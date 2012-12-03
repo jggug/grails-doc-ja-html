@@ -122,6 +122,7 @@ function addJsClass(el) {
 <li><code>XML</code> - An instance of <code>XmlSlurper</code>'s <a href="http://groovy.codehaus.org/api/groovy/util/slurpersupport/GPathResult.html" target="blank">GPathResult</a> class that allows parsing of an incoming XML request (useful for REST).</li>
 <li><code>JSON</code> - An instance of Grails' api:org.codehaus.groovy.grails.web.json.JSONObject class that allows parsing of an incoming JSON request (useful for JSON based REST).</li>
 <li><code>forwardURI</code> - Useful for obtaining the current request URI since the <code>request</code> objects <code>requestURI</code> property returns the original URI, not the matched one.</li>
+<li><code>isRedirected()</code> - Returns <code>true</code> if a redirect has been issued for this request (Grails 2+).</li>
 <li><code>get</code> - Returns true if the current request is an HTTP <code>GET</code> request.</li>
 <li><code>post</code> - Returns true if the current request is an HTTP <code>POST</code> request.</li>
 <li><code>each</code> - Implementation of Groovy's <code>each</code> method for iterating over request attributes.</li>
@@ -300,6 +301,9 @@ render <span class="java&#45;quote">"The Title is $title"</span></pre></div><p c
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -483,6 +487,9 @@ render <span class="java&#45;quote">"The Title is $title"</span></pre></div><p c
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

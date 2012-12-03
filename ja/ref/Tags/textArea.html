@@ -113,7 +113,9 @@ function addJsClass(el) {
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
-                <h1>textArea</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Creates a HTML text area element. An implicit "id" attribute is given the same value as name unless you explicitly specify one.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:textArea name=<span class="xml&#45;quote">"myField"</span> value=<span class="xml&#45;quote">"myValue"</span> rows=<span class="xml&#45;quote">"5"</span> cols=<span class="xml&#45;quote">"40"</span>/&#62;</span></pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>属性 <div class="hidden-block">Attributes</div>
+                <h1>textArea</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Creates a HTML text area element. An implicit "id" attribute is given the same value as name unless you explicitly specify one. You can specify "rows" and "cols" attributes, but CSS values for width and height on <code>textarea</code> will override these values.<p class="paragraph"/><blockquote class="note">
+The standard stylesheet used by the scaffolding defines values for 'width' and 'height' on &#60;textarea&#62; elements, so if you want to customise the sizes yourself you will have to provide CSS overrides.
+</blockquote><p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:textArea name=<span class="xml&#45;quote">"myField"</span> value=<span class="xml&#45;quote">"myValue"</span> rows=<span class="xml&#45;quote">"5"</span> cols=<span class="xml&#45;quote">"40"</span>/&#62;</span></pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>属性 <div class="hidden-block">Attributes</div>
 <ul class="star">
 <li><code>name</code> (required) - The name of the text area</li>
 <li><code>value</code> (optional) - The initial text to display in the text area. By default the text area will be empty.</li>
@@ -286,6 +288,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -469,6 +474,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

@@ -118,7 +118,7 @@ def results = Book.list()<p class="paragraph"/>// list 10 results
 def results = Book.list(max: 10)<p class="paragraph"/>// list 10 results, offset by 100
 def results = Book.list(max: 10, offset: 100)<p class="paragraph"/>// list 10 results, offset by 100, orderd by title in descending order
 def results = Book.list(max: 10, offset: 100, sort: <span class="java&#45;quote">"title"</span>, order: <span class="java&#45;quote">"desc"</span>)<p class="paragraph"/>// list all books, eagerly fetching the authors association
-def results = Book.list(fetch: &#91;authors: <span class="java&#45;quote">"eager"</span>&#93;)</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>パラメータ: <div class="hidden-block">Parameters:</div>
+def results = Book.list(fetch: &#91;authors: <span class="java&#45;quote">"eager"</span>&#93;)</pre></div><p class="paragraph"/>When <code>max</code> is specified as a named argument this will return a api:grails.orm.PagedResultList which has a getTotalCount() method to return the total number of matching records for pagination. Two queries are still run, but they're run for you and the results and total count are combined in the <code>PagedResultList</code>.<p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>パラメータ: <div class="hidden-block">Parameters:</div>
 <ul class="star">
 <li><code>max</code> - The maximum number to list</li>
 <li><code>offset</code> - The offset from the first result to list from</li>
@@ -296,6 +296,9 @@ def results = Book.list(fetch: &#91;authors: <span class="java&#45;quote">"eager
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -479,6 +482,9 @@ def results = Book.list(fetch: &#91;authors: <span class="java&#45;quote">"eager
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

@@ -131,8 +131,13 @@ function addJsClass(el) {
 <li><code>params</code> (optional) - A Map of request parameters</li>
 <li><code>prev</code> (optional) - The text to display for the previous link (defaults to "Previous" as defined by <code>default.paginate.prev</code> property in the i18n <code>messages.properties</code> file)</li>
 <li><code>next</code> (optional) - The text to display for the next link (defaults to "Next" as defined by <code>default.paginate.next</code> property in the i18n <code>messages.properties</code> file)</li>
+<li><code>omitPrev</code> (optional) - If set to true, the previous link will never be shown</li>
+<li><code>omitNext</code> (optional) -  If set to true, the next link will never be shown</li>
+<li><code>omitFirst</code> (optional) -  If set to true, the first page link will only be shown when the first page is within the offset</li>
+<li><code>omitLast</code> (optional) -  If set to true, the last page link will only be shown when the last page is within the offset</li>
 <li><code>max</code> (optional) - The number of records to display per page (defaults to 10). Used ONLY if <code>params.max</code> is empty</li>
 <li><code>maxsteps</code> (optional) - The number of steps displayed for pagination (defaults to 10). Used ONLY if <code>params.maxsteps</code> is empty</li>
+<li><code>mapping</code> (optional) - The <a href="../../guide/single.html#namedMappings" class="guide">named URL mapping</a> to use to rewrite the link</li>
 <li><code>offset</code> (optional) - Used ONLY if <code>params.offset</code> is empty</li>
 </ul><p class="paragraph"/><h2>ソース <div class="hidden-block">Source</div></h2><p class="paragraph"/>{source:tag=RenderTagLib.paginate}
 {source}
@@ -302,6 +307,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -485,6 +493,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

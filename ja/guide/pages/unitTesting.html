@@ -472,11 +472,11 @@ class BookTests &#123;
                 title: <span class="java&#45;quote">"Misery"</span>,
                 author: <span class="java&#45;quote">"Stephen King"</span>)<p class="paragraph"/>        mockForConstraintsTests(Book, &#91;existingBook&#93;)<p class="paragraph"/>        // validation should fail <span class="java&#45;keyword">if</span> both properties are <span class="java&#45;keyword">null</span>
         def book = <span class="java&#45;keyword">new</span> Book()<p class="paragraph"/>        assert !book.validate()
-        assert <span class="java&#45;quote">"nullable"</span> == book.errors&#91;<span class="java&#45;quote">"title"</span>&#93;
-        assert <span class="java&#45;quote">"nullable"</span> == book.errors&#91;<span class="java&#45;quote">"author"</span>&#93;<p class="paragraph"/>        // So let's demonstrate the unique and minSize constraints<p class="paragraph"/>        book = <span class="java&#45;keyword">new</span> Book(title: <span class="java&#45;quote">"Misery"</span>, author: <span class="java&#45;quote">"JK"</span>)
+        assert <span class="java&#45;quote">"nullable"</span> == book.errors&#91;<span class="java&#45;quote">"title"</span>&#93;.code
+        assert <span class="java&#45;quote">"nullable"</span> == book.errors&#91;<span class="java&#45;quote">"author"</span>&#93;.code<p class="paragraph"/>        // So let's demonstrate the unique and minSize constraints<p class="paragraph"/>        book = <span class="java&#45;keyword">new</span> Book(title: <span class="java&#45;quote">"Misery"</span>, author: <span class="java&#45;quote">"JK"</span>)
         assert !book.validate()
-        assert <span class="java&#45;quote">"unique"</span> == book.errors&#91;<span class="java&#45;quote">"title"</span>&#93;
-        assert <span class="java&#45;quote">"minSize"</span> == book.errors&#91;<span class="java&#45;quote">"author"</span>&#93;<p class="paragraph"/>        // Validation should pass!
+        assert <span class="java&#45;quote">"unique"</span> == book.errors&#91;<span class="java&#45;quote">"title"</span>&#93;.code
+        assert <span class="java&#45;quote">"minSize"</span> == book.errors&#91;<span class="java&#45;quote">"author"</span>&#93;.code<p class="paragraph"/>        // Validation should pass!
         book = <span class="java&#45;keyword">new</span> Book(title: <span class="java&#45;quote">"The Shining"</span>, author: <span class="java&#45;quote">"Stephen King"</span>)
         assert book.validate()
     &#125;
@@ -723,6 +723,9 @@ The <code>GrailsUnitTestMixin</code> provides a <code>mockCodec</code> method fo
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
                             </div>
                             
@@ -898,6 +901,9 @@ The <code>GrailsUnitTestMixin</code> provides a <code>mockCodec</code> method fo
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

@@ -345,7 +345,7 @@ Grailsのサービスの重要な側面は、<a href="http://www.springframework
     def bookService<p class="paragraph"/>    def buyBook() &#123;
         bookService.buyBook(<span class="java&#45;keyword">this</span>)
     &#125;
-&#125;</pre></div>
+&#125;</pre></div><p class="paragraph"/><h4>Service Bean Names</h4><p class="paragraph"/>The default bean name which is associated with a service can be problematic if there are multiple services with the same name defined in different packages.  For example consider the situation where an application defines a service class named <code>com.demo.ReportingService</code> and the application uses a plugin named <code>ReportingUtilities</code> and that plugin provides a service class named <code>com.reporting.util.ReportingService</code>.  The default bean name for each of those would be <code>reportingService</code> so they would conflict with each other.  Grails manages this by changing the default bean name for services provided by plugins by prefixing the bean name with the plugin name.  In the scenario described above the <code>reportingService</code> bean would be an instance of the <code>com.demo.ReportingService</code> class defined in the application and the <code>reportingUtilitiesReportingService</code> bean would be an instance of the <code>com.reporting.util.ReportingService</code> class provided by the <code>ReportingUtilities</code> plugin.  For all service beans provided by plugins, if there are no other services with the same name within the application or other plugins in the application then a bean alias will be created which does not include the plugin name and that alias points to the bean referred to by the name that does include the plugin name prefix.  For example, if the <code>ReportingUtilities</code> plugin provides a service named <code>com.reporting.util.AuthorService</code> and there is no other <code>AuthorService</code> in the application or in any of the plugins that the application is using then there will be a bean named <code>reportingUtilitiesAuthorService</code> which is an instance of this <code>com.reporting.util.AuthorService</code> class and there will be a bean alias defined in the context named <code>authorService</code> which points to that same bean.
 
 
 <a name="8.4 Using Services from Java"><!-- Legacy link --></a>
@@ -559,6 +559,9 @@ Grailsのサービスの重要な側面は、<a href="http://www.springframework
                             <div class="menu-item"><a href="../ref/Command%20Line/stats.html">stats</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../ref/Command%20Line/stop-app.html">stop-app</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../ref/Command%20Line/test-app.html">test-app</a>
                             </div>
                             
@@ -734,6 +737,9 @@ Grailsのサービスの重要な側面は、<a href="http://www.springframework
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Database%20Mapping/discriminator.html">discriminator</a>

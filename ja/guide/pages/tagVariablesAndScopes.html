@@ -142,7 +142,9 @@ function addJsClass() {
 GSPでは変数を<a href="../ref/Tags/set.html" class="tags">set</a>タグで定義することができます:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:set var=<span class="xml&#45;quote">"now"</span> value=<span class="xml&#45;quote">"$&#123;new Date()&#125;"</span> /&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">Here we assign a variable called <code>now</code> to the result of a GSP expression (which simply constructs a new <code>java.util.Date</code> instance). You can also use the body of the <code>&#60;g:set&#62;</code> tag to define a variable:</div>
 この例では変数<code>now</code>にGSP表記の結果を割り当てています(単純に<code>java.util.Date</code>のインスタンスを生成しただけです)。<code>&#60;g:set&#62;</code>タグのタグ内容に記述して定義することもできます。:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:set var=<span class="xml&#45;quote">"myHTML"</span>&#62;</span>
    Some re&#45;usable code on: $&#123;new Date()&#125;
-<span class="xml&#45;tag">&#60;/g:set&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">Variables can also be placed in one of the following scopes:</div>
+<span class="xml&#45;tag">&#60;/g:set&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">The assigned value can also be a bean from the applicationContext:</div>
+applicationContextにあるビーンを変数定義することも可能です。
+<div class="code"><pre><span class="xml&#45;tag">&#60;g:set var=<span class="xml&#45;quote">"bookService"</span> bean=<span class="xml&#45;quote">"bookService"</span> /&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">Variables can also be placed in one of the following scopes:</div>
 変数は以下のいずれかのスコープに定義することができます:
 <div class="hidden-block">
 <ul class="star">
@@ -335,6 +337,9 @@ GSPでは変数を<a href="../ref/Tags/set.html" class="tags">set</a>タグで�
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
                             </div>
                             
@@ -510,6 +515,9 @@ GSPでは変数を<a href="../ref/Tags/set.html" class="tags">set</a>タグで�
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

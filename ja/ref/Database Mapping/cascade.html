@@ -116,7 +116,8 @@ function addJsClass(el) {
                 <h1>cascade</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Configures the cascading behavior of an association.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>class Author &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         books cascade: 'all&#45;delete&#45;orphan'
     &#125;
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>association_name(cascade:string)</code><p class="paragraph"/>引数: <div class="hidden-block">Arguments:</div>
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>association_name(cascade:string)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>association_name(cascade:string)</code><p class="paragraph"/>引数: <div class="hidden-block">Arguments:</div>
 <ul class="star">
 <li><code>cascade</code> - The cascading behavior to define. Can be one or more (comma-separated) of <code>all</code>, <code>merge</code>, <code>save-update</code>, <code>delete</code>, <code>lock</code>, <code>refresh</code>, <code>evict</code>, <code>replicate</code> or <code>all-delete-orphan</code> (one-to-many associations only).</li>
 </ul><p class="paragraph"/>By default GORM configures a cascading policy of "all" in the case where one entity "belongs to" another. For example:<p class="paragraph"/><div class="code"><pre>class Book &#123;
@@ -296,6 +297,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -479,6 +483,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

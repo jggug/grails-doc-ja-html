@@ -116,7 +116,8 @@ function addJsClass(el) {
                 <h1>fetch</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Configures the fetching behavior of an association.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>class Author &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         books fetch: 'join'
     &#125;
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>association_name(fetch:string)</code><p class="paragraph"/>引数: <div class="hidden-block">Arguments:</div>
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>association_name(fetch:string)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>association_name(fetch:string)</code><p class="paragraph"/>引数: <div class="hidden-block">Arguments:</div>
 <ul class="star">
 <li><code>fetchStrategy</code> - The fetching strategy to use. Either <code>join</code> or <code>select</code>.</li>
 </ul><p class="paragraph"/>By default GORM assumes fetching of associations is done using a <code>SELECT</code> when the association is accessed. If you prefer that the association be fetched eagerly at the same time then you can override the behavior:<p class="paragraph"/><div class="code"><pre>class Author &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
@@ -290,6 +291,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -473,6 +477,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

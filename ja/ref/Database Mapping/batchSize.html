@@ -118,7 +118,8 @@ function addJsClass(el) {
     <span class="java&#45;keyword">static</span> mapping = &#123;
         batchSize 10
     &#125;
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>batchSize(integer)</code><p class="paragraph"/>Given a lazy association where an <code>Author</code> has many <code>Book</code>s, GORM will perform one query for the <code>Author</code> and additional queries the associated <code>Book</code>s. This is what is known as the N+1 problem and can often be worked around by using a join query. However, joins can be expensive.<p class="paragraph"/>Batch fetching is an optimization of lazy loading so that if, for example, you set a <code>batchSize</code> of 10 and you have an <code>Author</code> that with 30 books, instead of 31 queries you get four (one for the <code>Author</code> and three batches of 10):<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>batchSize(integer)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>batchSize(integer)</code><p class="paragraph"/>Given a lazy association where an <code>Author</code> has many <code>Book</code>s, GORM will perform one query for the <code>Author</code> and additional queries the associated <code>Book</code>s. This is what is known as the N+1 problem and can often be worked around by using a join query. However, joins can be expensive.<p class="paragraph"/>Batch fetching is an optimization of lazy loading so that if, for example, you set a <code>batchSize</code> of 10 and you have an <code>Author</code> that with 30 books, instead of 31 queries you get four (one for the <code>Author</code> and three batches of 10):<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
     batchSize 10
 &#125;</pre></div><p class="paragraph"/>You can also configure <code>batchSize</code> on a per association basis:<p class="paragraph"/><div class="code"><pre>class Author &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         books batchSize: 10
@@ -290,6 +291,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -473,6 +477,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

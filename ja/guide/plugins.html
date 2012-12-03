@@ -384,14 +384,21 @@ sshResolver.setCheckmodified(<span class="java&#45;keyword">true</span>)</pre></
 
 <a name="12.4 Providing Basic Artefacts"><!-- Legacy link --></a>
 <h2 id="providingBasicArtefacts">13.4 基本アーティファクトの提供</h2>
-<div class="hidden-block">h4. Adding a new Script</div><p class="paragraph"/><div class="hidden-block">A plugin can add a new script simply by providing the relevant Gant script in its scripts directory:</div><p class="paragraph"/>プラグインのscriptディレクトリ配下に関連するGantスクリプトを置くことで、プラグインは新しいスクリプトを追加することができます:<p class="paragraph"/><div class="code"><pre>+ MyPlugin.groovy
+<div class="hidden-block">h4. Adding a new Script</div><p class="paragraph"/><div class="hidden-block">A plugin can add a new script simply by providing the relevant Gant script in its scripts directory:</div><p class="paragraph"/>プラグインのscriptディレクトリ配下に関連するGantスクリプトを置くことで、プラグインは新しいスクリプトを追加することができます:
+<div class="hidden-block">   + scripts     &#60;<strike class="strike"> additional scripts here</div>
+<div class="code"><pre>+ MyPlugin.groovy
    + scripts     &#60;&#45;&#45; ここにスクリプトを追加する
    + grails&#45;app
         + controllers
         + services
         + etc.
     + lib</pre></div><p class="paragraph"/><div class="hidden-block">h4. Adding a new grails-app artifact (Controller, Tag Library, Service, etc.)</div><p class="paragraph"/><h4>Grails-appアーテファクト(Controller, Tag Library, Service, 他)の追加</h4><p class="paragraph"/>
-<div class="hidden-block">A plugin can add new artifacts by creating the relevant file within the <code>grails-app</code> tree. Note that the plugin is loaded from where it is installed and not copied into the main application tree.</div><p class="paragraph"/><code>grails-app</code>配下のツリーに関連するファイルを置いておくことで、プラグインは新しいアーテファクトを追加することができます。プラグインはインストールされた場所から読み込まれるのであって、メインアプリのツリー中にコピーされるわけではないことに留意して下さい。<p class="paragraph"/><div class="code"><pre>+ ExamplePlugin.groovy
+<div class="hidden-block">A plugin can add new artifacts by creating the relevant file within the <code>grails-app</code> tree. Note that the plugin is loaded from where it is installed and not copied into the main application tree.</div><p class="paragraph"/><code>grails-app</code>配下のツリーに関連するファイルを置いておくことで、プラグインは新しいアーテファクトを追加することができます。プラグインはインストールされた場所から読み込まれるのであって、メインアプリのツリー中にコピーされるわけではないことに留意して下さい。<p class="paragraph"/><div class="hidden-block">
+        + controllers  &#60;</strike> additional controllers here
+        + services &#60;<strike class="strike"> additional services here
+        + etc.  &#60;</strike> additional XXX here
+</div>
+<div class="code"><pre>+ ExamplePlugin.groovy
    + scripts
    + grails&#45;app
         + controllers  &#60;&#45;&#45; コントローラを追加するのはここ。
@@ -635,7 +642,7 @@ def dependsOn = &#91;foo: <span class="java&#45;quote">"1.0 &#62; &#42;"</span>&
         sessionFactory = sessionFactory
     &#125;
     grailsUrlHandlerMapping.interceptors &#60;&#60; openSessionInViewInterceptor
-&#125;</pre></div><p class="paragraph"/>ここではHibernateプラグインは、<code>controllers</code>プラグインがロードされてれば、<code>OpenSessionInViewInterceptor</code>だけを登録します。<code>manager</code>変数はapi:org.codehaus.groovy.grails.plugins.GrailsPluginManagerインターフェースのインスタンスであり、他のプラグインと相互作用するためのメソッドを提供しています。<p class="paragraph"/><div class="hidden-block">You can also use the <code>loadBefore</code> property to specify one or more plugins that your plugin should load before:</div><p class="paragraph"/><code>loadBefore</code>プロパティには、あなたのプラグインの前にロードしておかなければならない1個以上のプラグインを指定します。<p class="paragraph"/><div class="code"><pre>def loadBefore = &#91;'rabbitmq'&#93;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Scopes and Environments</div><p class="paragraph"/><h4>スコープと環境</h4><p class="paragraph"/><div class="hidden-block">It's not only plugin load order that you can control. You can also specify which environments your plugin should be loaded in and which scopes (stages of a build). Simply declare one or both of these properties in your plugin descriptor:</div><p class="paragraph"/>制御できるのはプラグインのロード順だけではありません。プラグインがどの環境にロードされるか、あるいはどのスコープ(ビルドの各段階)でロードされるかを指定することもできます。やり方は、それぞれのプロパティをプラグインディスクリプタ中に宣言するだけです。<p class="paragraph"/><div class="code"><pre>def environments = &#91;'development', 'test', 'myCustomEnv'&#93;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Here the Hibernate plugin will only register an <code>OpenSessionInViewInterceptor</code> if the <code>controllers</code> plugin has been loaded. The <code>manager</code> variable is an instance of the api:org.codehaus.groovy.grails.plugins.GrailsPluginManager interface and it provides methods to interact with other plugins.</div><p class="paragraph"/>ここではHibernateプラグインは、<code>controllers</code>プラグインがロードされてれば、<code>OpenSessionInViewInterceptor</code>だけを登録します。<code>manager</code>変数はapi:org.codehaus.groovy.grails.plugins.GrailsPluginManagerインターフェースのインスタンスであり、他のプラグインと相互作用するためのメソッドを提供しています。<p class="paragraph"/><div class="hidden-block">You can also use the <code>loadBefore</code> property to specify one or more plugins that your plugin should load before:</div><p class="paragraph"/><code>loadBefore</code>プロパティには、あなたのプラグインの前にロードしておかなければならない1個以上のプラグインを指定します。<p class="paragraph"/><div class="code"><pre>def loadBefore = &#91;'rabbitmq'&#93;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Scopes and Environments</div><p class="paragraph"/><h4>スコープと環境</h4><p class="paragraph"/><div class="hidden-block">It's not only plugin load order that you can control. You can also specify which environments your plugin should be loaded in and which scopes (stages of a build). Simply declare one or both of these properties in your plugin descriptor:</div><p class="paragraph"/>制御できるのはプラグインのロード順だけではありません。プラグインがどの環境にロードされるか、あるいはどのスコープ(ビルドの各段階)でロードされるかを指定することもできます。やり方は、それぞれのプロパティをプラグインディスクリプタ中に宣言するだけです。<p class="paragraph"/><div class="code"><pre>def environments = &#91;'development', 'test', 'myCustomEnv'&#93;
 def scopes = &#91;excludes:'war'&#93;</pre></div><p class="paragraph"/><div class="hidden-block">In this example, the plugin will only load in the 'development' and 'test' environments. Nor will it be packaged into the WAR file, because it's excluded from the 'war' phase. This allows <code>development-only</code> plugins to not be packaged for production use.</div><p class="paragraph"/>この例では、プラグインは「development」と「test」環境のときだけロードされます。また、warフェイズからは除外設定されているので、WARファイル中にはパッケージされません。こうすることで、<code>development-only</code>のプラグインは、実運用時にはパッケージされないようにできます。<p class="paragraph"/><div class="hidden-block">The full list of available scopes are defined by the enum api:grails.util.BuildScope, but here's a summary:</div><p class="paragraph"/>利用可能なスコープの全てのリストはenum api:grails.util.BuildScopeで定義されていますが、以下はその抜粋です:<p class="paragraph"/><div class="code"><pre>&#42; <code>test</code> &#45; when running tests
 &#42; <code>functional&#45;test</code> &#45; when running functional tests
 &#42; <code>run</code> &#45; <span class="java&#45;keyword">for</span> run&#45;app and run&#45;war
@@ -932,6 +939,9 @@ Grails 2.0から、プラグインを通常のJARファイルとしてプリコ�
                             <div class="menu-item"><a href="../ref/Command%20Line/stats.html">stats</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../ref/Command%20Line/stop-app.html">stop-app</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../ref/Command%20Line/test-app.html">test-app</a>
                             </div>
                             
@@ -1107,6 +1117,9 @@ Grails 2.0から、プラグインを通常のJARファイルとしてプリコ�
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Database%20Mapping/discriminator.html">discriminator</a>

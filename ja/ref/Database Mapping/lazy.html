@@ -116,7 +116,8 @@ function addJsClass(el) {
                 <h1>lazy</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Configures whether to use proxies and lazy loading for one-to-one and many-to-one associations.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>class Book &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> belongsTo = &#91;author: Author&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         author lazy: <span class="java&#45;keyword">false</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>association_name(lazy: boolean)</code><p class="paragraph"/>By default GORM single-ended associations are lazy in that when you load a domain instance, an associated domain is not loaded until accessed. Hibernate creates a dynamic proxy by subclassing the domain class and proxying all methods and property access.<p class="paragraph"/>This can have some strange side effects (see <a href="http://www.hibernate.org/280.html" target="blank">this page</a> on proxies at the Hibernate site) particularly in relation to inheritance. You can tell Hibernate not use proxies for single-ended associations by using the <code>lazy</code> argument:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>association_name(lazy: boolean)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>association_name(lazy: boolean)</code><p class="paragraph"/>By default GORM single-ended associations are lazy in that when you load a domain instance, an associated domain is not loaded until accessed. Hibernate creates a dynamic proxy by subclassing the domain class and proxying all methods and property access.<p class="paragraph"/>This can have some strange side effects (see <a href="http://www.hibernate.org/280.html" target="blank">this page</a> on proxies at the Hibernate site) particularly in relation to inheritance. You can tell Hibernate not use proxies for single-ended associations by using the <code>lazy</code> argument:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
     author lazy: <span class="java&#45;keyword">false</span>
 &#125;</pre></div><p class="paragraph"/>See the section on <a href="../../guide/single.html#fetching" class="guide">Eager vs Lazing Fetching</a> in the user guide.
 
@@ -285,6 +286,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -468,6 +472,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

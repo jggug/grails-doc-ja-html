@@ -119,7 +119,8 @@ function addJsClass(el) {
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Thumbnail &#123;
     <span class="java&#45;object">byte</span>&#91;&#93; data
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>association_name(ignoreNotFound: boolean)</code><p class="paragraph"/>When the data in the database is corrupt and a foreign key references a non existent record, Hibernate will complain with a "No row with the given identifier exists" message. For example, a <code>LegacyCdDomain</code> record may have a reference to a <code>Thumbnail</code> record with an ID of 1234, but the database may no longer contain a <code>Thumbnail</code> with that ID.<p class="paragraph"/>One possible way to load such corrupt data is to use the <code>ignoreNotFound</code> mapping option. If you set it to <code>true</code>, Hibernate will treat a missing row as a <code>null</code> association. So in the above example, our <code>LegacyCdDomain</code> instance would load but its <code>thumbnail</code> property would be <code>null</code>. Specifying a value of <code>false</code> for <code>ignoreNotFound</code> will result in Hibernate throwing an <code>org.hibernate.ObjectNotFoundException</code>.<p class="paragraph"/><blockquote class="warning">
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>association_name(ignoreNotFound: boolean)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>association_name(ignoreNotFound: boolean)</code><p class="paragraph"/>When the data in the database is corrupt and a foreign key references a non existent record, Hibernate will complain with a "No row with the given identifier exists" message. For example, a <code>LegacyCdDomain</code> record may have a reference to a <code>Thumbnail</code> record with an ID of 1234, but the database may no longer contain a <code>Thumbnail</code> with that ID.<p class="paragraph"/>One possible way to load such corrupt data is to use the <code>ignoreNotFound</code> mapping option. If you set it to <code>true</code>, Hibernate will treat a missing row as a <code>null</code> association. So in the above example, our <code>LegacyCdDomain</code> instance would load but its <code>thumbnail</code> property would be <code>null</code>. Specifying a value of <code>false</code> for <code>ignoreNotFound</code> will result in Hibernate throwing an <code>org.hibernate.ObjectNotFoundException</code>.<p class="paragraph"/><blockquote class="warning">
 A dataset loaded with <code>ignoreNotFound: true</code> may throw an exception during <code>save()</code> because of the missing reference!
 </blockquote><p class="paragraph"/>The default value for this setting is <code>false</code>. It maps to Hibernate's <code>not-found</code> property.<p class="paragraph"/>This settings can be useful if you have a legacy database with unusual behaviour when it comes to referential integrity.
 
@@ -288,6 +289,9 @@ A dataset loaded with <code>ignoreNotFound: true</code> may throw an exception d
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -471,6 +475,9 @@ A dataset loaded with <code>ignoreNotFound: true</code> may throw an exception d
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

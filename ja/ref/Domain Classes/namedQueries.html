@@ -134,7 +134,8 @@ function addJsClass(el) {
    &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>// get all recent publications&#8230;
 def recentPubs = Publication.recentPublications.list()<p class="paragraph"/>// get up to 10 recent publications, skip the first 5&#8230;
-def recentPubs = Publication.recentPublications.list(max: 10, offset: 5)<p class="paragraph"/>// get the number of recent publications&#8230;
+def recentPubs = Publication.recentPublications.list(max: 10, offset: 5)<p class="paragraph"/>// get a single recent publication
+def recentPub = Publication.recentPublications.get()<p class="paragraph"/>// get the number of recent publications&#8230;
 def numberOfRecentPubs = Publication.recentPublications.count()<p class="paragraph"/>// get a recent publication with a specific id&#8230;
 def pub = Publication.recentPublications.get(42)<p class="paragraph"/>// get all recent publications where title = 'Some Title'
 def pubs = Publication.recentPublications.findAllWhere(title: 'Some Title')<p class="paragraph"/>// get a recent publication where title = 'Some Title'
@@ -356,6 +357,9 @@ def books = Publication.oldPublicationsLargerThan(500)
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
                             </div>
                             
@@ -537,6 +541,9 @@ def books = Publication.oldPublicationsLargerThan(500)
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

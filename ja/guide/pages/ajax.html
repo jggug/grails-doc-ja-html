@@ -260,17 +260,16 @@ HTMLフォームを非同期で送信することができます。<a href="../r
 <li><code>onLoading</code> - レスポンスを読み込み中に呼び出すJavaScriptファンクション</li>
 <li><code>onLoaded</code> - レスポンスの読み込み完了時に呼び出すJavaScriptファンクション</li>
 <li><code>onComplete</code> - リモートファンクションが完全に完了(更新を含む)したら呼び出すJavaScriptファンクション</li>
-</ul><p class="paragraph"/><div class="hidden-block">If you need a reference to the <code>XmlHttpRequest</code> object you can use the implicit event parameter <code>e</code> to obtain it:</div>
-<code>XmlHttpRequest</code>オブジェクトを参照する場合は、以下のように、<code>e</code>等のイベントパラメータ使用して取得します:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:javascript&#62;</span>
-    function fireMe(e) &#123;
-        alert(<span class="xml&#45;quote">"XmlHttpRequest = "</span> + e)
+</ul><p class="paragraph"/><div class="hidden-block">If you need a reference to the <code>XmlHttpRequest</code> object you can use the implicit event parameter <code>event</code> to obtain it:</div>
+<code>XmlHttpRequest</code>オブジェクトを参照する場合は、以下のように、<code>event</code>等のイベントパラメータ使用して取得します:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:javascript&#62;</span>
+    function fireMe(event) &#123;
+        alert(<span class="xml&#45;quote">"XmlHttpRequest = "</span> + event)
     &#125;
 &#125;
 <span class="xml&#45;tag">&#60;/g:javascript&#62;</span>
 <span class="xml&#45;tag">&#60;g:remoteLink action=<span class="xml&#45;quote">"example"</span>
               update=<span class="xml&#45;quote">"success"</span>
-              onSuccess=<span class="xml&#45;quote">"fireMe(e)"</span>&#62;</span>Ajax Link<span class="xml&#45;tag">&#60;/g:remoteLink&#62;</span></pre></div>
-
+              onSuccess=<span class="xml&#45;quote">"fireMe(event)"</span>&#62;</span>Ajax Link<span class="xml&#45;tag">&#60;/g:remoteLink&#62;</span></pre></div>
 
 <a name="6.7.2 Ajax with Prototype"><!-- Legacy link --></a>
 <h2 id="ajaxWithPrototype">7.7.2 Prototypeを使用したAjax</h2>
@@ -541,6 +540,9 @@ AjaxとAjaxではないリクエストを同じコントローラアクション
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
                             </div>
                             
@@ -716,6 +718,9 @@ AjaxとAjaxではないリクエストを同じコントローラアクション
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

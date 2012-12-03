@@ -117,7 +117,8 @@ function addJsClass(el) {
         author insertable: <span class="java&#45;keyword">false</span>
         author updateable: <span class="java&#45;keyword">false</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>association_name(insertable: boolean)</code><p class="paragraph"/>Useful in general where you don't want to set an initial value (or include the column in the generated SQL) during an initial <code>save()</code>.<p class="paragraph"/>In particular this is useful for one-to-many relationships. For example when you store the foreign key in the 'child' table, it's often efficient to save the child using only the foreign key of the parent. You do this by setting the parent object (and the parent foreign key) in the 'child' entity. Setting the attributes insertable:false and updateable:false for the 'belongsTo' parent object lets you insert and update using only the foreign key.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>association_name(insertable: boolean)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>association_name(insertable: boolean)</code><p class="paragraph"/>Useful in general where you don't want to set an initial value (or include the column in the generated SQL) during an initial <code>save()</code>.<p class="paragraph"/>In particular this is useful for one-to-many relationships. For example when you store the foreign key in the 'child' table, it's often efficient to save the child using only the foreign key of the parent. You do this by setting the parent object (and the parent foreign key) in the 'child' entity. Setting the attributes insertable:false and updateable:false for the 'belongsTo' parent object lets you insert and update using only the foreign key.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
     author insertable: <span class="java&#45;keyword">false</span>
 &#125;</pre></div>
 
@@ -286,6 +287,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -469,6 +473,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

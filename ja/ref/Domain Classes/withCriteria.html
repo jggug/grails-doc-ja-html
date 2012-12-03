@@ -113,7 +113,11 @@ function addJsClass(el) {
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
-                <h1>withCriteria</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Allows inline execution of Criteria queries. See the <a href="../../ref/Domain Classes/createCriteria.html" class="domainClasses">createCriteria</a> method for reference.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>def results = Book.withCriteria &#123;
+                <h1>withCriteria</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Allows inline execution of Criteria queries. See the <a href="../../ref/Domain Classes/createCriteria.html" class="domainClasses">createCriteria</a> method for reference.<p class="paragraph"/><h2>Return value</h2><p class="paragraph"/>If no matching records are found, an empty List is returned.<p class="paragraph"/>If a projection is specified:
+<ul class="star">
+<li>returns a single value if it only contains one field</li>
+<li>a List in case there are multiple fields in the projection</li>
+</ul><p class="paragraph"/>Otherwise, it will return a List of matched instances of the class calling withCriteria.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>def results = Book.withCriteria &#123;
     def now = <span class="java&#45;keyword">new</span> Date()
     between('releaseDate', now&#45;7, now)
     like('title', '%Groovy%')
@@ -291,6 +295,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -474,6 +481,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

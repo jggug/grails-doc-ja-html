@@ -115,7 +115,8 @@ function addJsClass(el) {
 
                 <h1>column</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Customizes a column definition<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
         currency column: <span class="java&#45;quote">"currency"</span>, sqlType: <span class="java&#45;quote">"<span class="java&#45;object">char</span>"</span>, length: 3
-    &#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>property_name(map)</code><p class="paragraph"/>引数: <div class="hidden-block">Arguments:</div>
+    &#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>property_name(map)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>property_name(map)</code><p class="paragraph"/>引数: <div class="hidden-block">Arguments:</div>
 <ul class="star">
 <li><code>column</code> - The name of the column as a String</li>
 <li><code>sqlType</code> (optional) - The underlying SQL type</li>
@@ -125,6 +126,8 @@ function addJsClass(el) {
 <li><code>length</code> (optional) - The length of the column</li>
 <li><code>precision</code> (optional) - The precision of the column</li>
 <li><code>scale</code> (optional) - The scale of the column</li>
+<li><code>comment</code> (optional) - The comment for the column (used to create the table DDL)</li>
+<li><code>defaultValue</code> (optional) - The database default value</li>
 </ul><p class="paragraph"/>By default GORM uses the property name and type to determine how to map a property in the database. For example a <code>String</code> property is typically mapped as a <code>varchar(255)</code> column. You can customize these with column configuration arguments:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
     currency column: <span class="java&#45;quote">"currency"</span>, sqlType: <span class="java&#45;quote">"<span class="java&#45;object">char</span>"</span>, length: 3
 &#125;</pre></div><p class="paragraph"/>If you use a Hibernate <a href="../../ref/Database Mapping/type.html" class="databaseMapping">type</a> that requires multiple column definitions you can use the <code>column</code> method to define each column:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
@@ -299,6 +302,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -482,6 +488,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

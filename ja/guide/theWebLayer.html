@@ -763,7 +763,7 @@ Grailsが間のインスタンスも自動的に生成します。上記のケ�
    def displayInvoice(<span class="java&#45;object">String</span> accountNumber, <span class="java&#45;object">int</span> accountType) &#123;
        // &#8230;
    &#125;
-&#125;</pre></div><p class="paragraph"/>For primitive arguments and arguments which are instances of any of the primitive type wrapper classes a type conversion has to be carried out before the request parameter value can be bound to the action argument.  The type conversion happens automatically.  In a case like the example shown above, the <code>params.accountType</code> request parameter has to be converted to an <code>int</code>.  If type conversion fails for any reason, the argument will have its default value per normal Java behavior (null for type wrapper references, false for booleans and zero for numbers) and a corresponding error will be added to the <code>errors</code> property of the defining controller.<p class="paragraph"/><div class="code"><pre>/accounting/displayInvoice?accountNumber=B59786&#38;accountType=bogusValue</pre></div><p class="paragraph"/>Since "bogusValue" cannot be converted to type int, the value of accountType will be zero, <code>controller.errors.hasErrors()</code> will be true, <code>controller.errors.errorCount</code> will be equal to 1 and <code>controller.errors.getFieldError('accountType')</code> will contain the corresponding error.<p class="paragraph"/>If the argument name does not match the name of the request parameter then the <code>&#64;grails.web.RequestParameter</code> annotation may be applied to an argument to express the name of the request parameter which should be bound to that argument:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.web.RequestParameter<p class="paragraph"/>class AccountingController &#123;<p class="paragraph"/>   // mainAccountNumber will be initialized with the value of params.accountNumber
+&#125;</pre></div><p class="paragraph"/>For primitive arguments and arguments which are instances of any of the primitive type wrapper classes a type conversion has to be carried out before the request parameter value can be bound to the action argument.  The type conversion happens automatically.  In a case like the example shown above, the <code>params.accountType</code> request parameter has to be converted to an <code>int</code>.  If type conversion fails for any reason, the argument will have its default value per normal Java behavior (null for type wrapper references, false for booleans and zero for numbers) and a corresponding error will be added to the <code>errors</code> property of the defining controller.<p class="paragraph"/><div class="code"><pre>/accounting/displayInvoice?accountNumber=B59786&#38;accountType=bogusValue</pre></div><p class="paragraph"/>Since "bogusValue" cannot be converted to type int, the value of accountType will be zero, the controller's <code>errors.hasErrors()</code> will be true, the controller's <code>errors.errorCount</code> will be equal to 1 and the controller's <code>errors.getFieldError('accountType')</code> will contain the corresponding error.<p class="paragraph"/>If the argument name does not match the name of the request parameter then the <code>&#64;grails.web.RequestParameter</code> annotation may be applied to an argument to express the name of the request parameter which should be bound to that argument:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.web.RequestParameter<p class="paragraph"/>class AccountingController &#123;<p class="paragraph"/>   // mainAccountNumber will be initialized with the value of params.accountNumber
    // accountType will be initialized with params.accountType
    def displayInvoice(@RequestParameter('accountNumber') <span class="java&#45;object">String</span> mainAccountNumber, <span class="java&#45;object">int</span> accountType) &#123;
        // &#8230;
@@ -790,7 +790,7 @@ bindData(p, params)</pre></div><p class="paragraph"/><div class="hidden-block">T
 <code>bindData</code>メソッドでは、更新しないパラメータを除外する事が可能です:<p class="paragraph"/><div class="code"><pre>def p = <span class="java&#45;keyword">new</span> Person()
 bindData(p, params, &#91;exclude: 'dateOfBirth'&#93;)</pre></div><p class="paragraph"/><div class="hidden-block">Or include only certain properties:</div>
 または、指定したプロパティのみの更新も可能です:<p class="paragraph"/><div class="code"><pre>def p = <span class="java&#45;keyword">new</span> Person()
-bindData(p, params, &#91;include: &#91;'firstName', 'lastName&#93;&#93;)</pre></div><p class="paragraph"/><blockquote class="note">
+bindData(p, params, &#91;include: &#91;'firstName', 'lastName'&#93;&#93;)</pre></div><p class="paragraph"/><blockquote class="note">
 Note that if an empty List is provided as a value for the <code>include</code> parameter then all fields will be subject to binding if they are not explicitly excluded.
 </blockquote>
 
@@ -1189,7 +1189,9 @@ GSPのタグ属性に、ひんぱんに使用する名前付きパラメータ�
 GSPでは変数を<a href="../ref/Tags/set.html" class="tags">set</a>タグで定義することができます:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:set var=<span class="xml&#45;quote">"now"</span> value=<span class="xml&#45;quote">"$&#123;new Date()&#125;"</span> /&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">Here we assign a variable called <code>now</code> to the result of a GSP expression (which simply constructs a new <code>java.util.Date</code> instance). You can also use the body of the <code>&#60;g:set&#62;</code> tag to define a variable:</div>
 この例では変数<code>now</code>にGSP表記の結果を割り当てています(単純に<code>java.util.Date</code>のインスタンスを生成しただけです)。<code>&#60;g:set&#62;</code>タグのタグ内容に記述して定義することもできます。:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:set var=<span class="xml&#45;quote">"myHTML"</span>&#62;</span>
    Some re&#45;usable code on: $&#123;new Date()&#125;
-<span class="xml&#45;tag">&#60;/g:set&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">Variables can also be placed in one of the following scopes:</div>
+<span class="xml&#45;tag">&#60;/g:set&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">The assigned value can also be a bean from the applicationContext:</div>
+applicationContextにあるビーンを変数定義することも可能です。
+<div class="code"><pre><span class="xml&#45;tag">&#60;g:set var=<span class="xml&#45;quote">"bookService"</span> bean=<span class="xml&#45;quote">"bookService"</span> /&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">Variables can also be placed in one of the following scopes:</div>
 変数は以下のいずれかのスコープに定義することができます:
 <div class="hidden-block">
 <ul class="star">
@@ -1836,7 +1838,7 @@ debugTemplatesでは以下のようなコメントが追記されます:<p class
 
 <a name="6.3.2 Simple Tags"><!-- Legacy link --></a>
 <h2 id="simpleTags">7.3.2 簡単なタグ</h2>
-<div class="hidden-block">As demonstrated it the previous example it is easy to write simple tags that have no body and just output content. Another example is a <code>dateFormat</code> style tag:</div>
+<div class="hidden-block">As demonstrated in the previous example it is easy to write simple tags that have no body and just output content. Another example is a <code>dateFormat</code> style tag:</div>
 前の説明で、簡単にコンテンツを出力するタグは簡単に記述できると説明しました。他の例として<code>dateFormat</code>タグを紹介します:<p class="paragraph"/><div class="code"><pre>def dateFormat = &#123; attrs, body &#45;&#62;
     out &#60;&#60; <span class="java&#45;keyword">new</span> java.text.SimpleDateFormat(attrs.format).format(attrs.date)
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The above uses Java's <code>SimpleDateFormat</code> class to format a date and then write it to the response. The tag can then be used within a GSP as follows:</div>
@@ -2332,11 +2334,14 @@ Grails 1.2からWebフローはGrailsのコア機能では無くなりました�
     &#125;
     &#8230;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">Since the <code>showCart</code> event is a view state it will render the view <code>grails-app/book/shoppingCart/showCart.gsp</code>. Within this view you need to have components that trigger flow execution. On a form this can be done use the <a href="../ref/Tags/submitButton.html" class="tags">submitButton</a> tag:</div>
-<code>shopCart</code>イベントはビューステートなので、<code>grails-app/book/shoppingCart/showCart.gsp</code>を描写します。このビューの中に、フロートリガーを実行するコンポーネントを持つ必要があります。 <a href="../ref/Tags/submitButton.html" class="tags">submitButton</a>タグを使用したフォームを使います:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:form action=<span class="xml&#45;quote">"shoppingCart"</span>&#62;</span>
+<code>shopCart</code>イベントはビューステートなので、<code>grails-app/book/shoppingCart/showCart.gsp</code>を描写します。このビューの中に、フロートリガーを実行するコンポーネントを持つ必要があります。 <a href="../ref/Tags/submitButton.html" class="tags">submitButton</a>タグを使用したフォームを使います:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:form&#62;</span>
     <span class="xml&#45;tag">&#60;g:submitButton name=<span class="xml&#45;quote">"continueShopping"</span> value=<span class="xml&#45;quote">"Continue Shopping"</span> /&#62;</span>
     <span class="xml&#45;tag">&#60;g:submitButton name=<span class="xml&#45;quote">"checkout"</span> value=<span class="xml&#45;quote">"Checkout"</span> /&#62;</span>
-<span class="xml&#45;tag">&#60;/g:form&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">The form must submit back to the <code>shoppingCart</code> flow. The name attribute of each <a href="../ref/Tags/submitButton.html" class="tags">submitButton</a> tag signals which event will be triggered. If you don't have a form you can also trigger an event with the <a href="../ref/Tags/link.html" class="tags">link</a> tag as follows:</div>
-フォームは<code>shoppingCart</code>フローへ送信するようにします。それぞれの<a href="../ref/Tags/submitButton.html" class="tags">submitButton</a>タグのname属性にトリガーするイベントを指定します。フォームを使用しない場合は、次のように<a href="../ref/Tags/link.html" class="tags">link</a>タグをイベントトリガーに使用できます:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:link action=<span class="xml&#45;quote">"shoppingCart"</span> event=<span class="xml&#45;quote">"checkout"</span> /&#62;</span></pre></div><p class="paragraph"/><h4>アクションからのイベントトリガー <div class="hidden-block">Triggering Events from an Action</div></h4><p class="paragraph"/><div class="hidden-block">To trigger an event from an <code>action</code> you invoke a method. For example there is the built in <code>error()</code> and <code>success()</code> methods. The example below triggers the <code>error()</code> event on validation failure in a transition action:</div>
+<span class="xml&#45;tag">&#60;/g:form&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">The form automatically submits back to the <code>shoppingCart</code> flow. The name attribute of each <a href="../ref/Tags/submitButton.html" class="tags">submitButton</a> tag signals which event will be triggered. If you don't have a form you can also trigger an event with the <a href="../ref/Tags/link.html" class="tags">link</a> tag as follows:</div>
+フォームは自動的に<code>shoppingCart</code>フローへ送信します。それぞれの<a href="../ref/Tags/submitButton.html" class="tags">submitButton</a>タグのname属性にトリガーするイベントを指定します。フォームを使用しない場合は、次のように<a href="../ref/Tags/link.html" class="tags">link</a>タグをイベントトリガーに使用できます:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:link event=<span class="xml&#45;quote">"checkout"</span> /&#62;</span></pre></div><p class="paragraph"/><blockquote class="note">
+Prior to 2.0.0, it was required to specify the controller and/or action in forms and links, which caused the url to change when entering a subflow state. When the controller and action are not specified,
+all url's are relative to the main flow execution url, which makes your flows reusable as subflows and prevents issues with the browser's back button.
+</blockquote><p class="paragraph"/><h4>アクションからのイベントトリガー <div class="hidden-block">Triggering Events from an Action</div></h4><p class="paragraph"/><div class="hidden-block">To trigger an event from an <code>action</code> you invoke a method. For example there is the built in <code>error()</code> and <code>success()</code> methods. The example below triggers the <code>error()</code> event on validation failure in a transition action:</div>
 アクションからイベントをトリガーするには、メソッドを実行します。組込の<code>error()</code>と<code>success()</code>メソッド(トランジションアクション)が有るのでそれを例に使用します。次の例では、トランジションアクションでバリデーションが失敗したら<code>error()</code>イベントをトリガーしています:<p class="paragraph"/><div class="code"><pre>enterPersonalDetails &#123;
    on(<span class="java&#45;quote">"submit"</span>) &#123;
          def p = <span class="java&#45;keyword">new</span> Person(params)
@@ -2884,17 +2889,16 @@ HTMLフォームを非同期で送信することができます。<a href="../r
 <li><code>onLoading</code> - レスポンスを読み込み中に呼び出すJavaScriptファンクション</li>
 <li><code>onLoaded</code> - レスポンスの読み込み完了時に呼び出すJavaScriptファンクション</li>
 <li><code>onComplete</code> - リモートファンクションが完全に完了(更新を含む)したら呼び出すJavaScriptファンクション</li>
-</ul><p class="paragraph"/><div class="hidden-block">If you need a reference to the <code>XmlHttpRequest</code> object you can use the implicit event parameter <code>e</code> to obtain it:</div>
-<code>XmlHttpRequest</code>オブジェクトを参照する場合は、以下のように、<code>e</code>等のイベントパラメータ使用して取得します:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:javascript&#62;</span>
-    function fireMe(e) &#123;
-        alert(<span class="xml&#45;quote">"XmlHttpRequest = "</span> + e)
+</ul><p class="paragraph"/><div class="hidden-block">If you need a reference to the <code>XmlHttpRequest</code> object you can use the implicit event parameter <code>event</code> to obtain it:</div>
+<code>XmlHttpRequest</code>オブジェクトを参照する場合は、以下のように、<code>event</code>等のイベントパラメータ使用して取得します:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:javascript&#62;</span>
+    function fireMe(event) &#123;
+        alert(<span class="xml&#45;quote">"XmlHttpRequest = "</span> + event)
     &#125;
 &#125;
 <span class="xml&#45;tag">&#60;/g:javascript&#62;</span>
 <span class="xml&#45;tag">&#60;g:remoteLink action=<span class="xml&#45;quote">"example"</span>
               update=<span class="xml&#45;quote">"success"</span>
-              onSuccess=<span class="xml&#45;quote">"fireMe(e)"</span>&#62;</span>Ajax Link<span class="xml&#45;tag">&#60;/g:remoteLink&#62;</span></pre></div>
-
+              onSuccess=<span class="xml&#45;quote">"fireMe(event)"</span>&#62;</span>Ajax Link<span class="xml&#45;tag">&#60;/g:remoteLink&#62;</span></pre></div>
 
 <a name="6.7.2 Ajax with Prototype"><!-- Legacy link --></a>
 <h2 id="ajaxWithPrototype">7.7.2 Prototypeを使用したAjax</h2>
@@ -3228,6 +3232,9 @@ Unitテストまたは統合テスト(<a href="../guide/single.html#testing" cla
                             <div class="menu-item"><a href="../ref/Command%20Line/stats.html">stats</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../ref/Command%20Line/stop-app.html">stop-app</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../ref/Command%20Line/test-app.html">test-app</a>
                             </div>
                             
@@ -3403,6 +3410,9 @@ Unitテストまたは統合テスト(<a href="../guide/single.html#testing" cla
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Database%20Mapping/discriminator.html">discriminator</a>

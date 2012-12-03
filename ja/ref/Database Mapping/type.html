@@ -124,7 +124,8 @@ function addJsClass(el) {
             column name: <span class="java&#45;quote">"currency"</span>, sqlType: <span class="java&#45;quote">"<span class="java&#45;object">char</span>"</span>, length: 3
         &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>association_name(type:string/class)</code><p class="paragraph"/>Hibernate will attempt to automatically select the appropriate database type from the field typed based on configuration in the <code>Dialect</code> class that is being used. But you can override the defaults if necessary. For example <code>String</code> values are mapped by default to <code>varchar(255)</code> columns. To store larger <code>String</code> values you can use a <code>text</code> type instead:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>association_name(type:string/class)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>association_name(type:string/class)</code><p class="paragraph"/>Hibernate will attempt to automatically select the appropriate database type from the field typed based on configuration in the <code>Dialect</code> class that is being used. But you can override the defaults if necessary. For example <code>String</code> values are mapped by default to <code>varchar(255)</code> columns. To store larger <code>String</code> values you can use a <code>text</code> type instead:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
     title type: <span class="java&#45;quote">"text"</span>
 &#125;</pre></div><p class="paragraph"/>Hibernate also has the concept of custom <code>UserType</code> implementations. In this case you specify the <code>UserType</code> class. If the <code>UserType</code> maps to multiple columns you may need to specify a mapping for each column:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
     amount type: MonetaryUserType, &#123;
@@ -298,6 +299,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -481,6 +485,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

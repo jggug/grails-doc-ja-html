@@ -130,7 +130,13 @@ Book.findAll(<span class="java&#45;quote">"from Book as b where b.author in (:au
 Book.findAll(<span class="java&#45;quote">"from Book as b where not exists "</span> +
                 <span class="java&#45;quote">"(from Borrow as br where br.book = b)"</span>)<p class="paragraph"/>// query by example
 def example = <span class="java&#45;keyword">new</span> Book(author: <span class="java&#45;quote">"Dan Brown"</span>)
-Book.findAll(example)</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>The <code>findAll</code> method allows querying with Hibernate's query language <a href="../../guide/single.html#hql" class="guide">HQL</a> and querying by example, returning all matching instances. Pagination can be controlled using the <code>max</code> and <code>offset</code> parameters:<p class="paragraph"/><div class="code"><pre>Book.findAll(<span class="java&#45;quote">"from Book as b where b.author=:author"</span>,
+Book.findAll(example)<p class="paragraph"/>// Use where criteria (since Grails 2.0)
+def results = Person.findAll &#123;
+     lastName == <span class="java&#45;quote">"Simpson"</span>
+&#125;
+def results = Person.findAll(sort:<span class="java&#45;quote">"firstName"</span>) &#123;
+     lastName == <span class="java&#45;quote">"Simpson"</span>
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>The <code>findAll</code> method allows querying with Hibernate's query language <a href="../../guide/single.html#hql" class="guide">HQL</a> and querying by example, returning all matching instances. Pagination can be controlled using the <code>max</code> and <code>offset</code> parameters:<p class="paragraph"/><div class="code"><pre>Book.findAll(<span class="java&#45;quote">"from Book as b where b.author=:author"</span>,
              &#91;author: 'Dan Brown'&#93;, &#91;max: 10, offset: 5&#93;)</pre></div><p class="paragraph"/>The <code>findAll</code> method supports the 2nd level cache:<p class="paragraph"/><div class="code"><pre>Book.findAll(<span class="java&#45;quote">"from Book as b where b.author=:author"</span>,
              &#91;author:'Dan Brown'&#93;, &#91;max: 10, offset: 5, cache: <span class="java&#45;keyword">true</span>&#93;)</pre></div><p class="paragraph"/>The basic syntax for the method is:<p class="paragraph"/><div class="code"><pre>Book.findAll()
 Book.findAll(<span class="java&#45;object">String</span> query)
@@ -138,7 +144,9 @@ Book.findAll(<span class="java&#45;object">String</span> query, Collection posit
 Book.findAll(<span class="java&#45;object">String</span> query, Collection positionalParams, Map queryParams)
 Book.findAll(<span class="java&#45;object">String</span> query, Map namedParams)
 Book.findAll(<span class="java&#45;object">String</span> query, Map namedParams, Map queryParams)
-Book.findAll(Book example)</pre></div><p class="paragraph"/><blockquote class="note">
+Book.findAll(Book example)
+Book.findAll(Closure whereCriteria)
+Book.findAll(Map queryParams, Closure whereCriteria)</pre></div><p class="paragraph"/><blockquote class="note">
 If you have a join in your HQL, the method will return a <code>List</code> of <code>Array</code>s containing domain class instances. You may wish to use <a href="../../ref/Domain Classes/executeQuery.html" class="domainClasses">executeQuery</a> in this case so you have more flexibility in specifying what gets returned.
 </blockquote><p class="paragraph"/>パラメータ: <div class="hidden-block">Parameters:</div>
 <ul class="star">
@@ -317,6 +325,9 @@ If you have a join in your HQL, the method will return a <code>List</code> of <c
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -500,6 +511,9 @@ If you have a join in your HQL, the method will return a <code>List</code> of <c
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

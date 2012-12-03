@@ -118,10 +118,12 @@ function addJsClass(el) {
     $&#123;counter&#125;.&#38;nbsp; $&#123;it&#125; &#45;&#62; $&#123;counter % 2 == 0 ? 'even' : 'odd'&#125;
     <span class="xml&#45;tag">&#60;g:set var=<span class="xml&#45;quote">"counter"</span> value=<span class="xml&#45;quote">"$&#123;counter + 1&#125;"</span> /&#62;</span><span class="xml&#45;tag">&#60;br/&#62;</span>
 <span class="xml&#45;tag">&#60;/g:each&#62;</span></pre></div><p class="paragraph"/>Using scopes:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:set var=<span class="xml&#45;quote">"foo"</span> value=<span class="xml&#45;quote">"$&#123;new Date()&#125;"</span> scope=<span class="xml&#45;quote">"page"</span> /&#62;</span>
-<span class="xml&#45;tag">&#60;g:set var=<span class="xml&#45;quote">"bar"</span> value=<span class="xml&#45;quote">"$&#123;new Date() &#45; 7&#125;"</span> scope=<span class="xml&#45;quote">"session"</span> /&#62;</span></pre></div><p class="paragraph"/>Using the body contents:<p class="paragraph"/><div class="code"><pre>&#60;g:set <span class="java&#45;keyword">var</span>=<span class="java&#45;quote">"foo"</span>&#62;Hello!&#60;/g:set&#62;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>属性 <div class="hidden-block">Attributes</div>
+<span class="xml&#45;tag">&#60;g:set var=<span class="xml&#45;quote">"bar"</span> value=<span class="xml&#45;quote">"$&#123;new Date() &#45; 7&#125;"</span> scope=<span class="xml&#45;quote">"session"</span> /&#62;</span></pre></div><p class="paragraph"/>Using the body contents:<p class="paragraph"/><div class="code"><pre>&#60;g:set <span class="java&#45;keyword">var</span>=<span class="java&#45;quote">"foo"</span>&#62;Hello!&#60;/g:set&#62;</pre></div><p class="paragraph"/>Get a bean from the applicationContext by name:<p class="paragraph"/><div class="code"><pre>&#60;g:set <span class="java&#45;keyword">var</span>=<span class="java&#45;quote">"bookService"</span> bean=<span class="java&#45;quote">"bookService"</span>/&#62;</pre></div><p class="paragraph"/>Get a bean from the applicationContext by type:<p class="paragraph"/><div class="code"><pre>&#60;%@ page <span class="java&#45;keyword">import</span>=<span class="java&#45;quote">"org.springframework.context.MessageSource"</span> %&#62;
+&#60;g:set <span class="java&#45;keyword">var</span>=<span class="java&#45;quote">"messageSource"</span> bean=<span class="java&#45;quote">"$&#123;MessageSource&#125;"</span>/&#62;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>属性 <div class="hidden-block">Attributes</div>
 <ul class="star">
 <li><code>var</code> - The name of the variable</li>
 <li><code>value</code> - The initial value</li>
+<li><code>bean</code> -  The name or the type of a bean in the applicationContext; the type can be an interface or superclass</li>
 <li><code>scope</code> - Scope to set variable in, one of <code>request</code>, <code>page</code>, <code>flash</code> or <code>session</code>. Defaults to <code>page</code>.</li>
 </ul><p class="paragraph"/><h2>ソース <div class="hidden-block">Source</div></h2><p class="paragraph"/>{source:tag=ApplicationTagLib.set}
 {source}
@@ -291,6 +293,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -474,6 +479,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

@@ -118,7 +118,8 @@ function addJsClass(el) {
     <span class="java&#45;keyword">static</span> mapping = &#123;
         version <span class="java&#45;keyword">false</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>version(string/boolean)</code><p class="paragraph"/>By default GORM is configured with <a href="../../guide/single.html#locking" class="guide">optimistic locking</a> enabled. You can disable this by calling the <code>version</code> method with an argument of <code>false</code>:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>version(string/boolean)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>version(string/boolean)</code><p class="paragraph"/>By default GORM is configured with <a href="../../guide/single.html#locking" class="guide">optimistic locking</a> enabled. You can disable this by calling the <code>version</code> method with an argument of <code>false</code>:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
     version <span class="java&#45;keyword">false</span>
 &#125;</pre></div><p class="paragraph"/>You can pass the name to the <code>version</code> method to change the name of the database column:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
     version 'revision_number'
@@ -289,6 +290,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -472,6 +476,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

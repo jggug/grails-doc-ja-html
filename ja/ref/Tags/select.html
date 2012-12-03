@@ -149,7 +149,8 @@ function addJsClass(el) {
 <li><code>multiple</code> (optional) - Set to <code>true</code> to generate a multi-select listbox rather than a dropdown list.</li>
 </ul><p class="paragraph"/>The <code>optionKey</code> and <code>optionValue</code> attribute of the <code>&#60;g:select&#62;</code> tag deserve special mention as these let you control what is displayed to the user within the resulting <code>&#60;select&#62;</code> tag and also the value which is submitted in a form submission. The default behaviour is to call <code>toString()</code> on each element in the <code>from</code> attribute, but for example if you had a list of <code>Book</code> domain classes this may not be useful behaviour.<p class="paragraph"/>As an example the following <code>&#60;g:select&#62;</code> uses the <code>optionKey</code> attribute to resolve the <code>id</code> property of each <code>Book</code> as the value of the <code>value</code> attribute in each <code>&#60;option&#62;</code> tag. It also uses the <code>optionValue</code> attribute of <code>&#60;g:select&#62;</code> to display the <code>title</code> property of each <code>Book</code> to the user:<p class="paragraph"/><div class="code"><pre>&#60;g:select optionKey=<span class="java&#45;quote">"id"</span> optionValue=<span class="java&#45;quote">"title"</span>
           name=<span class="java&#45;quote">"book.title"</span> from=<span class="java&#45;quote">"$&#123;bookList&#125;"</span> /&#62;</pre></div><p class="paragraph"/>If you require even more control over how each <code>&#60;option&#62;</code> element is presented to the user you can use a closure to apply a transformation within the <code>optionValue</code> attribute. As an example, the following code transforms each <code>Book</code> title to upper case:<p class="paragraph"/><div class="code"><pre>&#60;g:select optionKey=<span class="java&#45;quote">"id"</span> optionValue=<span class="java&#45;quote">"$&#123;&#123;it.title?.toUpperCase()&#125;&#125;"</span>
-          name=<span class="java&#45;quote">"book.title"</span> from=<span class="java&#45;quote">"$&#123;bookList&#125;"</span> /&#62;</pre></div><p class="paragraph"/><h2>ソース <div class="hidden-block">Source</div></h2><p class="paragraph"/>{source:tag=FormTagLib.select}
+          name=<span class="java&#45;quote">"book.title"</span> from=<span class="java&#45;quote">"$&#123;bookList&#125;"</span> /&#62;</pre></div><p class="paragraph"/>If you specify an <code>optionKey</code> then be aware that you should use that property in the <code>value</code> attribute in order to pre-select an item in the drop down list. For example, let's say we have a <code>favoriteBook</code> that we want to pre-select in a list of books:<p class="paragraph"/><div class="code"><pre>&#60;g:select optionKey=<span class="java&#45;quote">"id"</span> value=<span class="java&#45;quote">"$&#123;favoriteBook.id&#125;"</span>
+          name=<span class="java&#45;quote">"book"</span> from=<span class="java&#45;quote">"$&#123;bookList&#125;"</span> /&#62;</pre></div><p class="paragraph"/>In this case, <code>value</code> should contain the ID of <code>favouriteBook</code> rather than the book object itself because <code>optionKey</code> is set to the <code>id</code> property.<p class="paragraph"/><h2>ソース <div class="hidden-block">Source</div></h2><p class="paragraph"/>{source:tag=FormTagLib.select}
 {source}
 
             </div>
@@ -317,6 +318,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -500,6 +504,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

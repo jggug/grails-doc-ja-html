@@ -118,7 +118,9 @@ function addJsClass(el) {
     <span class="java&#45;keyword">static</span> mapping = &#123;
         autoImport <span class="java&#45;keyword">false</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>autoImport(boolean)</code><p class="paragraph"/>By default the domain classes are auto-imported in HQL queries so you aren't required to specify the whole class name including the package, but if you have duplicate domain class names in different packages the names are no longer unique, causing a <code>org.hibernate.DuplicateMappingException</code>. Disable auto-import of one or both of them to fix this, setting <code>autoImport</code> to <code>false</code>. Remember that you need to use the fully qualified class name in the HQL query for references to these classes.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>
+<div class="hidden-block">Usage: <code>autoImport(boolean)</code></div>
+使用方法: <code>autoImport(boolean)</code><p class="paragraph"/>By default the domain classes are auto-imported in HQL queries so you aren't required to specify the whole class name including the package, but if you have duplicate domain class names in different packages the names are no longer unique, causing a <code>org.hibernate.DuplicateMappingException</code>. Disable auto-import of one or both of them to fix this, setting <code>autoImport</code> to <code>false</code>. Remember that you need to use the fully qualified class name in the HQL query for references to these classes.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
     autoImport <span class="java&#45;keyword">false</span>
 &#125;</pre></div>
 
@@ -287,6 +289,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -470,6 +475,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

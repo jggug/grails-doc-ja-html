@@ -121,12 +121,12 @@ function addJsClass(el) {
 &#125;</pre></div><p class="paragraph"/>Example usages for above controller:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:form action=<span class="xml&#45;quote">"show"</span>&#62;</span>
     Login: <span class="xml&#45;tag">&#60;input name=<span class="xml&#45;quote">"login"</span> type=<span class="xml&#45;quote">"text"</span> /&#62;</span>
     <span class="xml&#45;tag">&#60;g:submitToRemote update=<span class="xml&#45;quote">"updateMe"</span> /&#62;</span>
-<span class="xml&#45;tag">&#60;/g:form&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;div id=<span class="xml&#45;quote">"updateMe"</span>&#62;</span>this div will be updated with the form submit response<span class="xml&#45;tag">&#60;/div&#62;</span></pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>属性 <div class="hidden-block">Attributes</div>
+<span class="xml&#45;tag">&#60;/g:form&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;div id=<span class="xml&#45;quote">"updateMe"</span>&#62;</span>this div will be updated with the form submit response<span class="xml&#45;tag">&#60;/div&#62;</span></pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>This tag creates a submit button that fires an AJAX request when it is pressed. The exact Javascript used to fire off the AJAX request depends on which Javascript library is used. This tag also requires the use of either the &#60;g:<a href="../../ref/Tags/javascript.html" class="tags">javascript</a>/&#62; or &#60;g:<a href="../../ref/Tags/setProvider.html" class="tags">setProvider</a>/&#62; tags. See the <a href="../../guide/single.html#ajax" class="guide">AJAX section</a> of the user guide to find out more.<p class="paragraph"/>属性 <div class="hidden-block">Attributes</div>
 <ul class="star">
 <li><code>url</code> - The url to submit to, either a map contraining keys for the action, controller and id or a string value</li>
 <li><code>update</code> (optional) - Either a Map containing the elements to update for 'success' or 'failure' states, or a string with the element id to update, in which case failure events would be ignored</li>
-<li><code>before</code> (optional) - The JavaScript function to call before the remote function call</li>
-<li><code>after</code> (optional) - The JavaScript function to call after the remote function call</li>
+<li><code>before</code> (optional) - The JavaScript function to call before the remote function call. A semi-colon is automatically added so you don't have to provide one yourself in this string.</li>
+<li><code>after</code> (optional) - The JavaScript function to call after the remote function call. A semi-colon is automatically added so you don't have to provide one yourself in this string.</li>
 <li><code>asynchronous</code> (optional) - Whether to do the call asynchronously (defaults to <code>true</code>)</li>
 <li><code>method</code> (optional) - The method to use the execute the call (defaults to POST)</li>
 </ul><p class="paragraph"/>イベント <div class="hidden-block">Events</div>
@@ -306,6 +306,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -489,6 +492,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

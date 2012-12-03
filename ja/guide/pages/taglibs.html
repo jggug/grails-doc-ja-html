@@ -238,7 +238,7 @@ function addJsClass() {
 
 <a name="6.3.2 Simple Tags"><!-- Legacy link --></a>
 <h2 id="simpleTags">7.3.2 簡単なタグ</h2>
-<div class="hidden-block">As demonstrated it the previous example it is easy to write simple tags that have no body and just output content. Another example is a <code>dateFormat</code> style tag:</div>
+<div class="hidden-block">As demonstrated in the previous example it is easy to write simple tags that have no body and just output content. Another example is a <code>dateFormat</code> style tag:</div>
 前の説明で、簡単にコンテンツを出力するタグは簡単に記述できると説明しました。他の例として<code>dateFormat</code>タグを紹介します:<p class="paragraph"/><div class="code"><pre>def dateFormat = &#123; attrs, body &#45;&#62;
     out &#60;&#60; <span class="java&#45;keyword">new</span> java.text.SimpleDateFormat(attrs.format).format(attrs.date)
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The above uses Java's <code>SimpleDateFormat</code> class to format a date and then write it to the response. The tag can then be used within a GSP as follows:</div>
@@ -510,6 +510,9 @@ Object returning tag names are listed in a static <code>returnObjectForTags</cod
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
                             </div>
                             
@@ -685,6 +688,9 @@ Object returning tag names are listed in a static <code>returnObjectForTags</cod
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

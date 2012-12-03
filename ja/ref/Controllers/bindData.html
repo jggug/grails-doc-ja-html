@@ -118,14 +118,15 @@ bindData(target, params)<p class="paragraph"/>// exclude firstName and lastName
 bindData(target, params, &#91;exclude: &#91;'firstName', 'lastName'&#93;&#93;)<p class="paragraph"/>// only use parameters starting with <span class="java&#45;quote">"author."</span> e.g. author.email
 bindData(target, params, <span class="java&#45;quote">"author"</span>)
 bindData(target, params, &#91;exclude: &#91;'firstName', 'lastName'&#93;&#93;, <span class="java&#45;quote">"author"</span>)<p class="paragraph"/>// using inclusive map
-bindData(target, params, &#91;include: &#91;'firstName', 'lastName'&#93;&#93;, <span class="java&#45;quote">"author"</span>)</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>bindData(target, params, includesExcludes<strong class="bold">, prefix</strong>)</code><p class="paragraph"/>引数: <div class="hidden-block">Arguments:</div>
+bindData(target, params, &#91;include: &#91;'firstName', 'lastName'&#93;&#93;, <span class="java&#45;quote">"author"</span>)</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>bindData(target, params, includesExcludes<strong class="bold">, prefix</strong>)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>bindData(target, params, includesExcludes<strong class="bold">, prefix</strong>)</code><p class="paragraph"/>引数: <div class="hidden-block">Arguments:</div>
 <ul class="star">
 <li><code>target</code> - The target object to bind to</li>
 <li><code>params</code> - A <code>Map</code> of source parameters, often the <a href="../../ref/Controllers/params.html" class="controllers">params</a> object when used in a controller</li>
 <li><code>includesExcludes</code> - (Optional) A map with 'include' and/or 'exclude' lists containing the names of properties to either include or exclude.</li>
 <li><code>prefix</code> - (Optional) A string representing a prefix to use to filter parameters. The method will automatically append a '.' when matching the prefix to parameters, so you can use 'author' to filter for parameters such as 'author.name'.</li>
 </ul><p class="paragraph"/><blockquote class="note">
-Note that if an empty List is provided as a value for the <code>include</code> parameter then all fields will be subject to binding if they are not explicitly excluded.
+Note that if an empty List or no List is provided as a value for the <code>include</code> parameter then all statically typed instance properties will be subject to binding if they are not explicitly excluded. See the <a href="../../ref/Constraints/bindable.html" class="constraints">bindable</a> constraint documentation for more information on how to control what is bindable and what is not.
 </blockquote><p class="paragraph"/>The underlying implementation uses Spring's Data Binding framework. If the target is a domain class, type conversion errors are stored in the <code>errors</code> property of the domain class.<p class="paragraph"/>Refer to the section on <a href="../../guide/single.html#dataBinding" class="guide">Data Binding</a> in the user guide for more information.
 
             </div>
@@ -293,6 +294,9 @@ Note that if an empty List is provided as a value for the <code>include</code> p
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -476,6 +480,9 @@ Note that if an empty List is provided as a value for the <code>include</code> p
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

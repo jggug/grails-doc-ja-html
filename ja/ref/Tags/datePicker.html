@@ -117,10 +117,12 @@ function addJsClass(el) {
               noSelection=<span class="xml&#45;quote">"&#91;'':'&#45;Choose&#45;'&#93;"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;g:datePicker name=<span class="xml&#45;quote">"myDate"</span> value=<span class="xml&#45;quote">"$&#123;new Date()&#125;"</span>
               precision=<span class="xml&#45;quote">"day"</span> years=<span class="xml&#45;quote">"$&#123;1930..1970&#125;"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;g:datePicker name=<span class="xml&#45;quote">"myDate"</span> value=<span class="xml&#45;quote">"$&#123;new Date()&#125;"</span>
               precision=<span class="xml&#45;quote">"day"</span> years=<span class="xml&#45;quote">"&#91;1930, 1940, 1950, 1960, 1970&#93;"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;g:datePicker name=<span class="xml&#45;quote">"myDate"</span> value=<span class="xml&#45;quote">"$&#123;new Date()&#125;"</span> precision=<span class="xml&#45;quote">"month"</span>
-              noSelection=<span class="xml&#45;quote">"&#91;'':'&#45;Choose&#45;'&#93;"</span> relativeYears=<span class="xml&#45;quote">"&#91;&#45;2..7&#93;"</span>/&#62;</span></pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>属性 <div class="hidden-block">Attributes</div>
+              noSelection=<span class="xml&#45;quote">"&#91;'':'&#45;Choose&#45;'&#93;"</span> relativeYears=<span class="xml&#45;quote">"&#91;&#45;2..7&#93;"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;g:datePicker name=<span class="xml&#45;quote">"myDate"</span> value=<span class="xml&#45;quote">"$&#123;myDomainClass?.myDateField&#125;"</span>
+              default=<span class="xml&#45;quote">"$&#123;new Date().plus(7)&#125;"</span>/&#62;</span></pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>属性 <div class="hidden-block">Attributes</div>
 <ul class="star">
 <li><code>name</code> (required) - The name of the date picker field set</li>
-<li><code>value</code> (optional) - The current value of the date picker; defaults to now if not specified</li>
+<li><code>value</code> (optional) - The current value of the date picker; defaults to either the value specified by the <code>default</code> attribute or  <em class="italic">now</em>  if no <code>default</code> is set.</li>
+<li><code>default</code> (optional) - A <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html" class="api">Date</a> or parsable date string (see <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/text/DateFormat.html" class="api">DateFormat</a>) that will be used if there is no <code>value</code></li>
 <li><code>precision</code> (optional) - The desired granularity of the date to be rendered</li>
 <ul class="star">
 <li>Valid values are 'year', 'month', 'day', 'hour', or 'minute'</li>
@@ -306,6 +308,9 @@ function addJsClass(el) {
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
                             </div>
                             
@@ -487,6 +492,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

@@ -197,7 +197,7 @@ Grailsが間のインスタンスも自動的に生成します。上記のケ�
    def displayInvoice(<span class="java&#45;object">String</span> accountNumber, <span class="java&#45;object">int</span> accountType) &#123;
        // &#8230;
    &#125;
-&#125;</pre></div><p class="paragraph"/>For primitive arguments and arguments which are instances of any of the primitive type wrapper classes a type conversion has to be carried out before the request parameter value can be bound to the action argument.  The type conversion happens automatically.  In a case like the example shown above, the <code>params.accountType</code> request parameter has to be converted to an <code>int</code>.  If type conversion fails for any reason, the argument will have its default value per normal Java behavior (null for type wrapper references, false for booleans and zero for numbers) and a corresponding error will be added to the <code>errors</code> property of the defining controller.<p class="paragraph"/><div class="code"><pre>/accounting/displayInvoice?accountNumber=B59786&#38;accountType=bogusValue</pre></div><p class="paragraph"/>Since "bogusValue" cannot be converted to type int, the value of accountType will be zero, <code>controller.errors.hasErrors()</code> will be true, <code>controller.errors.errorCount</code> will be equal to 1 and <code>controller.errors.getFieldError('accountType')</code> will contain the corresponding error.<p class="paragraph"/>If the argument name does not match the name of the request parameter then the <code>&#64;grails.web.RequestParameter</code> annotation may be applied to an argument to express the name of the request parameter which should be bound to that argument:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.web.RequestParameter<p class="paragraph"/>class AccountingController &#123;<p class="paragraph"/>   // mainAccountNumber will be initialized with the value of params.accountNumber
+&#125;</pre></div><p class="paragraph"/>For primitive arguments and arguments which are instances of any of the primitive type wrapper classes a type conversion has to be carried out before the request parameter value can be bound to the action argument.  The type conversion happens automatically.  In a case like the example shown above, the <code>params.accountType</code> request parameter has to be converted to an <code>int</code>.  If type conversion fails for any reason, the argument will have its default value per normal Java behavior (null for type wrapper references, false for booleans and zero for numbers) and a corresponding error will be added to the <code>errors</code> property of the defining controller.<p class="paragraph"/><div class="code"><pre>/accounting/displayInvoice?accountNumber=B59786&#38;accountType=bogusValue</pre></div><p class="paragraph"/>Since "bogusValue" cannot be converted to type int, the value of accountType will be zero, the controller's <code>errors.hasErrors()</code> will be true, the controller's <code>errors.errorCount</code> will be equal to 1 and the controller's <code>errors.getFieldError('accountType')</code> will contain the corresponding error.<p class="paragraph"/>If the argument name does not match the name of the request parameter then the <code>&#64;grails.web.RequestParameter</code> annotation may be applied to an argument to express the name of the request parameter which should be bound to that argument:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.web.RequestParameter<p class="paragraph"/>class AccountingController &#123;<p class="paragraph"/>   // mainAccountNumber will be initialized with the value of params.accountNumber
    // accountType will be initialized with params.accountType
    def displayInvoice(@RequestParameter('accountNumber') <span class="java&#45;object">String</span> mainAccountNumber, <span class="java&#45;object">int</span> accountType) &#123;
        // &#8230;
@@ -224,7 +224,7 @@ bindData(p, params)</pre></div><p class="paragraph"/><div class="hidden-block">T
 <code>bindData</code>メソッドでは、更新しないパラメータを除外する事が可能です:<p class="paragraph"/><div class="code"><pre>def p = <span class="java&#45;keyword">new</span> Person()
 bindData(p, params, &#91;exclude: 'dateOfBirth'&#93;)</pre></div><p class="paragraph"/><div class="hidden-block">Or include only certain properties:</div>
 または、指定したプロパティのみの更新も可能です:<p class="paragraph"/><div class="code"><pre>def p = <span class="java&#45;keyword">new</span> Person()
-bindData(p, params, &#91;include: &#91;'firstName', 'lastName&#93;&#93;)</pre></div><p class="paragraph"/><blockquote class="note">
+bindData(p, params, &#91;include: &#91;'firstName', 'lastName'&#93;&#93;)</pre></div><p class="paragraph"/><blockquote class="note">
 Note that if an empty List is provided as a value for the <code>include</code> parameter then all fields will be subject to binding if they are not explicitly excluded.
 </blockquote>
 
@@ -402,6 +402,9 @@ Note that if an empty List is provided as a value for the <code>include</code> p
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
                             </div>
                             
@@ -577,6 +580,9 @@ Note that if an empty List is provided as a value for the <code>include</code> p
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

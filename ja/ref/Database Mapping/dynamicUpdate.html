@@ -116,7 +116,8 @@ function addJsClass(el) {
                 <h1>dynamicUpdate</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Whether to dynamically build <code>UPDATE</code> queries<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>class Book &#123;<p class="paragraph"/>    ...<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         dynamicUpdate <span class="java&#45;keyword">true</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>dynamicUpdate(boolean)</code><p class="paragraph"/>By default Hibernate generates all queries at startup and caches them. This helps performance since insert, update, and delete queries don't have to be dynamically generated at runtime. However, there are certain circumstances where dynamic queries are useful.<p class="paragraph"/>For example if you were using custom <code>UserType</code> to hash passwords, every time an UPDATE occurred, the password would get re-hashed. The <code>dynamicUpdate</code> method lets you turn off the dynamic creation of queries that uses only the properties that are needed to perform the update.
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>dynamicUpdate(boolean)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>dynamicUpdate(boolean)</code><p class="paragraph"/>By default Hibernate generates all queries at startup and caches them. This helps performance since insert, update, and delete queries don't have to be dynamically generated at runtime. However, there are certain circumstances where dynamic queries are useful.<p class="paragraph"/>For example if you were using custom <code>UserType</code> to hash passwords, every time an UPDATE occurred, the password would get re-hashed. The <code>dynamicUpdate</code> method lets you turn off the dynamic creation of queries that uses only the properties that are needed to perform the update.
 
             </div>
         </td>
@@ -283,6 +284,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -466,6 +470,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>

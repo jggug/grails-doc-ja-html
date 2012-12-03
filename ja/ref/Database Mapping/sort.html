@@ -118,7 +118,8 @@ function addJsClass(el) {
     <span class="java&#45;keyword">static</span> mapping = &#123;
         sort <span class="java&#45;quote">"releaseDate"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div> <code>sort(string/map)</code><p class="paragraph"/>By default results are sorted by creation date, and you can specify the column to order by in a query:<p class="paragraph"/><div class="code"><pre>def results = Book.list(sort:<span class="java&#45;quote">"title"</span>)</pre></div><p class="paragraph"/>However, you can also configure the default sort property:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/><div class="hidden-block">Usage: <code>sort(string/map)</code></div>
+使用方法: <div class="hidden-block">Usage:</div> <code>sort(string/map)</code><p class="paragraph"/>By default results are sorted by creation date, and you can specify the column to order by in a query:<p class="paragraph"/><div class="code"><pre>def results = Book.list(sort:<span class="java&#45;quote">"title"</span>)</pre></div><p class="paragraph"/>However, you can also configure the default sort property:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
     sort <span class="java&#45;quote">"title"</span>
 &#125;</pre></div><p class="paragraph"/>in which case the <code>sort</code> argument is no longer needed. You can also control the sort order:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mapping = &#123;
     sort title: <span class="java&#45;quote">"desc"</span> // or <span class="java&#45;quote">"asc"</span>
@@ -289,6 +290,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/stats.html">stats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/stop-app.html">stop-app</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/test-app.html">test-app</a>
@@ -472,6 +476,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/column.html">column</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Database%20Mapping/comment.html">comment</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Database%20Mapping/discriminator.html">discriminator</a>
