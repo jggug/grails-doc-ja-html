@@ -2853,7 +2853,13 @@ The Grails Wrapper allows a Grails application to built without having to instal
 
 <a name="5. Object Relational Mapping (GORM)"><!-- Legacy link --></a>
 <h1 id="GORM">6 O/Rマッピング (GORM)</h1>
-Domain classes are core to any business application. They hold state about business processes and hopefully also implement behavior. They are linked together through relationships; one-to-one, one-to-many, or many-to-many.<p class="paragraph"/>GORM is Grails' object relational mapping (ORM) implementation. Under the hood it uses Hibernate 3 (a very popular and flexible open source ORM solution) and thanks to the dynamic nature of Groovy with its static and dynamic typing, along with the convention of Grails, there is far less configuration involved in creating Grails domain classes.<p class="paragraph"/>You can also write Grails domain classes in Java. See the section on Hibernate Integration for how to write domain classes in Java but still use dynamic persistent methods. Below is a preview of GORM in action:<p class="paragraph"/><div class="code"><pre>def book = Book.findByTitle(<span class="java&#45;quote">"Groovy in Action"</span>)<p class="paragraph"/>book
+<div class="hidden-block">Domain classes are core to any business application. They hold state about business processes and hopefully also implement behavior. They are linked together through relationships; one-to-one, one-to-many, or many-to-many.</div><p class="paragraph"/>ドメインクラスは業務アプリケーションの中心です。
+それらは業務プロセスについての状態や振る舞いを保持します。
+また、それらは一対一、一対多、多対多などの関連を通して結びつけられます。<p class="paragraph"/><div class="hidden-block">GORM is Grails' object relational mapping (ORM) implementation. Under the hood it uses Hibernate 3 (a very popular and flexible open source ORM solution) and thanks to the dynamic nature of Groovy with its static and dynamic typing, along with the convention of Grails, there is far less configuration involved in creating Grails domain classes.</div><p class="paragraph"/>GORMは、Grailsのオブジェクトリレーショナルマッピング(ORM)の実装です。
+その裏では、広く使われていて柔軟性の高いオープンソースORMであるHibernate 3を利用しています。
+Grailsの規約と、静的・動的型付けというGroovyのダイナミックな特性のおかげで、Grailsのドメインクラスに必要となる設定はほとんどありません。<p class="paragraph"/><div class="hidden-block">You can also write Grails domain classes in Java. See the section on Hibernate Integration for how to write domain classes in Java but still use dynamic persistent methods. Below is a preview of GORM in action:</div><p class="paragraph"/>GrailsのドメインクラスをJavaで書くこともできます。
+Javaでドメインクラスを書いて、動的な永続化メソッドも使えるようにする方法については、<a href="../guide/single.html#hibernate" class="guide">GrailsとHibernate</a>のセクションを参照してください。<p class="paragraph"/>以下は、GORMのサンプルコードです:
+<div class="code"><pre>def book = Book.findByTitle(<span class="java&#45;quote">"Groovy in Action"</span>)<p class="paragraph"/>book
   .addToAuthors(name:<span class="java&#45;quote">"Dierk Koenig"</span>)
   .addToAuthors(name:<span class="java&#45;quote">"Guillaume LaForge"</span>)
   .save()</pre></div>
