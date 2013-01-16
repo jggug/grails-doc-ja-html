@@ -138,7 +138,8 @@ function addJsClass() {
                 
 <a name="11.4.2 Shiro"><!-- Legacy link --></a>
 <h2 id="shiro">12.4.2 Shiro</h2>
-<a href="http://shiro.apache.org/" target="blank">Shiro</a> is a Java POJO-oriented security framework that provides a default domain model that models realms, users, roles and permissions. With Shiro you extend a controller base class called called <code>JsecAuthBase</code> in each controller you want secured and then provide an <code>accessControl</code> block to setup the roles. An example below:<p class="paragraph"/><div class="code"><pre>class ExampleController <span class="java&#45;keyword">extends</span> JsecAuthBase &#123;
+<div class="hidden-block"><a href="http://shiro.apache.org/" target="blank">Shiro</a> is a Java POJO-oriented security framework that provides a default domain model that models realms, users, roles and permissions. With Shiro you extend a controller base class called <code>JsecAuthBase</code> in each controller you want secured and then provide an <code>accessControl</code> block to setup the roles. An example below:</div>
+<a href="http://shiro.apache.org/" target="blank">Shiro</a>はJava POJO指向のセキュリティフレームワークで、レルム/ユーザ/ロール/権限に対するデフォルトのドメインモデルを提供します。Shiroを利用するには、セキュリティ機能が必要な各コントローラで<code>JsecAuthBase</code>という基底クラスを継承し、<code>accessControl</code>ブロックを使用してロールを設定します。以下に例を示します:<p class="paragraph"/><div class="code"><pre>class ExampleController <span class="java&#45;keyword">extends</span> JsecAuthBase &#123;
     <span class="java&#45;keyword">static</span> accessControl = &#123;
         // All actions require the 'Observer' role.
         role(name: 'Observer')<p class="paragraph"/>        // The 'edit' action requires the 'Administrator' role.
@@ -146,7 +147,8 @@ function addJsClass() {
         role(name: 'Administrator', only: &#91; 'create', 'edit', 'save', 'update' &#93;)
     &#125;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>For more information on the Shiro plugin refer to the <a href="http://grails.org/plugin/shiro" target="blank">documentation</a>.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">For more information on the Shiro plugin refer to the <a href="http://grails.org/plugin/shiro" target="blank">documentation</a>.</div>
+Shiroプラグインについてのより詳しい情報は、<a href="http://grails.org/plugin/shiro" target="blank">ドキュメント</a>を参照してください。
 
 
 
