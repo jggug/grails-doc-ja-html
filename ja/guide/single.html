@@ -2867,16 +2867,23 @@ Javaでドメインクラスを書いて、動的な永続化メソッドも使�
 
 <a name="5.1 Quick Start Guide"><!-- Legacy link --></a>
 <h2 id="quickStartGuide">6.1 クイックスタートガイド</h2>
-A domain class can be created with the <a href="../ref/Command Line/create-domain-class.html" class="commandLine">create-domain-class</a> command:<p class="paragraph"/><div class="code"><pre>grails create&#45;domain&#45;class helloworld.Person</pre></div><p class="paragraph"/><blockquote class="note">
-If no package is specified with the create-domain-class script, Grails automatically uses the application name as the package name.
-</blockquote><p class="paragraph"/>This will create a class at the location <code>grails-app/domain/helloworld/Person.groovy</code> such as the one below:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> helloworld<p class="paragraph"/>class Person &#123;
+<div class="hidden-block">A domain class can be created with the <a href="../ref/Command Line/create-domain-class.html" class="commandLine">create-domain-class</a> command:</div>
+以下のように<a href="../ref/Command Line/create-domain-class.html" class="commandLine">create-domain-class</a>コマンドでドメインクラスを作成できます。<p class="paragraph"/><div class="code"><pre>grails create&#45;domain&#45;class helloworld.Person</pre></div><p class="paragraph"/><blockquote class="note">
+<div class="hidden-block">If no package is specified with the create-domain-class script, Grails automatically uses the application name as the package name.</div>
+パッケージ名を指定しない場合、自動的にアプリケーション名をパッケージ名として使用します。
+</blockquote><p class="paragraph"/><div class="hidden-block">This will create a class at the location <code>grails-app/domain/helloworld/Person.groovy</code> such as the one below:</div>
+コマンドを実行すると<code>grails-app/domain/helloworld/Person.groovy</code>に以下のようなドメインクラスを作成します。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> helloworld<p class="paragraph"/>class Person &#123;
 &#125;</pre></div><p class="paragraph"/><blockquote class="note">
-If you have the <code>dbCreate</code> property set to "update", "create" or "create-drop" on your <a href="../guide/single.html#dataSource" class="guide">DataSource</a>, Grails will automatically generate/modify the database tables for you.
-</blockquote><p class="paragraph"/>You can customize the class by adding properties:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+<div class="hidden-block">If you have the <code>dbCreate</code> property set to "update", "create" or "create-drop" on your <a href="../guide/single.html#dataSource" class="guide">データソース</a>, Grails will automatically generate/modify the database tables for you.</div>
+<a href="../guide/single.html#dataSource" class="guide">データソース</a>の<code>dbCreate</code>プロパティに"update", "create" または "create-drop"が設定されている場合は、ドメインクラスに対応したデータベースのテーブルを自動的に作成/修正します。
+</blockquote><p class="paragraph"/><div class="hidden-block">You can customize the class by adding properties:</div>
+プロパティを追加することでドメインクラスをカスタマイズできます。<p class="paragraph"/><div class="code"><pre>class Person &#123;
     <span class="java&#45;object">String</span> name
     <span class="java&#45;object">Integer</span> age
     Date lastVisit
-&#125;</pre></div><p class="paragraph"/>Once you have a domain class try and manipulate it with the <a href="../ref/Command Line/shell.html" class="commandLine">shell</a> or <a href="../ref/Command Line/console.html" class="commandLine">console</a> by typing:<p class="paragraph"/><div class="code"><pre>grails console</pre></div><p class="paragraph"/>This loads an interactive GUI where you can run Groovy commands with access to the Spring ApplicationContext, GORM, etc.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Once you have a domain class try and manipulate it with the <a href="../ref/Command Line/shell.html" class="commandLine">shell</a> or <a href="../ref/Command Line/console.html" class="commandLine">console</a> by typing:</div>
+<a href="../ref/Command Line/shell.html" class="commandLine">shell</a>や<a href="../ref/Command Line/console.html" class="commandLine">console</a>上で、作成したドメインクラスを操作できます。<p class="paragraph"/><div class="code"><pre>grails console</pre></div><p class="paragraph"/><div class="hidden-block">This loads an interactive GUI where you can run Groovy commands with access to the Spring ApplicationContext, GORM, etc.</div>
+このコマンドはGroovyコードを実行可能なインタラクティブなGUIを起動します。GroovyコードからSpring ApplicationContextやGORMなどを使用できます。
 
 
 <a name="5.1.1 Basic CRUD"><!-- Legacy link --></a>
