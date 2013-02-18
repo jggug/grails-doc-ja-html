@@ -138,14 +138,30 @@ function addJsClass() {
                 
 <a name="5.1.1 Basic CRUD"><!-- Legacy link --></a>
 <h2 id="basicCRUD">6.1.1 基本CRUD</h2>
-Try performing some basic CRUD (Create/Read/Update/Delete) operations.<p class="paragraph"/><h4>Create</h4><p class="paragraph"/>To create a domain class use Map constructor to set its properties and call <a href="../ref/Domain Classes/save.html" class="domainClasses">save</a>:<p class="paragraph"/><div class="code"><pre>def p = <span class="java&#45;keyword">new</span> Person(name: <span class="java&#45;quote">"Fred"</span>, age: 40, lastVisit: <span class="java&#45;keyword">new</span> Date())
-p.save()</pre></div><p class="paragraph"/>The <a href="../ref/Domain Classes/save.html" class="domainClasses">save</a> method will persist your class to the database using the underlying Hibernate ORM layer.<p class="paragraph"/><h4>Read</h4><p class="paragraph"/>Grails transparently adds an implicit <code>id</code> property to your domain class which you can use for retrieval:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)
-assert 1 == p.id</pre></div><p class="paragraph"/>This uses the <a href="../ref/Domain Classes/get.html" class="domainClasses">get</a> method that expects a database identifier to read the <code>Person</code> object back from the database.
-You can also load an object in a read-only state by using the <a href="../ref/Domain Classes/read.html" class="domainClasses">read</a> method:<p class="paragraph"/><div class="code"><pre>def p = Person.read(1)</pre></div><p class="paragraph"/>In this case the underlying Hibernate engine will not do any dirty checking and the object will not be persisted. Note that
-if you explicitly call the <a href="../ref/Domain Classes/save.html" class="domainClasses">save</a> method then the object is placed back into a read-write state.<p class="paragraph"/>In addition, you can also load a proxy for an instance by using the <a href="../ref/Domain Classes/load.html" class="domainClasses">load</a> method:<p class="paragraph"/><div class="code"><pre>def p = Person.load(1)</pre></div><p class="paragraph"/>This incurs no database access until a method other than getId() is called. Hibernate then initializes the proxied instance, or
-throws an exception if no record is found for the specified id.<p class="paragraph"/><h4>Update</h4><p class="paragraph"/>To update an instance, change some properties and then call <a href="../ref/Domain Classes/save.html" class="domainClasses">save</a> again:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)
+<div class="hidden-block">Try performing some basic CRUD (Create/Read/Update/Delete) operations.</div>
+いくつかの単純なCRUD操作(作成/参照/更新/削除)を実行してみましょう。<p class="paragraph"/><div class="hidden-block">h4. Create</div>
+<h4>作成</h4><p class="paragraph"/><div class="hidden-block">To create a domain class use Map constructor to set its properties and call <a href="../ref/Domain Classes/save.html" class="domainClasses">save</a>:</div>
+ドメインクラスを作成するにはマップコンストラクタでプロパティをセットし、<a href="../ref/Domain Classes/save.html" class="domainClasses">save</a>メソッドを呼び出します。<p class="paragraph"/><div class="code"><pre>def p = <span class="java&#45;keyword">new</span> Person(name: <span class="java&#45;quote">"Fred"</span>, age: 40, lastVisit: <span class="java&#45;keyword">new</span> Date())
+p.save()</pre></div><p class="paragraph"/><div class="hidden-block">The <a href="../ref/Domain Classes/save.html" class="domainClasses">save</a> method will persist your class to the database using the underlying Hibernate ORM layer.</div>
+上記の<a href="../ref/Domain Classes/save.html" class="domainClasses">save</a>メソッドはHibernateのORM層を通じてドメインクラスをデータベースに永続化します。<p class="paragraph"/><div class="hidden-block">h4. Read</div>
+<h4>参照</h4><p class="paragraph"/><div class="hidden-block">Grails transparently adds an implicit <code>id</code> property to your domain class which you can use for retrieval:</div>
+Grailsはユーザが特に意識しなくても暗黙的な<code>id</code>プロパティをドメインクラスの永続化時に付与します。この<code>id</code>によって検索時にドメインクラスを一意に識別することができます。<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)
+assert 1 == p.id</pre></div><p class="paragraph"/><div class="hidden-block">This uses the <a href="../ref/Domain Classes/get.html" class="domainClasses">get</a> method that expects a database identifier to read the <code>Person</code> object back from the database.</div>
+この<a href="../ref/Domain Classes/get.html" class="domainClasses">get</a>メソッドは引数にデータベースの主キーを受け取り、データベースから主キーに対応する<code>Person</code>オブジェクトを返します。
+<div class="hidden-block">You can also load an object in a read-only state by using the <a href="../ref/Domain Classes/read.html" class="domainClasses">read</a> method:</div>
+<a href="../ref/Domain Classes/read.html" class="domainClasses">read</a>メソッドを使用することで、読み取り専用でオブジェクトを参照することができます。<p class="paragraph"/><div class="code"><pre>def p = Person.read(1)</pre></div><p class="paragraph"/><div class="hidden-block">In this case the underlying Hibernate engine will not do any dirty checking and the object will not be persisted. Note that</div>
+<div class="hidden-block">if you explicitly call the <a href="../ref/Domain Classes/save.html" class="domainClasses">save</a> method then the object is placed back into a read-write state.</div>
+読み取り専用でオブジェクトを参照した場合は、下層のHibernateはdirtyチェックと永続化処理を行いません。
+しかし、<a href="../ref/Domain Classes/save.html" class="domainClasses">save</a>メソッドを明示的に呼び出した時は、オブジェクトは読み書き可能な状態に戻るということに留意してください。<p class="paragraph"/><div class="hidden-block">In addition, you can also load a proxy for an instance by using the <a href="../ref/Domain Classes/load.html" class="domainClasses">load</a> method:</div>
+さらに<a href="../ref/Domain Classes/load.html" class="domainClasses">load</a>メソッドを使用することで、プロキシインスタンスを参照することができます。<p class="paragraph"/><div class="code"><pre>def p = Person.load(1)</pre></div><p class="paragraph"/><div class="hidden-block">This incurs no database access until a method other than getId() is called. Hibernate then initializes the proxied instance, or</div>
+<div class="hidden-block">throws an exception if no record is found for the specified id.</div>
+このプロキシインスタンスはgetId()メソッド以外の何らかのメソッドを呼び出すまでデータベースにアクセスしません。getId()メソッド以外の何らかのメソッドを呼び出した時に、Hibernateがプロキシインスタンスを初期化します。対象の主キーを持つレコードが見つからなかった場合は例外が投げられます。<p class="paragraph"/><div class="hidden-block">h4. Update</div>
+<h4>更新</h4><p class="paragraph"/><div class="hidden-block">To update an instance, change some properties and then call <a href="../ref/Domain Classes/save.html" class="domainClasses">save</a> again:</div>
+インスタンスを更新するには、いずれかのプロパティを変更した後で作成と同じように<a href="../ref/Domain Classes/save.html" class="domainClasses">save</a>メソッドを使用します。<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)
 p.name = <span class="java&#45;quote">"Bob"</span>
-p.save()</pre></div><p class="paragraph"/><h4>Delete</h4><p class="paragraph"/>To delete an instance use the <a href="../ref/Domain Classes/delete.html" class="domainClasses">delete</a> method:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)
+p.save()</pre></div><p class="paragraph"/><div class="hidden-block">h4. Delete</div>
+<h4>削除</h4><p class="paragraph"/><div class="hidden-block">To delete an instance use the <a href="../ref/Domain Classes/delete.html" class="domainClasses">delete</a> method:</div>
+インスタンスを削除するには<a href="../ref/Domain Classes/delete.html" class="domainClasses">delete</a>メソッドを使用します。<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)
 p.delete()</pre></div>
 
 
