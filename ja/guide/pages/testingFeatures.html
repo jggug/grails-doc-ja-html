@@ -136,19 +136,19 @@ function addJsClass() {
                 
 <a name="1.1.5 Testing Features"><!-- Legacy link --></a>
 <h2 id="testingFeatures">1.3.5 テスト機能</h2>
-<h4>新Unitテストのコンソール出力 <div class="hidden-block">New Unit Testing Console Output</div></h4><p class="paragraph"/><div class="hidden-block">Test output from the test-app command has been improved:</div>
-test-app実行時のテストコンソール出力が向上しました:<p class="paragraph"/><img border="0" class="center" src="../../img/test-output.png"></img><p class="paragraph"/><h4>新しいUnitテストAPI <div class="hidden-block">New Unit Testing API</div></h4><p class="paragraph"/><div class="hidden-block">There is a new unit testing API based on mixins that supports JUnit 3, 4 and Spock style tests (with Spock 0.6 and above). Example:</div>
-JUnit3,4,Spock(Spock 0.6以上)のテストに対応した、Mixinsベースの新しUnitテストAPIが追加されました:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.test.mixin.TestFor<p class="paragraph"/>@TestFor(SimpleController)
+<h4>新ユニットテストのコンソール出力 <div class="hidden-block">New Unit Testing Console Output</div></h4><p class="paragraph"/><div class="hidden-block">Test output from the test-app command has been improved:</div>
+test-app実行時のテストコンソール出力が向上しました:<p class="paragraph"/><img border="0" class="center" src="../../img/test-output.png"></img><p class="paragraph"/><h4>新しいユニットテストAPI <div class="hidden-block">New Unit Testing API</div></h4><p class="paragraph"/><div class="hidden-block">There is a new unit testing API based on mixins that supports JUnit 3, 4 and Spock style tests (with Spock 0.6 and above). Example:</div>
+JUnit3,4,Spock(Spock 0.6以上)のテストに対応した、Mixinsベースの新しユニットテストAPIが追加されました:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.test.mixin.TestFor<p class="paragraph"/>@TestFor(SimpleController)
 class SimpleControllerTests  &#123;
     void testIndex() &#123;
         controller.home()<p class="paragraph"/>        assert view == <span class="java&#45;quote">"/simple/homePage"</span>
         assert model.title == <span class="java&#45;quote">"Hello World"</span>
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The <a href="../guide/single.html#testing" class="guide">documentation on testing</a> has also been re-written around this new framework.</div>
-テストのドキュメントが、この新しいフレームワークのために書き直されました。詳細は <a href="../guide/single.html#testing" class="guide">テストのドキュメント</a> を参照してください。<p class="paragraph"/><h4>GORMのUnitテスト <div class="hidden-block">Unit Testing GORM</div></h4><p class="paragraph"/><div class="hidden-block">A new in-memory GORM implementation is present that supports many more features of the GORM API making unit testing of criteria queries, named queries and other previously unsupported methods possible.</div>
-メモリ上で動作するGORM実装により、今までにサポートされていなかった、クライテリアクエリ、名前付きクエリなど、様々なGORM APIのテストがUnitテストで可能になりました。<p class="paragraph"/><h4>インタラクティブモードで快速なUnitテストを <div class="hidden-block">Faster Unit Testing with Interactive Mode</div></h4><p class="paragraph"/><div class="hidden-block">The new interactive mode (activated by typing 'grails') greatly improves the execution time of running unit and integration tests.</div>
-'grails'と入力するだけで実行できるインタラクティブモードでのUnitテスト・統合テストの実行速度が向上しました。<p class="paragraph"/><h4>Unit Test スカッフォルド <div class="hidden-block">Unit Test Scaffolding</div></h4><p class="paragraph"/><div class="hidden-block">A unit test is now generated for scaffolded controllers</div>
-スカッフォルドされたコントローラのUnitテストが生成されるようになりました。
+テストのドキュメントが、この新しいフレームワークのために書き直されました。詳細は <a href="../guide/single.html#testing" class="guide">テストのドキュメント</a> を参照してください。<p class="paragraph"/><h4>GORMのユニットテスト <div class="hidden-block">Unit Testing GORM</div></h4><p class="paragraph"/><div class="hidden-block">A new in-memory GORM implementation is present that supports many more features of the GORM API making unit testing of criteria queries, named queries and other previously unsupported methods possible.</div>
+メモリ上で動作するGORM実装により、今までにサポートされていなかった、クライテリアクエリ、名前付きクエリなど、様々なGORM APIのテストがユニットテストで可能になりました。<p class="paragraph"/><h4>インタラクティブモードで快速なユニットテストを <div class="hidden-block">Faster Unit Testing with Interactive Mode</div></h4><p class="paragraph"/><div class="hidden-block">The new interactive mode (activated by typing 'grails') greatly improves the execution time of running unit and integration tests.</div>
+'grails'と入力するだけで実行できるインタラクティブモードでのユニットテスト・統合テストの実行速度が向上しました。<p class="paragraph"/><h4>Unit Test スカッフォルド <div class="hidden-block">Unit Test Scaffolding</div></h4><p class="paragraph"/><div class="hidden-block">A unit test is now generated for scaffolded controllers</div>
+スカッフォルドされたコントローラのユニットテストが生成されるようになりました。
 
 
                 <div style="clear:both;margin-top:15px;"></div>

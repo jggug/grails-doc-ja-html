@@ -155,7 +155,7 @@ grails integrate-with --ant</code></pre><p class="paragraph"/><div class="hidden
 <ul class="star">
 <li><code>clean</code> - Grailsアプリケーションをクリーンします。</li>
 <li><code>compile</code> - アプリケーションのソースコードをコンパイルします。</li>
-<li><code>test</code> - Unitテストを実行します。</li>
+<li><code>test</code> - ユニットテストを実行します。</li>
 <li><code>run</code> - Grailsの"run-app"コマンド相当を実行します。</li>
 <li><code>war</code> - WARファイルを作成します。</li>
 <li><code>deploy</code> - デフォルトでは空ですが、自動配備を実装することができます。</li>
@@ -314,7 +314,7 @@ $ grails create&#45;multi&#45;project&#45;build org.mycompany:parent:1.0</pre></
         mavenLocal()    
     &#125;
 &#125;</pre></div><p class="paragraph"/>By reading the <code>pom.xml</code> file you can do an initial <code>mvn install</code> from the parent project to build all plugins and install them into your local maven cache and then <code>cd</code> into your project and use the regular <code>grails run-app</code> command to run your application. All previously built plugins will be resolved from the local Maven cache.<p class="paragraph"/><h4>Grailsコマンドをフェーズに追加する <div class="hidden-block">Adding Grails commands to phases </div></h4><p class="paragraph"/><div class="hidden-block">The standard POM created for you by Grails already attaches the appropriate core Grails commands to their corresponding build phases, so "compile" goes in the "compile" phase and "war" goes in the "package" phase. That doesn't help though when you want to attach a plugin's command to a particular phase. The classic example is functional tests. How do you make sure that your functional tests (using which ever plugin you have decided on) are run during the "integration-test" phase?</div>
-Grailsが作成した標準のPOMファイルは、Grailsのビルドフェーズに対応したコアコマンドに適切に付属しています。"compile" は "compile"フェーズに、"war" は "package"フェーズに。特定のフェーズにプラグインコマンドを付属させたい場合には役立ちません。古典的な例は、機能テストです。どうやって機能テストが統合テストフェーズの間に（あなた使用しているどんなプラグインを使った場合でも）実行されるのかを確かめるのでしょうか？<p class="paragraph"/><div class="hidden-block">Fear not: all things are possible. In this case, you can associate the command to a phase using an extra "execution" block:</div>
+Grailsが作成した標準のPOMファイルは、Grailsのビルドフェーズに対応したコアコマンドに適切に付属しています。"compile" は "compile"フェーズに、"war" は "package"フェーズに。特定のフェーズにプラグインコマンドを付属させたい場合には役立ちません。古典的な例は、ファンクショナルテストです。どうやってファンクショナルテストが統合テストフェーズの間に（あなた使用しているどんなプラグインを使った場合でも）実行されるのかを確かめるのでしょうか？<p class="paragraph"/><div class="hidden-block">Fear not: all things are possible. In this case, you can associate the command to a phase using an extra "execution" block:</div>
 恐れる必要はありません、すべて可能です。この場合には、"execution"ブロックを追加してフェーズに関連付けることができます。
 <div class="code"><pre><span class="xml&#45;tag">&#60;plugin&#62;</span>
     <span class="xml&#45;tag">&#60;groupId&#62;</span>org.grails<span class="xml&#45;tag">&#60;/groupId&#62;</span>

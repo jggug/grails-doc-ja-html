@@ -137,22 +137,22 @@ function addJsClass() {
                 <div id="table-of-content">
                     <h2>Table of Contents</h2>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#unitTesting"><strong>10.1</strong><span>Unit&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#unitTesting"><strong>10.1</strong><span>&#12518;&#12491;&#12483;&#12488;&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#unitTestingControllers"><strong>10.1.1</strong><span>&#12467;&#12531;&#12488;&#12525;&#12540;&#12521;Unit&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#unitTestingControllers"><strong>10.1.1</strong><span>&#12467;&#12531;&#12488;&#12525;&#12540;&#12521;&#12518;&#12491;&#12483;&#12488;&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#unitTestingTagLibraries"><strong>10.1.2</strong><span>&#12479;&#12464;&#12521;&#12452;&#12502;&#12521;&#12522;Unit&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#unitTestingTagLibraries"><strong>10.1.2</strong><span>&#12479;&#12464;&#12521;&#12452;&#12502;&#12521;&#12522;&#12518;&#12491;&#12483;&#12488;&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#unitTestingDomains"><strong>10.1.3</strong><span>&#12489;&#12513;&#12452;&#12531;Unit&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#unitTestingDomains"><strong>10.1.3</strong><span>&#12489;&#12513;&#12452;&#12531;&#12518;&#12491;&#12483;&#12488;&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#unitTestingFilters"><strong>10.1.4</strong><span>&#12501;&#12451;&#12523;&#12479;Unit&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#unitTestingFilters"><strong>10.1.4</strong><span>&#12501;&#12451;&#12523;&#12479;&#12518;&#12491;&#12483;&#12488;&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#unitTestingURLMappings"><strong>10.1.5</strong><span>URL&#12510;&#12483;&#12500;&#12531;&#12464;Unit&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#unitTestingURLMappings"><strong>10.1.5</strong><span>URL&#12510;&#12483;&#12500;&#12531;&#12464;&#12518;&#12491;&#12483;&#12488;&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:10px"><a href="#mockingCollaborators"><strong>10.1.6</strong><span>&#12514;&#12483;&#12461;&#12531;&#12464;&#12467;&#12521;&#12508;&#12524;&#12540;&#12479;</span></a>
@@ -164,7 +164,7 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0px"><a href="#integrationTesting"><strong>10.2</strong><span>&#32113;&#21512;&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#functionalTesting"><strong>10.3</strong><span>&#27231;&#33021;&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#functionalTesting"><strong>10.3</strong><span>&#12501;&#12449;&#12531;&#12463;&#12471;&#12519;&#12490;&#12523;&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
                 </div>
@@ -174,14 +174,14 @@ function addJsClass() {
 <a name="9. Testing"><!-- Legacy link --></a>
 <h1 id="testing">10 テスト</h1>
 <div class="hidden-block">Automated testing is a key part of Grails. Hence, Grails provides many ways to making testing easier from low level unit testing to high level functional tests. This section details the different capabilities that Grails offers for testing.</div>
-自動化テストはGrailsにおいて重要な機能です。GrailsではUnitテストから機能テストまで、簡単にテスト生成できる様々な方法を提供しています。この章ではGrailsがテストのために提供している機能について詳しく説明します。<p class="paragraph"/><div class="hidden-block"><blockquote class="note">
+自動化テストはGrailsにおいて重要な機能です。Grailsではユニットテストからファンクショナルテストまで、簡単にテスト生成できる様々な方法を提供しています。この章ではGrailsがテストのために提供している機能について詳しく説明します。<p class="paragraph"/><div class="hidden-block"><blockquote class="note">
 Grails 1.3.x and below used the <code>grails.test.GrailsUnitTestCase</code> class hierarchy for testing in a JUnit 3 style. Grails 2.0.x and above deprecates these test harnesses in favour of mixins that can be applied to a range of different kinds of tests (JUnit 3, Junit 4, Spock etc.) without subclassing
 </blockquote></div>
 <blockquote class="note">
 Grails 1.3.X以下のバージョンでは、JUnit 3スタイルのテストのために<code>grails.test.GrailsUnitTestCase</code>のクラスを継承するようになっていましたが、Grails 2.0.X 以上のバージョンではサブクラスを作ることなく異なる種類のテスト(Junit 3, Junit4, Spock など)を実施可能なMixinsベースのテストを推奨しています。
 </blockquote><p class="paragraph"/><div class="hidden-block">The first thing to be aware of is that all of the <code>create-&#42;</code> and <code>generate-&#42;</code> commands create <code>unit</code> or <code>integration</code> tests automatically. For example if you run the <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> command as follows:</div>
 まずはじめに全ての<code>create-&#42;</code>や<code>generate-&#42;</code>のコマンドは<code>unit</code>もしくは<code>integration</code>テストを自動的に生成します。例えば、<a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a>コマンドを以下のように実行したとします。:<p class="paragraph"/><div class="code"><pre>grails create&#45;controller com.acme.app.simple</pre></div><p class="paragraph"/><div class="hidden-block">Grails will create a controller at <code>grails-app/controllers/com/acme/app/SimpleController.groovy</code>, and also a unit test at <code>test/unit/com/acme/app/SimpleControllerTests.groovy</code>. What Grails won't do however is populate the logic inside the test! That is left up to you.</div>
-Grailsは<code>grails-app/controllers/com/acme/app/SimpleController.groovy</code>にコントローラを、<code>test/unit/com/acme/app/SimpleControllerTests.groovy</code>にUnitテストを作ります。しかしながら、Grailsはテストの中のロジックは作成しません！それはあなたに任されています。<p class="paragraph"/><div class="hidden-block"><blockquote class="note">
+Grailsは<code>grails-app/controllers/com/acme/app/SimpleController.groovy</code>にコントローラを、<code>test/unit/com/acme/app/SimpleControllerTests.groovy</code>にユニットテストを作ります。しかしながら、Grailsはテストの中のロジックは作成しません！それはあなたに任されています。<p class="paragraph"/><div class="hidden-block"><blockquote class="note">
 The default class name suffix is <code>Tests</code> but as of Grails 1.2.2, the suffix of <code>Test</code> is also supported.
 </blockquote></div>
 <blockquote class="note">
@@ -228,7 +228,7 @@ Grails <a href="http://grails.org/plugin/spock" target="blank">Spockプラグイ
 この例では、<code>some.org</code>のパッケージかサブパッケージの中で<code>integration</code>と<code>unit</code>フェーズの全てのテストが実行されるでしょう。
 
 <a name="9.1 Unit Testing"><!-- Legacy link --></a>
-<h2 id="unitTesting">10.1 Unitテスト</h2>
+<h2 id="unitTesting">10.1 ユニットテスト</h2>
 Unit testing are tests at the "unit" level. In other words you are testing individual methods or blocks of code without consideration for surrounding infrastructure. Unit tests are typically run without the presence of physical resources that involve I/O such databases, socket connections or files. This is to ensure they run as quick as possible since quick feedback is important.<p class="paragraph"/><h4>The Test Mixins</h4><p class="paragraph"/>Since Grails 2.0, a collection of unit testing mixins is provided by Grails that lets you enhance the behavior of a typical JUnit 3, JUnit 4 or Spock test. The following sections cover the usage of these mixins.<p class="paragraph"/><blockquote class="note">
 The previous JUnit 3-style <code>GrailsUnitTestCase</code> class hierarchy is still present in Grails for backwards compatibility, but is now deprecated. The previous documentation on the subject can be found in the <a href="http://grails.org/doc/1.3.x/guide/9.%20Testing.html" target="blank">Grails 1.3.x documentation</a>
 </blockquote><p class="paragraph"/>You won't normally have to import any of the testing classes because Grails does that for you. But if you find that your IDE for example can't find the classes, here they all are:
@@ -256,7 +256,7 @@ The previous JUnit 3-style <code>GrailsUnitTestCase</code> class hierarchy is st
 
 
 <a name="9.1.1 Unit Testing Controllers"><!-- Legacy link --></a>
-<h2 id="unitTestingControllers">10.1.1 コントローラUnitテスト</h2>
+<h2 id="unitTestingControllers">10.1.1 コントローラユニットテスト</h2>
 <h4>The Basics</h4><p class="paragraph"/>You use the <code>grails.test.mixin.TestFor</code> annotation to unit test controllers. Using <code>TestFor</code> in this manner activates the <code>grails.test.mixin.web.ControllerUnitTestMixin</code> and its associated API. For example:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.test.mixin.TestFor<p class="paragraph"/>@TestFor(SimpleController)
 class SimpleControllerTests &#123;
     void testSomething() &#123;<p class="paragraph"/>    &#125;
@@ -432,7 +432,7 @@ controller.handleForm() // second execution</pre></div><p class="paragraph"/><h4
 
 
 <a name="9.1.2 Unit Testing Tag Libraries"><!-- Legacy link --></a>
-<h2 id="unitTestingTagLibraries">10.1.2 タグライブラリUnitテスト</h2>
+<h2 id="unitTestingTagLibraries">10.1.2 タグライブラリユニットテスト</h2>
 <h4>The Basics</h4><p class="paragraph"/>Tag libraries and GSP pages can be tested with the <code>grails.test.mixin.web.GroovyPageUnitTestMixin</code> mixin. To use the mixin declare which tag library is under test with the <code>TestFor</code> annotation:<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleTagLib)
 class SimpleTagLibTests &#123;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Note that if you are testing invocation of a custom tag from a controller you can combine the <code>ControllerUnitTestMixin</code> and the <code>GroovyPageUnitTestMixin</code> using the <code>Mock</code> annotation:<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleController)
 @Mock(SimpleTagLib)
@@ -467,7 +467,7 @@ assert result == <span class="java&#45;quote">"Hello World"</span></pre></div><p
 
 
 <a name="9.1.3 Unit Testing Domains"><!-- Legacy link --></a>
-<h2 id="unitTestingDomains">10.1.3 ドメインUnitテスト</h2>
+<h2 id="unitTestingDomains">10.1.3 ドメインユニットテスト</h2>
 <div class="hidden-block">
 <h4>Overview</h4>
 </div>
@@ -605,7 +605,7 @@ That's it for testing constraints. One final thing we would like to say is that 
 
 
 <a name="9.1.4 Unit Testing Filters"><!-- Legacy link --></a>
-<h2 id="unitTestingFilters">10.1.4 フィルタUnitテスト</h2>
+<h2 id="unitTestingFilters">10.1.4 フィルタユニットテスト</h2>
 Unit testing filters is typically a matter of testing a controller where a filter is a mock collaborator. For example consider the following filters class:<p class="paragraph"/><div class="code"><pre>class CancellingFilters &#123;
     def filters = &#123;
         all(controller:<span class="java&#45;quote">"simple"</span>, action:<span class="java&#45;quote">"list"</span>) &#123;
@@ -628,7 +628,7 @@ class SimpleControllerTests &#123;<p class="paragraph"/>&#125;</pre></div><p cla
 
 
 <a name="9.1.5 Unit Testing URL Mappings"><!-- Legacy link --></a>
-<h2 id="unitTestingURLMappings">10.1.5 URLマッピングUnitテスト</h2>
+<h2 id="unitTestingURLMappings">10.1.5 URLマッピングユニットテスト</h2>
 <h4>The Basics</h4><p class="paragraph"/>Testing URL mappings can be done with the <code>TestFor</code> annotation testing a particular URL mappings class. For example to test the default URL mappings you can do the following:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.example.AuthorController
 <span class="java&#45;keyword">import</span> org.example.SimpleController<p class="paragraph"/>@TestFor(UrlMappings)
 @Mock(&#91;AuthorController, SimpleController&#93;)
@@ -670,9 +670,9 @@ strictControl.demand.<span class="java&#45;keyword">static</span>.aStaticMethod 
 <h2 id="mockingCodecs">10.1.7 Mocking Codecs</h2>
 <div class="hidden-block">
 The <code>GrailsUnitTestMixin</code> provides a <code>mockCodec</code> method for mocking <a href="../guide/single.html#codecs" class="guide">custom codecs</a> which may be invoked while a unit test is running.
-</div><p class="paragraph"/><code>GrailsUnitTestMixin</code>は<a href="../guide/single.html#codecs" class="guide">カスタムコーデック</a>のモックを生成するための<code>mockCodec</code>メソッドを提供しています。このメソッドはUnitテストの実施中に呼び出される可能性があります。<p class="paragraph"/><div class="code"><pre>mockCodec(MyCustomCodec)</pre></div><p class="paragraph"/><div class="hidden-block">
+</div><p class="paragraph"/><code>GrailsUnitTestMixin</code>は<a href="../guide/single.html#codecs" class="guide">カスタムコーデック</a>のモックを生成するための<code>mockCodec</code>メソッドを提供しています。このメソッドはユニットテストの実施中に呼び出される可能性があります。<p class="paragraph"/><div class="code"><pre>mockCodec(MyCustomCodec)</pre></div><p class="paragraph"/><div class="hidden-block">
 Failing to mock a codec which is invoked while a unit test is running may result in a MissingMethodException.
-</div><p class="paragraph"/>コーデックのモック生成に失敗している場合は、Unitテストが<code>MissingMethodException</code>で終了する可能性があります。
+</div><p class="paragraph"/>コーデックのモック生成に失敗している場合は、ユニットテストが<code>MissingMethodException</code>で終了する可能性があります。
 
 
 <a name="9.2 Integration Testing"><!-- Legacy link --></a>
@@ -843,9 +843,9 @@ Subclasses of <code>WebFlowTestCase</code> <strong class="bold">must</strong> be
 
 
 <a name="9.3 Functional Testing"><!-- Legacy link --></a>
-<h2 id="functionalTesting">10.3 機能テスト</h2>
+<h2 id="functionalTesting">10.3 ファンクショナルテスト</h2>
 <div class="hidden-block">Functional tests involve making HTTP requests against the running application and verifying the resultant behaviour. Grails does not ship with any support for writing functional tests directly, but there are several plugins available for this.</div>
-機能テストは実行中のアプリケーションに対してHTTPリクエストを行い、結果として得られた振る舞いを検証します。Grailsは機能テストを書くための直接的なサポートは提供しませんが、機能テストのためのいくつかのプラグインが利用可能です。
+ファンクショナルテストは実行中のアプリケーションに対してHTTPリクエストを行い、結果として得られた振る舞いを検証します。Grailsはファンクショナルテストを書くための直接的なサポートは提供しませんが、ファンクショナルテストのためのいくつかのプラグインが利用可能です。
 <ul class="star">
 <li><code>Canoo Webtest</code> - <a href="http://grails.org/plugin/webtest" target="blank">http://grails.org/plugin/webtest</a></li>
 <li><code>G-Func</code> - <a href="http://grails.org/plugin/functional-test" target="blank">http://grails.org/plugin/functional-test</a></li>
@@ -861,10 +861,10 @@ Subclasses of <code>WebFlowTestCase</code> <strong class="bold">must</strong> be
 <strong class="bold"><code>-inline</code>オプションは<code>-baseUrl</code>か<code>-war</code>のどちらかが設定されていないと、暗黙的に有効になります</strong><p class="paragraph"/><div class="hidden-block">h5. war</div>
 <h5>warオプション</h5><p class="paragraph"/><div class="hidden-block">The <code>-war</code> option specifies that the grails application should be packaged as a war and started. This is useful as it tests your application in a production-like state, but it has a longer startup time than the <code>-inline</code> option. It also runs the war in a forked JVM, meaning that you cannot access any internal application objects.</div>
 <code>-war</code>オプションを指定すると、Grailsアプリケーションはwarファイルにパッケージ化した後に起動されます。このオプションはアプリケーションを実際にプロダクトと同じ状態でテストすることができるので便利です。しかし、<code>-inline</code>オプションよりも起動に時間がかかります。また、warで起動するとフォークされたJVM上で実行されます。これは内部のオブジェクトにアクセスできないことを意味しています。<p class="paragraph"/><div class="code"><pre>grails test&#45;app functional: &#45;war</pre></div><p class="paragraph"/><div class="hidden-block">Note that the same build/config options for the <a href="../ref/Command Line/run-war.html" class="commandLine">run-war</a> command apply to functional testing against the WAR.</div>
-<a href="../ref/Command Line/run-war.html" class="commandLine">run-war</a>コマンドで利用可能なビルドまたは設定オプションが、warファイルに対する機能テストでも使用できます。<p class="paragraph"/><div class="hidden-block">h5. https</div>
+<a href="../ref/Command Line/run-war.html" class="commandLine">run-war</a>コマンドで利用可能なビルドまたは設定オプションが、warファイルに対するファンクショナルテストでも使用できます。<p class="paragraph"/><div class="hidden-block">h5. https</div>
 <h5>httpsオプション</h5><p class="paragraph"/><div class="hidden-block">The <code>-https</code> option results in the application being able to receive https requests as well as http requests. It is compatible with both the <code>-inline</code> and <code>-war</code> options.</div>
 <code>-https</code>オプションはhttpリクエストと同様にアプリケーションがhttpsリクエストを受け付けられるようにします。このオプションは<code>-inline</code>と<code>-war</code>の両方のオプションと一緒に使うことができます。<p class="paragraph"/><div class="code"><pre>grails test&#45;app functional: &#45;https</pre></div><p class="paragraph"/><div class="hidden-block">Note that this does not change the test  <em class="italic">base url</em>  to be https, it will still be http unless the <code>-httpsBaseUrl</code> option is also given.</div>
-<code>-https</code>オプションを使っていてもテストで使われる  <em class="italic">base url</em>  はhttpsにはなりません。<code>-httpsBaseUrl</code>をあわせて指定しない限りhttpのままとなります。<p class="paragraph"/><div class="hidden-block">h5. httpsBaseUrl</div>
+<code>-https</code>オプションを使っていてもテストで使われる  <em class="italic">base url</em>  はhttpsにはなりません。<code>-httpsBaseUrl</code>をあわせて指定しない限り、httpのままとなります。<p class="paragraph"/><div class="hidden-block">h5. httpsBaseUrl</div>
 <h5>httpsBaseUrlオプション</h5><p class="paragraph"/><div class="hidden-block">The <code>-httpsBaseUrl</code> causes the implicit base url to be used for tests to be a https url.</div>
 <code>-httpsBaseUrl</code>オプションを使えば暗黙的に設定されている  <em class="italic">base url</em>  がテスト時にhttpsのURLとして使われます。<p class="paragraph"/><div class="code"><pre>grails test&#45;app functional: &#45;httpsBaseUrl</pre></div><p class="paragraph"/><div class="hidden-block">This option is ignored if the <code>-baseUrl</code> option is specified.</div>
 <code>-httpsBaseUrl</code>オプションは<code>-baseUrl</code>オプションが指定されると無視されます。<p class="paragraph"/><div class="hidden-block">h5. baseUrl</div>

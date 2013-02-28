@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>10.3 &#27231;&#33021;&#12486;&#12473;&#12488; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>10.3 &#12501;&#12449;&#12531;&#12463;&#12471;&#12519;&#12490;&#12523;&#12486;&#12473;&#12488; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -122,7 +122,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>10.3 &#27231;&#33021;&#12486;&#12473;&#12488; - Reference Documentation</h1>
+                    <h1>10.3 &#12501;&#12449;&#12531;&#12463;&#12471;&#12519;&#12490;&#12523;&#12486;&#12473;&#12488; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -137,9 +137,9 @@ function addJsClass() {
 
                 
 <a name="9.3 Functional Testing"><!-- Legacy link --></a>
-<h2 id="functionalTesting">10.3 機能テスト</h2>
+<h2 id="functionalTesting">10.3 ファンクショナルテスト</h2>
 <div class="hidden-block">Functional tests involve making HTTP requests against the running application and verifying the resultant behaviour. Grails does not ship with any support for writing functional tests directly, but there are several plugins available for this.</div>
-機能テストは実行中のアプリケーションに対してHTTPリクエストを行い、結果として得られた振る舞いを検証します。Grailsは機能テストを書くための直接的なサポートは提供しませんが、機能テストのためのいくつかのプラグインが利用可能です。
+ファンクショナルテストは実行中のアプリケーションに対してHTTPリクエストを行い、結果として得られた振る舞いを検証します。Grailsはファンクショナルテストを書くための直接的なサポートは提供しませんが、ファンクショナルテストのためのいくつかのプラグインが利用可能です。
 <ul class="star">
 <li><code>Canoo Webtest</code> - <a href="http://grails.org/plugin/webtest" target="blank">http://grails.org/plugin/webtest</a></li>
 <li><code>G-Func</code> - <a href="http://grails.org/plugin/functional-test" target="blank">http://grails.org/plugin/functional-test</a></li>
@@ -155,10 +155,10 @@ function addJsClass() {
 <strong class="bold"><code>-inline</code>オプションは<code>-baseUrl</code>か<code>-war</code>のどちらかが設定されていないと、暗黙的に有効になります</strong><p class="paragraph"/><div class="hidden-block">h5. war</div>
 <h5>warオプション</h5><p class="paragraph"/><div class="hidden-block">The <code>-war</code> option specifies that the grails application should be packaged as a war and started. This is useful as it tests your application in a production-like state, but it has a longer startup time than the <code>-inline</code> option. It also runs the war in a forked JVM, meaning that you cannot access any internal application objects.</div>
 <code>-war</code>オプションを指定すると、Grailsアプリケーションはwarファイルにパッケージ化した後に起動されます。このオプションはアプリケーションを実際にプロダクトと同じ状態でテストすることができるので便利です。しかし、<code>-inline</code>オプションよりも起動に時間がかかります。また、warで起動するとフォークされたJVM上で実行されます。これは内部のオブジェクトにアクセスできないことを意味しています。<p class="paragraph"/><div class="code"><pre>grails test&#45;app functional: &#45;war</pre></div><p class="paragraph"/><div class="hidden-block">Note that the same build/config options for the <a href="../ref/Command Line/run-war.html" class="commandLine">run-war</a> command apply to functional testing against the WAR.</div>
-<a href="../ref/Command Line/run-war.html" class="commandLine">run-war</a>コマンドで利用可能なビルドまたは設定オプションが、warファイルに対する機能テストでも使用できます。<p class="paragraph"/><div class="hidden-block">h5. https</div>
+<a href="../ref/Command Line/run-war.html" class="commandLine">run-war</a>コマンドで利用可能なビルドまたは設定オプションが、warファイルに対するファンクショナルテストでも使用できます。<p class="paragraph"/><div class="hidden-block">h5. https</div>
 <h5>httpsオプション</h5><p class="paragraph"/><div class="hidden-block">The <code>-https</code> option results in the application being able to receive https requests as well as http requests. It is compatible with both the <code>-inline</code> and <code>-war</code> options.</div>
 <code>-https</code>オプションはhttpリクエストと同様にアプリケーションがhttpsリクエストを受け付けられるようにします。このオプションは<code>-inline</code>と<code>-war</code>の両方のオプションと一緒に使うことができます。<p class="paragraph"/><div class="code"><pre>grails test&#45;app functional: &#45;https</pre></div><p class="paragraph"/><div class="hidden-block">Note that this does not change the test  <em class="italic">base url</em>  to be https, it will still be http unless the <code>-httpsBaseUrl</code> option is also given.</div>
-<code>-https</code>オプションを使っていてもテストで使われる  <em class="italic">base url</em>  はhttpsにはなりません。<code>-httpsBaseUrl</code>をあわせて指定しない限りhttpのままとなります。<p class="paragraph"/><div class="hidden-block">h5. httpsBaseUrl</div>
+<code>-https</code>オプションを使っていてもテストで使われる  <em class="italic">base url</em>  はhttpsにはなりません。<code>-httpsBaseUrl</code>をあわせて指定しない限り、httpのままとなります。<p class="paragraph"/><div class="hidden-block">h5. httpsBaseUrl</div>
 <h5>httpsBaseUrlオプション</h5><p class="paragraph"/><div class="hidden-block">The <code>-httpsBaseUrl</code> causes the implicit base url to be used for tests to be a https url.</div>
 <code>-httpsBaseUrl</code>オプションを使えば暗黙的に設定されている  <em class="italic">base url</em>  がテスト時にhttpsのURLとして使われます。<p class="paragraph"/><div class="code"><pre>grails test&#45;app functional: &#45;httpsBaseUrl</pre></div><p class="paragraph"/><div class="hidden-block">This option is ignored if the <code>-baseUrl</code> option is specified.</div>
 <code>-httpsBaseUrl</code>オプションは<code>-baseUrl</code>オプションが指定されると無視されます。<p class="paragraph"/><div class="hidden-block">h5. baseUrl</div>
