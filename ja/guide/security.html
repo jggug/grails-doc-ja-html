@@ -161,12 +161,22 @@ function addJsClass() {
                 
 <a name="11. Security"><!-- Legacy link --></a>
 <h1 id="security">12 セキュリティ</h1>
-Grails is no more or less secure than Java Servlets. However, Java servlets (and hence Grails) are extremely secure and largely immune to common buffer overrun and malformed URL exploits due to the nature of the Java Virtual Machine underpinning the code.<p class="paragraph"/>Web security problems typically occur due to developer naivety or mistakes, and there is a little Grails can do to avoid common mistakes and make writing secure applications easier to write.<p class="paragraph"/><h4>What Grails Automatically Does</h4><p class="paragraph"/>Grails has a few built in safety mechanisms by default.
+<div class="hidden-block">Grails is no more or less secure than Java Servlets. However, Java servlets (and hence Grails) are extremely secure and largely immune to common buffer overrun and malformed URL exploits due to the nature of the Java Virtual Machine underpinning the code.</div>
+Grailsは、Javaサーブレットと同等にセキュアであり、Javaサーブレットと比べてどちらが安全、というものではありません。とは言え、Javaサーブレット(そしてGrails)は、コードを支えるJava仮想マシンの性質によって極めて安全で、一般的なバッファオーバーランや不正な形式のURLエクスプロイトに対して、多くの場合影響を受けません。<p class="paragraph"/><div class="hidden-block">Web security problems typically occur due to developer naivety or mistakes, and there is a little Grails can do to avoid common mistakes and make writing secure applications easier to write.</div>
+Web上でのセキュリティ問題は、開発者の知識の無さやうっかりミスにより起こることが多いでしょう。そこで、よくあるミスを防ぎ、安全なアプリケーションとしてよりコーディングしやすくするために、Grailsでは次のようなちょっとした機能を提供します。<p class="paragraph"/><div class="hidden-block">h4. What Grails Automatically Does</div>
+<h4>Grailsが自動的に行うこと</h4><p class="paragraph"/><div class="hidden-block">Grails has a few built in safety mechanisms by default.</div>
+Grailsには、安全性を保つためデフォルトでいくつかのメカニズムが内蔵されています。<p class="paragraph"/><div class="hidden-block">
 <ol>
 <li>All standard database access via <a href="../guide/single.html#GORM" class="guide">GORM</a> domain objects is automatically SQL escaped to prevent SQL injection attacks</li>
 <li>The default <a href="../guide/single.html#scaffolding" class="guide">scaffolding</a> templates HTML escape all data fields when displayed</li>
 <li>Grails link creating tags (<a href="../ref/Tags/link.html" class="tags">link</a>, <a href="../ref/Tags/form.html" class="tags">form</a>, <a href="../ref/Tags/createLink.html" class="tags">createLink</a>, <a href="../ref/Tags/createLinkTo.html" class="tags">createLinkTo</a> and others) all use appropriate escaping mechanisms to prevent code injection</li>
 <li>Grails provides <a href="../guide/single.html#codecs" class="guide">codecs</a> to let you trivially escape data when rendered as HTML, JavaScript and URLs to prevent injection attacks here.</li>
+</ol><p class="paragraph"/></div>
+<ol>
+<li><a href="../guide/single.html#GORM" class="guide">GORM</a>経由でのすべての標準的なデータベースアクセスにおける、SQLインジェクション攻撃を防ぐための自動的なエスケープ処理</li>
+<li>デフォルトの<a href="../guide/single.html#scaffolding" class="guide">スカッフォルド</a>テンプレートのHTMLにおける、すべてのデータフィールドに対する表示時のエスケープ処理</li>
+<li>Grailsのリンク作成タグ(<a href="../ref/Tags/link.html" class="tags">link</a>、<a href="../ref/Tags/form.html" class="tags">form</a>、<a href="../ref/Tags/createLink.html" class="tags">createLink</a>、<a href="../ref/Tags/createLinkTo.html" class="tags">createLinkTo</a>他)における、コードインジェクションを防ぐための適切なエスケープ機構</li>
+<li>GrailsでHTML、JavaScript、URLをレンダリングする際の、データを手軽にエスケープ処理しインジェクション攻撃を防ぐ<a href="../guide/single.html#codecs" class="guide">コーデック</a>の提供</li>
 </ol><p class="paragraph"/>
 
 <a name="11.1 Securing Against Attacks"><!-- Legacy link --></a>
