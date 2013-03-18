@@ -141,14 +141,32 @@ function addJsClass() {
                 
 
 <h2 id="asyncServletApi">8.5 Servlet 3.0 Async</h2>
-In addition to the higher level async features discussed earlier in the section, you can access the raw Servlet 3.0 asynchronous API from a Grails application.<p class="paragraph"/><h4>Servlet 3.0 Asynchronous Rendering</h4><p class="paragraph"/>You can render content (templates, binary data etc.) in an asynchronous manner by calling the <code>startAsync</code> method which returns an instance of the Servlet 3.0 <code>AsyncContext</code>. Once you have a reference to the <code>AsyncContext</code> you can use Grails' regular render method to render content:<p class="paragraph"/><div class="code"><pre>def index() &#123;
+<div class="hidden-block">
+In addition to the higher level async features discussed earlier in the section, you can access the raw Servlet 3.0 asynchronous API from a Grails application.
+</div>
+これまでに説明してきた、より高レベルな非同期機能に加えて、GrailsのアプリケーションからServlet 3.0の非同期APIに直接アクセスすることもできます。<p class="paragraph"/><div class="hidden-block">
+<h4>Servlet 3.0 Asynchronous Rendering</h4>
+</div>
+<h4>Servlet 3.0の非同期レンダリング</h4><p class="paragraph"/><div class="hidden-block">
+You can render content (templates, binary data etc.) in an asynchronous manner by calling the <code>startAsync</code> method which returns an instance of the Servlet 3.0 <code>AsyncContext</code>. Once you have a reference to the <code>AsyncContext</code> you can use Grails' regular render method to render content:
+</div>
+非同期にコンテンツ(テンプレートやバイナリなど)のレンダリングには、Servlet 3.0の<code>AsyncContext</code>インスタンスを返す、<code>startAsync</code>を使用します。このメソッドを使用して<code>AsyncContext</code>への参照を取得したら、あとは通常のrenderメソッドを使用してコンテンツをレンダリングするだけです。<p class="paragraph"/><div class="code"><pre>def index() &#123;
     def ctx = startAsync()
     ctx.start &#123;
         <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Stand"</span>).save()
         render template:<span class="java&#45;quote">"books"</span>, model:&#91;books:Book.list()&#93;
         ctx.complete()
     &#125;
-&#125;</pre></div><p class="paragraph"/>Note that you must call the <code>complete()</code> method to terminate the connection.<p class="paragraph"/><h4>Resuming an Async Request</h4><p class="paragraph"/>You resume processing of an async request (for example to delegate to view rendering) by using the <code>dispatch</code> method of the <code>AsyncContext</code> class:<p class="paragraph"/><div class="code"><pre>def index() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Note that you must call the <code>complete()</code> method to terminate the connection. 
+</div>
+接続を終了するには、<code>complete</code>メソッドを呼び出す必要があることに注意してください。<p class="paragraph"/><div class="hidden-block">
+<h4>Resuming an Async Request</h4>
+</div>
+<h4>非同期リクエストの再開</h4><p class="paragraph"/><div class="hidden-block">
+You resume processing of an async request (for example to delegate to view rendering) by using the <code>dispatch</code> method of the <code>AsyncContext</code> class:
+</div>
+非同期リクエストの処理(例えばビューをレンダリングするために処理を委譲する)を再開するには、<code>AsyncContext</code>クラスの<code>dispatch</code>メソッドを使用します。<p class="paragraph"/><div class="code"><pre>def index() &#123;
     def ctx = startAsync()
     ctx.start &#123;
         // <span class="java&#45;keyword">do</span> working
