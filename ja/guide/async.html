@@ -372,7 +372,7 @@ results = waitAll(p1, p2, p3)</pre></div><p class="paragraph"/><div class="hidde
 When using GORM async each promise is executed in a different thread. Since the Hibernate session is not concurrency safe, a new session is bound per thread.
 </div>
 GORMを非同期に使用する場合、promiseはそれぞれ別々のスレッドで実行されます。またHibernateのセッションはスレッドセーフではないため、スレッドごとに新しいセッションをバインドします。<p class="paragraph"/><div class="hidden-block">
-This is an important consideration when using GORM async (particularily with Hibernate as the persistence engine). The objects returned from asynchronous queries will be detached entities.
+This is an important consideration when using GORM async (particularly with Hibernate as the persistence engine). The objects returned from asynchronous queries will be detached entities.
 </div>
 非同期にGORMを使用する場合は、この点に十分考慮する必要があります(特に永続化エンジンにHibernateを使用する場合)。特に非同期クエリから返されるオブジェクトは、デタッチされたエンティティであることに注意をしてください。<p class="paragraph"/><div class="hidden-block">
 This means you cannot save objects returned from asynchronous queries without first merging them back into session. For example the following will not work:
@@ -387,7 +387,7 @@ Instead you need to merge the object with the session bound to the calling threa
 def person = promise.get()
 person.merge()
 person.firstName = <span class="java&#45;quote">"Bart"</span></pre></div><p class="paragraph"/><div class="hidden-block">
-Note that <code>merge()</code> is called first because it may refresh the object from the cache or database, which would result in the change being lost. In general it is not recommended to read and write objects in different threads and you should avoid this technique unless absolutely necessariy.
+Note that <code>merge()</code> is called first because it may refresh the object from the cache or database, which would result in the change being lost. In general it is not recommended to read and write objects in different threads and you should avoid this technique unless absolutely necessary.
 </div>
 まず始めに<code>merge()</code>を呼びだしています。これはキャッシュまたはデータベースのデータが再読み込みされ、それまでに行った変更が失われてしまうためです。また一般的に異なるスレッド間でオブジェクトを読み書きすることは推奨されません。もし必要がない限り、この方法は絶対に避けるべきです。<p class="paragraph"/><div class="hidden-block">
 Finally, another issue with detached objects is that association lazy loading <strong class="bold">will not</strong> work and you will encounter <code>LazyInitializationException</code> errors if you do so. If you plan to access the associated objects of those returned from asynchronous queries you should use eager queries (which is recommended anyway to avoid N+1 problems).
