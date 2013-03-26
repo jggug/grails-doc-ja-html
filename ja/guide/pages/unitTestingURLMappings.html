@@ -141,28 +141,69 @@ function addJsClass() {
                 
 <a name="9.1.5 Unit Testing URL Mappings"><!-- Legacy link --></a>
 <h2 id="unitTestingURLMappings">11.1.5 URLマッピングユニットテスト</h2>
-<h4>The Basics</h4><p class="paragraph"/>Testing URL mappings can be done with the <code>TestFor</code> annotation testing a particular URL mappings class. For example to test the default URL mappings you can do the following:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.example.AuthorController
+<div class="hidden-block">
+<h4>The Basics</h4>
+</div><p class="paragraph"/><h4>基本</h4><p class="paragraph"/><div class="hidden-block">
+Testing URL mappings can be done with the <code>TestFor</code> annotation testing a particular URL mappings class. For example to test the default URL mappings you can do the following:
+</div><p class="paragraph"/>URLマッピングをテストするには、<code>TestFor</code>アノテーションを使用します。例えば、デフォルトのURLマッピングをテストするためには次のように使用します。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.example.AuthorController
 <span class="java&#45;keyword">import</span> org.example.SimpleController<p class="paragraph"/>@TestFor(UrlMappings)
 @Mock(&#91;AuthorController, SimpleController&#93;)
 class UrlMappingsTests &#123;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>As you can see, any controller that is the target of a URL mapping that you're testing  <em class="italic">must</em>  be added to the <code>&#64;Mock</code> annotation.<p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+As you can see, any controller that is the target of a URL mapping that you're testing  <em class="italic">must</em>  be added to the <code>&#64;Mock</code> annotation.
+</div><p class="paragraph"/>上記のように、テストを実施するURLマッピングの対象となるコントローラには<code>Mock</code>アノテーションを追加しなければなりません。<p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 Note that since the default <code>UrlMappings</code> class is in the default package your test must also be in the default package
-</blockquote><p class="paragraph"/>With that done there are a number of useful methods that are defined by the <code>grails.test.mixin.web.UrlMappingsUnitTestMixin</code> for testing URL mappings. These include:
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+<code>UrlMappings</code>クラスがデフォルトパッケージの中にあるので、あなたが実行するテストもデフォルトパッケージの中になければいけません。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+With that done there are a number of useful methods that are defined by the <code>grails.test.mixin.web.UrlMappingsUnitTestMixin</code> for testing URL mappings. These include:
+</div><p class="paragraph"/>URLマッピングをテストするために<code>grails.test.mixin.web.UrlMappingsUnitTestMixin</code>には以下のような便利なメソッドが定義されています。<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li><code>assertForwardUrlMapping</code> - Asserts a URL mapping is forwarded for the given controller class (note that controller will need to be defined as a mock collaborate for this to work)</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>assertForwardUrlMapping</code> - 指定したコントローラクラスにフォワードするURLマッピングを検証する（コントローラはモックコラボレータとして定義される必要があることに注意してください）</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+<ul class="star">
 <li><code>assertReverseUrlMapping</code> - Asserts that the given URL is produced when reverse mapping a link to a given controller and action</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>assertReverseUrlMapping</code> - 指定したURLが、与えられたコントローラとアクションからリバースマッピングしたリンクとして生成されるか検証する</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+<ul class="star">
 <li><code>assertUrlMapping</code> - Asserts a URL mapping is valid for the given URL. This combines the <code>assertForwardUrlMapping</code> and <code>assertReverseUrlMapping</code> assertions</li>
-</ul><p class="paragraph"/><h4>Asserting Forward URL Mappings</h4><p class="paragraph"/>You use <code>assertForwardUrlMapping</code> to assert that a given URL maps to a given controller. For example, consider the following URL mappings:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>assertUrlMapping</code> - 指定したURLに対応するURLマッピングの妥当性を検証する。これは、<code>assertForwardUrlMapping</code>と<code>assertReverseUrlMapping</code>を組み合わせたものです。</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+<h4>Asserting Forward URL Mappings</h4>
+</div><p class="paragraph"/><h4>URLマッピングの転送の検証</h4><p class="paragraph"/><div class="hidden-block">
+You use <code>assertForwardUrlMapping</code> to assert that a given URL maps to a given controller. For example, consider the following URL mappings:
+</div><p class="paragraph"/>指定したURLが、期待したコントローラにマップされるか検証するために<code>assertForwardUrlMapping</code>が使用できます。例えば、以下のようなURLマッピングについて考えてみます。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
     <span class="java&#45;quote">"/action1"</span>(controller: <span class="java&#45;quote">"simple"</span>, action: <span class="java&#45;quote">"action1"</span>)
     <span class="java&#45;quote">"/action2"</span>(controller: <span class="java&#45;quote">"simple"</span>, action: <span class="java&#45;quote">"action2"</span>)
-&#125;</pre></div><p class="paragraph"/>The following test can be written to assert these URL mappings:<p class="paragraph"/><div class="code"><pre>void testUrlMappings() &#123;<p class="paragraph"/>    assertForwardUrlMapping(<span class="java&#45;quote">"/action1"</span>, controller: 'simple',
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The following test can be written to assert these URL mappings:
+</div><p class="paragraph"/>このようなURLマッピングのテストは次のように書けます。<p class="paragraph"/><div class="code"><pre>void testUrlMappings() &#123;<p class="paragraph"/>    assertForwardUrlMapping(<span class="java&#45;quote">"/action1"</span>, controller: 'simple',
                                         action: <span class="java&#45;quote">"action1"</span>)<p class="paragraph"/>    assertForwardUrlMapping(<span class="java&#45;quote">"/action2"</span>, controller: 'simple',
                                         action: <span class="java&#45;quote">"action2"</span>)<p class="paragraph"/>    shouldFail &#123;
         assertForwardUrlMapping(<span class="java&#45;quote">"/action2"</span>, controller: 'simple',
                                             action: <span class="java&#45;quote">"action1"</span>)
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Assert Reverse URL Mappings</h4><p class="paragraph"/>You use <code>assertReverseUrlMapping</code> to check that correct links are produced for your URL mapping when using the <code>link</code> tag in GSP views. An example test is largely identical to the previous listing except you use <code>assertReverseUrlMapping</code> instead of <code>assertForwardUrlMapping</code>. Note that you can combine these 2 assertions with <code>assertUrlMapping</code>.<p class="paragraph"/><h4>Simulating Controller Mapping</h4><p class="paragraph"/>In addition to the assertions to check the validity of URL mappings you can also simulate mapping to a controller by using your <code>UrlMappings</code> as a mock collaborator and the <code>mapURI</code> method. For example:<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleController)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Assert Reverse URL Mappings</h4>
+</div><p class="paragraph"/><h4>URLマッピングのリバース検証</h4><p class="paragraph"/><div class="hidden-block">
+You use <code>assertReverseUrlMapping</code> to check that correct links are produced for your URL mapping when using the <code>link</code> tag in GSP views. An example test is largely identical to the previous listing except you use <code>assertReverseUrlMapping</code> instead of <code>assertForwardUrlMapping</code>. Note that you can combine these 2 assertions with <code>assertUrlMapping</code>.
+</div><p class="paragraph"/>GSPのビューで<code>link</code>タグを使用した場合に、URLマッピングから生成されるリンクを確認(チェック)するために<code>assertReverseUrlMapping</code>を使用できます。
+<code>assertReverseUrlMapping</code>の代わりに<code>assertForwardUrlMapping</code>を使用する以外は上記の例とほとんど同じです。
+<code>assertUrlMapping</code>はこれら2つのアサーションを組み合わせた検証が出来ます。<p class="paragraph"/><div class="hidden-block">
+<h4>Simulating Controller Mapping</h4>
+</div><p class="paragraph"/><h4>コントローラのマッピングをシミュレート</h4><p class="paragraph"/><div class="hidden-block">
+In addition to the assertions to check the validity of URL mappings you can also simulate mapping to a controller by using your <code>UrlMappings</code> as a mock collaborator and the <code>mapURI</code> method. For example:
+</div><p class="paragraph"/>URLマッピングの妥当性をチェックするためのアサーションに加えて、<code>UrlMappings</code>をモックとして指定し<code>mapURI</code>メソッドを使用することで、コントローラへのマッピングをシミュレートすることができます。<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleController)
 @Mock(UrlMappings)
 class SimpleControllerTests &#123;<p class="paragraph"/>    void testControllerMapping() &#123;<p class="paragraph"/>        SimpleController controller = mapURI('/simple/list')
         assert controller != <span class="java&#45;keyword">null</span><p class="paragraph"/>        def model = controller.list()

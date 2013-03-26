@@ -167,9 +167,21 @@ function addJsClass() {
                 
 <a name="9.1 Unit Testing"><!-- Legacy link --></a>
 <h2 id="unitTesting">11.1 ユニットテスト</h2>
-Unit testing are tests at the "unit" level. In other words you are testing individual methods or blocks of code without consideration for surrounding infrastructure. Unit tests are typically run without the presence of physical resources that involve I/O such databases, socket connections or files. This is to ensure they run as quick as possible since quick feedback is important.<p class="paragraph"/><h4>The Test Mixins</h4><p class="paragraph"/>Since Grails 2.0, a collection of unit testing mixins is provided by Grails that lets you enhance the behavior of a typical JUnit 3, JUnit 4 or Spock test. The following sections cover the usage of these mixins.<p class="paragraph"/><blockquote class="note">
+<div class="hidden-block">
+Unit testing are tests at the "unit" level. In other words you are testing individual methods or blocks of code without consideration for surrounding infrastructure. Unit tests are typically run without the presence of physical resources that involve I/O such databases, socket connections or files. This is to ensure they run as quick as possible since quick feedback is important.
+</div><p class="paragraph"/>Unitテストは"単体"レベルのテストです。具体的には、環境周りを考慮せずに個々のメソッドやブロック単位で行うテストのことです。Unitテストは基本的にデータベース、ネットワーク接続、ファイルなどのI/Oを必要とする物理リソースを必要としません。素早いフィードバックを得られるように、Unitテストの実行時間はできる限り短くしてください。<p class="paragraph"/><div class="hidden-block">
+<h4>The Test Mixins</h4>
+</div><p class="paragraph"/><h4>テストMixin</h4><p class="paragraph"/><div class="hidden-block">
+Since Grails 2.0, a collection of unit testing mixins is provided by Grails that lets you enhance the behavior of a typical JUnit 3, JUnit 4 or Spock test. The following sections cover the usage of these mixins.
+</div><p class="paragraph"/>Grails 2.0以降、MixinのUnitテストライブラリがGrailsによって提供されており、代表的なJUnit 3、JUnit 4、Spockを使用したテストの実行をサポートします。以下の節では、Mixinの使い方について記載しています。<p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 The previous JUnit 3-style <code>GrailsUnitTestCase</code> class hierarchy is still present in Grails for backwards compatibility, but is now deprecated. The previous documentation on the subject can be found in the <a href="http://grails.org/doc/1.3.x/guide/9.%20Testing.html" target="blank">Grails 1.3.x documentation</a>
-</blockquote><p class="paragraph"/>You won't normally have to import any of the testing classes because Grails does that for you. But if you find that your IDE for example can't find the classes, here they all are:
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+以前の<code>GrailsUnitTestCase</code>クラスを継承するJUnit 3スタイルは、下位バージョンとの互換性のためにGrailsにまだ存在しています。しかし今は非推奨です。過去のドキュメントは<a href="http://grails.org/doc/1.3.x/guide/9.%20Testing.html" target="blank">Grails 1.3.x ドキュメンテーション</a>で見つけることができます。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+You won't normally have to import any of the testing classes because Grails does that for you. But if you find that your IDE for example can't find the classes, here they all are:
+</div><p class="paragraph"/>Grailsは自動でテストクラスをインポートするため、全てのテストクラスをインポートしなくても問題ありません。しかし、IDEでテストクラスを探せないことがあるかもしれないので、下記にそれらすべてのテストクラスを列挙します。
 <ul class="star">
 <li><code>grails.test.mixin.TestFor</code></li>
 <li><code>grails.test.mixin.TestMixin</code></li>
@@ -182,8 +194,19 @@ The previous JUnit 3-style <code>GrailsUnitTestCase</code> class hierarchy is st
 <li><code>grails.test.mixin.web.GroovyPageUnitTestMixin</code></li>
 <li><code>grails.test.mixin.web.UrlMappingsUnitTestMixin</code></li>
 <li><code>grails.test.mixin.webflow/WebFlowUnitTestMixin</code></li>
-</ul><p class="paragraph"/>Note that you're only ever likely to use the first two explicitly. The rest are there for reference.<p class="paragraph"/><h4>Test Mixin Basics</h4><p class="paragraph"/>Most testing can be achieved via the <code>TestFor</code> annotation in combination with the <code>Mock</code> annotation for mocking collaborators. For example, to test a controller and associated domains you would define the following:<p class="paragraph"/><div class="code"><pre>&#64;TestFor(BookController)
-&#64;Mock(&#91;Book, Author, BookService&#93;)</pre></div><p class="paragraph"/>The <code>TestFor</code> annotation defines the class under test and will automatically create a field for the type of class under test. For example in the above case a "controller" field will be present, however if <code>TestFor</code> was defined for a service a "service" field would be created and so on.<p class="paragraph"/>The <code>Mock</code> annotation creates mock version of any collaborators. There is an in-memory implementation of GORM that will simulate most interactions with the GORM API. For those interactions that are not automatically mocked you can use the built in support for defining mocks and stubs programmatically. For example:<p class="paragraph"/>
+</ul><p class="paragraph"/><div class="hidden-block">
+Note that you're only ever likely to use the first two explicitly. The rest are there for reference.
+</div>
+常に明示的に使うのは最初の２つのクラスだけであることに注意してください。残りはリファレンスのために列挙しています。<p class="paragraph"/><div class="hidden-block">
+<h4>Test Mixin Basics</h4>
+</div><p class="paragraph"/><h4>テストMixinの基本</h4><p class="paragraph"/><div class="hidden-block">
+Most testing can be achieved via the <code>TestFor</code> annotation in combination with the <code>Mock</code> annotation for mocking collaborators. For example, to test a controller and associated domains you would define the following:
+</div><p class="paragraph"/>ほとんどのテストは、モックを使用するため<code>Mock</code>アノテーションと<code>TestFor</code>アノテーションを組み合わせて使用します。例えば、コントローラーとドメインをテストするためには次のように定義します。<p class="paragraph"/><div class="code"><pre>&#64;TestFor(BookController)
+&#64;Mock(&#91;Book, Author, BookService&#93;)</pre></div><p class="paragraph"/><div class="hidden-block">
+The <code>TestFor</code> annotation defines the class under test and will automatically create a field for the type of class under test. For example in the above case a "controller" field will be present, however if <code>TestFor</code> was defined for a service a "service" field would be created and so on.
+</div><p class="paragraph"/><code>TestFor</code>アノテーションは、テスト対象のクラスを定義することで自動的にクラスタイプのフィールドを生成します。例えば、上記の場合、"controller"フィールドを生成します。また、もし<code>TestFor</code>にサービスが定義されている場合、"service"フィールドが生成されます。<p class="paragraph"/><div class="hidden-block">
+The <code>Mock</code> annotation creates mock version of any collaborators. There is an in-memory implementation of GORM that will simulate most interactions with the GORM API. For those interactions that are not automatically mocked you can use the built in support for defining mocks and stubs programmatically. For example:
+</div><p class="paragraph"/><code>Mock</code>アノテーションは複数の種類のモックを生成します。ほとんどのGORM APIの振る舞いをシミュレートするインメモリのGORM実装があります。自動でモック化されない振る舞いに対しては、ビルトインされているモック、スタブの作成機能が使用できます。例えば、次の通りです。<p class="paragraph"/>
 <div class="code"><pre>void testSearch() &#123;
       def control = mockFor(SearchService)
       control.demand.searchWeb &#123; <span class="java&#45;object">String</span> q &#45;&#62; &#91;'mock results'&#93; &#125;
@@ -195,19 +218,35 @@ The previous JUnit 3-style <code>GrailsUnitTestCase</code> class hierarchy is st
 
 <a name="9.1.1 Unit Testing Controllers"><!-- Legacy link --></a>
 <h2 id="unitTestingControllers">11.1.1 コントローラユニットテスト</h2>
-<h4>The Basics</h4><p class="paragraph"/>You use the <code>grails.test.mixin.TestFor</code> annotation to unit test controllers. Using <code>TestFor</code> in this manner activates the <code>grails.test.mixin.web.ControllerUnitTestMixin</code> and its associated API. For example:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.test.mixin.TestFor<p class="paragraph"/>@TestFor(SimpleController)
+<div class="hidden-block">
+<h4>The Basics</h4>
+</div><p class="paragraph"/><h4>基本</h4><p class="paragraph"/><div class="hidden-block">
+You use the <code>grails.test.mixin.TestFor</code> annotation to unit test controllers. Using <code>TestFor</code> in this manner activates the <code>grails.test.mixin.web.ControllerUnitTestMixin</code> and its associated API. For example:
+</div><p class="paragraph"/>コントローラUnitテストには、<code>grails.test.mixin.TestFor</code>アノテーションを使用します。このように<code>TestFor</code>を使用することで、<code>grails.test.mixin.web.ControllerUnitTestMixin</code>とその関連APIが有効になります。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.test.mixin.TestFor<p class="paragraph"/>@TestFor(SimpleController)
 class SimpleControllerTests &#123;
     void testSomething() &#123;<p class="paragraph"/>    &#125;
-&#125;</pre></div><p class="paragraph"/>Adding the <code>TestFor</code> annotation to a controller causes a new <code>controller</code> field to be automatically created for the controller under test.<p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Adding the <code>TestFor</code> annotation to a controller causes a new <code>controller</code> field to be automatically created for the controller under test.
+</div><p class="paragraph"/><code>TestFor</code>アノテーションにコントローラを追加することにより、<code>controller</code>フィールドにテスト対象のコントローラが自動的に生成されます。<p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 The <code>TestFor</code> annotation will also automatically annotate any public methods starting with "test" with JUnit 4's @Test annotation. If any of your test method don't start with "test" just add this manually
-</blockquote><p class="paragraph"/>To test the simplest "Hello World"-style example you can do the following:<p class="paragraph"/><div class="code"><pre>// Test class
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+<code>TestFor</code>アノテーションは"test"から始まるパブリックなメソッドに自動的にJUnit4の<code>Testアノテーションを付与します。もしテストメソッドが"test"で始まらない場合は</code>Testアノテーションを手動で付与してください。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+To test the simplest "Hello World"-style example you can do the following:
+</div><p class="paragraph"/>最もシンプルなHello World形式のテストは次の通りです。<p class="paragraph"/><div class="code"><pre>// Test class
 class SimpleController &#123;
     def hello() &#123;
         render <span class="java&#45;quote">"hello"</span>
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>void testHello() &#123;
     controller.hello()<p class="paragraph"/>    assert response.text == 'hello'
-&#125;</pre></div><p class="paragraph"/>The <code>response</code> object is an instance of <code>GrailsMockHttpServletResponse</code> (from the package <code>org.codehaus.groovy.grails.plugins.testing</code>) which extends Spring's <code>MockHttpServletResponse</code> class and has a number of useful methods for inspecting the state of the response.<p class="paragraph"/>For example to test a redirect you can use the <code>redirectedUrl</code> property:<p class="paragraph"/><div class="code"><pre>// Test class
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The <code>response</code> object is an instance of <code>GrailsMockHttpServletResponse</code> (from the package <code>org.codehaus.groovy.grails.plugins.testing</code>) which extends Spring's <code>MockHttpServletResponse</code> class and has a number of useful methods for inspecting the state of the response.
+</div><p class="paragraph"/><code>response</code>オブジェクトは、<code>GrailsMockHttpServletResponse</code>（<code>org.codehaus.groovy.grails.plugins.testing</code>パッケージに含まれている）のインスタンスです。Springの<code>MockHttpServletResponse</code>クラスを継承しており、レスポンスの状態を調べる便利なメソッドを定義しています。<p class="paragraph"/><div class="hidden-block">
+For example to test a redirect you can use the <code>redirectedUrl</code> property:
+</div><p class="paragraph"/>例えば、リダイレクトをテストするには<code>redirectedUrl</code>プロパティを使用できます。<p class="paragraph"/><div class="code"><pre>// Test class
 class SimpleController &#123;
     def index() &#123;
         redirect action: 'hello'
@@ -215,21 +254,33 @@ class SimpleController &#123;
     &#8230;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>void testIndex() &#123;
     controller.index()<p class="paragraph"/>    assert response.redirectedUrl == '/simple/hello'
-&#125;</pre></div><p class="paragraph"/>Many actions make use of the parameter data associated with the request. For example, the 'sort', 'max', and 'offset' parameters are quite common. Providing these in the test is as simple as adding appropriate values to a special <code>params</code> variable:<p class="paragraph"/><div class="code"><pre>void testList() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Many actions make use of the parameter data associated with the request. For example, the 'sort', 'max', and 'offset' parameters are quite common. Providing these in the test is as simple as adding appropriate values to a special <code>params</code> variable:
+</div><p class="paragraph"/>ほとんどのアクションはリクエストに設定されたパラメータを使用します。例えば、'sort'、'max'、'offset'といったパラメータが一般的です。これらのパラメータをテストで利用するには<code>params</code>変数に値を代入するだけで簡単に設定できます。<p class="paragraph"/><div class="code"><pre>void testList() &#123;
     params.sort = <span class="java&#45;quote">"name"</span>
     params.max = 20
     params.offset = 0<p class="paragraph"/>    controller.list()
     &#8230;
-&#125;</pre></div><p class="paragraph"/>You can even control what type of request the controller action sees by setting the <code>method</code> property of the mock request:<p class="paragraph"/><div class="code"><pre>void testSave() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+You can even control what type of request the controller action sees by setting the <code>method</code> property of the mock request:
+</div><p class="paragraph"/>リクエストの<code>method</code>プロパティにリクエストタイプを設定することにより、リクエストタイプ毎のコントローラのアクションを確認できます。<p class="paragraph"/><div class="code"><pre>void testSave() &#123;
     request.method = <span class="java&#45;quote">"POST"</span>
     controller.save()
     &#8230;
-&#125;</pre></div><p class="paragraph"/>This is particularly important if your actions do different things depending on the type of the request. Finally, you can mark a request as AJAX like so:<p class="paragraph"/><div class="code"><pre>void testGetPage() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This is particularly important if your actions do different things depending on the type of the request. Finally, you can mark a request as AJAX like so:
+</div><p class="paragraph"/>リクエストタイプに応じてアクションが違った挙動をする場合、これは非常に重要です。さらに、次のようにAjaxとしてリクエストを作ることもできます。<p class="paragraph"/><div class="code"><pre>void testGetPage() &#123;
     request.method = <span class="java&#45;quote">"POST"</span>
     request.makeAjaxRequest()
     controller.getPage()
     &#8230;
-&#125;</pre></div><p class="paragraph"/>You only need to do this though if the code under test uses the <code>xhr</code> property on the request.<p class="paragraph"/><h4>Testing View Rendering</h4><p class="paragraph"/>To test view rendering you can inspect the state of the controller's <code>modelAndView</code> property (an instance of <code>org.springframework.web.servlet.ModelAndView</code>) or you can use the <code>view</code> and <code>model</code> properties provided by the mixin:<p class="paragraph"/><div class="code"><pre>// Test class
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+You only need to do this though if the code under test uses the <code>xhr</code> property on the request.
+</div><p class="paragraph"/>テスト対象コードのリクエストで<code>xhr</code>プロパティを使用してたとしても、これを実行するだけです。<p class="paragraph"/><div class="hidden-block">
+<h4>Testing View Rendering</h4>
+</div><p class="paragraph"/><h4>ビューのレンダリングテスト</h4><p class="paragraph"/><div class="hidden-block">
+To test view rendering you can inspect the state of the controller's <code>modelAndView</code> property (an instance of <code>org.springframework.web.servlet.ModelAndView</code>) or you can use the <code>view</code> and <code>model</code> properties provided by the mixin:
+</div><p class="paragraph"/>コントローラの<code>modelAndView</code>プロパティ（<code>org.springframework.web.servlet.ModelAndView</code>のインスタンス）、または、Mixinで提供されている<code>view</code>と<code>model</code>プロパティを使用することにより、ビューのレンダリングをテストすることができます。<p class="paragraph"/><div class="code"><pre>// Test class
 class SimpleController &#123;
     def home() &#123;
         render view: <span class="java&#45;quote">"homePage"</span>, model: &#91;title: <span class="java&#45;quote">"Hello World"</span>&#93;
@@ -238,18 +289,34 @@ class SimpleController &#123;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>void testIndex() &#123;
     controller.home()<p class="paragraph"/>    assert view == <span class="java&#45;quote">"/simple/homePage"</span>
     assert model.title == <span class="java&#45;quote">"Hello World"</span>
-&#125;</pre></div><p class="paragraph"/>Note that the view string is the absolute view path, so it starts with a '/' and will include path elements, such as the directory named after the action's controller.<p class="paragraph"/><h4>Testing Template Rendering</h4><p class="paragraph"/>Unlike view rendering, template rendering will actually attempt to write the template directly to the response rather than returning a <code>ModelAndView</code> hence it requires a different approach to testing.<p class="paragraph"/>Consider the following controller action:<p class="paragraph"/><div class="code"><pre>class SimpleController &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Note that the view string is the absolute view path, so it starts with a '/' and will include path elements, such as the directory named after the action's controller.
+</div><p class="paragraph"/>viewの文字列は絶対パスであることに注意してください。これは、'/'から始まり、動作するコントローラの名前から決まるディレクトリ名などがパスとして含まれます。<p class="paragraph"/><div class="hidden-block">
+<h4>Testing Template Rendering</h4>
+</div><p class="paragraph"/><h4>テンプレートレンダリングテスト</h4><p class="paragraph"/><div class="hidden-block">
+Unlike view rendering, template rendering will actually attempt to write the template directly to the response rather than returning a <code>ModelAndView</code> hence it requires a different approach to testing.
+</div><p class="paragraph"/>テンプレートのレンダリングは<code>ModelAndView</code>を返すのではなく、レスポンスにテンプレートの内容を直接書き込みます。そのため、ビューのレンダリングとは異なるテストのアプローチが必要になります。<p class="paragraph"/><div class="hidden-block">
+Consider the following controller action:
+</div><p class="paragraph"/>次のコントローラアクションを見てください。<p class="paragraph"/><div class="code"><pre>class SimpleController &#123;
     def display() &#123;
         render template:<span class="java&#45;quote">"snippet"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>In this example the controller will look for a template in <code>grails-app/views/simple/_snippet.gsp</code>. You can test this as follows:<p class="paragraph"/><div class="code"><pre>void testDisplay() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In this example the controller will look for a template in <code>grails-app/views/simple/_snippet.gsp</code>. You can test this as follows:
+</div><p class="paragraph"/>この例では、コントローラは<code>grails-app/views/simple/_snippet.gsp</code>にあるテンプレートを探します。そして、次のようにテストをします。<p class="paragraph"/><div class="code"><pre>void testDisplay() &#123;
     controller.display()
     assert response.text == 'contents of template'
-&#125;</pre></div><p class="paragraph"/>However, you may not want to render the real template, but just test that is was rendered. In this case you can provide mock Groovy Pages:<p class="paragraph"/><div class="code"><pre>void testDisplay() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+However, you may not want to render the real template, but just test that is was rendered. In this case you can provide mock Groovy Pages:
+</div><p class="paragraph"/>テンプレートをレンダリングしたくない場合にも、テストでは実際にテンプレートがレンダリングされます。このような場合はGroovy Pagesのモックが使用できます。<p class="paragraph"/><div class="code"><pre>void testDisplay() &#123;
     views&#91;'/simple/_snippet.gsp'&#93; = 'mock contents'
     controller.display()
     assert response.text == 'mock contents'
-&#125;</pre></div><p class="paragraph"/><h4>Testing Actions Which Return A Map</h4><p class="paragraph"/>When a controller action returns a <code>java.util.Map</code> that <code>Map</code> may be inspected directly to assert that it contains the expected data:<p class="paragraph"/><div class="code"><pre>class SimpleController &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Testing Actions Which Return A Map</h4>
+</div><p class="paragraph"/><h4>マップを返すアクションをテスト</h4><p class="paragraph"/><div class="hidden-block">
+When a controller action returns a <code>java.util.Map</code> that <code>Map</code> may be inspected directly to assert that it contains the expected data:
+</div><p class="paragraph"/>コントローラアクションが<code>java.util.Map</code>を返す場合は、<code>Map</code>に期待したデータが含まれているか直接検証できます。<p class="paragraph"/><div class="code"><pre>class SimpleController &#123;
     def showBookDetails() &#123;
         &#91;title: 'The Nature Of Necessity', author: 'Alvin Plantinga'&#93;
     &#125;
@@ -258,15 +325,25 @@ class SimpleControllerTests &#123;<p class="paragraph"/>    void testShowBookDet
         def model = controller.showBookDetails()<p class="paragraph"/>        assert model.author == 'Alvin Plantinga'
     &#125;
 &#125;</pre></div><p class="paragraph"/>
-<h4>Testing XML and JSON Responses</h4><p class="paragraph"/>XML and JSON response are also written directly to the response. Grails' mocking capabilities provide some conveniences for testing XML and JSON response. For example consider the following action:<p class="paragraph"/><div class="code"><pre>def renderXml() &#123;
+<div class="hidden-block">
+<h4>Testing XML and JSON Responses</h4>
+</div><p class="paragraph"/><h4>XMLとJSONレスポンスのテスト</h4><p class="paragraph"/><div class="hidden-block">
+XML and JSON response are also written directly to the response. Grails' mocking capabilities provide some conveniences for testing XML and JSON response. For example consider the following action:
+</div><p class="paragraph"/>XMLとJSONのレスポンスもまた、直接レスポンスに書き込まれます。Grailsのモック機構は、XMLとJSONのレスポンスをテストするために便利な機能をいくつか提供しています。<p class="paragraph"/><div class="code"><pre>def renderXml() &#123;
     render(contentType:<span class="java&#45;quote">"text/xml"</span>) &#123;
         book(title:<span class="java&#45;quote">"Great"</span>)
     &#125;
-&#125;</pre></div><p class="paragraph"/>This can be tested using the <code>xml</code> property of the response:<p class="paragraph"/><div class="code"><pre>void testRenderXml() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This can be tested using the <code>xml</code> property of the response:
+</div><p class="paragraph"/>次の例は、レスポンスの<code>xml</code>プロパティを使ってテストしています。<p class="paragraph"/><div class="code"><pre>void testRenderXml() &#123;
     controller.renderXml()
     assert <span class="java&#45;quote">"&#60;book title='Great'/&#62;"</span> == response.text
     assert <span class="java&#45;quote">"Great"</span> == response.xml.@title.text()
-&#125;</pre></div><p class="paragraph"/>The <code>xml</code> property is a parsed result from Groovy's <a href="http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper" target="blank">XmlSlurper</a> class which is very convenient for parsing XML.<p class="paragraph"/>Testing JSON responses is pretty similar, instead you use the <code>json</code> property:<p class="paragraph"/><div class="code"><pre>// controller action
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The <code>xml</code> property is a parsed result from Groovy's <a href="http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper" target="blank">XmlSlurper</a> class which is very convenient for parsing XML.
+</div><p class="paragraph"/><code>xml</code>プロパティは、XMLをパースするためにとても便利なGroovyの<a href="http://groovy.codehaus.org/Reading+XML+using+Groovys+XmlSlurper" target="blank">XmlSlurper</a> でパースされた結果です。<p class="paragraph"/><div class="hidden-block">
+Testing JSON responses is pretty similar, instead you use the <code>json</code> property:
+</div><p class="paragraph"/><code>json</code>プロパティを使うだけで、JSONレスポンスのテストもかなり似ています。<p class="paragraph"/><div class="code"><pre>// controller action
 def renderJson() &#123;
     render(contentType:<span class="java&#45;quote">"text/json"</span>) &#123;
         book = <span class="java&#45;quote">"Great"</span>
@@ -274,18 +351,32 @@ def renderJson() &#123;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>// test
 void testRenderJson() &#123;<p class="paragraph"/>    controller.renderJson()<p class="paragraph"/>    assert '&#123;<span class="java&#45;quote">"book"</span>:<span class="java&#45;quote">"Great"</span>&#125;' == response.text
     assert <span class="java&#45;quote">"Great"</span> == response.json.book
-&#125;</pre></div><p class="paragraph"/>The <code>json</code> property is an instance of <code>org.codehaus.groovy.grails.web.json.JSONElement</code> which is a map-like structure that is useful for parsing JSON responses.<p class="paragraph"/><h4>Testing XML and JSON Requests</h4><p class="paragraph"/>Grails provides various convenient ways to automatically parse incoming XML and JSON packets. For example you can bind incoming JSON or XML requests using Grails' data binding:<p class="paragraph"/><div class="code"><pre>def consumeBook() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The <code>json</code> property is an instance of <code>org.codehaus.groovy.grails.web.json.JSONElement</code> which is a map-like structure that is useful for parsing JSON responses.
+</div><p class="paragraph"/><code>json</code>プロパティは、JSONレスポンスをパースするために便利な<code>org.codehaus.groovy.grails.web.json.JSONElement</code>のインスタンスでマップライクな構造をもっています。<p class="paragraph"/><div class="hidden-block">
+<h4>Testing XML and JSON Requests</h4>
+</div><p class="paragraph"/><h4>XMLとJSONリクエストのテスト</h4><p class="paragraph"/><div class="hidden-block">
+Grails provides various convenient ways to automatically parse incoming XML and JSON packets. For example you can bind incoming JSON or XML requests using Grails' data binding:
+</div><p class="paragraph"/>Grailsは、入力されるXMLとJSONパケットを自動的にパースするためのいろいろな便利な方法を提供しています。例えば、入力されるJSONかXMLリクエストをGrailsのデータバインディングを使ってバインドできます。<p class="paragraph"/><div class="code"><pre>def consumeBook() &#123;
     def b = <span class="java&#45;keyword">new</span> Book(params&#91;'book'&#93;)<p class="paragraph"/>    render b.title
-&#125;</pre></div><p class="paragraph"/>To test this Grails provides an easy way to specify an XML or JSON packet via the <code>xml</code> or <code>json</code> properties. For example the above action can be tested by specifying a String containing the XML:<p class="paragraph"/><div class="code"><pre>void testConsumeBookXml() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+To test this Grails provides an easy way to specify an XML or JSON packet via the <code>xml</code> or <code>json</code> properties. For example the above action can be tested by specifying a String containing the XML:
+</div><p class="paragraph"/>次のテストでは、<code>xml</code>や<code>json</code>プロパティを用いてXMLやJSONリクエストを設定しています。例えば、上記のアクションはXMLの文字列を設定することによってテストができます。<p class="paragraph"/><div class="code"><pre>void testConsumeBookXml() &#123;
     request.xml = '&#60;book&#62;&#60;title&#62;The Shining&#60;/title&#62;&#60;/book&#62;'
     controller.consumeBook()<p class="paragraph"/>    assert response.text == 'The Shining'
-&#125;</pre></div><p class="paragraph"/>Or alternatively a domain instance can be specified and it will be auto-converted into the appropriate XML request:<p class="paragraph"/><div class="code"><pre>void testConsumeBookXml() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Or alternatively a domain instance can be specified and it will be auto-converted into the appropriate XML request:
+</div><p class="paragraph"/>もしくは、ドメインインスタンスを設定することで、適切なXMLリクエストに自動変換してテストをします。<p class="paragraph"/><div class="code"><pre>void testConsumeBookXml() &#123;
     request.xml = <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Shining"</span>)
     controller.consumeBook()<p class="paragraph"/>    assert response.text == 'The Shining'
-&#125;</pre></div><p class="paragraph"/>The same can be done for JSON requests:<p class="paragraph"/><div class="code"><pre>void testConsumeBookJson() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The same can be done for JSON requests:
+</div><p class="paragraph"/>JSONリクエストでも同じようにテストできます。<p class="paragraph"/><div class="code"><pre>void testConsumeBookJson() &#123;
     request.json = <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Shining"</span>)
     controller.consumeBook()<p class="paragraph"/>    assert response.text == 'The Shining'
-&#125;</pre></div><p class="paragraph"/>If you prefer not to use Grails' data binding but instead manually parse the incoming XML or JSON that can be tested too. For example consider the controller action below:<p class="paragraph"/><div class="code"><pre>def consume() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+If you prefer not to use Grails' data binding but instead manually parse the incoming XML or JSON that can be tested too. For example consider the controller action below:
+</div><p class="paragraph"/>もし、Grailsのデータバインディングを使用したくない場合は、入力されるXMLまたはJSONを手動でパースする必要がありますが、このような場合も同じようにテストできます。次のコントローラアクションを見てください。<p class="paragraph"/><div class="code"><pre>def consume() &#123;
     request.withFormat &#123;
         xml &#123;
             render request.XML.@title
@@ -294,12 +385,20 @@ void testRenderJson() &#123;<p class="paragraph"/>    controller.renderJson()<p 
             render request.JSON.title
         &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/>To test the XML request you can specify the XML as a string:<p class="paragraph"/><div class="code"><pre>void testConsumeXml() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+To test the XML request you can specify the XML as a string:
+</div><p class="paragraph"/>XMLリクエストをテストするためには、XMLの文字列を設定します。<p class="paragraph"/><div class="code"><pre>void testConsumeXml() &#123;
     request.xml = '&#60;book title=<span class="java&#45;quote">"The Stand"</span> /&#62;'<p class="paragraph"/>    controller.consume()<p class="paragraph"/>    assert response.text == 'The Stand'
-&#125;</pre></div><p class="paragraph"/>And, of course, the same can be done for JSON:<p class="paragraph"/><div class="code"><pre>void testConsumeJson() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+And, of course, the same can be done for JSON:
+</div><p class="paragraph"/>もちろん、同じことがJSONでもできます。<p class="paragraph"/><div class="code"><pre>void testConsumeJson() &#123;
     request.json = '&#123;title:<span class="java&#45;quote">"The Stand"</span>&#125;'
     controller.consume()<p class="paragraph"/>    assert response.text == 'The Stand'
-&#125;</pre></div><p class="paragraph"/><h4>Testing Spring Beans</h4><p class="paragraph"/>When using <code>TestFor</code> only a subset of the Spring beans available to a running Grails application are available. If you wish to make additional beans available you can do so with the <code>defineBeans</code> method of <code>GrailsUnitTestMixin</code>:<p class="paragraph"/><div class="code"><pre>class SimpleController &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Testing Spring Beans</h4>
+</div><p class="paragraph"/><h4>Springビーンのテスト</h4><p class="paragraph"/><div class="hidden-block">
+When using <code>TestFor</code> only a subset of the Spring beans available to a running Grails application are available. If you wish to make additional beans available you can do so with the <code>defineBeans</code> method of <code>GrailsUnitTestMixin</code>:
+</div><p class="paragraph"/><code>TestFor</code>を使用した場合は、Grailsアプリケーションを実行するのに必要なSpringビーンのサブセットだけが利用できます。もし、利用できるビーンを追加したい場合は、<code>GrailsUnitTestMixin</code>の<code>defineBeans</code>メソッドを使うことにより、ビーンを追加できます。<p class="paragraph"/><div class="code"><pre>class SimpleController &#123;
     SimpleService simpleService
     def hello() &#123;
         render simpleService.sayHello()
@@ -308,13 +407,19 @@ void testRenderJson() &#123;<p class="paragraph"/>    controller.renderJson()<p 
     defineBeans &#123;
         simpleService(SimpleService)
     &#125;<p class="paragraph"/>    controller.hello()<p class="paragraph"/>    assert response.text == <span class="java&#45;quote">"Hello World"</span>
-&#125;</pre></div><p class="paragraph"/>The controller is auto-wired by Spring just like in a running Grails application. Autowiring even occurs if you instantiate subsequent instances of the controller:<p class="paragraph"/><div class="code"><pre>void testAutowiringViaNew() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The controller is auto-wired by Spring just like in a running Grails application. Autowiring even occurs if you instantiate subsequent instances of the controller:
+</div><p class="paragraph"/>コントローラは実行中のGrailsアプリケーションのように、Springによって自動的にビーンが注入されます。もしコントローラを後でインスタンス化した場合も自動的に注入されます。<p class="paragraph"/><div class="code"><pre>void testAutowiringViaNew() &#123;
     defineBeans &#123;
         simpleService(SimpleService)
     &#125;<p class="paragraph"/>    def controller1 = <span class="java&#45;keyword">new</span> SimpleController()
     def controller2 = <span class="java&#45;keyword">new</span> SimpleController()<p class="paragraph"/>    assert controller1.simpleService != <span class="java&#45;keyword">null</span>
     assert controller2.simpleService != <span class="java&#45;keyword">null</span>
-&#125;</pre></div><p class="paragraph"/><h4>Testing Mime Type Handling</h4><p class="paragraph"/>You can test mime type handling and the <code>withFormat</code> method quite simply by setting the response's <code>format</code> attribute:<p class="paragraph"/><div class="code"><pre>// controller action
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Testing Mime Type Handling</h4>
+</div><p class="paragraph"/><h4>MIME Typeの制御のテスト</h4><p class="paragraph"/><div class="hidden-block">
+You can test mime type handling and the <code>withFormat</code> method quite simply by setting the response's <code>format</code> attribute:
+</div><p class="paragraph"/>MIME Typeの制御と<code>withFormat</code>メソッドは、レスポンスの<code>format</code>属性を設定することにより簡単にテストができます。<p class="paragraph"/><div class="code"><pre>// controller action
 def sayHello() &#123;
     def data = &#91;Hello:<span class="java&#45;quote">"World"</span>&#93;
     withFormat &#123;
@@ -326,73 +431,119 @@ void testSayHello() &#123;
     response.format = 'xml'
     controller.sayHello()<p class="paragraph"/>    <span class="java&#45;object">String</span> expected = '&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;' +
                       '&#60;map&#62;&#60;entry key=<span class="java&#45;quote">"Hello"</span>&#62;World&#60;/entry&#62;&#60;/map&#62;'<p class="paragraph"/>    assert expected == response.text
-&#125;</pre></div><p class="paragraph"/><h4>Testing Duplicate Form Submissions</h4><p class="paragraph"/>Testing duplicate form submissions is a little bit more involved. For example if you have an action that handles a form such as:<p class="paragraph"/><div class="code"><pre>def handleForm() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Testing Duplicate Form Submissions</h4>
+</div><p class="paragraph"/><h4>フォームの２重送信テスト</h4><p class="paragraph"/><div class="hidden-block">
+Testing duplicate form submissions is a little bit more involved. For example if you have an action that handles a form such as:
+</div><p class="paragraph"/>フォームの２重送信のテストは少し複雑になります。例えば、次のようなフォームを処理するアクションがあるとします。<p class="paragraph"/><div class="code"><pre>def handleForm() &#123;
     withForm &#123;
         render <span class="java&#45;quote">"Good"</span>
     &#125;.invalidToken &#123;
         render <span class="java&#45;quote">"Bad"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>you want to verify the logic that is executed on a good form submission and the logic that is executed on a duplicate submission. Testing the bad submission is simple. Just invoke the controller:<p class="paragraph"/><div class="code"><pre>void testDuplicateFormSubmission() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+you want to verify the logic that is executed on a good form submission and the logic that is executed on a duplicate submission. Testing the bad submission is simple. Just invoke the controller:
+</div><p class="paragraph"/>ここでフォームの送信が成功する場合と、２重送信となる場合のロジックを検証したいとします。２重送信となる場合のテストは、単にコントローラをすることで簡単に実行できます。<p class="paragraph"/><div class="code"><pre>void testDuplicateFormSubmission() &#123;
     controller.handleForm()
     assert <span class="java&#45;quote">"Bad"</span> == response.text
-&#125;</pre></div><p class="paragraph"/>Testing the successful submission requires providing an appropriate <code>SynchronizerToken</code>:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.servlet.mvc.SynchronizerToken
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Testing the successful submission requires providing an appropriate <code>SynchronizerToken</code>:
+</div><p class="paragraph"/>フォームの送信が成功する場合のテストは適切な<code>SynchronizerToken</code>が必要となります。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.servlet.mvc.SynchronizerToken
 ...<p class="paragraph"/>void testValidFormSubmission() &#123;
     def token = SynchronizerToken.store(session)
     params&#91;SynchronizerToken.KEY&#93; = token.currentToken.toString()<p class="paragraph"/>    controller.handleForm()
     assert <span class="java&#45;quote">"Good"</span> == response.text
-&#125;</pre></div><p class="paragraph"/>If you test both the valid and the invalid request in the same test be sure to reset the response between executions of the controller:<p class="paragraph"/><div class="code"><pre>controller.handleForm() // first execution
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+If you test both the valid and the invalid request in the same test be sure to reset the response between executions of the controller:
+</div><p class="paragraph"/>もし、有効/無効のリクエストを両方ともテストしたい場合、コントローラのメソッド実行の間で、レスポンスをリセットしてください。<p class="paragraph"/><div class="code"><pre>controller.handleForm() // first execution
 &#8230;
 response.reset()
 &#8230;
-controller.handleForm() // second execution</pre></div><p class="paragraph"/><h4>Testing File Upload</h4><p class="paragraph"/>You use the <code>GrailsMockMultipartFile</code> class to test file uploads. For example consider the following controller action:<p class="paragraph"/><div class="code"><pre>def uploadFile() &#123;
+controller.handleForm() // second execution</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Testing File Upload</h4>
+</div><p class="paragraph"/><h4>ファイルアップロードのテスト</h4><p class="paragraph"/><div class="hidden-block">
+You use the <code>GrailsMockMultipartFile</code> class to test file uploads. For example consider the following controller action:
+</div><p class="paragraph"/>ファイルアップロードをテストするためには、<code>GrailsMockMultipartFile</code>クラスを使います。例えば、次のコントローラアクションを見てください。<p class="paragraph"/><div class="code"><pre>def uploadFile() &#123;
     MultipartFile file = request.getFile(<span class="java&#45;quote">"myFile"</span>)
     file.transferTo(<span class="java&#45;keyword">new</span> File(<span class="java&#45;quote">"/local/disk/myFile"</span>))
-&#125;</pre></div><p class="paragraph"/>To test this action you can register a <code>GrailsMockMultipartFile</code> with the request:<p class="paragraph"/><div class="code"><pre>void testFileUpload() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+To test this action you can register a <code>GrailsMockMultipartFile</code> with the request:
+</div><p class="paragraph"/>このアクションをテストするには、リクエストに<code>GrailsMockMultipartFile</code>を設定してください。<p class="paragraph"/><div class="code"><pre>void testFileUpload() &#123;
     <span class="java&#45;keyword">final</span> file = <span class="java&#45;keyword">new</span> GrailsMockMultipartFile(<span class="java&#45;quote">"myFile"</span>, <span class="java&#45;quote">"foo"</span>.bytes)
     request.addFile(file)
     controller.uploadFile()<p class="paragraph"/>    assert file.targetFileLocation.path == <span class="java&#45;quote">"/local/disk/myFile"</span>
-&#125;</pre></div><p class="paragraph"/>The <code>GrailsMockMultipartFile</code> constructor arguments are the name and contents of the file. It has a mock implementation of the <code>transferTo</code> method that simply records the <code>targetFileLocation</code> and doesn't write to disk.<p class="paragraph"/><h4>Testing Command Objects</h4><p class="paragraph"/>Special support exists for testing command object handling with the <code>mockCommandObject</code> method. For example consider the following action:<p class="paragraph"/><div class="code"><pre>def handleCommand(SimpleCommand simple) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The <code>GrailsMockMultipartFile</code> constructor arguments are the name and contents of the file. It has a mock implementation of the <code>transferTo</code> method that simply records the <code>targetFileLocation</code> and doesn't write to disk.
+</div><p class="paragraph"/><code>GrailsMockMultipartFile</code>のコンストラクタの引数はファイル名とファイルの内容です。これは<code>transferTo</code>のモック実装をもっており、ファイルには書き込まずに<code>targetFileLocation</code>として値を保持します。<p class="paragraph"/><div class="hidden-block">
+<h4>Testing Command Objects</h4>
+</div><p class="paragraph"/><h4>Commnadオブジェクトのテスト</h4><p class="paragraph"/><div class="hidden-block">
+Special support exists for testing command object handling with the <code>mockCommandObject</code> method. For example consider the following action:
+</div><p class="paragraph"/><code>mockCommandObject</code>メソッドにはCommandオブジェクトの処理をテストするための特別な機能があります。例えば、次のアクションを見てください。<p class="paragraph"/><div class="code"><pre>def handleCommand(SimpleCommand simple) &#123;
     <span class="java&#45;keyword">if</span> (simple.hasErrors()) &#123;
         render <span class="java&#45;quote">"Bad"</span>
     &#125;
     <span class="java&#45;keyword">else</span> &#123;
         render <span class="java&#45;quote">"Good"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>To test this you mock the command object, populate it and then validate it as follows:<p class="paragraph"/><div class="code"><pre>void testInvalidCommand() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+To test this you mock the command object, populate it and then validate it as follows:
+</div><p class="paragraph"/>これをテストするために、次のようにCommandオブジェクトをモック化した上で、データを投入して検証してください。<p class="paragraph"/><div class="code"><pre>void testInvalidCommand() &#123;
     def cmd = mockCommandObject(SimpleCommand)
     cmd.name = '' // doesn't allow blank names<p class="paragraph"/>    cmd.validate()
     controller.handleCommand(cmd)<p class="paragraph"/>    assert response.text == 'Bad'
-&#125;</pre></div><p class="paragraph"/><h4>Testing Calling Tag Libraries</h4><p class="paragraph"/>You can test calling tag libraries using <code>ControllerUnitTestMixin</code>, although the mechanism for testing the tag called varies from tag to tag. For example to test a call to the <code>message</code> tag, add a message to the <code>messageSource</code>. Consider the following action:<p class="paragraph"/><div class="code"><pre>def showMessage() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Testing Calling Tag Libraries</h4>
+</div><p class="paragraph"/><h4>タグライブラリの呼び出しテスト</h4><p class="paragraph"/><div class="hidden-block">
+You can test calling tag libraries using <code>ControllerUnitTestMixin</code>, although the mechanism for testing the tag called varies from tag to tag. For example to test a call to the <code>message</code> tag, add a message to the <code>messageSource</code>. Consider the following action:
+</div><p class="paragraph"/>タグごとに必要となるテストの方法は異なりますが、タグライブラリの呼びしは<code>ControllerUnitTestMixin</code>を使用することでテストできます。例えば、<code>message</code>タグを呼び出すテストでは、<code>messageSource</code>にメッセージを加えます。次のアクションを見てください。<p class="paragraph"/><div class="code"><pre>def showMessage() &#123;
     render g.message(code: <span class="java&#45;quote">"foo.bar"</span>)
-&#125;</pre></div><p class="paragraph"/>This can be tested as follows:<p class="paragraph"/><div class="code"><pre>void testRenderBasicTemplateWithTags() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This can be tested as follows:
+</div><p class="paragraph"/>これは次のようにテストをします。<p class="paragraph"/><div class="code"><pre>void testRenderBasicTemplateWithTags() &#123;
     messageSource.addMessage(<span class="java&#45;quote">"foo.bar"</span>, request.locale, <span class="java&#45;quote">"Hello World"</span>)<p class="paragraph"/>    controller.showMessage()<p class="paragraph"/>    assert response.text == <span class="java&#45;quote">"Hello World"</span>
 &#125;</pre></div>
 
 
 <a name="9.1.2 Unit Testing Tag Libraries"><!-- Legacy link --></a>
 <h2 id="unitTestingTagLibraries">11.1.2 タグライブラリユニットテスト</h2>
-<h4>The Basics</h4><p class="paragraph"/>Tag libraries and GSP pages can be tested with the <code>grails.test.mixin.web.GroovyPageUnitTestMixin</code> mixin. To use the mixin declare which tag library is under test with the <code>TestFor</code> annotation:<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleTagLib)
-class SimpleTagLibTests &#123;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Note that if you are testing invocation of a custom tag from a controller you can combine the <code>ControllerUnitTestMixin</code> and the <code>GroovyPageUnitTestMixin</code> using the <code>Mock</code> annotation:<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleController)
+<div class="hidden-block">
+<h4>The Basics</h4>
+</div><p class="paragraph"/><h4>基本</h4><p class="paragraph"/><div class="hidden-block">
+Tag libraries and GSP pages can be tested with the <code>grails.test.mixin.web.GroovyPageUnitTestMixin</code> mixin. To use the mixin declare which tag library is under test with the <code>TestFor</code> annotation:
+</div><p class="paragraph"/>タグライブラリとGSPは、<code>grails.test.mixin.web.GroovyPageUnitTestMixin</code>のMixinでテストできます。Mixinを使用するために、タグライブラリを<code>TestFor</code>アノテーションの中に宣言します。<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleTagLib)
+class SimpleTagLibTests &#123;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Note that if you are testing invocation of a custom tag from a controller you can combine the <code>ControllerUnitTestMixin</code> and the <code>GroovyPageUnitTestMixin</code> using the <code>Mock</code> annotation:
+</div><p class="paragraph"/>もし、コントローラからカスタムタグの呼び出しをテストする場合、<code>Mock</code>アノテーションを使用して<code>ControllerUnitTestMixin</code>と<code>GroovyPageUnitTestMixin</code>を組み合わせることができます。<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleController)
 @Mock(SimpleTagLib)
-class GroovyPageUnitTestMixinTests &#123;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/><h4>Testing Custom Tags</h4><p class="paragraph"/>The core Grails tags don't need to be enabled during testing, however custom tag libraries do. The <code>GroovyPageUnitTestMixin</code> class provides a <code>mockTagLib()</code> method that you can use to mock a custom tag library. For example consider the following tag library:<p class="paragraph"/><div class="code"><pre>class SimpleTagLib &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> namespace = 's'<p class="paragraph"/>    def hello = &#123; attrs, body &#45;&#62;
+class GroovyPageUnitTestMixinTests &#123;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Testing Custom Tags</h4>
+</div><p class="paragraph"/><h4>カスタムタグのテスト</h4><p class="paragraph"/><div class="hidden-block">
+The core Grails tags don't need to be enabled during testing, however custom tag libraries do. The <code>GroovyPageUnitTestMixin</code> class provides a <code>mockTagLib()</code> method that you can use to mock a custom tag library. For example consider the following tag library:
+</div><p class="paragraph"/>Grailsコアのタグはテスト中に有効にする必要はありませんが、カスタムタグライブラリは有効にする必要があります。<code>GroovyPageUnitTestMixin</code>クラスは、カスタムタグライブラリをモック化するために使える<code>mockTagLib()</code>メソッドを提供しています。<p class="paragraph"/><div class="code"><pre>class SimpleTagLib &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> namespace = 's'<p class="paragraph"/>    def hello = &#123; attrs, body &#45;&#62;
         out &#60;&#60; <span class="java&#45;quote">"Hello $&#123;attrs.name ?: 'World'&#125;"</span>
     &#125;<p class="paragraph"/>    def bye = &#123; attrs, body &#45;&#62;
         out &#60;&#60; <span class="java&#45;quote">"Bye $&#123;attrs.author.name ?: 'World'&#125;"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>You can test this tag library by using <code>TestFor</code> and supplying the name of the tag library:<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleTagLib)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+You can test this tag library by using <code>TestFor</code> and supplying the name of the tag library:
+</div><p class="paragraph"/><code>TestFor</code>を使用し、タグライブラリの名前を記載することによって、上記のタグライブラリをテストできます。<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleTagLib)
 class SimpleTagLibTests &#123;
     void testHelloTag() &#123;
         assert applyTemplate('&#60;s:hello /&#62;') == 'Hello World'
         assert applyTemplate('&#60;s:hello name=<span class="java&#45;quote">"Fred"</span> /&#62;') == 'Hello Fred'
         assert applyTemplate('&#60;s:bye author=<span class="java&#45;quote">"&#36;&#123;author&#125;"</span> /&#62;', &#91;author: <span class="java&#45;keyword">new</span> Author(name: 'Fred')&#93;) == 'Bye Fred'
     &#125;
-&#125;</pre></div><p class="paragraph"/>Alternatively, you can use the <code>TestMixin</code> annotation and mock multiple tag libraries using the <code>mockTagLib()</code> method:<p class="paragraph"/><div class="code"><pre>@grails.test.mixin.TestMixin(GroovyPageUnitTestMixin)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Alternatively, you can use the <code>TestMixin</code> annotation and mock multiple tag libraries using the <code>mockTagLib()</code> method:
+</div><p class="paragraph"/>代わりに、<code>TestMixin</code>アノテーションと<code>mockTagLib()</code>メソッドにより、複数のタグライブラリをモック化することができます。<p class="paragraph"/><div class="code"><pre>@grails.test.mixin.TestMixin(GroovyPageUnitTestMixin)
 class MultipleTagLibraryTests &#123;<p class="paragraph"/>    @Test
     void testMuliple() &#123;
         mockTagLib(FirstTagLib)
         mockTagLib(SecondTagLib)<p class="paragraph"/>        &#8230;
     &#125;
-&#125;</pre></div><p class="paragraph"/>The <code>GroovyPageUnitTestMixin</code> provides convenience methods for asserting that the template output equals or matches an expected value.<p class="paragraph"/><div class="code"><pre>@grails.test.mixin.TestMixin(GroovyPageUnitTestMixin)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The <code>GroovyPageUnitTestMixin</code> provides convenience methods for asserting that the template output equals or matches an expected value.
+</div><p class="paragraph"/><code>GroovyPageUnitTestMixin</code>はテンプレート出力が期待した値と同じであることを検証するために便利なメソッドを提供しています。<p class="paragraph"/><div class="code"><pre>@grails.test.mixin.TestMixin(GroovyPageUnitTestMixin)
 class MultipleTagLibraryTests &#123;<p class="paragraph"/>    @Test
     void testMuliple() &#123;
         mockTagLib(FirstTagLib)
@@ -400,8 +551,14 @@ class MultipleTagLibraryTests &#123;<p class="paragraph"/>    @Test
         assertOutputEquals ('Hello World', '&#60;s:hello /&#62;')
         assertOutputMatches (/.&#42;Fred.&#42;/, '&#60;s:hello name=<span class="java&#45;quote">"Fred"</span> /&#62;')
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Testing View and Template Rendering</h4><p class="paragraph"/>You can test rendering of views and templates in <code>grails-app/views</code> via the <code>render(Map)</code> method provided by <code>GroovyPageUnitTestMixin</code> :<p class="paragraph"/><div class="code"><pre>def result = render(template: <span class="java&#45;quote">"/simple/hello"</span>)
-assert result == <span class="java&#45;quote">"Hello World"</span></pre></div><p class="paragraph"/>This will attempt to render a template found at the location <code>grails-app/views/simple/_hello.gsp</code>. Note that if the template depends on any custom tag libraries you need to call <code>mockTagLib</code> as described in the previous section.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Testing View and Template Rendering</h4>
+</div><p class="paragraph"/><h4>表示とテンプレートのレンダリングテスト</h4><p class="paragraph"/><div class="hidden-block">
+You can test rendering of views and templates in <code>grails-app/views</code> via the <code>render(Map)</code> method provided by <code>GroovyPageUnitTestMixin</code> :
+</div><p class="paragraph"/><code>GroovyPageUnitTestMixin</code>で提供されている<code>render(Map)</code>メソッドを使って<code>grails-app/views</code>内にあるビューとテンプレートのレンダリングをテストできます。<p class="paragraph"/><div class="code"><pre>def result = render(template: <span class="java&#45;quote">"/simple/hello"</span>)
+assert result == <span class="java&#45;quote">"Hello World"</span></pre></div><p class="paragraph"/><div class="hidden-block">
+This will attempt to render a template found at the location <code>grails-app/views/simple/_hello.gsp</code>. Note that if the template depends on any custom tag libraries you need to call <code>mockTagLib</code> as described in the previous section.
+</div><p class="paragraph"/>これは、<code>grails-app/views/simple/_hello.gsp</code>に配置されているテンプレートをレンダリングします。もしテンプレートがいくつかのカスタムタグライブラリに依存している場合、前の節で記載した<code>mockTagLib</code>を呼び出す必要があります。
 
 
 <a name="9.1.3 Unit Testing Domains"><!-- Legacy link --></a>
@@ -567,28 +724,69 @@ class SimpleControllerTests &#123;<p class="paragraph"/>&#125;</pre></div><p cla
 
 <a name="9.1.5 Unit Testing URL Mappings"><!-- Legacy link --></a>
 <h2 id="unitTestingURLMappings">11.1.5 URLマッピングユニットテスト</h2>
-<h4>The Basics</h4><p class="paragraph"/>Testing URL mappings can be done with the <code>TestFor</code> annotation testing a particular URL mappings class. For example to test the default URL mappings you can do the following:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.example.AuthorController
+<div class="hidden-block">
+<h4>The Basics</h4>
+</div><p class="paragraph"/><h4>基本</h4><p class="paragraph"/><div class="hidden-block">
+Testing URL mappings can be done with the <code>TestFor</code> annotation testing a particular URL mappings class. For example to test the default URL mappings you can do the following:
+</div><p class="paragraph"/>URLマッピングをテストするには、<code>TestFor</code>アノテーションを使用します。例えば、デフォルトのURLマッピングをテストするためには次のように使用します。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.example.AuthorController
 <span class="java&#45;keyword">import</span> org.example.SimpleController<p class="paragraph"/>@TestFor(UrlMappings)
 @Mock(&#91;AuthorController, SimpleController&#93;)
 class UrlMappingsTests &#123;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>As you can see, any controller that is the target of a URL mapping that you're testing  <em class="italic">must</em>  be added to the <code>&#64;Mock</code> annotation.<p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+As you can see, any controller that is the target of a URL mapping that you're testing  <em class="italic">must</em>  be added to the <code>&#64;Mock</code> annotation.
+</div><p class="paragraph"/>上記のように、テストを実施するURLマッピングの対象となるコントローラには<code>Mock</code>アノテーションを追加しなければなりません。<p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 Note that since the default <code>UrlMappings</code> class is in the default package your test must also be in the default package
-</blockquote><p class="paragraph"/>With that done there are a number of useful methods that are defined by the <code>grails.test.mixin.web.UrlMappingsUnitTestMixin</code> for testing URL mappings. These include:
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+<code>UrlMappings</code>クラスがデフォルトパッケージの中にあるので、あなたが実行するテストもデフォルトパッケージの中になければいけません。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+With that done there are a number of useful methods that are defined by the <code>grails.test.mixin.web.UrlMappingsUnitTestMixin</code> for testing URL mappings. These include:
+</div><p class="paragraph"/>URLマッピングをテストするために<code>grails.test.mixin.web.UrlMappingsUnitTestMixin</code>には以下のような便利なメソッドが定義されています。<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li><code>assertForwardUrlMapping</code> - Asserts a URL mapping is forwarded for the given controller class (note that controller will need to be defined as a mock collaborate for this to work)</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>assertForwardUrlMapping</code> - 指定したコントローラクラスにフォワードするURLマッピングを検証する（コントローラはモックコラボレータとして定義される必要があることに注意してください）</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+<ul class="star">
 <li><code>assertReverseUrlMapping</code> - Asserts that the given URL is produced when reverse mapping a link to a given controller and action</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>assertReverseUrlMapping</code> - 指定したURLが、与えられたコントローラとアクションからリバースマッピングしたリンクとして生成されるか検証する</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+<ul class="star">
 <li><code>assertUrlMapping</code> - Asserts a URL mapping is valid for the given URL. This combines the <code>assertForwardUrlMapping</code> and <code>assertReverseUrlMapping</code> assertions</li>
-</ul><p class="paragraph"/><h4>Asserting Forward URL Mappings</h4><p class="paragraph"/>You use <code>assertForwardUrlMapping</code> to assert that a given URL maps to a given controller. For example, consider the following URL mappings:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>assertUrlMapping</code> - 指定したURLに対応するURLマッピングの妥当性を検証する。これは、<code>assertForwardUrlMapping</code>と<code>assertReverseUrlMapping</code>を組み合わせたものです。</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+<h4>Asserting Forward URL Mappings</h4>
+</div><p class="paragraph"/><h4>URLマッピングの転送の検証</h4><p class="paragraph"/><div class="hidden-block">
+You use <code>assertForwardUrlMapping</code> to assert that a given URL maps to a given controller. For example, consider the following URL mappings:
+</div><p class="paragraph"/>指定したURLが、期待したコントローラにマップされるか検証するために<code>assertForwardUrlMapping</code>が使用できます。例えば、以下のようなURLマッピングについて考えてみます。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
     <span class="java&#45;quote">"/action1"</span>(controller: <span class="java&#45;quote">"simple"</span>, action: <span class="java&#45;quote">"action1"</span>)
     <span class="java&#45;quote">"/action2"</span>(controller: <span class="java&#45;quote">"simple"</span>, action: <span class="java&#45;quote">"action2"</span>)
-&#125;</pre></div><p class="paragraph"/>The following test can be written to assert these URL mappings:<p class="paragraph"/><div class="code"><pre>void testUrlMappings() &#123;<p class="paragraph"/>    assertForwardUrlMapping(<span class="java&#45;quote">"/action1"</span>, controller: 'simple',
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The following test can be written to assert these URL mappings:
+</div><p class="paragraph"/>このようなURLマッピングのテストは次のように書けます。<p class="paragraph"/><div class="code"><pre>void testUrlMappings() &#123;<p class="paragraph"/>    assertForwardUrlMapping(<span class="java&#45;quote">"/action1"</span>, controller: 'simple',
                                         action: <span class="java&#45;quote">"action1"</span>)<p class="paragraph"/>    assertForwardUrlMapping(<span class="java&#45;quote">"/action2"</span>, controller: 'simple',
                                         action: <span class="java&#45;quote">"action2"</span>)<p class="paragraph"/>    shouldFail &#123;
         assertForwardUrlMapping(<span class="java&#45;quote">"/action2"</span>, controller: 'simple',
                                             action: <span class="java&#45;quote">"action1"</span>)
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Assert Reverse URL Mappings</h4><p class="paragraph"/>You use <code>assertReverseUrlMapping</code> to check that correct links are produced for your URL mapping when using the <code>link</code> tag in GSP views. An example test is largely identical to the previous listing except you use <code>assertReverseUrlMapping</code> instead of <code>assertForwardUrlMapping</code>. Note that you can combine these 2 assertions with <code>assertUrlMapping</code>.<p class="paragraph"/><h4>Simulating Controller Mapping</h4><p class="paragraph"/>In addition to the assertions to check the validity of URL mappings you can also simulate mapping to a controller by using your <code>UrlMappings</code> as a mock collaborator and the <code>mapURI</code> method. For example:<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleController)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Assert Reverse URL Mappings</h4>
+</div><p class="paragraph"/><h4>URLマッピングのリバース検証</h4><p class="paragraph"/><div class="hidden-block">
+You use <code>assertReverseUrlMapping</code> to check that correct links are produced for your URL mapping when using the <code>link</code> tag in GSP views. An example test is largely identical to the previous listing except you use <code>assertReverseUrlMapping</code> instead of <code>assertForwardUrlMapping</code>. Note that you can combine these 2 assertions with <code>assertUrlMapping</code>.
+</div><p class="paragraph"/>GSPのビューで<code>link</code>タグを使用した場合に、URLマッピングから生成されるリンクを確認(チェック)するために<code>assertReverseUrlMapping</code>を使用できます。
+<code>assertReverseUrlMapping</code>の代わりに<code>assertForwardUrlMapping</code>を使用する以外は上記の例とほとんど同じです。
+<code>assertUrlMapping</code>はこれら2つのアサーションを組み合わせた検証が出来ます。<p class="paragraph"/><div class="hidden-block">
+<h4>Simulating Controller Mapping</h4>
+</div><p class="paragraph"/><h4>コントローラのマッピングをシミュレート</h4><p class="paragraph"/><div class="hidden-block">
+In addition to the assertions to check the validity of URL mappings you can also simulate mapping to a controller by using your <code>UrlMappings</code> as a mock collaborator and the <code>mapURI</code> method. For example:
+</div><p class="paragraph"/>URLマッピングの妥当性をチェックするためのアサーションに加えて、<code>UrlMappings</code>をモックとして指定し<code>mapURI</code>メソッドを使用することで、コントローラへのマッピングをシミュレートすることができます。<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleController)
 @Mock(UrlMappings)
 class SimpleControllerTests &#123;<p class="paragraph"/>    void testControllerMapping() &#123;<p class="paragraph"/>        SimpleController controller = mapURI('/simple/list')
         assert controller != <span class="java&#45;keyword">null</span><p class="paragraph"/>        def model = controller.list()
