@@ -797,17 +797,52 @@ class SimpleControllerTests &#123;<p class="paragraph"/>    void testControllerM
 
 <a name="9.1.6 Mocking Collaborators"><!-- Legacy link --></a>
 <h2 id="mockingCollaborators">11.1.6 モッキングコラボレータ</h2>
-Beyond the specific targeted mocking APIs there is also an all-purpose <code>mockFor()</code> method that is available when using the <code>TestFor</code> annotation. The signature of <code>mockFor</code> is:<p class="paragraph"/><div class="code"><pre>mockFor(class, loose = <span class="java&#45;keyword">false</span>)</pre></div><p class="paragraph"/>This is general-purpose mocking that lets you set up either strict or loose demands on a class.<p class="paragraph"/>This method is surprisingly intuitive to use. By default it will create a strict mock control object (one for which the order in which methods are called is important) that you can use to specify demands:<p class="paragraph"/><div class="code"><pre>def strictControl = mockFor(MyService)
+<div class="hidden-block">
+Beyond the specific targeted mocking APIs there is also an all-purpose <code>mockFor()</code> method that is available when using the <code>TestFor</code> annotation. The signature of <code>mockFor</code> is:
+</div>
+ドメインをモックするなど特定の目的をもったモックAPIの他に、汎用的に使える<code>mockFor()</code>メソッドがあります。これは<code>TestFor</code>アノテーションを使用している場合にも使用できます。<code>mockFor</code>は以下のように使用します。<p class="paragraph"/><div class="code"><pre>mockFor(class, loose = <span class="java&#45;keyword">false</span>)</pre></div><p class="paragraph"/><div class="hidden-block">
+This is general-purpose mocking that lets you set up either strict or loose demands on a class.
+</div>
+<code>mockFor</code>を使用したモックでは、demand(要求)がstrict(厳密)、またはloose(緩やか)のどちらであるかを指定する必要があります。<p class="paragraph"/><div class="hidden-block">
+This method is surprisingly intuitive to use. By default it will create a strict mock control object (one for which the order in which methods are called is important) that you can use to specify demands:
+</div>
+デフォルトではstrictなモック制御オブジェクト(メソッドの呼び出し順序をチェックする)として生成し、demandを次のように指定します。<p class="paragraph"/><div class="code"><pre>def strictControl = mockFor(MyService)
 strictControl.demand.someMethod(0..2) &#123; <span class="java&#45;object">String</span> arg1, <span class="java&#45;object">int</span> arg2 &#45;&#62; &#8230; &#125;
-strictControl.demand.<span class="java&#45;keyword">static</span>.aStaticMethod &#123;&#45;&#62; &#8230; &#125;</pre></div><p class="paragraph"/>Notice that you can mock static as well as instance methods by using the "static" property. You then specify the name of the method to mock, with an optional range argument. This range determines how many times you expect the method to be called, and if the number of invocations falls outside of that range (either too few or too many) then an assertion error will be thrown. If no range is specified, a default of "1..1" is assumed, i.e. that the method must be called exactly once.<p class="paragraph"/>The last part of a demand is a closure representing the implementation of the mock method. The closure arguments must match the number and types of the mocked method, but otherwise you are free to add whatever you want in the body.<p class="paragraph"/>Call <code>mockControl.createMock()</code> to get an actual mock instance of the class that you are mocking. You can call this multiple times to create as many mock instances as you need. And once you have executed the test method, call <code>mockControl.verify()</code> to check that the expected methods were called.<p class="paragraph"/>Grails mocks also provide a <code>demandExplicit</code> method that can be used in place of demand.  This will check the mocked class's metaClass and throw an ExplicitDemandException if a method with that name and signature doesn't exist. For example, given the service:<p class="paragraph"/><div class="code"><pre>class MyService &#123;
+strictControl.demand.<span class="java&#45;keyword">static</span>.aStaticMethod &#123;&#45;&#62; &#8230; &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Notice that you can mock static as well as instance methods by using the "static" property. You then specify the name of the method to mock, with an optional range argument. This range determines how many times you expect the method to be called, and if the number of invocations falls outside of that range (either too few or too many) then an assertion error will be thrown. If no range is specified, a default of "1..1" is assumed, i.e. that the method must be called exactly once.
+</div>
+"static"プロパティを使用することで、インスタンスメソッド同様にstaticなメソッドをモックすることができます。また、モックするメソッドには、必要に応じてrange(範囲)を引数に指定できます。このrangeは期待するメソッドの呼び出し回数を表しており、もし呼び出し回数がこの範囲を外れた場合(多すぎたり、少なすぎたりした場合)は、アサーションエラーがスローされます。rangeを指定しなかった場合は、デフォルトで"1..1"が指定され、メソッドが1度だけ呼び出されること意味しています。<p class="paragraph"/><div class="hidden-block">
+The last part of a demand is a closure representing the implementation of the mock method. The closure arguments must match the number and types of the mocked method, but otherwise you are free to add whatever you want in the body.
+</div>
+demandの最後の引数は、モックの実装を表すクロージャです。クロージャの引数は、モックするメソッドの引数の数と型が一致している必要がありますが、それ以外は自由に中身を実装できます。<p class="paragraph"/><div class="hidden-block">
+Call <code>mockControl.createMock()</code> to get an actual mock instance of the class that you are mocking. You can call this multiple times to create as many mock instances as you need. And once you have executed the test method, call <code>mockControl.verify()</code> to check that the expected methods were called.
+</div>
+モッククラスの定義が完了した後に、<code>mockControl.createMock()</code>メソッドを呼ぶことで、モックインスタンスを作成します。複数のモックインスタンスが必要な場合は、必要なだけこのメソッドを呼び出すことで、複数のモックインスタンスが作成できます。また期待するメソッドの呼び出しを検証するには<code>mockControl.verify()</code>を呼び出してください。<p class="paragraph"/><div class="hidden-block">
+Grails mocks also provide a <code>demandExplicit</code> method that can be used in place of demand.  This will check the mocked class's metaClass and throw an ExplicitDemandException if a method with that name and signature doesn't exist. For example, given the service:
+</div>
+Grailsのモックは、demandの代わりに<code>demandExplicit</code>メソッドも提供しています。これはモックするクラスのmetaClassをチェックし、もしそのメソッドの名前、シグネチャが存在しない場合に、ExplicitDemandExceptionをスローします。例えば次のようなサービスがあるとします。<p class="paragraph"/><div class="code"><pre>class MyService &#123;
     def someMethod(<span class="java&#45;object">String</span> s) &#123; &#8230; &#125;
-&#125;</pre></div><p class="paragraph"/>The following mocking works the same as demand
-<div class="code"><pre>def strictControl = mockFor(MyService)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The following mocking works the same as demand
+</div>
+demandと同じようにモックできます。<p class="paragraph"/><div class="code"><pre>def strictControl = mockFor(MyService)
 //Works just like the demand method since method signature exists on the class
-strictControl.demandExplicit.someMethod(1) &#123; <span class="java&#45;object">String</span> arg1  &#125;</pre></div><p class="paragraph"/>While this mocking throws an ExplicitDemandException when the test is run.
+strictControl.demandExplicit.someMethod(1) &#123; <span class="java&#45;object">String</span> arg1  &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+While this mocking throws an ExplicitDemandException when the test is run.
+</div>
+以下はメソッドのシグネイチャが存在しないため、テストを実行した際にExplicitDemandExceptionをスローします。
 <div class="code"><pre>def strictControl = mockFor(MyService)
 //Throws ExplicitDemandException because method signature doesn't exist
-strictControl.demandExplicit.someMethod(1) &#123; <span class="java&#45;object">String</span> arg1, <span class="java&#45;object">String</span> arg2  &#125;</pre></div><p class="paragraph"/>Using demandExplicit should be the preferred method for mocking as it is more likely to catch issues when changing method signatures.  Use demand when the method to be mocked is added dynamically, otherwise use demandExplicit.<p class="paragraph"/>Lastly, the call:<p class="paragraph"/><div class="code"><pre>def looseControl = mockFor(MyService, <span class="java&#45;keyword">true</span>)</pre></div><p class="paragraph"/>will create a mock control object that has only loose expectations, i.e. the order that methods are invoked does not matter.
+strictControl.demandExplicit.someMethod(1) &#123; <span class="java&#45;object">String</span> arg1, <span class="java&#45;object">String</span> arg2  &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Using demandExplicit should be the preferred method for mocking as it is more likely to catch issues when changing method signatures.  Use demand when the method to be mocked is added dynamically, otherwise use demandExplicit.
+</div>
+demandExplicitを使用することで、メソッドのシグネチャを変更した際に、問題を検出しやすくなります。このため、動的に追加されるメソッドに対してはdemandを使用し、そうでなければdemandExplicitを使用してください。<p class="paragraph"/><div class="hidden-block">
+Lastly, the call:
+</div>
+最後に以下のコードを見てください。<p class="paragraph"/><div class="code"><pre>def looseControl = mockFor(MyService, <span class="java&#45;keyword">true</span>)</pre></div><p class="paragraph"/><div class="hidden-block">
+will create a mock control object that has only loose expectations, i.e. the order that methods are invoked does not matter.
+</div>
+これはlooseなモック制御オブジェクトを作成します。別の言い方をすると、これにより呼び出し順序をチェックしなくなります。
 
 
 <a name="9.1.7 Mocking Codecs"><!-- Legacy link --></a>
