@@ -193,16 +193,24 @@ p.save(flush: <span class="java&#45;keyword">true</span>)</pre></div><p class="p
 
 <a name="5.3.2 Deleting Objects"><!-- Legacy link --></a>
 <h2 id="deletingObjects">6.3.2 オブジェクトの削除</h2>
-An example of the <a href="../ref/Domain Classes/delete.html" class="domainClasses">delete</a> method can be seen below:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)
-p.delete()</pre></div><p class="paragraph"/>As with saves, Hibernate will use transactional write-behind to perform the delete; to perform the delete in-place you can use the <code>flush</code> argument:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)
-p.delete(flush: <span class="java&#45;keyword">true</span>)</pre></div><p class="paragraph"/>Using the <code>flush</code> argument lets you catch any errors that occur during a delete. A common error that may occur is if you violate a database constraint, although this is normally down to a programming or schema error. The following example shows how to catch a <code>DataIntegrityViolationException</code> that is thrown when you violate the database constraints:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)<p class="paragraph"/><span class="java&#45;keyword">try</span> &#123;
+<div class="hidden-block">An example of the <a href="../ref/Domain Classes/delete.html" class="domainClasses">delete</a> method can be seen below:</div>
+<a href="../ref/Domain Classes/delete.html" class="domainClasses">delete</a>メソッドの使用例を以下に示します:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)
+p.delete()</pre></div><p class="paragraph"/><div class="hidden-block">As with saves, Hibernate will use transactional write-behind to perform the delete; to perform the delete in-place you can use the <code>flush</code> argument:</div>
+saveメソッドの時と同様に、deleteメソッド実行時にも、Hibernateはトランザクション内で遅延書き込みを行います。その場で削除を実行したい場合には、名前付き引数<code>flush</code>を使うことができます:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)
+p.delete(flush: <span class="java&#45;keyword">true</span>)</pre></div><p class="paragraph"/><div class="hidden-block">Using the <code>flush</code> argument lets you catch any errors that occur during a delete. A common error that may occur is if you violate a database constraint, although this is normally down to a programming or schema error. The following example shows how to catch a <code>DataIntegrityViolationException</code> that is thrown when you violate the database constraints:</div>
+<code>flush</code>引数を使うことによって、削除にともなって発生する可能性のあるエラーに対処する必要が出てきます。
+このタイミングで発生する、よくあるエラーの1つに、データベースの制約違反があります。
+このエラーは、プログラミングやデータベーススキーマの間違いに起因することが多いのですが、その時に発生する例外<code>DataIntegrityViolationException</code>をキャッチする例を以下に示します:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)<p class="paragraph"/><span class="java&#45;keyword">try</span> &#123;
     p.delete(flush: <span class="java&#45;keyword">true</span>)
 &#125;
 <span class="java&#45;keyword">catch</span> (org.springframework.dao.DataIntegrityViolationException e) &#123;
     flash.message = <span class="java&#45;quote">"Could not delete person $&#123;p.name&#125;"</span>
     redirect(action: <span class="java&#45;quote">"show"</span>, id: p.id)
-&#125;</pre></div><p class="paragraph"/>Note that Grails does not supply a <code>deleteAll</code> method as deleting data is discouraged and can often be avoided through boolean flags/logic.<p class="paragraph"/>If you really need to batch delete data you can use the <a href="../ref/Domain Classes/executeUpdate.html" class="domainClasses">executeUpdate</a> method to do batch DML statements:<p class="paragraph"/><div class="code"><pre>Customer.executeUpdate(<span class="java&#45;quote">"delete Customer c where c.name = :oldName"</span>,
-                       &#91;oldName: <span class="java&#45;quote">"Fred"</span>&#93;)</pre></div><p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Note that Grails does not supply a <code>deleteAll</code> method as deleting data is discouraged and can often be avoided through boolean flags/logic.</div>
+なお、Grailsは<code>deleteAll</code>メソッドは提供しておらず、そのような削除の方法は推奨されていません。代わりに、削除されたかどうか判定するためのフラグやロジックを用意するなどの方法を検討してください。<p class="paragraph"/><div class="hidden-block">If you really need to batch delete data you can use the <a href="../ref/Domain Classes/executeUpdate.html" class="domainClasses">executeUpdate</a> method to do batch DML statements:</div>
+もし、どうしてもデータの一括削除が必要な場合は<a href="../ref/Domain Classes/executeUpdate.html" class="domainClasses">executeUpdate</a>メソッドを利用してください。このメソッドを使えば、以下のように一括でデータ操作を行うDML文を発行することができます:<p class="paragraph"/><div class="code"><pre>Customer.executeUpdate(<span class="java&#45;quote">"delete Customer c where c.name = :oldName"</span>,
+                       &#91;oldName: <span class="java&#45;quote">"Fred"</span>&#93;)</pre></div>
+
 
 <a name="5.3.3 Understanding Cascading Updates and Deletes"><!-- Legacy link --></a>
 <h2 id="cascades">6.3.3 カスケード更新削除を理解する</h2>
