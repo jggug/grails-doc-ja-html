@@ -141,7 +141,10 @@ function addJsClass() {
                 
 <a name="5.6 Programmatic Transactions"><!-- Legacy link --></a>
 <h2 id="programmaticTransactions">6.6 プログラマチックトランザクション</h2>
-Grails is built on Spring and uses Spring's Transaction abstraction for dealing with programmatic transactions. However, GORM classes have been enhanced to make this simpler with the <a href="../ref/Domain Classes/withTransaction.html" class="domainClasses">withTransaction</a> method. This method has a single parameter, a Closure, which has a single parameter which is a Spring <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/TransactionStatus.html" class="api">TransactionStatus</a> instance.<p class="paragraph"/>Here's an example of using <code>withTransaction</code> in a controller methods:<p class="paragraph"/><div class="code"><pre>def transferFunds() &#123;
+<div class="hidden-block">Grails is built on Spring and uses Spring's Transaction abstraction for dealing with programmatic transactions. However, GORM classes have been enhanced to make this simpler with the <a href="../ref/Domain Classes/withTransaction.html" class="domainClasses">withTransaction</a> method. This method has a single parameter, a Closure, which has a single parameter which is a Spring <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/TransactionStatus.html" class="api">TransactionStatus</a> instance.</div>
+GrailsはSpringをベースに構築されていて、プログラマチックトランザクションを扱うためにSpringのトランザクション抽象を使います。
+と言っても、<a href="../ref/Domain Classes/withTransaction.html" class="domainClasses">withTransaction</a>メソッドを使ってシンプルに利用できるようにGORMクラスが拡張されています。
+このメソッドはクロージャを1つ引数に取ります。このクロージャは<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/TransactionStatus.html" class="api">TransactionStatus</a>インスタンスを引数に取ります。<p class="paragraph"/><div class="hidden-block">Here's an example of using <code>withTransaction</code> in a controller methods:</div><p class="paragraph"/>コントローラのメソッドで<code>withTransaction</code>を利用する例を示します:<p class="paragraph"/><div class="code"><pre>def transferFunds() &#123;
     Account.withTransaction &#123; status &#45;&#62;
         def source = Account.get(params.from)
         def dest = Account.get(params.to)<p class="paragraph"/>        def amount = params.amount.toInteger()
@@ -155,8 +158,12 @@ Grails is built on Spring and uses Spring's Transaction abstraction for dealing 
             &#125;
         &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/>In this example we rollback the transaction if the destination account is not active. Also, if an unchecked <code>Exception</code> or <code>Error</code> (but not a checked <code>Exception</code>, even though Groovy doesn't require that you catch checked exceptions) is thrown during the process the transaction will automatically be rolled back.<p class="paragraph"/>You can also use "save points" to rollback a transaction to a particular point in time if you don't want to rollback the entire transaction. This can be achieved through the use of Spring's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/SavepointManager.html" class="api">SavePointManager</a> interface.<p class="paragraph"/>The <code>withTransaction</code> method deals with the begin/commit/rollback logic for you within the scope of the block.
-
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this example we rollback the transaction if the destination account is not active. Also, if an unchecked <code>Exception</code> or <code>Error</code> (but not a checked <code>Exception</code>, even though Groovy doesn't require that you catch checked exceptions) is thrown during the process the transaction will automatically be rolled back.</div>
+この例では、送金先口座が有効ではない場合に、トランザクションをロールバックします。
+また、もし非チェック例外である<code>RuntimeException</code>や<code>Error</code>がトランザクション処理中にスローされた場合も、自動的にロールバックされます。
+（Groovyはチェック例外のcatchを必須としていないため、チェック例外と非チェック例外の区別が曖昧になりがちですが）チェック例外である<code>Exception</code>の場合にはロールバックされません。<p class="paragraph"/><div class="hidden-block">You can also use "save points" to rollback a transaction to a particular point in time if you don't want to rollback the entire transaction. This can be achieved through the use of Spring's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/SavepointManager.html" class="api">SavePointManager</a> interface.</div>
+また、もしトランザクション全体をロールバックしたくなければ、トランザクションを特定のポイントにロールバックする「セーブポイント」を使うこともできます。これはSpringの<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/SavepointManager.html" class="api">SavePointManager</a>インタフェースを使うことで実現されています。<p class="paragraph"/><div class="hidden-block">The <code>withTransaction</code> method deals with the begin/commit/rollback logic for you within the scope of the block.</div>
+<code>withTransaction</code>メソッドは、ブロックのスコープ内で開始/コミット/ロールバックを制御します。<p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>
