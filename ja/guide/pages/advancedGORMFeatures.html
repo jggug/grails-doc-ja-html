@@ -334,18 +334,27 @@ If you have <code>nullable: false</code> constraints on either <code>dateCreated
 
 <a name="5.5.2 Custom ORM Mapping"><!-- Legacy link --></a>
 <h2 id="ormdsl">6.5.2 カスタムORマッピング</h2>
-Grails domain classes can be mapped onto many legacy schemas with an Object Relational Mapping DSL (domain specific language). The following sections takes you through what is possible with the ORM DSL.<p class="paragraph"/><blockquote class="note">
-None of this is necessary if you are happy to stick to the conventions defined by GORM for table names, column names and so on. You only needs this functionality if you need to tailor the way GORM maps onto legacy schemas or configures caching
-</blockquote><p class="paragraph"/>Custom mappings are defined using a static <code>mapping</code> block defined within your domain class:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+<div class="hidden-block">Grails domain classes can be mapped onto many legacy schemas with an Object Relational Mapping DSL (domain specific language). The following sections takes you through what is possible with the ORM DSL.</div>
+GrailsのドメインクラスはObject Relation Mapping DSL(Domain Specific Language; ドメイン特化言語)を利用して、多くのレガシースキーマにマッピングさせることができます。
+この後に続くセクションでは、ORM DSLを使って何ができるかをひとつひとつ見ていきます。<p class="paragraph"/><blockquote class="note">
+<div class="hidden-block">None of this is necessary if you are happy to stick to the conventions defined by GORM for table names, column names and so on. You only needs this functionality if you need to tailor the way GORM maps onto legacy schemas or configures caching</div>
+もしあなたがGORMが定めるテーブル名やカラム名などの規約で満足しているのであれば、これはまったく必要ありません。
+GORMをレガシースキーマにマッピングしたり、キャッシュを設定したりするようなカスタマイズが必要な場合にのみ、この機能が必要となります。
+</blockquote><p class="paragraph"/><div class="hidden-block">Custom mappings are defined using a static <code>mapping</code> block defined within your domain class:</div>
+カスタムマッピングは、ドメインクラス内で定義されるstaticな<code>mapping</code>ブロックを利用して設定します:<p class="paragraph"/><div class="code"><pre>class Person &#123;
     &#8230;
     <span class="java&#45;keyword">static</span> mapping = &#123;
         version <span class="java&#45;keyword">false</span>
         autoTimestamp <span class="java&#45;keyword">false</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>You can also configure global mappings in Config.groovy (or an external config file) using this setting:<p class="paragraph"/><div class="code"><pre>grails.gorm.<span class="java&#45;keyword">default</span>.mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can also configure global mappings in Config.groovy (or an external config file) using this setting:</div>
+Config.groovy内（または外部設定ファイル）で、グローバルマッピングを設定することもできます:<p class="paragraph"/><div class="code"><pre>grails.gorm.<span class="java&#45;keyword">default</span>.mapping = &#123;
     version <span class="java&#45;keyword">false</span>
     autoTimestamp <span class="java&#45;keyword">false</span>
-&#125;</pre></div><p class="paragraph"/>It has the same syntax as the standard <code>mapping</code> block but it applies to all your domain classes! You can then override these defaults within the <code>mapping</code> block of a domain class.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">It has the same syntax as the standard <code>mapping</code> block but it applies to all your domain classes! You can then override these defaults within the <code>mapping</code> block of a domain class.</div>
+これは通常の<code>mapping</code>ブロックと同じシンタックスを持ちますが、すべてのドメインクラスに適用されます。
+更に、ドメインクラスの<code>mapping</code>内でこれらのデフォルト設定を上書きすることもできます。
+
 
 <a name="5.5.2.1 Table and Column Names"><!-- Legacy link --></a>
 <h2 id="tableAndColumnNames">6.5.2.1 テーブル名、カラム名</h2>
