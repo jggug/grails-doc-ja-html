@@ -709,13 +709,30 @@ def modifiedFieldNames = airport.getDirtyPropertyNames()
 
 <a name="5.4 Querying with GORM"><!-- Legacy link --></a>
 <h2 id="querying">6.4 GORMでクエリー</h2>
-GORM supports a number of powerful ways to query from dynamic finders, to criteria to Hibernate's object oriented query language HQL. Depending on the complexity of the query you have the following options in order of flexibility and power:
+<div class="hidden-block">GORM supports a number of powerful ways to query from dynamic finders, to criteria to Hibernate's object oriented query language HQL. Depending on the complexity of the query you have the following options in order of flexibility and power:</div>
+GORMはダイナミックファインダーやHibernateのオブジェクト指向クエリー言語HQLなど、多くの便利な方法を提供します。クエリーの複雑さを考慮して、以下のような選択肢から選択することができます。上位にある選択肢ほど柔軟性と利便性が高くなります。<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li>Dynamic Finders</li>
 <li>Where Queries</li>
 <li>Criteria Queries</li>
 <li>Hibernate Query Language (HQL)</li>
-</ul><p class="paragraph"/>In addition, Groovy's ability to manipulate collections with <a href="http://groovy.codehaus.org/GPath" target="blank">GPath</a> and methods like sort, findAll and so on combined with GORM results in a powerful combination.<p class="paragraph"/>However, let's start with the basics.<p class="paragraph"/><h4>Listing instances</h4><p class="paragraph"/>Use the <a href="../ref/Domain Classes/list.html" class="domainClasses">list</a> method to obtain all instances of a given class:<p class="paragraph"/><div class="code"><pre>def books = Book.list()</pre></div><p class="paragraph"/>The <a href="../ref/Domain Classes/list.html" class="domainClasses">list</a> method supports arguments to perform pagination:<p class="paragraph"/><div class="code"><pre>def books = Book.list(offset:10, max:20)</pre></div><p class="paragraph"/>as well as sorting:<p class="paragraph"/><div class="code"><pre>def books = Book.list(sort:<span class="java&#45;quote">"title"</span>, order:<span class="java&#45;quote">"asc"</span>)</pre></div><p class="paragraph"/>Here, the <code>sort</code> argument is the name of the domain class property that you wish to sort on, and the <code>order</code> argument is either <code>asc</code> for <strong class="bold">asc</strong>ending or <code>desc</code> for <strong class="bold">desc</strong>ending.<p class="paragraph"/><h4>Retrieval by Database  Identifier</h4><p class="paragraph"/>The second basic form of retrieval is by database identifier using the <a href="../ref/Domain Classes/get.html" class="domainClasses">get</a> method:<p class="paragraph"/><div class="code"><pre>def book = Book.get(23)</pre></div><p class="paragraph"/>You can also obtain a list of instances for a set of identifiers using <a href="../ref/Domain Classes/getAll.html" class="domainClasses">getAll</a>:<p class="paragraph"/><div class="code"><pre>def books = Book.getAll(23, 93, 81)</pre></div>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li>ダイナミックファインダー</li>
+<li>Whereクエリー</li>
+<li>クライテリアクエリー</li>
+<li>Hibernateクエリー言語 (HQL)</li>
+</ul><p class="paragraph"/><div class="hidden-block">In addition, Groovy's ability to manipulate collections with <a href="http://groovy.codehaus.org/GPath" target="blank">GPath</a> and methods like sort, findAll and so on combined with GORM results in a powerful combination.</div>
+さらに、Groovyの機能であるコレクション操作機能 <a href="http://groovy.codehaus.org/Japanese+GPath" target="blank">GPath</a> と、GORMの持つsortやfindAllなどのメソッドの組み合わせは、すばらしい結果をもたらします。<p class="paragraph"/><div class="hidden-block">However, let's start with the basics.</div>
+まずは、基本的な使い方から始めましょう。<p class="paragraph"/><div class="hidden-block">h4. Listing instances</div>
+<h4>インスタンスの一覧取得</h4><p class="paragraph"/><div class="hidden-block">Use the <a href="../ref/Domain Classes/list.html" class="domainClasses">list</a> method to obtain all instances of a given class:</div>
+対象のクラスのすべてのインスタンスを取得するには、<a href="../ref/Domain Classes/list.html" class="domainClasses">list</a>を使います。:<p class="paragraph"/><div class="code"><pre>def books = Book.list()</pre></div><p class="paragraph"/><div class="hidden-block">The <a href="../ref/Domain Classes/list.html" class="domainClasses">list</a> method supports arguments to perform pagination:</div>
+以下の様に、<a href="../ref/Domain Classes/list.html" class="domainClasses">list</a>メソッドは、行数を指定するための引数をサポートします。:<p class="paragraph"/><div class="code"><pre>def books = Book.list(offset:10, max:20)</pre></div><p class="paragraph"/><div class="hidden-block">as well as sorting:</div>
+同様に、ソートを行う場合は以下の通りです。:<p class="paragraph"/><div class="code"><pre>def books = Book.list(sort:<span class="java&#45;quote">"title"</span>, order:<span class="java&#45;quote">"asc"</span>)</pre></div><p class="paragraph"/><div class="hidden-block">Here, the <code>sort</code> argument is the name of the domain class property that you wish to sort on, and the <code>order</code> argument is either <code>asc</code> for <strong class="bold">asc</strong>ending or <code>desc</code> for <strong class="bold">desc</strong>ending.</div>
+ここで、<code>sort</code>はソート対象にしたいドメインクラスのプロパティを指定します。<code>order</code>は<code>asc</code>であれば昇順(<strong class="bold">asc</strong>ending)、<code>desc</code>であれば降順(<strong class="bold">desc</strong>ending)となります。<p class="paragraph"/><div class="hidden-block">h4. Retrieval by Database  Identifier</div>
+<h4>データベースのIDによる取得</h4><p class="paragraph"/><div class="hidden-block">The second basic form of retrieval is by database identifier using the <a href="../ref/Domain Classes/get.html" class="domainClasses">get</a> method:</div>
+次の検索の基本形は、データベースのIDを利用して、<a href="../ref/Domain Classes/get.html" class="domainClasses">get</a>メソッドで取得する方法です。:<p class="paragraph"/><div class="code"><pre>def book = Book.get(23)</pre></div><p class="paragraph"/><div class="hidden-block">You can also obtain a list of instances for a set of identifiers using <a href="../ref/Domain Classes/getAll.html" class="domainClasses">getAll</a>:</div>
+また、複数のIDの組み合わせを指定して<a href="../ref/Domain Classes/getAll.html" class="domainClasses">getAll</a>を使う事で、インスタンスの一覧を取得することもできます。:<p class="paragraph"/><div class="code"><pre>def books = Book.getAll(23, 93, 81)</pre></div>
 
 
 <a name="5.4.1 Dynamic Finders"><!-- Legacy link --></a>
