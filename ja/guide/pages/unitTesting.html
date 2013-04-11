@@ -604,7 +604,7 @@ However a large, commonly-used portion of the GORM API can be mocked using <code
 <li>GORMのイベント</li>
 </ul><p class="paragraph"/><div class="hidden-block">
 If something isn't supported then <code>GrailsUnitTestMixin</code>'s <code>mockFor</code> method can come in handy to mock the missing pieces. Alternatively you can write an integration test which bootstraps the complete Grails environment at a cost of test execution time.
-</div><p class="paragraph"/>もしサポートされてないない部分があった場合でも、<code>GrailsUnitTestMixin</code>の<code>mockFor</code>メソッドを使用することで足りない部分をモック化することができます。または、テストの実行時間はかかりますが、完全にGrails環境が立ち上がるIntegrationテストを使用することもできます。<p class="paragraph"/><div class="hidden-block">
+</div><p class="paragraph"/>もしサポートされてない部分があった場合でも、<code>GrailsUnitTestMixin</code>の<code>mockFor</code>メソッドを使用することで足りない部分をモック化することができます。または、テストの実行時間はかかりますが、完全にGrails環境が立ち上がるIntegrationテストを使用することもできます。<p class="paragraph"/><div class="hidden-block">
 <h4>The Basics</h4>
 </div><p class="paragraph"/><h4>基本</h4><p class="paragraph"/><div class="hidden-block">
 <code>DomainClassUnitTestMixin</code> is typically used in combination with testing either a controller, service or tag library where the domain is a mock collaborator defined by the <code>Mock</code> annotation:
