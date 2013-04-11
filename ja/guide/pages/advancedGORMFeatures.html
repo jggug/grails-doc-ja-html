@@ -358,49 +358,80 @@ Config.groovy内（または外部設定ファイル）で、グローバルマ�
 
 <a name="5.5.2.1 Table and Column Names"><!-- Legacy link --></a>
 <h2 id="tableAndColumnNames">6.5.2.1 テーブル名、カラム名</h2>
-<h4>Table names</h4><p class="paragraph"/>The database table name which the class maps to can be customized using the <code>table</code> method:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+<div class="hidden-block">h4. Table names</div>
+<h4>テーブル名</h4><p class="paragraph"/><div class="hidden-block">The database table name which the class maps to can be customized using the <code>table</code> method:</div>
+ドメインクラスと対応するデータベースのテーブル名は<code>table</code>メソッドを使ってカスタマイズすることができます:<p class="paragraph"/><div class="code"><pre>class Person &#123;
     &#8230;
     <span class="java&#45;keyword">static</span> mapping = &#123;
         table 'people'
     &#125;
-&#125;</pre></div><p class="paragraph"/>In this case the class would be mapped to a table called <code>people</code> instead of the default name of <code>person</code>.<p class="paragraph"/><h4>Column names</h4><p class="paragraph"/>It is also possible to customize the mapping for individual columns onto the database. For example to change the name you can do:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case the class would be mapped to a table called <code>people</code> instead of the default name of <code>person</code>.</div>
+この場合、このクラスはデフォルト名の<code>person</code>の代わりに<code>people</code>テーブルに対応付けられます。<p class="paragraph"/><div class="hidden-block">h4. Column names</div>
+<h4>カラム名</h4><p class="paragraph"/><div class="hidden-block">It is also possible to customize the mapping for individual columns onto the database. For example to change the name you can do:</div>
+また、個々のカラムに対するデータベースとの対応付けもカスタマイズできます。
+名前を変更する例として、次のように書けます:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         table 'people'
         firstName column: 'First_Name'
     &#125;
-&#125;</pre></div><p class="paragraph"/>Here <code>firstName</code> is a dynamic method within the <code>mapping</code> Closure that has a single Map parameter. Since its name corresponds to a domain class persistent field, the parameter values (in this case just <code>"column"</code>) are used to configure the mapping for that property.<p class="paragraph"/><h4>Column type</h4><p class="paragraph"/>GORM supports configuration of Hibernate types with the DSL using the type attribute. This includes specifing user types that implement the Hibernate <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/usertype/UserType.html" class="api">org.hibernate.usertype.UserType</a> interface, which allows complete customization of how a type is persisted. As an example if you had a <code>PostCodeType</code> you could use it as follows:<p class="paragraph"/><div class="code"><pre>class Address &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> number
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Here <code>firstName</code> is a dynamic method within the <code>mapping</code> Closure that has a single Map parameter. Since its name corresponds to a domain class persistent field, the parameter values (in this case just <code>"column"</code>) are used to configure the mapping for that property.</div>
+ここで、<code>firstName</code>は<code>mapping</code>クロージャ内におけるダイナミックメソッドで、Map型の引数を1つ取ります。
+その名前はドメインクラスの永続化フィールドと対応していて、Map引数の値（この例ではちょうど<code>"column"</code>の値）はこのプロパティとのマッピングに使われます。<p class="paragraph"/><div class="hidden-block">h4. Column type</div>
+<h4>カラムの型</h4><p class="paragraph"/><div class="hidden-block">GORM supports configuration of Hibernate types with the DSL using the type attribute. This includes specifing user types that implement the Hibernate <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/usertype/UserType.html" class="api">org.hibernate.usertype.UserType</a> interface, which allows complete customization of how a type is persisted. As an example if you had a <code>PostCodeType</code> you could use it as follows:</div><p class="paragraph"/>GORMでは、<code>type</code>属性を利用したDSLによって、Hibernateの型を指定できます。
+Hibernateの<a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/usertype/UserType.html" class="api">org.hibernate.usertype.UserType</a>インターフェイスを実装したユーザ型も指定できます。
+これを使えば、ある型がどのように永続化されるかを完全にカスタマイズできます。<p class="paragraph"/><div class="code"><pre>class Address &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> number
     <span class="java&#45;object">String</span> postCode<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         postCode type: PostCodeType
     &#125;
-&#125;</pre></div><p class="paragraph"/>Alternatively if you just wanted to map it to one of Hibernate's basic types other than the default chosen by Grails you could use:<p class="paragraph"/><div class="code"><pre>class Address &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> number
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Alternatively if you just wanted to map it to one of Hibernate's basic types other than the default chosen by Grails you could use:</div>
+単にGrailsがデフォルトで選んだものとは別のHibernateの基本型に対応付けしたいだけであれば、以下のように書くこともできます:<p class="paragraph"/><div class="code"><pre>class Address &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> number
     <span class="java&#45;object">String</span> postCode<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         postCode type: 'text'
     &#125;
-&#125;</pre></div><p class="paragraph"/>This would make the <code>postCode</code> column map to the default large-text type for the database you're using (for example TEXT or CLOB).<p class="paragraph"/>See the Hibernate documentation regarding <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/mapping.html#mapping-types-basictypes" target="blank">Basic Types</a> for further information.<p class="paragraph"/><h4>Many-to-One/One-to-One Mappings</h4><p class="paragraph"/>In the case of associations it is also possible to configure the foreign keys used to map associations. In the case of a many-to-one or one-to-one association this is exactly the same as any regular column. For example consider the following:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This would make the <code>postCode</code> column map to the default large-text type for the database you're using (for example TEXT or CLOB).</div>
+これは、<code>postCode</code>カラムを使用中のデータベースの標準ラージ文字列型(例えば、TEXTやCLOB型)に対応付けています。<p class="paragraph"/><div class="hidden-block">See the Hibernate documentation regarding <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/mapping.html#mapping-types-basictypes" target="blank">Basic Types</a> for further information.</div>
+<a href="http://docs.jboss.org/hibernate/core/3.6/reference/ja-JP/html/mapping.html#mapping-types-basictypes" target="blank">基本的な型</a>についてのより詳細な情報は、Hibernateのドキュメントを参照してください。<p class="paragraph"/><div class="hidden-block">h4. Many-to-One/One-to-One Mappings</div>
+<h4>多対1/1対1マッピング</h4><p class="paragraph"/><div class="hidden-block">In the case of associations it is also possible to configure the foreign keys used to map associations. In the case of a many-to-one or one-to-one association this is exactly the same as any regular column. For example consider the following:</div>
+関連の場合、対応付けに使われる外部キーを変更することもできます。
+多対1と1対1関連の場合、この方法は普通のカラムの場合とまったく同じです。
+例えば、以下を考えます:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName
     Address address<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         table 'people'
         firstName column: 'First_Name'
         address column: 'Person_Address_Id'
     &#125;
-&#125;</pre></div><p class="paragraph"/>By default the <code>address</code> association would map to a foreign key column called <code>address_id</code>. By using the above mapping we have changed the name of the foreign key column to <code>Person_Adress_Id</code>.<p class="paragraph"/><h4>One-to-Many Mapping</h4><p class="paragraph"/>With a bidirectional one-to-many you can change the foreign key column used by changing the column name on the many side of the association as per the example in the previous section on one-to-one associations. However, with unidirectional associations the foreign key needs to be specified on the association itself. For example given a unidirectional one-to-many relationship between <code>Person</code> and <code>Address</code> the following code will change the foreign key in the <code>address</code> table:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;addresses: Address&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">By default the <code>address</code> association would map to a foreign key column called <code>address_id</code>. By using the above mapping we have changed the name of the foreign key column to <code>Person_Adress_Id</code>.</div>
+デフォルトでは、<code>address</code>関連は<code>address_id</code>という名前の外部キーカラムに対応付けられます。
+上記のマッピングを使うと、その外部キーカラムの名前が<code>Person_Adress_Id</code>に変更されます。<p class="paragraph"/><div class="hidden-block">h4. One-to-Many Mapping</div>
+<h4>1対多マッピング</h4><p class="paragraph"/><div class="hidden-block">With a bidirectional one-to-many you can change the foreign key column used by changing the column name on the many side of the association as per the example in the previous section on one-to-one associations. However, with unidirectional associations the foreign key needs to be specified on the association itself. For example given a unidirectional one-to-many relationship between <code>Person</code> and <code>Address</code> the following code will change the foreign key in the <code>address</code> table:</div>
+双方向の1対多では、前のセクションの1対1関連の例に従って、関連における「多」側のカラム名を変更することで、外部キーカラムを変更することができます。
+一方、単方向の1対多関連の場合は、Grailsはデフォルトで結合テーブルを利用します。
+例えば、<code>Person</code>と<code>Address</code>間の単方向1対多関連では、以下のコードで<code>address</code>テーブルに対する外部キーカラム名を変更できます。<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;addresses: Address&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         table 'people'
         firstName column: 'First_Name'
         addresses column: 'Person_Address_Id'
     &#125;
-&#125;</pre></div><p class="paragraph"/>If you don't want the column to be in the <code>address</code> table, but instead some intermediate join table you can use the <code>joinTable</code> parameter:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;addresses: Address&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If you don't want the column to be in the <code>address</code> table, but instead some intermediate join table you can use the <code>joinTable</code> parameter:</div>
+もし、結合テーブル自体のテーブル名も含めて指定したい場合は、<code>joinTable</code>パラメータが使えます。<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;addresses: Address&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         table 'people'
         firstName column: 'First_Name'
         addresses joinTable: &#91;name: 'Person_Addresses',
                               key: 'Person_Id',
                               column: 'Address_Id'&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Many-to-Many Mapping</h4><p class="paragraph"/>Grails, by default maps a many-to-many association using a join table. For example consider this many-to-many association:<p class="paragraph"/><div class="code"><pre>class Group &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Many-to-Many Mapping</div>
+<h4>多対多マッピング</h4><p class="paragraph"/><div class="hidden-block">Grails, by default maps a many-to-many association using a join table. For example consider this many-to-many association:</div>
+Grailsは、デフォルトで結合テーブルを利用して多対多関連を実現します。
+例えば、次の多対多関連を考えます:<p class="paragraph"/><div class="code"><pre>class Group &#123;
     &#8230;
     <span class="java&#45;keyword">static</span> hasMany = &#91;people: Person&#93;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Person &#123;
     &#8230;
     <span class="java&#45;keyword">static</span> belongsTo = Group
     <span class="java&#45;keyword">static</span> hasMany = &#91;groups: Group&#93;
-&#125;</pre></div><p class="paragraph"/>In this case Grails will create a join table called <code>group_person</code> containing foreign keys called <code>person_id</code> and <code>group_id</code> referencing the <code>person</code> and <code>group</code> tables. To change the column names you can specify a column within the mappings for each class.<p class="paragraph"/><div class="code"><pre>class Group &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case Grails will create a join table called <code>group_person</code> containing foreign keys called <code>person_id</code> and <code>group_id</code> referencing the <code>person</code> and <code>group</code> tables. To change the column names you can specify a column within the mappings for each class.</div>
+この場合、Grailsは<code>group_person</code>という名前の結合テーブルを生成します。
+この結合テーブルは、<code>person</code>と<code>group</code>テーブルを参照する<code>person_id</code>と<code>group_id</code>という名前の外部キーを持っています。
+このカラム名を変更するには、それぞれのクラスの<code>mapping</code>内に<code>column</code>を指定します。<p class="paragraph"/><div class="code"><pre>class Group &#123;
    &#8230;
    <span class="java&#45;keyword">static</span> mapping = &#123;
        people column: 'Group_Person_Id'
@@ -411,7 +442,8 @@ class Person &#123;
    <span class="java&#45;keyword">static</span> mapping = &#123;
        groups column: 'Group_Group_Id'
    &#125;
-&#125;</pre></div><p class="paragraph"/>You can also specify the name of the join table to use:<p class="paragraph"/><div class="code"><pre>class Group &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can also specify the name of the join table to use:</div>
+結合テーブル名を指定することもできます。<p class="paragraph"/><div class="code"><pre>class Group &#123;
    &#8230;
    <span class="java&#45;keyword">static</span> mapping = &#123;
        people column: 'Group_Person_Id',
