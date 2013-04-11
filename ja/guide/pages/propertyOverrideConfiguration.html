@@ -141,11 +141,25 @@ function addJsClass() {
                 
 <a name="14.6 Property Override Configuration"><!-- Legacy link --></a>
 <h2 id="propertyOverrideConfiguration">16.6 プロパティオーバーライド設定</h2>
-Grails supports setting of bean properties via <a href="../guide/single.html#conf" class="guide">configuration</a>. This is often useful when used in combination with <a href="../guide/single.html#configExternalized" class="guide">externalized configuration</a>.<p class="paragraph"/>You define a <code>beans</code> block with the names of beans and their values:<p class="paragraph"/><div class="code"><pre>beans &#123;
+<div class="hidden-block">
+Grails supports setting of bean properties via <a href="../guide/single.html#conf" class="guide">configuration</a>. This is often useful when used in combination with <a href="../guide/single.html#configExternalized" class="guide">externalized configuration</a>.
+</div>
+Grailsでは<a href="../guide/single.html#conf" class="guide">設定</a>を通じてビーンのプロパティ設定が行えます。
+これは<a href="../guide/single.html#configExternalized" class="guide">設定の外部化</a>と組み合わせて使用した場合にも便利です。<p class="paragraph"/><div class="hidden-block">
+You define a <code>beans</code> block with the names of beans and their values:
+</div>
+設定は<code>beans</code>ブロックにビーンの名前と値を定義して行います。<p class="paragraph"/><div class="code"><pre>beans &#123;
     bookService &#123;
         webServiceURL = <span class="java&#45;quote">"http://www.amazon.com"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>The general format is:<p class="paragraph"/><div class="code"><pre>&#91;bean name&#93;.&#91;property name&#93; = &#91;value&#93;</pre></div><p class="paragraph"/>The same configuration in a Java properties file would be:<p class="paragraph"/><div class="code"><pre>beans.bookService.webServiceURL=http://www.amazon.com</pre></div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The general format is:
+</div>
+この設定の一般的なフォーマットは以下になります。<p class="paragraph"/><div class="code"><pre>&#91;bean name&#93;.&#91;property name&#93; = &#91;value&#93;</pre></div><p class="paragraph"/><div class="hidden-block">
+The same configuration in a Java properties file would be:
+</div>
+これはJavaのプロパティファイルと同じように設定が行えます。<p class="paragraph"/><div class="code"><pre>beans.bookService.webServiceURL=http://www.amazon.com</pre></div>
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>
