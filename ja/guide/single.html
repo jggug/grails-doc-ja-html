@@ -4128,13 +4128,18 @@ Hibernateの2次キャッシュは、インスタンスのキャッシュだけ�
 
 <a name="5.5.2.3 Inheritance Strategies"><!-- Legacy link --></a>
 <h2 id="inheritanceStrategies">6.5.2.3 継承ストラテジー</h2>
-By default GORM classes use <code>table-per-hierarchy</code> inheritance mapping. This has the disadvantage that columns cannot have a <code>NOT-NULL</code> constraint applied to them at the database level. If you would prefer to use a <code>table-per-subclass</code> inheritance strategy you can do so as follows:<p class="paragraph"/><div class="code"><pre>class Payment &#123;
+<div class="hidden-block">By default GORM classes use <code>table-per-hierarchy</code> inheritance mapping. This has the disadvantage that columns cannot have a <code>NOT-NULL</code> constraint applied to them at the database level. If you would prefer to use a <code>table-per-subclass</code> inheritance strategy you can do so as follows:</div>
+デフォルトでは、GORMのクラスは<code>table-per-hierarchy</code>継承マッピングを用います。
+この場合、データベースレベルで<code>NOT-NULL</code>制約が適用できないというデメリットがあります。
+もし<code>table-per-subclass</code>継承を使いたければ、次のように書くことができます:<p class="paragraph"/><div class="code"><pre>class Payment &#123;
     <span class="java&#45;object">Integer</span> amount<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         tablePerHierarchy <span class="java&#45;keyword">false</span>
     &#125;
 &#125;<p class="paragraph"/>class CreditCardPayment <span class="java&#45;keyword">extends</span> Payment &#123;
     <span class="java&#45;object">String</span> cardNumber
-&#125;</pre></div><p class="paragraph"/>The mapping of the root <code>Payment</code> class specifies that it will not be using <code>table-per-hierarchy</code> mapping for all child classes.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The mapping of the root <code>Payment</code> class specifies that it will not be using <code>table-per-hierarchy</code> mapping for all child classes.</div>
+<code>Payment</code>スーパクラスのマッピングで、すべてのサブクラスに対して<code>table-per-hierarchy</code>マッピングを使わないように指定しています。
+
 
 <a name="5.5.2.4 Custom Database Identity"><!-- Legacy link --></a>
 <h2 id="identity">6.5.2.4 カスタムデータベースアイデンティティー</h2>
