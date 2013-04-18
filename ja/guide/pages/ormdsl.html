@@ -309,25 +309,37 @@ class Person &#123;
 
 <a name="5.5.2.2 Caching Strategy"><!-- Legacy link --></a>
 <h2 id="caching">6.5.2.2 キャッシングストラテジー</h2>
-<h4>Setting up caching</h4><p class="paragraph"/><a href="http://www.hibernate.org/" target="blank">Hibernate</a> features a second-level cache with a customizable cache provider. This needs to be configured in the <code>grails-app/conf/DataSource.groovy</code> file as follows:<p class="paragraph"/><div class="code"><pre>hibernate &#123;
-    cache.use_second_level_cache=<span class="java&#45;keyword">true</span>
-    cache.use_query_cache=<span class="java&#45;keyword">true</span>
-    cache.provider_class='org.hibernate.cache.EhCacheProvider'
-&#125;</pre></div><p class="paragraph"/>You can customize any of these settings, for example to use a distributed caching mechanism.<p class="paragraph"/><blockquote class="note">
-For further reading on caching and in particular Hibernate's second-level cache, refer to the <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/performance.html#performance-cache" target="blank">Hibernate documentation</a> on the subject.
-</blockquote><p class="paragraph"/><h4>Caching instances</h4><p class="paragraph"/>Call the <code>cache</code> method in your mapping block to enable caching with the default settings:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+<div class="hidden-block">h4. Setting up caching</div>
+<h4>キャッシング設定</h4><p class="paragraph"/><div class="hidden-block"><a href="http://www.hibernate.org/" target="blank">Hibernate</a> features a second-level cache with a customizable cache provider. This needs to be configured in the <code>grails-app/conf/DataSource.groovy</code> file as follows:</div>
+<a href="http://www.hibernate.org/" target="blank">Hibernate</a> はカスタマイズ可能なキャッシュプロバイダによる二次キャッシュを持っています。
+利用するには<code>grails-app/conf/DataSource.groovy</code>で次のような設定が必要です:<p class="paragraph"/><div class="code"><pre>hibernate &#123;
+    cache.use_second_level_cache = <span class="java&#45;keyword">true</span>
+    cache.use_query_cache = <span class="java&#45;keyword">true</span>
+    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory'
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can customize any of these settings, for example to use a distributed caching mechanism.</div>
+分散キャッシュ機構などを使うように設定を変更することもできます。<p class="paragraph"/><blockquote class="note">
+<div class="hidden-block">For further reading on caching and in particular Hibernate's second-level cache, refer to the <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/performance.html#performance-cache" target="blank">Hibernate documentation</a> on the subject.</div>
+キャッシングと、特にHibernateの二次キャッシュについてもっと知りたい場合は、<a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/performance.html#performance-cache" target="blank">Hibernateのドキュメント</a>を参照してください。
+</blockquote><p class="paragraph"/><div class="hidden-block">h4. Caching instances</div>
+<h4>インスタンスのキャッシュ</h4><p class="paragraph"/><div class="hidden-block">Call the <code>cache</code> method in your mapping block to enable caching with the default settings:</div>
+デフォルト設定においてキャッシュを有効にするには、<code>mapping</code>ブロックの中で<code>cache</code>メソッドを呼びます:<p class="paragraph"/><div class="code"><pre>class Person &#123;
     &#8230;
     <span class="java&#45;keyword">static</span> mapping = &#123;
         table 'people'
         cache <span class="java&#45;keyword">true</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>This will configure a 'read-write' cache that includes both lazy and non-lazy properties. You can customize this further:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This will configure a 'read-write' cache that includes both lazy and non-lazy properties. You can customize this further:</div>
+上の設定では、lazyとnon-lazyの両方のプロパティを含んだread-writeキャッシュが設定されます。
+次のようにもっと細かく設定することもできます:<p class="paragraph"/><div class="code"><pre>class Person &#123;
     &#8230;
     <span class="java&#45;keyword">static</span> mapping = &#123;
         table 'people'
         cache usage: 'read&#45;only', include: 'non&#45;lazy'
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Caching associations</h4><p class="paragraph"/>As well as the ability to use Hibernate's second level cache to cache instances you can also cache collections (associations) of objects. For example:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;addresses: Address&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Caching associations</div>
+<h4>関連のキャッシュ</h4><p class="paragraph"/><div class="hidden-block">As well as the ability to use Hibernate's second level cache to cache instances you can also cache collections (associations) of objects. For example:</div>
+Hibernateの2次キャッシュは、インスタンスのキャッシュだけではなく、オブジェクトのコレクション(関連)もキャッシュできます。
+例えば:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;addresses: Address&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         table 'people'
         version <span class="java&#45;keyword">false</span>
         addresses column: 'Address', cache: <span class="java&#45;keyword">true</span>
@@ -335,17 +347,33 @@ For further reading on caching and in particular Hibernate's second-level cache,
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Address &#123;
     <span class="java&#45;object">String</span> number
     <span class="java&#45;object">String</span> postCode
-&#125;</pre></div><p class="paragraph"/>This will enable a 'read-write' caching mechanism on the <code>addresses</code> collection. You can also use:<p class="paragraph"/><div class="code"><pre>cache: 'read&#45;write' // or 'read&#45;only' or 'transactional'</pre></div><p class="paragraph"/>to further configure the cache usage.<p class="paragraph"/><h4>Caching Queries</h4><p class="paragraph"/>You can cache queries such as dynamic finders and criteria. To do so using a dynamic finder you can pass the <code>cache</code> argument:<p class="paragraph"/><div class="code"><pre>def person = Person.findByFirstName(<span class="java&#45;quote">"Fred"</span>, &#91;cache: <span class="java&#45;keyword">true</span>&#93;)</pre></div><p class="paragraph"/><blockquote class="note">
-In order for the results of the query to be cached, you must enable caching in your mapping as discussed in the previous section.
-</blockquote><p class="paragraph"/>You can also cache criteria queries:<p class="paragraph"/><div class="code"><pre>def people = Person.withCriteria &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This will enable a 'read-write' caching mechanism on the <code>addresses</code> collection. You can also use:</div>
+これは<code>addresses</code>コレクション上でのread-writeキャッシュ機構を有効にします。
+より細かくカスタマイズするために<p class="paragraph"/><div class="code"><pre>cache: 'read&#45;write' // or 'read&#45;only' or 'transactional'</pre></div><p class="paragraph"/><div class="hidden-block">to further configure the cache usage.</div>
+を使うこともできます。<p class="paragraph"/><div class="hidden-block">h4. Caching Queries</div>
+<h4>クエリのキャッシュ</h4><p class="paragraph"/><div class="hidden-block">You can cache queries such as dynamic finders and criteria. To do so using a dynamic finder you can pass the <code>cache</code> argument:</div>
+ダイナミックファインダやクライテリアのようなクエリをキャッシュすることもできます。
+ダイナミックファインダをキャッシュするためには、<code>cache</code>引数を渡します:<p class="paragraph"/><div class="code"><pre>def person = Person.findByFirstName(<span class="java&#45;quote">"Fred"</span>, &#91;cache: <span class="java&#45;keyword">true</span>&#93;)</pre></div><p class="paragraph"/><blockquote class="note">
+<div class="hidden-block">In order for the results of the query to be cached, you must enable caching in your mapping as discussed in the previous section.</div>
+キャッシュされたクエリの結果のために、前のセクションで示したように<code>mapping</code>でキャッシュを有効にしなければなりません。
+</blockquote><p class="paragraph"/><div class="hidden-block">You can also cache criteria queries:</div>
+クライテリアのクエリもキャッシュできます。<p class="paragraph"/><div class="code"><pre>def people = Person.withCriteria &#123;
     like('firstName', 'Fr%')
     cache <span class="java&#45;keyword">true</span>
-&#125;</pre></div><p class="paragraph"/><h4>Cache usages</h4><p class="paragraph"/>Below is a description of the different cache settings and their usages:
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Cache usages</div>
+<h4>キャッシュの使い方</h4><p class="paragraph"/><div class="hidden-block">Below is a description of the different cache settings and their usages:</div>
+それぞれのキャッシュ設定と使い方を以下に示します:<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li><code>read-only</code> - If your application needs to read but never modify instances of a persistent class, a read-only cache may be used.</li>
 <li><code>read-write</code> - If the application needs to update data, a read-write cache might be appropriate.</li>
 <li><code>nonstrict-read-write</code> - If the application only occasionally needs to update data (ie. if it is very unlikely that two transactions would try to update the same item simultaneously) and strict transaction isolation is not required, a <code>nonstrict-read-write</code> cache might be appropriate.</li>
 <li><code>transactional</code> - The <code>transactional</code> cache strategy provides support for fully transactional cache providers such as JBoss TreeCache. Such a cache may only be used in a JTA environment and you must specify <code>hibernate.transaction.manager_lookup_class</code> in the <code>grails-app/conf/DataSource.groovy</code> file's <code>hibernate</code> config.</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>read-only</code> -アプリケーションが永続化されたデータを変更せず単に読むだけであれば、read-onlyキャッシュが使えます。</li>
+<li><code>read-write</code> - アプリケーションがデータを更新する必要があれば、read-writeキャッシュが適しているかも知れません。</li>
+<li><code>nonstrict-read-write</code> - アプリケーションがごくたまにデータを更新するぐらいで(すなわち、2つのトランザクションが同時に同一の項目を更新することがほとんどなく)、かつ、厳密なトランザクション分離を必要としないのであれば、<code>nonstrict-read-write</code>キャッシュが適しているかも知れません。</li>
+<li><code>transactional</code> - このキャッシュ戦略はJBoss TreeCacheのようなトランザクション対応キャッシュプロバイダを完全にサポートします。このようなキャッシュはJTA環境でのみ使えます。<code>grails-app/conf/DataSource.groovy</code>ファイルの<code>hibernate</code>設定に<code>hibernate.transaction.manager_lookup_class</code>を指定も必要です。</li>
 </ul><p class="paragraph"/>
 
 <a name="5.5.2.3 Inheritance Strategies"><!-- Legacy link --></a>
