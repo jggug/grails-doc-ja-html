@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>16.5 &#12503;&#12525;&#12497;&#12486;&#12451;&#12503;&#12524;&#12540;&#12473;&#12501;&#12457;&#12523;&#12480;&#12540;&#35373;&#23450; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>16.5 &#12503;&#12525;&#12497;&#12486;&#12451;&#12503;&#12524;&#12540;&#12473;&#12507;&#12523;&#12480;&#35373;&#23450; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -125,7 +125,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>16.5 &#12503;&#12525;&#12497;&#12486;&#12451;&#12503;&#12524;&#12540;&#12473;&#12501;&#12457;&#12523;&#12480;&#12540;&#35373;&#23450; - Reference Documentation</h1>
+                    <h1>16.5 &#12503;&#12525;&#12497;&#12486;&#12451;&#12503;&#12524;&#12540;&#12473;&#12507;&#12523;&#12480;&#35373;&#23450; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -140,9 +140,20 @@ function addJsClass() {
 
                 
 <a name="14.5 Property Placeholder Configuration"><!-- Legacy link --></a>
-<h2 id="propertyPlaceholderConfiguration">16.5 プロパティプレースフォルダー設定</h2>
-Grails supports the notion of property placeholder configuration through an extended version of Spring's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/beans/factory/config/PropertyPlaceholderConfigurer.html" class="api">PropertyPlaceholderConfigurer</a>, which is typically useful in combination with <a href="../guide/single.html#configExternalized" class="guide">externalized configuration</a>.<p class="paragraph"/>Settings defined in either <a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a> scripts or Java properties files can be used as placeholder values for Spring configuration in <code>grails-app/conf/spring/resources.xml</code> and <code>grails-app/conf/spring/resources.groovy</code>. For example given the following entries in <code>grails-app/conf/Config.groovy</code> (or an externalized config):<p class="paragraph"/><div class="code"><pre>database.driver=<span class="java&#45;quote">"com.mysql.jdbc.Driver"</span>
-database.dbname=<span class="java&#45;quote">"mysql:mydb"</span></pre></div><p class="paragraph"/>You can then specify placeholders in <code>resources.xml</code> as follows using the familiar ${..} syntax:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;bean id=<span class="xml&#45;quote">"dataSource"</span>
+<h2 id="propertyPlaceholderConfiguration">16.5 プロパティプレースホルダ設定</h2>
+<div class="hidden-block">
+Grails supports the notion of property placeholder configuration through an extended version of Spring's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/beans/factory/config/PropertyPlaceholderConfigurer.html" class="api">PropertyPlaceholderConfigurer</a>, which is typically useful in combination with <a href="../guide/single.html#configExternalized" class="guide">externalized configuration</a>.
+</div>
+Grailsは、Springの<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/beans/factory/config/PropertyPlaceholderConfigurer.html" class="api">PropertyPlaceholderConfigurer</a>を拡張することでプロパティプレースホルダの概念をサポートしています。
+特に<a href="../guide/single.html#configExternalized" class="guide">設定の外部化</a>と組み合わせた場合に有用です。<p class="paragraph"/><div class="hidden-block">
+Settings defined in either <a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a> scripts or Java properties files can be used as placeholder values for Spring configuration in <code>grails-app/conf/spring/resources.xml</code> and <code>grails-app/conf/spring/resources.groovy</code>. For example given the following entries in <code>grails-app/conf/Config.groovy</code> (or an externalized config):
+</div>
+プレースホルダの値は <a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a> またはJavaプロパティファイルで定義を行い、<code>grails-app/conf/spring/resources.xml</code>と<code>grails-app/conf/spring/resources.groovy</code>のSpringの設定ファイル内で使用できます。
+例えば、<code>grails-app/conf/Config.groovy</code>(または外部設定)で以下の設定があるとします。<p class="paragraph"/><div class="code"><pre>database.driver=<span class="java&#45;quote">"com.mysql.jdbc.Driver"</span>
+database.dbname=<span class="java&#45;quote">"mysql:mydb"</span></pre></div><p class="paragraph"/><div class="hidden-block">
+You can then specify placeholders in <code>resources.xml</code> as follows using the familiar ${..} syntax:
+</div>
+<code>resources.xml</code>内では、使い慣れた${..}のシンタックスを使用してプレースホルダを指定できます。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;bean id=<span class="xml&#45;quote">"dataSource"</span>
       class=<span class="xml&#45;quote">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span>&#62;</span>
     <span class="xml&#45;tag">&#60;property name=<span class="xml&#45;quote">"driverClassName"</span>&#62;</span>
         <span class="xml&#45;tag">&#60;value&#62;</span>$&#123;database.driver&#125;<span class="xml&#45;tag">&#60;/value&#62;</span>
@@ -150,13 +161,26 @@ database.dbname=<span class="java&#45;quote">"mysql:mydb"</span></pre></div><p c
     <span class="xml&#45;tag">&#60;property name=<span class="xml&#45;quote">"url"</span>&#62;</span>
         <span class="xml&#45;tag">&#60;value&#62;</span>jdbc:$&#123;database.dbname&#125;<span class="xml&#45;tag">&#60;/value&#62;</span>
     <span class="xml&#45;tag">&#60;/property&#62;</span>
- <span class="xml&#45;tag">&#60;/bean&#62;</span></pre></div><p class="paragraph"/>To specify placeholders in <code>resources.groovy</code> you need to use single quotes:<p class="paragraph"/><div class="code"><pre>dataSource(org.springframework.jdbc.datasource.DriverManagerDataSource) &#123;
+ <span class="xml&#45;tag">&#60;/bean&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">
+To specify placeholders in <code>resources.groovy</code> you need to use single quotes:
+</div>
+<code>resources.groovy</code>内でプレースホルダを指定するには、シングルクォートを使用する必要があります。<p class="paragraph"/><div class="code"><pre>dataSource(org.springframework.jdbc.datasource.DriverManagerDataSource) &#123;
     driverClassName = '$&#123;database.driver&#125;'
     url = 'jdbc:$&#123;database.dbname&#125;'
-&#125;</pre></div><p class="paragraph"/>This sets the property value to a literal string which is later resolved against the config by Spring's PropertyPlaceholderConfigurer.<p class="paragraph"/>A better option for <code>resources.groovy</code> is to access properties through the <code>grailsApplication</code> variable:<p class="paragraph"/><div class="code"><pre>dataSource(org.springframework.jdbc.datasource.DriverManagerDataSource) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This sets the property value to a literal string which is later resolved against the config by Spring's PropertyPlaceholderConfigurer.
+</div>
+このプロパティの値は、後でSpringのPropertyPlaceholderConfigurerによって文字列が置換されます。<p class="paragraph"/><div class="hidden-block">
+A better option for <code>resources.groovy</code> is to access properties through the <code>grailsApplication</code> variable:
+</div>
+また、<code>resources.groovy</code>では<code>grailsApplication</code>にアクセスすることが可能です。<p class="paragraph"/><div class="code"><pre>dataSource(org.springframework.jdbc.datasource.DriverManagerDataSource) &#123;
     driverClassName = grailsApplication.config.database.driver
     url = <span class="java&#45;quote">"jdbc&#58;$&#123;grailsApplication.config.database.dbname&#125;"</span>
-&#125;</pre></div><p class="paragraph"/>Using this approach will keep the types as defined in your config.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Using this approach will keep the types as defined in your config.
+</div>
+これにより、設定ファイル内で定義した型をそのまま使用することができます。
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>

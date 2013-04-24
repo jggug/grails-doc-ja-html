@@ -871,8 +871,8 @@ Grailsでは<code>XML</code>と同じ仕組みで、<code>JSON</code>の自動�
 <a name="6.1.8 More on JSONBuilder"><!-- Legacy link --></a>
 <h2 id="moreOnJSONBuilder">7.1.8 JSONBuilder (JSONビルダー)</h2>
 <div class="hidden-block">The previous section on on XML and JSON responses covered simplistic examples of rendering XML and JSON responses. Whilst the XML builder used by Grails is the standard <a href="http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper" target="blank">XmlSlurper</a> found in Groovy, the JSON builder is a custom implementation specific to Grails.</div>
-前のセクション「 XMLとJSONレスポンス」で単純なXMLとJSONのを描写してレスポンスする例を紹介しました。Grailsで使用してるXMLビルダーがGroovyの標準的な <a href="http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper" target="blank">XmlSlurper</a> に対して、JSONビルダーに関してはGrails特有の実装になっています。<p class="paragraph"/><h4>JSONBuilderとGrailsのバージョン <div class="hidden-block">JSONBuilder and Grails versions </div></h4><p class="paragraph"/><div class="hidden-block">JSONBuilder behaves different depending on the version of Grails you use. For version below 1.2 the deprecated api:grails.web.JSONBuilder class is used. This section covers the usage of the Grails 1.2 JSONBuilder </div>
-JSONBuilderの振る舞いは使用するGrailsのバージョンに依存します。1.2以前では現在非推奨となるapi:grails.web.JSONBuilderが使用されます。このセクションでは、Grails 1.2のJSONBuilderの説明をします。<p class="paragraph"/><div class="hidden-block">For backwards compatibility the old <code>JSONBuilder</code> class is used with the <code>render</code> method for older applications; to use the newer/better <code>JSONBuilder</code> class set the following in <code>Config.groovy</code>:</div>
+前のセクション「 XMLとJSONレスポンス」で単純なXMLとJSONのを描写してレスポンスする例を紹介しました。Grailsで使用してるXMLビルダーがGroovyの標準的な <a href="http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper" target="blank">XmlSlurper</a> に対して、JSONビルダーに関してはGrails特有の実装になっています。<p class="paragraph"/><h4>JSONBuilderとGrailsのバージョン <div class="hidden-block">JSONBuilder and Grails versions </div></h4><p class="paragraph"/><div class="hidden-block">JSONBuilder behaves different depending on the version of Grails you use. For version below 1.2 the deprecated <a href="http://grails.org/doc/latest/api/grails/web/JSONBuilder.html" class="api">grails.web.JSONBuilder</a> class is used. This section covers the usage of the Grails 1.2 JSONBuilder </div>
+JSONBuilderの振る舞いは使用するGrailsのバージョンに依存します。1.2以前では現在非推奨となる<a href="http://grails.org/doc/latest/api/grails/web/JSONBuilder.html" class="api">grails.web.JSONBuilder</a>が使用されます。このセクションでは、Grails 1.2のJSONBuilderの説明をします。<p class="paragraph"/><div class="hidden-block">For backwards compatibility the old <code>JSONBuilder</code> class is used with the <code>render</code> method for older applications; to use the newer/better <code>JSONBuilder</code> class set the following in <code>Config.groovy</code>:</div>
 下位互換として、古いバージョンからメンテナンスしているアプリケーションのために、<code>render</code>メソッドで古い<code>JSONBuilder</code>を使用するようになっています。新しい良くなった<code>JSONBuilder</code>を使用するには<code>Config.groovy</code>に、次のような設定をします:<p class="paragraph"/><div class="code"><pre>grails.json.legacy.builder = <span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><h4>単純なオブジェクトを描写 <div class="hidden-block">Rendering Simple Objects </div></h4><p class="paragraph"/><div class="hidden-block">To render a simple JSON object just set properties within the context of the Closure:</div>
 単純なJSONオブジェクトを生成するには、クロージャの中にプロパティをセットするだけです:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
     hello = <span class="java&#45;quote">"world"</span>
@@ -1099,25 +1099,25 @@ GSPには、初期定義されたスコープ変数がいくつか存在しま�
 <li><code>application</code> - The <a href="http://download.oracle.com/javaee/1.4/api/javax/servlet/ServletContext.html" class="api">javax.servlet.ServletContext</a> instance</li>
 <li><code>applicationContext</code> The Spring <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/context/ApplicationContext.html" class="api">ApplicationContext</a> instance</li>
 <li><code>flash</code> - The <a href="../ref/Controllers/flash.html" class="controllers">flash</a> object</li>
-<li><code>grailsApplication</code> - The api:org.codehaus.groovy.grails.commons.GrailsApplication instance</li>
+<li><code>grailsApplication</code> - The <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api">GrailsApplication</a> instance</li>
 <li><code>out</code> - The response writer for writing to the output stream</li>
 <li><code>params</code> - The <a href="../ref/Controllers/params.html" class="controllers">params</a> object for retrieving request parameters</li>
 <li><code>request</code> - The <a href="http://download.oracle.com/javaee/1.4/api/javax/servlet/http/HttpServletRequest.html" class="api">HttpServletRequest</a> instance</li>
 <li><code>response</code> - The <a href="http://download.oracle.com/javaee/1.4/api/javax/servlet/http/HttpServletResponse.html" class="api">HttpServletResponse</a> instance</li>
 <li><code>session</code> - The <a href="http://download.oracle.com/javaee/1.4/api/javax/servlet/http/HttpSession.html" class="api">HttpSession</a> instance</li>
-<li><code>webRequest</code> - The api:org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest instance</li>
+<li><code>webRequest</code> - The <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/servlet/mvc/GrailsWebRequest.html" class="api">GrailsWebRequest</a> instance</li>
 </ul><p class="paragraph"/></div>
 <ul class="star">
 <li><code>application</code> - <a href="http://download.oracle.com/javaee/1.4/api/javax/servlet/ServletContext.html" class="api">javax.servlet.ServletContext</a>インスタンス</li>
 <li><code>applicationContext</code> - Spring <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/context/ApplicationContext.html" class="api">ApplicationContext</a>インスタンス</li>
 <li><code>flash</code> - flash オブジェクト</li>
-<li><code>grailsApplication</code> - api:org.codehaus.groovy.grails.commons.GrailsApplicationインスタンス</li>
+<li><code>grailsApplication</code> - <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api">GrailsApplication</a>インスタンス</li>
 <li><code>out</code> - 出力ストリームを書き込むレスポンスライター</li>
 <li><code>params</code> - <a href="../ref/Controllers/params.html" class="controllers">params</a>リクエストパラメータを取得するオブジェクト</li>
 <li><code>request</code> - <a href="http://download.oracle.com/javaee/1.4/api/javax/servlet/http/HttpServletRequest.html" class="api">HttpServletRequest</a>インスタンス</li>
 <li><code>response</code> - <a href="http://download.oracle.com/javaee/1.4/api/javax/servlet/http/HttpServletResponse.html" class="api">HttpServletResponse</a>インスタンス</li>
 <li><code>session</code> - <a href="http://download.oracle.com/javaee/1.4/api/javax/servlet/http/HttpSession.html" class="api">HttpSession</a>インスタンス</li>
-<li><code>webRequest</code> - api:org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequestインスタンス</li>
+<li><code>webRequest</code> - <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/servlet/mvc/GrailsWebRequest.html" class="api">GrailsWebRequest</a>インスタンス</li>
 </ul><p class="paragraph"/>
 
 <a name="6.2.2.2 Logic and Iteration"><!-- Legacy link --></a>
@@ -1814,7 +1814,7 @@ debugTemplatesでは以下のようなコメントが追記されます:<p class
 <li><code>actionName</code> - The currently executing action name</li>
 <li><code>controllerName</code> - The currently executing controller name</li>
 <li><code>flash</code> - The <a href="../ref/Controllers/flash.html" class="controllers">flash</a> object</li>
-<li><code>grailsApplication</code> - The api:org.codehaus.groovy.grails.commons.GrailsApplication instance</li>
+<li><code>grailsApplication</code> - The <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api">GrailsApplication</a> instance</li>
 <li><code>out</code> - The response writer for writing to the output stream</li>
 <li><code>pageScope</code> - A reference to the <a href="../ref/Tag Libraries/pageScope.html" class="tagLibraries">pageScope</a> object used for GSP rendering (i.e. the binding)</li>
 <li><code>params</code> - The <a href="../ref/Controllers/params.html" class="controllers">params</a> object for retrieving request parameters</li>
@@ -1828,7 +1828,7 @@ debugTemplatesでは以下のようなコメントが追記されます:<p class
 <li><code>actionName</code> - 現在実行中のアクション名</li>
 <li><code>controllerName</code> - 現在実行中のコントローラ名</li>
 <li><code>flash</code> - <a href="../ref/Controllers/flash.html" class="controllers">flash</a>オブジェクト</li>
-<li><code>grailsApplication</code> - api:org.codehaus.groovy.grails.commons.GrailsApplicationインスタンス</li>
+<li><code>grailsApplication</code> - <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api">GrailsApplication</a>インスタンス</li>
 <li><code>out</code> - 出力用のレスポンスライター</li>
 <li><code>pageScope</code> - GSP描写で使用する<a href="../ref/Tag Libraries/pageScope.html" class="tagLibraries">pageScope</a>オブジェクトへの参照</li>
 <li><code>params</code> - リクエストパラメータ取得用の<a href="../ref/Controllers/params.html" class="controllers">params</a>オブジェクト</li>
@@ -2169,9 +2169,9 @@ linkネームスペースタグでは、パラメータを属性で指定でき�
 </div>
 URLでの
 URLマッピングは、デフォルトでキャメルケースのURLになります。例えばコントローラ<code>MathHelperController</code>のアクション<code>addNumbers</code>の場合、デフォルトURLでのURLは、<code>/mathHelper/addNumbers</code>のようになります。Grailsでは、このパターンをカスタマイズして、<code>/math-helper/add-numbers</code>のようなハイフン形式にキャメルケース形式を入れ換える実装が可能です。ハイフンURLを可能にするには、<code>grails-app/conf/Config.groovy</code>の<code>grails.web.url.converter</code>を"hyphenated"にします。<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/Config.groovy<p class="paragraph"/>grails.web.url.converter = 'hyphenated'</pre></div><p class="paragraph"/><div class="hidden-block">
-Arbitrary strategies may be plugged in by providing a class which implements the api:grails.web.UrlConverter interface and adding an instance of that class to the Spring application context with the bean name of <code>grails.web.UrlConverter.BEAN_NAME</code>.  If Grails finds a bean in the context with that name, it will be used as the default converter and there is no need to assign a value to the <code>grails.web.url.converter</code> config property.
+Arbitrary strategies may be plugged in by providing a class which implements the <a href="http://grails.org/doc/latest/api/grails/web/UrlConverter.html" class="api">UrlConverter</a> interface and adding an instance of that class to the Spring application context with the bean name of <code>grails.web.UrlConverter.BEAN_NAME</code>.  If Grails finds a bean in the context with that name, it will be used as the default converter and there is no need to assign a value to the <code>grails.web.url.converter</code> config property.
 </div>
-任意の方法追加するには、インターフェイスapi:grails.web.UrlConverterを実装したクラスを、ビーン名称<code>grails.web.UrlConverter.BEAN_NAME</code>で追加します。Grailsがそのビーン名称をコンテキストに有ることを認識した場合、指定したクラスの実装がデフォルトとなります。この場合は、<code>grails.web.url.converter</code>プロパティは必要有りません。
+任意の方法追加するには、インターフェイス<a href="http://grails.org/doc/latest/api/grails/web/UrlConverter.html" class="api">UrlConverter</a>を実装したクラスを、ビーン名称<code>grails.web.UrlConverter.BEAN_NAME</code>で追加します。Grailsがそのビーン名称をコンテキストに有ることを認識した場合、指定したクラスの実装がデフォルトとなります。この場合は、<code>grails.web.url.converter</code>プロパティは必要有りません。
 <div class="hidden-block">
 <div class="code"><pre>// src/groovy/com/myapplication/MyUrlConverterImpl.groovy<p class="paragraph"/><span class="java&#45;keyword">package</span> com.myapplication<p class="paragraph"/>class MyUrlConverterImpl <span class="java&#45;keyword">implements</span> grails.web.UrlConverter &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> toUrlElement(<span class="java&#45;object">String</span> propertyOrClassName) &#123;
         // <span class="java&#45;keyword">return</span> some representation of a property or class name that should be used in URLs&#8230;

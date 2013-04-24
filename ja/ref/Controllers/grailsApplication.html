@@ -116,12 +116,12 @@ function addJsClass(el) {
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
-                <h1>grailsApplication</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>An instance of the api:org.codehaus.groovy.grails.commons.GrailsApplication class.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>class BookController &#123;
+                <h1>grailsApplication</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>An instance of the <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api">GrailsApplication</a> class.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>class BookController &#123;
     def list() &#123;
         def bookClass = grailsApplication.classLoader.loadClass(<span class="java&#45;quote">"Book"</span>)
         &#91;book: bookClass.newInstance()&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>The <code>GrailsApplication</code> class provides information about the conventions within Grails and access to api:org.codehaus.groovy.grails.commons.GrailsApplication, api:org.codehaus.groovy.grails.commons.GrailsApplication and the api:org.codehaus.groovy.grails.commons.GrailsApplication
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>The <code>GrailsApplication</code> class provides information about the conventions within Grails and access to <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html#getMetadata()" class="api">metadata</a>, <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html#getConfig()" class="api">config</a> and the <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html#getClassLoader()" class="api">ClassLoader</a>
 
             </div>
         </td>

@@ -152,7 +152,7 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0px"><a href="#theBeanBuilderDSLExplained"><strong>16.4</strong><span>&#12499;&#12540;&#12531;&#12499;&#12523;&#12480;&#12540;DSL&#12398;&#35299;&#35500;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#propertyPlaceholderConfiguration"><strong>16.5</strong><span>&#12503;&#12525;&#12497;&#12486;&#12451;&#12503;&#12524;&#12540;&#12473;&#12501;&#12457;&#12523;&#12480;&#12540;&#35373;&#23450;</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#propertyPlaceholderConfiguration"><strong>16.5</strong><span>&#12503;&#12525;&#12497;&#12486;&#12451;&#12503;&#12524;&#12540;&#12473;&#12507;&#12523;&#12480;&#35373;&#23450;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0px"><a href="#propertyOverrideConfiguration"><strong>16.6</strong><span>&#12503;&#12525;&#12497;&#12486;&#12451;&#12458;&#12540;&#12496;&#12540;&#12521;&#12452;&#12489;&#35373;&#23450;</span></a>
@@ -181,7 +181,7 @@ Grails is actually a <a href="http://www.springframework.org/docs/MVC-step-by-st
 <li>Transactions - Grails uses Spring's transaction management in <a href="../guide/single.html#GORM" class="guide">GORM</a></li>
 </ul><p class="paragraph"/>In other words Grails has Spring embedded running all the way through it.<p class="paragraph"/><h4>The Grails ApplicationContext</h4><p class="paragraph"/>Spring developers are often keen to understand how the Grails <code>ApplicationContext</code> instance is constructed. The basics of it are as follows.
 <ul class="star">
-<li>Grails constructs a parent <code>ApplicationContext</code> from the <code>web-app/WEB-INF/applicationContext.xml</code> file. This <code>ApplicationContext</code> configures the api:org.codehaus.groovy.grails.commons.GrailsApplication instance and the api:org.codehaus.groovy.grails.plugins.GrailsPluginManager.</li>
+<li>Grails constructs a parent <code>ApplicationContext</code> from the <code>web-app/WEB-INF/applicationContext.xml</code> file. This <code>ApplicationContext</code> configures the <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api">GrailsApplication</a> instance and the <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/plugins/GrailsPluginManager.html" class="api">GrailsPluginManager</a>.</li>
 <li>Using this <code>ApplicationContext</code> as a parent Grails' analyses the conventions with the <code>GrailsApplication</code> instance and constructs a child <code>ApplicationContext</code> that is used as the root <code>ApplicationContext</code> of the web application</li>
 </ul><p class="paragraph"/><h4>Configured Spring Beans</h4><p class="paragraph"/>Most of Grails' configuration happens at runtime. Each <a href="../guide/single.html#plugins" class="guide">plugin</a> may configure Spring beans that are registered in the <code>ApplicationContext</code>. For a reference as to which beans are configured, refer to the reference guide which describes each of the Grails plugins and which beans they configure.
 
@@ -265,20 +265,20 @@ If you define a bean in <code>resources.groovy</code> with the same name as one 
 This Bean builder in Grails aims to provide a simplified way of wiring together dependencies that uses Spring at its core.
 </div>
 ビーンビルダーの目的は、Grails内でSpringの依存関係を容易に構築するための手段を提供することです。<p class="paragraph"/><div class="hidden-block">
-In addition, Spring's regular way of configuration (via XML and annotations) is static and difficult to modify and configure at runtime, other than programmatic XML creation which is both error prone and verbose. Grails' api:grails.spring.BeanBuilder changes all that by making it possible to programmatically wire together components at runtime, allowing you to adapt the logic based on system properties or environment variables.
+In addition, Spring's regular way of configuration (via XML and annotations) is static and difficult to modify and configure at runtime, other than programmatic XML creation which is both error prone and verbose. Grails' <a href="http://grails.org/doc/latest/api/grails/spring/BeanBuilder.html" class="api">BeanBuilder</a> changes all that by making it possible to programmatically wire together components at runtime, allowing you to adapt the logic based on system properties or environment variables.
 </div>
 通常のSpringの設定方法(XMLやアノテーションを使用した方法)は、静的に設定を行い、実行時にこれらを変更することは容易ではありません。
 また、XMLを使用した設定方法は設定ミスを起こしやすく、設定が冗長になりがちです。
-Grailsのapi:grails.spring.BeanBuilderは、実行時にコンポーネントの構築が行えるようにし、システムプロパティや環境変数を使用したロジックも使用可能にすることで、これらの問題を解決します。<p class="paragraph"/><div class="hidden-block">
+Grailsの<a href="http://grails.org/doc/latest/api/grails/spring/BeanBuilder.html" class="api">BeanBuilder</a>は、実行時にコンポーネントの構築が行えるようにし、システムプロパティや環境変数を使用したロジックも使用可能にすることで、これらの問題を解決します。<p class="paragraph"/><div class="hidden-block">
 This enables the code to adapt to its environment and avoids unnecessary duplication of code (having different Spring configs for test, development and production environments)
 </div>
 これにより環境毎に実行するコードを切り替え、不要な重複コードを取り除くことも可能になります(テスト環境と、開発環境/本番環境で異なるSpringの設定を持つといったように)。<p class="paragraph"/><div class="hidden-block">
 <h4>The BeanBuilder class</h4>
 </div>
 <h4>BeanBuilderクラス</h4><p class="paragraph"/><div class="hidden-block">
-Grails provides a api:grails.spring.BeanBuilder class that uses dynamic Groovy to construct bean definitions. The basics are as follows:
+Grails provides a <a href="http://grails.org/doc/latest/api/grails/spring/BeanBuilder.html" class="api">grails.spring.BeanBuilder</a> class that uses dynamic Groovy to construct bean definitions. The basics are as follows:
 </div>
-Grailsは、Groovyの動的な性質を利用してビーンを構築できるapi:grails.spring.BeanBuilderクラスを提供しています。以下のように使用します。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.apache.commons.dbcp.BasicDataSource
+Grailsは、Groovyの動的な性質を利用してビーンを構築できる<a href="http://grails.org/doc/latest/api/grails/spring/BeanBuilder.html" class="api">grails.spring.BeanBuilder</a>クラスを提供しています。以下のように使用します。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.apache.commons.dbcp.BasicDataSource
 <span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean
 <span class="java&#45;keyword">import</span> org.springframework.context.ApplicationContext
 <span class="java&#45;keyword">import</span> grails.spring.BeanBuilder<p class="paragraph"/>def bb = <span class="java&#45;keyword">new</span> BeanBuilder()<p class="paragraph"/>bb.beans &#123;<p class="paragraph"/>    dataSource(BasicDataSource) &#123;
@@ -516,9 +516,20 @@ bb.beans &#123;<p class="paragraph"/>    abstractBean(KnightOfTheRoundTable) &#1
 
 
 <a name="14.5 Property Placeholder Configuration"><!-- Legacy link --></a>
-<h2 id="propertyPlaceholderConfiguration">16.5 プロパティプレースフォルダー設定</h2>
-Grails supports the notion of property placeholder configuration through an extended version of Spring's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/beans/factory/config/PropertyPlaceholderConfigurer.html" class="api">PropertyPlaceholderConfigurer</a>, which is typically useful in combination with <a href="../guide/single.html#configExternalized" class="guide">externalized configuration</a>.<p class="paragraph"/>Settings defined in either <a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a> scripts or Java properties files can be used as placeholder values for Spring configuration in <code>grails-app/conf/spring/resources.xml</code> and <code>grails-app/conf/spring/resources.groovy</code>. For example given the following entries in <code>grails-app/conf/Config.groovy</code> (or an externalized config):<p class="paragraph"/><div class="code"><pre>database.driver=<span class="java&#45;quote">"com.mysql.jdbc.Driver"</span>
-database.dbname=<span class="java&#45;quote">"mysql:mydb"</span></pre></div><p class="paragraph"/>You can then specify placeholders in <code>resources.xml</code> as follows using the familiar ${..} syntax:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;bean id=<span class="xml&#45;quote">"dataSource"</span>
+<h2 id="propertyPlaceholderConfiguration">16.5 プロパティプレースホルダ設定</h2>
+<div class="hidden-block">
+Grails supports the notion of property placeholder configuration through an extended version of Spring's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/beans/factory/config/PropertyPlaceholderConfigurer.html" class="api">PropertyPlaceholderConfigurer</a>, which is typically useful in combination with <a href="../guide/single.html#configExternalized" class="guide">externalized configuration</a>.
+</div>
+Grailsは、Springの<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/beans/factory/config/PropertyPlaceholderConfigurer.html" class="api">PropertyPlaceholderConfigurer</a>を拡張することでプロパティプレースホルダの概念をサポートしています。
+特に<a href="../guide/single.html#configExternalized" class="guide">設定の外部化</a>と組み合わせた場合に有用です。<p class="paragraph"/><div class="hidden-block">
+Settings defined in either <a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a> scripts or Java properties files can be used as placeholder values for Spring configuration in <code>grails-app/conf/spring/resources.xml</code> and <code>grails-app/conf/spring/resources.groovy</code>. For example given the following entries in <code>grails-app/conf/Config.groovy</code> (or an externalized config):
+</div>
+プレースホルダの値は <a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a> またはJavaプロパティファイルで定義を行い、<code>grails-app/conf/spring/resources.xml</code>と<code>grails-app/conf/spring/resources.groovy</code>のSpringの設定ファイル内で使用できます。
+例えば、<code>grails-app/conf/Config.groovy</code>(または外部設定)で以下の設定があるとします。<p class="paragraph"/><div class="code"><pre>database.driver=<span class="java&#45;quote">"com.mysql.jdbc.Driver"</span>
+database.dbname=<span class="java&#45;quote">"mysql:mydb"</span></pre></div><p class="paragraph"/><div class="hidden-block">
+You can then specify placeholders in <code>resources.xml</code> as follows using the familiar ${..} syntax:
+</div>
+<code>resources.xml</code>内では、使い慣れた${..}のシンタックスを使用してプレースホルダを指定できます。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;bean id=<span class="xml&#45;quote">"dataSource"</span>
       class=<span class="xml&#45;quote">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span>&#62;</span>
     <span class="xml&#45;tag">&#60;property name=<span class="xml&#45;quote">"driverClassName"</span>&#62;</span>
         <span class="xml&#45;tag">&#60;value&#62;</span>$&#123;database.driver&#125;<span class="xml&#45;tag">&#60;/value&#62;</span>
@@ -526,13 +537,26 @@ database.dbname=<span class="java&#45;quote">"mysql:mydb"</span></pre></div><p c
     <span class="xml&#45;tag">&#60;property name=<span class="xml&#45;quote">"url"</span>&#62;</span>
         <span class="xml&#45;tag">&#60;value&#62;</span>jdbc:$&#123;database.dbname&#125;<span class="xml&#45;tag">&#60;/value&#62;</span>
     <span class="xml&#45;tag">&#60;/property&#62;</span>
- <span class="xml&#45;tag">&#60;/bean&#62;</span></pre></div><p class="paragraph"/>To specify placeholders in <code>resources.groovy</code> you need to use single quotes:<p class="paragraph"/><div class="code"><pre>dataSource(org.springframework.jdbc.datasource.DriverManagerDataSource) &#123;
+ <span class="xml&#45;tag">&#60;/bean&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">
+To specify placeholders in <code>resources.groovy</code> you need to use single quotes:
+</div>
+<code>resources.groovy</code>内でプレースホルダを指定するには、シングルクォートを使用する必要があります。<p class="paragraph"/><div class="code"><pre>dataSource(org.springframework.jdbc.datasource.DriverManagerDataSource) &#123;
     driverClassName = '$&#123;database.driver&#125;'
     url = 'jdbc:$&#123;database.dbname&#125;'
-&#125;</pre></div><p class="paragraph"/>This sets the property value to a literal string which is later resolved against the config by Spring's PropertyPlaceholderConfigurer.<p class="paragraph"/>A better option for <code>resources.groovy</code> is to access properties through the <code>grailsApplication</code> variable:<p class="paragraph"/><div class="code"><pre>dataSource(org.springframework.jdbc.datasource.DriverManagerDataSource) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This sets the property value to a literal string which is later resolved against the config by Spring's PropertyPlaceholderConfigurer.
+</div>
+このプロパティの値は、後でSpringのPropertyPlaceholderConfigurerによって文字列が置換されます。<p class="paragraph"/><div class="hidden-block">
+A better option for <code>resources.groovy</code> is to access properties through the <code>grailsApplication</code> variable:
+</div>
+また、<code>resources.groovy</code>では<code>grailsApplication</code>にアクセスすることが可能です。<p class="paragraph"/><div class="code"><pre>dataSource(org.springframework.jdbc.datasource.DriverManagerDataSource) &#123;
     driverClassName = grailsApplication.config.database.driver
     url = <span class="java&#45;quote">"jdbc&#58;$&#123;grailsApplication.config.database.dbname&#125;"</span>
-&#125;</pre></div><p class="paragraph"/>Using this approach will keep the types as defined in your config.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Using this approach will keep the types as defined in your config.
+</div>
+これにより、設定ファイル内で定義した型をそのまま使用することができます。
+
 
 <a name="14.6 Property Override Configuration"><!-- Legacy link --></a>
 <h2 id="propertyOverrideConfiguration">16.6 プロパティオーバーライド設定</h2>

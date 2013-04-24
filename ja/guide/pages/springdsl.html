@@ -145,20 +145,20 @@ function addJsClass() {
 This Bean builder in Grails aims to provide a simplified way of wiring together dependencies that uses Spring at its core.
 </div>
 ビーンビルダーの目的は、Grails内でSpringの依存関係を容易に構築するための手段を提供することです。<p class="paragraph"/><div class="hidden-block">
-In addition, Spring's regular way of configuration (via XML and annotations) is static and difficult to modify and configure at runtime, other than programmatic XML creation which is both error prone and verbose. Grails' api:grails.spring.BeanBuilder changes all that by making it possible to programmatically wire together components at runtime, allowing you to adapt the logic based on system properties or environment variables.
+In addition, Spring's regular way of configuration (via XML and annotations) is static and difficult to modify and configure at runtime, other than programmatic XML creation which is both error prone and verbose. Grails' <a href="http://grails.org/doc/latest/api/grails/spring/BeanBuilder.html" class="api">BeanBuilder</a> changes all that by making it possible to programmatically wire together components at runtime, allowing you to adapt the logic based on system properties or environment variables.
 </div>
 通常のSpringの設定方法(XMLやアノテーションを使用した方法)は、静的に設定を行い、実行時にこれらを変更することは容易ではありません。
 また、XMLを使用した設定方法は設定ミスを起こしやすく、設定が冗長になりがちです。
-Grailsのapi:grails.spring.BeanBuilderは、実行時にコンポーネントの構築が行えるようにし、システムプロパティや環境変数を使用したロジックも使用可能にすることで、これらの問題を解決します。<p class="paragraph"/><div class="hidden-block">
+Grailsの<a href="http://grails.org/doc/latest/api/grails/spring/BeanBuilder.html" class="api">BeanBuilder</a>は、実行時にコンポーネントの構築が行えるようにし、システムプロパティや環境変数を使用したロジックも使用可能にすることで、これらの問題を解決します。<p class="paragraph"/><div class="hidden-block">
 This enables the code to adapt to its environment and avoids unnecessary duplication of code (having different Spring configs for test, development and production environments)
 </div>
 これにより環境毎に実行するコードを切り替え、不要な重複コードを取り除くことも可能になります(テスト環境と、開発環境/本番環境で異なるSpringの設定を持つといったように)。<p class="paragraph"/><div class="hidden-block">
 <h4>The BeanBuilder class</h4>
 </div>
 <h4>BeanBuilderクラス</h4><p class="paragraph"/><div class="hidden-block">
-Grails provides a api:grails.spring.BeanBuilder class that uses dynamic Groovy to construct bean definitions. The basics are as follows:
+Grails provides a <a href="http://grails.org/doc/latest/api/grails/spring/BeanBuilder.html" class="api">grails.spring.BeanBuilder</a> class that uses dynamic Groovy to construct bean definitions. The basics are as follows:
 </div>
-Grailsは、Groovyの動的な性質を利用してビーンを構築できるapi:grails.spring.BeanBuilderクラスを提供しています。以下のように使用します。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.apache.commons.dbcp.BasicDataSource
+Grailsは、Groovyの動的な性質を利用してビーンを構築できる<a href="http://grails.org/doc/latest/api/grails/spring/BeanBuilder.html" class="api">grails.spring.BeanBuilder</a>クラスを提供しています。以下のように使用します。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.apache.commons.dbcp.BasicDataSource
 <span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean
 <span class="java&#45;keyword">import</span> org.springframework.context.ApplicationContext
 <span class="java&#45;keyword">import</span> grails.spring.BeanBuilder<p class="paragraph"/>def bb = <span class="java&#45;keyword">new</span> BeanBuilder()<p class="paragraph"/>bb.beans &#123;<p class="paragraph"/>    dataSource(BasicDataSource) &#123;
