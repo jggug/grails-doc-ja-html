@@ -361,7 +361,7 @@ Grailsアプリケーションを構築するときは、解決しようとし�
 A many-to-one relationship is the simplest kind, and is defined with a property of the type of another domain class. Consider this example:<p class="paragraph"/><h5>Example A</h5><p class="paragraph"/><div class="code"><pre>class Face &#123;
     Nose nose
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Nose &#123;
-&#125;</pre></div><p class="paragraph"/>In this case we have a unidirectional many-to-one relationship from <code>Face</code> to <code>Nose</code>. To make this relationship bidirectional define the other side as follows:<p class="paragraph"/><h5>Example B</h5><p class="paragraph"/><div class="code"><pre>class Face &#123;
+&#125;</pre></div><p class="paragraph"/>In this case we have a unidirectional many-to-one relationship from <code>Face</code> to <code>Nose</code>. To make this relationship bidirectional define the other side as follows (and see the section on controlling the ends of the association just below):<p class="paragraph"/><h5>Example B</h5><p class="paragraph"/><div class="code"><pre>class Face &#123;
     Nose nose
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Nose &#123;
     <span class="java&#45;keyword">static</span> belongsTo = &#91;face:Face&#93;
@@ -376,7 +376,15 @@ f.delete() // both Face and Nose deleted</pre></div><p class="paragraph"/>To mak
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Nose &#123;
     Face face
-&#125;</pre></div>
+&#125;</pre></div><p class="paragraph"/><h5>Controlling the ends of the association</h5><p class="paragraph"/>Occasionally you may find yourself with domain classes that have multiple properties of the same type. They may even be self-referential, i.e. the association property has the same type as the domain class it's in. Such situations can cause problems because Grails may guess incorrectly the type of the association. Consider this simple class:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+    <span class="java&#45;object">String</span> name
+    Person parent<p class="paragraph"/>    <span class="java&#45;keyword">static</span> belongsTo = &#91; supervisor: Person &#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123; supervisor nullable: <span class="java&#45;keyword">true</span> &#125;
+&#125;</pre></div><p class="paragraph"/>As far as Grails is concerned, the <code>parent</code> and <code>supervisor</code> properties are two directions of the same association. So when you set the <code>parent</code> property on a <code>Person</code> instance, Grails will automatically set the <code>supervisor</code> property on the other <code>Person</code> instance. This may be what you want, but if you look at the class, what we in fact have are two unidirectional relationships.<p class="paragraph"/>To guide Grails to the correct mapping, you can tell it that a particular association is unidirectional through the <code>mappedBy</code> property:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+    <span class="java&#45;object">String</span> name
+    Person parent<p class="paragraph"/>    <span class="java&#45;keyword">static</span> belongsTo = &#91; supervisor: Person &#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mappedBy = &#91; supervisor: <span class="java&#45;quote">"none"</span>, parent: <span class="java&#45;quote">"none"</span> &#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123; supervisor nullable: <span class="java&#45;keyword">true</span> &#125;
+&#125;</pre></div><p class="paragraph"/>You can also replace "none" with any property name of the target class. And of course this works for normal domain classes too, not just self-referential ones. Nor is the <code>mappedBy</code> property limited to many-to-one and one-to-one associations: it also works for one-to-many and many-to-many associations as you'll see in the next section.<p class="paragraph"/><blockquote class="warning">
+If you have a property called "none" on your domain class, this approach won't work currently! The "none" property will be treated as the reverse direction of the association (or the "back reference"). Fortunately, "none" is not a common domain class property name.
+</blockquote>
 
 
 <a name="5.2.1.2 One-to-many"><!-- Legacy link --></a>
@@ -1568,9 +1576,11 @@ println p.firstName</pre></div><p class="paragraph"/>Domain classes mapped with 
 &#125;</pre></div><p class="paragraph"/>In this case the <code>address</code> table will have an additional two columns called <code>person_first_name</code> and <code>person_last_name</code>. If you wish the change the mapping of these columns then you can do so using the following technique:<p class="paragraph"/><div class="code"><pre>class Address &#123;
     Person person
     <span class="java&#45;keyword">static</span> mapping = &#123;
-        person &#123;
-            column: <span class="java&#45;quote">"FirstName"</span>
-            column: <span class="java&#45;quote">"LastName"</span>
+        columns &#123;
+		    person &#123;
+                column name: <span class="java&#45;quote">"FirstName"</span>
+                column name: <span class="java&#45;quote">"LastName"</span>
+			&#125;
         &#125;
     &#125;
 &#125;</pre></div>

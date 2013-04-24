@@ -683,7 +683,29 @@ Grailsは、多くのコア・テクノロジーによるWeb開発でのパズ�
 
 
 <h2 id="whatsNew23">1.1 Grails 2.3の新機能</h2>
-<h4>Improved Dependency Management</h4><p class="paragraph"/>The default dependency resolution engine used by Grails has been changed to <a href="http://eclipse.org/aether" target="blank">Aether</a>, the dependency resolution engine used by Maven. Which engine you use can be configured in <code>BuildConfig</code>:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolver = <span class="java&#45;quote">"maven"</span> // or ivy</pre></div><p class="paragraph"/>Using Aether dependency resolution in Grails results in the same behavior as when using the Maven build tool, meaning improved snapshot handling, understanding of custom packaging types and so on.<p class="paragraph"/>In addition, the <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> command has been updated to print the dependency graph of the console, which helps in diagnosing dependency resolution failures. See the chapter on <a href="../guide/single.html#dependencyResolution" class="guide">Dependency Resolution</a> for more information.
+<h4>依存管理の向上</h4><p class="paragraph"/><div class="hidden-block">The default dependency resolution engine used by Grails has been changed to <a href="http://eclipse.org/aether" target="blank">Aether</a>, the dependency resolution engine used by Maven. Which engine you use can be configured in <code>BuildConfig</code>:</div>
+Grailsでデフォルトで使用されている依存管理エンジンが、Mavenで使用されているエンジンの <a href="http://eclipse.org/aether" target="blank">Aether</a> に変更されました。 <code>BuildConfig</code> で設定をすることでどちらのエンジンを使用するか変更可能です。<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolver = <span class="java&#45;quote">"maven"</span> // or ivy</pre></div><p class="paragraph"/><div class="hidden-block">Using Aether dependency resolution in Grails results in the same behavior as when using the Maven build tool, meaning improved snapshot handling, understanding of custom packaging types and so on.</div>
+Aether依存管理を使用するとGrailsではMavenビルドツールと同じ振る舞いをします。これは、前と比べてスナップショットハンドリングの向上やカスタムパッケージング等の機能向上を意味します。<p class="paragraph"/><div class="hidden-block">In addition, the <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> command has been updated to print the dependency graph of the console, which helps in diagnosing dependency resolution failures. See the chapter on <a href="../guide/single.html#dependencyResolution" class="guide">Dependency Resolution</a> for more information.</div>
+そしてさらに、 <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> コマンドも改良され、依存問題の解決を手助けするために、依存関係のグラフがコンソールに表示されるようになりました。 詳しくは <a href="../guide/single.html#dependencyResolution" class="guide">依存性解決</a> のドキュメントを参照してください。<p class="paragraph"/><h4>コマンドライン</h4><p class="paragraph"/><div class="hidden-block">The <code>create-app</code> command will now by default generate the command line grailsw wrapper for newly created applications.  The <code>&#45;&#45;skip-wrapper</code> switch may be used to prevent the wrapper from being generated.</div>
+<code>create&#45;app</code> コマンドがデフォルトでgrailswラッパーを生成するようになりました。ラッパーを生成しない場合は <code>&#45;&#45;skip&#45;wrapper</code> オプションを指定してください。<p class="paragraph"/><div class="code"><pre>grails create&#45;app appname &#45;&#45;skip&#45;wrapper</pre></div><p class="paragraph"/><h4>データバインダー</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 includes a new data binding mechanism which is more flexible and easier to maintain than the data binder used in previous versions.  The new data binder includes numerous enhancements including:</div>
+Grails 2.3では、依存のバージョンよりもフレキシブルで保守性の高く簡単な新データバインダーを実装しています。<p class="paragraph"/><div class="hidden-block">
+<ul class="star">
+<li>Custom date formats on a per field basis using api:org.grails.databinding.BindingFormat</li>
+<li>User defined data converters using api:org.grails.databinding.converters.ValueConverter</li>
+<li>User defined formatted data converters using api:org.grails.databinding.BindingFormat and api:org.grails.databinding.converters.FormattedValueConverter</li>
+<li>Custom binding on a per class basis using api:org.grails.databinding.BindUsing</li>
+<li>Custom binding on a per field basis using api:org.grails.databinding.BindUsing</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li>フィールドごとのカスタム日付フォーマット - api:org.grails.databinding.BindingFormat</li>
+<li>ユーザ定義可能なデータコンバーター - api:org.grails.databinding.converters.ValueConverter</li>
+<li>ユーザ定義フォーマットデータコンバーター - api:org.grails.databinding.BindingFormat  api:org.grails.databinding.converters.FormattedValueConverter</li>
+<li>クラスごとのカスタムバインディング - api:org.grails.databinding.BindUsing</li>
+<li>フィールドごとのカスタムバインディング - api:org.grails.databinding.BindUsing</li>
+</ul><p class="paragraph"/><div class="hidden-block">See the <a href="../guide/single.html#dataBinding" class="guide">Data Binding</a> section for details.</div>
+詳細は <a href="../guide/single.html#dataBinding" class="guide">データバインディング</a> のセクションを参照してください。<p class="paragraph"/>
+<div class="hidden-block">The legacy data binder may be used by assinging <code>true</code> to the <code>grails.databinding.useLegacyBinder</code> property in <code>grails-app/conf/Config.groovy</code>.  Note that the legacy binder does not support any of the new features provided by the new data binder.</div>
+<code>grails-app/conf/Config.groovy</code> の <code>grails.databinding.useLegacyBinder</code> プロパティを <code>true</code> にすることで以前のデータバインダーに変更することができます。 以前のバインダーは今回実装された新機能には対応していません。<p class="paragraph"/>
 
 
 <h2 id="whatsNew22">1.2 Grails 2.2の新機能</h2>
@@ -2308,11 +2330,21 @@ Most Grails applications have runtime dependencies on several jar files that are
 
 <a name="3.7.11 Changing/Snapshot Dependencies"><!-- Legacy link --></a>
 <h2 id="changingDependencies">4.7.6 スナップショットと他の変化する依存関係</h2>
-<h4>Configuration Changing dependencies</h4><p class="paragraph"/>Typically, dependencies are constant. That is, for a given combination of <code>group</code>, <code>name</code> and <code>version</code> the jar (or plugin) that it refers to will never change. The Grails dependency management system uses this fact to cache dependencies in order to avoid having to download them from the source repository each time. Sometimes this is not desirable. For example, many developers use the convention of a  <em class="italic">snapshot</em>  (i.e. a dependency with a version number ending in “-SNAPSHOT”) that can change from time to time while still retaining the same version number. We call this a "changing dependency".<p class="paragraph"/>Whenever you have a changing dependency, Grails will always check the remote repository for a new version. More specifically, when a changing dependency is encountered during dependency resolution its last modified timestamp in the local cache is compared against the last modified timestamp in the dependency repositories. If the version on the remote server is deemed to be newer than the version in the local cache, the new version will be downloaded and used.<p class="paragraph"/>{info}
+<h4>Configuration Changing dependencies</h4><p class="paragraph"/>Typically, dependencies are constant. That is, for a given combination of <code>group</code>, <code>name</code> and <code>version</code> the jar (or plugin) that it refers to will never change. The Grails dependency management system uses this fact to cache dependencies in order to avoid having to download them from the source repository each time. Sometimes this is not desirable. For example, many developers use the convention of a  <em class="italic">snapshot</em>  (i.e. a dependency with a version number ending in “-SNAPSHOT”) that can change from time to time while still retaining the same version number. We call this a "changing dependency".<p class="paragraph"/>Whenever you have a changing dependency, Grails will always check the remote repository for a new version. More specifically, when a changing dependency is encountered during dependency resolution its last modified timestamp in the local cache is compared against the last modified timestamp in the dependency repositories. If the version on the remote server is deemed to be newer than the version in the local cache, the new version will be downloaded and used.<p class="paragraph"/><blockquote class="note">
 Be sure to read the next section on “Dependency Resolution Caching” in addition to this one as it affects changing dependencies.
-{info}<p class="paragraph"/>All dependencies (jars and plugins) with a version number ending in <code>-SNAPSHOT</code> are <strong class="bold">implicitly</strong> considered to be changing by Grails. You can also explicitly specify that a dependency is changing by setting the changing flag in the dependency DSL (This is only required for Ivy, Aether does not support the 'changing' flag and treats dependencies that end with -SNAPSHOT as changing):<p class="paragraph"/><div class="code"><pre>runtime ('org.my:lib:1.2.3') &#123;
+</blockquote><p class="paragraph"/>All dependencies (jars and plugins) with a version number ending in <code>-SNAPSHOT</code> are <strong class="bold">implicitly</strong> considered to be changing by Grails. You can also explicitly specify that a dependency is changing by setting the changing flag in the dependency DSL (This is only required for Ivy, Aether does not support the 'changing' flag and treats dependencies that end with -SNAPSHOT as changing):<p class="paragraph"/><div class="code"><pre>runtime ('org.my:lib:1.2.3') &#123;
     changing = <span class="java&#45;keyword">true</span>
-&#125;</pre></div><p class="paragraph"/><h4>Ivy and Changing dependencies</h4><p class="paragraph"/>For those used to Maven snapshot handling, if you use Aether dependency management you can expect the same semantics as Maven. If you choose to use Ivy there is a caveat to the support for changing dependencies that you should be aware of. Ivy will stop looking for newer versions of a dependency once it finds a remote repository that has the dependency.<p class="paragraph"/>Consider the following setup:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+&#125;</pre></div><p class="paragraph"/><h4>Aether and SNAPSHOT dependencies</h4><p class="paragraph"/>The semantics for handling snapshots when using Aether in Grails are the same as those when using the Maven build tool. The default snapshot check policy is to check once a day for a new version of the dependency. This means that if a new snapshot is published during the day to a remote repository you may not see that change unless you manually clear out your local snapshot.<p class="paragraph"/>If you wish to change the snapshot update policy you can do so by configuring an <code>updatePolicy</code> for the repository where the snapshot was resolved from, for example:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+    mavenCentral &#123;
+        updatePolicy <span class="java&#45;quote">"interval:1"</span>
+    &#125;
+&#125;</pre></div><p class="paragraph"/>The above example configures an update policy that checks once a minute for changes. Note that that an <code>updatePolicy</code> like the above will seriously impact performance of dependency resolution. The possibly configuration values for <code>updatePolicy</code> are as follows:
+<ul class="star">
+<li><code>never</code> - Never check for new snapshots</li>
+<li><code>always</code> - Always check for new snapshots</li>
+<li><code>daily</code> - Check once a day for new snapshots (the default)</li>
+<li><code>interval:x</code> - Check once every x minutes for new snapshots</li>
+</ul><p class="paragraph"/><h4>Ivy and Changing dependencies</h4><p class="paragraph"/>For those used to Maven snapshot handling, if you use Aether dependency management you can expect the same semantics as Maven. If you choose to use Ivy there is a caveat to the support for changing dependencies that you should be aware of. Ivy will stop looking for newer versions of a dependency once it finds a remote repository that has the dependency.<p class="paragraph"/>Consider the following setup:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     repositories &#123;
         mavenLocal()
         mavenRepo <span class="java&#45;quote">"http://my.org/repo"</span>
@@ -2988,7 +3020,7 @@ Grailsアプリケーションを構築するときは、解決しようとし�
 A many-to-one relationship is the simplest kind, and is defined with a property of the type of another domain class. Consider this example:<p class="paragraph"/><h5>Example A</h5><p class="paragraph"/><div class="code"><pre>class Face &#123;
     Nose nose
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Nose &#123;
-&#125;</pre></div><p class="paragraph"/>In this case we have a unidirectional many-to-one relationship from <code>Face</code> to <code>Nose</code>. To make this relationship bidirectional define the other side as follows:<p class="paragraph"/><h5>Example B</h5><p class="paragraph"/><div class="code"><pre>class Face &#123;
+&#125;</pre></div><p class="paragraph"/>In this case we have a unidirectional many-to-one relationship from <code>Face</code> to <code>Nose</code>. To make this relationship bidirectional define the other side as follows (and see the section on controlling the ends of the association just below):<p class="paragraph"/><h5>Example B</h5><p class="paragraph"/><div class="code"><pre>class Face &#123;
     Nose nose
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Nose &#123;
     <span class="java&#45;keyword">static</span> belongsTo = &#91;face:Face&#93;
@@ -3003,7 +3035,15 @@ f.delete() // both Face and Nose deleted</pre></div><p class="paragraph"/>To mak
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Nose &#123;
     Face face
-&#125;</pre></div>
+&#125;</pre></div><p class="paragraph"/><h5>Controlling the ends of the association</h5><p class="paragraph"/>Occasionally you may find yourself with domain classes that have multiple properties of the same type. They may even be self-referential, i.e. the association property has the same type as the domain class it's in. Such situations can cause problems because Grails may guess incorrectly the type of the association. Consider this simple class:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+    <span class="java&#45;object">String</span> name
+    Person parent<p class="paragraph"/>    <span class="java&#45;keyword">static</span> belongsTo = &#91; supervisor: Person &#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123; supervisor nullable: <span class="java&#45;keyword">true</span> &#125;
+&#125;</pre></div><p class="paragraph"/>As far as Grails is concerned, the <code>parent</code> and <code>supervisor</code> properties are two directions of the same association. So when you set the <code>parent</code> property on a <code>Person</code> instance, Grails will automatically set the <code>supervisor</code> property on the other <code>Person</code> instance. This may be what you want, but if you look at the class, what we in fact have are two unidirectional relationships.<p class="paragraph"/>To guide Grails to the correct mapping, you can tell it that a particular association is unidirectional through the <code>mappedBy</code> property:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+    <span class="java&#45;object">String</span> name
+    Person parent<p class="paragraph"/>    <span class="java&#45;keyword">static</span> belongsTo = &#91; supervisor: Person &#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mappedBy = &#91; supervisor: <span class="java&#45;quote">"none"</span>, parent: <span class="java&#45;quote">"none"</span> &#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123; supervisor nullable: <span class="java&#45;keyword">true</span> &#125;
+&#125;</pre></div><p class="paragraph"/>You can also replace "none" with any property name of the target class. And of course this works for normal domain classes too, not just self-referential ones. Nor is the <code>mappedBy</code> property limited to many-to-one and one-to-one associations: it also works for one-to-many and many-to-many associations as you'll see in the next section.<p class="paragraph"/><blockquote class="warning">
+If you have a property called "none" on your domain class, this approach won't work currently! The "none" property will be treated as the reverse direction of the association (or the "back reference"). Fortunately, "none" is not a common domain class property name.
+</blockquote>
 
 
 <a name="5.2.1.2 One-to-many"><!-- Legacy link --></a>
@@ -4195,9 +4235,11 @@ println p.firstName</pre></div><p class="paragraph"/>Domain classes mapped with 
 &#125;</pre></div><p class="paragraph"/>In this case the <code>address</code> table will have an additional two columns called <code>person_first_name</code> and <code>person_last_name</code>. If you wish the change the mapping of these columns then you can do so using the following technique:<p class="paragraph"/><div class="code"><pre>class Address &#123;
     Person person
     <span class="java&#45;keyword">static</span> mapping = &#123;
-        person &#123;
-            column: <span class="java&#45;quote">"FirstName"</span>
-            column: <span class="java&#45;quote">"LastName"</span>
+        columns &#123;
+		    person &#123;
+                column name: <span class="java&#45;quote">"FirstName"</span>
+                column name: <span class="java&#45;quote">"LastName"</span>
+			&#125;
         &#125;
     &#125;
 &#125;</pre></div>
@@ -10580,13 +10622,104 @@ es.subtitle=...</pre></div><p class="paragraph"/>For each language translation, 
 
 <h1>Document Translation Report.</h1>
 <ul class="star">
-<li><strong class="bold">File Count</strong> - 273</li>
-<li><strong class="bold">Done</strong> - 159</li>
-<li><strong class="bold">TODO</strong> - 112</li>
+<li><strong class="bold">File Count</strong> - 272</li>
+<li><strong class="bold">Done</strong> - 190</li>
+<li><strong class="bold">TODO</strong> - 80</li>
 <li><strong class="bold">Not found or new</strong> - 2</li>
 </ul><p class="paragraph"/><h2>Original document updated after translation.:</h2><p class="paragraph"/><strong class="bold">./guide/gettingStarted/runningAnApplication.gdoc</strong><p class="paragraph"/><div class="code"><pre>19 : | Application loaded in interactive mode. Type 'stop&#45;app' to shutdown.
 21 : grails&#62; stop&#45;app
-25 : | Application loaded in interactive mode. Type 'stop&#45;app' to shutdown.</pre></div><p class="paragraph"/><strong class="bold">./guide/webServices/SOAP.gdoc</strong><p class="paragraph"/><div class="code"><pre>1  : Grails does not feature SOAP support out&#45;of&#45;the&#45;box, but there are several plugins that can help <span class="java&#45;keyword">for</span> both producing SOAP servers and calling SOAP web services.
+25 : | Application loaded in interactive mode. Type 'stop&#45;app' to shutdown.</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/controllers/dataBinding.gdoc</strong><p class="paragraph"/><div class="code"><pre>242: The &#91;BindUsing|api:org.grails.databinding.BindUsing&#93; annotation may be used to define a custom binding mechanism <span class="java&#45;keyword">for</span> a particular field in a class.  Any time data binding is being applied to the field the closure value of the annotation will be invoked with 2 arguments.  The first argument is the object that data binding is being applied to and the second argument is a <code>Map</code> which is the data source <span class="java&#45;keyword">for</span> the data binding.  The value returned from the closure will be bound to the property.  The following example would result in the upper <span class="java&#45;keyword">case</span> version of the <code>name</code> value in the source being applied to the <code>name</code> field during data binding.
+245: <span class="java&#45;keyword">import</span> org.grails.databinding.BindUsing
+247: class SomeClass &#123;
+248:     @BindUsing(&#123;
+249:         obj, source &#45;&#62; source&#91;'name'&#93;?.toUpperCase()
+250:     &#125;)
+251:     <span class="java&#45;object">String</span> name
+255: The &#91;BindUsing|api:org.grails.databinding.BindUsing&#93; annotation may be used to define a custom binding mechanism <span class="java&#45;keyword">for</span> all of the fields on a particular class. When the annotation is applied to a class, the value assigned to the annotation should be a class which <span class="java&#45;keyword">implements</span> the &#91;BindingHelper|api:org.grails.databinding.BindingHelper&#93; <span class="java&#45;keyword">interface</span>.  An instance of that class will be used any time a value is bound to a property in the class that <span class="java&#45;keyword">this</span> annotation has been applied to. 
+258: @BindUsing(SomeClassWhichImplementsBindingHelper)
+259: class SomeClass &#123;
+260:     <span class="java&#45;object">String</span> someProperty
+261:     <span class="java&#45;object">Integer</span> someOtherProperty
+267: The binder will <span class="java&#45;keyword">do</span> a lot of type conversion automatically.  Some applications may want to define their own mechanism <span class="java&#45;keyword">for</span> converting values and a simple way to <span class="java&#45;keyword">do</span> <span class="java&#45;keyword">this</span> is to write a class which <span class="java&#45;keyword">implements</span> &#91;ValueConverter|api:org.grails.databinding.converters.ValueConverter&#93; and register an instance of that class as a bean in the Spring application context.
+270: <span class="java&#45;keyword">package</span> com.myapp.converters
+272: <span class="java&#45;keyword">import</span> org.grails.databinding.converters.ValueConverter
+274: /&#42;&#42;
+275:  &#42; A custom converter which will convert <span class="java&#45;object">String</span> of the
+276:  &#42; form 'city:state' into an Address object.
+277:  &#42;/
+278: class AddressValueConverter <span class="java&#45;keyword">implements</span> ValueConverter &#123;
+280:     def convert(value) &#123;
+281:         def pieces = value.split(':')
+282:         <span class="java&#45;keyword">new</span> com.myapp.Address(city: pieces&#91;0&#93;, state: pieces&#91;1&#93;)
+283:     &#125;
+285:     <span class="java&#45;object">Class</span>&#60;?&#62; getTargetType() &#123;
+286:         com.myapp.Address
+287:     &#125;
+291: An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented ValueConverter will be automatically plugged in to the data binding process.
+294: // grails&#45;app/conf/spring/resources.groovy
+296: beans = &#123;
+298:     addressConverter com.myapp.converters.AddressValueConverter
+306: class Person &#123;
+307:     <span class="java&#45;object">String</span> firstName
+308:     Address homeAddress
+311: class Address &#123;
+312:     <span class="java&#45;object">String</span> city
+313:     <span class="java&#45;object">String</span> state
+316: def person = <span class="java&#45;keyword">new</span> Person()
+317: person.properties = &#91;firstName: 'Jeff', homeAddress: <span class="java&#45;quote">"O'Fallon:Missouri"</span>&#93;
+318: assert person.firstName == 'Jeff'
+319: assert person.homeAddress.city = <span class="java&#45;quote">"O'Fallon"</span>
+320: assert person.homeAddress.state = 'Missouri'
+325: A custom date format may be specified to be used when binding a <span class="java&#45;object">String</span> to a Date value by applying the &#91;BindingFormat|api:org.grails.databinding.BindingFormat&#93; annotation to a Date field.
+328: <span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat
+330: class Person &#123;
+331:     @BindingFormat('MMddyyyy')
+332:     Date birthDate
+338: You may supply your own handler <span class="java&#45;keyword">for</span> the &#91;BindingFormat|api:org.grails.databinding.BindingFormat&#93; annotation by writing a class which <span class="java&#45;keyword">implements</span> the &#91;FormattedValueConverter|api:org.grails.databinding.converters.FormattedValueConverter&#93; <span class="java&#45;keyword">interface</span> and regiserting an instance of that class as a bean in the Spring application context.  Below is an example of a trivial custom <span class="java&#45;object">String</span> formatter that might convert the <span class="java&#45;keyword">case</span> of a <span class="java&#45;object">String</span> based on the value assigned to the BindingFormat annotation.
+341: <span class="java&#45;keyword">package</span> com.myapp.converters
+343: <span class="java&#45;keyword">import</span> org.grails.databinding.converters.FormattedValueConverter
+345: class FormattedStringValueConverter <span class="java&#45;keyword">implements</span> FormattedValueConverter &#123;
+346:     def convert(value, <span class="java&#45;object">String</span> format) &#123;
+347:         <span class="java&#45;keyword">if</span>('UPPERCASE' == format) &#123;
+348:             value = value.toUpperCase()
+349:         &#125; <span class="java&#45;keyword">else</span> <span class="java&#45;keyword">if</span>('LOWERCASE' == format) &#123;
+350:             value = value.toLowerCase()
+351:         &#125;
+353:     &#125;
+355:     <span class="java&#45;object">Class</span> getTargetType() &#123;
+356:         // specifies the type to which <span class="java&#45;keyword">this</span> converter may be applied
+357:         <span class="java&#45;object">String</span>
+358:     &#125;
+362: An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented FormattedValueConverter will be automatically plugged in to the data binding process.
+365: // grails&#45;app/conf/spring/resources.groovy
+367: beans = &#123;
+369:     formattedStringConverter com.myapp.converters.FormattedStringValueConverter
+376: With that in place the BindUsing annotation may be applied to <span class="java&#45;object">String</span> fields to inform the data binder to take advantage of the custom converter.
+379: <span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat
+381: class Person &#123;
+382:     @BindingFormat('UPPERCASE')
+383:     <span class="java&#45;object">String</span> someUpperCaseString
+385:     @BindingFormat('LOWERCASE')
+386:     <span class="java&#45;object">String</span> someLowerCaseString
+388:     <span class="java&#45;object">String</span> someOtherString</pre></div><p class="paragraph"/><strong class="bold">./guide/introduction/whatsNew23.gdoc</strong><p class="paragraph"/><div class="code"><pre>15 : The <code>create&#45;app</code> command will now by <span class="java&#45;keyword">default</span> generate the command line grailsw wrapper <span class="java&#45;keyword">for</span> newly created applications.  The <code>&#45;&#45;skip&#45;wrapper</code> <span class="java&#45;keyword">switch</span> may be used to prevent the wrapper from being generated.</pre></div><p class="paragraph"/><strong class="bold">./guide/gettingStarted/requirements.gdoc</strong><p class="paragraph"/><div class="code"><pre>9  : &#123;note&#125;
+10 : A JDK is required in your Grails development environment. A JRE is not sufficient.
+11 : &#123;note&#125;</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/contentNegotiation.gdoc</strong><p class="paragraph"/><div class="code"><pre>25 : Let's say a controller action can <span class="java&#45;keyword">return</span> a resource in a variety of formats: HTML, XML, and JSON. What format will the client get? The easiest and most reliable way <span class="java&#45;keyword">for</span> the client to control <span class="java&#45;keyword">this</span> is through a <code>format</code> URL parameter.
+27 : So <span class="java&#45;keyword">if</span> you, as a browser or some other client, want a resource as XML, you can use a URL like <span class="java&#45;keyword">this</span>:
+30 : http://my.domain.org/books?format=xml
+33 : The result of <span class="java&#45;keyword">this</span> on the server side is a <code>format</code> property on the <code>response</code> object with the value <code>xml</code> . You could code your controller action to <span class="java&#45;keyword">return</span> XML based on <span class="java&#45;keyword">this</span> property, but you can also make use of the controller&#45;specific <code>withFormat()</code> method:
+36 : <span class="java&#45;keyword">import</span> grails.converters.JSON
+46 :             json &#123; render books as JSON &#125;
+53 : In <span class="java&#45;keyword">this</span> example, Grails will only execute the block inside <code>withFormat()</code> that matches the requested content type. So <span class="java&#45;keyword">if</span> the preferred format is <code>html</code> then Grails will execute the <code>html()</code> call only. Each 'block' can either be a map model <span class="java&#45;keyword">for</span> the corresponding view (as we are doing <span class="java&#45;keyword">for</span> 'html' in the above example) or a closure. The closure can contain any standard action code, <span class="java&#45;keyword">for</span> example it can <span class="java&#45;keyword">return</span> a model or render content directly.
+55 : There is a special format, <span class="java&#45;quote">"all"</span>, that is handled differently from the explicit formats. If <span class="java&#45;quote">"all"</span> is specified (normally <span class="java&#45;keyword">this</span> happens through the Accept header &#45; see below), then the first block of <code>withFormat()</code> is executed. You should not add an explicit <span class="java&#45;quote">"all"</span> block. In the above example, a format of <span class="java&#45;quote">"all"</span> will trigger the <code>html</code> handler.
+69 : which simply means anything. However, newer browsers send more interesting values such as <span class="java&#45;keyword">this</span> one sent by Firefox 3:
+72 : text/xml, application/xml, application/xhtml+xml, text/html;q=0.9, &#10;73 :     text/plain;q=0.8, image/png, &#42;/&#42;;q=0.5
+76 : This particular accept header is unhelpful because it indicates that XML is the preferred response format whereas the user is really expecting HTML. That's why Grails ignores the accept header by <span class="java&#45;keyword">default</span>. However, non&#45;browser clients are typically more specific in their requirements and can send accept headers such as
+79 : application/json
+82 : If you want to support such clients and their accept headers, then simply add (or change) the <code>grails.mime.use.accept.header</code> setting in <code>Config.groovy</code> :
+85 : grails.mime.use.accept.header = <span class="java&#45;keyword">true</span>
+88 : With <span class="java&#45;keyword">this</span> setting, Grails parses the incoming accept header and sets the appropriate value <span class="java&#45;keyword">for</span> the <code>format</code> response property. For example, <span class="java&#45;keyword">if</span> it sees the accept header above ('application/json') it will set <code>format</code> to <code>json</code> as you'd expect. And of course <span class="java&#45;keyword">this</span> works with the <code>withFormat()</code> method in just the same way as when the <code>format</code> URL parameter is set (although the URL parameter takes precedence).
+90 : An accept header of '&#42;/&#42;' results in a value of <code>all</code> <span class="java&#45;keyword">for</span> the <code>format</code> property.
+93 : If you enable accept header parsing, it's usually best to handle XML and JSON responses in a different action from the HTML ones due to the problems with various browsers. You can then use <code>withFormat()</code> exclusively <span class="java&#45;keyword">for</span> the REST <span class="java&#45;keyword">interface</span> and avoid it <span class="java&#45;keyword">for</span> actions that render the normal HTML pages.</pre></div><p class="paragraph"/><strong class="bold">./guide/webServices/SOAP.gdoc</strong><p class="paragraph"/><div class="code"><pre>1  : Grails does not feature SOAP support out&#45;of&#45;the&#45;box, but there are several plugins that can help <span class="java&#45;keyword">for</span> both producing SOAP servers and calling SOAP web services.
 5  : To call SOAP web services there are generally 2 approaches taken, one is to use a tool to generate client stubs, the other is to manually construct the SOAP calls. The former can be easier to use, but the latter provides more flexibility / control.
 7  : The &#91;CXF client plugin|http://grails.org/plugin/cxf&#45;client&#93; uses the CXF framework, which includes a <code>wsdl2java</code> tool <span class="java&#45;keyword">for</span> generating a client. There is nothing Groovy/Grails specific here in the generated code as it simply provides a Java API which you can invoke to call SOAP web services.
 9  : See the documentation on the &#91;CXF client plugin|https://github.com/ctoestreich/cxf&#45;client&#93; <span class="java&#45;keyword">for</span> further information.
@@ -10619,7 +10752,9 @@ es.subtitle=...</pre></div><p class="paragraph"/>For each language translation, 
 70 : This is not recommended however, as it will re&#45;enable the previous behavior of using both POM data and BuildConfig to resolve dependencies. The most commmon problem you will face is with plugins that express their dependencies in a scope that is not valid inside a POM (example: <span class="java&#45;quote">"build"</span> scope).
 72 : Plugins like <span class="java&#45;keyword">this</span> will need to be re&#45;publish with a corrected scope of <span class="java&#45;quote">"compile"</span>. If you then specify the plugin as <span class="java&#45;quote">"build"</span> scope in your application, transitive compile and runtime scoped dependencies will be converted to <span class="java&#45;quote">"build"</span> scope as well.</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/ajax.gdoc</strong><p class="paragraph"/><div class="code"><pre>3  : &#123;note&#125;
 4  : Note: JavaScript examples use the jQuery library.
-5  : &#123;note&#125;</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/ajax/ajaxOnTheServer.gdoc</strong><p class="paragraph"/><div class="code"><pre>50 : function updateBook(data) &#123;
+5  : &#123;note&#125;</pre></div><p class="paragraph"/><strong class="bold">./guide/GORM/advancedGORMFeatures/ormdsl/caching.gdoc</strong><p class="paragraph"/><div class="code"><pre>7  :     cache.use_second_level_cache=<span class="java&#45;keyword">true</span>
+8  :     cache.use_query_cache=<span class="java&#45;keyword">true</span>
+9  :     cache.provider_class='org.hibernate.cache.EhCacheProvider'</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/ajax/ajaxOnTheServer.gdoc</strong><p class="paragraph"/><div class="code"><pre>50 : function updateBook(data) &#123;
 51 :     $(<span class="java&#45;quote">"&#35;book"</span> + data.id + <span class="java&#45;quote">"_title"</span>).html( data.title );
 53 : &#60;/g:javascript&#62;
 54 : &#60;g:remoteLink action=<span class="java&#45;quote">"showBook"</span> id=<span class="java&#45;quote">"$&#123;book.id&#125;"</span> onSuccess=<span class="java&#45;quote">"updateBook(data)"</span>&#62;
@@ -10642,19 +10777,25 @@ es.subtitle=...</pre></div><p class="paragraph"/>For each language translation, 
 43 : If you see the error <span class="java&#45;quote">"Server failed to start <span class="java&#45;keyword">for</span> port 8080: Address already in use"</span>, then it means another server is running on that port. You can easily work around <span class="java&#45;keyword">this</span> by running your server on a different port using <code>&#45;Dserver.port=9090 run&#45;app</code>. '9090' is just an example: you can pretty much choose anything within the range 1024 to 49151.
 46 : The result will look something like <span class="java&#45;keyword">this</span>:
 50 : This is the Grails intro page which is rendered by the <code>grails&#45;app/view/index.gsp</code> file. It detects the presence of your controllers and provides links to them. You can click on the <span class="java&#45;quote">"HelloController"</span> link to see our custom page containing the text <span class="java&#45;quote">"Hello World&#33;"</span>. Voila&#33; You have your first working Grails application.
-52 : One <span class="java&#45;keyword">final</span> thing: a controller can contain many actions, each of which corresponds to a different page (ignoring AJAX at <span class="java&#45;keyword">this</span> point). Each page is accessible via a unique URL that is composed from the controller name and the action name: /&#60;appname&#62;/&#60;controller&#62;/&#60;action&#62;. This means you can access the Hello World page via &#91;/helloworld/hello/index|http://localhost:8080/helloworld/hello/index&#93;, where 'hello' is the controller name (remove the 'Controller' suffix from the class name and lower&#45;<span class="java&#45;keyword">case</span> the first letter) and 'index' is the action name. But you can also access the page via the same URL without the action name: <span class="java&#45;keyword">this</span> is because 'index' is the  <em class="italic">default action</em> . See the end of the &#91;controllers and actions|guide:understandingControllersAndActions&#93; section of the user guide to find out more on <span class="java&#45;keyword">default</span> actions.</pre></div><p class="paragraph"/><strong class="bold">./guide/plugins/creatingAndInstallingPlugins.gdoc</strong><p class="paragraph"/><div class="code"><pre>11 : Make sure the plugin name does not contain more than one capital in a row, or it won't work. Camel <span class="java&#45;keyword">case</span> is fine, though.
-131: The Artifactory repository <span class="java&#45;keyword">for</span> Grails now includes all the dependencies <span class="java&#45;keyword">for</span> published plugins. So, <span class="java&#45;keyword">if</span> you are using inline plugins that have dependencies, it is necessary to <span class="java&#45;keyword">do</span> a secondary resolve because these dependencies might not be in the repository. Therefore, you should set <code>legacyResolve</code> to <code><span class="java&#45;keyword">true</span></code> in your <code>BuildConfig.groovy</code> <span class="java&#45;keyword">if</span> you are using inline plugins with dependencies.</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/controllers/commandObjects.gdoc</strong><p class="paragraph"/><div class="code"><pre>1  : Grails controllers support the concept of command objects. A command object is a class that is used in conjunction with &#91;data binding|guide:dataBinding&#93;, usually to allow validation of data that may not fit into an existing domain class.
+52 : One <span class="java&#45;keyword">final</span> thing: a controller can contain many actions, each of which corresponds to a different page (ignoring AJAX at <span class="java&#45;keyword">this</span> point). Each page is accessible via a unique URL that is composed from the controller name and the action name: /&#60;appname&#62;/&#60;controller&#62;/&#60;action&#62;. This means you can access the Hello World page via &#91;/helloworld/hello/index|http://localhost:8080/helloworld/hello/index&#93;, where 'hello' is the controller name (remove the 'Controller' suffix from the class name and lower&#45;<span class="java&#45;keyword">case</span> the first letter) and 'index' is the action name. But you can also access the page via the same URL without the action name: <span class="java&#45;keyword">this</span> is because 'index' is the  <em class="italic">default action</em> . See the end of the &#91;controllers and actions|guide:understandingControllersAndActions&#93; section of the user guide to find out more on <span class="java&#45;keyword">default</span> actions.</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/controllers/commandObjects.gdoc</strong><p class="paragraph"/><div class="code"><pre>1  : Grails controllers support the concept of command objects. A command object is a class that is used in conjunction with &#91;data binding|guide:dataBinding&#93;, usually to allow validation of data that may not fit into an existing domain class.
 3  : &#123;note&#125;
 4  : Note: A class is only considered to be a command object when it is used as a parameter of an action.
 5  : &#123;note&#125;
 24 : In <span class="java&#45;keyword">this</span> example, the command object is marked with the <code>Validateable</code> annotation. The <code>Validateable</code> annotation allows the definition of &#91;constraints|guide:constraints&#93; just like in &#91;domain classes|guide:GORM&#93;. If the command object is defined in the same source file as the controller that is using it, Grails will automatically mark it as <code>Validateable</code>. It is not required that command object classes be validateable.
-30 : Before the controller action is executed Grails will automatically create an instance of the command object class and populate its properties by binding the request parameters.  If the command object class is marked with <code>Validateable</code> then the command object will be validated. For example:</pre></div><p class="paragraph"/><strong class="bold">./guide/introduction/whatsNew22.gdoc</strong><p class="paragraph"/><div class="code"><pre>59 : &#42; The ability to deploy other Grails/Spring applications in parallel without conflicting dependencies</pre></div><p class="paragraph"/><strong class="bold">./guide/GORM/quickStartGuide.gdoc</strong><p class="paragraph"/><div class="code"><pre>21 : If you have the <code>dbCreate</code> property set to <span class="java&#45;quote">"update"</span>, <span class="java&#45;quote">"create"</span> or <span class="java&#45;quote">"create&#45;drop"</span> on your &#91;DataSource|guide:dataSource&#93;, Grails will automatically generate/modify the database tables <span class="java&#45;keyword">for</span> you.</pre></div><p class="paragraph"/><h2>Not done.</h2>
+30 : Before the controller action is executed Grails will automatically create an instance of the command object class and populate its properties by binding the request parameters.  If the command object class is marked with <code>Validateable</code> then the command object will be validated. For example:</pre></div><p class="paragraph"/><strong class="bold">./guide/testing/unitTesting.gdoc</strong><p class="paragraph"/><div class="code"><pre>25 : Note that you're only ever likely to use the first two explicitly. The <span class="java&#45;keyword">rest</span> are there <span class="java&#45;keyword">for</span> reference.</pre></div><p class="paragraph"/><strong class="bold">./guide/introduction/whatsNew22.gdoc</strong><p class="paragraph"/><div class="code"><pre>59 : &#42; The ability to deploy other Grails/Spring applications in parallel without conflicting dependencies</pre></div><p class="paragraph"/><strong class="bold">./guide/GORM/quickStartGuide.gdoc</strong><p class="paragraph"/><div class="code"><pre>21 : If you have the <code>dbCreate</code> property set to <span class="java&#45;quote">"update"</span>, <span class="java&#45;quote">"create"</span> or <span class="java&#45;quote">"create&#45;drop"</span> on your &#91;DataSource|guide:dataSource&#93;, Grails will automatically generate/modify the database tables <span class="java&#45;keyword">for</span> you.</pre></div><p class="paragraph"/><strong class="bold">./guide/plugins/creatingAndInstallingPlugins.gdoc</strong><p class="paragraph"/><div class="code"><pre>11 : Make sure the plugin name does not contain more than one capital in a row, or it won't work. Camel <span class="java&#45;keyword">case</span> is fine, though.
+113: You can specify what to exclude in addition to the <span class="java&#45;keyword">default</span> excludes by adding elements to the <code>pluginExcludes</code> descriptor property (described below). In addition, there are two ways to configure the contents of the plugin ZIP or JAR file.
+115: One is to create an event handler <span class="java&#45;keyword">for</span> the <code>CreatePluginArchiveStart</code> event, which is fired after all of the plugin files have been copied to the staging directory. By adding an event handler you can add, modify, or delete files as needed. Add the handler to <code>_Events.groovy</code> in the <code>scripts</code> directory, <span class="java&#45;keyword">for</span> example
+118: eventCreatePluginArchiveStart = &#123; stagingDir &#45;&#62;
+119:    // update staging directory contents here
+123: You can customize the location of the staging directory with the <code>grails.project.plugin.staging.dir</code> attribute in <code>BuildConfig.groovy</code> or as  as system property. 
+125: Note that there is also a <code>CreatePluginArchiveEnd</code> event which is fired after the ZIP or JAR is packaged.
+127: You can also <span class="java&#45;keyword">do</span> <span class="java&#45;keyword">this</span> work in a Closure in <code>BuildConfig.groovy</code> with the property <code>grails.plugin.resources</code> which is analogous to the <code>grails.war.resources</code> property, e.g.
+130: grails.plugin.resources = &#123; stagingDir &#45;&#62;
+131:    // update staging directory contents here
+155: The Artifactory repository <span class="java&#45;keyword">for</span> Grails now includes all the dependencies <span class="java&#45;keyword">for</span> published plugins. So, <span class="java&#45;keyword">if</span> you are using inline plugins that have dependencies, it is necessary to <span class="java&#45;keyword">do</span> a secondary resolve because these dependencies might not be in the repository. Therefore, you should set <code>legacyResolve</code> to <code><span class="java&#45;keyword">true</span></code> in your <code>BuildConfig.groovy</code> <span class="java&#45;keyword">if</span> you are using inline plugins with dependencies.</pre></div><p class="paragraph"/><h2>Not done.</h2>
 <ul class="star">
-<li> <strong class="bold">(original file updated)</strong> ../en/guide/.DS_Store</li>
 <li>../en/guide/GORM/advancedGORMFeatures/defaultSortOrder.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/eventsAutoTimestamping.gdoc</li>
-<li>../en/guide/GORM/advancedGORMFeatures/ormdsl.gdoc</li>
-<li>../en/guide/GORM/advancedGORMFeatures/ormdsl/caching.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/compositePrimaryKeys.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/customCascadeBehaviour.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/customHibernateTypes.gdoc</li>
@@ -10662,36 +10803,19 @@ es.subtitle=...</pre></div><p class="paragraph"/>For each language translation, 
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/databaseIndices.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/derivedProperties.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/fetchingDSL.gdoc</li>
-<li>../en/guide/GORM/advancedGORMFeatures/ormdsl/identity.gdoc</li>
-<li>../en/guide/GORM/advancedGORMFeatures/ormdsl/inheritanceStrategies.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/optimisticLockingAndVersioning.gdoc</li>
-<li>../en/guide/GORM/advancedGORMFeatures/ormdsl/tableAndColumnNames.gdoc</li>
 <li>../en/guide/GORM/domainClasses/gormAssociation/basicCollectionTypes.gdoc</li>
 <li>../en/guide/GORM/domainClasses/gormAssociation/manyToMany.gdoc</li>
 <li>../en/guide/GORM/domainClasses/gormAssociation/manyToOneAndOneToOne.gdoc</li>
 <li>../en/guide/GORM/domainClasses/gormAssociation/oneToMany.gdoc</li>
 <li>../en/guide/GORM/domainClasses/gormComposition.gdoc</li>
 <li>../en/guide/GORM/domainClasses/inheritanceInGORM.gdoc</li>
-<li>../en/guide/GORM/gormConstraints.gdoc</li>
-<li>../en/guide/GORM/persistenceBasics/cascades.gdoc</li>
-<li>../en/guide/GORM/persistenceBasics/deletingObjects.gdoc</li>
-<li>../en/guide/GORM/persistenceBasics/fetching.gdoc</li>
 <li>../en/guide/GORM/persistenceBasics/locking.gdoc</li>
 <li>../en/guide/GORM/persistenceBasics/modificationChecking.gdoc</li>
-<li>../en/guide/GORM/persistenceBasics/savingAndUpdating.gdoc</li>
-<li>../en/guide/GORM/programmaticTransactions.gdoc</li>
-<li>../en/guide/GORM/querying.gdoc</li>
 <li>../en/guide/GORM/querying/criteria.gdoc</li>
 <li>../en/guide/GORM/querying/detachedCriteria.gdoc</li>
-<li>../en/guide/GORM/querying/finders.gdoc</li>
 <li>../en/guide/GORM/querying/hql.gdoc</li>
-<li>../en/guide/GORM/querying/whereQueries.gdoc</li>
-<li>../en/guide/async.gdoc</li>
-<li>../en/guide/async/asyncGorm.gdoc</li>
-<li>../en/guide/async/asyncRequests.gdoc</li>
-<li>../en/guide/async/asyncServletApi.gdoc</li>
 <li>../en/guide/async/grailsEvents.gdoc</li>
-<li>../en/guide/async/promises.gdoc</li>
 <li>../en/guide/commandLine/forkedMode.gdoc</li>
 <li>../en/guide/commandLine/interactiveMode.gdoc</li>
 <li>../en/guide/commandLine/wrapper.gdoc</li>
@@ -10729,30 +10853,18 @@ es.subtitle=...</pre></div><p class="paragraph"/>For each language translation, 
 <li>../en/guide/contributing/issues.gdoc</li>
 <li>../en/guide/contributing/patchesCore.gdoc</li>
 <li>../en/guide/contributing/patchesDoc.gdoc</li>
-<li>../en/guide/deployment.gdoc</li>
 <li>../en/guide/hibernate.gdoc</li>
 <li>../en/guide/hibernate/addingConstraints.gdoc</li>
 <li>../en/guide/hibernate/mappingWithHibernateAnnotations.gdoc</li>
 <li>../en/guide/hibernate/usingHibernateXMLMappingFiles.gdoc</li>
-<li>../en/guide/introduction/whatsNew23.gdoc</li>
 <li>../en/guide/links.yml</li>
 <li>../en/guide/rewriteRules.txt</li>
-<li>../en/guide/security/securityPlugins/springSecurity.gdoc</li>
 <li>../en/guide/services/declarativeTransactions/transactionsRollbackAndTheSession.gdoc</li>
-<li>../en/guide/spring.gdoc</li>
-<li>../en/guide/spring/propertyOverrideConfiguration.gdoc</li>
-<li>../en/guide/spring/propertyPlaceholderConfiguration.gdoc</li>
-<li>../en/guide/spring/springdsl.gdoc</li>
 <li>../en/guide/spring/springdslAdditional.gdoc</li>
 <li>../en/guide/spring/theBeanBuilderDSLExplained.gdoc</li>
 <li>../en/guide/spring/theUnderpinningsOfGrails.gdoc</li>
 <li>../en/guide/testing/integrationTesting.gdoc</li>
-<li>../en/guide/testing/unitTesting.gdoc</li>
-<li>../en/guide/testing/unitTesting/mockingCollaborators.gdoc</li>
-<li>../en/guide/testing/unitTesting/unitTestingControllers.gdoc</li>
 <li>../en/guide/testing/unitTesting/unitTestingFilters.gdoc</li>
-<li>../en/guide/testing/unitTesting/unitTestingTagLibraries.gdoc</li>
-<li>../en/guide/testing/unitTesting/unitTestingURLMappings.gdoc</li>
 <li>../en/guide/theWebLayer/urlmappings/namespacedControllers.gdoc</li>
 <li> <strong class="bold">(original file updated)</strong> ../en/guide/toc.yml</li>
 <li>../en/guide/validation.gdoc</li>

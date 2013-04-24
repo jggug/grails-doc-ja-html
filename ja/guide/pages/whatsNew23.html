@@ -139,7 +139,29 @@ function addJsClass() {
                 
 
 <h2 id="whatsNew23">1.1 Grails 2.3の新機能</h2>
-<h4>Improved Dependency Management</h4><p class="paragraph"/>The default dependency resolution engine used by Grails has been changed to <a href="http://eclipse.org/aether" target="blank">Aether</a>, the dependency resolution engine used by Maven. Which engine you use can be configured in <code>BuildConfig</code>:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolver = <span class="java&#45;quote">"maven"</span> // or ivy</pre></div><p class="paragraph"/>Using Aether dependency resolution in Grails results in the same behavior as when using the Maven build tool, meaning improved snapshot handling, understanding of custom packaging types and so on.<p class="paragraph"/>In addition, the <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> command has been updated to print the dependency graph of the console, which helps in diagnosing dependency resolution failures. See the chapter on <a href="../guide/single.html#dependencyResolution" class="guide">Dependency Resolution</a> for more information.
+<h4>依存管理の向上</h4><p class="paragraph"/><div class="hidden-block">The default dependency resolution engine used by Grails has been changed to <a href="http://eclipse.org/aether" target="blank">Aether</a>, the dependency resolution engine used by Maven. Which engine you use can be configured in <code>BuildConfig</code>:</div>
+Grailsでデフォルトで使用されている依存管理エンジンが、Mavenで使用されているエンジンの <a href="http://eclipse.org/aether" target="blank">Aether</a> に変更されました。 <code>BuildConfig</code> で設定をすることでどちらのエンジンを使用するか変更可能です。<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolver = <span class="java&#45;quote">"maven"</span> // or ivy</pre></div><p class="paragraph"/><div class="hidden-block">Using Aether dependency resolution in Grails results in the same behavior as when using the Maven build tool, meaning improved snapshot handling, understanding of custom packaging types and so on.</div>
+Aether依存管理を使用するとGrailsではMavenビルドツールと同じ振る舞いをします。これは、前と比べてスナップショットハンドリングの向上やカスタムパッケージング等の機能向上を意味します。<p class="paragraph"/><div class="hidden-block">In addition, the <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> command has been updated to print the dependency graph of the console, which helps in diagnosing dependency resolution failures. See the chapter on <a href="../guide/single.html#dependencyResolution" class="guide">Dependency Resolution</a> for more information.</div>
+そしてさらに、 <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> コマンドも改良され、依存問題の解決を手助けするために、依存関係のグラフがコンソールに表示されるようになりました。 詳しくは <a href="../guide/single.html#dependencyResolution" class="guide">依存性解決</a> のドキュメントを参照してください。<p class="paragraph"/><h4>コマンドライン</h4><p class="paragraph"/><div class="hidden-block">The <code>create-app</code> command will now by default generate the command line grailsw wrapper for newly created applications.  The <code>&#45;&#45;skip-wrapper</code> switch may be used to prevent the wrapper from being generated.</div>
+<code>create&#45;app</code> コマンドがデフォルトでgrailswラッパーを生成するようになりました。ラッパーを生成しない場合は <code>&#45;&#45;skip&#45;wrapper</code> オプションを指定してください。<p class="paragraph"/><div class="code"><pre>grails create&#45;app appname &#45;&#45;skip&#45;wrapper</pre></div><p class="paragraph"/><h4>データバインダー</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 includes a new data binding mechanism which is more flexible and easier to maintain than the data binder used in previous versions.  The new data binder includes numerous enhancements including:</div>
+Grails 2.3では、依存のバージョンよりもフレキシブルで保守性の高く簡単な新データバインダーを実装しています。<p class="paragraph"/><div class="hidden-block">
+<ul class="star">
+<li>Custom date formats on a per field basis using api:org.grails.databinding.BindingFormat</li>
+<li>User defined data converters using api:org.grails.databinding.converters.ValueConverter</li>
+<li>User defined formatted data converters using api:org.grails.databinding.BindingFormat and api:org.grails.databinding.converters.FormattedValueConverter</li>
+<li>Custom binding on a per class basis using api:org.grails.databinding.BindUsing</li>
+<li>Custom binding on a per field basis using api:org.grails.databinding.BindUsing</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li>フィールドごとのカスタム日付フォーマット - api:org.grails.databinding.BindingFormat</li>
+<li>ユーザ定義可能なデータコンバーター - api:org.grails.databinding.converters.ValueConverter</li>
+<li>ユーザ定義フォーマットデータコンバーター - api:org.grails.databinding.BindingFormat  api:org.grails.databinding.converters.FormattedValueConverter</li>
+<li>クラスごとのカスタムバインディング - api:org.grails.databinding.BindUsing</li>
+<li>フィールドごとのカスタムバインディング - api:org.grails.databinding.BindUsing</li>
+</ul><p class="paragraph"/><div class="hidden-block">See the <a href="../guide/single.html#dataBinding" class="guide">Data Binding</a> section for details.</div>
+詳細は <a href="../guide/single.html#dataBinding" class="guide">データバインディング</a> のセクションを参照してください。<p class="paragraph"/>
+<div class="hidden-block">The legacy data binder may be used by assinging <code>true</code> to the <code>grails.databinding.useLegacyBinder</code> property in <code>grails-app/conf/Config.groovy</code>.  Note that the legacy binder does not support any of the new features provided by the new data binder.</div>
+<code>grails-app/conf/Config.groovy</code> の <code>grails.databinding.useLegacyBinder</code> プロパティを <code>true</code> にすることで以前のデータバインダーに変更することができます。 以前のバインダーは今回実装された新機能には対応していません。<p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>

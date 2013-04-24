@@ -445,9 +445,11 @@ println p.firstName</pre></div><p class="paragraph"/>Domain classes mapped with 
 &#125;</pre></div><p class="paragraph"/>In this case the <code>address</code> table will have an additional two columns called <code>person_first_name</code> and <code>person_last_name</code>. If you wish the change the mapping of these columns then you can do so using the following technique:<p class="paragraph"/><div class="code"><pre>class Address &#123;
     Person person
     <span class="java&#45;keyword">static</span> mapping = &#123;
-        person &#123;
-            column: <span class="java&#45;quote">"FirstName"</span>
-            column: <span class="java&#45;quote">"LastName"</span>
+        columns &#123;
+		    person &#123;
+                column name: <span class="java&#45;quote">"FirstName"</span>
+                column name: <span class="java&#45;quote">"LastName"</span>
+			&#125;
         &#125;
     &#125;
 &#125;</pre></div>
