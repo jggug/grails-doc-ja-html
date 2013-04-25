@@ -141,18 +141,30 @@ function addJsClass() {
                 
 <a name="3.7.7 Plugin JAR Dependencies"><!-- Legacy link --></a>
 <h2 id="pluginJARDependencies">4.7.8 プラグインJAR依存</h2>
-<h4>Specifying Plugin JAR dependencies</h4><p class="paragraph"/>The way in which you specify dependencies for a <a href="../guide/single.html#plugins" class="guide">plugin</a> is identical to how you specify dependencies in an application. When a plugin is installed into an application the application automatically inherits the dependencies of the plugin.<p class="paragraph"/>To define a dependency that is resolved for use with the plugin but not  <em class="italic">exported</em>  to the application then you can set the <code>export</code> property of the dependency:<p class="paragraph"/><div class="code"><pre>compile('org.spockframework:spock&#45;core:0.5&#45;groovy&#45;1.8') &#123;
+<div class="hidden-block">h4. Specifying Plugin JAR dependencies</div>
+<h4>プラグインJARの依存関係を指定する</h4><p class="paragraph"/><div class="hidden-block">The way in which you specify dependencies for a <a href="../guide/single.html#plugins" class="guide">plugin</a> is identical to how you specify dependencies in an application. When a plugin is installed into an application the application automatically inherits the dependencies of the plugin.</div>
+<a href="../guide/single.html#plugins" class="guide">plugin</a>の依存関係を指定する方法は、アプリケーションの依存関係を指定する方法と同じです。プラグインがアプリケーションにインストールされている場合、アプリケーションは自動的にプラグインの依存関係を継承します。<p class="paragraph"/><div class="hidden-block">To define a dependency that is resolved for use with the plugin but not  <em class="italic">exported</em>  to the application then you can set the <code>export</code> property of the dependency:</div>
+プラグインには必要で、アプリケーションには<code>エクスポートしたくない</code>依存関係を定義するには、<code>export</code>プロパティを使用します:
+<div class="code"><pre>compile('org.spockframework:spock&#45;core:0.5&#45;groovy&#45;1.8') &#123;
     export = <span class="java&#45;keyword">false</span>
-&#125;</pre></div><p class="paragraph"/>In this case the Spock dependency will be available only to the plugin and not resolved as an application dependency. Alternatively, if you're using the Map syntax:<p class="paragraph"/><div class="code"><pre>compile group: 'org.spockframework', name: 'spock&#45;core',
-     version: '0.5&#45;groovy&#45;1.8', export: <span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case the Spock dependency will be available only to the plugin and not resolved as an application dependency. Alternatively, if you're using the Map syntax:</div>
+このケースではSpockの依存関係はプラグインのみが利用できるようになり、アプリケーションの依存関係としては解決されません。また、Mapを使用している場合は以下のようになります:<p class="paragraph"/><div class="code"><pre>compile group: 'org.spockframework', name: 'spock&#45;core',
+     version: '0.5&#45;groovy&#45;1.8', export: <span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 You can use <code>exported = false</code> instead of <code>export = false</code>, but we recommend the latter because it's consistent with the Map argument.
-</blockquote><p class="paragraph"/><h4>Overriding Plugin JAR Dependencies in Your Application</h4><p class="paragraph"/>If a plugin is using a JAR which conflicts with another plugin, or an application dependency then you can override how a plugin resolves its dependencies inside an application using exclusions. For example:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+<code>export=false</code>の代わりに<code>exported=false</code>を使用することができますが、Mapの引数と一致しているため前者を推奨します。
+</blockquote><p class="paragraph"/><div class="hidden-block">h4. Overriding Plugin JAR Dependencies in Your Application</div>
+<h4>独自アプリケーションでプラグインのJAR依存関係をオーバーライドする</h4><p class="paragraph"/><div class="hidden-block">If a plugin is using a JAR which conflicts with another plugin, or an application dependency then you can override how a plugin resolves its dependencies inside an application using exclusions. For example:</div>
+プラグインが、他のプラグインまたはアプリケーションの依存関係と競合するJarを利用している場合、除外設定を使用することでプラグイン内部で使用している依存関係を上書きできます。例を以下に示します:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     compile(<span class="java&#45;quote">"&#58;hibernate&#58;&#36;grailsVersion"</span>) &#123;
         excludes <span class="java&#45;quote">"javassist"</span>
     &#125;
 &#125;<p class="paragraph"/>dependencies &#123;
     runtime <span class="java&#45;quote">"javassist:javassist:3.4.GA"</span>
-&#125;</pre></div><p class="paragraph"/>In this case the application explicitly declares a dependency on the "hibernate" plugin and specifies an exclusion using the <code>excludes</code> method, effectively excluding the javassist library as a dependency.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case the application explicitly declares a dependency on the "hibernate" plugin and specifies an exclusion using the <code>excludes</code> method, effectively excluding the javassist library as a dependency.</div>
+上記の場合、アプリケーションで明示的に"hibernate"プラグインの依存関係を宣言し、<code>excludes</code>メソッドを使用して除外する依存関係を指定することで、Javassistライブラリを依存関係から除外します。
 
 
 

@@ -1220,18 +1220,30 @@ Grails2.3では、<code>dependency-report</code>コマンドはアプリケー�
 
 <a name="3.7.7 Plugin JAR Dependencies"><!-- Legacy link --></a>
 <h2 id="pluginJARDependencies">4.7.8 プラグインJAR依存</h2>
-<h4>Specifying Plugin JAR dependencies</h4><p class="paragraph"/>The way in which you specify dependencies for a <a href="../guide/single.html#plugins" class="guide">plugin</a> is identical to how you specify dependencies in an application. When a plugin is installed into an application the application automatically inherits the dependencies of the plugin.<p class="paragraph"/>To define a dependency that is resolved for use with the plugin but not  <em class="italic">exported</em>  to the application then you can set the <code>export</code> property of the dependency:<p class="paragraph"/><div class="code"><pre>compile('org.spockframework:spock&#45;core:0.5&#45;groovy&#45;1.8') &#123;
+<div class="hidden-block">h4. Specifying Plugin JAR dependencies</div>
+<h4>プラグインJARの依存関係を指定する</h4><p class="paragraph"/><div class="hidden-block">The way in which you specify dependencies for a <a href="../guide/single.html#plugins" class="guide">plugin</a> is identical to how you specify dependencies in an application. When a plugin is installed into an application the application automatically inherits the dependencies of the plugin.</div>
+<a href="../guide/single.html#plugins" class="guide">plugin</a>の依存関係を指定する方法は、アプリケーションの依存関係を指定する方法と同じです。プラグインがアプリケーションにインストールされている場合、アプリケーションは自動的にプラグインの依存関係を継承します。<p class="paragraph"/><div class="hidden-block">To define a dependency that is resolved for use with the plugin but not  <em class="italic">exported</em>  to the application then you can set the <code>export</code> property of the dependency:</div>
+プラグインには必要で、アプリケーションには<code>エクスポートしたくない</code>依存関係を定義するには、<code>export</code>プロパティを使用します:
+<div class="code"><pre>compile('org.spockframework:spock&#45;core:0.5&#45;groovy&#45;1.8') &#123;
     export = <span class="java&#45;keyword">false</span>
-&#125;</pre></div><p class="paragraph"/>In this case the Spock dependency will be available only to the plugin and not resolved as an application dependency. Alternatively, if you're using the Map syntax:<p class="paragraph"/><div class="code"><pre>compile group: 'org.spockframework', name: 'spock&#45;core',
-     version: '0.5&#45;groovy&#45;1.8', export: <span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case the Spock dependency will be available only to the plugin and not resolved as an application dependency. Alternatively, if you're using the Map syntax:</div>
+このケースではSpockの依存関係はプラグインのみが利用できるようになり、アプリケーションの依存関係としては解決されません。また、Mapを使用している場合は以下のようになります:<p class="paragraph"/><div class="code"><pre>compile group: 'org.spockframework', name: 'spock&#45;core',
+     version: '0.5&#45;groovy&#45;1.8', export: <span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 You can use <code>exported = false</code> instead of <code>export = false</code>, but we recommend the latter because it's consistent with the Map argument.
-</blockquote><p class="paragraph"/><h4>Overriding Plugin JAR Dependencies in Your Application</h4><p class="paragraph"/>If a plugin is using a JAR which conflicts with another plugin, or an application dependency then you can override how a plugin resolves its dependencies inside an application using exclusions. For example:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+<code>export=false</code>の代わりに<code>exported=false</code>を使用することができますが、Mapの引数と一致しているため前者を推奨します。
+</blockquote><p class="paragraph"/><div class="hidden-block">h4. Overriding Plugin JAR Dependencies in Your Application</div>
+<h4>独自アプリケーションでプラグインのJAR依存関係をオーバーライドする</h4><p class="paragraph"/><div class="hidden-block">If a plugin is using a JAR which conflicts with another plugin, or an application dependency then you can override how a plugin resolves its dependencies inside an application using exclusions. For example:</div>
+プラグインが、他のプラグインまたはアプリケーションの依存関係と競合するJarを利用している場合、除外設定を使用することでプラグイン内部で使用している依存関係を上書きできます。例を以下に示します:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     compile(<span class="java&#45;quote">"&#58;hibernate&#58;&#36;grailsVersion"</span>) &#123;
         excludes <span class="java&#45;quote">"javassist"</span>
     &#125;
 &#125;<p class="paragraph"/>dependencies &#123;
     runtime <span class="java&#45;quote">"javassist:javassist:3.4.GA"</span>
-&#125;</pre></div><p class="paragraph"/>In this case the application explicitly declares a dependency on the "hibernate" plugin and specifies an exclusion using the <code>excludes</code> method, effectively excluding the javassist library as a dependency.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case the application explicitly declares a dependency on the "hibernate" plugin and specifies an exclusion using the <code>excludes</code> method, effectively excluding the javassist library as a dependency.</div>
+上記の場合、アプリケーションで明示的に"hibernate"プラグインの依存関係を宣言し、<code>excludes</code>メソッドを使用して除外する依存関係を指定することで、Javassistライブラリを依存関係から除外します。
 
 
 <a name="3.7.8 Maven Integration"><!-- Legacy link --></a>
@@ -1299,7 +1311,8 @@ Grailsプラグインの<code>groupId</code>と<code>version</code>は、<code>G
 
 <a name="3.7.10 Plugin Dependencies"><!-- Legacy link --></a>
 <h2 id="pluginDependencies">4.7.11 プラグイン依存管理</h2>
-You can declaratively specify plugins as dependencies via the dependency DSL instead of using the <a href="../ref/Command Line/install-plugin.html" class="commandLine">install-plugin</a> command:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+<div class="hidden-block">You can declaratively specify plugins as dependencies via the dependency DSL instead of using the <a href="../ref/Command Line/install-plugin.html" class="commandLine">install-plugin</a> command:</div>
+<a href="../ref/Command Line/install-plugin.html" class="commandLine">install-plugin</a>コマンドを使用する代わりに依存関係DSLクエリー言語を用いることで依存するプラグインを指定できます:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     &#8230;
     repositories &#123;
         &#8230;
@@ -1309,26 +1322,44 @@ You can declaratively specify plugins as dependencies via the dependency DSL ins
         &#8230;
     &#125;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>If you don't specify a group id the default plugin group id of <code>org.grails.plugins</code> is used.<p class="paragraph"/><h4>Latest Integration</h4><p class="paragraph"/><blockquote class="warning">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If you don't specify a group id the default plugin group id of <code>org.grails.plugins</code> is used. </div>
+グループIDを指定しない場合、デフォルトのプラグインのグループIDである<code>org.grails.plugins</code>が使用されます。<p class="paragraph"/><div class="hidden-block">h4. Latest Integration</div>
+<h4>Latest Integrationラベル</h4><p class="paragraph"/><div class="hidden-block">
+<blockquote class="warning">
 Only the Ivy dependency manager supports the "latest.integration" version. For Aether you can achieve a similar effect with version ranges.
-</blockquote><p class="paragraph"/>You can specify to use the latest version of a particular plugin by using "latest.integration" as the version number:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+</blockquote>
+</div><p class="paragraph"/><blockquote class="warning">
+Ivy依存関係マネージャは"latest.integration"バージョンをサポートしています。Aetherの場合は、バージョンの範囲指定で同様の効果を得ることができます。
+</blockquote><p class="paragraph"/><div class="hidden-block">You can specify to use the latest version of a particular plugin by using "latest.integration" as the version number:</div>
+バージョン番号として "latest.integration"を使用することで、特定のプラグインの最新バージョンを使用するように指定できます:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime ':hibernate:latest.integration'
-&#125;</pre></div><p class="paragraph"/><h4>Integration vs. Release</h4><p class="paragraph"/>The "latest.integration" version label will also include resolving snapshot versions. To not include snapshot versions then use the "latest.release" label:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Integration vs. Release</div>
+<h4>Integrationラベル vs. Releaseラベル</h4><p class="paragraph"/><div class="hidden-block">The "latest.integration" version label will also include resolving snapshot versions. To not include snapshot versions then use the "latest.release" label:</div>
+"latest.integration"ラベルはスナップショットのバージョンも含まれます。スナップショットのバージョンが含まれないようにするには、 "latest.release"ラベルを使用します。<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime ':hibernate:latest.release'
-&#125;</pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 The "latest.release" label only works with Maven compatible repositories. If you have a regular SVN-based Grails repository then you should use "latest.integration".
-</blockquote><p class="paragraph"/>And of course if you use a Maven repository with an alternative group id you can specify a group id:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+"latest.release"ラベルはMavenの互換リポジトリでのみ動作します。通常のSVNベースのGrailsリポジトリの場合は、"latest.integration"を使用する必要があります。
+</blockquote><p class="paragraph"/><div class="hidden-block">And of course if you use a Maven repository with an alternative group id you can specify a group id:</div>
+もちろん、別のグループIDでMavenのリポジトリを使用する場合は、グループIDを指定することができます:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime 'mycompany:hibernate:latest.integration'
-&#125;</pre></div><p class="paragraph"/><h4>Plugin Exclusions</h4><p class="paragraph"/>You can control how plugins transitively resolves both plugin and JAR dependencies using exclusions. For example:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Plugin Exclusions</div>
+<h4>プラグインの除外</h4><p class="paragraph"/><div class="hidden-block">You can control how plugins transitively resolves both plugin and JAR dependencies using exclusions. For example:</div>
+excludesメソッドを使用して、プラグインおよびJARの依存関係を推移的に解決する方法を制御できます。以下に例を示します:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime(':weceem:0.8') &#123;
         excludes <span class="java&#45;quote">"searchable"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>Here we have defined a dependency on the "weceem" plugin which transitively depends on the "searchable" plugin. By using the <code>excludes</code> method you can tell Grails  <em class="italic">not</em>  to transitively install the searchable plugin. You can combine this technique to specify an alternative version of a plugin:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Here we have defined a dependency on the "weceem" plugin which transitively depends on the "searchable" plugin. By using the <code>excludes</code> method you can tell Grails  <em class="italic">not</em>  to transitively install the searchable plugin. You can combine this technique to specify an alternative version of a plugin:</div>
+ここでは、推移的に"searchable"プラグインに依存する"weceem"プラグインへの依存関係を定義しました。<code>excludes</code>メソッドを使用することで、Grailsにsearchableプラグインを推移的にインストール_しない_ことを教えることができます。あわせて、プラグインの代替バージョンを指定することもできます:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime(':weceem:0.8') &#123;
         excludes <span class="java&#45;quote">"searchable"</span> // excludes most recent version
     &#125;
     runtime ':searchable:0.5.4' // specifies a fixed searchable version
-&#125;</pre></div><p class="paragraph"/>You can also completely disable transitive plugin installs, in which case no transitive dependencies will be resolved:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can also completely disable transitive plugin installs, in which case no transitive dependencies will be resolved:</div>
+推移的なプラグインのインストールを完全に無効にすることもでき、その場合、いかなる推移的な依存関係も解決されません:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime(':weceem:0.8') &#123;
         transitive = <span class="java&#45;keyword">false</span>
     &#125;
@@ -1338,21 +1369,44 @@ The "latest.release" label only works with Maven compatible repositories. If you
 
 <a name="3.7.12 Dependency Resolution Caching"><!-- Legacy link --></a>
 <h2 id="dependencyResolutionCaching">4.7.12 依存管理のキャッシュ</h2>
-As a performance optimisation, when using Ivy (this does not apply to Aether), Grails does not resolve dependencies for every command invocation. Even with all the necessary dependencies downloaded and cached, resolution may take a second or two. To minimise this cost, Grails caches the result of dependency resolution (i.e. the location on the local file system of all of the declared dependencies, typically inside the dependency cache) and reuses this result for subsequent commands when it can reasonably expect that nothing has changed.<p class="paragraph"/>Grails only performs dependency resolution under the following circumstances:
+<div class="hidden-block">As a performance optimisation, when using Ivy (this does not apply to Aether), Grails does not resolve dependencies for every command invocation. Even with all the necessary dependencies downloaded and cached, resolution may take a second or two. To minimise this cost, Grails caches the result of dependency resolution (i.e. the location on the local file system of all of the declared dependencies, typically inside the dependency cache) and reuses this result for subsequent commands when it can reasonably expect that nothing has changed.</div>
+Ivyを使用している場合（Aetherには適用されません）、パフォーマンスの最適化のために、Grailsはコマンド呼び出しで依存関係解決をしない場合があります。必要なすべての依存関係がダウンロードされ、キャッシュされている場合でも、依存関係解決は1秒から2秒かかることがあります。このコストを最小限に抑えるために、Grailsは依存関係解決の結果をキャッシュし（すなわち、宣言された依存関係のすべてのローカルファイルシステム上の場所、通常は依存キャッシュ内）、後続のコマンドについては、依存関係に変更がないことがある程度期待できる場合は、このキャッシュを再利用します。<p class="paragraph"/><div class="hidden-block">Grails only performs dependency resolution under the following circumstances:</div>
+Grailsは、以下の場合にのみ依存関係解決を実行します:<p class="paragraph"/><div class="hidden-block">* The project is clean (i.e. fresh checkout or after <code>grails clean</code>)</div>
 <ul class="star">
-<li>The project is clean (i.e. fresh checkout or after <code>grails clean</code>)</li>
-<li>The <code>BuildConfig.groovy</code> file has changed since the last command was run</li>
-<li>The <code>&#45;&#45;refresh-dependencies</code> command line switch is provided to the command (any command)</li>
-<li>The <code>refresh-dependencies</code> command is the command being executed</li>
-</ul><p class="paragraph"/>Generally, this strategy works well and you can ignore dependency resolution caching. Every time you change your dependencies (i.e. modify <code>BuildConfig.groovy</code>) Grails will do the right thing and resolve your new dependencies.<p class="paragraph"/>However, when you have  <em class="italic">changing</em>  or  <em class="italic">dynamic</em>  dependencies you will have to consider dependency resolution caching.<p class="paragraph"/>{info}
+<li>プロジェクトがクリーンな場合（すなわち、チェックアウト直後または<code>grails clean</code>の実行後）</li>
+</ul><p class="paragraph"/><div class="hidden-block">* The <code>BuildConfig.groovy</code> file has changed since the last command was run</div>
+<ul class="star">
+<li>最後にコマンドが実行された後に、<code>BuildConfig.groovy</code>ファイルが変更された場合</li>
+</ul><p class="paragraph"/><div class="hidden-block">* The <code>&#45;&#45;refresh-dependencies</code> command line switch is provided to the command (any command)</div>
+<ul class="star">
+<li><code>&#45;&#45;refresh-dependencies</code>引数が、何らかのコマンドに与えられる場合</li>
+</ul><p class="paragraph"/><div class="hidden-block">* The <code>refresh-dependencies</code> command is the command being executed</div>
+<ul class="star">
+<li><code>refresh-dependencies</code>コマンドが実行された場合</li>
+</ul><p class="paragraph"/><div class="hidden-block">Generally, this strategy works well and you can ignore dependency resolution caching. Every time you change your dependencies (i.e. modify <code>BuildConfig.groovy</code>) Grails will do the right thing and resolve your new dependencies.</div>
+一般に、この手法はうまく動作し、依存関係解決のキャッシュを無視することができます。依存関係を変更するたびに（すなわち<code>BuildConfig.groovy</code>を変更するたびに）Grailsは正しく新たに依存関係解決を実行します。<p class="paragraph"/><div class="hidden-block">However, when you have  <em class="italic">changing</em>  or  <em class="italic">dynamic</em>  dependencies you will have to consider dependency resolution caching.</div>
+しかし、  <em class="italic">変化する依存関係</em>  または  <em class="italic">動的な依存関係</em>  がある場合は、依存関係解決のキャッシングを考慮する必要があります。<p class="paragraph"/><div class="hidden-block">
+{info}
 A  <em class="italic">changing</em>  dependency is one whose version number does not change, but its contents do (like a SNAPSHOT). A  <em class="italic">dynamic</em>  dependency is one that is defined as one of many possible options (like a dependency with a version range, or symbolic version number like <code>latest.integration</code>).
-{info}<p class="paragraph"/>Both  <em class="italic">changing</em>  and  <em class="italic">dynamic</em>  dependencies are influenced by the environment. With caching active, any changes to the environment are effectively ignored. For example, your project may not automatically fetch the very latest version of a dependency when using <code>latest.integration</code>. Or if you declare a <code>SNAPSHOT</code> dependency, you may not automatically get the latest that's available on the server.<p class="paragraph"/>To ensure you have the correct version of a  <em class="italic">changing</em>  or  <em class="italic">dynamic</em>  dependency in your project, you can:
+{info}
+</div><p class="paragraph"/>{info}
+ <em class="italic">変化する依存関係</em>  は、バージョン番号が変更されずに、内容が変化するもの（スナップショットなど）です。  <em class="italic">動的な依存関係</em>  は多くの可能なオプションのいずれかとして定義されるものです。（バージョンが範囲指定されている、または<code>latest.integration</code>のように抽象的なバージョン番号を持つ依存関係など）
+{info}<p class="paragraph"/><div class="hidden-block">Both  <em class="italic">changing</em>  and  <em class="italic">dynamic</em>  dependencies are influenced by the environment. With caching active, any changes to the environment are effectively ignored. For example, your project may not automatically fetch the very latest version of a dependency when using <code>latest.integration</code>. Or if you declare a <code>SNAPSHOT</code> dependency, you may not automatically get the latest that's available on the server.</div>
+変化する依存関係 と 動的な依存関係は共に、リモートリポジトリ等の外部環境に影響されます。キャッシュが有効な場合、これらの環境の変更は事実上無視されます。例えば、<code>latest.integration</code>を使用している場合、プロジェクトは依存関係の最新バージョンを自動的に取得しないでしょう。また、<code>SNAPSHOT</code>の依存関係を宣言した場合、サーバー上で使用可能な最新のものを自動的に取得できない可能性があります。<p class="paragraph"/><div class="hidden-block">To ensure you have the correct version of a  <em class="italic">changing</em>  or  <em class="italic">dynamic</em>  dependency in your project, you can:</div>
+プロジェクトの  <em class="italic">変化する依存関係</em>  や  <em class="italic">動的な依存関係</em>  が正しいバージョンであることを確認するために、以下のことができます:<p class="paragraph"/><div class="hidden-block">* clean the project</div>
 <ul class="star">
-<li>clean the project</li>
-<li>run the <code>refresh-dependencies</code> command</li>
-<li>run  <em class="italic">any</em>  command with the <code>&#45;&#45;refresh-dependencies</code> switch; or</li>
-<li>make a change to <code>BuildConfig.groovy</code></li>
-</ul><p class="paragraph"/>If you have your CI builds configured to not perform clean builds, it may be worth adding the <code>&#45;&#45;refresh-dependencies</code> switch to the command you use to build your projects.
+<li>プロジェクトのクリーンアップ</li>
+</ul><p class="paragraph"/><div class="hidden-block">* run the <code>refresh-dependencies</code> command</div>
+<ul class="star">
+<li><code>refresh-dependencies</code>コマンドの実行</li>
+</ul><p class="paragraph"/><div class="hidden-block">* run  <em class="italic">any</em>  command with the <code>&#45;&#45;refresh-dependencies</code> switch; or</div>
+<ul class="star">
+<li><code>任意のコマンド</code>に<code>&#45;&#45;refresh-dependencies</code>を付与して実行</li>
+</ul><p class="paragraph"/><div class="hidden-block">* make a change to <code>BuildConfig.groovy</code></div>
+<ul class="star">
+<li><code>BuildConfig.groovy</code>を変更</li>
+</ul><p class="paragraph"/><div class="hidden-block">If you have your CI builds configured to not perform clean builds, it may be worth adding the <code>&#45;&#45;refresh-dependencies</code> switch to the command you use to build your projects.</div>
+CIビルドツールがクリーンビルドを実行しないように設定されている場合、プロジェクトのビルドコマンドに<code>&#45;&#45;refresh-dependencies</code>を追加しておくと有効でしょう。
 
 
 

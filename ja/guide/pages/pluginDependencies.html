@@ -141,7 +141,8 @@ function addJsClass() {
                 
 <a name="3.7.10 Plugin Dependencies"><!-- Legacy link --></a>
 <h2 id="pluginDependencies">4.7.11 プラグイン依存管理</h2>
-You can declaratively specify plugins as dependencies via the dependency DSL instead of using the <a href="../ref/Command Line/install-plugin.html" class="commandLine">install-plugin</a> command:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+<div class="hidden-block">You can declaratively specify plugins as dependencies via the dependency DSL instead of using the <a href="../ref/Command Line/install-plugin.html" class="commandLine">install-plugin</a> command:</div>
+<a href="../ref/Command Line/install-plugin.html" class="commandLine">install-plugin</a>コマンドを使用する代わりに依存関係DSLクエリー言語を用いることで依存するプラグインを指定できます:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     &#8230;
     repositories &#123;
         &#8230;
@@ -151,26 +152,44 @@ You can declaratively specify plugins as dependencies via the dependency DSL ins
         &#8230;
     &#125;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>If you don't specify a group id the default plugin group id of <code>org.grails.plugins</code> is used.<p class="paragraph"/><h4>Latest Integration</h4><p class="paragraph"/><blockquote class="warning">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If you don't specify a group id the default plugin group id of <code>org.grails.plugins</code> is used. </div>
+グループIDを指定しない場合、デフォルトのプラグインのグループIDである<code>org.grails.plugins</code>が使用されます。<p class="paragraph"/><div class="hidden-block">h4. Latest Integration</div>
+<h4>Latest Integrationラベル</h4><p class="paragraph"/><div class="hidden-block">
+<blockquote class="warning">
 Only the Ivy dependency manager supports the "latest.integration" version. For Aether you can achieve a similar effect with version ranges.
-</blockquote><p class="paragraph"/>You can specify to use the latest version of a particular plugin by using "latest.integration" as the version number:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+</blockquote>
+</div><p class="paragraph"/><blockquote class="warning">
+Ivy依存関係マネージャは"latest.integration"バージョンをサポートしています。Aetherの場合は、バージョンの範囲指定で同様の効果を得ることができます。
+</blockquote><p class="paragraph"/><div class="hidden-block">You can specify to use the latest version of a particular plugin by using "latest.integration" as the version number:</div>
+バージョン番号として "latest.integration"を使用することで、特定のプラグインの最新バージョンを使用するように指定できます:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime ':hibernate:latest.integration'
-&#125;</pre></div><p class="paragraph"/><h4>Integration vs. Release</h4><p class="paragraph"/>The "latest.integration" version label will also include resolving snapshot versions. To not include snapshot versions then use the "latest.release" label:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Integration vs. Release</div>
+<h4>Integrationラベル vs. Releaseラベル</h4><p class="paragraph"/><div class="hidden-block">The "latest.integration" version label will also include resolving snapshot versions. To not include snapshot versions then use the "latest.release" label:</div>
+"latest.integration"ラベルはスナップショットのバージョンも含まれます。スナップショットのバージョンが含まれないようにするには、 "latest.release"ラベルを使用します。<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime ':hibernate:latest.release'
-&#125;</pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 The "latest.release" label only works with Maven compatible repositories. If you have a regular SVN-based Grails repository then you should use "latest.integration".
-</blockquote><p class="paragraph"/>And of course if you use a Maven repository with an alternative group id you can specify a group id:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+"latest.release"ラベルはMavenの互換リポジトリでのみ動作します。通常のSVNベースのGrailsリポジトリの場合は、"latest.integration"を使用する必要があります。
+</blockquote><p class="paragraph"/><div class="hidden-block">And of course if you use a Maven repository with an alternative group id you can specify a group id:</div>
+もちろん、別のグループIDでMavenのリポジトリを使用する場合は、グループIDを指定することができます:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime 'mycompany:hibernate:latest.integration'
-&#125;</pre></div><p class="paragraph"/><h4>Plugin Exclusions</h4><p class="paragraph"/>You can control how plugins transitively resolves both plugin and JAR dependencies using exclusions. For example:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Plugin Exclusions</div>
+<h4>プラグインの除外</h4><p class="paragraph"/><div class="hidden-block">You can control how plugins transitively resolves both plugin and JAR dependencies using exclusions. For example:</div>
+excludesメソッドを使用して、プラグインおよびJARの依存関係を推移的に解決する方法を制御できます。以下に例を示します:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime(':weceem:0.8') &#123;
         excludes <span class="java&#45;quote">"searchable"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>Here we have defined a dependency on the "weceem" plugin which transitively depends on the "searchable" plugin. By using the <code>excludes</code> method you can tell Grails  <em class="italic">not</em>  to transitively install the searchable plugin. You can combine this technique to specify an alternative version of a plugin:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Here we have defined a dependency on the "weceem" plugin which transitively depends on the "searchable" plugin. By using the <code>excludes</code> method you can tell Grails  <em class="italic">not</em>  to transitively install the searchable plugin. You can combine this technique to specify an alternative version of a plugin:</div>
+ここでは、推移的に"searchable"プラグインに依存する"weceem"プラグインへの依存関係を定義しました。<code>excludes</code>メソッドを使用することで、Grailsにsearchableプラグインを推移的にインストール_しない_ことを教えることができます。あわせて、プラグインの代替バージョンを指定することもできます:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime(':weceem:0.8') &#123;
         excludes <span class="java&#45;quote">"searchable"</span> // excludes most recent version
     &#125;
     runtime ':searchable:0.5.4' // specifies a fixed searchable version
-&#125;</pre></div><p class="paragraph"/>You can also completely disable transitive plugin installs, in which case no transitive dependencies will be resolved:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can also completely disable transitive plugin installs, in which case no transitive dependencies will be resolved:</div>
+推移的なプラグインのインストールを完全に無効にすることもでき、その場合、いかなる推移的な依存関係も解決されません:<p class="paragraph"/><div class="code"><pre>plugins &#123;
     runtime(':weceem:0.8') &#123;
         transitive = <span class="java&#45;keyword">false</span>
     &#125;
