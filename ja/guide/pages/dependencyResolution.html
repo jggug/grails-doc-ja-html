@@ -182,9 +182,14 @@ function addJsClass() {
                 
 <a name="3.7 Dependency Resolution"><!-- Legacy link --></a>
 <h2 id="dependencyResolution">4.7 依存性解決</h2>
-Grails features a dependency resolution DSL that lets you control how plugins and JAR dependencies are resolved.<p class="paragraph"/>You can choose to use Aether (since Grails 2.3) or Apache Ivy as the dependency resolution engine. Aether is the dependency resolution library used by the Maven build tool, so if you are looking for Maven-like behavior then Aether is the better choise. Ivy allows more flexibility if you wish to resolve jars from flat file systems or none HTTP repositories. Aether is the default dependency resolution engine for Grails applications since Grails 2.3.<p class="paragraph"/>To configure which dependency resolution engine to use you can specify the <code>grails.project.dependency.resolver</code> setting in <code>grails-app/conf/BuildConfig.groovy</code>. The default setting is shown below:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolver = <span class="java&#45;quote">"maven"</span> // or ivy</pre></div><p class="paragraph"/>You can then specify a <code>grails.project.dependency.resolution</code> property inside the <code>grails-app/conf/BuildConfig.groovy</code> file that configures how dependencies are resolved:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+<div class="hidden-block">Grails features a dependency resolution DSL that lets you control how plugins and JAR dependencies are resolved.</div>
+Grailsは依存関係解決のためのDSLクエリー言語を持ち、これによりプラグインとJARの依存関係を解決する方法を制御できます。<p class="paragraph"/><div class="hidden-block">You can choose to use Aether (since Grails 2.3) or Apache Ivy as the dependency resolution engine. Aether is the dependency resolution library used by the Maven build tool, so if you are looking for Maven-like behavior then Aether is the better choise. Ivy allows more flexibility if you wish to resolve jars from flat file systems or none HTTP repositories. Aether is the default dependency resolution engine for Grails applications since Grails 2.3. </div>
+依存関係解決エンジンとして、Aether（Grails2.3以降）あるいはApache Ivyのどちらかを選択できます。Aetherは、Mavenビルド・ツール内で使用されている依存関係解決ライブラリであり、Mavenのような振る舞いを期待しているなら、Aetherを選択すべきです。Ivyは、単層ファイルシステムまたはHTTP通信を行わないリポジトリからjarファイルを解決したい場合には、より柔軟性が高いです。Grails 2.3以降においては、AetherがGrailsアプリケーションのデフォルトの依存関係解決エンジンです。<p class="paragraph"/><div class="hidden-block">To configure which dependency resolution engine to use you can specify the <code>grails.project.dependency.resolver</code> setting in <code>grails-app/conf/BuildConfig.groovy</code>. The default setting is shown below:</div>
+使用する依存関係解決エンジンは、<code>grails-app/conf/BuildConfig.groovy</code>ファイル内の<code>grails.project.dependency.resolver</code>を設定することで指定出来ます。デフォルト設定は次のとおりです:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolver = <span class="java&#45;quote">"maven"</span> // or ivy</pre></div><p class="paragraph"/><div class="hidden-block">You can then specify a <code>grails.project.dependency.resolution</code> property inside the <code>grails-app/conf/BuildConfig.groovy</code> file that configures how dependencies are resolved:</div>
+<code>grails-app/conf/BuildConfig.groovyの</code>ファイル内の、<code>grails.project.dependency.resolution</code>プロパティを次のように指定することで、依存関係を解決する方法が設定できます:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
    // config here
-&#125;</pre></div><p class="paragraph"/>The default configuration looks like the following:<p class="paragraph"/><div class="code"><pre>grails.project.class.dir = <span class="java&#45;quote">"target/classes"</span>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The default configuration looks like the following:</div>
+デフォルト設定は以下です:<p class="paragraph"/><div class="code"><pre>grails.project.class.dir = <span class="java&#45;quote">"target/classes"</span>
 grails.project.test.class.dir = <span class="java&#45;quote">"target/test&#45;classes"</span>
 grails.project.test.reports.dir = <span class="java&#45;quote">"target/test&#45;reports"</span>
 //grails.project.war.file = <span class="java&#45;quote">"target/&#36;&#123;appName&#125;&#45;&#36;&#123;appVersion&#125;.war"</span><p class="paragraph"/>grails.project.dependency.resolution = &#123;
@@ -214,7 +219,8 @@ grails.project.test.reports.dir = <span class="java&#45;quote">"target/test&#45;
     &#125;<p class="paragraph"/>    plugins &#123;<p class="paragraph"/>        compile <span class="java&#45;quote">"&#58;jquery:1.8.3"</span>
         compile <span class="java&#45;quote">"&#58;resources:1.1.6"</span><p class="paragraph"/>        build <span class="java&#45;quote">"&#58;tomcat:&#36;grailsVersion"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>The details of the above will be explained in the next few sections.<p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The details of the above will be explained in the next few sections.</div>
+上記の詳細については、次節以降で説明します。<p class="paragraph"/>
 
 <a name="3.7.1 Configurations and Dependencies"><!-- Legacy link --></a>
 <h2 id="configurationsAndDependencies">4.7.1 設定と依存</h2>
