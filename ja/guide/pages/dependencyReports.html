@@ -141,7 +141,11 @@ function addJsClass() {
                 
 <a name="3.7.6 Dependency Reports"><!-- Legacy link --></a>
 <h2 id="dependencyReports">4.7.7 依存管理レポート</h2>
-As mentioned in the previous section a Grails application consists of dependencies inherited from the framework, the plugins installed and the application dependencies itself.<p class="paragraph"/>To obtain a report of an application's dependencies you can run the <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> command:<p class="paragraph"/><div class="code"><pre>grails dependency&#45;report</pre></div><p class="paragraph"/>By default this will generate reports in the <code>target/dependency-report</code> directory. You can specify which configuration (scope) you want a report for by passing an argument containing the configuration name:<p class="paragraph"/><div class="code"><pre>grails dependency&#45;report runtime</pre></div><p class="paragraph"/>As of Grails 2.3 the <code>dependency-report</code> command will also output to the console a graph of the dependencies of an application. Example output it shown below:<p class="paragraph"/><div class="code"><pre>compile &#45; Dependencies placed on the classpath <span class="java&#45;keyword">for</span> compilation (total: 73)
+<div class="hidden-block">As mentioned in the previous section a Grails application consists of dependencies inherited from the framework, the plugins installed and the application dependencies itself.</div>
+以前の節で述べたように、Grailsアプリケーションの依存関係は、フレームワークから継承した依存関係、インストールしたプラグインの依存関係、またアプリケーション自身で設定した依存関係で構成されます。<p class="paragraph"/><div class="hidden-block">To obtain a report of an application's dependencies you can run the <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> command:</div>
+アプリケーションの依存関係のレポートを取得するには、<a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a>コマンドを実行します:<p class="paragraph"/><div class="code"><pre>grails dependency&#45;report</pre></div><p class="paragraph"/><div class="hidden-block">By default this will generate reports in the <code>target/dependency-report</code> directory. You can specify which configuration (scope) you want a report for by passing an argument containing the configuration name:</div>
+デフォルトでは、<code>target/dependency-report</code>ディレクトリにレポートが生成されます。設定名を引数に渡すことで、レポートを作成したい設定（スコープ）を指定することもできます:<p class="paragraph"/><div class="code"><pre>grails dependency&#45;report runtime</pre></div><p class="paragraph"/><div class="hidden-block">As of Grails 2.3 the <code>dependency-report</code> command will also output to the console a graph of the dependencies of an application. Example output it shown below:</div>
+Grails2.3では、<code>dependency-report</code>コマンドはアプリケーションの依存関係のグラフをコンソールへ出力します。出力例を以下に示します:<p class="paragraph"/><div class="code"><pre>compile &#45; Dependencies placed on the classpath <span class="java&#45;keyword">for</span> compilation (total: 73)
 +&#45;&#45;&#45; org.codehaus.groovy:groovy&#45;all:2.0.6
 +&#45;&#45;&#45; org.grails:grails&#45;plugin&#45;codecs:2.3.0
 |    &#45;&#45;&#45; org.grails:grails&#45;web:2.3.0
@@ -156,6 +160,7 @@ As mentioned in the previous section a Grails application consists of dependenci
 |    &#45;&#45;&#45; commons&#45;beanutils:commons&#45;beanutils:1.8.3
 |    &#45;&#45;&#45; org.grails:grails&#45;core:2.3.0
 ...</pre></div>
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>

@@ -141,7 +141,10 @@ function addJsClass() {
                 
 <a name="3.7.5 Providing Default Dependencies"><!-- Legacy link --></a>
 <h2 id="providingDefaultDependencies">4.7.5 基本依存管理の提供</h2>
-Most Grails applications have runtime dependencies on several jar files that are provided by the Grails framework.  These include libraries like Spring, Sitemesh, Hibernate etc.  When a war file is created, all of these dependencies will be included in it.  But, an application may choose to exclude these jar files from the war.  This is useful when the jar files will be provided by the container, as would normally be the case if multiple Grails applications are deployed to the same container.<p class="paragraph"/>The dependency resolution DSL provides a mechanism to express that all of the default dependencies will be provided by the container. This is done by invoking the <code>defaultDependenciesProvided</code> method and passing <code>true</code> as an argument:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;<p class="paragraph"/>    defaultDependenciesProvided <span class="java&#45;keyword">true</span> // all of the <span class="java&#45;keyword">default</span> dependencies will
+<div class="hidden-block">Most Grails applications have runtime dependencies on several jar files that are provided by the Grails framework.  These include libraries like Spring, Sitemesh, Hibernate etc.  When a war file is created, all of these dependencies will be included in it.  But, an application may choose to exclude these jar files from the war.  This is useful when the jar files will be provided by the container, as would normally be the case if multiple Grails applications are deployed to the same container.</div>
+ほとんどのGrailsアプリケーションは、Grailsフレームワークによって提供されるいくつかのjarファイルに対し実行時の依存関係を持っています。これらにはSpring、Sitemesh、Hibernateなどのフレームワークが含まれます。WARファイルが作成される際に、これらすべての依存関係がWARファイルに含まれます。しかし、アプリケーションはWARファイルからこれらのjarファイルを除外することもできます。通常よくあるように、複数のGrailsアプリケーションが同じコンテナにデプロイされており、共通のjarファイルをコンテナによって提供するといった場合に便利な機能です。<p class="paragraph"/><div class="hidden-block">The dependency resolution DSL provides a mechanism to express that all of the default dependencies will be provided by the container. This is done by invoking the <code>defaultDependenciesProvided</code> method and passing <code>true</code> as an argument:</div>
+依存関係解決DSLクエリー言語は、デフォルトのすべての依存関係がコンテナによって提供されることを表現するためのメカニズムを提供します。これは、<code>defaultDependenciesProvided</code>メソッドに<code>true</code>を引数として渡して呼び出すことで実行されます:<p class="paragraph"/><div class="hidden-block">
+<div class="code"><pre>grails.project.dependency.resolution = &#123;<p class="paragraph"/>    defaultDependenciesProvided <span class="java&#45;keyword">true</span> // all of the <span class="java&#45;keyword">default</span> dependencies will
                                      // be <span class="java&#45;quote">"provided"</span> by the container<p class="paragraph"/>    inherits <span class="java&#45;quote">"global"</span> // inherit Grails' <span class="java&#45;keyword">default</span> dependencies<p class="paragraph"/>    repositories &#123;
         grailsHome()
         &#8230;
@@ -149,8 +152,21 @@ Most Grails applications have runtime dependencies on several jar files that are
     dependencies &#123;
         &#8230;
     &#125;
-&#125;</pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div>
+</div><p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;<p class="paragraph"/>    defaultDependenciesProvided <span class="java&#45;keyword">true</span> // 全てのデフォルトの依存関係は
+                                     // コンテナによって提供される<p class="paragraph"/>    inherits <span class="java&#45;quote">"global"</span> // Grailsのデフォルト依存関係を継承する<p class="paragraph"/>    repositories &#123;
+        grailsHome()
+        &#8230;
+    &#125;
+    dependencies &#123;
+        &#8230;
+    &#125;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 <code>defaultDependenciesProvided</code> must come before <code>inherits</code>, otherwise the Grails dependencies will be included in the war.
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+<code>defaultDependenciesProvided</code>は、<code>inherits</code>より前に記述されている必要があり、そうしなければGrailsの依存関係はWARファイルに含まれます。
 </blockquote>
 
 
