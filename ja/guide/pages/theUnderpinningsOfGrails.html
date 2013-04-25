@@ -141,17 +141,69 @@ function addJsClass() {
                 
 <a name="14.1 The Underpinnings of Grails"><!-- Legacy link --></a>
 <h2 id="theUnderpinningsOfGrails">16.1 Grailsの土台</h2>
-Grails is actually a <a href="http://www.springframework.org/docs/MVC-step-by-step/Spring-MVC-step-by-step.html" target="blank">Spring MVC</a> application in disguise. Spring MVC is the Spring framework's built-in MVC web application framework. Although Spring MVC suffers from some of the same difficulties as frameworks like Struts in terms of its ease of use, it is superbly designed and architected and was, for Grails, the perfect framework to build another framework on top of.<p class="paragraph"/>Grails leverages Spring MVC in the following areas:
+<div class="hidden-block">
+Grails is actually a <a href="http://www.springframework.org/docs/MVC-step-by-step/Spring-MVC-step-by-step.html" target="blank">Spring MVC</a> application in disguise. Spring MVC is the Spring framework's built-in MVC web application framework. Although Spring MVC suffers from some of the same difficulties as frameworks like Struts in terms of its ease of use, it is superbly designed and architected and was, for Grails, the perfect framework to build another framework on top of.
+</div>
+Grailsは、実はGrailsという皮を被った<a href="http://www.springframework.org/docs/MVC-step-by-step/Spring-MVC-step-by-step.html" target="blank">Spring MVC</a>アプリケーションです。
+Spring MVCはSpring frameworkに含まれているMVCウェブアプリケーションフレームワークです。
+Spring MVCはStrutsのようなフレームワークと同様に、使いやすさの面においては多少難があるため悩まされますが、その上に他のフレームワークを構築するには申し分ないフレームワークであり、Grailsにとってはすばらしい設計とアーキテクチャであるといえます。<p class="paragraph"/><div class="hidden-block">
+Grails leverages Spring MVC in the following areas:
+</div>
+GrailsはSpring MVCを次の領域で活用しています:<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li>Basic controller logic - Grails subclasses Spring's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/servlet/DispatcherServlet.html" class="api">DispatcherServlet</a> and uses it to delegate to Grails <a href="../guide/single.html#controllers" class="guide">controllers</a></li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li>基本的なコントローラのロジック - GrailsのサーブレットはSpringの<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/servlet/DispatcherServlet.html" class="api">DispatcherServlet</a>のサブクラスであり、それを用いてGrailsの<a href="../guide/single.html#controllers" class="guide">コントローラ</a>にディスパッチを行います</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+<ul class="star">
 <li>Data Binding and Validation - Grails' <a href="../guide/single.html#validation" class="guide">validation</a> and <a href="../guide/single.html#dataBinding" class="guide">data binding</a> capabilities are built on those provided by Spring</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li>データバインディングとバリデーション - Grailsの<a href="../guide/single.html#validation" class="guide">バリデーション</a>と<a href="../guide/single.html#dataBinding" class="guide">データバインディング</a>の機能は、Springで提供されているものを用いています</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+<ul class="star">
 <li>Runtime configuration - Grails' entire runtime convention based system is wired together by a Spring <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/context/ApplicationContext.html" class="api">ApplicationContext</a></li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li>ランタイム設定 - Grailsランタイム全体の規約に基づくシステムはSpringの<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/context/ApplicationContext.html" class="api">ApplicationContext</a>と結びついています</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+<ul class="star">
 <li>Transactions - Grails uses Spring's transaction management in <a href="../guide/single.html#GORM" class="guide">GORM</a></li>
-</ul><p class="paragraph"/>In other words Grails has Spring embedded running all the way through it.<p class="paragraph"/><h4>The Grails ApplicationContext</h4><p class="paragraph"/>Spring developers are often keen to understand how the Grails <code>ApplicationContext</code> instance is constructed. The basics of it are as follows.
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li>トランザクション - GrailsはSpringのトランザクション管理を<a href="../guide/single.html#GORM" class="guide">GORM</a>で利用しています</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+In other words Grails has Spring embedded running all the way through it.
+</div>
+言い換えれば、Grailsはすべての機能を組み込まれたSpringを介して実行しているということになります。<p class="paragraph"/><div class="hidden-block">
+<h4>The Grails ApplicationContext</h4>
+</div>
+<h4>Grailsアプリケーションコンテキスト</h4><p class="paragraph"/><div class="hidden-block">
+Spring developers are often keen to understand how the Grails <code>ApplicationContext</code> instance is constructed. The basics of it are as follows.
+</div>
+Spring開発者は、どのようにGrailsの<code>ApplicationContext</code>インスタンスが組み立てられるのか理解したい、と熱心に望んでいます。
+基本的には次のようになります:<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li>Grails constructs a parent <code>ApplicationContext</code> from the <code>web-app/WEB-INF/applicationContext.xml</code> file. This <code>ApplicationContext</code> configures the <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api">GrailsApplication</a> instance and the <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/plugins/GrailsPluginManager.html" class="api">GrailsPluginManager</a>.</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li>Grailsが<code>web-app/WEB-INF/applicationContext.xml</code>ファイルから親となる<code>ApplicationContext</code>を組み立てます。この<code>ApplicationContext</code>は<a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" target="blank">GrailsApplication</a>インスタンスと<a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/plugins/GrailsPluginManager.html" target="blank">GrailsPluginManager</a>を設定します。</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+<ul class="star">
 <li>Using this <code>ApplicationContext</code> as a parent Grails' analyses the conventions with the <code>GrailsApplication</code> instance and constructs a child <code>ApplicationContext</code> that is used as the root <code>ApplicationContext</code> of the web application</li>
-</ul><p class="paragraph"/><h4>Configured Spring Beans</h4><p class="paragraph"/>Most of Grails' configuration happens at runtime. Each <a href="../guide/single.html#plugins" class="guide">plugin</a> may configure Spring beans that are registered in the <code>ApplicationContext</code>. For a reference as to which beans are configured, refer to the reference guide which describes each of the Grails plugins and which beans they configure.
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li>この親となる<code>ApplicationContext</code>を用いて、<code>GrailsApplication</code>インスタンスと共にGrailsの規約を解析し、Webアプリケーションのルートとして利用される子<code>ApplicationContext</code>を組み立てます。</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+<h4>Configured Spring Beans</h4>
+</div>
+<h4>構成されたSpringビーン</h4><p class="paragraph"/><div class="hidden-block">
+Most of Grails' configuration happens at runtime. Each <a href="../guide/single.html#plugins" class="guide">plugin</a> may configure Spring beans that are registered in the <code>ApplicationContext</code>. For a reference as to which beans are configured, refer to the reference guide which describes each of the Grails plugins and which beans they configure.
+</div>
+Grailsの設定のほとんどは実行時に行われます。
+各<a href="../guide/single.html#plugins" class="guide">plugin</a>は<code>ApplicationContext</code>に登録されているSpringビーンを構成することができます。
+構成されるビーンの詳細については各プラグインのリファレンスガイドを参照してください。
 
 
 
