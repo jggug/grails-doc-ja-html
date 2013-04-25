@@ -149,10 +149,10 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0px"><a href="#cascades"><strong>6.3</strong><span>&#12459;&#12473;&#12465;&#12540;&#12489;&#26356;&#26032;&#21066;&#38500;&#12434;&#29702;&#35299;&#12377;&#12427;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#fetching"><strong>6.4</strong><span>Eager&#12392;Lazy&#12501;&#12455;&#12483;&#12481;&#12531;&#12464;</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#fetching"><strong>6.4</strong><span>Eager&#12501;&#12455;&#12483;&#12481;&#12392;Lazy&#12501;&#12455;&#12483;&#12481;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#locking"><strong>6.5</strong><span>&#24754;&#35251;&#30340;(Pessimistic)&#12392;&#27005;&#35251;&#30340;(Optimistic)&#12525;&#12483;&#12463;</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#locking"><strong>6.5</strong><span>&#24754;&#35251;&#30340;&#12525;&#12483;&#12463;&#12392;&#27005;&#35251;&#30340;&#12525;&#12483;&#12463;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0px"><a href="#modificationChecking"><strong>6.6</strong><span>&#22793;&#26356;&#30906;&#35469;</span></a>
@@ -256,7 +256,7 @@ airport.delete()</pre></div><p class="paragraph"/><div class="hidden-block">Howe
 
 
 <a name="5.3.4 Eager and Lazy Fetching"><!-- Legacy link --></a>
-<h2 id="fetching">6.3.4 EagerとLazyフェッチング</h2>
+<h2 id="fetching">6.3.4 EagerフェッチとLazyフェッチ</h2>
 <div class="hidden-block">Associations in GORM are by default lazy. This is best explained by example:</div>
 GORMでは、関連のあるドメインクラスのインスタンスは、デフォルトでlazyに取得するように振る舞います。以下に例を示します:<p class="paragraph"/><div class="code"><pre>class Airport &#123;
     <span class="java&#45;object">String</span> name
@@ -306,7 +306,7 @@ eagerフェッチングが適切なケースはもちろん有りますが、常
 
 
 <a name="5.3.5 Pessimistic and Optimistic Locking"><!-- Legacy link --></a>
-<h2 id="locking">6.3.5 悲観的(Pessimistic)と楽観的(Optimistic)ロック</h2>
+<h2 id="locking">6.3.5 悲観的ロックと楽観的ロック</h2>
 <h4>Optimistic Locking</h4><p class="paragraph"/>By default GORM classes are configured for optimistic locking. Optimistic locking is a feature of Hibernate which involves storing a version value in a special <code>version</code> column in the database that is incremented after each update.<p class="paragraph"/>The <code>version</code> column gets read into a <code>version</code> property that contains the current versioned state of persistent instance which you can access:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)<p class="paragraph"/>println airport.version</pre></div><p class="paragraph"/>When you perform updates Hibernate will automatically check the version property against the  version column in the database and if they differ will throw a <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/StaleObjectStateException.html" class="api">StaleObjectException</a>. This will roll back the transaction if one is active.<p class="paragraph"/>This is useful as it allows a certain level of atomicity without resorting to pessimistic locking that has an inherit performance penalty. The downside is that you have to deal with this exception if you have highly concurrent writes. This requires flushing the session:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)<p class="paragraph"/><span class="java&#45;keyword">try</span> &#123;
     airport.name = <span class="java&#45;quote">"Heathrow"</span>
     airport.save(flush: <span class="java&#45;keyword">true</span>)

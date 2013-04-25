@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>6.3.5 &#24754;&#35251;&#30340;(Pessimistic)&#12392;&#27005;&#35251;&#30340;(Optimistic)&#12525;&#12483;&#12463; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>6.3.5 &#24754;&#35251;&#30340;&#12525;&#12483;&#12463;&#12392;&#27005;&#35251;&#30340;&#12525;&#12483;&#12463; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -125,7 +125,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>6.3.5 &#24754;&#35251;&#30340;(Pessimistic)&#12392;&#27005;&#35251;&#30340;(Optimistic)&#12525;&#12483;&#12463; - Reference Documentation</h1>
+                    <h1>6.3.5 &#24754;&#35251;&#30340;&#12525;&#12483;&#12463;&#12392;&#27005;&#35251;&#30340;&#12525;&#12483;&#12463; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -140,7 +140,7 @@ function addJsClass() {
 
                 
 <a name="5.3.5 Pessimistic and Optimistic Locking"><!-- Legacy link --></a>
-<h2 id="locking">6.3.5 悲観的(Pessimistic)と楽観的(Optimistic)ロック</h2>
+<h2 id="locking">6.3.5 悲観的ロックと楽観的ロック</h2>
 <h4>Optimistic Locking</h4><p class="paragraph"/>By default GORM classes are configured for optimistic locking. Optimistic locking is a feature of Hibernate which involves storing a version value in a special <code>version</code> column in the database that is incremented after each update.<p class="paragraph"/>The <code>version</code> column gets read into a <code>version</code> property that contains the current versioned state of persistent instance which you can access:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)<p class="paragraph"/>println airport.version</pre></div><p class="paragraph"/>When you perform updates Hibernate will automatically check the version property against the  version column in the database and if they differ will throw a <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/StaleObjectStateException.html" class="api">StaleObjectException</a>. This will roll back the transaction if one is active.<p class="paragraph"/>This is useful as it allows a certain level of atomicity without resorting to pessimistic locking that has an inherit performance penalty. The downside is that you have to deal with this exception if you have highly concurrent writes. This requires flushing the session:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)<p class="paragraph"/><span class="java&#45;keyword">try</span> &#123;
     airport.name = <span class="java&#45;quote">"Heathrow"</span>
     airport.save(flush: <span class="java&#45;keyword">true</span>)

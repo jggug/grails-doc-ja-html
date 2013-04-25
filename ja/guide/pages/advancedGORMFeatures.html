@@ -143,22 +143,22 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0px"><a href="#eventsAutoTimestamping"><strong>6.1</strong><span>&#12452;&#12505;&#12531;&#12488;&#12392;&#33258;&#21205;&#12479;&#12452;&#12512;&#12473;&#12479;&#12531;&#12503;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#ormdsl"><strong>6.2</strong><span>&#12459;&#12473;&#12479;&#12512;OR&#12510;&#12483;&#12500;&#12531;&#12464;</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#ormdsl"><strong>6.2</strong><span>O/R&#12510;&#12483;&#12500;&#12531;&#12464;&#12398;&#12459;&#12473;&#12479;&#12510;&#12452;&#12474;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:10px"><a href="#tableAndColumnNames"><strong>6.2.1</strong><span>&#12486;&#12540;&#12502;&#12523;&#21517;&#12289;&#12459;&#12521;&#12512;&#21517;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#caching"><strong>6.2.2</strong><span>&#12461;&#12515;&#12483;&#12471;&#12531;&#12464;&#12473;&#12488;&#12521;&#12486;&#12472;&#12540;</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#caching"><strong>6.2.2</strong><span>&#12461;&#12515;&#12483;&#12471;&#12531;&#12464;&#12473;&#12488;&#12521;&#12486;&#12472;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#inheritanceStrategies"><strong>6.2.3</strong><span>&#32153;&#25215;&#12473;&#12488;&#12521;&#12486;&#12472;&#12540;</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#inheritanceStrategies"><strong>6.2.3</strong><span>&#32153;&#25215;&#12473;&#12488;&#12521;&#12486;&#12472;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#identity"><strong>6.2.4</strong><span>&#12459;&#12473;&#12479;&#12512;&#12487;&#12540;&#12479;&#12505;&#12540;&#12473;&#12450;&#12452;&#12487;&#12531;&#12486;&#12451;&#12486;&#12451;&#12540;</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#identity"><strong>6.2.4</strong><span>&#12487;&#12540;&#12479;&#12505;&#12540;&#12473;&#35672;&#21029;&#23376;&#12398;&#12459;&#12473;&#12479;&#12510;&#12452;&#12474;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#compositePrimaryKeys"><strong>6.2.5</strong><span>&#12503;&#12521;&#12452;&#12510;&#12522;&#12461;&#12540;&#21512;&#25104;</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#compositePrimaryKeys"><strong>6.2.5</strong><span>&#35079;&#21512;&#20027;&#12461;&#12540;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:10px"><a href="#databaseIndices"><strong>6.2.6</strong><span>&#12487;&#12540;&#12479;&#12505;&#12540;&#12473;&#12452;&#12531;&#12487;&#12483;&#12463;&#12473;</span></a>
@@ -167,7 +167,7 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:10px"><a href="#optimisticLockingAndVersioning"><strong>6.2.7</strong><span>&#27005;&#35251;&#30340;&#12525;&#12483;&#12463;&#12392;&#12496;&#12540;&#12472;&#12519;&#12491;&#12531;&#12464;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#fetchingDSL"><strong>6.2.8</strong><span>Eager&#12392;Lazy&#12501;&#12455;&#12483;&#12481;&#12531;&#12464;</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#fetchingDSL"><strong>6.2.8</strong><span>Eager&#12501;&#12455;&#12483;&#12481;&#12392;Lazy&#12501;&#12455;&#12483;&#12481;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:10px"><a href="#customCascadeBehaviour"><strong>6.2.9</strong><span>&#12459;&#12473;&#12465;&#12540;&#12489;&#12398;&#25391;&#12427;&#33310;&#12356;&#12434;&#22793;&#12360;&#12427;</span></a>
@@ -333,7 +333,7 @@ If you have <code>nullable: false</code> constraints on either <code>dateCreated
 
 
 <a name="5.5.2 Custom ORM Mapping"><!-- Legacy link --></a>
-<h2 id="ormdsl">6.5.2 カスタムORマッピング</h2>
+<h2 id="ormdsl">6.5.2 O/Rマッピングのカスタマイズ</h2>
 <div class="hidden-block">Grails domain classes can be mapped onto many legacy schemas with an Object Relational Mapping DSL (domain specific language). The following sections takes you through what is possible with the ORM DSL.</div>
 GrailsのドメインクラスはObject Relation Mapping DSL(Domain Specific Language; ドメイン特化言語)を利用して、多くのレガシースキーマにマッピングさせることができます。
 この後に続くセクションでは、ORM DSLを使って何ができるかをひとつひとつ見ていきます。<p class="paragraph"/><blockquote class="note">
@@ -460,7 +460,7 @@ class Person &#123;
 
 
 <a name="5.5.2.2 Caching Strategy"><!-- Legacy link --></a>
-<h2 id="caching">6.5.2.2 キャッシングストラテジー</h2>
+<h2 id="caching">6.5.2.2 キャッシングストラテジ</h2>
 <div class="hidden-block">h4. Setting up caching</div>
 <h4>キャッシング設定</h4><p class="paragraph"/><div class="hidden-block"><a href="http://www.hibernate.org/" target="blank">Hibernate</a> features a second-level cache with a customizable cache provider. This needs to be configured in the <code>grails-app/conf/DataSource.groovy</code> file as follows:</div>
 <a href="http://www.hibernate.org/" target="blank">Hibernate</a> はカスタマイズ可能なキャッシュプロバイダによる二次キャッシュを持っています。
@@ -529,7 +529,7 @@ Hibernateの2次キャッシュは、インスタンスのキャッシュだけ�
 </ul><p class="paragraph"/>
 
 <a name="5.5.2.3 Inheritance Strategies"><!-- Legacy link --></a>
-<h2 id="inheritanceStrategies">6.5.2.3 継承ストラテジー</h2>
+<h2 id="inheritanceStrategies">6.5.2.3 継承ストラテジ</h2>
 <div class="hidden-block">By default GORM classes use <code>table-per-hierarchy</code> inheritance mapping. This has the disadvantage that columns cannot have a <code>NOT-NULL</code> constraint applied to them at the database level. If you would prefer to use a <code>table-per-subclass</code> inheritance strategy you can do so as follows:</div>
 デフォルトでは、GORMのクラスは<code>table-per-hierarchy</code>継承マッピングを用います。
 この場合、データベースレベルで<code>NOT-NULL</code>制約が適用できないというデメリットがあります。
@@ -544,7 +544,7 @@ Hibernateの2次キャッシュは、インスタンスのキャッシュだけ�
 
 
 <a name="5.5.2.4 Custom Database Identity"><!-- Legacy link --></a>
-<h2 id="identity">6.5.2.4 カスタムデータベースアイデンティティー</h2>
+<h2 id="identity">6.5.2.4 データベース識別子のカスタマイズ</h2>
 <div class="hidden-block">You can customize how GORM generates identifiers for the database using the DSL. By default GORM relies on the native database mechanism for generating ids. This is by far the best approach, but there are still many schemas that have different approaches to identity.</div>
 DSLを用いて、GORMがデータベース上の識別子を生成する方法をカスタマイズできます。
 デフォルトでは、GORMはIDの生成をデータベース固有の機構に頼っています。
@@ -577,8 +577,10 @@ Grailsが自動的に追加してくれるため、通常はわざわざ<code>id
 
 
 <a name="5.5.2.5 Composite Primary Keys"><!-- Legacy link --></a>
-<h2 id="compositePrimaryKeys">6.5.2.5 プライマリキー合成</h2>
-GORM supports the concept of composite identifiers (identifiers composed from 2 or more properties). It is not an approach we recommend, but is available to you if you need it:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.apache.commons.lang.builder.HashCodeBuilder<p class="paragraph"/>class Person <span class="java&#45;keyword">implements</span> Serializable &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName
+<h2 id="compositePrimaryKeys">6.5.2.5 複合主キー</h2>
+<div class="hidden-block">GORM supports the concept of composite identifiers (identifiers composed from 2 or more properties). It is not an approach we recommend, but is available to you if you need it:</div>
+GORMは複合主キー(2つ以上のプロパティから構成される識別子)をサポートしています。
+複合主キーはお勧めの方法ではありませんが、必要ならば利用可能です。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.apache.commons.lang.builder.HashCodeBuilder<p class="paragraph"/>class Person <span class="java&#45;keyword">implements</span> Serializable &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName
     <span class="java&#45;object">String</span> lastName<p class="paragraph"/>    <span class="java&#45;object">boolean</span> equals(other) &#123;
         <span class="java&#45;keyword">if</span> (!(other <span class="java&#45;keyword">instanceof</span> Person)) &#123;
             <span class="java&#45;keyword">return</span> <span class="java&#45;keyword">false</span>
@@ -591,10 +593,20 @@ GORM supports the concept of composite identifiers (identifiers composed from 2 
     &#125;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         id composite: &#91;'firstName', 'lastName'&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/>The above will create a composite id of the <code>firstName</code> and <code>lastName</code> properties of the Person class. To retrieve an instance by id you use a prototype of the object itself:<p class="paragraph"/><div class="code"><pre>def p = Person.get(<span class="java&#45;keyword">new</span> Person(firstName: <span class="java&#45;quote">"Fred"</span>, lastName: <span class="java&#45;quote">"Flintstone"</span>))
-println p.firstName</pre></div><p class="paragraph"/>Domain classes mapped with composite primary keys must implement the <code>Serializable</code> interface and override the <code>equals</code> and <code>hashCode</code> methods, using the properties in the composite key for the calculations. The example above uses a <code>HashCodeBuilder</code> for convenience but it's fine to implement it yourself.<p class="paragraph"/>Another important consideration when using composite primary keys is associations. If for example you have a many-to-one association where the foreign keys are stored in the associated table then 2 columns will be present in the associated table.<p class="paragraph"/>For example consider the following domain class:<p class="paragraph"/><div class="code"><pre>class Address &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The above will create a composite id of the <code>firstName</code> and <code>lastName</code> properties of the Person class. To retrieve an instance by id you use a prototype of the object itself:</div>
+上の例では、<code>Person</code>クラスの<code>firstName</code>と<code>lastName</code>プロパティを複合主キーにしています。
+IDでインスタンスを取得するためには、そのドメインクラスの未保存のインスタンスを検索条件として使用します:<p class="paragraph"/><div class="code"><pre>def p = Person.get(<span class="java&#45;keyword">new</span> Person(firstName: <span class="java&#45;quote">"Fred"</span>, lastName: <span class="java&#45;quote">"Flintstone"</span>))
+println p.firstName</pre></div><p class="paragraph"/><div class="hidden-block">Domain classes mapped with composite primary keys must implement the <code>Serializable</code> interface and override the <code>equals</code> and <code>hashCode</code> methods, using the properties in the composite key for the calculations. The example above uses a <code>HashCodeBuilder</code> for convenience but it's fine to implement it yourself.</div>
+複合主キーを用いるドメインクラスでは、<code>Serializable</code>インターフェイスの実装と<code>equals</code>と<code>hashCode</code>メソッドのオーバライドが必要です。
+これによって複合キーのプロパティを同一性の算定に利用できるようになります。
+前述の例では、簡便のため<code>HashCodeBuilder</code>を利用しましたが、もちろん自分で実装しても構いません。<p class="paragraph"/><div class="hidden-block">Another important consideration when using composite primary keys is associations. If for example you have a many-to-one association where the foreign keys are stored in the associated table then 2 columns will be present in the associated table.</div>
+複合主キーを利用する上で、もう一つ抑えておかなければならないのが関連です。
+例えば多対1関連の場合、外部キーが関連元テーブル上に格納されますが、上記のように複合主キーを利用すると外部キー用に2つのカラムが必要なことになります。<p class="paragraph"/><div class="hidden-block">For example consider the following domain class:</div>
+例えば、次のドメインクラスを考えます:<p class="paragraph"/><div class="code"><pre>class Address &#123;
     Person person
-&#125;</pre></div><p class="paragraph"/>In this case the <code>address</code> table will have an additional two columns called <code>person_first_name</code> and <code>person_last_name</code>. If you wish the change the mapping of these columns then you can do so using the following technique:<p class="paragraph"/><div class="code"><pre>class Address &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case the <code>address</code> table will have an additional two columns called <code>person_first_name</code> and <code>person_last_name</code>. If you wish the change the mapping of these columns then you can do so using the following technique:</div>
+この場合、<code>address</code>テーブルには、<code>person_first_name</code>と<code>person_last_name</code>という2つのカラムが追加されることになります。
+もし、これらのカラムへの対応付けを変更したいのであれば、次のようにできます:<p class="paragraph"/><div class="code"><pre>class Address &#123;
     Person person
     <span class="java&#45;keyword">static</span> mapping = &#123;
         columns &#123;
@@ -640,7 +652,7 @@ If you disable optimistic locking you are essentially on your own with regards t
 
 
 <a name="5.5.2.8 Eager and Lazy Fetching"><!-- Legacy link --></a>
-<h2 id="fetchingDSL">6.5.2.8 EagerとLazyフェッチング</h2>
+<h2 id="fetchingDSL">6.5.2.8 EagerフェッチとLazyフェッチ</h2>
 <h4>Lazy Collections</h4><p class="paragraph"/>As discussed in the section on <a href="../guide/single.html#fetching" class="guide">Eager and Lazy fetching</a>, GORM collections are lazily loaded by default but you can change this behaviour with the ORM DSL. There are several options available to you, but the most common ones are:
 <ul class="star">
 <li>lazy: false</li>
