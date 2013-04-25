@@ -464,53 +464,112 @@ log <span class="java&#45;quote">"warn"</span></pre></div><p class="paragraph"/>
 
 <a name="3.7.11 Changing/Snapshot Dependencies"><!-- Legacy link --></a>
 <h2 id="changingDependencies">4.7.6 スナップショットと他の変化する依存関係</h2>
-<h4>Configuration Changing dependencies</h4><p class="paragraph"/>Typically, dependencies are constant. That is, for a given combination of <code>group</code>, <code>name</code> and <code>version</code> the jar (or plugin) that it refers to will never change. The Grails dependency management system uses this fact to cache dependencies in order to avoid having to download them from the source repository each time. Sometimes this is not desirable. For example, many developers use the convention of a  <em class="italic">snapshot</em>  (i.e. a dependency with a version number ending in “-SNAPSHOT”) that can change from time to time while still retaining the same version number. We call this a "changing dependency".<p class="paragraph"/>Whenever you have a changing dependency, Grails will always check the remote repository for a new version. More specifically, when a changing dependency is encountered during dependency resolution its last modified timestamp in the local cache is compared against the last modified timestamp in the dependency repositories. If the version on the remote server is deemed to be newer than the version in the local cache, the new version will be downloaded and used.<p class="paragraph"/><blockquote class="note">
+<div class="hidden-block">h4. Configuration Changing dependencies</div>
+<h4>変化する依存関係の設定</h4><p class="paragraph"/><div class="hidden-block">Typically, dependencies are constant. That is, for a given combination of <code>group</code>, <code>name</code> and <code>version</code> the jar (or plugin) that it refers to will never change. The Grails dependency management system uses this fact to cache dependencies in order to avoid having to download them from the source repository each time. Sometimes this is not desirable. For example, many developers use the convention of a  <em class="italic">snapshot</em>  (i.e. a dependency with a version number ending in “-SNAPSHOT”) that can change from time to time while still retaining the same version number. We call this a "changing dependency".</div>
+基本的に、依存関係は不変です。ここでの不変とは、ある特定の<code>グループ</code>、<code>名前</code>、<code>バージョン</code>の組み合わせが参照するjar（もしくはプラグイン）は変化することはない、ということです。これによりGrailsの依存関係管理システムは、ソースリポジトリから毎回ダウンロードすることを回避するために、依存関係をキャッシュできます。時に、この仕様には不都合が生じます。例えば、多くの開発者は慣習的にスナップショット（つまり、バージョン番号が”-SNAPSHOT”で終わる依存関係）を使っています。このスナップショットは同一のバージョン番号を保持しつつ、変更される可能性があります。このことは”変化する依存関係”と呼ばれています。<p class="paragraph"/><div class="hidden-block">Whenever you have a changing dependency, Grails will always check the remote repository for a new version. More specifically, when a changing dependency is encountered during dependency resolution its last modified timestamp in the local cache is compared against the last modified timestamp in the dependency repositories. If the version on the remote server is deemed to be newer than the version in the local cache, the new version will be downloaded and used.</div>
+変化する依存関係を持っている場合は必ず、Grailsは新しいバージョンのリモートリポジトリをチェックします。具体的には、依存関係の解決中に変化する依存関係に遭遇した場合、ローカルキャッシュの最終更新日時と依存関係のリポジトリの最終更新日時と比較します。リモートサーバ上のバージョンがローカルキャッシュ内のバージョンよりも新しい場合は、新しいバージョンがダウンロードされ使用されます。<p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 Be sure to read the next section on “Dependency Resolution Caching” in addition to this one as it affects changing dependencies.
-</blockquote><p class="paragraph"/>All dependencies (jars and plugins) with a version number ending in <code>-SNAPSHOT</code> are <strong class="bold">implicitly</strong> considered to be changing by Grails. You can also explicitly specify that a dependency is changing by setting the changing flag in the dependency DSL (This is only required for Ivy, Aether does not support the 'changing' flag and treats dependencies that end with -SNAPSHOT as changing):<p class="paragraph"/><div class="code"><pre>runtime ('org.my:lib:1.2.3') &#123;
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+変化する依存関係に作用する、依存関係解決キャッシングについて、次のセクションを必ずお読みください。
+</blockquote><p class="paragraph"/><div class="hidden-block">All dependencies (jars and plugins) with a version number ending in <code>-SNAPSHOT</code> are <strong class="bold">implicitly</strong> considered to be changing by Grails. You can also explicitly specify that a dependency is changing by setting the changing flag in the dependency DSL (This is only required for Ivy, Aether does not support the 'changing' flag and treats dependencies that end with -SNAPSHOT as changing):</div>
+Grailsは<code>暗黙的に</code>バージョン番号が<code>-SNAPSHOT</code>で終わるすべての依存関係（jarファイルもしくはプラグイン）を、変化する依存関係として扱います。また、明示的に依存DSLクエリー言語に変更フラグを設定することでも、変化する依存関係として扱う事ができます。（このDSLクエリー言語はIvyにのみ必要です。Aetherは'changing'フラグをサポートしておらず、-SNAPSHOTで終わる場合は変化する依存関係として扱います）<p class="paragraph"/><div class="code"><pre>runtime ('org.my:lib:1.2.3') &#123;
     changing = <span class="java&#45;keyword">true</span>
-&#125;</pre></div><p class="paragraph"/><h4>Aether and SNAPSHOT dependencies</h4><p class="paragraph"/>The semantics for handling snapshots when using Aether in Grails are the same as those when using the Maven build tool. The default snapshot check policy is to check once a day for a new version of the dependency. This means that if a new snapshot is published during the day to a remote repository you may not see that change unless you manually clear out your local snapshot.<p class="paragraph"/>If you wish to change the snapshot update policy you can do so by configuring an <code>updatePolicy</code> for the repository where the snapshot was resolved from, for example:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Aether and SNAPSHOT dependencies</h4>
+</div>
+<h4>AetherとSNAPSHOTの依存関係</h4><p class="paragraph"/><div class="hidden-block">
+The semantics for handling snapshots when using Aether in Grails are the same as those when using the Maven build tool. The default snapshot check policy is to check once a day for a new version of the dependency. This means that if a new snapshot is published during the day to a remote repository you may not see that change unless you manually clear out your local snapshot.
+</div>
+Grails内でAetherを使用した場合、スナップショットを処理するためのセマンティクスは、Mavenを使用した場合と同じです。
+デフォルトのスナップショットのチェックポリシーでは、1日に1回、依存関係の新しいバージョンをチェックします。
+これはその日リモートリポジトリに公開された新たなスナップショットが、手動でロカールリポジトリのスナップショットをクリアしない限り、変更を検知できない場合があるということです。<p class="paragraph"/><div class="hidden-block">
+If you wish to change the snapshot update policy you can do so by configuring an <code>updatePolicy</code> for the repository where the snapshot was resolved from, for example:
+</div>
+もし、スナップショットのアップデートポリシーを変更したい場合は、スナップショットの依存を解決するリポジトリで<code>updatePolicy</code>を設定します。
+例えば以下のようにします:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenCentral &#123;
         updatePolicy <span class="java&#45;quote">"interval:1"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>The above example configures an update policy that checks once a minute for changes. Note that that an <code>updatePolicy</code> like the above will seriously impact performance of dependency resolution. The possibly configuration values for <code>updatePolicy</code> are as follows:
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The above example configures an update policy that checks once a minute for changes. Note that that an <code>updatePolicy</code> like the above will seriously impact performance of dependency resolution. The possibly configuration values for <code>updatePolicy</code> are as follows:
+</div>
+上記の例では、1分に1回チェックをするアップデートポリシーを設定しています。
+上記の<code>updatePolicy</code>のように、この設定は依存関係解決のパフォーマンスに影響を与えることに注意してください。
+<code>updatePolicy</code>に設定が可能な値は以下のとおりです:<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li><code>never</code> - Never check for new snapshots</li>
 <li><code>always</code> - Always check for new snapshots</li>
 <li><code>daily</code> - Check once a day for new snapshots (the default)</li>
 <li><code>interval:x</code> - Check once every x minutes for new snapshots</li>
-</ul><p class="paragraph"/><h4>Ivy and Changing dependencies</h4><p class="paragraph"/>For those used to Maven snapshot handling, if you use Aether dependency management you can expect the same semantics as Maven. If you choose to use Ivy there is a caveat to the support for changing dependencies that you should be aware of. Ivy will stop looking for newer versions of a dependency once it finds a remote repository that has the dependency.<p class="paragraph"/>Consider the following setup:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>never</code> - 新しいスナップショットをチェックしない</li>
+<li><code>always</code> - 常に新しいスナップショットをチェックする</li>
+<li><code>daily</code> - 1日に1回新しいスナップショットをチェックする (デフォルト)</li>
+<li><code>interval:x</code> - x分ごとに1回新しいスナップショットをチェックする</li>
+</ul><p class="paragraph"/><div class="hidden-block">h4. Ivy and Changing dependencies</div>
+<h4>Ivyと変化する依存関係</h4><p class="paragraph"/><div class="hidden-block">For those used to Maven snapshot handling, if you use Aether dependency management you can expect the same semantics as Maven. If you choose to use Ivy there is a caveat to the support for changing dependencies that you should be aware of. Ivy will stop looking for newer versions of a dependency once it finds a remote repository that has the dependency.</div>
+Mavenのスナップショットの処理に使用されているものについては、Aetherの依存関係管理を使用する場合は、Mavenと同じセマンティクスを期待できます。Ivyを選択した場合は、変化する依存関係のサポートに対する注意があります。Ivyは依存関係を持つリモートリポジトリが見つかった時点で、新しいバージョンの依存関係の検索を終了します。<p class="paragraph"/><div class="hidden-block">Consider the following setup:</div>
+以下の設定を考えてみましょう:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     repositories &#123;
         mavenLocal()
         mavenRepo <span class="java&#45;quote">"http://my.org/repo"</span>
     &#125;
     dependencies &#123;
         compile <span class="java&#45;quote">"myorg:mylib:1.0&#45;SNAPSHOT"</span>
-    &#125;</pre></div><p class="paragraph"/>In this example we are using the local maven repository and a remote network maven repository. Assuming that the local OI dependency and the local Maven cache do not contain the dependency but the remote repository does, when we perform dependency resolution the following actions will occur:
+    &#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this example we are using the local maven repository and a remote network maven repository. Assuming that the local OI dependency and the local Maven cache do not contain the dependency but the remote repository does, when we perform dependency resolution the following actions will occur:</div>
+この例では、MavenのローカルリポジトリとMavenのリモートネットワークリポジトリを使用しています。ローカルにあるGrailsの依存関係とMavenのキャッシュには該当する依存関係が含まれていませんが、リモートリポジトリには含まれているとします。この状況で依存関係を解決する場合は、次のように動作します。<p class="paragraph"/><div class="hidden-block">* maven local repository is searched, dependency not found</div>
 <ul class="star">
-<li>maven local repository is searched, dependency not found</li>
-<li>maven network repository is searched, dependency is downloaded to the cache and used</li>
-</ul><p class="paragraph"/>Note that the repositories are checked in the order they are defined in the <code>BuildConfig.groovy</code> file.<p class="paragraph"/>If we perform dependency resolution again without the dependency changing on the remote server, the following will happen:
+<li>Mavenのローカルリポジトリが検索されますが、依存関係は見つかりません。</li>
+</ul><p class="paragraph"/><div class="hidden-block">* maven network repository is searched, dependency is downloaded to the cache and used</div>
 <ul class="star">
-<li>maven local repository is searched, dependency not found</li>
-<li>maven network repository is searched, dependency is found to be the same “age” as the version in the cache so will not be updated (i.e. downloaded)</li>
-</ul><p class="paragraph"/>Later on, a new version of <code>mylib 1.0-SNAPSHOT</code> is published changing the version on the server. The next time we perform dependency resolution, the following will happen:
+<li>Mavenのネットワークリポジトリが検索され、依存関係をキャッシュへダウンロードして使用します。</li>
+</ul><p class="paragraph"/><div class="hidden-block">Note that the repositories are checked in the order they are defined in the <code>BuildConfig.groovy</code> file. </div>
+リポジトリは<code>BuildConfig.groovy</code>のファイルに定義されている順にチェックされることに注意してください。<p class="paragraph"/><div class="hidden-block">If we perform dependency resolution again without the dependency changing on the remote server, the following will happen:</div>
+リモートサーバー上の依存関係が変化していない状況で、再び依存関係解決を行う場合、次の処理が実行されます。<p class="paragraph"/><div class="hidden-block">* maven local repository is searched, dependency not found</div>
 <ul class="star">
-<li>maven local repository is searched, dependency not found</li>
-<li>maven network repository is searched, dependency is found to newer than version in the cache so will be updated (i.e. downloaded to the cache)</li>
-</ul><p class="paragraph"/>So far everything is working well.<p class="paragraph"/>Now we want to test some local changes to the <code>mylib</code> library. To do this we build it locally and install it to the local Maven cache (how doesn't particularly matter). The next time we perform a dependency resolution, the following will occur:
+<li>Mavenのローカルリポジトリが検索されますが、依存関係は見つかりません。</li>
+</ul><p class="paragraph"/><div class="hidden-block">* maven network repository is searched, dependency is found to be the same “age” as the version in the cache so will not be updated (i.e. downloaded)</div>
 <ul class="star">
-<li>maven local repository is searched, dependency is found to newer than version in the cache so will be updated (i.e. downloaded to the cache)</li>
-<li>maven network repository is NOT searched as we've already found the dependency</li>
-</ul><p class="paragraph"/>This is what we wanted to occur.<p class="paragraph"/>Later on, a new version of <code>mylib 1.0-SNAPSHOT</code> is published changing the version on the server. The next time we perform dependency resolution, the following will happen:
+<li>Mavenのネットワークリポジトリが検索され依存関係が見つかりますが、キャッシュ内のバージョンと同じ最終更新日時のため更新（すなわちダウンロード）はされません。</li>
+</ul><p class="paragraph"/><div class="hidden-block">Later on, a new version of <code>mylib 1.0-SNAPSHOT</code> is published changing the version on the server. The next time we perform dependency resolution, the following will happen:</div>
+その後、<code>mylib 1.0-SNAPSHOT</code>の新しいバージョンが公開され、サーバ上のファイルが更新されたとします。この状況で依存関係の解決を実行した場合、以下の処理が行われます。<p class="paragraph"/><div class="hidden-block">* maven local repository is searched, dependency not found</div>
 <ul class="star">
-<li>maven local repository is searched, dependency is found to be the same “age” as the version in the cache so will not be updated (i.e. downloaded)</li>
-<li>maven network repository is NOT searched as we've already found the dependency</li>
-</ul><p class="paragraph"/>This is likely to not be the desired outcome. We are now out of sync with the latest published snapshot and will continue to keep using the version from the local maven repository.<p class="paragraph"/>The rule to remember is this: when resolving a dependency, Ivy will stop searching as soon as it finds a repository that has the dependency at the specified version number. It will <strong class="bold">not</strong> continue searching all repositories trying to find a more recently modified instance.<p class="paragraph"/>To remedy this situation (i.e. build against the  <em class="italic">newer</em>  version of <code>mylib 1.0-SNAPSHOT</code> in the remote repository), you can either:
+<li>Mavenのローカルリポジトリが検索されますが、依存関係は見つかりません。</li>
+</ul><p class="paragraph"/><div class="hidden-block">* maven network repository is searched, dependency is found to newer than version in the cache so will be updated (i.e. downloaded to the cache)</div>
 <ul class="star">
-<li>Delete the version from the local maven repository, or</li>
-<li>Reorder the repositories in the <code>BuildConfig.groovy</code> file</li>
-</ul><p class="paragraph"/>Where possible, prefer deleting the version from the local maven repository. In general, when you have finished building against a locally built SNAPSHOT always try to clear it from the local maven repository.<p class="paragraph"/><blockquote class="note">
+<li>Mavenのネットワークリポジトリが検索され、キャッシュ内のバージョンよりも新しい依存関係が見つかり、更新（つまり、キャッシュにダウンロード）されます。</li>
+</ul><p class="paragraph"/><div class="hidden-block">So far everything is working well.</div>
+ここまで、すべてが正常に機能しています。<p class="paragraph"/><div class="hidden-block">Now we want to test some local changes to the <code>mylib</code> library. To do this we build it locally and install it to the local Maven cache (how doesn't particularly matter). The next time we perform a dependency resolution, the following will occur:</div>
+ここで、<code>mylib</code>ライブラリのローカル上での変更をテストしたい場合を考えてみます。これを行うには、ライブラリをローカル上でビルドし、Mavenのローカルキャッシュにインストールします（方法は特に重要ではありません）。この状況で、依存関係の解決を実行した場合、以下のようになります。<p class="paragraph"/><div class="hidden-block">* maven local repository is searched, dependency is found to newer than version in the cache so will be updated (i.e. downloaded to the cache)</div>
+Mavenのローカルリポジトリが検索され、キャッシュ内のバージョンよりも新しい依存関係が見つかるため、更新（つまり、キャッシュにダウンロード）されます。
+<div class="hidden-block">* maven network repository is NOT searched as we've already found the dependency</div>
+すでに依存関係を発見したため、Mavenのネットワークリポジトリは検索されません。<p class="paragraph"/><div class="hidden-block">This is what we wanted to occur. </div>
+これは、期待通りの結果です。<p class="paragraph"/><div class="hidden-block">Later on, a new version of <code>mylib 1.0-SNAPSHOT</code> is published changing the version on the server. The next time we perform dependency resolution, the following will happen:</div>
+その後、<code>mylib 1.0-SNAPSHOT</code>の新しいバージョンが公開され、サーバ上のファイルが更新されたとします。この状況で依存関係の解決を実行した場合、以下の処理が行われます。<p class="paragraph"/><div class="hidden-block">* maven local repository is searched, dependency is found to be the same “age” as the version in the cache so will not be updated (i.e. downloaded)</div>
+<ul class="star">
+<li>Mavenのローカルリポジトリが検索され、キャッシュ内バージョンと同じ”年齢”の依存関係が見つかりますが、更新（すなわちダウンロード）はされません。</li>
+</ul><p class="paragraph"/><div class="hidden-block">* maven network repository is NOT searched as we've already found the dependency</div>
+<ul class="star">
+<li>すでに依存関係を発見したため、Mavenのネットワークリポジトリは検索されません。</li>
+</ul><p class="paragraph"/><div class="hidden-block">This is likely to not be the desired outcome. We are now out of sync with the latest published snapshot and will continue to keep using the version from the local maven repository.</div>
+これは望ましい結果ではない可能性があります。最新の公開された（ネットワークリポジトリの）スナップショットと同期をとらず、Mavenのローカルリポジトリのバージョンを使用し続けます。<p class="paragraph"/><div class="hidden-block">The rule to remember is this: when resolving a dependency, Ivy will stop searching as soon as it finds a repository that has the dependency at the specified version number. It will <strong class="bold">not</strong> continue searching all repositories trying to find a more recently modified instance.</div>
+覚えておくべきルール:依存関係を解決するときに、Grailsはできるだけ早く、バージョン番号の指定された依存関係を持つリポジトリを見つけ、検索を終了します。より最新のインスタンスを検索するためにすべてのリポジトリを検索し続けることは<code>しません</code>。<p class="paragraph"/><div class="hidden-block">To remedy this situation (i.e. build against the  <em class="italic">newer</em>  version of <code>mylib 1.0-SNAPSHOT</code> in the remote repository), you can either:</div>
+この状況を改善するために（すなわちリモートリポジトリ内の、より新しいバージョンの<code>mylib 1.0-SNAPSHOT</code>をビルドするために）、次のいずれかを実行できます。<p class="paragraph"/><div class="hidden-block">* Delete the version from the local maven repository, or</div>
+<ul class="star">
+<li>Mavenのローカルリポジトリからバージョンを削除する</li>
+</ul><p class="paragraph"/><div class="hidden-block">* Reorder the repositories in the <code>BuildConfig.groovy</code> file</div>
+<ul class="star">
+<li><code>BuildConfig.groovy</code>ファイル内のリポジトリの順序を変更する</li>
+</ul><p class="paragraph"/><div class="hidden-block">Where possible, prefer deleting the version from the local maven repository. In general, when you have finished building against a locally built SNAPSHOT always try to clear it from the local maven repository.</div>
+可能であれば、Mavenのローカルリポジトリからバージョンを削除することが望ましいでしょう。通常は、ローカルスナップショットのビルドが終了したら、常にMavenのローカルリポジトリからクリアしましょう。<p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 This changing dependency behaviour is an unmodifiable characteristic of the underlying dependency management system Apache Ivy. It is currently not possible to have Ivy search all repositories to look for newer versions (in terms of modification date) of the same dependency (i.e. the same combination of <code>group</code>, <code>name</code> and <code>version</code>). If you want this behavior consider switching to Aether as the dependency manager.
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+この変化する依存関係の挙動は、Grailsの依存関係管理システムの基礎となっているApache Ivyの変更不可能な特性です。現在のところIvyは、すべてのリポジトリを検索し、同じ依存関係（すなわち等しい<code>グループ</code>、<code>名前</code>、<code>バージョン</code>の組み合わせ）の中から（修正日付の面で）より新しいバージョンのものを探すことはできません。
 </blockquote>
 
 
