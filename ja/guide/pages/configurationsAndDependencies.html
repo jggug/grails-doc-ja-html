@@ -141,55 +141,100 @@ function addJsClass() {
                 
 <a name="3.7.1 Configurations and Dependencies"><!-- Legacy link --></a>
 <h2 id="configurationsAndDependencies">4.7.1 設定と依存</h2>
-Grails features five dependency resolution configurations (or 'scopes'):
+<div class="hidden-block">Grails features five dependency resolution configurations (or 'scopes'):</div>
+Grailsは、依存関係解決のための5つの設定（'スコープ'とも呼ばれます）を用意しています:<p class="paragraph"/><div class="hidden-block">*  <code>build</code>: Dependencies for the build system only</div>
 <ul class="star">
-<li> <code>build</code>: Dependencies for the build system only</li>
-<li> <code>compile</code>: Dependencies for the compile step</li>
-<li> <code>runtime</code>: Dependencies needed at runtime but not for compilation (see above)</li>
-<li> <code>test</code>: Dependencies needed for testing but not at runtime (see above)</li>
-<li> <code>provided</code>: Dependencies needed at development time, but not during WAR deployment</li>
-</ul><p class="paragraph"/>Within the <code>dependencies</code> block you can specify a dependency that falls into one of these configurations by calling the equivalent method. For example if your application requires the MySQL driver to function at <code>runtime</code> you can specify that like this:<p class="paragraph"/><div class="code"><pre>runtime 'com.mysql:mysql&#45;connector&#45;java:5.1.16'</pre></div><p class="paragraph"/>This uses the string syntax: <code>group:name:version</code>.<p class="paragraph"/>
-If you are using Aether as the dependency resolution library, the Maven pattern of:<p class="paragraph"/><div class="code"><pre>&#60;groupId&#62;:&#60;artifactId&#62;&#91;:&#60;extension&#62;&#91;:&#60;classifier&#62;&#93;&#93;:&#60;version&#62;</pre></div><p class="paragraph"/>You can also use a Map-based syntax:<p class="paragraph"/><div class="code"><pre>runtime group: 'com.mysql',
+<li> <code>build</code>: ビルドシステムのためだけの依存関係</li>
+</ul><p class="paragraph"/><div class="hidden-block">*  <code>compile</code>: Dependencies for the compile step</div>
+<ul class="star">
+<li> <code>compile</code>: コンパイルのための依存関係</li>
+</ul><p class="paragraph"/><div class="hidden-block">*  <code>runtime</code>: Dependencies needed at runtime but not for compilation (see above)</div>
+<ul class="star">
+<li> <code>runtime</code>: 実行時には必要だが、コンパイル時には不必要な依存関係（上記参照）</li>
+</ul><p class="paragraph"/><div class="hidden-block">*  <code>test</code>: Dependencies needed for testing but not at runtime (see above)</div>
+<ul class="star">
+<li> <code>test</code>: テスト時には必要だが、実行時には不必要な依存関係（上記参照）</li>
+</ul><p class="paragraph"/><div class="hidden-block">*  <code>provided</code>: Dependencies needed at development time, but not during WAR deployment</div>
+<ul class="star">
+<li> <code>provided</code>: 開発時には必要だが、WARファイルのデプロイ時には不必要な依存関係</li>
+</ul><p class="paragraph"/><div class="hidden-block">Within the <code>dependencies</code> block you can specify a dependency that falls into one of these configurations by calling the equivalent method. For example if your application requires the MySQL driver to function at <code>runtime</code> you can specify that like this:</div>
+<code>dependencies</code>ブロックの内部で上記のメソッドを呼び出すことにより、依存関係を指定することができます。たとえば、アプリケーションが<code>runtime</code>時にMySQLドライバを必要とする場合は、次のように指定することができます:<p class="paragraph"/><div class="code"><pre>runtime 'com.mysql:mysql&#45;connector&#45;java:5.1.16'</pre></div><p class="paragraph"/><div class="hidden-block">This uses the string syntax: <code>group:name:version</code>. </div>
+上記では、<code>グループ:名前:バージョン</code>というString構文を使用しています。<p class="paragraph"/>
+<div class="hidden-block">If you are using Aether as the dependency resolution library, the Maven pattern of:</div>
+Aetherを依存関係解決ライブラリーとして利用する場合は、以下のようなMaven形式で記載します:<p class="paragraph"/><div class="code"><pre>&#60;groupId&#62;:&#60;artifactId&#62;&#91;:&#60;extension&#62;&#91;:&#60;classifier&#62;&#93;&#93;:&#60;version&#62;</pre></div><p class="paragraph"/><div class="hidden-block">You can also use a Map-based syntax:</div>
+Map構文も使用できます:<p class="paragraph"/><div class="code"><pre>runtime group: 'com.mysql',
         name: 'mysql&#45;connector&#45;java',
-        version: '5.1.16'</pre></div><p class="paragraph"/>Possible settings to the map syntax are:
+        version: '5.1.16'</pre></div><p class="paragraph"/><div class="hidden-block">Possible settings to the map syntax are:</div>
+Map構文で可能な設定は次のとおりです:<p class="paragraph"/><div class="hidden-block">* <code>group</code> - The group / organization (or groupId in Maven terminology)</div>
 <ul class="star">
-<li><code>group</code> - The group / organization (or groupId in Maven terminology)</li>
-<li><code>name</code> - The dependency name (or artifactId in Maven terminology)</li>
-<li><code>version</code> - The version of the dependency</li>
-<li><code>extension</code> (Aether only) - The file extension of the dependency</li>
-<li><code>classifier</code> - The dependency classifier</li>
-<li><code>branch</code> (Ivy only) - The branch of the dependency</li>
-<li><code>transitive</code> (Ivy only) - Whether the dependency has transitive dependencies</li>
-</ul><p class="paragraph"/>As you can see from the list above some dependency configuration settings work only in Aether and some only in Ivy.<p class="paragraph"/>Multiple dependencies can be specified by passing multiple arguments:<p class="paragraph"/><div class="code"><pre>runtime 'com.mysql:mysql&#45;connector&#45;java:5.1.16',
+<li><code>group</code> - グループ/組織（Mavenの用語ではgroupId）</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>name</code> - The dependency name (or artifactId in Maven terminology)</div>
+<ul class="star">
+<li><code>name</code> - 依存関係名 (Mavenの用語ではartifactId)</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>version</code> - The version of the dependency</div>
+<ul class="star">
+<li><code>version</code> - 依存関係のバージョン</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>extension</code> (Aether only) - The file extension of the dependency</div>
+<ul class="star">
+<li><code>extension</code> (Aetherのみ) - 依存関係のファイル拡張子</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>classifier</code> - The dependency classifier</div>
+<ul class="star">
+<li><code>classifier</code> - 依存関係の分類</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>branch</code> (Ivy only) - The branch of the dependency</div>
+<ul class="star">
+<li><code>branch</code>（Ivyのみ） - 依存関係のブランチ</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>transitive</code> (Ivy only) - Whether the dependency has transitive dependencies</div>
+<ul class="star">
+<li><code>transitive</code> (Ivyのみ) - 推移的依存関係の有無</li>
+</ul><p class="paragraph"/><div class="hidden-block">As you can see from the list above some dependency configuration settings work only in Aether and some only in Ivy.</div>
+上記のリストからわかるように、依存関係の設定の一部は、Ivyのみで動作するものと、Aetherのみでと一部のみで動作するものがあります。<p class="paragraph"/><div class="hidden-block">Multiple dependencies can be specified by passing multiple arguments:</div>
+複数の依存関係は、複数の引数を渡すことで指定できます:<p class="paragraph"/><div class="code"><pre>runtime 'com.mysql:mysql&#45;connector&#45;java:5.1.16',
         'net.sf.ehcache:ehcache:1.6.1'<p class="paragraph"/>// Or<p class="paragraph"/>runtime(
     &#91;group:'com.mysql', name:'mysql&#45;connector&#45;java', version:'5.1.16'&#93;,
     &#91;group:'net.sf.ehcache', name:'ehcache', version:'1.6.1'&#93;
-)</pre></div><p class="paragraph"/><h3>Disabling transitive dependency resolution</h3><p class="paragraph"/>By default, Grails will not only get the JARs and plugins that you declare, but it will also get their transitive dependencies. This is usually what you want, but there are occasions where you want a dependency without all its baggage. In such cases, you can disable transitive dependency resolution on a case-by-case basis:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
+)</pre></div><p class="paragraph"/><div class="hidden-block">h3. Disabling transitive dependency resolution</div>
+<h3>推移的依存関係解決の無効化</h3><p class="paragraph"/><div class="hidden-block">By default, Grails will not only get the JARs and plugins that you declare, but it will also get their transitive dependencies. This is usually what you want, but there are occasions where you want a dependency without all its baggage. In such cases, you can disable transitive dependency resolution on a case-by-case basis:</div>
+デフォルトでは、Grailsは宣言したJARファイルやプラグインだけでなく、それらの推移的依存関係を取得します。これは、通常は望ましいことですが、推移的依存関係を取得したくない場合もあります。そのような場合、状況に応じて推移的依存関係解決を無効にできます:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
         'net.sf.ehcache:ehcache:1.6.1') &#123;
     transitive = <span class="java&#45;keyword">false</span>
 &#125;<p class="paragraph"/>// Or
 runtime group:'com.mysql',
         name:'mysql&#45;connector&#45;java',
         version:'5.1.16',
-        transitive:<span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><blockquote class="warning">
+        transitive:<span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="warning">
 Disabling transitive dependency resolution only works with the Ivy dependency manager. Aether does not support disabling of transitive resolution, instead explicit exclusions are required (see below).
-</blockquote><p class="paragraph"/><h3>Excluding specific transitive dependencies</h3><p class="paragraph"/>A far more common scenario is where you want the transitive dependencies, but some of them cause issues with your own dependencies or are unnecessary. For example, many Apache projects have 'commons-logging' as a transitive dependency, but it shouldn't be included in a Grails project (we use SLF4J). That's where the <code>excludes</code> option comes in:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
+</blockquote>
+</div><p class="paragraph"/><blockquote class="warning">
+推移的依存関係解決の無効化は、Ivy依存関係マネージャとだけ連携して動作します。Aetherは推移的解決をサポートしておらず、明示的に除外する必要があります（下記参照）。
+</blockquote><p class="paragraph"/>
+<div class="hidden-block">h3. Excluding specific transitive dependencies</div>
+<h3>特定の推移的依存関係の除外</h3><p class="paragraph"/><div class="hidden-block">A far more common scenario is where you want the transitive dependencies, but some of them cause issues with your own dependencies or are unnecessary. For example, many Apache projects have 'commons-logging' as a transitive dependency, but it shouldn't be included in a Grails project (we use SLF4J). That's where the <code>excludes</code> option comes in:</div>
+頻繁に起こりうるシチュエーションは、推移的依存関係解決は動作させたい一方で、そのうちいくつかの依存関係は独自プログラムの依存関係に問題を発生させたり、不要だったりする場合です。たとえば、多くのApacheプロジェクトは推移依存関係として"commons-logging"を持っていますが、それはGrailsプロジェクトに含まれるべきではありません（GrailsはSLF4Jを使用している）。このような場合は、<code>excludes</code>オプションを使用します:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
         'net.sf.ehcache:ehcache:1.6.1') &#123;
     excludes <span class="java&#45;quote">"xml&#45;apis"</span>, <span class="java&#45;quote">"commons&#45;logging"</span>
 &#125;<p class="paragraph"/>// Or
 runtime(group:'com.mysql', name:'mysql&#45;connector&#45;java', version:'5.1.16') &#123;
     excludes(&#91; group: 'xml&#45;apis', name: 'xml&#45;apis'&#93;,
              &#91; group: 'org.apache.httpcomponents' &#93;,
-             &#91; name: 'commons&#45;logging' &#93;)</pre></div><p class="paragraph"/>As you can see, you can either exclude dependencies by their artifact ID (also known as a module name) or any combination of group and artifact IDs (if you use the Map notation). You may also come across <code>exclude</code> as well, but that can only accept a single string or Map:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
+             &#91; name: 'commons&#45;logging' &#93;)</pre></div><p class="paragraph"/><div class="hidden-block">As you can see, you can either exclude dependencies by their artifact ID (also known as a module name) or any combination of group and artifact IDs (if you use the Map notation). You may also come across <code>exclude</code> as well, but that can only accept a single string or Map:</div>
+見てのとおり、アーティファクトID（モジュール名と言うこともあります）、または任意のグループIDとアーティファクトIDの組み合わせ（Map表記を使用している場合）によって、推移的依存関係解決を行う依存関係を除外できます。<code>exclude</code>オプションを利用する場合も同様ですが、こちらは単一の文字列またはMapのみを許容します:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
         'net.sf.ehcache:ehcache:1.6.1') &#123;
     exclude <span class="java&#45;quote">"xml&#45;apis"</span>
-&#125;</pre></div><p class="paragraph"/><h3>Using Ivy module configurations</h3><p class="paragraph"/>Using the Ivy dependency manager (Aether not supported), if you use Ivy module configurations and wish to depend on a specific configuration of a module, you can use the <code>dependencyConfiguration</code> method to specify the configuration to use.<p class="paragraph"/><div class="code"><pre>provided(<span class="java&#45;quote">"my.org:web&#45;service:1.0"</span>) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h3. Using Ivy module configurations</div>
+<h3>Ivyモジュール構成の使用</h3><p class="paragraph"/><div class="hidden-block">Using the Ivy dependency manager (Aether not supported), if you use Ivy module configurations and wish to depend on a specific configuration of a module, you can use the <code>dependencyConfiguration</code> method to specify the configuration to use.</div>
+Ivyモジュール構成を使用していて、指定したモジュール構成に依存させたい場合は、<code>dependencyConfiguration</code>メソッドを用いて使用する構成を指定できます。<p class="paragraph"/><div class="code"><pre>provided(<span class="java&#45;quote">"my.org:web&#45;service:1.0"</span>) &#123;
     dependencyConfiguration <span class="java&#45;quote">"api"</span>
-&#125;</pre></div><p class="paragraph"/>If the dependency configuration is not explicitly set, the configuration named <code>"default"</code> will be used (which is also the correct value for dependencies coming from Maven style repositories).<p class="paragraph"/><h3>Where are the JARs?</h3><p class="paragraph"/>With all these declarative dependencies, you may wonder where all the JARs end up. They have to go somewhere after all. By default Grails puts them into a directory, called the dependency cache, that resides on your local file system at <code>user.home/.grails/ivy-cache</code> or <code>user.home/.m2/repository</code> when using Aether. You can change this either via the <code>settings.groovy</code> file:<p class="paragraph"/><div class="code"><pre>grails.dependency.cache.dir = <span class="java&#45;quote">"$&#123;userHome&#125;/.my&#45;dependency&#45;cache"</span></pre></div><p class="paragraph"/>or in the dependency DSL:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If the dependency configuration is not explicitly set, the configuration named <code>"default"</code> will be used (which is also the correct value for dependencies coming from Maven style repositories).</div>
+依存関係の設定が明示的にされていない場合は、<code>"default"</code>設定が使用されます。（これは、Mavenスタイルのリポジトリから来る依存関係に対しても正しい値です）<p class="paragraph"/><div class="hidden-block">h3. Where are the JARs?</div>
+<h3>JARファイルの場所</h3><p class="paragraph"/><div class="hidden-block">With all these declarative dependencies, you may wonder where all the JARs end up. They have to go somewhere after all. By default Grails puts them into a directory, called the dependency cache, that resides on your local file system at <code>user.home/.grails/ivy-cache</code> or <code>user.home/.m2/repository</code> when using Aether. You can change this either via the <code>settings.groovy</code> file:</div>
+当然、宣言された全ての依存関係の実態であるJARファイルは、必ずどこかに存在している必要があります。デフォルトでは、Grailsは依存関係キャッシュと呼ばれるディレクトリにJARファイルを入れます。このディレクトリは、ローカル・ファイル・システム上の<code>user.home/.grails/ivy-cache</code>もしくは<code>user.home/.m2/repository</code>（Aether使用時）に配置されます。<code>settings.groovy</code>ファイルによって、この場所を変更できます:<p class="paragraph"/><div class="code"><pre>grails.dependency.cache.dir = <span class="java&#45;quote">"$&#123;userHome&#125;/.my&#45;dependency&#45;cache"</span></pre></div><p class="paragraph"/><div class="hidden-block">or in the dependency DSL:</div>
+依存関係DSLクエリー言語内でも変更可能です:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     &#8230;
     cacheDir <span class="java&#45;quote">"target/ivy&#45;cache"</span>
     &#8230;
-&#125;</pre></div><p class="paragraph"/>The <code>settings.groovy</code> option applies to all projects, so it's the preferred approach.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The <code>settings.groovy</code> option applies to all projects, so it's the preferred approach.</div>
+<code>settings.groovy</code>オプションを使用すると、すべてのプロジェクトに適用されるため、こちらがおすすめの方法です。
 
 
 

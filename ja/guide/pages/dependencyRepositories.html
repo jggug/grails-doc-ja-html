@@ -141,23 +141,49 @@ function addJsClass() {
                 
 <a name="3.7.2 Dependency Repositories"><!-- Legacy link --></a>
 <h2 id="dependencyRepositories">4.7.2 依存管理リポジトリ</h2>
-<h4>Remote Repositories</h4><p class="paragraph"/>Initially your BuildConfig.groovy does not use any remote public Maven repositories. There is a default <code>grailsHome()</code> repository that will locate the JAR files Grails needs from your Grails installation. To use a public repository, specify it in the <code>repositories</code> block:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+<div class="hidden-block">h4. Remote Repositories</div>
+<h4>リモートリポジトリ</h4><p class="paragraph"/><div class="hidden-block">Initially your BuildConfig.groovy does not use any remote public Maven repositories. There is a default <code>grailsHome()</code> repository that will locate the JAR files Grails needs from your Grails installation. To use a public repository, specify it in the <code>repositories</code> block:</div>
+初期状態では、BuildConfig.groovyはどのMavenの公開リモートリポジトリも使用していません。デフォルトでGrailsは、Grailsのインストールに必要なJARファイルが配置されている<code>grailsHome()</code>リポジトリが存在します。公開リポジトリを使用するには、<code>repositories</code>ブロック内で以下を指定します:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenCentral()
-&#125;</pre></div><p class="paragraph"/>In this case the default public Maven repository is specified.<p class="paragraph"/>You can also specify a specific Maven repository to use by URL:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case the default public Maven repository is specified. </div>
+上のケースでは、デフォルトのMavenの公開リポジトリが指定されています。<p class="paragraph"/><div class="hidden-block">You can also specify a specific Maven repository to use by URL:</div>
+URLによって使用する特定のMavenのリポジトリを指定することもできます:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenRepo <span class="java&#45;quote">"http://repository.codehaus.org"</span>
-&#125;</pre></div><p class="paragraph"/>and even give it a name:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">and even give it a name:</div>
+名前をつけることもできます:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenRepo name: <span class="java&#45;quote">"Codehaus"</span>, root: <span class="java&#45;quote">"http://repository.codehaus.org"</span>
-&#125;</pre></div><p class="paragraph"/>so that you can easily identify it in logs.<p class="paragraph"/><h4>Controlling Repositories Inherited from Plugins</h4><p class="paragraph"/>A plugin you have installed may define a reference to a remote repository just as an application can. By default your application will inherit this repository definition when you install the plugin.<p class="paragraph"/>If you do not wish to inherit repository definitions from plugins then you can disable repository inheritance:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">so that you can easily identify it in logs.</div>
+名前をつける事によって、ログ上で簡単に特定することができます。<p class="paragraph"/><div class="hidden-block">h4. Controlling Repositories Inherited from Plugins</div>
+<h4>プラグインから継承したリポジトリの制御</h4><p class="paragraph"/><div class="hidden-block">A plugin you have installed may define a reference to a remote repository just as an application can. By default your application will inherit this repository definition when you install the plugin.</div>
+インストールしたプラグインは、アプリケーションが正しく参照できるように、リモートリポジトリへの参照を定義しています。デフォルトでは、アプリケーションはプラグインをインストールするときに、このリポジトリの定義を継承します。<p class="paragraph"/><div class="hidden-block">If you do not wish to inherit repository definitions from plugins then you can disable repository inheritance:</div>
+プラグインからリポジトリの定義を継承したくない場合、継承を無効にすることができます:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     inherit <span class="java&#45;keyword">false</span>
-&#125;</pre></div><p class="paragraph"/>In this case your application will not inherit any repository definitions from plugins and it is down to you to provide appropriate (possibly internal) repository definitions.<p class="paragraph"/><h4>Offline Mode</h4><p class="paragraph"/>There are times when it is not desirable to connect to any remote repositories (whilst working on the train for example!). In this case you can use the <code>offline</code> flag to execute Grails commands and Grails will not connect to any remote repositories:<p class="paragraph"/><div class="code"><pre>grails &#45;&#45;offline run&#45;app</pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case your application will not inherit any repository definitions from plugins and it is down to you to provide appropriate (possibly internal) repository definitions.</div>
+上記のケースでは、アプリケーションは、プラグインからいかなるリポジトリの定義も継承しません。適切な（おそらく内部の）リポジトリの定義を自分で提供する必要があります。<p class="paragraph"/><div class="hidden-block">h4. Offline Mode</div>
+<h4>オフラインモード</h4><p class="paragraph"/><div class="hidden-block">There are times when it is not desirable to connect to any remote repositories (whilst working on the train for example!). In this case you can use the <code>offline</code> flag to execute Grails commands and Grails will not connect to any remote repositories:</div>
+リモートリポジトリに接続したくない時もあります（たとえば電車の中で作業している時など）。その場合、<code>offline</code>フラグを付加してGrailsコマンドを実行すれば、Grailsはリモートリポジトリに接続しません:<p class="paragraph"/><div class="code"><pre>grails &#45;&#45;offline run&#45;app</pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 Note that this command will fail if you do not have the necessary dependencies in your local Ivy cache
-</blockquote><p class="paragraph"/>You can also globally configure offline mode by setting <code>grails.offline.mode</code> to <code>true</code> in <code>~/.grails/settings.groovy</code> or in your project's <code>BuildConfig.groovy</code> file:<p class="paragraph"/><div class="code"><pre>grails.offline.mode=<span class="java&#45;keyword">true</span></pre></div><p class="paragraph"/><h4>Local Resolvers</h4><p class="paragraph"/>If you do not wish to use a public Maven repository you can specify a flat file repository:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+ローカルIvyキャッシュ内に必要な依存関係が存在しない場合、このコマンドは失敗することに注意してください。
+</blockquote><p class="paragraph"/><div class="hidden-block">You can also globally configure offline mode by setting <code>grails.offline.mode</code> to <code>true</code> in <code>~/.grails/settings.groovy</code> or in your project's <code>BuildConfig.groovy</code> file:</div>
+また、<code>~/.grails/settings.groovy</code>ファイルか、プロジェクトの<code>BuildConfig.groovy</code>ファイルの<code>grails.offline.mode</code>を<code>true</code>にすることでにオフラインモードを設定することができます:<p class="paragraph"/><div class="code"><pre>grails.offline.mode=<span class="java&#45;keyword">true</span></pre></div><p class="paragraph"/><div class="hidden-block">h4. Local Resolvers</div>
+<h4>ローカルリゾルバ</h4><p class="paragraph"/><div class="hidden-block">If you do not wish to use a public Maven repository you can specify a flat file repository:</div>
+Mavenの公開リポジトリを使用したくない場合は、フラットファイルリポジトリを指定できます:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     flatDir name:'myRepo', dirs:'/path/to/repo'
-&#125;</pre></div><p class="paragraph"/><blockquote class="warning">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="warning">
 Aether does not support the <code>flatDir</code> resolver or any custom file system resolvers. The above feature works only if you are using the Ivy dependency manager.
-</blockquote><p class="paragraph"/>To specify your local Maven cache (<code>~/.m2/repository</code>) as a repository:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+</blockquote>
+</div><p class="paragraph"/><blockquote class="warning">
+Aetherは<code>flatDir</code>リゾルバを含め、いかなるカスタムファイルシステムリゾルバもサポートしていません。上記の機能は、Ivy依存関係マネージャを使用している場合にのみ動作します。
+</blockquote><p class="paragraph"/><div class="hidden-block">To specify your local Maven cache (<code>~/.m2/repository</code>) as a repository:</div>
+Mavenのローカルキャッシュ（<code>~/.m2/repository</code>）をリポジトリとして指定する場合は以下のようにします:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenLocal()
-&#125;</pre></div><p class="paragraph"/><h4>Custom Resolvers</h4><p class="paragraph"/>If you are using the Ivy dependency manager (Aether does not support custom resolvers), then you can explicitly specify an Ivy resolver:<p class="paragraph"/><div class="code"><pre>/&#42;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Custom Resolvers</div>
+<h4>カスタムリゾルバ</h4><p class="paragraph"/><div class="hidden-block">If you are using the Ivy dependency manager (Aether does not support custom resolvers), then you can explicitly specify an Ivy resolver:</div>
+Ivy依存関係マネージャを使用している場合（Aetherはカスタムリゾルバをサポートしていません）は、明示的にIvyリゾルバを指定することができます:<p class="paragraph"/><div class="code"><pre>/&#42;
  &#42; Configure our resolver.
  &#42;/
 def libResolver = <span class="java&#45;keyword">new</span> org.apache.ivy.plugins.resolver.URLResolver()
@@ -167,8 +193,8 @@ def libResolver = <span class="java&#45;keyword">new</span> org.apache.ivy.plugi
             <span class="java&#45;quote">"http://my.repository/&#36;&#123;it&#125;/"</span> +
             <span class="java&#45;quote">"&#91;organisation&#93;/&#91;module&#93;/&#91;revision&#93;/&#91;type&#93;s/&#91;artifact&#93;.&#91;ext&#93;"</span>)
 &#125;<p class="paragraph"/>libResolver.name = <span class="java&#45;quote">"my&#45;repository"</span>
-libResolver.settings = ivySettings<p class="paragraph"/>resolver libResolver</pre></div><p class="paragraph"/>It's also possible to pull dependencies from a repository using SSH. Ivy comes with a dedicated resolver that you can configure and include in your project like so:
-<div class="code"><pre><span class="java&#45;keyword">import</span> org.apache.ivy.plugins.resolver.SshResolver
+libResolver.settings = ivySettings<p class="paragraph"/>resolver libResolver</pre></div><p class="paragraph"/><div class="hidden-block">It's also possible to pull dependencies from a repository using SSH. Ivy comes with a dedicated resolver that you can configure and include in your project like so:</div>
+SSHを使用して、リポジトリから依存関係を取得することも可能です。Ivyは、プロジェクト内で設定できる専用のリゾルバを用意しています:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.apache.ivy.plugins.resolver.SshResolver
 &#8230;
 repositories &#123;
     ...<p class="paragraph"/>    def sshResolver = <span class="java&#45;keyword">new</span> SshResolver(
@@ -180,13 +206,17 @@ repositories &#123;
             <span class="java&#45;quote">"/home/grails/repo/&#91;organisation&#93;/&#91;artifact&#93;/"</span> +
             <span class="java&#45;quote">"&#91;revision&#93;/&#91;artifact&#93;&#45;&#91;revision&#93;.&#91;ext&#93;"</span>)<p class="paragraph"/>    sshResolver.latestStrategy =
             <span class="java&#45;keyword">new</span> org.apache.ivy.plugins.latest.LatestTimeStrategy()<p class="paragraph"/>    sshResolver.changingPattern = <span class="java&#45;quote">".&#42;SNAPSHOT"</span><p class="paragraph"/>    sshResolver.setCheckmodified(<span class="java&#45;keyword">true</span>)<p class="paragraph"/>    resolver sshResolver
-&#125;</pre></div><p class="paragraph"/>Download the <a href="http://www.jcraft.com/jsch/" target="blank">JSch</a> JAR and add it to Grails' classpath to use the SSH resolver. You can do this by passing the path in the Grails command line:
-<div class="code"><pre>grails &#45;classpath /path/to/jsch compile|run&#45;app|etc.</pre></div><p class="paragraph"/>You can also add its path to the <code>CLASSPATH</code> environment variable but be aware this it affects many Java applications. An alternative on Unix is to create an alias for <code>grails -classpath ...</code> so that you don't have to type the extra arguments each time.<p class="paragraph"/><h4>Authentication</h4><p class="paragraph"/>If your repository requires authentication you can configure this using a <code>credentials</code> block:<p class="paragraph"/><div class="code"><pre>credentials &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Download the <a href="http://www.jcraft.com/jsch/" target="blank">JSch</a> JAR and add it to Grails' classpath to use the SSH resolver. You can do this by passing the path in the Grails command line:</div>
+SSHリゾルバを使用するために、<a href="http://www.jcraft.com/jsch/" target="blank">JSch</a> JARをダウンロードしGrailsのクラスパスに追加します。Grailsのコマンドラインでパスを通すことによってこれを実行出来ます:<p class="paragraph"/><div class="code"><pre>grails &#45;classpath /path/to/jsch compile|run&#45;app|etc.</pre></div><p class="paragraph"/><div class="hidden-block">You can also add its path to the <code>CLASSPATH</code> environment variable but be aware this it affects many Java applications. An alternative on Unix is to create an alias for <code>grails -classpath ...</code> so that you don't have to type the extra arguments each time.</div>
+また、<code>CLASSPATH</code>環境変数にパスを通すことでも追加できますが、多くのJavaアプリケーションに影響を与えることに注意する必要があります。Unix上で引数を毎回入力する面倒を避けるには、<code>grails -classpath...</code>コマンドのエイリアスを作成するのが良いでしょう。<p class="paragraph"/><div class="hidden-block">h4. Authentication</div>
+<h4>認証</h4><p class="paragraph"/><div class="hidden-block">If your repository requires authentication you can configure this using a <code>credentials</code> block:</div>
+リポジトリが認証を必要とする場合は、<code>credentials</code>ブロックを使用してこれを設定することができます:<p class="paragraph"/><div class="code"><pre>credentials &#123;
     realm = <span class="java&#45;quote">".."</span>
     host = <span class="java&#45;quote">"localhost"</span>
     username = <span class="java&#45;quote">"myuser"</span>
     password = <span class="java&#45;quote">"mypass"</span>
-&#125;</pre></div><p class="paragraph"/>This can be placed in your <code>USER_HOME/.grails/settings.groovy</code> file using the <code>grails.project.ivy.authentication</code> setting:<p class="paragraph"/><div class="code"><pre>grails.project.ivy.authentication = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This can be placed in your <code>USER_HOME/.grails/settings.groovy</code> file using the <code>grails.project.ivy.authentication</code> setting:</div>
+<code>grails.project.ivy.authentication</code>を使用して<code>USER_HOME/.grails/settings.groovy</code>ファイル内に記述することができます:<p class="paragraph"/><div class="code"><pre>grails.project.ivy.authentication = &#123;
     credentials &#123;
         realm = <span class="java&#45;quote">".."</span>
         host = <span class="java&#45;quote">"localhost"</span>

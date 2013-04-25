@@ -2192,76 +2192,147 @@ grails.project.test.reports.dir = <span class="java&#45;quote">"target/test&#45;
 
 <a name="3.7.1 Configurations and Dependencies"><!-- Legacy link --></a>
 <h2 id="configurationsAndDependencies">4.7.1 設定と依存</h2>
-Grails features five dependency resolution configurations (or 'scopes'):
+<div class="hidden-block">Grails features five dependency resolution configurations (or 'scopes'):</div>
+Grailsは、依存関係解決のための5つの設定（'スコープ'とも呼ばれます）を用意しています:<p class="paragraph"/><div class="hidden-block">*  <code>build</code>: Dependencies for the build system only</div>
 <ul class="star">
-<li> <code>build</code>: Dependencies for the build system only</li>
-<li> <code>compile</code>: Dependencies for the compile step</li>
-<li> <code>runtime</code>: Dependencies needed at runtime but not for compilation (see above)</li>
-<li> <code>test</code>: Dependencies needed for testing but not at runtime (see above)</li>
-<li> <code>provided</code>: Dependencies needed at development time, but not during WAR deployment</li>
-</ul><p class="paragraph"/>Within the <code>dependencies</code> block you can specify a dependency that falls into one of these configurations by calling the equivalent method. For example if your application requires the MySQL driver to function at <code>runtime</code> you can specify that like this:<p class="paragraph"/><div class="code"><pre>runtime 'com.mysql:mysql&#45;connector&#45;java:5.1.16'</pre></div><p class="paragraph"/>This uses the string syntax: <code>group:name:version</code>.<p class="paragraph"/>
-If you are using Aether as the dependency resolution library, the Maven pattern of:<p class="paragraph"/><div class="code"><pre>&#60;groupId&#62;:&#60;artifactId&#62;&#91;:&#60;extension&#62;&#91;:&#60;classifier&#62;&#93;&#93;:&#60;version&#62;</pre></div><p class="paragraph"/>You can also use a Map-based syntax:<p class="paragraph"/><div class="code"><pre>runtime group: 'com.mysql',
+<li> <code>build</code>: ビルドシステムのためだけの依存関係</li>
+</ul><p class="paragraph"/><div class="hidden-block">*  <code>compile</code>: Dependencies for the compile step</div>
+<ul class="star">
+<li> <code>compile</code>: コンパイルのための依存関係</li>
+</ul><p class="paragraph"/><div class="hidden-block">*  <code>runtime</code>: Dependencies needed at runtime but not for compilation (see above)</div>
+<ul class="star">
+<li> <code>runtime</code>: 実行時には必要だが、コンパイル時には不必要な依存関係（上記参照）</li>
+</ul><p class="paragraph"/><div class="hidden-block">*  <code>test</code>: Dependencies needed for testing but not at runtime (see above)</div>
+<ul class="star">
+<li> <code>test</code>: テスト時には必要だが、実行時には不必要な依存関係（上記参照）</li>
+</ul><p class="paragraph"/><div class="hidden-block">*  <code>provided</code>: Dependencies needed at development time, but not during WAR deployment</div>
+<ul class="star">
+<li> <code>provided</code>: 開発時には必要だが、WARファイルのデプロイ時には不必要な依存関係</li>
+</ul><p class="paragraph"/><div class="hidden-block">Within the <code>dependencies</code> block you can specify a dependency that falls into one of these configurations by calling the equivalent method. For example if your application requires the MySQL driver to function at <code>runtime</code> you can specify that like this:</div>
+<code>dependencies</code>ブロックの内部で上記のメソッドを呼び出すことにより、依存関係を指定することができます。たとえば、アプリケーションが<code>runtime</code>時にMySQLドライバを必要とする場合は、次のように指定することができます:<p class="paragraph"/><div class="code"><pre>runtime 'com.mysql:mysql&#45;connector&#45;java:5.1.16'</pre></div><p class="paragraph"/><div class="hidden-block">This uses the string syntax: <code>group:name:version</code>. </div>
+上記では、<code>グループ:名前:バージョン</code>というString構文を使用しています。<p class="paragraph"/>
+<div class="hidden-block">If you are using Aether as the dependency resolution library, the Maven pattern of:</div>
+Aetherを依存関係解決ライブラリーとして利用する場合は、以下のようなMaven形式で記載します:<p class="paragraph"/><div class="code"><pre>&#60;groupId&#62;:&#60;artifactId&#62;&#91;:&#60;extension&#62;&#91;:&#60;classifier&#62;&#93;&#93;:&#60;version&#62;</pre></div><p class="paragraph"/><div class="hidden-block">You can also use a Map-based syntax:</div>
+Map構文も使用できます:<p class="paragraph"/><div class="code"><pre>runtime group: 'com.mysql',
         name: 'mysql&#45;connector&#45;java',
-        version: '5.1.16'</pre></div><p class="paragraph"/>Possible settings to the map syntax are:
+        version: '5.1.16'</pre></div><p class="paragraph"/><div class="hidden-block">Possible settings to the map syntax are:</div>
+Map構文で可能な設定は次のとおりです:<p class="paragraph"/><div class="hidden-block">* <code>group</code> - The group / organization (or groupId in Maven terminology)</div>
 <ul class="star">
-<li><code>group</code> - The group / organization (or groupId in Maven terminology)</li>
-<li><code>name</code> - The dependency name (or artifactId in Maven terminology)</li>
-<li><code>version</code> - The version of the dependency</li>
-<li><code>extension</code> (Aether only) - The file extension of the dependency</li>
-<li><code>classifier</code> - The dependency classifier</li>
-<li><code>branch</code> (Ivy only) - The branch of the dependency</li>
-<li><code>transitive</code> (Ivy only) - Whether the dependency has transitive dependencies</li>
-</ul><p class="paragraph"/>As you can see from the list above some dependency configuration settings work only in Aether and some only in Ivy.<p class="paragraph"/>Multiple dependencies can be specified by passing multiple arguments:<p class="paragraph"/><div class="code"><pre>runtime 'com.mysql:mysql&#45;connector&#45;java:5.1.16',
+<li><code>group</code> - グループ/組織（Mavenの用語ではgroupId）</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>name</code> - The dependency name (or artifactId in Maven terminology)</div>
+<ul class="star">
+<li><code>name</code> - 依存関係名 (Mavenの用語ではartifactId)</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>version</code> - The version of the dependency</div>
+<ul class="star">
+<li><code>version</code> - 依存関係のバージョン</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>extension</code> (Aether only) - The file extension of the dependency</div>
+<ul class="star">
+<li><code>extension</code> (Aetherのみ) - 依存関係のファイル拡張子</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>classifier</code> - The dependency classifier</div>
+<ul class="star">
+<li><code>classifier</code> - 依存関係の分類</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>branch</code> (Ivy only) - The branch of the dependency</div>
+<ul class="star">
+<li><code>branch</code>（Ivyのみ） - 依存関係のブランチ</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>transitive</code> (Ivy only) - Whether the dependency has transitive dependencies</div>
+<ul class="star">
+<li><code>transitive</code> (Ivyのみ) - 推移的依存関係の有無</li>
+</ul><p class="paragraph"/><div class="hidden-block">As you can see from the list above some dependency configuration settings work only in Aether and some only in Ivy.</div>
+上記のリストからわかるように、依存関係の設定の一部は、Ivyのみで動作するものと、Aetherのみでと一部のみで動作するものがあります。<p class="paragraph"/><div class="hidden-block">Multiple dependencies can be specified by passing multiple arguments:</div>
+複数の依存関係は、複数の引数を渡すことで指定できます:<p class="paragraph"/><div class="code"><pre>runtime 'com.mysql:mysql&#45;connector&#45;java:5.1.16',
         'net.sf.ehcache:ehcache:1.6.1'<p class="paragraph"/>// Or<p class="paragraph"/>runtime(
     &#91;group:'com.mysql', name:'mysql&#45;connector&#45;java', version:'5.1.16'&#93;,
     &#91;group:'net.sf.ehcache', name:'ehcache', version:'1.6.1'&#93;
-)</pre></div><p class="paragraph"/><h3>Disabling transitive dependency resolution</h3><p class="paragraph"/>By default, Grails will not only get the JARs and plugins that you declare, but it will also get their transitive dependencies. This is usually what you want, but there are occasions where you want a dependency without all its baggage. In such cases, you can disable transitive dependency resolution on a case-by-case basis:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
+)</pre></div><p class="paragraph"/><div class="hidden-block">h3. Disabling transitive dependency resolution</div>
+<h3>推移的依存関係解決の無効化</h3><p class="paragraph"/><div class="hidden-block">By default, Grails will not only get the JARs and plugins that you declare, but it will also get their transitive dependencies. This is usually what you want, but there are occasions where you want a dependency without all its baggage. In such cases, you can disable transitive dependency resolution on a case-by-case basis:</div>
+デフォルトでは、Grailsは宣言したJARファイルやプラグインだけでなく、それらの推移的依存関係を取得します。これは、通常は望ましいことですが、推移的依存関係を取得したくない場合もあります。そのような場合、状況に応じて推移的依存関係解決を無効にできます:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
         'net.sf.ehcache:ehcache:1.6.1') &#123;
     transitive = <span class="java&#45;keyword">false</span>
 &#125;<p class="paragraph"/>// Or
 runtime group:'com.mysql',
         name:'mysql&#45;connector&#45;java',
         version:'5.1.16',
-        transitive:<span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><blockquote class="warning">
+        transitive:<span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="warning">
 Disabling transitive dependency resolution only works with the Ivy dependency manager. Aether does not support disabling of transitive resolution, instead explicit exclusions are required (see below).
-</blockquote><p class="paragraph"/><h3>Excluding specific transitive dependencies</h3><p class="paragraph"/>A far more common scenario is where you want the transitive dependencies, but some of them cause issues with your own dependencies or are unnecessary. For example, many Apache projects have 'commons-logging' as a transitive dependency, but it shouldn't be included in a Grails project (we use SLF4J). That's where the <code>excludes</code> option comes in:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
+</blockquote>
+</div><p class="paragraph"/><blockquote class="warning">
+推移的依存関係解決の無効化は、Ivy依存関係マネージャとだけ連携して動作します。Aetherは推移的解決をサポートしておらず、明示的に除外する必要があります（下記参照）。
+</blockquote><p class="paragraph"/>
+<div class="hidden-block">h3. Excluding specific transitive dependencies</div>
+<h3>特定の推移的依存関係の除外</h3><p class="paragraph"/><div class="hidden-block">A far more common scenario is where you want the transitive dependencies, but some of them cause issues with your own dependencies or are unnecessary. For example, many Apache projects have 'commons-logging' as a transitive dependency, but it shouldn't be included in a Grails project (we use SLF4J). That's where the <code>excludes</code> option comes in:</div>
+頻繁に起こりうるシチュエーションは、推移的依存関係解決は動作させたい一方で、そのうちいくつかの依存関係は独自プログラムの依存関係に問題を発生させたり、不要だったりする場合です。たとえば、多くのApacheプロジェクトは推移依存関係として"commons-logging"を持っていますが、それはGrailsプロジェクトに含まれるべきではありません（GrailsはSLF4Jを使用している）。このような場合は、<code>excludes</code>オプションを使用します:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
         'net.sf.ehcache:ehcache:1.6.1') &#123;
     excludes <span class="java&#45;quote">"xml&#45;apis"</span>, <span class="java&#45;quote">"commons&#45;logging"</span>
 &#125;<p class="paragraph"/>// Or
 runtime(group:'com.mysql', name:'mysql&#45;connector&#45;java', version:'5.1.16') &#123;
     excludes(&#91; group: 'xml&#45;apis', name: 'xml&#45;apis'&#93;,
              &#91; group: 'org.apache.httpcomponents' &#93;,
-             &#91; name: 'commons&#45;logging' &#93;)</pre></div><p class="paragraph"/>As you can see, you can either exclude dependencies by their artifact ID (also known as a module name) or any combination of group and artifact IDs (if you use the Map notation). You may also come across <code>exclude</code> as well, but that can only accept a single string or Map:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
+             &#91; name: 'commons&#45;logging' &#93;)</pre></div><p class="paragraph"/><div class="hidden-block">As you can see, you can either exclude dependencies by their artifact ID (also known as a module name) or any combination of group and artifact IDs (if you use the Map notation). You may also come across <code>exclude</code> as well, but that can only accept a single string or Map:</div>
+見てのとおり、アーティファクトID（モジュール名と言うこともあります）、または任意のグループIDとアーティファクトIDの組み合わせ（Map表記を使用している場合）によって、推移的依存関係解決を行う依存関係を除外できます。<code>exclude</code>オプションを利用する場合も同様ですが、こちらは単一の文字列またはMapのみを許容します:<p class="paragraph"/><div class="code"><pre>runtime('com.mysql:mysql&#45;connector&#45;java:5.1.16',
         'net.sf.ehcache:ehcache:1.6.1') &#123;
     exclude <span class="java&#45;quote">"xml&#45;apis"</span>
-&#125;</pre></div><p class="paragraph"/><h3>Using Ivy module configurations</h3><p class="paragraph"/>Using the Ivy dependency manager (Aether not supported), if you use Ivy module configurations and wish to depend on a specific configuration of a module, you can use the <code>dependencyConfiguration</code> method to specify the configuration to use.<p class="paragraph"/><div class="code"><pre>provided(<span class="java&#45;quote">"my.org:web&#45;service:1.0"</span>) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h3. Using Ivy module configurations</div>
+<h3>Ivyモジュール構成の使用</h3><p class="paragraph"/><div class="hidden-block">Using the Ivy dependency manager (Aether not supported), if you use Ivy module configurations and wish to depend on a specific configuration of a module, you can use the <code>dependencyConfiguration</code> method to specify the configuration to use.</div>
+Ivyモジュール構成を使用していて、指定したモジュール構成に依存させたい場合は、<code>dependencyConfiguration</code>メソッドを用いて使用する構成を指定できます。<p class="paragraph"/><div class="code"><pre>provided(<span class="java&#45;quote">"my.org:web&#45;service:1.0"</span>) &#123;
     dependencyConfiguration <span class="java&#45;quote">"api"</span>
-&#125;</pre></div><p class="paragraph"/>If the dependency configuration is not explicitly set, the configuration named <code>"default"</code> will be used (which is also the correct value for dependencies coming from Maven style repositories).<p class="paragraph"/><h3>Where are the JARs?</h3><p class="paragraph"/>With all these declarative dependencies, you may wonder where all the JARs end up. They have to go somewhere after all. By default Grails puts them into a directory, called the dependency cache, that resides on your local file system at <code>user.home/.grails/ivy-cache</code> or <code>user.home/.m2/repository</code> when using Aether. You can change this either via the <code>settings.groovy</code> file:<p class="paragraph"/><div class="code"><pre>grails.dependency.cache.dir = <span class="java&#45;quote">"$&#123;userHome&#125;/.my&#45;dependency&#45;cache"</span></pre></div><p class="paragraph"/>or in the dependency DSL:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If the dependency configuration is not explicitly set, the configuration named <code>"default"</code> will be used (which is also the correct value for dependencies coming from Maven style repositories).</div>
+依存関係の設定が明示的にされていない場合は、<code>"default"</code>設定が使用されます。（これは、Mavenスタイルのリポジトリから来る依存関係に対しても正しい値です）<p class="paragraph"/><div class="hidden-block">h3. Where are the JARs?</div>
+<h3>JARファイルの場所</h3><p class="paragraph"/><div class="hidden-block">With all these declarative dependencies, you may wonder where all the JARs end up. They have to go somewhere after all. By default Grails puts them into a directory, called the dependency cache, that resides on your local file system at <code>user.home/.grails/ivy-cache</code> or <code>user.home/.m2/repository</code> when using Aether. You can change this either via the <code>settings.groovy</code> file:</div>
+当然、宣言された全ての依存関係の実態であるJARファイルは、必ずどこかに存在している必要があります。デフォルトでは、Grailsは依存関係キャッシュと呼ばれるディレクトリにJARファイルを入れます。このディレクトリは、ローカル・ファイル・システム上の<code>user.home/.grails/ivy-cache</code>もしくは<code>user.home/.m2/repository</code>（Aether使用時）に配置されます。<code>settings.groovy</code>ファイルによって、この場所を変更できます:<p class="paragraph"/><div class="code"><pre>grails.dependency.cache.dir = <span class="java&#45;quote">"$&#123;userHome&#125;/.my&#45;dependency&#45;cache"</span></pre></div><p class="paragraph"/><div class="hidden-block">or in the dependency DSL:</div>
+依存関係DSLクエリー言語内でも変更可能です:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     &#8230;
     cacheDir <span class="java&#45;quote">"target/ivy&#45;cache"</span>
     &#8230;
-&#125;</pre></div><p class="paragraph"/>The <code>settings.groovy</code> option applies to all projects, so it's the preferred approach.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The <code>settings.groovy</code> option applies to all projects, so it's the preferred approach.</div>
+<code>settings.groovy</code>オプションを使用すると、すべてのプロジェクトに適用されるため、こちらがおすすめの方法です。
 
 
 <a name="3.7.2 Dependency Repositories"><!-- Legacy link --></a>
 <h2 id="dependencyRepositories">4.7.2 依存管理リポジトリ</h2>
-<h4>Remote Repositories</h4><p class="paragraph"/>Initially your BuildConfig.groovy does not use any remote public Maven repositories. There is a default <code>grailsHome()</code> repository that will locate the JAR files Grails needs from your Grails installation. To use a public repository, specify it in the <code>repositories</code> block:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+<div class="hidden-block">h4. Remote Repositories</div>
+<h4>リモートリポジトリ</h4><p class="paragraph"/><div class="hidden-block">Initially your BuildConfig.groovy does not use any remote public Maven repositories. There is a default <code>grailsHome()</code> repository that will locate the JAR files Grails needs from your Grails installation. To use a public repository, specify it in the <code>repositories</code> block:</div>
+初期状態では、BuildConfig.groovyはどのMavenの公開リモートリポジトリも使用していません。デフォルトでGrailsは、Grailsのインストールに必要なJARファイルが配置されている<code>grailsHome()</code>リポジトリが存在します。公開リポジトリを使用するには、<code>repositories</code>ブロック内で以下を指定します:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenCentral()
-&#125;</pre></div><p class="paragraph"/>In this case the default public Maven repository is specified.<p class="paragraph"/>You can also specify a specific Maven repository to use by URL:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case the default public Maven repository is specified. </div>
+上のケースでは、デフォルトのMavenの公開リポジトリが指定されています。<p class="paragraph"/><div class="hidden-block">You can also specify a specific Maven repository to use by URL:</div>
+URLによって使用する特定のMavenのリポジトリを指定することもできます:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenRepo <span class="java&#45;quote">"http://repository.codehaus.org"</span>
-&#125;</pre></div><p class="paragraph"/>and even give it a name:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">and even give it a name:</div>
+名前をつけることもできます:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenRepo name: <span class="java&#45;quote">"Codehaus"</span>, root: <span class="java&#45;quote">"http://repository.codehaus.org"</span>
-&#125;</pre></div><p class="paragraph"/>so that you can easily identify it in logs.<p class="paragraph"/><h4>Controlling Repositories Inherited from Plugins</h4><p class="paragraph"/>A plugin you have installed may define a reference to a remote repository just as an application can. By default your application will inherit this repository definition when you install the plugin.<p class="paragraph"/>If you do not wish to inherit repository definitions from plugins then you can disable repository inheritance:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">so that you can easily identify it in logs.</div>
+名前をつける事によって、ログ上で簡単に特定することができます。<p class="paragraph"/><div class="hidden-block">h4. Controlling Repositories Inherited from Plugins</div>
+<h4>プラグインから継承したリポジトリの制御</h4><p class="paragraph"/><div class="hidden-block">A plugin you have installed may define a reference to a remote repository just as an application can. By default your application will inherit this repository definition when you install the plugin.</div>
+インストールしたプラグインは、アプリケーションが正しく参照できるように、リモートリポジトリへの参照を定義しています。デフォルトでは、アプリケーションはプラグインをインストールするときに、このリポジトリの定義を継承します。<p class="paragraph"/><div class="hidden-block">If you do not wish to inherit repository definitions from plugins then you can disable repository inheritance:</div>
+プラグインからリポジトリの定義を継承したくない場合、継承を無効にすることができます:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     inherit <span class="java&#45;keyword">false</span>
-&#125;</pre></div><p class="paragraph"/>In this case your application will not inherit any repository definitions from plugins and it is down to you to provide appropriate (possibly internal) repository definitions.<p class="paragraph"/><h4>Offline Mode</h4><p class="paragraph"/>There are times when it is not desirable to connect to any remote repositories (whilst working on the train for example!). In this case you can use the <code>offline</code> flag to execute Grails commands and Grails will not connect to any remote repositories:<p class="paragraph"/><div class="code"><pre>grails &#45;&#45;offline run&#45;app</pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case your application will not inherit any repository definitions from plugins and it is down to you to provide appropriate (possibly internal) repository definitions.</div>
+上記のケースでは、アプリケーションは、プラグインからいかなるリポジトリの定義も継承しません。適切な（おそらく内部の）リポジトリの定義を自分で提供する必要があります。<p class="paragraph"/><div class="hidden-block">h4. Offline Mode</div>
+<h4>オフラインモード</h4><p class="paragraph"/><div class="hidden-block">There are times when it is not desirable to connect to any remote repositories (whilst working on the train for example!). In this case you can use the <code>offline</code> flag to execute Grails commands and Grails will not connect to any remote repositories:</div>
+リモートリポジトリに接続したくない時もあります（たとえば電車の中で作業している時など）。その場合、<code>offline</code>フラグを付加してGrailsコマンドを実行すれば、Grailsはリモートリポジトリに接続しません:<p class="paragraph"/><div class="code"><pre>grails &#45;&#45;offline run&#45;app</pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 Note that this command will fail if you do not have the necessary dependencies in your local Ivy cache
-</blockquote><p class="paragraph"/>You can also globally configure offline mode by setting <code>grails.offline.mode</code> to <code>true</code> in <code>~/.grails/settings.groovy</code> or in your project's <code>BuildConfig.groovy</code> file:<p class="paragraph"/><div class="code"><pre>grails.offline.mode=<span class="java&#45;keyword">true</span></pre></div><p class="paragraph"/><h4>Local Resolvers</h4><p class="paragraph"/>If you do not wish to use a public Maven repository you can specify a flat file repository:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+</blockquote>
+</div><p class="paragraph"/><blockquote class="note">
+ローカルIvyキャッシュ内に必要な依存関係が存在しない場合、このコマンドは失敗することに注意してください。
+</blockquote><p class="paragraph"/><div class="hidden-block">You can also globally configure offline mode by setting <code>grails.offline.mode</code> to <code>true</code> in <code>~/.grails/settings.groovy</code> or in your project's <code>BuildConfig.groovy</code> file:</div>
+また、<code>~/.grails/settings.groovy</code>ファイルか、プロジェクトの<code>BuildConfig.groovy</code>ファイルの<code>grails.offline.mode</code>を<code>true</code>にすることでにオフラインモードを設定することができます:<p class="paragraph"/><div class="code"><pre>grails.offline.mode=<span class="java&#45;keyword">true</span></pre></div><p class="paragraph"/><div class="hidden-block">h4. Local Resolvers</div>
+<h4>ローカルリゾルバ</h4><p class="paragraph"/><div class="hidden-block">If you do not wish to use a public Maven repository you can specify a flat file repository:</div>
+Mavenの公開リポジトリを使用したくない場合は、フラットファイルリポジトリを指定できます:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     flatDir name:'myRepo', dirs:'/path/to/repo'
-&#125;</pre></div><p class="paragraph"/><blockquote class="warning">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="warning">
 Aether does not support the <code>flatDir</code> resolver or any custom file system resolvers. The above feature works only if you are using the Ivy dependency manager.
-</blockquote><p class="paragraph"/>To specify your local Maven cache (<code>~/.m2/repository</code>) as a repository:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+</blockquote>
+</div><p class="paragraph"/><blockquote class="warning">
+Aetherは<code>flatDir</code>リゾルバを含め、いかなるカスタムファイルシステムリゾルバもサポートしていません。上記の機能は、Ivy依存関係マネージャを使用している場合にのみ動作します。
+</blockquote><p class="paragraph"/><div class="hidden-block">To specify your local Maven cache (<code>~/.m2/repository</code>) as a repository:</div>
+Mavenのローカルキャッシュ（<code>~/.m2/repository</code>）をリポジトリとして指定する場合は以下のようにします:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenLocal()
-&#125;</pre></div><p class="paragraph"/><h4>Custom Resolvers</h4><p class="paragraph"/>If you are using the Ivy dependency manager (Aether does not support custom resolvers), then you can explicitly specify an Ivy resolver:<p class="paragraph"/><div class="code"><pre>/&#42;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Custom Resolvers</div>
+<h4>カスタムリゾルバ</h4><p class="paragraph"/><div class="hidden-block">If you are using the Ivy dependency manager (Aether does not support custom resolvers), then you can explicitly specify an Ivy resolver:</div>
+Ivy依存関係マネージャを使用している場合（Aetherはカスタムリゾルバをサポートしていません）は、明示的にIvyリゾルバを指定することができます:<p class="paragraph"/><div class="code"><pre>/&#42;
  &#42; Configure our resolver.
  &#42;/
 def libResolver = <span class="java&#45;keyword">new</span> org.apache.ivy.plugins.resolver.URLResolver()
@@ -2271,8 +2342,8 @@ def libResolver = <span class="java&#45;keyword">new</span> org.apache.ivy.plugi
             <span class="java&#45;quote">"http://my.repository/&#36;&#123;it&#125;/"</span> +
             <span class="java&#45;quote">"&#91;organisation&#93;/&#91;module&#93;/&#91;revision&#93;/&#91;type&#93;s/&#91;artifact&#93;.&#91;ext&#93;"</span>)
 &#125;<p class="paragraph"/>libResolver.name = <span class="java&#45;quote">"my&#45;repository"</span>
-libResolver.settings = ivySettings<p class="paragraph"/>resolver libResolver</pre></div><p class="paragraph"/>It's also possible to pull dependencies from a repository using SSH. Ivy comes with a dedicated resolver that you can configure and include in your project like so:
-<div class="code"><pre><span class="java&#45;keyword">import</span> org.apache.ivy.plugins.resolver.SshResolver
+libResolver.settings = ivySettings<p class="paragraph"/>resolver libResolver</pre></div><p class="paragraph"/><div class="hidden-block">It's also possible to pull dependencies from a repository using SSH. Ivy comes with a dedicated resolver that you can configure and include in your project like so:</div>
+SSHを使用して、リポジトリから依存関係を取得することも可能です。Ivyは、プロジェクト内で設定できる専用のリゾルバを用意しています:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.apache.ivy.plugins.resolver.SshResolver
 &#8230;
 repositories &#123;
     ...<p class="paragraph"/>    def sshResolver = <span class="java&#45;keyword">new</span> SshResolver(
@@ -2284,13 +2355,17 @@ repositories &#123;
             <span class="java&#45;quote">"/home/grails/repo/&#91;organisation&#93;/&#91;artifact&#93;/"</span> +
             <span class="java&#45;quote">"&#91;revision&#93;/&#91;artifact&#93;&#45;&#91;revision&#93;.&#91;ext&#93;"</span>)<p class="paragraph"/>    sshResolver.latestStrategy =
             <span class="java&#45;keyword">new</span> org.apache.ivy.plugins.latest.LatestTimeStrategy()<p class="paragraph"/>    sshResolver.changingPattern = <span class="java&#45;quote">".&#42;SNAPSHOT"</span><p class="paragraph"/>    sshResolver.setCheckmodified(<span class="java&#45;keyword">true</span>)<p class="paragraph"/>    resolver sshResolver
-&#125;</pre></div><p class="paragraph"/>Download the <a href="http://www.jcraft.com/jsch/" target="blank">JSch</a> JAR and add it to Grails' classpath to use the SSH resolver. You can do this by passing the path in the Grails command line:
-<div class="code"><pre>grails &#45;classpath /path/to/jsch compile|run&#45;app|etc.</pre></div><p class="paragraph"/>You can also add its path to the <code>CLASSPATH</code> environment variable but be aware this it affects many Java applications. An alternative on Unix is to create an alias for <code>grails -classpath ...</code> so that you don't have to type the extra arguments each time.<p class="paragraph"/><h4>Authentication</h4><p class="paragraph"/>If your repository requires authentication you can configure this using a <code>credentials</code> block:<p class="paragraph"/><div class="code"><pre>credentials &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Download the <a href="http://www.jcraft.com/jsch/" target="blank">JSch</a> JAR and add it to Grails' classpath to use the SSH resolver. You can do this by passing the path in the Grails command line:</div>
+SSHリゾルバを使用するために、<a href="http://www.jcraft.com/jsch/" target="blank">JSch</a> JARをダウンロードしGrailsのクラスパスに追加します。Grailsのコマンドラインでパスを通すことによってこれを実行出来ます:<p class="paragraph"/><div class="code"><pre>grails &#45;classpath /path/to/jsch compile|run&#45;app|etc.</pre></div><p class="paragraph"/><div class="hidden-block">You can also add its path to the <code>CLASSPATH</code> environment variable but be aware this it affects many Java applications. An alternative on Unix is to create an alias for <code>grails -classpath ...</code> so that you don't have to type the extra arguments each time.</div>
+また、<code>CLASSPATH</code>環境変数にパスを通すことでも追加できますが、多くのJavaアプリケーションに影響を与えることに注意する必要があります。Unix上で引数を毎回入力する面倒を避けるには、<code>grails -classpath...</code>コマンドのエイリアスを作成するのが良いでしょう。<p class="paragraph"/><div class="hidden-block">h4. Authentication</div>
+<h4>認証</h4><p class="paragraph"/><div class="hidden-block">If your repository requires authentication you can configure this using a <code>credentials</code> block:</div>
+リポジトリが認証を必要とする場合は、<code>credentials</code>ブロックを使用してこれを設定することができます:<p class="paragraph"/><div class="code"><pre>credentials &#123;
     realm = <span class="java&#45;quote">".."</span>
     host = <span class="java&#45;quote">"localhost"</span>
     username = <span class="java&#45;quote">"myuser"</span>
     password = <span class="java&#45;quote">"mypass"</span>
-&#125;</pre></div><p class="paragraph"/>This can be placed in your <code>USER_HOME/.grails/settings.groovy</code> file using the <code>grails.project.ivy.authentication</code> setting:<p class="paragraph"/><div class="code"><pre>grails.project.ivy.authentication = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This can be placed in your <code>USER_HOME/.grails/settings.groovy</code> file using the <code>grails.project.ivy.authentication</code> setting:</div>
+<code>grails.project.ivy.authentication</code>を使用して<code>USER_HOME/.grails/settings.groovy</code>ファイル内に記述することができます:<p class="paragraph"/><div class="code"><pre>grails.project.ivy.authentication = &#123;
     credentials &#123;
         realm = <span class="java&#45;quote">".."</span>
         host = <span class="java&#45;quote">"localhost"</span>
