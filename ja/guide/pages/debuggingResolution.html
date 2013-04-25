@@ -141,14 +141,17 @@ function addJsClass() {
                 
 <a name="3.7.3 Debugging Resolution"><!-- Legacy link --></a>
 <h2 id="debuggingResolution">4.7.3 依存解決デバッグ</h2>
-If you are having trouble getting a dependency to resolve you can enable more verbose debugging from the underlying engine using the <code>log</code> method:<p class="paragraph"/><div class="code"><pre>// log level of the Aether or Ivy resolver, either 'error', 'warn',
+<div class="hidden-block">If you are having trouble getting a dependency to resolve you can enable more verbose debugging from the underlying engine using the <code>log</code> method:</div>
+依存関係解決に関して問題を抱えている場合は、<code>log</code>メソッドを使用して内部システムからより詳細なデバッグ情報を得ることができます:<p class="paragraph"/><div class="code"><pre>// log level of the Aether or Ivy resolver, either 'error', 'warn',
 // 'info', 'debug' or 'verbose'
-log <span class="java&#45;quote">"warn"</span></pre></div><p class="paragraph"/>A common issue is that the checksums for a dependency don't match the associated JAR file, and so Ivy rejects the dependency. This helps ensure that the dependencies are valid. But for a variety of reasons some dependencies simply don't have valid checksums in the repositories, even if they are valid JARs. To get round this, you can disable Ivy's dependency checks like so:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+log <span class="java&#45;quote">"warn"</span></pre></div><p class="paragraph"/><div class="hidden-block">A common issue is that the checksums for a dependency don't match the associated JAR file, and so Ivy rejects the dependency. This helps ensure that the dependencies are valid. But for a variety of reasons some dependencies simply don't have valid checksums in the repositories, even if they are valid JARs. To get round this, you can disable Ivy's dependency checks like so:</div>
+依存関係のチェックサムが関連付けられたJARファイルと一致しない場合、Ivyはその依存関係を拒否しますが、これが問題になることがよくあります。この機能は依存関係の有効性の確認に役立ちます。しかし何らかの原因で、有効なJARファイルであっても、いくつかの依存関係はリポジトリに有効なチェックサムを持っていない場合があります。このような場合でも依存関係を取得するために、次のようにIvyの依存関係チェックを無効にできます:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     &#8230;
     log <span class="java&#45;quote">"warn"</span>
     checksums <span class="java&#45;keyword">false</span>
     &#8230;
-&#125;</pre></div><p class="paragraph"/>This is a global setting, so only use it if you have to.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This is a global setting, so only use it if you have to.</div>
+これはグローバル設定なので、必要な時だけ使用してください。
 
 
 
