@@ -469,7 +469,9 @@ println p.firstName</pre></div><p class="paragraph"/><div class="hidden-block">D
 
 <a name="5.5.2.6 Database Indices"><!-- Legacy link --></a>
 <h2 id="databaseIndices">6.5.2.6 データベースインデックス</h2>
-To get the best performance out of your queries it is often necessary to tailor the table index definitions. How you tailor them is domain specific and a matter of monitoring usage patterns of your queries. With GORM's DSL you can specify which columns are used in which indexes:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+<div class="hidden-block">To get the best performance out of your queries it is often necessary to tailor the table index definitions. How you tailor them is domain specific and a matter of monitoring usage patterns of your queries. With GORM's DSL you can specify which columns are used in which indexes:</div>
+クエリに対してベストな性能を得るために、多くの場合は、テーブルに対するインデックス定義の追加が必要となります。
+GORMのDSLで、どのカラムがどのインデックスを使うかを指定することができます。<p class="paragraph"/><div class="code"><pre>class Person &#123;
     <span class="java&#45;object">String</span> firstName
     <span class="java&#45;object">String</span> address
     <span class="java&#45;keyword">static</span> mapping = &#123;
@@ -479,7 +481,9 @@ To get the best performance out of your queries it is often necessary to tailor 
         firstName column: 'First_Name', index: 'Name_Idx'
         address column: 'Address', index: 'Name_Idx,Address_Index'
     &#125;
-&#125;</pre></div><p class="paragraph"/>Note that you cannot have any spaces in the value of the <code>index</code> attribute; in this example <code>index:'Name_Idx, Address_Index'</code> will cause an error.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Note that you cannot have any spaces in the value of the <code>index</code> attribute; in this example <code>index:'Name_Idx, Address_Index'</code> will cause an error.</div>
+<code>index</code>属性の値にスペースを入れることはできないことに注意してください。
+例えば、<code>index:'Name_Idx, Address_Index'</code>はエラーになります。
 
 
 <a name="5.5.2.7 Optimistic Locking and Versioning"><!-- Legacy link --></a>
