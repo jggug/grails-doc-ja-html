@@ -218,7 +218,7 @@ function addJsClass(el) {
                             
                             <div class="toc-item" style="margin-left:10px"><a href="#interactiveMode"><strong>5.1</strong><span>&#12452;&#12531;&#12479;&#12521;&#12463;&#12486;&#12451;&#12502;&#12514;&#12540;&#12489;</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="#forkedMode"><strong>5.2</strong><span>&#12501;&#12457;&#12540;&#12463;&#12373;&#12428;&#12383;Tomcat&#23455;&#34892;</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="#forkedMode"><strong>5.2</strong><span>&#12501;&#12457;&#12540;&#12463;&#23455;&#34892;</span></a></div>
                             
                             <div class="toc-item" style="margin-left:10px"><a href="#creatingGantScripts"><strong>5.3</strong><span>Gant&#12473;&#12463;&#12522;&#12503;&#12488;&#12398;&#20316;&#25104;</span></a></div>
                             
@@ -345,8 +345,6 @@ function addJsClass(el) {
                             <div class="toc-item" style="margin-left:20px"><a href="#formtokens"><strong>7.1.11</strong><span>&#12501;&#12457;&#12540;&#12512;&#20108;&#37325;&#36865;&#20449;&#12398;&#12495;&#12531;&#12489;&#12522;&#12531;&#12464;</span></a></div>
                             
                             <div class="toc-item" style="margin-left:20px"><a href="#typeConverters"><strong>7.1.12</strong><span>&#12471;&#12531;&#12503;&#12523;&#12479;&#12452;&#12503;&#12467;&#12531;&#12496;&#12540;&#12479;</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:20px"><a href="#asynchronousRequestProcessing"><strong>7.1.13</strong><span>&#38750;&#21516;&#26399;&#12522;&#12463;&#12456;&#12473;&#12488;&#20966;&#29702;(OLD)</span></a></div>
                             
                             <div class="toc-item" style="margin-left:10px"><a href="#gsp"><strong>7.2</strong><span>Groovy&#12469;&#12540;&#12496;&#12540;&#12506;&#12540;&#12472;</span></a></div>
                             
@@ -562,15 +560,17 @@ function addJsClass(el) {
                             
                             <div class="toc-item" style="margin-left:10px"><a href="#securingAgainstAttacks"><strong>13.1</strong><span>&#25915;&#25731;&#12363;&#12425;&#12398;&#38450;&#24481;</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="#codecs"><strong>13.2</strong><span>&#12456;&#12531;&#12467;&#12540;&#12489;&#12539;&#12487;&#12467;&#12540;&#12489;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="#xssPrevention"><strong>13.2</strong><span>&#12463;&#12525;&#12473;&#12469;&#12452;&#12488;&#12473;&#12463;&#12522;&#12503;&#12486;&#12451;&#12531;&#12464;(XSS)&#38450;&#24481;</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="#authentication"><strong>13.3</strong><span>&#35469;&#35388;</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="#codecs"><strong>13.3</strong><span>&#12456;&#12531;&#12467;&#12540;&#12489;&#12539;&#12487;&#12467;&#12540;&#12489;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="#securityPlugins"><strong>13.4</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;&#12503;&#12521;&#12464;&#12452;&#12531;</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="#authentication"><strong>13.4</strong><span>&#35469;&#35388;</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:20px"><a href="#springSecurity"><strong>13.4.1</strong><span>Spring Security</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="#securityPlugins"><strong>13.5</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;&#12503;&#12521;&#12464;&#12452;&#12531;</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:20px"><a href="#shiro"><strong>13.4.2</strong><span>Shiro</span></a></div>
+                            <div class="toc-item" style="margin-left:20px"><a href="#springSecurity"><strong>13.5.1</strong><span>Spring Security</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:20px"><a href="#shiro"><strong>13.5.2</strong><span>Shiro</span></a></div>
                             
                             <div class="toc-item" style="margin-left:0px"><a href="#plugins"><strong>14</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a></div>
                             
@@ -683,11 +683,12 @@ Grailsは、多くのコア・テクノロジーによるWeb開発でのパズ�
 
 
 <h2 id="whatsNew23">1.1 Grails 2.3の新機能</h2>
+<div class="hidden-block">h4. Improved Dependency Management</div>
 <h4>依存管理の向上</h4><p class="paragraph"/><div class="hidden-block">The default dependency resolution engine used by Grails has been changed to <a href="http://eclipse.org/aether" target="blank">Aether</a>, the dependency resolution engine used by Maven. Which engine you use can be configured in <code>BuildConfig</code>:</div>
 Grailsでデフォルトで使用されている依存管理エンジンが、Mavenで使用されているエンジンの <a href="http://eclipse.org/aether" target="blank">Aether</a> に変更されました。 <code>BuildConfig</code> で設定をすることでどちらのエンジンを使用するか変更可能です。<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolver = <span class="java&#45;quote">"maven"</span> // or ivy</pre></div><p class="paragraph"/><div class="hidden-block">Using Aether dependency resolution in Grails results in the same behavior as when using the Maven build tool, meaning improved snapshot handling, understanding of custom packaging types and so on.</div>
 Aether依存管理を使用するとGrailsではMavenビルドツールと同じ振る舞いをします。これは、前と比べてスナップショットハンドリングの向上やカスタムパッケージング等の機能向上を意味します。<p class="paragraph"/><div class="hidden-block">In addition, the <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> command has been updated to print the dependency graph of the console, which helps in diagnosing dependency resolution failures. See the chapter on <a href="../guide/single.html#dependencyResolution" class="guide">Dependency Resolution</a> for more information.</div>
-そしてさらに、 <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> コマンドも改良され、依存問題の解決を手助けするために、依存関係のグラフがコンソールに表示されるようになりました。 詳しくは <a href="../guide/single.html#dependencyResolution" class="guide">依存性解決</a> のドキュメントを参照してください。<p class="paragraph"/><h4>コマンドライン</h4><p class="paragraph"/><div class="hidden-block">The <code>create-app</code> command will now by default generate the command line grailsw wrapper for newly created applications.  The <code>&#45;&#45;skip-wrapper</code> switch may be used to prevent the wrapper from being generated.</div>
-<code>create&#45;app</code> コマンドがデフォルトでgrailswラッパーを生成するようになりました。ラッパーを生成しない場合は <code>&#45;&#45;skip&#45;wrapper</code> オプションを指定してください。<p class="paragraph"/><div class="code"><pre>grails create&#45;app appname &#45;&#45;skip&#45;wrapper</pre></div><p class="paragraph"/><h4>データバインダー</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 includes a new data binding mechanism which is more flexible and easier to maintain than the data binder used in previous versions.  The new data binder includes numerous enhancements including:</div>
+そしてさらに、 <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> コマンドも改良され、依存問題の解決を手助けするために、依存関係のグラフがコンソールに表示されるようになりました。 詳しくは <a href="../guide/single.html#dependencyResolution" class="guide">依存性解決</a> のドキュメントを参照してください。<p class="paragraph"/><div class="hidden-block">h4. Data Binder</div>
+<h4>データバインダー</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 includes a new data binding mechanism which is more flexible and easier to maintain than the data binder used in previous versions.  The new data binder includes numerous enhancements including:</div>
 Grails 2.3では、依存のバージョンよりもフレキシブルで保守性の高く簡単な新データバインダーを実装しています。<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li>Custom date formats on a per field basis using api:org.grails.databinding.BindingFormat</li>
@@ -697,15 +698,63 @@ Grails 2.3では、依存のバージョンよりもフレキシブルで保守�
 <li>Custom binding on a per field basis using api:org.grails.databinding.BindUsing</li>
 </ul><p class="paragraph"/></div>
 <ul class="star">
-<li>フィールドごとのカスタム日付フォーマット - api:org.grails.databinding.BindingFormat</li>
+<li>フィールドごとのカスタムデータフォーマット - api:org.grails.databinding.BindingFormat</li>
 <li>ユーザ定義可能なデータコンバーター - api:org.grails.databinding.converters.ValueConverter</li>
 <li>ユーザ定義フォーマットデータコンバーター - api:org.grails.databinding.BindingFormat  api:org.grails.databinding.converters.FormattedValueConverter</li>
 <li>クラスごとのカスタムバインディング - api:org.grails.databinding.BindUsing</li>
 <li>フィールドごとのカスタムバインディング - api:org.grails.databinding.BindUsing</li>
 </ul><p class="paragraph"/><div class="hidden-block">See the <a href="../guide/single.html#dataBinding" class="guide">Data Binding</a> section for details.</div>
-詳細は <a href="../guide/single.html#dataBinding" class="guide">データバインディング</a> のセクションを参照してください。<p class="paragraph"/>
-<div class="hidden-block">The legacy data binder may be used by assinging <code>true</code> to the <code>grails.databinding.useLegacyBinder</code> property in <code>grails-app/conf/Config.groovy</code>.  Note that the legacy binder does not support any of the new features provided by the new data binder.</div>
-<code>grails-app/conf/Config.groovy</code> の <code>grails.databinding.useLegacyBinder</code> プロパティを <code>true</code> にすることで以前のデータバインダーに変更することができます。 以前のバインダーは今回実装された新機能には対応していません。<p class="paragraph"/>
+詳細は <a href="../guide/single.html#dataBinding" class="guide">データバインディング</a> のセクションを参照してください。<p class="paragraph"/><div class="hidden-block">The legacy data binder may be used by assinging <code>true</code> to the <code>grails.databinding.useSpringBinder</code> property in <code>grails-app/conf/Config.groovy</code>.  Note that the legacy binder does not support any of the new features provided by the new data binder.</div>
+<code>grails-app/conf/Config.groovy</code> の <code>grails.databinding.useSpringBinder</code> プロパティを <code>true</code> にすることで以前のデータバインダーに変更することができます。 以前のバインダーは今回実装された新機能には対応していません。<p class="paragraph"/><div class="hidden-block">h4. Forked Execution</div>
+<h4>フォーク実行 </h4><p class="paragraph"/><div class="hidden-block">All major commands can now be forked into a separate JVM, thus isolating the build path from the runtime / test paths. Forked execution can be controlled via the <code>BuildConfig</code>:</div>
+全てのメジャーなコマンドが別々のJVMへフォークされるようになり、ビルドパスをランタイム/テストから分離します。 フォーク実行のパラメータは <code>BuildConfig</code> に定義できます:<p class="paragraph"/><div class="hidden-block">
+<div class="code"><pre>forkConfig = &#91;maxMemory: 1024, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
+grails.project.fork = &#91;
+   test: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
+   run: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;app JVM
+   war: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;war JVM
+   console: forkConfig // configure settings <span class="java&#45;keyword">for</span> the Swing console JVM
+&#93;</pre></div>
+</div>
+<div class="code"><pre>forkConfig = &#91;maxMemory: 1024, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
+grails.project.fork = &#91;
+   test: forkConfig, // test&#45;app用JVMへの設定
+   run: forkConfig, // run&#45;app用JVMへの設定
+   war: forkConfig, // run&#45;war用JVMへの設定
+   console: forkConfig // console用JVMへの設定
+&#93;</pre></div><p class="paragraph"/><div class="hidden-block">See the documentation on <a href="../guide/single.html#forkedMode" class="guide">Forked Mode</a> for more information.</div>
+詳しくは <a href="../guide/single.html#forkedMode" class="guide">フォームモード</a> のドキュメントを参照してください。<p class="paragraph"/><div class="hidden-block">h4. Async support </div>
+<h4>非同期サポート</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 features new <a href="../guide/single.html#async" class="guide">Asynchronous Programming APIs</a> that allow for asynchronous processing of requests and integrate seamlessly with GORM. Example:</div>
+Grails 2.3では、リクエストの非同期処理と、GORMとシームレスに統合した新たな<a href="../guide/single.html#async" class="guide">非同期プログラミングAPI</a>を提供しています。 例:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> grails.async.Promises.&#42;
+&#8230;
+def index() &#123;
+   tasks books: Book.async.list(),
+         totalBooks: Book.async.count(),
+         otherValue: &#123;
+           // <span class="java&#45;keyword">do</span> hard work
+         &#125;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">See <a href="../guide/single.html#async" class="guide">the documentation</a> for further information.</div>
+詳しくは、 <a href="../guide/single.html#async" class="guide">ドキュメント</a> を参照してください。<p class="paragraph"/><div class="hidden-block">h4. Encoding / Escaping Improvements </div>
+<h4>エンコーディング / エスケーピングの向上</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 features dedicated support for <a href="../guide/single.html#xssPrevention" class="guide">Cross Site Scripting (XSS) prevention</a>, including :</div>
+Grails 2.3では専用の <a href="../guide/single.html#xssPrevention" class="guide">クロスサイトスクリプティング(XSS)防御</a>を実装しています。<p class="paragraph"/><div class="hidden-block">
+<ul class="star">
+<li>Defaulting to HTML escaping all GSP expressions and scriptlets</li>
+<li>Context sensitive encoding switching for tags</li>
+<li>Double encoding prevention</li>
+<li>Optional automatic encoding of all data in a GSP page not considered safe</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li>デフォルトでGSPエクスプレッションとスクリプトレットをHTMLエスケーピング</li>
+<li>タグでの状況依存エンコーディング切替</li>
+<li>多重エンコーディング防止</li>
+<li>GSPページ内の全てのデータに対して安全と判断しない場合の自動エンコーディング</li>
+</ul><p class="paragraph"/><div class="hidden-block">See the documentation on <a href="../guide/single.html#xssPrevention" class="guide">Cross Site Scripting (XSS) prevention</a> for more information.</div>
+詳しくは、 <a href="../guide/single.html#xssPrevention" class="guide">クロスサイトスクリプティング(XSS)防御</a> のドキュメントを参照してください。<p class="paragraph"/><div class="hidden-block">h4. Hibernate 3 and 4 support </div>
+<h4>Hibernate 3と4をサポート</h4><p class="paragraph"/><div class="hidden-block">The GORM for Hibernate 3 support for Grails has been extracted into a separate project, allowing new support for Hibernate 4 as a separate plugin.</div>
+新たにHibernate 4をプラグインでサポートするために、Hibernate 3用のGORMは、本体から別のプラグインプロジェクトとなりました。<p class="paragraph"/><div class="hidden-block">h4. Command Line </div>
+<h4>コマンドライン</h4><p class="paragraph"/><div class="hidden-block">The <code>create-app</code> command will now by default generate the command line grailsw wrapper for newly created applications.  The <code>&#45;&#45;skip-wrapper</code> switch may be used to prevent the wrapper from being generated.</div>
+<code>create&#45;app</code> コマンドがデフォルトでgrailswラッパーを生成するようになりました。ラッパーを生成しない場合は <code>&#45;&#45;skip&#45;wrapper</code> オプションを指定してください。<p class="paragraph"/><div class="code"><pre>grails create&#45;app appname &#45;&#45;skip&#45;wrapper</pre></div>
+
 
 
 <h2 id="whatsNew22">1.2 Grails 2.2の新機能</h2>
@@ -753,7 +802,7 @@ Grails 2.2では、開発モードにおいて、Tomcatコンテナを実行す�
 <ul class="star">
 <li>Reduced memory consumption, since the Grails build system can exit</li>
 <li>Isolation of the build classpath from the runtime classpath</li>
-<li>The ability to deploy other Grails/Spring applications in parallels without conflicting dependencies</li>
+<li>The ability to deploy other Grails/Spring applications in parallel without conflicting dependencies</li>
 </ul><p class="paragraph"/></div>
 <ul class="star">
 <li>Grailsビルドシステムから抜けられるため、メモリーの消耗を減らします。</li>
@@ -999,7 +1048,9 @@ Grailsをインストールする前に、Java Development Kit (JDK) 1.6以上�
 <li><a href="http://www.grailsexample.net/installing-a-grails-development-environment-on-linux/" target="blank">Linux</a></li>
 <li><a href="http://www.grailsexample.net/installing-a-grails-development-environment-on-os-x/" target="blank">Mac OS X</a></li>
 </ul><p class="paragraph"/><div class="hidden-block">These will show you how to install Grails too, not just the JDK.</div>
-これらの動画は、JDKのセットアップのみではなく、Grailsのインストールまで解説しています。<p class="paragraph"/><div class="hidden-block">On some platforms (for example OS X) the Java installation is automatically detected. However in many cases you will want to manually configure the location of Java. For example:</div>
+これらの動画は、JDKのセットアップのみではなく、Grailsのインストールまで解説しています。<p class="paragraph"/><blockquote class="note">
+A JDK is required in your Grails development environment. A JRE is not sufficient.
+</blockquote><p class="paragraph"/><div class="hidden-block">On some platforms (for example OS X) the Java installation is automatically detected. However in many cases you will want to manually configure the location of Java. For example:</div>
 一部のOS環境(OSX等)では、自動的にJavaが認識されます。別途設定したい場合は、次のように設定してください:<p class="paragraph"/><div class="code"><pre>export JAVA_HOME=/Library/Java/Home
 export PATH=<span class="java&#45;quote">"$PATH:$JAVA_HOME/bin"</span></pre></div><p class="paragraph"/><div class="hidden-block">if you're using bash or another variant of the Bourne Shell.</div>
 Bashやその他のBourne Shellでの例です。
@@ -1049,25 +1100,16 @@ cd helloworld</code></pre><p class="paragraph"/>
 
 <a name="2.4 A Hello World Example"><!-- Legacy link --></a>
 <h2 id="aHelloWorldExample">2.4 ハローワールド例</h2>
-<div class="hidden-block">To implement the typical "hello world!" example <code>cd</code> into the "helloworld" directory created in the previous section and activate interactive mode:</div>
-単純な"Hello World！"を実装してみましょう。前のセクションで作成されたディレクトリ"helloworld"に<code>cd</code>コマンドで移動してインタラクティブモードを開始します。<p class="paragraph"/><div class="code"><pre>$ cd helloworld
-$ grails</pre></div><p class="paragraph"/><div class="hidden-block">Grails' interactive mode will be activated and you should see a prompt that looks like the following:</div>
-Grailsのインタラクティブモードが開始されたら、プロンプトが次のように表示されます:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-helloworld.png"></img><p class="paragraph"/><div class="hidden-block">Now run the <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> command:</div>
-では、<a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a>コマンドを実行してみましょう:<p class="paragraph"/><pre class="bq"><code>
-grails&#62; create-controller hello</code></pre><p class="paragraph"/><div class="hidden-block">This will create a new controller (Refer to the section on <a href="../guide/single.html#controllers" class="guide">Controllers</a> for more information) in the <code>grails-app/controllers</code> directory called <code>helloworld/HelloController.groovy</code>.</div>
-このコマンドによって、<code>grails-app/controllers</code>ディレクトリ内に、<code>HelloController.groovy</code>という新しいコントローラ（詳細については<a href="../guide/single.html#controllers" class="guide">コントローラ</a>のセクションを参照してください）が生成されます。<p class="paragraph"/><blockquote class="note">
-<div class="hidden-block">If no package is specified with create-controller script, Grails automatically uses the application name as the package name. This default is configurable with the <code>grails.project.groupId</code> attribute in Config.groovy.</div>
-create-controllerスクリプトでパッケージが指定されなかった場合はGrailsが自動的にアプリケーション名をパッケージ名として使用します。デフォルト値はConfig.groovyに<code>grails.project.groupId</code>を指定することで変更可能です。
-</blockquote><p class="paragraph"/><div class="hidden-block">Controllers are capable of dealing with web requests and to fulfil the "hello world!" use case our implementation needs to look like the following:</div>
-コントローラは、Webリクエストを処理します。"hello world!"を表示するには、次のように記述します。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> helloworld<p class="paragraph"/>class HelloController &#123;<p class="paragraph"/>    def world() &#123;
+Let's now take the new project and turn it into the classic "Hello world!" example. First, change into the "helloworld" directory you just created and start the Grails interactive console:<p class="paragraph"/><pre class="bq"><code>
+$ cd helloworld
+$ grails</code></pre><p class="paragraph"/>You should see a prompt that looks like this:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-helloworld.png"></img><p class="paragraph"/>What we want is a simple page that just prints the message "Hello World!" to the browser. In Grails, whenever you want a new page you just create a new controller action for it. Since we don't yet have a controller, let's create one now with the <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> command:<p class="paragraph"/><pre class="bq"><code>
+grails&#62; create-controller hello</code></pre><p class="paragraph"/>Don't forget that in the interactive console, we have auto-completion on command names. So you can type "cre" and then press &#60;tab&#62; to get a list of all <code>create&#45;&#42;</code> commands. Type a few more letters of the command name and then &#60;tab&#62; again to finish.<p class="paragraph"/>The above command will create a new <a href="../guide/single.html#controllers" class="guide">controller</a> in the <code>grails-app/controllers/helloworld</code> directory called <code>HelloController.groovy</code>. Why the extra <code>helloworld</code> directory? Because in Java land, it's strongly recommended that all classes are placed into packages, so Grails defaults to the application name if you don't provide one. The reference page for <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> provides more detail on this.<p class="paragraph"/>We now have a controller so let's add an action to generate the "Hello World!" page. The code looks like this:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> helloworld<p class="paragraph"/>class HelloController &#123;<p class="paragraph"/>    def index() &#123;
         render <span class="java&#45;quote">"Hello World!"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Job done. Now start-up the container with another new command called <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>:</div>
-作業は以上です。次に<a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>コマンドで、このアプリケーションを起動させましょう:<p class="paragraph"/><pre class="bq"><code>
-grails&#62; run-app</code></pre><p class="paragraph"/><div class="hidden-block">This will start-up a server on port 8080 and you should now be able to access your application with the URL: <code>http://localhost:8080/helloworld</code> </div>
-これで8080番ポートでサーバを起動します。<code>http://localhost:8080/helloworld</code>をブラウザで見てみましょう。<p class="paragraph"/><div class="hidden-block">The result will look something like the following screenshot:</div>
-結果は次のスクリーンショットのようになります:<p class="paragraph"/><img border="0" class="center" src="../../img/intropage.png"></img><p class="paragraph"/><div class="hidden-block">This is the Grails intro page which is rendered by the <code>web-app/index.gsp</code> file. You will note it has a detected the presence of your controller and clicking on the link to our controller we can see the text "Hello World!" printed to the browser window.</div>
-これは<code>grails-app/views/index.gsp</code>ファイルによって描写されたアプリケーションの初期画面です。画面にはコントローラへのリンクが表示されています。このリンクをクリックすることで、画面に"Hello World！"が表示されます。<p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/>The action is simply a method. In this particular case, it calls a special method provided by Grails to <a href="../ref/Tags/render.html" class="tags">render</a> the page.<p class="paragraph"/>Job done. To see your application in action, you just need to start up a server with another command called <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>:<p class="paragraph"/><pre class="bq"><code>
+grails&#62; run-app</code></pre><p class="paragraph"/>This will start an embedded server on port 8080 that hosts your application. You should now be able to access your application at the URL <a href="http://localhost:8080/helloworld/" target="blank">http://localhost:8080/helloworld/</a> - try it!<p class="paragraph"/><blockquote class="note">
+If you see the error "Server failed to start for port 8080: Address already in use", then it means another server is running on that port. You can easily work around this by running your server on a different port using <code>-Dserver.port=9090 run-app</code>. '9090' is just an example: you can pretty much choose anything within the range 1024 to 49151.
+</blockquote><p class="paragraph"/>The result will look something like this:<p class="paragraph"/><img border="0" class="center" src="../../img/intropage.png"></img><p class="paragraph"/>This is the Grails intro page which is rendered by the <code>grails-app/view/index.gsp</code> file. It detects the presence of your controllers and provides links to them. You can click on the "HelloController" link to see our custom page containing the text "Hello World!". Voila! You have your first working Grails application.<p class="paragraph"/>One final thing: a controller can contain many actions, each of which corresponds to a different page (ignoring AJAX at this point). Each page is accessible via a unique URL that is composed from the controller name and the action name: /&#60;appname&#62;/&#60;controller&#62;/&#60;action&#62;. This means you can access the Hello World page via <a href="http://localhost:8080/helloworld/hello/index" target="blank">/helloworld/hello/index</a>, where 'hello' is the controller name (remove the 'Controller' suffix from the class name and lower-case the first letter) and 'index' is the action name. But you can also access the page via the same URL without the action name: this is because 'index' is the  <em class="italic">default action</em> . See the end of the <a href="../guide/single.html#understandingControllersAndActions" class="guide">controllers and actions</a> section of the user guide to find out more on default actions.<p class="paragraph"/>
 
 
 <h2 id="usingInteractiveMode">2.5 インタラクティブモードの利用</h2>
@@ -1144,13 +1186,13 @@ Grailsアプリケーションは、<a href="../ref/Command Line/run-app.html" c
 起動オプションに<code>server.port</code>を指定して別のポートで起動することもできます。<p class="paragraph"/><div class="code"><pre>grails &#45;Dserver.port=8090 run&#45;app</pre></div><p class="paragraph"/>Note that it is better to start up the application in interactive mode since a container restart is much quicker:<p class="paragraph"/><div class="code"><pre>$ grails
 grails&#62; run&#45;app
 | Server running. Browse to http://localhost:8080/helloworld
-| Application loaded in interactive mode. Type 'exit' to shutdown.
+| Application loaded in interactive mode. Type 'stop&#45;app' to shutdown.
 | Downloading: plugins&#45;list.xml
-grails&#62; exit
+grails&#62; stop&#45;app
 | Stopping Grails server
 grails&#62; run&#45;app
 | Server running. Browse to http://localhost:8080/helloworld
-| Application loaded in interactive mode. Type 'exit' to shutdown.
+| Application loaded in interactive mode. Type 'stop&#45;app' to shutdown.
 | Downloading: plugins&#45;list.xml</pre></div><p class="paragraph"/><div class="hidden-block">More information on the <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a> command can be found in the reference guide.</div>
 <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>コマンドの詳細は、リファレンスガイドを参照してください。
 
@@ -1233,7 +1275,10 @@ Grailsには<a href="../guide/single.html#controllers" class="guide">コント�
 <a name="2.2 Upgrading from previous versions of Grails"><!-- Legacy link --></a>
 <h1 id="upgradingFromPreviousVersionsOfGrails">3 Grails下位バージョンからの更新</h1>
 <div class="hidden-block">Although the Grails development team have tried to keep breakages to a minimum there are a number of items to consider when upgrading a Grails 1.0.x, 1.1.x, 1.2.x, or 1.3.x applications to Grails 2.0. The major changes are described in more detail below, but here's a brief summary of what you might encounter when upgrading from Grails 1.3.x:</div>
-Grails開発チームではできる限りの下位互換を心がけていますが、Grails 2.0へ更新する際に、下位バージョンから考慮しなくてはならない内容が幾つか存在します。大きな変更点を以下にまとめます。<p class="paragraph"/><div class="hidden-block">* <code>environment</code> bean added by Spring 3.1, which will be auto-wired into properties of the same name.</div>
+Grails開発チームではできる限りの下位互換を心がけていますが、Grails 2.0へ更新する際に、下位バージョンから考慮しなくてはならない内容が幾つか存在します。大きな変更点を以下にまとめます。
+<ul class="star">
+<li>Dependency resolution has been changed to <strong class="bold">only</strong> use data from the POMs to resolve, this can impact plugins and you may need to republish a plugin with corrected dependency data</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>environment</code> bean added by Spring 3.1, which will be auto-wired into properties of the same name.</div>
 Spring 3.1によって、同じ名称の環境が <code>environment</code> ビーンが自動追加されます。<p class="paragraph"/><div class="hidden-block">* Logging by convention packages have changed, so you may not see the logging output you expect. Update your logging configuration as described below.</div>
 <ul class="star">
 <li>ロギングDSLのパッケージが変更されたので正常にログ出力がされない場合があります。ログの設定を変更する必要があります。</li>
@@ -1295,7 +1340,12 @@ Spring 3.1によって、同じ名称の環境が <code>environment</code> ビ�
 </ul><p class="paragraph"/><div class="hidden-block">* The following deprecated classes have been removed: <code>grails.web.JsonBuilder</code> and <code>grails.web.OpenRicoBuilder</code>.</div>
 <ul class="star">
 <li>次の非推奨クラスが削除されました: <code>grails.web.JsonBuilder</code>、<code>grails.web.OpenRicoBuilder</code></li>
-</ul><p class="paragraph"/><h3>Grails 1.3.xからのアップグレード <div class="hidden-block">Upgrading from Grails 1.3.x</div></h3><p class="paragraph"/><h4>web.xmlテンプレートの内容変更 <div class="hidden-block">Changes to web.xml template</div></h4><p class="paragraph"/><div class="hidden-block">If you have customized the web.xml provided by <code>grails install-templates</code> then you will need to update this customized template with the latest version provided by Grails. Failing to do so will lead to a ClassNotFoundException for the <code>org.codehaus.groovy.grails.web.util.Log4jConfigListener</code> class.</div>
+</ul><p class="paragraph"/><h3>Upgrading to 2.2 from 2.1 or 2.0</h3><p class="paragraph"/><h4>Groovy 2.0</h4><p class="paragraph"/>Grails 2.2 ships with Groovy 2.0 which has some language level changes that may require changes to your code or plugins that you use.<p class="paragraph"/><h4>Dependency resolution</h4><p class="paragraph"/>Grails 2.2 no longer uses the BuildConfig of the plugin for dependency resolution and <strong class="bold">only</strong> uses data provided by POMs, this may impact some plugins that had previously incorrectly 
+specified dependency information.<p class="paragraph"/>If you don't want to immediately deal with the changes necessary to upgrade, then you can open <code>BuildConfig</code> and set the <code>legacyResolve</code> settings to true:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;    
+    &#8230;
+    legacyResolve <span class="java&#45;keyword">false</span> 
+    &#8230;
+&#125;</pre></div><p class="paragraph"/>This is not recommended however, as it will re-enable the previous behavior of using both POM data and BuildConfig to resolve dependencies. The most commmon problem you will face is with plugins that express their dependencies in a scope that is not valid inside a POM (example: "build" scope).<p class="paragraph"/>Plugins like this will need to be re-publish with a corrected scope of "compile". If you then specify the plugin as "build" scope in your application, transitive compile and runtime scoped dependencies will be converted to "build" scope as well.<p class="paragraph"/><h3>Grails 1.3.xからのアップグレード <div class="hidden-block">Upgrading from Grails 1.3.x</div></h3><p class="paragraph"/><h4>web.xmlテンプレートの内容変更 <div class="hidden-block">Changes to web.xml template</div></h4><p class="paragraph"/><div class="hidden-block">If you have customized the web.xml provided by <code>grails install-templates</code> then you will need to update this customized template with the latest version provided by Grails. Failing to do so will lead to a ClassNotFoundException for the <code>org.codehaus.groovy.grails.web.util.Log4jConfigListener</code> class.</div>
 <code>grails install-templates</code>で提供されたweb.xmlをカスタマイズしている場合は、最新のGrailsで提供される無いように更新する必要が有ります。変更を行わなかった場合は、<code>org.codehaus.groovy.grails.web.util.Log4jConfigListener</code>クラスのClassNotFoundExceptionを引き起こします。<p class="paragraph"/><h4>Groovy 1.8での変更点<div class="hidden-block">Groovy 1.8 Changes</div></h4><p class="paragraph"/><div class="hidden-block">Groovy 1.8 is a little stricter in terms of compilation so you may be required to fix compilation errors in your application that didn't occur under Grails 1.3.x.</div>
 Groovy 1.8ではｍコンパイルが少し厳しくなっています。そのため、Grails 1.3.xでは発生しなかったコンパイルエラーに対応する必要があります。<p class="paragraph"/><div class="hidden-block">Groovy 1.8 also requires that you update many of the libraries that you may be using in your application. Libraries known to require an upgrade include:</div>
 さらに、Groovy 1.8では、アプリケーションで使用している幾つかのライブラリを更新する必要があります。解っている更新が必要なライブラリは以下になります。
@@ -2801,9 +2851,20 @@ grails run&#45;app</pre></div><p class="paragraph"/><h4>non-interactive mode</h4
 Interactive mode is the a feature of the Grails command line which keeps the JVM running and allows for quicker execution of commands. To activate interactive mode type 'grails' at the command line and then use TAB completion to get a list of commands:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-output.png"></img><p class="paragraph"/>If you need to open a file whilst within interactive mode you can use the <code>open</code> command which will TAB complete file paths:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-open-cmd.png"></img><p class="paragraph"/>Even better, the <code>open</code> command understands the logical aliases 'test-report' and 'dep-report', which will open the most recent test and dependency reports respectively. In other words, to open the test report in a browser simply execute <code>open test-report</code>. You can even open multiple files at once: <code>open test-report test/unit/MyTests.groovy</code> will open the HTML test report in your browser and the <code>MyTests.groovy</code> source file in your text editor.<p class="paragraph"/>TAB completion also works for class names after the <code>create-*</code> commands:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-complete-class.png"></img><p class="paragraph"/>If you need to run an external process whilst interactive mode is running you can do so by starting the command with a !:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-run-external.png"></img><p class="paragraph"/>Note that with &#33; (bang) commands, you get file path auto completion - ideal for external commands that operate on the file system such as 'ls', 'cat', 'git', etc.<p class="paragraph"/>The <code>stop-app</code> command will stop an application that has been run with the <code>run-app</code> command.<p class="paragraph"/>To exit interactive mode enter the <code>exit</code> command.  Note that if the Grails application has been run with <code>run-app</code> normally it will terminate when the interactive mode console exits because the JVM will be terminated. An exception to this would be if the application were running in forked mode which means the application is running in a different JVM.  In that case the application will be left running afer the interactive mode console terminates.  If you want to exit interactive mode and stop an application that is running in forked mode, use the <code>quit</code> command.  The <code>quit</code> command will stop the running application and then close interactive mode.
 
 
-
-<h2 id="forkedMode">5.2 フォークされたTomcat実行</h2>
-<h4>Forked Tomcat Execution</h4><p class="paragraph"/>Grails 2.2 and above support forked JVM execution of the Tomcat container in development mode. This has several benefits including:
+<a name="5.2 Forked Execution"><!-- Legacy link --></a>
+<h2 id="forkedMode">5.2 フォーク実行</h2>
+<h4>Forked Execution</h4><p class="paragraph"/>Since Grails 2.3, the <code>run-app</code>, <code>run-war</code>, <code>test-app</code> and <code>console</code> commands are now executed in a forked JVM in order to isolate the build classpath from the runtime classpath.<p class="paragraph"/>Forked execution is configured via the <code>grails-app/conf/BuildConfig.groovy</code> file. The following is the default configuration:<p class="paragraph"/><div class="code"><pre>forkConfig = &#91;maxMemory: 1024, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
+grails.project.fork = &#91;
+   test: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
+   run: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;app JVM
+   war: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;war JVM
+   console: forkConfig // configure settings <span class="java&#45;keyword">for</span> the Swing console JVM
+&#93;</pre></div><p class="paragraph"/>The memory requirements of the forked JVM can be tweaked as per the requirements of the application.<p class="paragraph"/><h4>Forked Test Execution</h4><p class="paragraph"/>When running the <a href="../ref/Command Line/test-app.html" class="commandLine">test-app</a> command, a separate JVM is launched to execute this tests. This will have a notable impact on the speed of execution of the tests when running the command directly:<p class="paragraph"/><div class="code"><pre>grails test&#45;app</pre></div><p class="paragraph"/>To mitigate this, Grails 2.3 and above include a feature that launches a background JVM on standby to run tests when using interactive mode. In other words, running <code>test-app</code> from interactive mode will result in faster test execution times:<p class="paragraph"/><div class="code"><pre>$ grails
+$ grails&#62; test&#45;app</pre></div><p class="paragraph"/>It is recommended that forked execution is used for tests, however it does require modern hardware due to the use of multiple JVMs. You can therefore disable forked execution by setting the <code>grails.project.fork.test</code> setting to <code>false</code>:<p class="paragraph"/><div class="code"><pre>forkConfig = &#91;maxMemory: 1024, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
+grails.project.fork = &#91;
+   test: <span class="java&#45;keyword">false</span>,
+   &#8230;
+&#93;</pre></div><p class="paragraph"/><h4>Forked Tomcat Execution</h4><p class="paragraph"/>Grails 2.2 and above support forked JVM execution of the Tomcat container in development mode. This has several benefits including:
 <ul class="star">
 <li>Reduced memory consumption, since the Grails build system can exit</li>
 <li>Isolation of the build classpath from the runtime classpath</li>
@@ -3202,7 +3263,7 @@ Javaでドメインクラスを書いて、動的な永続化メソッドも使�
 </blockquote><p class="paragraph"/><div class="hidden-block">This will create a class at the location <code>grails-app/domain/helloworld/Person.groovy</code> such as the one below:</div>
 コマンドを実行すると<code>grails-app/domain/helloworld/Person.groovy</code>に以下のようなドメインクラスを作成します。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> helloworld<p class="paragraph"/>class Person &#123;
 &#125;</pre></div><p class="paragraph"/><blockquote class="note">
-<div class="hidden-block">If you have the <code>dbCreate</code> property set to "update", "create" or "create-drop" on your <a href="../guide/single.html#dataSource" class="guide">データソース</a>, Grails will automatically generate/modify the database tables for you.</div>
+<div class="hidden-block">If you have the <code>dbCreate</code> property set to "update", "create" or "create-drop" on your <a href="../guide/single.html#dataSource" class="guide">DataSource</a>, Grails will automatically generate/modify the database tables for you.</div>
 <a href="../guide/single.html#dataSource" class="guide">データソース</a>の<code>dbCreate</code>プロパティに"update", "create" または "create-drop"が設定されている場合は、ドメインクラスに対応したデータベースのテーブルを自動的に作成/修正します。
 </blockquote><p class="paragraph"/><div class="hidden-block">You can customize the class by adding properties:</div>
 プロパティを追加することでドメインクラスをカスタマイズできます。<p class="paragraph"/><div class="code"><pre>class Person &#123;
@@ -4353,9 +4414,9 @@ class Person &#123;
 <h4>キャッシング設定</h4><p class="paragraph"/><div class="hidden-block"><a href="http://www.hibernate.org/" target="blank">Hibernate</a> features a second-level cache with a customizable cache provider. This needs to be configured in the <code>grails-app/conf/DataSource.groovy</code> file as follows:</div>
 <a href="http://www.hibernate.org/" target="blank">Hibernate</a> はカスタマイズ可能なキャッシュプロバイダによる二次キャッシュを持っています。
 利用するには<code>grails-app/conf/DataSource.groovy</code>で次のような設定が必要です:<p class="paragraph"/><div class="code"><pre>hibernate &#123;
-    cache.use_second_level_cache = <span class="java&#45;keyword">true</span>
-    cache.use_query_cache = <span class="java&#45;keyword">true</span>
-    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory'
+    cache.use_second_level_cache=<span class="java&#45;keyword">true</span>
+    cache.use_query_cache=<span class="java&#45;keyword">true</span>
+    cache.provider_class='org.hibernate.cache.EhCacheProvider'
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can customize any of these settings, for example to use a distributed caching mechanism.</div>
 分散キャッシュ機構などを使うように設定を変更することもできます。<p class="paragraph"/><blockquote class="note">
 <div class="hidden-block">For further reading on caching and in particular Hibernate's second-level cache, refer to the <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/performance.html#performance-cache" target="blank">Hibernate documentation</a> on the subject.</div>
@@ -4967,7 +5028,7 @@ Use scoped controllers wisely. For instance, we don't recommend having any prope
 <li><code>attributes</code></li>
 <li><code>application</code></li>
 </ul><p class="paragraph"/><div class="hidden-block">Currently, no error will be reported if you do use them, but this will hopefully change in a future version of Grails.</div>
-現状では使用したとしてもエラーが出ることはありませんが、将来的には変わるかもしれません。<p class="paragraph"/><h4>ビューの選択<div class="hidden-block">Selecting the View </div></h4><p class="paragraph"/><div class="hidden-block">In both of the previous two examples there was no code that specified which <a href="../guide/single.html#gsp" class="guide">view</a> to render. So how does Grails know which one to pick? The answer lies in the conventions. Grails will look for a view at the location <code>grails-app/views/book/show.gsp</code> for this <code>list</code> action:</div>
+現状では使用したとしてもエラーが出ることはありませんが、将来的には変わるかもしれません。<p class="paragraph"/><h4>ビューの選択<div class="hidden-block">Selecting the View </div></h4><p class="paragraph"/><div class="hidden-block">In both of the previous two examples there was no code that specified which <a href="../guide/single.html#gsp" class="guide">view</a> to render. So how does Grails know which one to pick? The answer lies in the conventions. Grails will look for a view at the location <code>grails-app/views/book/show.gsp</code> for this <code>show</code> action:</div>
 これまでの例ではビューがどのように設定されるのかを説明しませんでたが、Grailsではどのようにビューを選択しているのでしょうか？答えは慣習にあります。何も指定しなければ、以下のアクションでは、Grailsが自動的に、<code>grails-app/views/book/show.gsp</code>をビューとして使用します。<p class="paragraph"/><div class="code"><pre>class BookController &#123;
     def show() &#123;
          &#91;book: Book.get(params.id)&#93;
@@ -5117,8 +5178,7 @@ redirect(url: <span class="java&#45;quote">"http://grails.org"</span>)</pre></di
 <a name="6.1.6 Data Binding"><!-- Legacy link --></a>
 <h2 id="dataBinding">7.1.6 データバインディング</h2>
 <div class="hidden-block">Data binding is the act of "binding" incoming request parameters onto the properties of an object or an entire graph of objects. Data binding should deal with all necessary type conversion since request parameters, which are typically delivered by a form submission, are always strings whilst the properties of a Groovy or Java object may well not be.</div>
-データバインディングとは、受信したリクエストパラメータを、オブジェクトのプロパティまたオブジェクト構造へ結合させる機能です。データバインディングでは、フォームから送信された文字列のリクエストパラメータを、必要な型への変換を行います。<p class="paragraph"/><div class="hidden-block">Grails uses <a href="http://www.springframework.org" target="blank">Spring</a>'s underlying data binding capability to perform data binding.</div>
-Grailsでは、<a href="http://www.springframework.org" target="blank">Spring</a>のデータバインディングを基礎にデータバインディングを行います。<p class="paragraph"/><h4>モデルにリクエストデータをバインドする <div class="hidden-block">Binding Request Data to the Model </div></h4><p class="paragraph"/><div class="hidden-block">There are two ways to bind request parameters onto the properties of a domain class. The first involves using a domain classes' Map constructor:</div>
+データバインディングとは、受信したリクエストパラメータを、オブジェクトのプロパティまたオブジェクト構造へ結合させる機能です。データバインディングでは、フォームから送信された文字列のリクエストパラメータを、必要な型への変換を行います。<p class="paragraph"/><h4>モデルにリクエストデータをバインドする <div class="hidden-block">Binding Request Data to the Model </div></h4><p class="paragraph"/><div class="hidden-block">There are two ways to bind request parameters onto the properties of a domain class. The first involves using a domain classes' Map constructor:</div>
 リクエストパラメータをドメインクラスのプロパティへバインドする２通りの方法があります。１つめはドメインクラスのMapを指定するコンストラクタを使用します。<p class="paragraph"/><div class="code"><pre>def save() &#123;
     def b = <span class="java&#45;keyword">new</span> Book(params)
     b.save()
@@ -5129,7 +5189,8 @@ Grailsでは、<a href="http://www.springframework.org" target="blank">Spring</a
     b.properties = params
     b.save()
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This has the same effect as using the implicit constructor.</div>
-上記の例で先ほどのコンストラクタと同じ結果となります。<p class="paragraph"/><blockquote class="warning">
+上記の例で先ほどのコンストラクタと同じ結果となります。<p class="paragraph"/>When binding an empty String (a String with no characters in it, not even spaces) to a constrained property which has been configured as nullable, the data binder will convert the empty String to null.  This simplifies the most common case where the intent is to treat an empty form field as having the value null since there isn't a way to actually submit a null as a request parameter.  When this behavior is not desireable the application may assign the value directly.<p class="paragraph"/>The mass property binding mechanism will by default automatically trim all Strings at binding time.  To disable this behavior set the grails.databinding.trimStrings value to false in <code>grails-app/conf/Config.groovy</code>.<p class="paragraph"/><div class="code"><pre>// the <span class="java&#45;keyword">default</span> value is <span class="java&#45;keyword">true</span>
+grails.databinding.trimStrings = <span class="java&#45;keyword">false</span><p class="paragraph"/>// ...</pre></div><p class="paragraph"/><blockquote class="warning">
 These forms of data binding in Grails are very convenient, but also indiscriminate. In other words, they will bind  <em class="italic">all</em>  non-transient, typed instance properties of the target object, including ones that you may not want bound. Just because the form in your UI doesn't submit all the properties, an attacker can still send malign data via a raw HTTP request. Fortunately, Grails also makes it easy to protect against such attacks - see the section titled "Data Binding and Security concerns" for more information.
 </blockquote><p class="paragraph"/><h4>シングルエンデッド・アソシエーション(単一終端関連)のデータバインディング <div class="hidden-block">Data binding and Single-ended Associations </div></h4><p class="paragraph"/><div class="hidden-block">If you have a <code>one-to-one</code> or <code>many-to-one</code> association you can use Grails' data binding capability to update these relationships too. For example if you have an incoming request such as:</div>
 <code>one-to-one</code>または<code>many-to-one</code>などの関連も、Grailsデータバインディングの機能で更新可能です。例として次のようなリクエストを受信したとします:<p class="paragraph"/><div class="code"><pre>/book/save?author.id=20</pre></div><p class="paragraph"/><div class="hidden-block">Grails will automatically detect the <code>.id</code> suffix on the request parameter and look up the <code>Author</code> instance for the given id when doing data binding such as:</div>
@@ -5166,7 +5227,8 @@ Grailsが間のインスタンスも自動的に生成します。上記のケ�
           from=<span class="xml&#45;quote">"$&#123;Image.list()&#125;"</span>
           value=<span class="xml&#45;quote">"$&#123;book?.images&#91;cover&#93;?.id&#125;"</span>
           noSelection=<span class="xml&#45;quote">"&#91;'null': ''&#93;"</span>/&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">This would bind the selected image into the <code>Map</code> property <code>images</code> under a key of <code>"cover"</code>.</div>
-この例では、Mapプロパティimagesのキー"cover"に対してバインドされます。<p class="paragraph"/><h4>複数ドメインクラスでのデータバインディング <div class="hidden-block">Data binding with Multiple domain classes </div></h4><p class="paragraph"/><div class="hidden-block">It is possible to bind data to multiple domain objects from the <a href="../ref/Controllers/params.html" class="controllers">params</a> object.</div>
+この例では、Mapプロパティimagesのキー"cover"に対してバインドされます。<p class="paragraph"/>When binding to Maps, Arrays and Collections the data binder will automatically grow the size of the collections as necessary.  The default limit to how large the binder will grow a collection is 256.  If the data binder encounters an entry that requires the collection be grown beyond that limit, the entry is ignored.  The limit may be configured by assigning a value to the <code>grails.databinding.autoGrowCollectionLimit</code> property in <code>Config.groovy</code>.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/Config.groovy<p class="paragraph"/>// the <span class="java&#45;keyword">default</span> value is 256
+grails.databinding.autoGrowCollectionLimit = 128<p class="paragraph"/>// ...</pre></div><p class="paragraph"/><h4>複数ドメインクラスでのデータバインディング <div class="hidden-block">Data binding with Multiple domain classes </div></h4><p class="paragraph"/><div class="hidden-block">It is possible to bind data to multiple domain objects from the <a href="../ref/Controllers/params.html" class="controllers">params</a> object.</div>
 <a href="../ref/Controllers/params.html" class="controllers">params</a>オブジェクトから、複数のドメインオブジェクトへのデータのバインドが可能です。<p class="paragraph"/><div class="hidden-block">For example so you have an incoming request to:</div>
 例として以下のようなリクエストがあったとします:<p class="paragraph"/><div class="code"><pre>/book/save?book.title=The%20Stand&#38;author.name=Stephen%20King</pre></div><p class="paragraph"/><div class="hidden-block">You'll notice the difference with the above request is that each parameter has a prefix such as <code>author.</code> or <code>book.</code> which is used to isolate which parameters belong to which type. Grails' <code>params</code> object is like a multi-dimensional hash and you can index into it to isolate only a subset of the parameters to bind.</div>
 上記のリクエストでは、それぞれのパラメータに<code>author.</code>また<code>book.</code>という接頭辞が付いていて、どちらの型(ドメインクラス)に属するかを区別しています。Grailsの<code>params</code>オブジェクトは多次元ハッシュのようになっており、それぞれバインドするためのパラメータサブセットとして区別されて索引されます。<p class="paragraph"/><div class="code"><pre>def b = <span class="java&#45;keyword">new</span> Book(params.book)</pre></div><p class="paragraph"/><div class="hidden-block">Notice how we use the prefix before the first dot of the <code>book.title</code> parameter to isolate only parameters below this level to bind. We could do the same with an <code>Author</code> domain class:</div>
@@ -5193,7 +5255,58 @@ Grailsが間のインスタンスも自動的に生成します。上記のケ�
             <span class="java&#45;quote">" is not a valid URL!"</span>
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">Although we have not yet covered error codes (for more information see the section on <a href="../guide/single.html#validation" class="guide">Validation</a>), for type conversion errors you would want a message from the <code>grails-app/i18n/messages.properties</code> file to use for the error. You can use a generic error message handler such as:</div>
 この章までは、まだエラーコードの説明していませんが(詳しくは<a href="../guide/single.html#validation" class="guide">Validation</a>を参照)、型変換エラーでは<code>grails-app/i18n/messages.properties</code>を使用してメッセージを返す事もあると思います。次のような一般的なメッセージハンドラーを使用することもできます<p class="paragraph"/><div class="code"><pre>typeMismatch.java.net.URL=The field &#123;0&#125; is not a valid URL</pre></div><p class="paragraph"/><div class="hidden-block">Or a more specific one:</div>
-また、さらに対象を特定する場合は:<p class="paragraph"/><div class="code"><pre>typeMismatch.Book.publisherURL=The publisher URL you specified is not a valid URL</pre></div><p class="paragraph"/><h4>データバインディングとセキュリティ考慮 <div class="hidden-block">Data Binding and Security concerns </div></h4><p class="paragraph"/><div class="hidden-block">When batch updating properties from request parameters you need to be careful not to allow clients to bind malicious data to domain classes and be persisted in the database. You can limit what properties are bound to a given domain class using the subscript operator:</div>
+また、さらに対象を特定する場合は:<p class="paragraph"/><div class="code"><pre>typeMismatch.Book.publisherURL=The publisher URL you specified is not a valid URL</pre></div><p class="paragraph"/><h4>The BindUsing Annotation</h4><p class="paragraph"/>The api:org.grails.databinding.BindUsing annotation may be used to define a custom binding mechanism for a particular field in a class.  Any time data binding is being applied to the field the closure value of the annotation will be invoked with 2 arguments.  The first argument is the object that data binding is being applied to and the second argument is a <code>Map</code> which is the data source for the data binding.  The value returned from the closure will be bound to the property.  The following example would result in the upper case version of the <code>name</code> value in the source being applied to the <code>name</code> field during data binding.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindUsing<p class="paragraph"/>class SomeClass &#123;
+    @BindUsing(&#123;
+        obj, source &#45;&#62; source&#91;'name'&#93;?.toUpperCase()
+    &#125;)
+    <span class="java&#45;object">String</span> name
+&#125;</pre></div><p class="paragraph"/>The api:org.grails.databinding.BindUsing annotation may be used to define a custom binding mechanism for all of the fields on a particular class. When the annotation is applied to a class, the value assigned to the annotation should be a class which implements the api:org.grails.databinding.BindingHelper interface.  An instance of that class will be used any time a value is bound to a property in the class that this annotation has been applied to.<p class="paragraph"/><div class="code"><pre>@BindUsing(SomeClassWhichImplementsBindingHelper)
+class SomeClass &#123;
+    <span class="java&#45;object">String</span> someProperty
+    <span class="java&#45;object">Integer</span> someOtherProperty
+&#125;</pre></div><p class="paragraph"/><h4>Custom Data Converters</h4><p class="paragraph"/>The binder will do a lot of type conversion automatically.  Some applications may want to define their own mechanism for converting values and a simple way to do this is to write a class which implements api:org.grails.databinding.converters.ValueConverter and register an instance of that class as a bean in the Spring application context.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> com.myapp.converters<p class="paragraph"/><span class="java&#45;keyword">import</span> org.grails.databinding.converters.ValueConverter<p class="paragraph"/>/&#42;&#42;
+ &#42; A custom converter which will convert <span class="java&#45;object">String</span> of the
+ &#42; form 'city:state' into an Address object.
+ &#42;/
+class AddressValueConverter <span class="java&#45;keyword">implements</span> ValueConverter &#123;<p class="paragraph"/>    <span class="java&#45;object">boolean</span> canConvert(value) &#123;
+        value <span class="java&#45;keyword">instanceof</span> <span class="java&#45;object">String</span>
+    &#125;<p class="paragraph"/>    def convert(value) &#123;
+        def pieces = value.split(':')
+        <span class="java&#45;keyword">new</span> com.myapp.Address(city: pieces&#91;0&#93;, state: pieces&#91;1&#93;)
+    &#125;<p class="paragraph"/>    <span class="java&#45;object">Class</span>&#60;?&#62; getTargetType() &#123;
+        com.myapp.Address
+    &#125;
+&#125;</pre></div><p class="paragraph"/>An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented ValueConverter will be automatically plugged in to the data binding process.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/spring/resources.groovy<p class="paragraph"/>beans = &#123;<p class="paragraph"/>    addressConverter com.myapp.converters.AddressValueConverter<p class="paragraph"/>    // ...<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Person &#123;
+    <span class="java&#45;object">String</span> firstName
+    Address homeAddress
+&#125;<p class="paragraph"/>class Address &#123;
+    <span class="java&#45;object">String</span> city
+    <span class="java&#45;object">String</span> state
+&#125;<p class="paragraph"/>def person = <span class="java&#45;keyword">new</span> Person()
+person.properties = &#91;firstName: 'Jeff', homeAddress: <span class="java&#45;quote">"O'Fallon:Missouri"</span>&#93;
+assert person.firstName == 'Jeff'
+assert person.homeAddress.city = <span class="java&#45;quote">"O'Fallon"</span>
+assert person.homeAddress.state = 'Missouri'</pre></div><p class="paragraph"/><h4>Date Formats For Data Binding</h4><p class="paragraph"/>A custom date format may be specified to be used when binding a String to a Date value by applying the api:org.grails.databinding.BindingFormat annotation to a Date field.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat<p class="paragraph"/>class Person &#123;
+    @BindingFormat('MMddyyyy')
+    Date birthDate
+&#125;</pre></div><p class="paragraph"/><h4>Custom Formatted Converters</h4><p class="paragraph"/>You may supply your own handler for the api:org.grails.databinding.BindingFormat annotation by writing a class which implements the api:org.grails.databinding.converters.FormattedValueConverter interface and regiserting an instance of that class as a bean in the Spring application context.  Below is an example of a trivial custom String formatter that might convert the case of a String based on the value assigned to the BindingFormat annotation.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> com.myapp.converters<p class="paragraph"/><span class="java&#45;keyword">import</span> org.grails.databinding.converters.FormattedValueConverter<p class="paragraph"/>class FormattedStringValueConverter <span class="java&#45;keyword">implements</span> FormattedValueConverter &#123;
+    def convert(value, <span class="java&#45;object">String</span> format) &#123;
+        <span class="java&#45;keyword">if</span>('UPPERCASE' == format) &#123;
+            value = value.toUpperCase()
+        &#125; <span class="java&#45;keyword">else</span> <span class="java&#45;keyword">if</span>('LOWERCASE' == format) &#123;
+            value = value.toLowerCase()
+        &#125;
+        value
+    &#125;<p class="paragraph"/>    <span class="java&#45;object">Class</span> getTargetType() &#123;
+        // specifies the type to which <span class="java&#45;keyword">this</span> converter may be applied
+        <span class="java&#45;object">String</span>
+    &#125;
+&#125;</pre></div><p class="paragraph"/>An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented FormattedValueConverter will be automatically plugged in to the data binding process.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/spring/resources.groovy<p class="paragraph"/>beans = &#123;<p class="paragraph"/>    formattedStringConverter com.myapp.converters.FormattedStringValueConverter<p class="paragraph"/>    // ...<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>With that in place the BindUsing annotation may be applied to String fields to inform the data binder to take advantage of the custom converter.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat<p class="paragraph"/>class Person &#123;
+    @BindingFormat('UPPERCASE')
+    <span class="java&#45;object">String</span> someUpperCaseString<p class="paragraph"/>    @BindingFormat('LOWERCASE')
+    <span class="java&#45;object">String</span> someLowerCaseString<p class="paragraph"/>    <span class="java&#45;object">String</span> someOtherString
+&#125;</pre></div><p class="paragraph"/>
+<h4>データバインディングとセキュリティ考慮 <div class="hidden-block">Data Binding and Security concerns </div></h4><p class="paragraph"/><div class="hidden-block">When batch updating properties from request parameters you need to be careful not to allow clients to bind malicious data to domain classes and be persisted in the database. You can limit what properties are bound to a given domain class using the subscript operator:</div>
 リクエストパラメータからのバッチ更新をする際は、クライアントからの悪意のあるデータを、ドメインクラスやデータベースへの永続化に反映させないように注意が必要です。添字演算子を使用してドメインクラスにバインドするプロパティを制限することができます。<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)<p class="paragraph"/>p.properties&#91;'firstName','lastName'&#93; = params</pre></div><p class="paragraph"/><div class="hidden-block">In this case only the <code>firstName</code> and <code>lastName</code> properties will be bound.</div>
 上記の例では、<code>firstName</code>と<code>lastName</code>のみバインドされます。<p class="paragraph"/><div class="hidden-block">Another way to do this is is to use <a href="../guide/single.html#commandObjects" class="guide">Command Objects</a> as the target of data binding instead of domain classes. Alternatively there is also the flexible <a href="../ref/Controllers/bindData.html" class="controllers">bindData</a> method.</div>
 他には、データバインディングのターゲットをドメインクラスではなく<a href="../guide/single.html#commandObjects" class="guide">コマンドオブジェクト</a>を利用する方法があります。あるいは柔軟な<a href="../ref/Controllers/bindData.html" class="controllers">bindData</a>メソッドを使用します。<p class="paragraph"/><div class="hidden-block">The <code>bindData</code> method allows the same data binding capability, but to arbitrary objects:</div>
@@ -5365,9 +5478,9 @@ Grailsでは、Springの<a href="http://static.springsource.org/spring/docs/3.0.
 
 <a name="6.1.10 Command Objects"><!-- Legacy link --></a>
 <h2 id="commandObjects">7.1.10 コマンドオブジェクト</h2>
-<div class="hidden-block">Grails controllers support the concept of command objects. A command object is similar to a form bean in a framework like Struts.  They are useful for grouping a subset of request parameters into a single object using <a href="../guide/single.html#dataBinding" class="guide">data binding</a>.</div>
-Grailsのコマンドオブジェクトの設計概念をサポートしています。コマンドオブジェクトはStrutsでのフォームビーンと同じような物です。リクエストパラメータのサブセットをグルーピングして、<a href="../guide/single.html#dataBinding" class="guide">データバインディング</a>を使用する１つのオブジェクトを作成する際に便利です。<p class="paragraph"/><h4>コマンドオブジェクトの宣言 <div class="hidden-block">Declaring Command Objects </div></h4><p class="paragraph"/><div class="hidden-block">Command objects are typically declared in the same source file as a controller, directly below the controller class definition. For example:</div>
-<div class="hidden-block">Command object classes are defined just like any other class.</div>
+<div class="hidden-block">Grails controllers support the concept of command objects. A command object is a class that is used in conjunction with <a href="../guide/single.html#dataBinding" class="guide">data binding</a>, usually to allow validation of data that may not fit into an existing domain class.</div><p class="paragraph"/>Grailsのコマンドオブジェクトの設計概念をサポートしています。 コマンドオブジェクトは <a href="../guide/single.html#dataBinding" class="guide">data binding</a> と連結して使用するクラスであり、通常ドメインクラスとして扱わないデータに対してバリデーションを可能にします。<p class="paragraph"/><blockquote class="note">
+Note: A class is only considered to be a command object when it is used as a parameter of an action.
+</blockquote><p class="paragraph"/><h4>コマンドオブジェクトの宣言 <div class="hidden-block">Declaring Command Objects </div></h4><p class="paragraph"/><div class="hidden-block">Command object classes are defined just like any other class.</div>
 コマンドオブジェクトクラスは他の通常クラスと同じように設定します:<p class="paragraph"/><div class="code"><pre>@grails.validation.Validateable
 class LoginCommand &#123;
     <span class="java&#45;object">String</span> username
@@ -5375,8 +5488,8 @@ class LoginCommand &#123;
         username(blank: <span class="java&#45;keyword">false</span>, minSize: 6)
         password(blank: <span class="java&#45;keyword">false</span>, minSize: 6)
     &#125;
-&#125;</pre></div><p class="paragraph"/>As this example shows, since the command object class is marked with <code>Validateable you can define <a href="../guide/single.html#constraints" class="guide">constraints</a> in command objects just like in <a href="../guide/single.html#GORM" class="guide">domain classes</a>.  Another way to make a command object class validateable is to define it in the same source file as the controller which is using the class as a command object.  If a command object class is not defined in the same source file as a controller which uses the class as a command object and the class is not marked with </code>Validateable, the class will not be made validateable.  It is not required that command object classes be validateable.<p class="paragraph"/>
-<h4>コマンドオブジェクトを使用する <div class="hidden-block">Using Command Objects </div></h4><p class="paragraph"/>To use command objects, controller actions may optionally specify any number of command object parameters. The parameter types must be supplied so that Grails knows what objects to create and initialize.<p class="paragraph"/>Before the controller action is executed Grails will automatically create an instance of the command object class and populate its properties by binding the request parameters.  If the command object class is marked with @Validateable then the command object will be validated. For example:<p class="paragraph"/><div class="code"><pre>class LoginController &#123;<p class="paragraph"/>    def login(LoginCommand cmd) &#123;
+&#125;</pre></div><p class="paragraph"/>In this example, the command object is marked with the <code>Validateable</code> annotation. The <code>Validateable</code> annotation allows the definition of <a href="../guide/single.html#constraints" class="guide">constraints</a> just like in <a href="../guide/single.html#GORM" class="guide">domain classes</a>. If the command object is defined in the same source file as the controller that is using it, Grails will automatically mark it as <code>Validateable</code>. It is not required that command object classes be validateable.<p class="paragraph"/>
+<h4>コマンドオブジェクトを使用する <div class="hidden-block">Using Command Objects </div></h4><p class="paragraph"/>To use command objects, controller actions may optionally specify any number of command object parameters. The parameter types must be supplied so that Grails knows what objects to create and initialize.<p class="paragraph"/>Before the controller action is executed Grails will automatically create an instance of the command object class and populate its properties by binding the request parameters.  If the command object class is marked with <code>Validateable</code> then the command object will be validated. For example:<p class="paragraph"/><div class="code"><pre>class LoginController &#123;<p class="paragraph"/>    def login(LoginCommand cmd) &#123;
         <span class="java&#45;keyword">if</span> (cmd.hasErrors()) &#123;
             redirect(action: 'loginForm')
             <span class="java&#45;keyword">return</span>
@@ -5427,39 +5540,6 @@ GSPタグの<code>attrs</code>パラメータでも、同じ仕組みの型変�
 &#125;</pre></div>
 
 
-<a name="6.1.13 Asynchronous Request Processing"><!-- Legacy link --></a>
-<h2 id="asynchronousRequestProcessing">7.1.13 非同期リクエスト処理(OLD)</h2>
-<div class="hidden-block">Grails support asynchronous request processing as provided by the Servlet 3.0 specification. To enable the async features you need to set your servlet target version to 3.0 in BuildConfig.groovy:</div>
-Servlet 3.0での非同期リクエスト処理をサポートしています。有効にするには、BuildConfig.groovy サーブレットバージョン指定を3.0に変更します。<p class="paragraph"/>
-<div class="code"><pre>grails.servlet.version = <span class="java&#45;quote">"3.0"</span></pre></div><p class="paragraph"/><div class="hidden-block">With that done ensure you do a clean re-compile as some async features are enabled at compile time.</div>
-設定を変更したら、async機能がコンパイル時に有効にするために、クリーンしてリコンパイルしてください。<p class="paragraph"/>
-<blockquote class="note">
-<div class="hidden-block">With a Servlet target version of 3.0 you can only deploy on Servlet 3.0 containers such as Tomcat 7 and above.</div>
-Servlet 3.0を指定した場合は、Servlet 3.0のみ対応でデプロイされるので、Servlet 3.0に対応したコンテナ(Tomcatの場合は7以上)で運用しましょう。
-</blockquote><p class="paragraph"/><h4>非同期描写 <div class="hidden-block">Asynchronous Rendering </div></h4><p class="paragraph"/><div class="hidden-block">You can render content (templates, binary data etc.) in an asynchronous manner by calling the <code>startAsync</code> method which returns an instance of the Servlet 3.0 <code>AsyncContext</code>. Once you have a reference to the <code>AsyncContext</code> you can use Grails' regular render method to render content:</div>
-Servlet 3.0のAsyncContextインスタンスを返す<code>startAsync</code>メソッドを呼び出すことで、非同期でコンテンツが描写(テンプレート、バイナリー等)できます。<code>AsyncContext</code>の参照をするだけで、あとは通常のGrailsのrenderメソッドを使用してコンテンツを描写できます。<p class="paragraph"/>
-<div class="code"><pre>def index() &#123;
-    def ctx = startAsync()
-    ctx.start &#123;
-        <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Stand"</span>).save()
-        render template:<span class="java&#45;quote">"books"</span>, model:&#91;books:Book.list()&#93;
-        ctx.complete()
-    &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Note that you must call the <code>complete()</code> method to terminate the connection. </div>
-コネクションを終了するには必ず<code>complete()</code>メソッドをコールしてください。<p class="paragraph"/>
-<h4>非同期リクエストの再開 <div class="hidden-block">Resuming an Async Request </div></h4><p class="paragraph"/><div class="hidden-block">You resume processing of an async request (for example to delegate to view rendering) by using the <code>dispatch</code> method of the <code>AsyncContext</code> class:</div>
-非同期リクエストを再開するには、<code>AsyncContext</code>クラスの<code>dispatch()</code>メソッドを使用します。<p class="paragraph"/>
-<div class="code"><pre>def index() &#123;
-    def ctx = startAsync()
-    ctx.start &#123;
-        // <span class="java&#45;keyword">do</span> working
-        &#8230;
-        // render view
-        ctx.dispatch()
-    &#125;
-&#125;</pre></div>
-
-
 <a name="6.2 Groovy Server Pages"><!-- Legacy link --></a>
 <h2 id="gsp">7.2 Groovyサーバーページ</h2>
 <div class="hidden-block">Groovy Servers Pages (or GSP for short) is Grails' view technology. It is designed to be familiar for users of technologies such as ASP and JSP, but to be far more flexible and intuitive.</div>
@@ -5473,8 +5553,9 @@ GroovyロジックをGSPに埋め込むことも可能ですが推奨しませ�
 GSPは通常ビュー描写に使用される変数のセットなどの"モデル"を持っています。モデルはコントローラからGSPビューげ渡されます。例として次のコントローラアクションを見てみましょう。<p class="paragraph"/><div class="code"><pre>def show() &#123;
     &#91;book: Book.get(params.id)&#93;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This action will look up a <code>Book</code> instance and create a model that contains a key called <code>book</code>. This key can then be referenced within the GSP view using the name <code>book</code>:</div>
-このアクションは<code>Book</code>インスタンスを取り出して、<code>book</code>というキーでモデルを作成しています。GSPでは、このキー<code>book</code>が参照できます。<p class="paragraph"/><div class="code"><pre>$&#123;book.title&#125;</pre></div>
-
+このアクションは<code>Book</code>インスタンスを取り出して、<code>book</code>というキーでモデルを作成しています。GSPでは、このキー<code>book</code>が参照できます。<p class="paragraph"/><div class="code"><pre>$&#123;book.title&#125;</pre></div><p class="paragraph"/><blockquote class="warning">
+Embedding data received from user input has the risk of making your application vulnerable to an Cross Site Scripting (XSS) attack. Please read the documentation on <a href="../guide/single.html#xssPrevention" class="guide">XSS prevention</a> for information on how to prevent XSS attacks.
+</blockquote>
 
 <a name="6.2.1 GSP Basics"><!-- Legacy link --></a>
 <h2 id="GSPBasics">7.2.1 GSPの基本</h2>
@@ -5495,8 +5576,9 @@ GSPは、Groovyを記述できる、スクリプトレットブロック<code>&#
      <span class="xml&#45;tag">&#60;%&#45;&#45; This is my comment &#45;&#45;%&#62;</span>
      <span class="xml&#45;tag">&#60;%=<span class="xml&#45;quote">"Hello GSP!"</span> %&#62;</span>
    <span class="xml&#45;tag">&#60;/body&#62;</span>
-<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div>
-
+<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/><blockquote class="warning">
+Embedding data received from user input has the risk of making your application vulnerable to an Cross Site Scripting (XSS) attack. Please read the documentation on <a href="../guide/single.html#xssPrevention" class="guide">XSS prevention</a> for information on how to prevent XSS attacks.
+</blockquote>
 
 <a name="6.6.3 Variables and Scopes"><!-- Legacy link --></a>
 <h2 id="variablesAndScopes">7.2.1.1 変数とスコープ</h2>
@@ -5566,10 +5648,10 @@ GSPでは、先に紹介した<code>&#60;%= %&#62;</code>シンタックスは�
   <span class="xml&#45;tag">&#60;body&#62;</span>
     Hello $&#123;params.name&#125;
   <span class="xml&#45;tag">&#60;/body&#62;</span>
-<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">However, unlike JSP EL you can have any Groovy expression within the <code>${..}</code> block. Variables within the <code>${..}</code> block are <strong class="bold">not</strong> escaped by default, so any HTML in the variable's string is rendered directly to the page. To reduce the risk of Cross-site-scripting (XSS) attacks, you can enable automatic HTML escaping with the <code>grails.views.default.codec</code> setting in <code>grails-app/conf/Config.groovy</code>:</div>
-JSP式言語(JSP EL)と違い、Groovy表記は、<code>${…}</code>ブロックに記述します。<code>${…}</code>ブロックの変数はデフォルトではエスケープを行いません。したがって、HTML文字列が直接ページ内に描写されます。これによって起こりうる、XSS(クロスサイトスクリプティング)をリスクを軽減するには、<code>grails-app/conf/Config.groovy</code>に<code>grails.views.default.codec</code>を設定します。<p class="paragraph"/><div class="code"><pre>grails.views.<span class="java&#45;keyword">default</span>.codec='html'</pre></div><p class="paragraph"/><div class="hidden-block">Other possible values are 'none' (for no default encoding) and 'base64'.</div>
-他に設定可能な値は'none'(何も設定しない)と'base64'になります。
-
+<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">However, unlike JSP EL you can have any Groovy expression within the <code>${..}</code> block. </div>
+JSP式言語(JSP EL)と違い、Groovy表記は、 <code>${…}</code> ブロックに記述します。<p class="paragraph"/><blockquote class="warning">
+Embedding data received from user input has the risk of making your application vulnerable to an Cross Site Scripting (XSS) attack. Please read the documentation on <a href="../guide/single.html#xssPrevention" class="guide">XSS prevention</a> for information on how to prevent XSS attacks.
+</blockquote><p class="paragraph"/>
 
 <a name="6.2.2 GSP Tags"><!-- Legacy link --></a>
 <h2 id="tags">7.2.2 GSPタグ</h2>
@@ -7212,7 +7294,9 @@ MyOtherFiltersクラスのフィルタが先に実行されて、MyFiltersクラ
 <a name="6.7 Ajax"><!-- Legacy link --></a>
 <h2 id="ajax">7.7 Ajax</h2>
 <div class="hidden-block">Ajax is the driving force behind the shift to richer web applications. These types of applications in general are better suited to agile, dynamic frameworks written in languages like <a href="http://groovy.codehaus.org" target="blank">Groovy</a> and <a href="http://www.ruby-lang.org/." target="blank">Ruby</a> Grails provides support for building Ajax applications through its Ajax tag library. For a full list of these see the Tag Library Reference.</div>
-AjaxはリッチWebアプリケーションでは欠かせない物となっています。この手のアプリケーションには通常、GroovyやRuby等で実装されたアジャイル、ダイナミックフレームワークがお似合いです。GrailsではAjaxアプリケーションを構築をサポートするためのAjaxタグライブラリを提供しています。Ajaxタグライブラリのリストはタグリファレンスを参照してください。
+AjaxはリッチWebアプリケーションでは欠かせない物となっています。この手のアプリケーションには通常、GroovyやRuby等で実装されたアジャイル、ダイナミックフレームワークがお似合いです。GrailsではAjaxアプリケーションを構築をサポートするためのAjaxタグライブラリを提供しています。Ajaxタグライブラリのリストはタグリファレンスを参照してください。<p class="paragraph"/><blockquote class="note">
+Note: JavaScript examples use the jQuery library.
+</blockquote>
 
 
 <a name="6.7.1 Ajax Support"><!-- Legacy link --></a>
@@ -7301,8 +7385,8 @@ HTMLフォームを非同期で送信することができます。<a href="../r
 <li><code>onLoading</code> - レスポンスを読み込み中に呼び出すJavaScriptファンクション</li>
 <li><code>onLoaded</code> - レスポンスの読み込み完了時に呼び出すJavaScriptファンクション</li>
 <li><code>onComplete</code> - リモートファンクションが完全に完了(更新を含む)したら呼び出すJavaScriptファンクション</li>
-</ul><p class="paragraph"/><div class="hidden-block">If you need a reference to the <code>XmlHttpRequest</code> object you can use the implicit event parameter <code>event</code> to obtain it:</div>
-<code>XmlHttpRequest</code>オブジェクトを参照する場合は、以下のように、<code>event</code>等のイベントパラメータ使用して取得します:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:javascript&#62;</span>
+</ul><p class="paragraph"/><div class="hidden-block">You can simply refer to the <code>XMLHttpRequest</code> variable to obtain the request:</div>
+リクエストを取得するには、単純に<code>XMLHttpRequest</code>変数で参照できます:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:javascript&#62;</span>
     function fireMe(event) &#123;
         alert(<span class="xml&#45;quote">"XmlHttpRequest = "</span> + event)
     &#125;
@@ -7310,7 +7394,8 @@ HTMLフォームを非同期で送信することができます。<a href="../r
 <span class="xml&#45;tag">&#60;/g:javascript&#62;</span>
 <span class="xml&#45;tag">&#60;g:remoteLink action=<span class="xml&#45;quote">"example"</span>
               update=<span class="xml&#45;quote">"success"</span>
-              onSuccess=<span class="xml&#45;quote">"fireMe(event)"</span>&#62;</span>Ajax Link<span class="xml&#45;tag">&#60;/g:remoteLink&#62;</span></pre></div>
+              onFailure=<span class="xml&#45;quote">"fireMe(XMLHttpRequest)"</span>&#62;</span>Ajax Link<span class="xml&#45;tag">&#60;/g:remoteLink&#62;</span></pre></div>
+
 
 <a name="6.7.2 Ajax with Prototype"><!-- Legacy link --></a>
 <h2 id="ajaxWithPrototype">7.7.2 Prototypeを使用したAjax</h2>
@@ -7362,12 +7447,11 @@ Ajaxを実装するには幾つかの方法があります。通常次のよう�
     def b = Book.get(params.id)<p class="paragraph"/>    render b as JSON
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">And then on the client parse the incoming JSON request using an Ajax event handler:</div>
 クライアント側で取得したJSONをAjaxイベントハンドラを使って処理します:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:javascript&#62;</span>
-function updateBook(e) &#123;
-    var book = eval(<span class="xml&#45;quote">"("</span>+e.responseText+<span class="xml&#45;quote">")"</span>) // evaluate the JSON
-    $(<span class="xml&#45;quote">"book"</span> + book.id + <span class="xml&#45;quote">"_title"</span>).innerHTML = book.title
+function updateBook(data) &#123;
+    $(<span class="xml&#45;quote">"&#35;book"</span> + data.id + <span class="xml&#45;quote">"_title"</span>).html( data.title );
 &#125;
-<span class="xml&#45;tag">&#60;g:javascript&#62;</span>
-<span class="xml&#45;tag">&#60;g:remoteLink action=<span class="xml&#45;quote">"test"</span> update=<span class="xml&#45;quote">"foo"</span> onSuccess=<span class="xml&#45;quote">"updateBook(e)"</span>&#62;</span>
+<span class="xml&#45;tag">&#60;/g:javascript&#62;</span>
+<span class="xml&#45;tag">&#60;g:remoteLink action=<span class="xml&#45;quote">"showBook"</span> id=<span class="xml&#45;quote">"$&#123;book.id&#125;"</span> onSuccess=<span class="xml&#45;quote">"updateBook(data)"</span>&#62;</span>
     Update Book
 <span class="xml&#45;tag">&#60;/g:remoteLink&#62;</span>
 <span class="xml&#45;tag">&#60;g:set var=<span class="xml&#45;quote">"bookId"</span>&#62;</span>book$&#123;book.id&#125;<span class="xml&#45;tag">&#60;/g:set&#62;</span>
@@ -7378,10 +7462,9 @@ function updateBook(e) &#123;
     def b = Book.get(params.id)<p class="paragraph"/>    render b as XML
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">However, since DOM is involved the client gets more complicated:</div>
 しかしクライアント側でのDOM操作は複雑になります:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:javascript&#62;</span>
-function updateBook(e) &#123;
-    var xml = e.responseXML
-    var id = xml.getElementsByTagName(<span class="xml&#45;quote">"book"</span>).getAttribute(<span class="xml&#45;quote">"id"</span>)
-    $(<span class="xml&#45;quote">"book"</span> + id + <span class="xml&#45;quote">"_title"</span>) = xml.getElementsByTagName(<span class="xml&#45;quote">"title"</span>)&#91;0&#93;.textContent
+function updateBook(data) &#123;
+    var id = $(data).find(<span class="xml&#45;quote">"book"</span>).attr(<span class="xml&#45;quote">"id"</span>);
+    $(<span class="xml&#45;quote">"&#35;book"</span> + id + <span class="xml&#45;quote">"_title"</span>).html( $(data).find(<span class="xml&#45;quote">"title"</span>).text() );
 &#125;
 <span class="xml&#45;tag">&#60;g:javascript&#62;</span>
 <span class="xml&#45;tag">&#60;g:remoteLink action=<span class="xml&#45;quote">"test"</span> update=<span class="xml&#45;quote">"foo"</span> onSuccess=<span class="xml&#45;quote">"updateBook(e)"</span>&#62;</span>
@@ -7393,8 +7476,8 @@ function updateBook(e) &#123;
 <span class="xml&#45;tag">&#60;/div&#62;</span></pre></div><p class="paragraph"/><h4>スクリプトを使用したAjax <div class="hidden-block">Script Centric Ajax with JavaScript </div></h4><p class="paragraph"/><div class="hidden-block">Script centric Ajax involves actually sending JavaScript back that gets evaluated on the client. An example of this can be seen below:</div>
 スクリプトを使用したAjaxは、Javascriptを返してクライアント側で動作(評価)させます。以下が例になります:<p class="paragraph"/><div class="code"><pre>def showBook() &#123;
     def b = Book.get(params.id)<p class="paragraph"/>    response.contentType = <span class="java&#45;quote">"text/javascript"</span>
-    <span class="java&#45;object">String</span> title = b.title.encodeAsJavascript()
-    render <span class="java&#45;quote">"&#36;('book$&#123;b.id&#125;_title')='$&#123;title&#125;'"</span>
+    <span class="java&#45;object">String</span> title = b.title.encodeAsJavaScript()
+    render <span class="java&#45;quote">"&#36;('&#35;book$&#123;b.id&#125;_title').html('$&#123;title&#125;');"</span>
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The important thing to remember is to set the <code>contentType</code> to <code>text/javascript</code>. If you use Prototype on the client the returned JavaScript will automatically be evaluated due to this <code>contentType</code> setting.</div>
 重要な部分として<code>contentType</code>を<code>text/javascript</code>にすることを思えて起きましょう。Prototypeを使用した場合はこの<code>contentType</code>で自動的にJavaScriptを評価します。<p class="paragraph"/><div class="hidden-block">Obviously in this case it is critical that you have an agreed client-side API as you don't want changes on the client breaking the server. This is one of the reasons Rails has something like RJS. Although Grails does not currently have a feature such as RJS there is a <a href="http://grails.org/plugin/dynamic-javascript" target="blank">Dynamic JavaScript Plugin</a> that offers similar capabilities.</div>
 当然このケースでは、クライアントがサーバを壊す事が無いと認めたクライアントサイトAPIでは無いと危険です。これがRailsではRJSを持っている理由です。Grailsには、RJSに相当する仕組みは存在しませんが、同じような内容の仕組みが <a href="http://grails.org/plugin/dynamic-javascript" target="blank">Dynamic JavaScript</a>プラグインで提供されています。<p class="paragraph"/><h4>AjaxとAjaxでない両方へのレスポンス <div class="hidden-block">Responding to both Ajax and non-Ajax requests </div></h4><p class="paragraph"/><div class="hidden-block">It's straightforward to have the same Grails controller action handle both Ajax and non-Ajax requests. Grails adds the <code>isXhr()</code> method to <code>HttpServletRequest</code> which can be used to identify Ajax requests. For example you could render a page fragment using a template for Ajax requests or the full page for regular HTTP requests:</div>
@@ -7423,25 +7506,18 @@ Grailsには、明示的なフォーマットに対するリクエストのHTTP 
                       json: 'text/json',
                       html: &#91;'text/html','application/xhtml+xml'&#93;
                     &#93;</pre></div><p class="paragraph"/><div class="hidden-block">The above bit of configuration allows Grails to detect to format of a request containing either the 'text/xml' or 'application/xml' media types as simply 'xml'. You can add your own types by simply adding new entries into the map.</div>
-この設定の一部を説明すると、'text/xml'または'application/xml'を含むリクエストは単純にコンテントタイプ'xml'としてGrailsが検出するのを可能にします。独自のタイプを追加するには単純にマップにタイプを追加するだけです。<p class="paragraph"/><h4>Acceptヘッダーを使用したコンテントネゴシエーション <div class="hidden-block">Content Negotiation using the Accept header </div></h4><p class="paragraph"/><div class="hidden-block">Every incoming HTTP request has a special <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" target="blank">Accept</a> header that defines what media types (or mime types) a client can "accept". In older browsers this is typically:</div>
-全てのHTTPリクエストは、クライアントが受け入れ可能な、メディア(mimeタイプ)を定義した、<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" target="blank">Accept</a>ヘッダーを持っています。古いブラウザの場合は通常以下のようになります:<p class="paragraph"/><div class="code"><pre>&#42;/&#42;</pre></div><p class="paragraph"/><div class="hidden-block">Which simply means anything. However, on newer browser something all together more useful is sent such as (an example of a Firefox <code>Accept</code> header):</div>
-これは単純に何でも可能という意味です。最新のブラウザではもっと便利になっており次のような内容を送信します(FireFoxの<code>Accept</code>ヘッダーを例として):<p class="paragraph"/><div class="code"><pre>text/xml, application/xml, application/xhtml+xml, text/html;q=0.9,
-text/plain;q=0.8, image/png, &#42;/&#42;;q=0.5</pre></div><p class="paragraph"/><div class="hidden-block">Grails parses this incoming format and adds a <code>property</code> to the <a href="../ref/Servlet API/response.html" class="servletAPI">response</a> object that outlines the preferred response format. For the above example the following assertion would pass:</div>
-Grailsではこの入ってきたフォーマットをパースして、レスポンスフォーマットを選択するための<code>property</code>を<a href="../ref/Servlet API/response.html" class="servletAPI">response</a>オブジェクトに追加します。上記の例では以下のアサーションが通ります:<p class="paragraph"/><div class="code"><pre>assert 'html' == response.format</pre></div><p class="paragraph"/><div class="hidden-block">Why? The <code>text/html</code> media type has the highest "quality" rating of 0.9, therefore is the highest priority. If you have an older browser as mentioned previously the result is slightly different:</div>
-何故でしょう？ メディアタイプ<code>text/html</code>は、レートでは0.9という高い"特質"を持っているので、優先度が高いからです。先の例で紹介した古いブラウザの場合は少し違います:<p class="paragraph"/><div class="code"><pre>assert 'all' == response.format</pre></div><p class="paragraph"/><div class="hidden-block">In this case 'all' possible formats are accepted by the client. To deal with different kinds of requests from <a href="../guide/single.html#controllers" class="guide">Controllers</a> you can use the <a href="../ref/Controllers/withFormat.html" class="controllers">withFormat</a> method that acts as kind of a switch statement:</div>
-このケースの'all'はどのクライアントでも受け入れられます。様々な種類のリクエストを<a href="../guide/single.html#controllers" class="guide">コントローラ</a>で分別するには、switch文のように動作する<a href="../ref/Controllers/withFormat.html" class="controllers">withFormat</a>メソッドを使用します:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.converters.XML<p class="paragraph"/>class BookController &#123;<p class="paragraph"/>    def list() &#123;
-        def books = Book.list()
-        withFormat &#123;
+この設定の一部を説明すると、'text/xml'または'application/xml'を含むリクエストは単純にコンテントタイプ'xml'としてGrailsが検出するのを可能にします。独自のタイプを追加するには単純にマップにタイプを追加するだけです。<p class="paragraph"/><h4>Content Negotiation using the format parameter</h4><p class="paragraph"/>Let's say a controller action can return a resource in a variety of formats: HTML, XML, and JSON. What format will the client get? The easiest and most reliable way for the client to control this is through a <code>format</code> URL parameter.<p class="paragraph"/>So if you, as a browser or some other client, want a resource as XML, you can use a URL like this:<p class="paragraph"/><div class="code"><pre>http://my.domain.org/books?format=xml</pre></div><p class="paragraph"/>The result of this on the server side is a <code>format</code> property on the <code>response</code> object with the value <code>xml</code> . You could code your controller action to return XML based on this property, but you can also make use of the controller-specific <code>withFormat()</code> method:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.converters.JSON
+<span class="java&#45;keyword">import</span> grails.converters.XML<p class="paragraph"/>class BookController &#123;<p class="paragraph"/>    def list() &#123;
+        def books = Book.list()<p class="paragraph"/>        withFormat &#123;
             html bookList: books
-            js &#123; render <span class="java&#45;quote">"alert('hello')"</span> &#125;
+            json &#123; render books as JSON &#125;
             xml &#123; render books as XML &#125;
         &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If the preferred format is <code>html</code> then Grails will execute the <code>html()</code> call only. This causes Grails to look for a view called either <code>grails-app/views/books/list.html.gsp</code> or <code>grails-app/views/books/list.gsp</code>. If the format is <code>xml</code> then the closure will be invoked and an XML response rendered.</div>
-優先されたフォーマットが<code>html</code>の場合Grailsはhtml()のみを実行します。この場合Grailsは、<code>grails-app/views/books/list.html.gsp</code>また <code>grails-app/views/books/list.gsp</code>のどちらかのビューを探しに行きます。<p class="paragraph"/><div class="hidden-block">How do we handle the "all" format? Simply order the content-types within your <code>withFormat</code> block so that whichever one you want executed comes first. So in the above example, "all" will trigger the <code>html</code> handler.</div>
-ではどのようにフォーマットの"all"を判別するのでしょう？単純に<code>withFormat</code>ブロックのコンテントタイプの順番を指定して一番最初に実行される物を決めます。上記の例では、"all"を受け取った場合は、<code>html</code>ハンドラを実行します。<p class="paragraph"/><blockquote class="note">
-<div class="hidden-block">When using <a href="../ref/Controllers/withFormat.html" class="controllers">withFormat</a> make sure it is the last call in your controller action as the return value of the <code>withFormat</code> method is used by the action to dictate what happens next.</div>
-<a href="../ref/Controllers/withFormat.html" class="controllers">withFormat</a>を使用する場合は、<code>withFormat</code>での返値がコントローラアクションで最終の返値となります。
+&#125;</pre></div><p class="paragraph"/>In this example, Grails will only execute the block inside <code>withFormat()</code> that matches the requested content type. So if the preferred format is <code>html</code> then Grails will execute the <code>html()</code> call only. Each 'block' can either be a map model for the corresponding view (as we are doing for 'html' in the above example) or a closure. The closure can contain any standard action code, for example it can return a model or render content directly.<p class="paragraph"/>There is a special format, "all", that is handled differently from the explicit formats. If "all" is specified (normally this happens through the Accept header - see below), then the first block of <code>withFormat()</code> is executed. You should not add an explicit "all" block. In the above example, a format of "all" will trigger the <code>html</code> handler.<p class="paragraph"/><blockquote class="note">
+When using <a href="../ref/Controllers/withFormat.html" class="controllers">withFormat</a> make sure it is the last call in your controller action as the return value of the <code>withFormat</code> method is used by the action to dictate what happens next.
+</blockquote><p class="paragraph"/><h4>Acceptヘッダーを使用する <div class="hidden-block">Using the Accept header </div></h4><p class="paragraph"/>Every incoming HTTP request has a special <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" target="blank">Accept</a> header that defines what media types (or mime types) a client can "accept". In older browsers this is typically:<p class="paragraph"/><div class="code"><pre>&#42;/&#42;</pre></div><p class="paragraph"/>which simply means anything. However, newer browsers send more interesting values such as this one sent by Firefox 3:<p class="paragraph"/><div class="code"><pre>text/xml, application/xml, application/xhtml+xml, text/html;q=0.9, &#10;    text/plain;q=0.8, image/png, &#42;/&#42;;q=0.5</pre></div><p class="paragraph"/>This particular accept header is unhelpful because it indicates that XML is the preferred response format whereas the user is really expecting HTML. That's why Grails ignores the accept header by default. However, non-browser clients are typically more specific in their requirements and can send accept headers such as<p class="paragraph"/><div class="code"><pre>application/json</pre></div><p class="paragraph"/>If you want to support such clients and their accept headers, then simply add (or change) the <code>grails.mime.use.accept.header</code> setting in <code>Config.groovy</code> :<p class="paragraph"/><div class="code"><pre>grails.mime.use.accept.header = <span class="java&#45;keyword">true</span></pre></div><p class="paragraph"/>With this setting, Grails parses the incoming accept header and sets the appropriate value for the <code>format</code> response property. For example, if it sees the accept header above ('application/json') it will set <code>format</code> to <code>json</code> as you'd expect. And of course this works with the <code>withFormat()</code> method in just the same way as when the <code>format</code> URL parameter is set (although the URL parameter takes precedence).<p class="paragraph"/>An accept header of '&#42;/&#42;' results in a value of <code>all</code> for the <code>format</code> property.<p class="paragraph"/><blockquote class="note">
+If you enable accept header parsing, it's usually best to handle XML and JSON responses in a different action from the HTML ones due to the problems with various browsers. You can then use <code>withFormat()</code> exclusively for the REST interface and avoid it for actions that render the normal HTML pages.
 </blockquote><p class="paragraph"/><h4>リクエストフォーマット vs レスポンスフォーマット <div class="hidden-block">Request format vs. Response format </div></h4><p class="paragraph"/><div class="hidden-block">As of Grails 2.0, there is a separate notion of the  <em class="italic">request</em>  format and the  <em class="italic">response</em>  format. The request format is dictated by the <code>CONTENT_TYPE</code> header and is typically used to detect if the incoming request can be parsed into XML or JSON, whilst the response format uses the file extension, format parameter or ACCEPT header to attempt to deliver an appropriate response to the client.</div>
 Grails 2.0からの対応で、リクエストフォーマットとレスポンスフォーマットでは分離して認識するようになりました。リクエストフォーマットは、<code>CONTENT_TYPE</code>ヘッダの指定で入ってくるリクエストを認識してXMLまたJSON等に分類します。レスポンスフォーマットでは、ファイル拡張子、フォーマットパラメータまたはACCEPTヘッダを認識して適したレスポンスをクライアントに返します。<p class="paragraph"/><div class="hidden-block">The <a href="../ref/Controllers/withFormat.html" class="controllers">withFormat</a> available on controllers deals specifically with the response format. If you wish to add logic that deals with the request format then you can do so using a separate <code>withFormat</code> method available on the request:</div>
 コントローラでの<a href="../ref/Controllers/withFormat.html" class="controllers">withFormat</a>はレスポンスフォーマット専用となります。リクエストフォーマットでロジックを記述する場合は、requestオブジェクトの<code>withFormat</code>メソッドを使用します:<p class="paragraph"/><div class="code"><pre>request.withFormat &#123;
@@ -7471,7 +7547,7 @@ Grailsが拡張子を外して、<code>xml</code>としてフォーマットを�
 &#125;</pre></div>
 
 
-
+<a name="8 Asynchronous Programming"><!-- Legacy link --></a>
 <h1 id="async">8 非同期プログラミング</h1>
 <div class="hidden-block">
 With modern hardware featuring multiple cores, many programming languages have been adding asynchronous, parallel programming APIs, Groovy being no exception.
@@ -7815,7 +7891,7 @@ If the Yahoo URL is unresponsive the original request thread will not be blocked
 
 
 <h2 id="grailsEvents">8.4 GrailsイベントAPI</h2>
-TODO: Stephane?
+TODO: Coming in Grails 2.3 M2
 
 
 <h2 id="asyncServletApi">8.5 Servlet 3.0 Async</h2>
@@ -8319,7 +8395,7 @@ You won't normally have to import any of the testing classes because Grails does
 <li><code>grails.test.mixin.web.UrlMappingsUnitTestMixin</code></li>
 <li><code>grails.test.mixin.webflow/WebFlowUnitTestMixin</code></li>
 </ul><p class="paragraph"/><div class="hidden-block">
-Note that you're only ever likely to use the first two explicitly. The rest are there for reference.
+Note that you're only ever likely to use the first two explicitly. The rest are there for reference. 
 </div>
 常に明示的に使うのは最初の２つのクラスだけであることに注意してください。残りはリファレンスのために列挙しています。<p class="paragraph"/><div class="hidden-block">
 <h4>Test Mixin Basics</h4>
@@ -9269,9 +9345,10 @@ GORMドメインクラスの基盤であるHibernateは、データベースに�
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Phishing</div>
 <h4>フィッシング</h4><p class="paragraph"/><div class="hidden-block">This really a public relations issue in terms of avoiding hijacking of your branding and a declared communication policy with your customers. Customers need to know how to identify valid emails.</div>
 あなたとお客様との間で交わされたコミュニケーションポリシーのもと、あなたのブランドのハイジャックを防ぐという観点から、これはまさしく広報の問題です。顧客には、(不正な発信元でない)真正なEメールであることをどう見分けるか、知らせておく必要があります。<p class="paragraph"/><div class="hidden-block">h4. XSS - cross-site scripting injection</div>
-<h4>XSS - クロスサイトスクリプティングインジェクション</h4><p class="paragraph"/><div class="hidden-block">It is important that your application verifies as much as possible that incoming requests were originated from your application and not from another site. Ticketing and page flow systems can help this and Grails' support for <a href="http://www.springsource.org/webflow" target="blank">Spring Web Flow</a> includes security like this by default.</div>
-要求されたリクエストがあなたのアプリケーションのものであり、他のサイトからではないということを、できる限り検証することが重要です。チケットシステムやページ遷移システムによる支援や、Grailsの<a href="http://www.springsource.org/webflow" target="blank">Spring Web Flow</a> サポートは、デフォルトでこのようなセキュリティ対策を含んでいます。<p class="paragraph"/><div class="hidden-block">It is also important to ensure that all data values rendered into views are escaped correctly. For example when rendering to HTML or XHTML you must call <a href="../guide/single.html#codecs" class="guide">encodeAsHTML</a> on every object to ensure that people cannot maliciously inject JavaScript or other HTML into data or tags viewed by others. Grails supplies several <a href="../guide/single.html#codecs" class="guide">Dynamic Encoding Methods</a> for this purpose and if your output escaping format is not supported you can easily write your own codec.</div>
-ビューにレンダリングされる全てのデータが、確実に、正しくエスケープ処理されることもまた、重要です。例えば、HTMLまたはXHTMLをレンダリングする際、他人が見ることができるデータやタグに対して、JavaScriptや他のHTMLを悪意を持って挿入することができないよう、確実に全てのオブジェクトで<a href="../guide/single.html#codecs" class="guide">encodeAsHTML</a>を呼び出す必要があります。Grailsでは、こうした目的のために、いくつかの<a href="../guide/single.html#codecs" class="guide">動的なエンコード機能</a>を提供しています。また、あなたが必要とするエスケープ処理がサポートされていない場合にも、必要なコーデックを容易に書くことができます。<p class="paragraph"/><div class="hidden-block">You must also avoid the use of request parameters or data fields for determining the next URL to redirect the user to. If you use a <code>successURL</code> parameter for example to determine where to redirect a user to after a successful login, attackers can imitate your login procedure using your own site, and then redirect the user back to their own site once logged in, potentially allowing JavaScript code to then exploit the logged-in account on the site.</div>
+<h4>XSS - クロスサイトスクリプティングインジェクション</h4><p class="paragraph"/>
+<div class="hidden-block">It is important that your application verifies as much as possible that incoming requests were originated from your application and not from another site. It is also important to ensure that all data values rendered into views are escaped correctly. For example when rendering to HTML or XHTML you must ensure that people cannot maliciously inject JavaScript or other HTML into data or tags viewed by others. </div>
+要求されたリクエストがあなたのアプリケーションのものであり、他のサイトからではないということを、できる限り検証することが重要です。ビューにレンダリングされる全てのデータが、確実に、正しくエスケープ処理されることもまた重要です。例えば、HTMLまたはXHTMLをレンダリングする際、他人が見ることができるデータやタグに対して、JavaScriptや他のHTMLを悪意を持って挿入することができないようにする必要があります。<p class="paragraph"/><div class="hidden-block">Grails 2.3 and above include special support for automatically encoded data placed into GSP pages. See the documentation on <a href="../guide/single.html#xssPrevention" class="guide">Cross Site Scripting (XSS) prevention</a> for further information.</div>
+Grails 2.3以降では、自動的にエンコードしたデータをGSPに配置する仕組みが実装されています。詳しくは <a href="../guide/single.html#xssPrevention" class="guide">クロスサイトスクリプティング(XSS)防御</a> のドキュメントを参照してください。<p class="paragraph"/><div class="hidden-block">You must also avoid the use of request parameters or data fields for determining the next URL to redirect the user to. If you use a <code>successURL</code> parameter for example to determine where to redirect a user to after a successful login, attackers can imitate your login procedure using your own site, and then redirect the user back to their own site once logged in, potentially allowing JavaScript code to then exploit the logged-in account on the site.</div>
 ユーザのリダイレクト先URLを決めるためにリクエストパラメータやデータフィールドを使うこともまた、避けなければなりません。ログイン成功後、ユーザをどこへリダイレクトするか決定するために、例えば、あなたが<code>successURL</code>パラメータを使うような場合、攻撃者は、あなた自身のサイトを利用してログイン手順を偽装し、ユーザがログインしようとしたときに攻撃者自身のサイトにリダイレクトさせることができてしまいます。これは、潜在的に、サイト上のログインアカウントを悪用するJavaScriptコードを許していることになります。<p class="paragraph"/><div class="hidden-block">h4. Cross-site request forgery</div>
 <h4>クロスサイトリクエストフォージェリ</h4><p class="paragraph"/><div class="hidden-block">CSRF involves unauthorized commands being transmitted from a user that a website trusts. A typical example would be another website embedding a link to perform an action on your website if the user is still authenticated.</div>
 CSRFは、ウェブサイト上の正規ユーザから、承認されていないコマンド送信を引き起こします。認証されている状態のユーザが、別のウェブサイト内に埋め込まれたリンクによって、あなたのウェブサイト上で意図しないアクションを引き起こすようなものが典型的な例です。<p class="paragraph"/><div class="hidden-block">The best way to decrease risk against these types of attacks is to use the <code>useToken</code> attribute on your forms. See <a href="../guide/single.html#formtokens" class="guide">Handling Duplicate Form Submissions</a> for more information on how to use it. An additional measure would be to not use remember-me cookies.</div>
@@ -9293,8 +9370,45 @@ HTML/URLインジェクションは、Grailsが提供する<a href="../guide/sin
 いずれにせよ、全ての保護されていないURLは、当然誰からもアクセス可能であると考えなければなりません。
 
 
+<a name="13.2 Cross Site Scripting (XSS) Prevention"><!-- Legacy link --></a>
+<h2 id="xssPrevention">13.2 クロスサイトスクリプティング(XSS)防御</h2>
+Cross Site Scripting (XSS) attacks are a common attack vector for web applications. They typically involve submitting HTML or Javascript code in a form such that when that code is displayed, the browser does something nasty. It could be as simple as popping up an alert box, or it could be much worse. The solution is to escape all untrusted user input when it is displayed in a page. For example,<p class="paragraph"/><div class="code"><pre>&#60;script&#62;alert('Got ya!');&#60;/script&#62;</pre></div><p class="paragraph"/>will become<p class="paragraph"/><div class="code"><pre>&#38;lt;script&#38;gt;alert('Got ya!');&#38;lt;/script&#38;gt;</pre></div><p class="paragraph"/>when rendered, nullifying the effects of the malicious input.<p class="paragraph"/>By default, Grails plays it safe and escapes all content in <code>${}</code> expressions in GSPs. All the standard GSP tags are also safe by default, escaping any relevant attribute values.<p class="paragraph"/>So what happens when you want to stop Grails from escaping some content? There are valid use cases for putting HTML into the database and rendering it as-is, as long as that content is <strong class="bold">trusted</strong>. In such cases, you can tell Grails that the content is safe as should be rendered raw, i.e. without any escaping:<p class="paragraph"/><div class="code"><pre>&#60;section&#62;$&#123;raw(page.content)&#125;&#60;/section&#62;</pre></div><p class="paragraph"/>The <code>raw()</code> method you see here is available from controllers, tag libraries and GSP pages.<p class="paragraph"/><blockquote class="warning">Although Grails plays it safe by default, that is no guarantee that your application will be invulnerable to an XSS-style attack. Such an attack is less likely to succeed than would otherwise be the case, but developers should always be conscious of potential attack vectors and attempt to uncover vulnerabilities in the application during testing. It's also easy to switch to an unsafe default, thereby increasing the risk of a vulnerability being introduced.</blockquote><p class="paragraph"/>It's difficult to make a solution that works for everyone, and so Grails provides a lot of flexibility with regard to fine-tuning how escaping works, allowing you to keep most of your application safe while switching off default escaping or changing the codec used for pages, tags, page fragments, and more.<p class="paragraph"/><h4>Configuration</h4><p class="paragraph"/>It is recommended that you review the configuration of a newly created Grails application to garner an understanding of XSS prevention works in Grails.<p class="paragraph"/>GSP features the ability to automatically HTML encode GSP expressions, and as of Grails 2.3 this is the default configuration.  The default configuration (found in <code>Config.groovy</code>) for a newly created Grails application can be seen below:<p class="paragraph"/><div class="code"><pre>grails &#123;
+        views &#123;
+            gsp &#123;
+                encoding = 'UTF&#45;8'
+                htmlcodec = 'xml' // use xml escaping instead of HTML4 escaping
+                codecs &#123;
+                    expression = 'html' // escapes values inside $&#123;&#125;
+                    scriptlet = 'html' // escapes output from scriptlets in GSPs
+                    taglib = 'none' // escapes output from taglibs
+                    staticparts = 'none' // escapes output from <span class="java&#45;keyword">static</span> template parts
+                &#125;
+            &#125;
+            // escapes all not&#45;encoded output at <span class="java&#45;keyword">final</span> stage of outputting
+            filteringCodecForContentType &#123;
+                //'text/html' = 'html'
+            &#125;
+        &#125;
+    &#125;</pre></div><p class="paragraph"/>GSP features several codecs that it uses when writing the page to the response. The codecs are configured in the <code>codecs</code> block and are described below:
+<ul class="star">
+<li><code>expression</code> - The expression codec is used to encode any code found within ${..} expressions. The default for newly created application is <code>html</code> encoding.</li>
+<li><code>scriptlet</code> - Used for output from GSP scriplets (&#60;% %&#62;, &#60;%= %&#62; blocks). The default for newly created applications is <code>html</code> encoding</li>
+<li><code>taglib</code> - Used to encode output from GSP tag libraries. The default is <code>none</code> for new applications, as typically it is the responsibility of the tag author to define the encoding of a given tag and by specifying <code>none</code> Grails remains backwards compatible with older tag libraries.</li>
+<li><code>staticparts</code> - Used to encode the raw markup output by a GSP page. The default is <code>none</code>.</li>
+</ul><p class="paragraph"/><h4>Double Encoding Prevention</h4><p class="paragraph"/>Versions of Grails prior to 2.3, included the ability to set the default codec to <code>html</code>, however enabling this setting sometimes proved problematic when using existing plugins due to encoding being applied twice (once by the <code>html</code> codec and then again if the plugin manually called <code>encodeAsHTML</code>).<p class="paragraph"/>Grails 2.3 includes double encoding prevention so that when an expression is evaluated, it will not encode if the data has already been encoded (Example <code>${foo.encodeAsHTML()}</code>).<p class="paragraph"/><h4>Raw Output</h4><p class="paragraph"/>If you are 100% sure that the value you wish to present on the page has not been received from user input, and you do not wish the value to be encoded then you can use the <code>raw</code> method:<p class="paragraph"/><div class="code"><pre>$&#123;raw(book.title)&#125;</pre></div><p class="paragraph"/>The 'raw' method is available in tag libraries, controllers and GSP pages.<p class="paragraph"/><h4>Per Plugin Encoding</h4><p class="paragraph"/>Grails also features the ability to control the codecs used on a per plugin basis. For example if you have a plugin named <code>foo</code> installed, then placing the following configuration in your application's <code>Config.groovy</code> will disable encoding for only the <code>foo</code> plugin<p class="paragraph"/><div class="code"><pre>foo.grails.views.gsp.codecs.expression = <span class="java&#45;quote">"none"</span></pre></div><p class="paragraph"/><h4>Per Page Encoding</h4><p class="paragraph"/>You can also control the various codecs used to render a GSP page on a per page basis, using a page directive:<p class="paragraph"/><div class="code"><pre>&#60;%@page expressionCodec=<span class="java&#45;quote">"none"</span> %&#62;</pre></div><p class="paragraph"/><h4>Per Tag Library Encoding</h4><p class="paragraph"/>Each tag library created has the opportunity to specify a default codec used to encode output from the tag library using the "defaultEncodeAs" property:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> defaultEncodeAs = 'html'</pre></div><p class="paragraph"/>Encoding can also be specified on a per tag basis using "encodeAsForTags":<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> encodeAsForTags = &#91;tagName: 'raw'&#93;</pre></div><p class="paragraph"/><h4>Context Sensitive Encoding Switching</h4><p class="paragraph"/>Certain tags require certain encodings and Grails features the ability to enable a codec only a certain part of a tag's execution using the "withCodec" method. Consider for example the "&#60;g:javascript&#62;"" tag which allows you to embed JavaScript code in the page. This tag requires JavaScript encoding, not HTML coding for the execution of the body of the tag (but not for the markup that is output):<p class="paragraph"/><div class="code"><pre>out.println '&#60;script type=<span class="java&#45;quote">"text/javascript"</span>&#62;'
+    withCodec(<span class="java&#45;quote">"JavaScript"</span>) &#123;
+        out &#60;&#60; body()
+    &#125;
+    out.println()
+    out.println '&#60;/script&#62;'</pre></div><p class="paragraph"/><h4>Forced Encoding for Tags</h4><p class="paragraph"/>If a tag specifies a default encoding that differs from your requirements you can force the encoding for any tag by passing the optional 'encodeAs' attribute:<p class="paragraph"/><div class="code"><pre>&#60;g:message code=<span class="java&#45;quote">"foo.bar"</span> encodeAs=<span class="java&#45;quote">"JavaScript"</span> /&#62;</pre></div><p class="paragraph"/><h4>Default Encoding for All Output</h4><p class="paragraph"/>The default configuration for new applications is fine for most use cases, and backwards compatible with existing plugins and tag libraries. However, you can also make your application even more secure by configuring Grails to always encode all output at the end of a response. This is done using the <code>filteringCodecForContentType</code> configuration in <code>Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.views.gsp.filteringCodecForContentType.'text/html' = 'html'</pre></div><p class="paragraph"/>Note that, if activated, the <code>staticparts</code> codec typically needs to be set to <code>raw</code> so that static markup is not encoded:<p class="paragraph"/><div class="code"><pre>codecs &#123;
+        expression = 'html' // escapes values inside $&#123;&#125;
+        scriptlet = 'html' // escapes output from scriptlets in GSPs
+        taglib = 'none' // escapes output from taglibs
+        staticparts = 'raw' // escapes output from <span class="java&#45;keyword">static</span> template parts
+    &#125;</pre></div><p class="paragraph"/>
+
 <a name="11.2 Encoding and Decoding Objects"><!-- Legacy link --></a>
-<h2 id="codecs">13.2 エンコード・デコードオブジェクト</h2>
+<h2 id="codecs">13.3 エンコード・デコードオブジェクト</h2>
 <div class="hidden-block">Grails supports the concept of dynamic encode/decode methods.  A set of standard codecs are bundled with Grails.  Grails also supports a simple mechanism for developers to contribute their own codecs that will be recognized at runtime.</div>
 Grailsは動的なエンコード/デコードメソッドという考え方をサポートしています。標準的なコーデックはGrailsにバンドルされているほか、開発者が独自のコーデックを簡単に定義することのできるメカニズムも備えています。<p class="paragraph"/><div class="hidden-block">h4. Codec Classes</div>
 <h4>コーデッククラス</h4><p class="paragraph"/><div class="hidden-block">A Grails codec class is one that may contain an encode closure, a decode closure or both.  When a Grails application starts up the Grails framework dynamically loads codecs from the <code>grails-app/utils/</code> directory.</div>
@@ -9344,7 +9458,7 @@ SHA256アルゴリズムを使用してbyte配列や整数のリスト、文字�
 
 
 <a name="11.3 Authentication"><!-- Legacy link --></a>
-<h2 id="authentication">13.3 認証</h2>
+<h2 id="authentication">13.4 認証</h2>
 <div class="hidden-block">Grails has no default mechanism for authentication as it is possible to implement authentication in many different ways. It is however, easy to implement a simple authentication mechanism using either <a href="../guide/single.html#interceptors" class="guide">interceptors</a> or <a href="../guide/single.html#filters" class="guide">filters</a>. This is sufficient for simple use cases but it's highly preferable to use an established security framework, for example by using the <a href="../guide/single.html#springSecurity" class="guide">Spring Security</a> or the <a href="../guide/single.html#shiro" class="guide">Shiro</a> plugin.</div>
 認証は様々な方法で実装することができるため、Grailsではデフォルトの認証メカニズムを提供していません。<a href="../guide/single.html#interceptors" class="guide">インターセプター</a>や<a href="../guide/single.html#filters" class="guide">フィルタ</a>を使用することで、単純な認証であれば簡単に実装することができます。これらの機能は多くのユースケースにおいて十分ですが、実績のあるセキュリティフレームワークを使用することがより望ましいでしょう。セキュリティフレームワークには、例えば<a href="../guide/single.html#springSecurity" class="guide">Spring Security</a>や<a href="../guide/single.html#shiro" class="guide">Shiro</a>プラグインなどがあります。<p class="paragraph"/><div class="hidden-block">Filters let you apply authentication across all controllers or across a URI space. For example you can create a new set of filters in a class called <code>grails-app/conf/SecurityFilters.groovy</code> by running:</div>
 フィルタを使うと、すべてのコントローラやURI空間に対して認証を適用できます。例えば、以下のコマンドを実行することで、<code>grails-app/conf/SecurityFilters.groovy</code>というクラスに新しいフィルタセットが生成されます:<p class="paragraph"/><div class="code"><pre>grails create&#45;filters security</pre></div><p class="paragraph"/><div class="hidden-block">and implement your interception logic there:</div>
@@ -9381,13 +9495,13 @@ SHA256アルゴリズムを使用してbyte配列や整数のリスト、文字�
 
 
 <a name="11.4 Security Plug-ins"><!-- Legacy link --></a>
-<h2 id="securityPlugins">13.4 セキュリティプラグイン</h2>
+<h2 id="securityPlugins">13.5 セキュリティプラグイン</h2>
 <div class="hidden-block">If you need more advanced functionality beyond simple authentication such as authorization, roles etc. then you should consider using one of the available security plugins.</div>
 認可やロールなど、単純な認証以上の機能が必要な場合、以下のようなセキュリティプラグインの利用を検討してください。
 
 
 <a name="11.4.1 Spring Security"><!-- Legacy link --></a>
-<h2 id="springSecurity">13.4.1 Spring Security</h2>
+<h2 id="springSecurity">13.5.1 Spring Security</h2>
 <div class="hidden-block">The Spring Security plugins are built on the <a href="http://static.springsource.org/spring-security/site/" target="blank">Spring Security</a> project which provides a flexible, extensible framework for building all sorts of authentication and authorization schemes. The plugins are modular so you can install just the functionality that you need for your application. The Spring Security plugins are the official security plugins for Grails and are actively maintained and supported.</div>
 Spring Securityプラグインは、<a href="http://static.springsource.org/spring-security/site/" target="blank">Spring Security</a>プロジェクトをGrailsで利用可能にします。Spring Securityプロジェクトでは、様々な種類の認証/認可スキームを実装するための柔軟で拡張可能なフレームワークを提供しています。このプラグインはモジュール化されているため、アプリケーションに必要な機能だけをインストールすることができます。Spring SecurityプラグインはGrailsの公式セキュリティプラグインで、活発にメンテナンスとサポートが行われています。<p class="paragraph"/><div class="hidden-block">There is a <a href="http://grails.org/plugin/spring-security-core" target="blank">Core plugin</a> which supports form-based authentication, encrypted/salted passwords, HTTP Basic authentication, etc. and secondary dependent plugins provide alternate functionality such as <a href="http://grails.org/plugin/spring-security-openid" target="blank">OpenID authentication</a>, <a href="http://grails.org/plugin/spring-security-acl" target="blank">ACL support</a>, <a href="http://grails.org/plugin/spring-security-cas" target="blank">single sign-on with Jasig CAS</a>, <a href="http://grails.org/plugin/spring-security-ldap" target="blank">LDAP authentication</a>, <a href="http://grails.org/plugin/spring-security-kerberos" target="blank">Kerberos authentication</a>, and a plugin providing <a href="http://grails.org/plugin/spring-security-ui" target="blank">user interface extensions</a> and security workflows.</div>
 <a href="http://grails.org/plugin/spring-security-core" target="blank">Coreプラグイン</a>では、フォームベースの認証、パスワードの暗号化(ソルトを加えることもできる)、HTTP Basic認証などをサポートしています。Coreプラグインに依存するプラグインを利用することで、例えば<a href="http://grails.org/plugin/spring-security-openid" target="blank">OpenID認証</a>、<a href="http://grails.org/plugin/spring-security-acl" target="blank">ACL</a>、<a href="http://grails.org/plugin/spring-security-cas" target="blank">Jasig CASを利用したシングルサインオン</a>、<a href="http://grails.org/plugin/spring-security-ldap" target="blank">LDAP認証</a>、<a href="http://grails.org/plugin/spring-security-kerberos" target="blank">Kerberos認証</a>などの機能を利用できるほか、<a href="http://grails.org/plugin/spring-security-ui" target="blank">ユーザインタフェース拡張</a>やセキュリティワークフローを提供するプラグインもあります。<p class="paragraph"/><div class="hidden-block">See the <a href="http://grails.org/plugin/spring-security-core" target="blank">Core plugin page</a> for basic information and the <a href="http://burtbeckwith.github.com/grails-spring-security-core/" target="blank">user guide</a> for detailed information.</div>
@@ -9395,7 +9509,7 @@ Spring Securityプラグインは、<a href="http://static.springsource.org/spri
 
 
 <a name="11.4.2 Shiro"><!-- Legacy link --></a>
-<h2 id="shiro">13.4.2 Shiro</h2>
+<h2 id="shiro">13.5.2 Shiro</h2>
 <div class="hidden-block"><a href="http://shiro.apache.org/" target="blank">Shiro</a> is a Java POJO-oriented security framework that provides a default domain model that models realms, users, roles and permissions. With Shiro you extend a controller base class called <code>JsecAuthBase</code> in each controller you want secured and then provide an <code>accessControl</code> block to setup the roles. An example below:</div>
 <a href="http://shiro.apache.org/" target="blank">Shiro</a>はJava POJO指向のセキュリティフレームワークで、レルム/ユーザ/ロール/権限に対するデフォルトのドメインモデルを提供します。Shiroを利用するには、セキュリティ機能が必要な各コントローラで<code>JsecAuthBase</code>という基底クラスを継承し、<code>accessControl</code>ブロックを使用してロールを設定します。以下に例を示します:<p class="paragraph"/><div class="code"><pre>class ExampleController <span class="java&#45;keyword">extends</span> JsecAuthBase &#123;
     <span class="java&#45;keyword">static</span> accessControl = &#123;
@@ -9430,8 +9544,10 @@ Extending the platform may sound complicated, but plugins can range from trivial
 <h4>プラグインの作成</h4><p class="paragraph"/><div class="hidden-block">
 Creating a Grails plugin is a simple matter of running the command:
 </div><p class="paragraph"/>Grailsプラグインの新規作成は、以下のコマンドを実行するだけであり、とても簡単です:<p class="paragraph"/><div class="code"><pre>grails create&#45;plugin &#91;PLUGIN NAME&#93;</pre></div><p class="paragraph"/><div class="hidden-block">
-This will create a plugin project for the name you specify. For example running <code>grails create-plugin example</code> would create a new plugin project called <code>example</code>.<p class="paragraph"/>The structure of a Grails plugin is very nearly the same as a Grails application project's except that in the root of the plugin directory you will find a plugin Groovy file called the "plugin descriptor".
-</div><p class="paragraph"/>こうすることで指定した名前のプラグインプロジェクトが作成されます。例えば、<code>grails create-plugin example</code>を実行すると、<code>example</code>という新規プラグインプロジェクトが作成されます。<p class="paragraph"/>Grailsプラグインの構造は、プラグインのルートディレクトリに「プラグインディスクリプタ」と呼ばれるGroovyファイルがあることを除き、Grailsアプリケーションプロジェクトの構造とほとんど同じです。<p class="paragraph"/><blockquote class="note">
+This will create a plugin project for the name you specify. For example running <code>grails create-plugin example</code> would create a new plugin project called <code>example</code>.</div>
+こうすることで指定した名前のプラグインプロジェクトが作成されます。例えば、<code>grails create-plugin example</code>を実行すると、<code>example</code>という新規プラグインプロジェクトが作成されます。<p class="paragraph"/>Make sure the plugin name does not contain more than one capital in a row, or it won't work. Camel case is fine, though.<p class="paragraph"/><div class="hidden-block">The structure of a Grails plugin is very nearly the same as a Grails application project's except that in the root of the plugin directory you will find a plugin Groovy file called the "plugin descriptor".
+</div>
+Grailsプラグインの構造は、プラグインのルートディレクトリに「プラグインディスクリプタ」と呼ばれるGroovyファイルがあることを除き、Grailsアプリケーションプロジェクトの構造とほとんど同じです。<p class="paragraph"/><blockquote class="note">
 <div class="hidden-block">
 The only plugins included in a new plugin project are Tomcat and Release. Hibernate is not included by default.
 </div>
@@ -9525,7 +9641,12 @@ Although the <a href="../ref/Command Line/create-plugin.html" class="commandLine
 <li><code>&#42;&#42;/.svn/&#42;&#42;</code> と <code>&#42;&#42;/CVS/&#42;&#42;</code>配下のSCM管理ファイル</li>
 </ul><p class="paragraph"/><div class="hidden-block">
 If you need artefacts within <code>WEB-INF</code> it is recommended you use the <code>_Install.groovy</code> script (covered later), which is executed when a plugin is installed, to provide such artefacts. In addition, although <code>UrlMappings.groovy</code> is excluded you are allowed to include a <code>UrlMappings</code> definition with a different name, such as <code>MyPluginUrlMappings.groovy</code>.
-</div><p class="paragraph"/>アーテファクトを<code>WEB-INF</code>に含める必要がある場合には、プラグインインストール時に実行されるスクリプトである<code>_Install.groovy</code>スクリプト(後述)を使用することがお勧めです。なお、除外対象アーティファクトである<code>UrlMappings.groovy</code>は除外されますが、<code>UrlMappings</code>情報は「<code>MyPluginUrlMappings.groovy</code>」などの異なる名前にしておけば、含めることができます。<p class="paragraph"/><div class="hidden-block">
+</div><p class="paragraph"/>アーテファクトを<code>WEB-INF</code>に含める必要がある場合には、プラグインインストール時に実行されるスクリプトである<code>_Install.groovy</code>スクリプト(後述)を使用することがお勧めです。なお、除外対象アーティファクトである<code>UrlMappings.groovy</code>は除外されますが、<code>UrlMappings</code>情報は「<code>MyPluginUrlMappings.groovy</code>」などの異なる名前にしておけば、含めることができます。<p class="paragraph"/><h4>Customizing the plugin contents</h4><p class="paragraph"/>You can specify what to exclude in addition to the default excludes by adding elements to the <code>pluginExcludes</code> descriptor property (described below). In addition, there are two ways to configure the contents of the plugin ZIP or JAR file.<p class="paragraph"/>One is to create an event handler for the <code>CreatePluginArchiveStart</code> event, which is fired after all of the plugin files have been copied to the staging directory. By adding an event handler you can add, modify, or delete files as needed. Add the handler to <code>_Events.groovy</code> in the <code>scripts</code> directory, for example<p class="paragraph"/><div class="code"><pre>eventCreatePluginArchiveStart = &#123; stagingDir &#45;&#62;
+   // update staging directory contents here
+&#125;</pre></div><p class="paragraph"/>You can customize the location of the staging directory with the <code>grails.project.plugin.staging.dir</code> attribute in <code>BuildConfig.groovy</code> or as  as system property.<p class="paragraph"/>Note that there is also a <code>CreatePluginArchiveEnd</code> event which is fired after the ZIP or JAR is packaged.<p class="paragraph"/>You can also do this work in a Closure in <code>BuildConfig.groovy</code> with the property <code>grails.plugin.resources</code> which is analogous to the <code>grails.war.resources</code> property, e.g.<p class="paragraph"/><div class="code"><pre>grails.plugin.resources = &#123; stagingDir &#45;&#62;
+   // update staging directory contents here
+&#125;</pre></div><p class="paragraph"/>
+<div class="hidden-block">
 <h4>Specifying Plugin Locations</h4>
 </div><p class="paragraph"/><h4>プラグイン位置の指定</h4><p class="paragraph"/><div class="hidden-block">
 An application can load plugins from anywhere on the file system, even if they have not been installed. Specify the location of the (unpacked) plugin in the application's <code>grails-app/conf/BuildConfig.groovy</code> file:
@@ -9548,7 +9669,9 @@ This is particularly useful in two cases:
 <ul class="star">
 <li>開発中のプラグインを、パッケージ化とインストールをスキップして、実アプリケーションにすぐに組み込んでテストしたいとき。</li>
 <li>アプリケーションが複数のプラグイン群に分割されており、それらすべてが同じ「スーパープロジェクト」ディレクトリ配下にある場合。</li>
-</ul><p class="paragraph"/><div class="hidden-block">
+</ul><p class="paragraph"/><blockquote class="note">
+The Artifactory repository for Grails now includes all the dependencies for published plugins. So, if you are using inline plugins that have dependencies, it is necessary to do a secondary resolve because these dependencies might not be in the repository. Therefore, you should set <code>legacyResolve</code> to <code>true</code> in your <code>BuildConfig.groovy</code> if you are using inline plugins with dependencies.
+</blockquote><p class="paragraph"/><div class="hidden-block">
 <h4>Global plugins</h4>
 </div><p class="paragraph"/><h4>グローバルプラグイン</h4><p class="paragraph"/><div class="hidden-block">
 Plugins can also be installed globally for all applications for a particular version of Grails using the <code>&#45;global</code> flag, for example:
@@ -9568,7 +9691,7 @@ If you have created a Grails plugin and want it to be hosted in the central repo
 </div><p class="paragraph"/><blockquote class="note">
 もしGrailsプラグインを開発して、セントラルリポジトリでホスティングしたい場合、アカウント入手の手順は<a href="http://grails.org/Creating+Plugins" target="blank">このWikiページ</a>にあります。
 </blockquote><p class="paragraph"/><div class="hidden-block">When you have access to the Grails Plugin repository, install the <a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">Release Plugin</a> and execute the <code>publish-plugin</code> command to release your plugin:</div><p class="paragraph"/>Grailsプラグインリポジトリにアクセス権を持っていれば、<a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">リリースプラグイン</a>をインストールして、<code>publish-plugin</code>コマンドを実行することでプラグインをリリースすることができます:<p class="paragraph"/><div class="code"><pre>grails install&#45;plugin release
-grails publish&#45;plugin</pre></div><p class="paragraph"/><div class="hidden-block">This will automatically commit any remaining source code changes to your SCM provider and then publish the plugin to the central repository. If the command is successful, it will immediately be available on the plugin portal at http://grails.org/plugin/&#60;pluginName&#62;. You can find out more about the Release plugin and its other features in <a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">its user guide</a>.</div><p class="paragraph"/>これにより、未コミットのソースコード変更を自動的にSCMプロバイダにコミットした上で、プラグインをセントラルリポジトリに公開します。もしコマンドが成功すれば、即座にhttp://grails.org/plugin/&#60;pluginName&#62;のプラグインポータルから利用可能になります。リリースプラグインとその他の機能に関する情報は、<a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">ユーザガイド</a>にあります。<p class="paragraph"/><div class="hidden-block">h4. Configuring Additional Repositories</div><p class="paragraph"/><h4>追加リポジトリの設定</h4><p class="paragraph"/><div class="hidden-block">The process for configuring repositories in Grails differs between versions. For version of Grails 1.2 and earlier please refer to the <a href="http://grails.org/doc/1.2.x/guide/12.%20Plug-ins.html#12.2%20Plugin%20Repositories" target="blank">Grails 1.2 documentation</a> on the subject. The following sections cover Grails 1.3 and above.</div><p class="paragraph"/>Grailsにおけるリポジトリの設定手順は、Grailsのバージョンによって異なっています。Grails 1.2以前の情報については<a href="http://grails.org/doc/1.2.x/guide/12.%20Plug-ins.html#12.2%20Plugin%20Repositories" target="blank">Grails 1.2のドキュメンテーション</a>を参照ください。以降の節は、Grails 1.3以降について記述しています。<p class="paragraph"/><div class="hidden-block">Grails 1.3 and above use Ivy under the hood to resolve plugin dependencies. The mechanism for defining additional plugin repositories is largely the same as guide:ivy. For example you can define a remote Maven repository that contains Grails plugins using the following syntax in <code>grails-app/conf/BuildConfig.groovy</code>:</div><p class="paragraph"/>Grails 1.3以上では、下位層に隠されているIvyがプラグインの依存性を解決します。プラグインリポジトリを追加定義する仕組みは、 guide:ivyする方法とほぼ同じです。例えば、Grailsプラグインを含むリモートMavenリポジトリを定義するには、 <code>grails-app/conf/BuildConfig.groovy</code>中で以下のように記述します:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+grails publish&#45;plugin</pre></div><p class="paragraph"/><div class="hidden-block">This will automatically commit any remaining source code changes to your SCM provider and then publish the plugin to the central repository. If the command is successful, it will immediately be available on the plugin portal at http://grails.org/plugin/&#60;pluginName&#62;. You can find out more about the Release plugin and its other features in <a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">its user guide</a>.</div><p class="paragraph"/>これにより、未コミットのソースコード変更を自動的にSCMプロバイダにコミットした上で、プラグインをセントラルリポジトリに公開します。もしコマンドが成功すれば、即座にhttp://grails.org/plugin/&#60;pluginName&#62;のプラグインポータルから利用可能になります。リリースプラグインとその他の機能に関する情報は、<a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">ユーザガイド</a>にあります。<p class="paragraph"/><div class="hidden-block">h4. Configuring Additional Repositories</div><p class="paragraph"/><h4>追加リポジトリの設定</h4><p class="paragraph"/><div class="hidden-block">The process for configuring repositories in Grails differs between versions. For version of Grails 1.2 and earlier please refer to the <a href="http://grails.org/doc/1.2.x/guide/12.%20Plug-ins.html#12.2%20Plugin%20Repositories" target="blank">Grails 1.2 documentation</a> on the subject. The following sections cover Grails 1.3 and above.</div><p class="paragraph"/>Grailsにおけるリポジトリの設定手順は、Grailsのバージョンによって異なっています。Grails 1.2以前の情報については<a href="http://grails.org/doc/1.2.x/guide/12.%20Plug-ins.html#12.2%20Plugin%20Repositories" target="blank">Grails 1.2のドキュメンテーション</a>を参照ください。以降の節は、Grails 1.3以降について記述しています。<p class="paragraph"/><div class="hidden-block">Grails 1.3 and above use Ivy under the hood to resolve plugin dependencies. The mechanism for defining additional plugin repositories is largely the same as <a href="../guide/single.html#dependencyResolution" class="guide">defining repositories for JAR dependencies</a>. For example you can define a remote Maven repository that contains Grails plugins using the following syntax in <code>grails-app/conf/BuildConfig.groovy</code>:</div><p class="paragraph"/>Grails 1.3以上では、下位層に隠されているIvyがプラグインの依存性を解決します。プラグインリポジトリを追加定義する仕組みは、 <a href="../guide/single.html#dependencyResolution" class="guide">JAR依存性を定義</a>する方法とほぼ同じです。例えば、Grailsプラグインを含むリモートMavenリポジトリを定義するには、 <code>grails-app/conf/BuildConfig.groovy</code>中で以下のように記述します:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenRepo <span class="java&#45;quote">"http://repository.codehaus.org"</span><p class="paragraph"/>    // ...or with a name
     mavenRepo name: <span class="java&#45;quote">"myRepo"</span>,
               root: <span class="java&#45;quote">"http://myserver:8081/artifactory/plugins&#45;snapshots&#45;local"</span>
@@ -10073,24 +10196,18 @@ RESTful Webサービス用のJava APIをベースとしたRESTを、<a href="htt
 
 <a name="13.2 SOAP"><!-- Legacy link --></a>
 <h2 id="SOAP">15.2 SOAP</h2>
-<div class="hidden-block">There are several plugins that add SOAP support to Grails depending on your preferred approach. For Contract First SOAP services there is a <a href="http://grails.org/plugin/springws" target="blank">Spring WS</a> plugin, whilst if you want to generate a SOAP API from Grails services there are several plugins that do this including:</div>
-GrailsにはSOAPのサポートを追加するプラグインがいくつかあります。コントラクトファーストのSOAP向けには<a href="http://grails.org/plugin/springws" target="blank">Spring WS</a>プラグインがあり、GrailsサービスからSOAP APIを生成したいのであれば以下のようなプラグインがあります。<p class="paragraph"/><div class="hidden-block">
-<ul class="star">
-<li><a href="http://grails.org/plugin/cxf/" target="blank">CXF</a> plugin which uses the <a href="http://cxf.apache.org/" target="blank">CXF</a> SOAP stack</li>
-<li><a href="http://grails.org/plugin/axis2" target="blank">Axis2</a> plugin which uses <a href="http://ws.apache.org/axis2/" target="blank">Axis2</a></li>
-<li><a href="https://jax-ws-commons.dev.java.net/grails/" target="blank">Metro</a> plugin which uses the <a href="https://jax-ws-commons.dev.java.net/grails/" target="blank">Metro</a> framework (and can also be used for <a href="http://docs.codehaus.org/pages/viewpage.action?pageId=88342530" target="blank">Contract First</a>)</li>
-</ul><p class="paragraph"/></div>
-<ul class="star">
-<li><a href="http://grails.org/plugin/cxf/" target="blank">CXF</a> プラグインは、<a href="http://cxf.apache.org/" target="blank">CXF</a> SOAPスタックを使用します。</li>
-<li><a href="http://grails.org/plugin/axis2" target="blank">Axis2</a> プラグインは、<a href="http://ws.apache.org/axis2/" target="blank">Axis2</a> を使用します。</li>
-<li><a href="https://jax-ws-commons.dev.java.net/grails/" target="blank">Metro</a> プラグインは、<a href="https://jax-ws-commons.dev.java.net/grails/" target="blank">Metro</a> フレームワークを使用します。（<a href="http://docs.codehaus.org/pages/viewpage.action?pageId=88342530" target="blank">コントラクトファースト</a>向けに使用することもできます。）</li>
-</ul><p class="paragraph"/><div class="hidden-block">Most of the SOAP integrations integrate with Grails <a href="../guide/single.html#services" class="guide">services</a> via the <code>exposes</code> static property. This example is taken from the CXF plugin:</div>
-ほとんどのSOAP系プラグインはGrailsの<a href="../guide/single.html#services" class="guide">サービス</a>に<code>expose</code>プロパティを定義することによって、SOAPを統合することが可能です。下記はCXFプラグインの例です:<p class="paragraph"/><div class="code"><pre>class BookService &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> expose = &#91;'cxf'&#93;<p class="paragraph"/>    Book&#91;&#93; getBooks() &#123;
-        Book.list() as Book&#91;&#93;
+Grails does not feature SOAP support out-of-the-box, but there are several plugins that can help for both producing SOAP servers and calling SOAP web services.<p class="paragraph"/><h4>SOAP Clients</h4><p class="paragraph"/>To call SOAP web services there are generally 2 approaches taken, one is to use a tool to generate client stubs, the other is to manually construct the SOAP calls. The former can be easier to use, but the latter provides more flexibility / control.<p class="paragraph"/>The <a href="http://grails.org/plugin/cxf-client" target="blank">CXF client plugin</a> uses the CXF framework, which includes a <code>wsdl2java</code> tool for generating a client. There is nothing Groovy/Grails specific here in the generated code as it simply provides a Java API which you can invoke to call SOAP web services.<p class="paragraph"/>See the documentation on the <a href="https://github.com/ctoestreich/cxf-client" target="blank">CXF client plugin</a> for further information.<p class="paragraph"/>Alternatively, if you prefer more control over your SOAP calls the <a href="https://github.com/jwagenleitner/groovy-wslite" target="blank">WS-Lite library</a> is an excellent choice and features a <a href="http://grails.org/plugin/wslite" target="blank">Grails plugin</a>. You have more control over the SOAP requests sent, and since Groovy has fantastic support for building and parsing XML it can be very productive approach.<p class="paragraph"/>Below is an example of a SOAP call with wslite:<p class="paragraph"/><div class="code"><pre>withSoap(serviceURL: 'http://www.holidaywebservice.com/Holidays/US/Dates/USHolidayDates.asmx') &#123;
+    def response = send &#123;
+        body &#123;
+            GetMothersDay(xmlns: 'http://www.27seconds.com/Holidays/US/Dates/') &#123;
+                year(2011)
+            &#125;
+        &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The WSDL can then be accessed at the location: <code>http://127.0.0.1:8080/your_grails_app/services/book?wsdl</code></div>
-WSDLには次のようなロケーションでアクセスすることができます。 <code>http://127.0.0.1:8080/your_grails_app/services/book?wsdl</code><p class="paragraph"/><div class="hidden-block">For more information on the CXF plugin refer to <a href="http://grails.org/plugin/cxf" target="blank">the documentation</a> on the wiki.</div>
-CXFプラグインについてもっと知りたい方は、<a href="http://grails.org/plugin/cxf" target="blank">ドキュメント</a>を参照しましょう。
+    println response.GetMothersDayResponse.GetMothersDayResult.text()
+&#125;</pre></div><p class="paragraph"/>It is not recommended that you use the <a href="http://groovy.codehaus.org/GroovyWS" target="blank">GroovyWS</a> library, it pulls in many dependencies which increases the likelihood of conflicts. The WSlite library provides a far simpler and easier to use solution.<p class="paragraph"/><h4>SOAP Servers</h4><p class="paragraph"/>Again, Grails does not have direct support for exposing SOAP web services, however if you wish to expose a SOAP service from your application then the <a href="http://grails.org/plugin/cxf" target="blank">CXF plugin</a> (not to be confused with the cxf-client plugin), provides an easy way to do so.<p class="paragraph"/>Typically it involves taking a Grails service and adding 'expose'-style configuration, such as the below:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> expose = EndpointType.JAX_WS_WSDL
+  //your path (preferred) or url to wsdl
+  <span class="java&#45;keyword">static</span> wsdl = 'org/grails/cxf/test/soap/CustomerService.wsdl'</pre></div><p class="paragraph"/>Please refer to the <a href="https://github.com/thorstadt/grails-cxf#soap" target="blank">documentation of the plugin</a> for more information.
 
 <a name="13.3 RSS and Atom"><!-- Legacy link --></a>
 <h2 id="RSSAndAtom">15.3 RSSとAtom</h2>
@@ -10940,185 +11057,17 @@ es.subtitle=...</pre></div><p class="paragraph"/>For each language translation, 
 
 <h1>Document Translation Report.</h1>
 <ul class="star">
-<li><strong class="bold">File Count</strong> - 272</li>
-<li><strong class="bold">Done</strong> - 190</li>
-<li><strong class="bold">TODO</strong> - 80</li>
+<li><strong class="bold">File Count</strong> - 273</li>
+<li><strong class="bold">Done</strong> - 204</li>
+<li><strong class="bold">TODO</strong> - 67</li>
 <li><strong class="bold">Not found or new</strong> - 2</li>
-</ul><p class="paragraph"/><h2>Original document updated after translation.:</h2><p class="paragraph"/><strong class="bold">./guide/gettingStarted/runningAnApplication.gdoc</strong><p class="paragraph"/><div class="code"><pre>19 : | Application loaded in interactive mode. Type 'stop&#45;app' to shutdown.
-21 : grails&#62; stop&#45;app
-25 : | Application loaded in interactive mode. Type 'stop&#45;app' to shutdown.</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/controllers/dataBinding.gdoc</strong><p class="paragraph"/><div class="code"><pre>242: The &#91;BindUsing|api:org.grails.databinding.BindUsing&#93; annotation may be used to define a custom binding mechanism <span class="java&#45;keyword">for</span> a particular field in a class.  Any time data binding is being applied to the field the closure value of the annotation will be invoked with 2 arguments.  The first argument is the object that data binding is being applied to and the second argument is a <code>Map</code> which is the data source <span class="java&#45;keyword">for</span> the data binding.  The value returned from the closure will be bound to the property.  The following example would result in the upper <span class="java&#45;keyword">case</span> version of the <code>name</code> value in the source being applied to the <code>name</code> field during data binding.
-245: <span class="java&#45;keyword">import</span> org.grails.databinding.BindUsing
-247: class SomeClass &#123;
-248:     @BindUsing(&#123;
-249:         obj, source &#45;&#62; source&#91;'name'&#93;?.toUpperCase()
-250:     &#125;)
-251:     <span class="java&#45;object">String</span> name
-255: The &#91;BindUsing|api:org.grails.databinding.BindUsing&#93; annotation may be used to define a custom binding mechanism <span class="java&#45;keyword">for</span> all of the fields on a particular class. When the annotation is applied to a class, the value assigned to the annotation should be a class which <span class="java&#45;keyword">implements</span> the &#91;BindingHelper|api:org.grails.databinding.BindingHelper&#93; <span class="java&#45;keyword">interface</span>.  An instance of that class will be used any time a value is bound to a property in the class that <span class="java&#45;keyword">this</span> annotation has been applied to. 
-258: @BindUsing(SomeClassWhichImplementsBindingHelper)
-259: class SomeClass &#123;
-260:     <span class="java&#45;object">String</span> someProperty
-261:     <span class="java&#45;object">Integer</span> someOtherProperty
-267: The binder will <span class="java&#45;keyword">do</span> a lot of type conversion automatically.  Some applications may want to define their own mechanism <span class="java&#45;keyword">for</span> converting values and a simple way to <span class="java&#45;keyword">do</span> <span class="java&#45;keyword">this</span> is to write a class which <span class="java&#45;keyword">implements</span> &#91;ValueConverter|api:org.grails.databinding.converters.ValueConverter&#93; and register an instance of that class as a bean in the Spring application context.
-270: <span class="java&#45;keyword">package</span> com.myapp.converters
-272: <span class="java&#45;keyword">import</span> org.grails.databinding.converters.ValueConverter
-274: /&#42;&#42;
-275:  &#42; A custom converter which will convert <span class="java&#45;object">String</span> of the
-276:  &#42; form 'city:state' into an Address object.
-277:  &#42;/
-278: class AddressValueConverter <span class="java&#45;keyword">implements</span> ValueConverter &#123;
-280:     def convert(value) &#123;
-281:         def pieces = value.split(':')
-282:         <span class="java&#45;keyword">new</span> com.myapp.Address(city: pieces&#91;0&#93;, state: pieces&#91;1&#93;)
-283:     &#125;
-285:     <span class="java&#45;object">Class</span>&#60;?&#62; getTargetType() &#123;
-286:         com.myapp.Address
-287:     &#125;
-291: An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented ValueConverter will be automatically plugged in to the data binding process.
-294: // grails&#45;app/conf/spring/resources.groovy
-296: beans = &#123;
-298:     addressConverter com.myapp.converters.AddressValueConverter
-306: class Person &#123;
-307:     <span class="java&#45;object">String</span> firstName
-308:     Address homeAddress
-311: class Address &#123;
-312:     <span class="java&#45;object">String</span> city
-313:     <span class="java&#45;object">String</span> state
-316: def person = <span class="java&#45;keyword">new</span> Person()
-317: person.properties = &#91;firstName: 'Jeff', homeAddress: <span class="java&#45;quote">"O'Fallon:Missouri"</span>&#93;
-318: assert person.firstName == 'Jeff'
-319: assert person.homeAddress.city = <span class="java&#45;quote">"O'Fallon"</span>
-320: assert person.homeAddress.state = 'Missouri'
-325: A custom date format may be specified to be used when binding a <span class="java&#45;object">String</span> to a Date value by applying the &#91;BindingFormat|api:org.grails.databinding.BindingFormat&#93; annotation to a Date field.
-328: <span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat
-330: class Person &#123;
-331:     @BindingFormat('MMddyyyy')
-332:     Date birthDate
-338: You may supply your own handler <span class="java&#45;keyword">for</span> the &#91;BindingFormat|api:org.grails.databinding.BindingFormat&#93; annotation by writing a class which <span class="java&#45;keyword">implements</span> the &#91;FormattedValueConverter|api:org.grails.databinding.converters.FormattedValueConverter&#93; <span class="java&#45;keyword">interface</span> and regiserting an instance of that class as a bean in the Spring application context.  Below is an example of a trivial custom <span class="java&#45;object">String</span> formatter that might convert the <span class="java&#45;keyword">case</span> of a <span class="java&#45;object">String</span> based on the value assigned to the BindingFormat annotation.
-341: <span class="java&#45;keyword">package</span> com.myapp.converters
-343: <span class="java&#45;keyword">import</span> org.grails.databinding.converters.FormattedValueConverter
-345: class FormattedStringValueConverter <span class="java&#45;keyword">implements</span> FormattedValueConverter &#123;
-346:     def convert(value, <span class="java&#45;object">String</span> format) &#123;
-347:         <span class="java&#45;keyword">if</span>('UPPERCASE' == format) &#123;
-348:             value = value.toUpperCase()
-349:         &#125; <span class="java&#45;keyword">else</span> <span class="java&#45;keyword">if</span>('LOWERCASE' == format) &#123;
-350:             value = value.toLowerCase()
-351:         &#125;
-353:     &#125;
-355:     <span class="java&#45;object">Class</span> getTargetType() &#123;
-356:         // specifies the type to which <span class="java&#45;keyword">this</span> converter may be applied
-357:         <span class="java&#45;object">String</span>
-358:     &#125;
-362: An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented FormattedValueConverter will be automatically plugged in to the data binding process.
-365: // grails&#45;app/conf/spring/resources.groovy
-367: beans = &#123;
-369:     formattedStringConverter com.myapp.converters.FormattedStringValueConverter
-376: With that in place the BindUsing annotation may be applied to <span class="java&#45;object">String</span> fields to inform the data binder to take advantage of the custom converter.
-379: <span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat
-381: class Person &#123;
-382:     @BindingFormat('UPPERCASE')
-383:     <span class="java&#45;object">String</span> someUpperCaseString
-385:     @BindingFormat('LOWERCASE')
-386:     <span class="java&#45;object">String</span> someLowerCaseString
-388:     <span class="java&#45;object">String</span> someOtherString</pre></div><p class="paragraph"/><strong class="bold">./guide/introduction/whatsNew23.gdoc</strong><p class="paragraph"/><div class="code"><pre>15 : The <code>create&#45;app</code> command will now by <span class="java&#45;keyword">default</span> generate the command line grailsw wrapper <span class="java&#45;keyword">for</span> newly created applications.  The <code>&#45;&#45;skip&#45;wrapper</code> <span class="java&#45;keyword">switch</span> may be used to prevent the wrapper from being generated.</pre></div><p class="paragraph"/><strong class="bold">./guide/gettingStarted/requirements.gdoc</strong><p class="paragraph"/><div class="code"><pre>9  : &#123;note&#125;
-10 : A JDK is required in your Grails development environment. A JRE is not sufficient.
-11 : &#123;note&#125;</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/contentNegotiation.gdoc</strong><p class="paragraph"/><div class="code"><pre>25 : Let's say a controller action can <span class="java&#45;keyword">return</span> a resource in a variety of formats: HTML, XML, and JSON. What format will the client get? The easiest and most reliable way <span class="java&#45;keyword">for</span> the client to control <span class="java&#45;keyword">this</span> is through a <code>format</code> URL parameter.
-27 : So <span class="java&#45;keyword">if</span> you, as a browser or some other client, want a resource as XML, you can use a URL like <span class="java&#45;keyword">this</span>:
-30 : http://my.domain.org/books?format=xml
-33 : The result of <span class="java&#45;keyword">this</span> on the server side is a <code>format</code> property on the <code>response</code> object with the value <code>xml</code> . You could code your controller action to <span class="java&#45;keyword">return</span> XML based on <span class="java&#45;keyword">this</span> property, but you can also make use of the controller&#45;specific <code>withFormat()</code> method:
-36 : <span class="java&#45;keyword">import</span> grails.converters.JSON
-46 :             json &#123; render books as JSON &#125;
-53 : In <span class="java&#45;keyword">this</span> example, Grails will only execute the block inside <code>withFormat()</code> that matches the requested content type. So <span class="java&#45;keyword">if</span> the preferred format is <code>html</code> then Grails will execute the <code>html()</code> call only. Each 'block' can either be a map model <span class="java&#45;keyword">for</span> the corresponding view (as we are doing <span class="java&#45;keyword">for</span> 'html' in the above example) or a closure. The closure can contain any standard action code, <span class="java&#45;keyword">for</span> example it can <span class="java&#45;keyword">return</span> a model or render content directly.
-55 : There is a special format, <span class="java&#45;quote">"all"</span>, that is handled differently from the explicit formats. If <span class="java&#45;quote">"all"</span> is specified (normally <span class="java&#45;keyword">this</span> happens through the Accept header &#45; see below), then the first block of <code>withFormat()</code> is executed. You should not add an explicit <span class="java&#45;quote">"all"</span> block. In the above example, a format of <span class="java&#45;quote">"all"</span> will trigger the <code>html</code> handler.
-69 : which simply means anything. However, newer browsers send more interesting values such as <span class="java&#45;keyword">this</span> one sent by Firefox 3:
-72 : text/xml, application/xml, application/xhtml+xml, text/html;q=0.9, &#10;73 :     text/plain;q=0.8, image/png, &#42;/&#42;;q=0.5
-76 : This particular accept header is unhelpful because it indicates that XML is the preferred response format whereas the user is really expecting HTML. That's why Grails ignores the accept header by <span class="java&#45;keyword">default</span>. However, non&#45;browser clients are typically more specific in their requirements and can send accept headers such as
-79 : application/json
-82 : If you want to support such clients and their accept headers, then simply add (or change) the <code>grails.mime.use.accept.header</code> setting in <code>Config.groovy</code> :
-85 : grails.mime.use.accept.header = <span class="java&#45;keyword">true</span>
-88 : With <span class="java&#45;keyword">this</span> setting, Grails parses the incoming accept header and sets the appropriate value <span class="java&#45;keyword">for</span> the <code>format</code> response property. For example, <span class="java&#45;keyword">if</span> it sees the accept header above ('application/json') it will set <code>format</code> to <code>json</code> as you'd expect. And of course <span class="java&#45;keyword">this</span> works with the <code>withFormat()</code> method in just the same way as when the <code>format</code> URL parameter is set (although the URL parameter takes precedence).
-90 : An accept header of '&#42;/&#42;' results in a value of <code>all</code> <span class="java&#45;keyword">for</span> the <code>format</code> property.
-93 : If you enable accept header parsing, it's usually best to handle XML and JSON responses in a different action from the HTML ones due to the problems with various browsers. You can then use <code>withFormat()</code> exclusively <span class="java&#45;keyword">for</span> the REST <span class="java&#45;keyword">interface</span> and avoid it <span class="java&#45;keyword">for</span> actions that render the normal HTML pages.</pre></div><p class="paragraph"/><strong class="bold">./guide/webServices/SOAP.gdoc</strong><p class="paragraph"/><div class="code"><pre>1  : Grails does not feature SOAP support out&#45;of&#45;the&#45;box, but there are several plugins that can help <span class="java&#45;keyword">for</span> both producing SOAP servers and calling SOAP web services.
-5  : To call SOAP web services there are generally 2 approaches taken, one is to use a tool to generate client stubs, the other is to manually construct the SOAP calls. The former can be easier to use, but the latter provides more flexibility / control.
-7  : The &#91;CXF client plugin|http://grails.org/plugin/cxf&#45;client&#93; uses the CXF framework, which includes a <code>wsdl2java</code> tool <span class="java&#45;keyword">for</span> generating a client. There is nothing Groovy/Grails specific here in the generated code as it simply provides a Java API which you can invoke to call SOAP web services.
-9  : See the documentation on the &#91;CXF client plugin|https://github.com/ctoestreich/cxf&#45;client&#93; <span class="java&#45;keyword">for</span> further information.
-11 : Alternatively, <span class="java&#45;keyword">if</span> you prefer more control over your SOAP calls the &#91;WS&#45;Lite library|https://github.com/jwagenleitner/groovy&#45;wslite&#93; is an excellent choice and features a &#91;Grails plugin|http://grails.org/plugin/wslite&#93;. You have more control over the SOAP requests sent, and since Groovy has fantastic support <span class="java&#45;keyword">for</span> building and parsing XML it can be very productive approach. 
-13 : Below is an example of a SOAP call with wslite:
-16 : withSoap(serviceURL: 'http://www.holidaywebservice.com/Holidays/US/Dates/USHolidayDates.asmx') &#123;
-17 :     def response = send &#123;
-18 :         body &#123;
-19 :             GetMothersDay(xmlns: 'http://www.27seconds.com/Holidays/US/Dates/') &#123;
-20 :                 year(2011)
-21 :             &#125;
-22 :         &#125;
-24 :     println response.GetMothersDayResponse.GetMothersDayResult.text()
-28 : It is not recommended that you use the &#91;GroovyWS|http://groovy.codehaus.org/GroovyWS&#93; library, it pulls in many dependencies which increases the likelihood of conflicts. The WSlite library provides a far simpler and easier to use solution.
-32 : Again, Grails does not have direct support <span class="java&#45;keyword">for</span> exposing SOAP web services, however <span class="java&#45;keyword">if</span> you wish to expose a SOAP service from your application then the &#91;CXF plugin|http://grails.org/plugin/cxf&#93; (not to be confused with the cxf&#45;client plugin), provides an easy way to <span class="java&#45;keyword">do</span> so.
-34 : Typically it involves taking a Grails service and adding 'expose'&#45;style configuration, such as the below:
-37 :   <span class="java&#45;keyword">static</span> expose = EndpointType.JAX_WS_WSDL
-38 :   //your path (preferred) or url to wsdl
-39 :   <span class="java&#45;keyword">static</span> wsdl = 'org/grails/cxf/test/soap/CustomerService.wsdl' 
-42 : Please refer to the &#91;documentation of the plugin|https://github.com/thorstadt/grails&#45;cxf&#35;soap&#93; <span class="java&#45;keyword">for</span> more information.</pre></div><p class="paragraph"/><strong class="bold">./guide/plugins/repositories.gdoc</strong><p class="paragraph"/><div class="code"><pre>34 : Grails 1.3 and above use Ivy under the hood to resolve plugin dependencies. The mechanism <span class="java&#45;keyword">for</span> defining additional plugin repositories is largely the same as &#91;defining repositories <span class="java&#45;keyword">for</span> JAR dependencies|guide:dependencyResolution&#93;. For example you can define a remote Maven repository that contains Grails plugins using the following syntax in <code>grails&#45;app/conf/BuildConfig.groovy</code>:</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/ajax/ajaxSupport/ajaxEvents.gdoc</strong><p class="paragraph"/><div class="code"><pre>21 : You can simply refer to the <code>XMLHttpRequest</code> variable to obtain the request:
-32 :               onFailure=<span class="java&#45;quote">"fireMe(XMLHttpRequest)"</span>&#62;Ajax Link&#60;/g:remoteLink&#62;</pre></div><p class="paragraph"/><strong class="bold">./guide/upgradingFromPreviousVersionsOfGrails.gdoc</strong><p class="paragraph"/><div class="code"><pre>3  : &#42; Dependency resolution has been changed to &#42;only&#42; use data from the POMs to resolve, <span class="java&#45;keyword">this</span> can impact plugins and you may need to republish a plugin with corrected dependency data
-53 : Grails 2.2 ships with Groovy 2.0 which has some language level changes that may require changes to your code or plugins that you use.
-57 : Grails 2.2 no longer uses the BuildConfig of the plugin <span class="java&#45;keyword">for</span> dependency resolution and &#42;only&#42; uses data provided by POMs, <span class="java&#45;keyword">this</span> may impact some plugins that had previously incorrectly 
-58 : specified dependency information.
-60 : If you don't want to immediately deal with the changes necessary to upgrade, then you can open <code>BuildConfig</code> and set the <code>legacyResolve</code> settings to <span class="java&#45;keyword">true</span>:
-63 : grails.project.dependency.resolution = &#123;    
-64 :     &#8230;
-65 :     legacyResolve <span class="java&#45;keyword">false</span> 
-66 :     &#8230;
-70 : This is not recommended however, as it will re&#45;enable the previous behavior of using both POM data and BuildConfig to resolve dependencies. The most commmon problem you will face is with plugins that express their dependencies in a scope that is not valid inside a POM (example: <span class="java&#45;quote">"build"</span> scope).
-72 : Plugins like <span class="java&#45;keyword">this</span> will need to be re&#45;publish with a corrected scope of <span class="java&#45;quote">"compile"</span>. If you then specify the plugin as <span class="java&#45;quote">"build"</span> scope in your application, transitive compile and runtime scoped dependencies will be converted to <span class="java&#45;quote">"build"</span> scope as well.</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/ajax.gdoc</strong><p class="paragraph"/><div class="code"><pre>3  : &#123;note&#125;
-4  : Note: JavaScript examples use the jQuery library.
-5  : &#123;note&#125;</pre></div><p class="paragraph"/><strong class="bold">./guide/GORM/advancedGORMFeatures/ormdsl/caching.gdoc</strong><p class="paragraph"/><div class="code"><pre>7  :     cache.use_second_level_cache=<span class="java&#45;keyword">true</span>
-8  :     cache.use_query_cache=<span class="java&#45;keyword">true</span>
-9  :     cache.provider_class='org.hibernate.cache.EhCacheProvider'</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/ajax/ajaxOnTheServer.gdoc</strong><p class="paragraph"/><div class="code"><pre>50 : function updateBook(data) &#123;
-51 :     $(<span class="java&#45;quote">"&#35;book"</span> + data.id + <span class="java&#45;quote">"_title"</span>).html( data.title );
-53 : &#60;/g:javascript&#62;
-54 : &#60;g:remoteLink action=<span class="java&#45;quote">"showBook"</span> id=<span class="java&#45;quote">"$&#123;book.id&#125;"</span> onSuccess=<span class="java&#45;quote">"updateBook(data)"</span>&#62;
-81 : function updateBook(data) &#123;
-82 :     <span class="java&#45;keyword">var</span> id = $(data).find(<span class="java&#45;quote">"book"</span>).attr(<span class="java&#45;quote">"id"</span>);
-83 :     $(<span class="java&#45;quote">"&#35;book"</span> + id + <span class="java&#45;quote">"_title"</span>).html( $(data).find(<span class="java&#45;quote">"title"</span>).text() );
-85 : &#60;/g:javascript&#62;
-86 : &#60;g:remoteLink action=<span class="java&#45;quote">"showBook"</span> id=<span class="java&#45;quote">"$&#123;book.id&#125;"</span> onSuccess=<span class="java&#45;quote">"updateBook(data)"</span>&#62;
-104:     <span class="java&#45;object">String</span> title = b.title.encodeAsJavaScript()
-105:     render <span class="java&#45;quote">"&#36;('&#35;book$&#123;b.id&#125;_title').html('$&#123;title&#125;');"</span></pre></div><p class="paragraph"/><strong class="bold">./guide/gettingStarted/aHelloWorldExample.gdoc</strong><p class="paragraph"/><div class="code"><pre>1  : Let's now take the <span class="java&#45;keyword">new</span> project and turn it into the classic <span class="java&#45;quote">"Hello world&#33;"</span> example. First, change into the <span class="java&#45;quote">"helloworld"</span> directory you just created and start the Grails interactive console:
-7  : You should see a prompt that looks like <span class="java&#45;keyword">this</span>:
-11 : What we want is a simple page that just prints the message <span class="java&#45;quote">"Hello World&#33;"</span> to the browser. In Grails, whenever you want a <span class="java&#45;keyword">new</span> page you just create a <span class="java&#45;keyword">new</span> controller action <span class="java&#45;keyword">for</span> it. Since we don't yet have a controller, let's create one now with the &#91;create&#45;controller|commandLine&#93; command:
-16 : Don't forget that in the interactive console, we have auto&#45;completion on command names. So you can type <span class="java&#45;quote">"cre"</span> and then press &#60;tab&#62; to get a list of all <code>create&#45;&#42;</code> commands. Type a few more letters of the command name and then &#60;tab&#62; again to finish.
-18 : The above command will create a <span class="java&#45;keyword">new</span> &#91;controller|guide:controllers&#93; in the <code>grails&#45;app/controllers/helloworld</code> directory called <code>HelloController.groovy</code>. Why the extra <code>helloworld</code> directory? Because in Java land, it's strongly recommended that all classes are placed into packages, so Grails defaults to the application name <span class="java&#45;keyword">if</span> you don't provide one. The reference page <span class="java&#45;keyword">for</span> &#91;create&#45;controller|commandLine&#93; provides more detail on <span class="java&#45;keyword">this</span>.
-20 : We now have a controller so let's add an action to generate the <span class="java&#45;quote">"Hello World&#33;"</span> page. The code looks like <span class="java&#45;keyword">this</span>: 
-27 :     def index() &#123;
-33 : The action is simply a method. In <span class="java&#45;keyword">this</span> particular <span class="java&#45;keyword">case</span>, it calls a special method provided by Grails to &#91;render|tags&#93; the page.
-35 : Job done. To see your application in action, you just need to start up a server with another command called &#91;run&#45;app|commandLine&#93;:
-40 : This will start an embedded server on port 8080 that hosts your application. You should now be able to access your application at the URL &#91;http://localhost:8080/helloworld/|http://localhost:8080/helloworld/&#93; &#45; <span class="java&#45;keyword">try</span> it&#33;
-43 : If you see the error <span class="java&#45;quote">"Server failed to start <span class="java&#45;keyword">for</span> port 8080: Address already in use"</span>, then it means another server is running on that port. You can easily work around <span class="java&#45;keyword">this</span> by running your server on a different port using <code>&#45;Dserver.port=9090 run&#45;app</code>. '9090' is just an example: you can pretty much choose anything within the range 1024 to 49151.
-46 : The result will look something like <span class="java&#45;keyword">this</span>:
-50 : This is the Grails intro page which is rendered by the <code>grails&#45;app/view/index.gsp</code> file. It detects the presence of your controllers and provides links to them. You can click on the <span class="java&#45;quote">"HelloController"</span> link to see our custom page containing the text <span class="java&#45;quote">"Hello World&#33;"</span>. Voila&#33; You have your first working Grails application.
-52 : One <span class="java&#45;keyword">final</span> thing: a controller can contain many actions, each of which corresponds to a different page (ignoring AJAX at <span class="java&#45;keyword">this</span> point). Each page is accessible via a unique URL that is composed from the controller name and the action name: /&#60;appname&#62;/&#60;controller&#62;/&#60;action&#62;. This means you can access the Hello World page via &#91;/helloworld/hello/index|http://localhost:8080/helloworld/hello/index&#93;, where 'hello' is the controller name (remove the 'Controller' suffix from the class name and lower&#45;<span class="java&#45;keyword">case</span> the first letter) and 'index' is the action name. But you can also access the page via the same URL without the action name: <span class="java&#45;keyword">this</span> is because 'index' is the  <em class="italic">default action</em> . See the end of the &#91;controllers and actions|guide:understandingControllersAndActions&#93; section of the user guide to find out more on <span class="java&#45;keyword">default</span> actions.</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/controllers/commandObjects.gdoc</strong><p class="paragraph"/><div class="code"><pre>1  : Grails controllers support the concept of command objects. A command object is a class that is used in conjunction with &#91;data binding|guide:dataBinding&#93;, usually to allow validation of data that may not fit into an existing domain class.
-3  : &#123;note&#125;
-4  : Note: A class is only considered to be a command object when it is used as a parameter of an action.
-5  : &#123;note&#125;
-24 : In <span class="java&#45;keyword">this</span> example, the command object is marked with the <code>Validateable</code> annotation. The <code>Validateable</code> annotation allows the definition of &#91;constraints|guide:constraints&#93; just like in &#91;domain classes|guide:GORM&#93;. If the command object is defined in the same source file as the controller that is using it, Grails will automatically mark it as <code>Validateable</code>. It is not required that command object classes be validateable.
-30 : Before the controller action is executed Grails will automatically create an instance of the command object class and populate its properties by binding the request parameters.  If the command object class is marked with <code>Validateable</code> then the command object will be validated. For example:</pre></div><p class="paragraph"/><strong class="bold">./guide/testing/unitTesting.gdoc</strong><p class="paragraph"/><div class="code"><pre>25 : Note that you're only ever likely to use the first two explicitly. The <span class="java&#45;keyword">rest</span> are there <span class="java&#45;keyword">for</span> reference.</pre></div><p class="paragraph"/><strong class="bold">./guide/introduction/whatsNew22.gdoc</strong><p class="paragraph"/><div class="code"><pre>59 : &#42; The ability to deploy other Grails/Spring applications in parallel without conflicting dependencies</pre></div><p class="paragraph"/><strong class="bold">./guide/GORM/quickStartGuide.gdoc</strong><p class="paragraph"/><div class="code"><pre>21 : If you have the <code>dbCreate</code> property set to <span class="java&#45;quote">"update"</span>, <span class="java&#45;quote">"create"</span> or <span class="java&#45;quote">"create&#45;drop"</span> on your &#91;DataSource|guide:dataSource&#93;, Grails will automatically generate/modify the database tables <span class="java&#45;keyword">for</span> you.</pre></div><p class="paragraph"/><strong class="bold">./guide/plugins/creatingAndInstallingPlugins.gdoc</strong><p class="paragraph"/><div class="code"><pre>11 : Make sure the plugin name does not contain more than one capital in a row, or it won't work. Camel <span class="java&#45;keyword">case</span> is fine, though.
-113: You can specify what to exclude in addition to the <span class="java&#45;keyword">default</span> excludes by adding elements to the <code>pluginExcludes</code> descriptor property (described below). In addition, there are two ways to configure the contents of the plugin ZIP or JAR file.
-115: One is to create an event handler <span class="java&#45;keyword">for</span> the <code>CreatePluginArchiveStart</code> event, which is fired after all of the plugin files have been copied to the staging directory. By adding an event handler you can add, modify, or delete files as needed. Add the handler to <code>_Events.groovy</code> in the <code>scripts</code> directory, <span class="java&#45;keyword">for</span> example
-118: eventCreatePluginArchiveStart = &#123; stagingDir &#45;&#62;
-119:    // update staging directory contents here
-123: You can customize the location of the staging directory with the <code>grails.project.plugin.staging.dir</code> attribute in <code>BuildConfig.groovy</code> or as  as system property. 
-125: Note that there is also a <code>CreatePluginArchiveEnd</code> event which is fired after the ZIP or JAR is packaged.
-127: You can also <span class="java&#45;keyword">do</span> <span class="java&#45;keyword">this</span> work in a Closure in <code>BuildConfig.groovy</code> with the property <code>grails.plugin.resources</code> which is analogous to the <code>grails.war.resources</code> property, e.g.
-130: grails.plugin.resources = &#123; stagingDir &#45;&#62;
-131:    // update staging directory contents here
-155: The Artifactory repository <span class="java&#45;keyword">for</span> Grails now includes all the dependencies <span class="java&#45;keyword">for</span> published plugins. So, <span class="java&#45;keyword">if</span> you are using inline plugins that have dependencies, it is necessary to <span class="java&#45;keyword">do</span> a secondary resolve because these dependencies might not be in the repository. Therefore, you should set <code>legacyResolve</code> to <code><span class="java&#45;keyword">true</span></code> in your <code>BuildConfig.groovy</code> <span class="java&#45;keyword">if</span> you are using inline plugins with dependencies.</pre></div><p class="paragraph"/><h2>Not done.</h2>
+</ul><p class="paragraph"/><h2>Original document updated after translation.:</h2><p class="paragraph"/><strong class="bold">./guide/introduction/whatsNew23.gdoc</strong><p class="paragraph"/><div class="code"><pre>79 : The <code>create&#45;app</code> command will now by <span class="java&#45;keyword">default</span> generate the command line grailsw wrapper <span class="java&#45;keyword">for</span> newly created applications.  The <code>&#45;&#45;skip&#45;wrapper</code> <span class="java&#45;keyword">switch</span> may be used to prevent the wrapper from being generated.</pre></div><p class="paragraph"/><h2>Not done.</h2>
 <ul class="star">
 <li>../en/guide/GORM/advancedGORMFeatures/defaultSortOrder.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/eventsAutoTimestamping.gdoc</li>
-<li>../en/guide/GORM/advancedGORMFeatures/ormdsl/compositePrimaryKeys.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/customCascadeBehaviour.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/customHibernateTypes.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/customNamingStrategy.gdoc</li>
-<li>../en/guide/GORM/advancedGORMFeatures/ormdsl/databaseIndices.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/derivedProperties.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/fetchingDSL.gdoc</li>
 <li>../en/guide/GORM/advancedGORMFeatures/ormdsl/optimisticLockingAndVersioning.gdoc</li>
@@ -11150,19 +11099,6 @@ es.subtitle=...</pre></div><p class="paragraph"/>For each language translation, 
 <li>../en/guide/conf/dataSource/databaseConsole.gdoc</li>
 <li>../en/guide/conf/dataSource/multipleDatasources.gdoc</li>
 <li>../en/guide/conf/dataSource/transactionAwareDataSourceProxy.gdoc</li>
-<li>../en/guide/conf/dependencyResolution.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/changingDependencies.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/configurationsAndDependencies.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/debuggingResolution.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/dependencyReports.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/dependencyRepositories.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/dependencyResolutionCaching.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/inheritedDependencies.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/mavenIntegration.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/mavendeploy.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/pluginDependencies.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/pluginJARDependencies.gdoc</li>
-<li>../en/guide/conf/dependencyResolution/providingDefaultDependencies.gdoc</li>
 <li>../en/guide/conf/docengine.gdoc</li>
 <li>../en/guide/conf/environments.gdoc</li>
 <li>../en/guide/conf/versioning.gdoc</li>
@@ -11171,16 +11107,17 @@ es.subtitle=...</pre></div><p class="paragraph"/>For each language translation, 
 <li>../en/guide/contributing/issues.gdoc</li>
 <li>../en/guide/contributing/patchesCore.gdoc</li>
 <li>../en/guide/contributing/patchesDoc.gdoc</li>
+<li>../en/guide/gettingStarted/aHelloWorldExample.gdoc</li>
 <li>../en/guide/hibernate.gdoc</li>
 <li>../en/guide/hibernate/addingConstraints.gdoc</li>
 <li>../en/guide/hibernate/mappingWithHibernateAnnotations.gdoc</li>
 <li>../en/guide/hibernate/usingHibernateXMLMappingFiles.gdoc</li>
 <li>../en/guide/links.yml</li>
 <li>../en/guide/rewriteRules.txt</li>
+<li>../en/guide/security/xssPrevention.gdoc</li>
 <li>../en/guide/services/declarativeTransactions/transactionsRollbackAndTheSession.gdoc</li>
 <li>../en/guide/spring/springdslAdditional.gdoc</li>
 <li>../en/guide/spring/theBeanBuilderDSLExplained.gdoc</li>
-<li>../en/guide/spring/theUnderpinningsOfGrails.gdoc</li>
 <li>../en/guide/testing/integrationTesting.gdoc</li>
 <li>../en/guide/testing/unitTesting/unitTestingFilters.gdoc</li>
 <li>../en/guide/theWebLayer/urlmappings/namespacedControllers.gdoc</li>
@@ -11192,6 +11129,7 @@ es.subtitle=...</pre></div><p class="paragraph"/>For each language translation, 
 <li>../en/guide/validation/validationAndInternationalization.gdoc</li>
 <li>../en/guide/validation/validationNonDomainAndCommandObjectClasses.gdoc</li>
 <li>../en/guide/validation/validationOnTheClient.gdoc</li>
+<li>../en/guide/webServices/SOAP.gdoc</li>
 </ul><p class="paragraph"/><h2>File not found (new file added) or empty file</h2>
 <ul class="star">
 <li>../en/guide/gettingStarted.gdoc</li>
@@ -11729,6 +11667,9 @@ es.subtitle=...</pre></div><p class="paragraph"/>For each language translation, 
                         </div>
                         
                         <div class="menu-item"><a href="../ref/Domain%20Classes/lock.html">lock</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="../ref/Domain%20Classes/mapWith.html">mapWith</a>
                         </div>
                         
                         <div class="menu-item"><a href="../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

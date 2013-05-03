@@ -116,13 +116,16 @@ function addJsClass(el) {
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
-                <h1>mappedBy</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>The <code>mappedBy</code> static property adds the ability to change how a bidirectional association is linked<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>class Airport &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mappedBy = &#91;outgoingFlights: 'departureAirport',
+                <h1>mappedBy</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>The <code>mappedBy</code> static property allows you to control whether an association is mapped as unidirectional or bidirectional, and which properties form the reverse direction in the case of bidirectional associations.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/>In this example the <code>Airport</code> class defines two bidirectional one-to-many associations. Without defining <code>mappedBy</code> this is impossible as GORM cannot differentiate which of the two properties on the other end of the association (either <code>departureAirport</code> or <code>destinationAirport</code> in the <code>Route</code> class) each one-to-many should be associated with.<p class="paragraph"/>The solution is to define <code>mappedBy</code> which tells the <code>Airport</code> class how each association relates to the other side.<p class="paragraph"/><div class="code"><pre>class Airport &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mappedBy = &#91;outgoingFlights: 'departureAirport',
                        incomingFlights: 'destinationAirport'&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;outgoingFlights: Route,
                       incomingFlights: Route&#93;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Route &#123;
     Airport departureAirport
     Airport destinationAirport
-&#125;</pre></div><p class="paragraph"/>In this example the <code>Airport</code> class defines two bidirectional one-to-many associations. Without defining <code>mappedBy</code> this is impossible as GORM cannot differentiate which of the two properties on the other end of the association (either <code>departureAirport</code> or <code>destinationAirport</code> in the <code>Route</code> class) each one-to-many should be associated with.<p class="paragraph"/>The solution is to define <code>mappedBy</code> which tells the <code>Airport</code> class how each association relates to the other side.
+&#125;</pre></div><p class="paragraph"/>Separate example for many-to-one relationships:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+    <span class="java&#45;object">String</span> name
+    Person parent<p class="paragraph"/>    <span class="java&#45;keyword">static</span> belongsTo = &#91; supervisor: Person &#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mappedBy = &#91; supervisor: <span class="java&#45;quote">"none"</span>, parent: <span class="java&#45;quote">"none"</span> &#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123; supervisor nullable: <span class="java&#45;keyword">true</span> &#125;
+&#125;</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>Grails needs to know whether associations are unidirectional or bidirectional, and in the case of the latter, which properties are involved from both sides. Normally it can infer this information, but when there are multiple properties with the same type its guess can sometimes be wrong. The <code>mappedBy</code> property is a simple map of property name pairs, where the key is the name of an association property in the current domain class and the value is the name of an association property in the domain class on the other side of the association (which may be itself). The examples above should clarify this.<p class="paragraph"/>You can also specify a value of "none" in the map, which indicates that the association is unidirectional. However, this won't work if you actually have a domain property called "none" in the target class!
 
             </div>
         </td>
@@ -665,6 +668,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

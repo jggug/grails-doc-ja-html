@@ -313,9 +313,9 @@ class Person &#123;
 <h4>キャッシング設定</h4><p class="paragraph"/><div class="hidden-block"><a href="http://www.hibernate.org/" target="blank">Hibernate</a> features a second-level cache with a customizable cache provider. This needs to be configured in the <code>grails-app/conf/DataSource.groovy</code> file as follows:</div>
 <a href="http://www.hibernate.org/" target="blank">Hibernate</a> はカスタマイズ可能なキャッシュプロバイダによる二次キャッシュを持っています。
 利用するには<code>grails-app/conf/DataSource.groovy</code>で次のような設定が必要です:<p class="paragraph"/><div class="code"><pre>hibernate &#123;
-    cache.use_second_level_cache = <span class="java&#45;keyword">true</span>
-    cache.use_query_cache = <span class="java&#45;keyword">true</span>
-    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory'
+    cache.use_second_level_cache=<span class="java&#45;keyword">true</span>
+    cache.use_query_cache=<span class="java&#45;keyword">true</span>
+    cache.provider_class='org.hibernate.cache.EhCacheProvider'
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can customize any of these settings, for example to use a distributed caching mechanism.</div>
 分散キャッシュ機構などを使うように設定を変更することもできます。<p class="paragraph"/><blockquote class="note">
 <div class="hidden-block">For further reading on caching and in particular Hibernate's second-level cache, refer to the <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/performance.html#performance-cache" target="blank">Hibernate documentation</a> on the subject.</div>
@@ -1203,6 +1203,9 @@ By default Grails uses Hibernate's <code>ImprovedNamingStrategy</code> to conver
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

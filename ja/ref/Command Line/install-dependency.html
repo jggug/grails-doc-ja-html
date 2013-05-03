@@ -116,7 +116,7 @@ function addJsClass(el) {
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
-                <h1>install-dependency</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Installs a JAR dependency, making it available to Grails guide:ivy mechanism.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>grails install&#45;dependency mysql:mysql&#45;connector&#45;java:5.1.16
+                <h1>install-dependency</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Installs a JAR dependency, making it available to Grails <a href="../../guide/single.html#dependencyResolution" class="guide">dependency resolution</a> mechanism.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>grails install&#45;dependency mysql:mysql&#45;connector&#45;java:5.1.16
 grails install&#45;dependency mysql:mysql&#45;connector&#45;java:5.1.16 &#45;&#45;dir=lib
 grails install&#45;dependency &#45;&#45;group=mysql &#45;&#45;name=mysql&#45;connector&#45;java &#45;&#45;version=5.1.16</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div>
 <div class="code"><pre>grails install&#45;dependency &#91;dependency&#93;</pre></div><p class="paragraph"/>引数: <div class="hidden-block">Arguments:</div>
@@ -126,7 +126,7 @@ grails install&#45;dependency &#45;&#45;group=mysql &#45;&#45;name=mysql&#45;con
 <li><code>version</code> - The version of the dependency</li>
 <li><code>repository</code> - The repository to resolve from</li>
 <li><code>dir</code> - The target directory to resolve JAR files to</li>
-</ul><p class="paragraph"/>The <code>install-dependency</code> command allows the installation of a JAR dependency into the Ivy cache so that it can be resolved locally (without needing to configure a repository explicitly).<p class="paragraph"/>In its most simple form you can pass a single argument that defines the dependency in the form "group:name:version":<p class="paragraph"/><div class="code"><pre>grails install&#45;dependency mysql:mysql&#45;connector&#45;java:5.1.16</pre></div><p class="paragraph"/>Grails has some built in common public Maven repositories that will be used to resolve the dependency. If the dependency is not found you can specify your own repository using the <code>repository</code> argument:<p class="paragraph"/><div class="code"><pre>grails install&#45;dependency mysql:mysql&#45;connector&#45;java:5.1.16 &#92;&#10;         &#45;&#45;repository=http://download.java.net/maven/2</pre></div><p class="paragraph"/>By default the JARs will be resolved to your local Ivy cache (typically <code>&#36;USER_HOME/.ivy2/cache</code>), if you wish the JAR files to be placed in an alternative directory you can use the <code>dir</code> argument:<p class="paragraph"/><div class="code"><pre>grails install&#45;dependency mysql:mysql&#45;connector&#45;java:5.1.16 &#45;&#45;dir=lib</pre></div>
+</ul><p class="paragraph"/>The <code>install-dependency</code> command allows the installation of a JAR dependency into the dependency cache so that it can be resolved locally (without needing to configure a repository explicitly).<p class="paragraph"/>In its most simple form you can pass a single argument that defines the dependency in the form "group:name:version":<p class="paragraph"/><div class="code"><pre>grails install&#45;dependency mysql:mysql&#45;connector&#45;java:5.1.16</pre></div><p class="paragraph"/>Grails has some built in common public Maven repositories that will be used to resolve the dependency. If the dependency is not found you can specify your own repository using the <code>repository</code> argument:<p class="paragraph"/><div class="code"><pre>grails install&#45;dependency mysql:mysql&#45;connector&#45;java:5.1.16 &#92;&#10;         &#45;&#45;repository=http://download.java.net/maven/2</pre></div><p class="paragraph"/>By default the JARs will be resolved to your local Ivy cache (typically <code>&#36;USER_HOME/.ivy2/cache</code>) when using Ivy and into your local Maven repoistory (typically <code>&#36;USER_HOME/.m2/repository</code>) when using Aether, if you wish the JAR files to be placed in an alternative directory you can use the <code>dir</code> argument:<p class="paragraph"/><div class="code"><pre>grails install&#45;dependency mysql:mysql&#45;connector&#45;java:5.1.16 &#45;&#45;dir=lib</pre></div>
 
             </div>
         </td>
@@ -669,6 +669,9 @@ grails install&#45;dependency &#45;&#45;group=mysql &#45;&#45;name=mysql&#45;con
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>13.3 &#35469;&#35388; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>13.4 &#35469;&#35388; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -125,7 +125,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>13.3 &#35469;&#35388; - Reference Documentation</h1>
+                    <h1>13.4 &#35469;&#35388; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -140,7 +140,7 @@ function addJsClass() {
 
                 
 <a name="11.3 Authentication"><!-- Legacy link --></a>
-<h2 id="authentication">13.3 認証</h2>
+<h2 id="authentication">13.4 認証</h2>
 <div class="hidden-block">Grails has no default mechanism for authentication as it is possible to implement authentication in many different ways. It is however, easy to implement a simple authentication mechanism using either <a href="../guide/single.html#interceptors" class="guide">interceptors</a> or <a href="../guide/single.html#filters" class="guide">filters</a>. This is sufficient for simple use cases but it's highly preferable to use an established security framework, for example by using the <a href="../guide/single.html#springSecurity" class="guide">Spring Security</a> or the <a href="../guide/single.html#shiro" class="guide">Shiro</a> plugin.</div>
 認証は様々な方法で実装することができるため、Grailsではデフォルトの認証メカニズムを提供していません。<a href="../guide/single.html#interceptors" class="guide">インターセプター</a>や<a href="../guide/single.html#filters" class="guide">フィルタ</a>を使用することで、単純な認証であれば簡単に実装することができます。これらの機能は多くのユースケースにおいて十分ですが、実績のあるセキュリティフレームワークを使用することがより望ましいでしょう。セキュリティフレームワークには、例えば<a href="../guide/single.html#springSecurity" class="guide">Spring Security</a>や<a href="../guide/single.html#shiro" class="guide">Shiro</a>プラグインなどがあります。<p class="paragraph"/><div class="hidden-block">Filters let you apply authentication across all controllers or across a URI space. For example you can create a new set of filters in a class called <code>grails-app/conf/SecurityFilters.groovy</code> by running:</div>
 フィルタを使うと、すべてのコントローラやURI空間に対して認証を適用できます。例えば、以下のコマンドを実行することで、<code>grails-app/conf/SecurityFilters.groovy</code>というクラスに新しいフィルタセットが生成されます:<p class="paragraph"/><div class="code"><pre>grails create&#45;filters security</pre></div><p class="paragraph"/><div class="hidden-block">and implement your interception logic there:</div>
@@ -715,6 +715,9 @@ function addJsClass() {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

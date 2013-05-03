@@ -147,8 +147,10 @@ function addJsClass() {
 <h4>プラグインの作成</h4><p class="paragraph"/><div class="hidden-block">
 Creating a Grails plugin is a simple matter of running the command:
 </div><p class="paragraph"/>Grailsプラグインの新規作成は、以下のコマンドを実行するだけであり、とても簡単です:<p class="paragraph"/><div class="code"><pre>grails create&#45;plugin &#91;PLUGIN NAME&#93;</pre></div><p class="paragraph"/><div class="hidden-block">
-This will create a plugin project for the name you specify. For example running <code>grails create-plugin example</code> would create a new plugin project called <code>example</code>.<p class="paragraph"/>The structure of a Grails plugin is very nearly the same as a Grails application project's except that in the root of the plugin directory you will find a plugin Groovy file called the "plugin descriptor".
-</div><p class="paragraph"/>こうすることで指定した名前のプラグインプロジェクトが作成されます。例えば、<code>grails create-plugin example</code>を実行すると、<code>example</code>という新規プラグインプロジェクトが作成されます。<p class="paragraph"/>Grailsプラグインの構造は、プラグインのルートディレクトリに「プラグインディスクリプタ」と呼ばれるGroovyファイルがあることを除き、Grailsアプリケーションプロジェクトの構造とほとんど同じです。<p class="paragraph"/><blockquote class="note">
+This will create a plugin project for the name you specify. For example running <code>grails create-plugin example</code> would create a new plugin project called <code>example</code>.</div>
+こうすることで指定した名前のプラグインプロジェクトが作成されます。例えば、<code>grails create-plugin example</code>を実行すると、<code>example</code>という新規プラグインプロジェクトが作成されます。<p class="paragraph"/>Make sure the plugin name does not contain more than one capital in a row, or it won't work. Camel case is fine, though.<p class="paragraph"/><div class="hidden-block">The structure of a Grails plugin is very nearly the same as a Grails application project's except that in the root of the plugin directory you will find a plugin Groovy file called the "plugin descriptor".
+</div>
+Grailsプラグインの構造は、プラグインのルートディレクトリに「プラグインディスクリプタ」と呼ばれるGroovyファイルがあることを除き、Grailsアプリケーションプロジェクトの構造とほとんど同じです。<p class="paragraph"/><blockquote class="note">
 <div class="hidden-block">
 The only plugins included in a new plugin project are Tomcat and Release. Hibernate is not included by default.
 </div>
@@ -242,7 +244,12 @@ Although the <a href="../ref/Command Line/create-plugin.html" class="commandLine
 <li><code>&#42;&#42;/.svn/&#42;&#42;</code> と <code>&#42;&#42;/CVS/&#42;&#42;</code>配下のSCM管理ファイル</li>
 </ul><p class="paragraph"/><div class="hidden-block">
 If you need artefacts within <code>WEB-INF</code> it is recommended you use the <code>_Install.groovy</code> script (covered later), which is executed when a plugin is installed, to provide such artefacts. In addition, although <code>UrlMappings.groovy</code> is excluded you are allowed to include a <code>UrlMappings</code> definition with a different name, such as <code>MyPluginUrlMappings.groovy</code>.
-</div><p class="paragraph"/>アーテファクトを<code>WEB-INF</code>に含める必要がある場合には、プラグインインストール時に実行されるスクリプトである<code>_Install.groovy</code>スクリプト(後述)を使用することがお勧めです。なお、除外対象アーティファクトである<code>UrlMappings.groovy</code>は除外されますが、<code>UrlMappings</code>情報は「<code>MyPluginUrlMappings.groovy</code>」などの異なる名前にしておけば、含めることができます。<p class="paragraph"/><div class="hidden-block">
+</div><p class="paragraph"/>アーテファクトを<code>WEB-INF</code>に含める必要がある場合には、プラグインインストール時に実行されるスクリプトである<code>_Install.groovy</code>スクリプト(後述)を使用することがお勧めです。なお、除外対象アーティファクトである<code>UrlMappings.groovy</code>は除外されますが、<code>UrlMappings</code>情報は「<code>MyPluginUrlMappings.groovy</code>」などの異なる名前にしておけば、含めることができます。<p class="paragraph"/><h4>Customizing the plugin contents</h4><p class="paragraph"/>You can specify what to exclude in addition to the default excludes by adding elements to the <code>pluginExcludes</code> descriptor property (described below). In addition, there are two ways to configure the contents of the plugin ZIP or JAR file.<p class="paragraph"/>One is to create an event handler for the <code>CreatePluginArchiveStart</code> event, which is fired after all of the plugin files have been copied to the staging directory. By adding an event handler you can add, modify, or delete files as needed. Add the handler to <code>_Events.groovy</code> in the <code>scripts</code> directory, for example<p class="paragraph"/><div class="code"><pre>eventCreatePluginArchiveStart = &#123; stagingDir &#45;&#62;
+   // update staging directory contents here
+&#125;</pre></div><p class="paragraph"/>You can customize the location of the staging directory with the <code>grails.project.plugin.staging.dir</code> attribute in <code>BuildConfig.groovy</code> or as  as system property.<p class="paragraph"/>Note that there is also a <code>CreatePluginArchiveEnd</code> event which is fired after the ZIP or JAR is packaged.<p class="paragraph"/>You can also do this work in a Closure in <code>BuildConfig.groovy</code> with the property <code>grails.plugin.resources</code> which is analogous to the <code>grails.war.resources</code> property, e.g.<p class="paragraph"/><div class="code"><pre>grails.plugin.resources = &#123; stagingDir &#45;&#62;
+   // update staging directory contents here
+&#125;</pre></div><p class="paragraph"/>
+<div class="hidden-block">
 <h4>Specifying Plugin Locations</h4>
 </div><p class="paragraph"/><h4>プラグイン位置の指定</h4><p class="paragraph"/><div class="hidden-block">
 An application can load plugins from anywhere on the file system, even if they have not been installed. Specify the location of the (unpacked) plugin in the application's <code>grails-app/conf/BuildConfig.groovy</code> file:
@@ -265,7 +272,9 @@ This is particularly useful in two cases:
 <ul class="star">
 <li>開発中のプラグインを、パッケージ化とインストールをスキップして、実アプリケーションにすぐに組み込んでテストしたいとき。</li>
 <li>アプリケーションが複数のプラグイン群に分割されており、それらすべてが同じ「スーパープロジェクト」ディレクトリ配下にある場合。</li>
-</ul><p class="paragraph"/><div class="hidden-block">
+</ul><p class="paragraph"/><blockquote class="note">
+The Artifactory repository for Grails now includes all the dependencies for published plugins. So, if you are using inline plugins that have dependencies, it is necessary to do a secondary resolve because these dependencies might not be in the repository. Therefore, you should set <code>legacyResolve</code> to <code>true</code> in your <code>BuildConfig.groovy</code> if you are using inline plugins with dependencies.
+</blockquote><p class="paragraph"/><div class="hidden-block">
 <h4>Global plugins</h4>
 </div><p class="paragraph"/><h4>グローバルプラグイン</h4><p class="paragraph"/><div class="hidden-block">
 Plugins can also be installed globally for all applications for a particular version of Grails using the <code>&#45;global</code> flag, for example:
@@ -813,6 +822,9 @@ The default location is &#36;USER_HOME/.grails/&#60;grailsVersion&#62;/global-pl
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

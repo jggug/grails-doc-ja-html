@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>5.2 &#12501;&#12457;&#12540;&#12463;&#12373;&#12428;&#12383;Tomcat&#23455;&#34892; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>5.2 &#12501;&#12457;&#12540;&#12463;&#23455;&#34892; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -125,7 +125,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>5.2 &#12501;&#12457;&#12540;&#12463;&#12373;&#12428;&#12383;Tomcat&#23455;&#34892; - Reference Documentation</h1>
+                    <h1>5.2 &#12501;&#12457;&#12540;&#12463;&#23455;&#34892; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -139,9 +139,20 @@ function addJsClass() {
                 
 
                 
-
-<h2 id="forkedMode">5.2 フォークされたTomcat実行</h2>
-<h4>Forked Tomcat Execution</h4><p class="paragraph"/>Grails 2.2 and above support forked JVM execution of the Tomcat container in development mode. This has several benefits including:
+<a name="5.2 Forked Execution"><!-- Legacy link --></a>
+<h2 id="forkedMode">5.2 フォーク実行</h2>
+<h4>Forked Execution</h4><p class="paragraph"/>Since Grails 2.3, the <code>run-app</code>, <code>run-war</code>, <code>test-app</code> and <code>console</code> commands are now executed in a forked JVM in order to isolate the build classpath from the runtime classpath.<p class="paragraph"/>Forked execution is configured via the <code>grails-app/conf/BuildConfig.groovy</code> file. The following is the default configuration:<p class="paragraph"/><div class="code"><pre>forkConfig = &#91;maxMemory: 1024, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
+grails.project.fork = &#91;
+   test: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
+   run: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;app JVM
+   war: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;war JVM
+   console: forkConfig // configure settings <span class="java&#45;keyword">for</span> the Swing console JVM
+&#93;</pre></div><p class="paragraph"/>The memory requirements of the forked JVM can be tweaked as per the requirements of the application.<p class="paragraph"/><h4>Forked Test Execution</h4><p class="paragraph"/>When running the <a href="../ref/Command Line/test-app.html" class="commandLine">test-app</a> command, a separate JVM is launched to execute this tests. This will have a notable impact on the speed of execution of the tests when running the command directly:<p class="paragraph"/><div class="code"><pre>grails test&#45;app</pre></div><p class="paragraph"/>To mitigate this, Grails 2.3 and above include a feature that launches a background JVM on standby to run tests when using interactive mode. In other words, running <code>test-app</code> from interactive mode will result in faster test execution times:<p class="paragraph"/><div class="code"><pre>$ grails
+$ grails&#62; test&#45;app</pre></div><p class="paragraph"/>It is recommended that forked execution is used for tests, however it does require modern hardware due to the use of multiple JVMs. You can therefore disable forked execution by setting the <code>grails.project.fork.test</code> setting to <code>false</code>:<p class="paragraph"/><div class="code"><pre>forkConfig = &#91;maxMemory: 1024, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
+grails.project.fork = &#91;
+   test: <span class="java&#45;keyword">false</span>,
+   &#8230;
+&#93;</pre></div><p class="paragraph"/><h4>Forked Tomcat Execution</h4><p class="paragraph"/>Grails 2.2 and above support forked JVM execution of the Tomcat container in development mode. This has several benefits including:
 <ul class="star">
 <li>Reduced memory consumption, since the Grails build system can exit</li>
 <li>Isolation of the build classpath from the runtime classpath</li>
@@ -689,6 +700,9 @@ function addJsClass() {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

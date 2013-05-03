@@ -116,8 +116,14 @@ function addJsClass(el) {
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
-                <h1>upgrade</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>The <code>upgrade</code> command upgrades a Grails application to the currently installed version of Grails if possible.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>grails upgrade</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div>
-<div class="code"><pre>grails upgrade</pre></div><p class="paragraph"/>発生するイベント: <div class="hidden-block">Fired Events:</div>
+                <h1>upgrade</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>The <code>upgrade</code> command upgrades a Grails application to the currently installed version of Grails if possible.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>grails upgrade
+grails upgrade &#45;&#45;update&#45;data&#45;source
+grails upgrade &#45;&#45;force</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div>
+<div class="code"><pre>grails upgrade</pre></div><p class="paragraph"/>引数: <div class="hidden-block">Arguments:</div>
+<ul class="star">
+<li><code>update-data-source</code> - upgrades DataSource.groovy to use H2 instead of HSQLDB.</li>
+<li><code>force</code> - suppress warning messages</li>
+</ul><p class="paragraph"/>発生するイベント: <div class="hidden-block">Fired Events:</div>
 <ul class="star">
 <li><code>StatusUpdate</code> - During the upgrade process</li>
 <li><code>StatusFinal</code> - After the upgrade completes</li>
@@ -663,6 +669,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

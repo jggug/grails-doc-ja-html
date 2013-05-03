@@ -118,9 +118,16 @@ function addJsClass(el) {
 
                 <h1>layoutTitle</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Used in layouts to render the contents of the title tag of the decorated page. Equivalent to the SiteMesh <code>&#60;decorator:title /&#62;</code> tag.<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/>Example decorated page:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;html&#62;</span>
    <span class="xml&#45;tag">&#60;head&#62;</span>
-        <span class="xml&#45;tag">&#60;title&#62;</span><span class="xml&#45;tag">&#60;g:layoutTitle default=<span class="xml&#45;quote">"Some Title"</span> /&#62;</span><span class="xml&#45;tag">&#60;/title&#62;</span>
-        <span class="xml&#45;tag">&#60;script src=<span class="xml&#45;quote">"global.js"</span> /&#62;</span>
-        <span class="xml&#45;tag">&#60;g:layoutHead /&#62;</span>
+      <span class="xml&#45;tag">&#60;meta name=<span class="xml&#45;quote">"layout"</span> content=<span class="xml&#45;quote">"myLayout"</span> /&#62;</span>
+      <span class="xml&#45;tag">&#60;title&#62;</span>Hello World!<span class="xml&#45;tag">&#60;/title&#62;</span>
+      <span class="xml&#45;tag">&#60;script src=<span class="xml&#45;quote">"myscript.js"</span> /&#62;</span>
+   <span class="xml&#45;tag">&#60;/head&#62;</span>
+   <span class="xml&#45;tag">&#60;body&#62;</span>Page to be decorated<span class="xml&#45;tag">&#60;/body&#62;</span>
+<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/>Example decorator layout:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;html&#62;</span>
+   <span class="xml&#45;tag">&#60;head&#62;</span>
+		<span class="xml&#45;tag">&#60;title&#62;</span><span class="xml&#45;tag">&#60;g:layoutTitle default=<span class="xml&#45;quote">"Some Title"</span> /&#62;</span><span class="xml&#45;tag">&#60;/title&#62;</span>
+      <span class="xml&#45;tag">&#60;script src=<span class="xml&#45;quote">"global.js"</span> /&#62;</span>
+      <span class="xml&#45;tag">&#60;g:layoutHead /&#62;</span>
    <span class="xml&#45;tag">&#60;/head&#62;</span>
    <span class="xml&#45;tag">&#60;body&#62;</span><span class="xml&#45;tag">&#60;g:layoutBody /&#62;</span><span class="xml&#45;tag">&#60;/body&#62;</span>
 <span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/>Results in:
@@ -675,6 +682,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

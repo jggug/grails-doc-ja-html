@@ -143,7 +143,7 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0px"><a href="#interactiveMode"><strong>5.1</strong><span>&#12452;&#12531;&#12479;&#12521;&#12463;&#12486;&#12451;&#12502;&#12514;&#12540;&#12489;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#forkedMode"><strong>5.2</strong><span>&#12501;&#12457;&#12540;&#12463;&#12373;&#12428;&#12383;Tomcat&#23455;&#34892;</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#forkedMode"><strong>5.2</strong><span>&#12501;&#12457;&#12540;&#12463;&#23455;&#34892;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0px"><a href="#creatingGantScripts"><strong>5.3</strong><span>Gant&#12473;&#12463;&#12522;&#12503;&#12488;&#12398;&#20316;&#25104;</span></a>
@@ -214,9 +214,20 @@ grails run&#45;app</pre></div><p class="paragraph"/><h4>non-interactive mode</h4
 Interactive mode is the a feature of the Grails command line which keeps the JVM running and allows for quicker execution of commands. To activate interactive mode type 'grails' at the command line and then use TAB completion to get a list of commands:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-output.png"></img><p class="paragraph"/>If you need to open a file whilst within interactive mode you can use the <code>open</code> command which will TAB complete file paths:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-open-cmd.png"></img><p class="paragraph"/>Even better, the <code>open</code> command understands the logical aliases 'test-report' and 'dep-report', which will open the most recent test and dependency reports respectively. In other words, to open the test report in a browser simply execute <code>open test-report</code>. You can even open multiple files at once: <code>open test-report test/unit/MyTests.groovy</code> will open the HTML test report in your browser and the <code>MyTests.groovy</code> source file in your text editor.<p class="paragraph"/>TAB completion also works for class names after the <code>create-*</code> commands:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-complete-class.png"></img><p class="paragraph"/>If you need to run an external process whilst interactive mode is running you can do so by starting the command with a !:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-run-external.png"></img><p class="paragraph"/>Note that with &#33; (bang) commands, you get file path auto completion - ideal for external commands that operate on the file system such as 'ls', 'cat', 'git', etc.<p class="paragraph"/>The <code>stop-app</code> command will stop an application that has been run with the <code>run-app</code> command.<p class="paragraph"/>To exit interactive mode enter the <code>exit</code> command.  Note that if the Grails application has been run with <code>run-app</code> normally it will terminate when the interactive mode console exits because the JVM will be terminated. An exception to this would be if the application were running in forked mode which means the application is running in a different JVM.  In that case the application will be left running afer the interactive mode console terminates.  If you want to exit interactive mode and stop an application that is running in forked mode, use the <code>quit</code> command.  The <code>quit</code> command will stop the running application and then close interactive mode.
 
 
-
-<h2 id="forkedMode">5.2 フォークされたTomcat実行</h2>
-<h4>Forked Tomcat Execution</h4><p class="paragraph"/>Grails 2.2 and above support forked JVM execution of the Tomcat container in development mode. This has several benefits including:
+<a name="5.2 Forked Execution"><!-- Legacy link --></a>
+<h2 id="forkedMode">5.2 フォーク実行</h2>
+<h4>Forked Execution</h4><p class="paragraph"/>Since Grails 2.3, the <code>run-app</code>, <code>run-war</code>, <code>test-app</code> and <code>console</code> commands are now executed in a forked JVM in order to isolate the build classpath from the runtime classpath.<p class="paragraph"/>Forked execution is configured via the <code>grails-app/conf/BuildConfig.groovy</code> file. The following is the default configuration:<p class="paragraph"/><div class="code"><pre>forkConfig = &#91;maxMemory: 1024, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
+grails.project.fork = &#91;
+   test: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
+   run: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;app JVM
+   war: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;war JVM
+   console: forkConfig // configure settings <span class="java&#45;keyword">for</span> the Swing console JVM
+&#93;</pre></div><p class="paragraph"/>The memory requirements of the forked JVM can be tweaked as per the requirements of the application.<p class="paragraph"/><h4>Forked Test Execution</h4><p class="paragraph"/>When running the <a href="../ref/Command Line/test-app.html" class="commandLine">test-app</a> command, a separate JVM is launched to execute this tests. This will have a notable impact on the speed of execution of the tests when running the command directly:<p class="paragraph"/><div class="code"><pre>grails test&#45;app</pre></div><p class="paragraph"/>To mitigate this, Grails 2.3 and above include a feature that launches a background JVM on standby to run tests when using interactive mode. In other words, running <code>test-app</code> from interactive mode will result in faster test execution times:<p class="paragraph"/><div class="code"><pre>$ grails
+$ grails&#62; test&#45;app</pre></div><p class="paragraph"/>It is recommended that forked execution is used for tests, however it does require modern hardware due to the use of multiple JVMs. You can therefore disable forked execution by setting the <code>grails.project.fork.test</code> setting to <code>false</code>:<p class="paragraph"/><div class="code"><pre>forkConfig = &#91;maxMemory: 1024, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
+grails.project.fork = &#91;
+   test: <span class="java&#45;keyword">false</span>,
+   &#8230;
+&#93;</pre></div><p class="paragraph"/><h4>Forked Tomcat Execution</h4><p class="paragraph"/>Grails 2.2 and above support forked JVM execution of the Tomcat container in development mode. This has several benefits including:
 <ul class="star">
 <li>Reduced memory consumption, since the Grails build system can exit</li>
 <li>Isolation of the build classpath from the runtime classpath</li>
@@ -1131,6 +1142,9 @@ The Grails Wrapper allows a Grails application to built without having to instal
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

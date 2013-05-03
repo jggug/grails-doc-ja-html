@@ -176,9 +176,6 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0px"><a href="#typeConverters"><strong>7.12</strong><span>&#12471;&#12531;&#12503;&#12523;&#12479;&#12452;&#12503;&#12467;&#12531;&#12496;&#12540;&#12479;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#asynchronousRequestProcessing"><strong>7.13</strong><span>&#38750;&#21516;&#26399;&#12522;&#12463;&#12456;&#12473;&#12488;&#20966;&#29702;(OLD)</span></a>
-                    </div>
-                    
                 </div>
                 
 
@@ -341,7 +338,7 @@ Use scoped controllers wisely. For instance, we don't recommend having any prope
 <li><code>attributes</code></li>
 <li><code>application</code></li>
 </ul><p class="paragraph"/><div class="hidden-block">Currently, no error will be reported if you do use them, but this will hopefully change in a future version of Grails.</div>
-現状では使用したとしてもエラーが出ることはありませんが、将来的には変わるかもしれません。<p class="paragraph"/><h4>ビューの選択<div class="hidden-block">Selecting the View </div></h4><p class="paragraph"/><div class="hidden-block">In both of the previous two examples there was no code that specified which <a href="../guide/single.html#gsp" class="guide">view</a> to render. So how does Grails know which one to pick? The answer lies in the conventions. Grails will look for a view at the location <code>grails-app/views/book/show.gsp</code> for this <code>list</code> action:</div>
+現状では使用したとしてもエラーが出ることはありませんが、将来的には変わるかもしれません。<p class="paragraph"/><h4>ビューの選択<div class="hidden-block">Selecting the View </div></h4><p class="paragraph"/><div class="hidden-block">In both of the previous two examples there was no code that specified which <a href="../guide/single.html#gsp" class="guide">view</a> to render. So how does Grails know which one to pick? The answer lies in the conventions. Grails will look for a view at the location <code>grails-app/views/book/show.gsp</code> for this <code>show</code> action:</div>
 これまでの例ではビューがどのように設定されるのかを説明しませんでたが、Grailsではどのようにビューを選択しているのでしょうか？答えは慣習にあります。何も指定しなければ、以下のアクションでは、Grailsが自動的に、<code>grails-app/views/book/show.gsp</code>をビューとして使用します。<p class="paragraph"/><div class="code"><pre>class BookController &#123;
     def show() &#123;
          &#91;book: Book.get(params.id)&#93;
@@ -491,8 +488,7 @@ redirect(url: <span class="java&#45;quote">"http://grails.org"</span>)</pre></di
 <a name="6.1.6 Data Binding"><!-- Legacy link --></a>
 <h2 id="dataBinding">7.1.6 データバインディング</h2>
 <div class="hidden-block">Data binding is the act of "binding" incoming request parameters onto the properties of an object or an entire graph of objects. Data binding should deal with all necessary type conversion since request parameters, which are typically delivered by a form submission, are always strings whilst the properties of a Groovy or Java object may well not be.</div>
-データバインディングとは、受信したリクエストパラメータを、オブジェクトのプロパティまたオブジェクト構造へ結合させる機能です。データバインディングでは、フォームから送信された文字列のリクエストパラメータを、必要な型への変換を行います。<p class="paragraph"/><div class="hidden-block">Grails uses <a href="http://www.springframework.org" target="blank">Spring</a>'s underlying data binding capability to perform data binding.</div>
-Grailsでは、<a href="http://www.springframework.org" target="blank">Spring</a>のデータバインディングを基礎にデータバインディングを行います。<p class="paragraph"/><h4>モデルにリクエストデータをバインドする <div class="hidden-block">Binding Request Data to the Model </div></h4><p class="paragraph"/><div class="hidden-block">There are two ways to bind request parameters onto the properties of a domain class. The first involves using a domain classes' Map constructor:</div>
+データバインディングとは、受信したリクエストパラメータを、オブジェクトのプロパティまたオブジェクト構造へ結合させる機能です。データバインディングでは、フォームから送信された文字列のリクエストパラメータを、必要な型への変換を行います。<p class="paragraph"/><h4>モデルにリクエストデータをバインドする <div class="hidden-block">Binding Request Data to the Model </div></h4><p class="paragraph"/><div class="hidden-block">There are two ways to bind request parameters onto the properties of a domain class. The first involves using a domain classes' Map constructor:</div>
 リクエストパラメータをドメインクラスのプロパティへバインドする２通りの方法があります。１つめはドメインクラスのMapを指定するコンストラクタを使用します。<p class="paragraph"/><div class="code"><pre>def save() &#123;
     def b = <span class="java&#45;keyword">new</span> Book(params)
     b.save()
@@ -503,7 +499,8 @@ Grailsでは、<a href="http://www.springframework.org" target="blank">Spring</a
     b.properties = params
     b.save()
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This has the same effect as using the implicit constructor.</div>
-上記の例で先ほどのコンストラクタと同じ結果となります。<p class="paragraph"/><blockquote class="warning">
+上記の例で先ほどのコンストラクタと同じ結果となります。<p class="paragraph"/>When binding an empty String (a String with no characters in it, not even spaces) to a constrained property which has been configured as nullable, the data binder will convert the empty String to null.  This simplifies the most common case where the intent is to treat an empty form field as having the value null since there isn't a way to actually submit a null as a request parameter.  When this behavior is not desireable the application may assign the value directly.<p class="paragraph"/>The mass property binding mechanism will by default automatically trim all Strings at binding time.  To disable this behavior set the grails.databinding.trimStrings value to false in <code>grails-app/conf/Config.groovy</code>.<p class="paragraph"/><div class="code"><pre>// the <span class="java&#45;keyword">default</span> value is <span class="java&#45;keyword">true</span>
+grails.databinding.trimStrings = <span class="java&#45;keyword">false</span><p class="paragraph"/>// ...</pre></div><p class="paragraph"/><blockquote class="warning">
 These forms of data binding in Grails are very convenient, but also indiscriminate. In other words, they will bind  <em class="italic">all</em>  non-transient, typed instance properties of the target object, including ones that you may not want bound. Just because the form in your UI doesn't submit all the properties, an attacker can still send malign data via a raw HTTP request. Fortunately, Grails also makes it easy to protect against such attacks - see the section titled "Data Binding and Security concerns" for more information.
 </blockquote><p class="paragraph"/><h4>シングルエンデッド・アソシエーション(単一終端関連)のデータバインディング <div class="hidden-block">Data binding and Single-ended Associations </div></h4><p class="paragraph"/><div class="hidden-block">If you have a <code>one-to-one</code> or <code>many-to-one</code> association you can use Grails' data binding capability to update these relationships too. For example if you have an incoming request such as:</div>
 <code>one-to-one</code>または<code>many-to-one</code>などの関連も、Grailsデータバインディングの機能で更新可能です。例として次のようなリクエストを受信したとします:<p class="paragraph"/><div class="code"><pre>/book/save?author.id=20</pre></div><p class="paragraph"/><div class="hidden-block">Grails will automatically detect the <code>.id</code> suffix on the request parameter and look up the <code>Author</code> instance for the given id when doing data binding such as:</div>
@@ -540,7 +537,8 @@ Grailsが間のインスタンスも自動的に生成します。上記のケ�
           from=<span class="xml&#45;quote">"$&#123;Image.list()&#125;"</span>
           value=<span class="xml&#45;quote">"$&#123;book?.images&#91;cover&#93;?.id&#125;"</span>
           noSelection=<span class="xml&#45;quote">"&#91;'null': ''&#93;"</span>/&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">This would bind the selected image into the <code>Map</code> property <code>images</code> under a key of <code>"cover"</code>.</div>
-この例では、Mapプロパティimagesのキー"cover"に対してバインドされます。<p class="paragraph"/><h4>複数ドメインクラスでのデータバインディング <div class="hidden-block">Data binding with Multiple domain classes </div></h4><p class="paragraph"/><div class="hidden-block">It is possible to bind data to multiple domain objects from the <a href="../ref/Controllers/params.html" class="controllers">params</a> object.</div>
+この例では、Mapプロパティimagesのキー"cover"に対してバインドされます。<p class="paragraph"/>When binding to Maps, Arrays and Collections the data binder will automatically grow the size of the collections as necessary.  The default limit to how large the binder will grow a collection is 256.  If the data binder encounters an entry that requires the collection be grown beyond that limit, the entry is ignored.  The limit may be configured by assigning a value to the <code>grails.databinding.autoGrowCollectionLimit</code> property in <code>Config.groovy</code>.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/Config.groovy<p class="paragraph"/>// the <span class="java&#45;keyword">default</span> value is 256
+grails.databinding.autoGrowCollectionLimit = 128<p class="paragraph"/>// ...</pre></div><p class="paragraph"/><h4>複数ドメインクラスでのデータバインディング <div class="hidden-block">Data binding with Multiple domain classes </div></h4><p class="paragraph"/><div class="hidden-block">It is possible to bind data to multiple domain objects from the <a href="../ref/Controllers/params.html" class="controllers">params</a> object.</div>
 <a href="../ref/Controllers/params.html" class="controllers">params</a>オブジェクトから、複数のドメインオブジェクトへのデータのバインドが可能です。<p class="paragraph"/><div class="hidden-block">For example so you have an incoming request to:</div>
 例として以下のようなリクエストがあったとします:<p class="paragraph"/><div class="code"><pre>/book/save?book.title=The%20Stand&#38;author.name=Stephen%20King</pre></div><p class="paragraph"/><div class="hidden-block">You'll notice the difference with the above request is that each parameter has a prefix such as <code>author.</code> or <code>book.</code> which is used to isolate which parameters belong to which type. Grails' <code>params</code> object is like a multi-dimensional hash and you can index into it to isolate only a subset of the parameters to bind.</div>
 上記のリクエストでは、それぞれのパラメータに<code>author.</code>また<code>book.</code>という接頭辞が付いていて、どちらの型(ドメインクラス)に属するかを区別しています。Grailsの<code>params</code>オブジェクトは多次元ハッシュのようになっており、それぞれバインドするためのパラメータサブセットとして区別されて索引されます。<p class="paragraph"/><div class="code"><pre>def b = <span class="java&#45;keyword">new</span> Book(params.book)</pre></div><p class="paragraph"/><div class="hidden-block">Notice how we use the prefix before the first dot of the <code>book.title</code> parameter to isolate only parameters below this level to bind. We could do the same with an <code>Author</code> domain class:</div>
@@ -567,7 +565,58 @@ Grailsが間のインスタンスも自動的に生成します。上記のケ�
             <span class="java&#45;quote">" is not a valid URL!"</span>
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">Although we have not yet covered error codes (for more information see the section on <a href="../guide/single.html#validation" class="guide">Validation</a>), for type conversion errors you would want a message from the <code>grails-app/i18n/messages.properties</code> file to use for the error. You can use a generic error message handler such as:</div>
 この章までは、まだエラーコードの説明していませんが(詳しくは<a href="../guide/single.html#validation" class="guide">Validation</a>を参照)、型変換エラーでは<code>grails-app/i18n/messages.properties</code>を使用してメッセージを返す事もあると思います。次のような一般的なメッセージハンドラーを使用することもできます<p class="paragraph"/><div class="code"><pre>typeMismatch.java.net.URL=The field &#123;0&#125; is not a valid URL</pre></div><p class="paragraph"/><div class="hidden-block">Or a more specific one:</div>
-また、さらに対象を特定する場合は:<p class="paragraph"/><div class="code"><pre>typeMismatch.Book.publisherURL=The publisher URL you specified is not a valid URL</pre></div><p class="paragraph"/><h4>データバインディングとセキュリティ考慮 <div class="hidden-block">Data Binding and Security concerns </div></h4><p class="paragraph"/><div class="hidden-block">When batch updating properties from request parameters you need to be careful not to allow clients to bind malicious data to domain classes and be persisted in the database. You can limit what properties are bound to a given domain class using the subscript operator:</div>
+また、さらに対象を特定する場合は:<p class="paragraph"/><div class="code"><pre>typeMismatch.Book.publisherURL=The publisher URL you specified is not a valid URL</pre></div><p class="paragraph"/><h4>The BindUsing Annotation</h4><p class="paragraph"/>The api:org.grails.databinding.BindUsing annotation may be used to define a custom binding mechanism for a particular field in a class.  Any time data binding is being applied to the field the closure value of the annotation will be invoked with 2 arguments.  The first argument is the object that data binding is being applied to and the second argument is a <code>Map</code> which is the data source for the data binding.  The value returned from the closure will be bound to the property.  The following example would result in the upper case version of the <code>name</code> value in the source being applied to the <code>name</code> field during data binding.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindUsing<p class="paragraph"/>class SomeClass &#123;
+    @BindUsing(&#123;
+        obj, source &#45;&#62; source&#91;'name'&#93;?.toUpperCase()
+    &#125;)
+    <span class="java&#45;object">String</span> name
+&#125;</pre></div><p class="paragraph"/>The api:org.grails.databinding.BindUsing annotation may be used to define a custom binding mechanism for all of the fields on a particular class. When the annotation is applied to a class, the value assigned to the annotation should be a class which implements the api:org.grails.databinding.BindingHelper interface.  An instance of that class will be used any time a value is bound to a property in the class that this annotation has been applied to.<p class="paragraph"/><div class="code"><pre>@BindUsing(SomeClassWhichImplementsBindingHelper)
+class SomeClass &#123;
+    <span class="java&#45;object">String</span> someProperty
+    <span class="java&#45;object">Integer</span> someOtherProperty
+&#125;</pre></div><p class="paragraph"/><h4>Custom Data Converters</h4><p class="paragraph"/>The binder will do a lot of type conversion automatically.  Some applications may want to define their own mechanism for converting values and a simple way to do this is to write a class which implements api:org.grails.databinding.converters.ValueConverter and register an instance of that class as a bean in the Spring application context.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> com.myapp.converters<p class="paragraph"/><span class="java&#45;keyword">import</span> org.grails.databinding.converters.ValueConverter<p class="paragraph"/>/&#42;&#42;
+ &#42; A custom converter which will convert <span class="java&#45;object">String</span> of the
+ &#42; form 'city:state' into an Address object.
+ &#42;/
+class AddressValueConverter <span class="java&#45;keyword">implements</span> ValueConverter &#123;<p class="paragraph"/>    <span class="java&#45;object">boolean</span> canConvert(value) &#123;
+        value <span class="java&#45;keyword">instanceof</span> <span class="java&#45;object">String</span>
+    &#125;<p class="paragraph"/>    def convert(value) &#123;
+        def pieces = value.split(':')
+        <span class="java&#45;keyword">new</span> com.myapp.Address(city: pieces&#91;0&#93;, state: pieces&#91;1&#93;)
+    &#125;<p class="paragraph"/>    <span class="java&#45;object">Class</span>&#60;?&#62; getTargetType() &#123;
+        com.myapp.Address
+    &#125;
+&#125;</pre></div><p class="paragraph"/>An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented ValueConverter will be automatically plugged in to the data binding process.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/spring/resources.groovy<p class="paragraph"/>beans = &#123;<p class="paragraph"/>    addressConverter com.myapp.converters.AddressValueConverter<p class="paragraph"/>    // ...<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Person &#123;
+    <span class="java&#45;object">String</span> firstName
+    Address homeAddress
+&#125;<p class="paragraph"/>class Address &#123;
+    <span class="java&#45;object">String</span> city
+    <span class="java&#45;object">String</span> state
+&#125;<p class="paragraph"/>def person = <span class="java&#45;keyword">new</span> Person()
+person.properties = &#91;firstName: 'Jeff', homeAddress: <span class="java&#45;quote">"O'Fallon:Missouri"</span>&#93;
+assert person.firstName == 'Jeff'
+assert person.homeAddress.city = <span class="java&#45;quote">"O'Fallon"</span>
+assert person.homeAddress.state = 'Missouri'</pre></div><p class="paragraph"/><h4>Date Formats For Data Binding</h4><p class="paragraph"/>A custom date format may be specified to be used when binding a String to a Date value by applying the api:org.grails.databinding.BindingFormat annotation to a Date field.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat<p class="paragraph"/>class Person &#123;
+    @BindingFormat('MMddyyyy')
+    Date birthDate
+&#125;</pre></div><p class="paragraph"/><h4>Custom Formatted Converters</h4><p class="paragraph"/>You may supply your own handler for the api:org.grails.databinding.BindingFormat annotation by writing a class which implements the api:org.grails.databinding.converters.FormattedValueConverter interface and regiserting an instance of that class as a bean in the Spring application context.  Below is an example of a trivial custom String formatter that might convert the case of a String based on the value assigned to the BindingFormat annotation.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> com.myapp.converters<p class="paragraph"/><span class="java&#45;keyword">import</span> org.grails.databinding.converters.FormattedValueConverter<p class="paragraph"/>class FormattedStringValueConverter <span class="java&#45;keyword">implements</span> FormattedValueConverter &#123;
+    def convert(value, <span class="java&#45;object">String</span> format) &#123;
+        <span class="java&#45;keyword">if</span>('UPPERCASE' == format) &#123;
+            value = value.toUpperCase()
+        &#125; <span class="java&#45;keyword">else</span> <span class="java&#45;keyword">if</span>('LOWERCASE' == format) &#123;
+            value = value.toLowerCase()
+        &#125;
+        value
+    &#125;<p class="paragraph"/>    <span class="java&#45;object">Class</span> getTargetType() &#123;
+        // specifies the type to which <span class="java&#45;keyword">this</span> converter may be applied
+        <span class="java&#45;object">String</span>
+    &#125;
+&#125;</pre></div><p class="paragraph"/>An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented FormattedValueConverter will be automatically plugged in to the data binding process.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/spring/resources.groovy<p class="paragraph"/>beans = &#123;<p class="paragraph"/>    formattedStringConverter com.myapp.converters.FormattedStringValueConverter<p class="paragraph"/>    // ...<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>With that in place the BindUsing annotation may be applied to String fields to inform the data binder to take advantage of the custom converter.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat<p class="paragraph"/>class Person &#123;
+    @BindingFormat('UPPERCASE')
+    <span class="java&#45;object">String</span> someUpperCaseString<p class="paragraph"/>    @BindingFormat('LOWERCASE')
+    <span class="java&#45;object">String</span> someLowerCaseString<p class="paragraph"/>    <span class="java&#45;object">String</span> someOtherString
+&#125;</pre></div><p class="paragraph"/>
+<h4>データバインディングとセキュリティ考慮 <div class="hidden-block">Data Binding and Security concerns </div></h4><p class="paragraph"/><div class="hidden-block">When batch updating properties from request parameters you need to be careful not to allow clients to bind malicious data to domain classes and be persisted in the database. You can limit what properties are bound to a given domain class using the subscript operator:</div>
 リクエストパラメータからのバッチ更新をする際は、クライアントからの悪意のあるデータを、ドメインクラスやデータベースへの永続化に反映させないように注意が必要です。添字演算子を使用してドメインクラスにバインドするプロパティを制限することができます。<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)<p class="paragraph"/>p.properties&#91;'firstName','lastName'&#93; = params</pre></div><p class="paragraph"/><div class="hidden-block">In this case only the <code>firstName</code> and <code>lastName</code> properties will be bound.</div>
 上記の例では、<code>firstName</code>と<code>lastName</code>のみバインドされます。<p class="paragraph"/><div class="hidden-block">Another way to do this is is to use <a href="../guide/single.html#commandObjects" class="guide">Command Objects</a> as the target of data binding instead of domain classes. Alternatively there is also the flexible <a href="../ref/Controllers/bindData.html" class="controllers">bindData</a> method.</div>
 他には、データバインディングのターゲットをドメインクラスではなく<a href="../guide/single.html#commandObjects" class="guide">コマンドオブジェクト</a>を利用する方法があります。あるいは柔軟な<a href="../ref/Controllers/bindData.html" class="controllers">bindData</a>メソッドを使用します。<p class="paragraph"/><div class="hidden-block">The <code>bindData</code> method allows the same data binding capability, but to arbitrary objects:</div>
@@ -739,9 +788,9 @@ Grailsでは、Springの<a href="http://static.springsource.org/spring/docs/3.0.
 
 <a name="6.1.10 Command Objects"><!-- Legacy link --></a>
 <h2 id="commandObjects">7.1.10 コマンドオブジェクト</h2>
-<div class="hidden-block">Grails controllers support the concept of command objects. A command object is similar to a form bean in a framework like Struts.  They are useful for grouping a subset of request parameters into a single object using <a href="../guide/single.html#dataBinding" class="guide">data binding</a>.</div>
-Grailsのコマンドオブジェクトの設計概念をサポートしています。コマンドオブジェクトはStrutsでのフォームビーンと同じような物です。リクエストパラメータのサブセットをグルーピングして、<a href="../guide/single.html#dataBinding" class="guide">データバインディング</a>を使用する１つのオブジェクトを作成する際に便利です。<p class="paragraph"/><h4>コマンドオブジェクトの宣言 <div class="hidden-block">Declaring Command Objects </div></h4><p class="paragraph"/><div class="hidden-block">Command objects are typically declared in the same source file as a controller, directly below the controller class definition. For example:</div>
-<div class="hidden-block">Command object classes are defined just like any other class.</div>
+<div class="hidden-block">Grails controllers support the concept of command objects. A command object is a class that is used in conjunction with <a href="../guide/single.html#dataBinding" class="guide">data binding</a>, usually to allow validation of data that may not fit into an existing domain class.</div><p class="paragraph"/>Grailsのコマンドオブジェクトの設計概念をサポートしています。 コマンドオブジェクトは <a href="../guide/single.html#dataBinding" class="guide">data binding</a> と連結して使用するクラスであり、通常ドメインクラスとして扱わないデータに対してバリデーションを可能にします。<p class="paragraph"/><blockquote class="note">
+Note: A class is only considered to be a command object when it is used as a parameter of an action.
+</blockquote><p class="paragraph"/><h4>コマンドオブジェクトの宣言 <div class="hidden-block">Declaring Command Objects </div></h4><p class="paragraph"/><div class="hidden-block">Command object classes are defined just like any other class.</div>
 コマンドオブジェクトクラスは他の通常クラスと同じように設定します:<p class="paragraph"/><div class="code"><pre>@grails.validation.Validateable
 class LoginCommand &#123;
     <span class="java&#45;object">String</span> username
@@ -749,8 +798,8 @@ class LoginCommand &#123;
         username(blank: <span class="java&#45;keyword">false</span>, minSize: 6)
         password(blank: <span class="java&#45;keyword">false</span>, minSize: 6)
     &#125;
-&#125;</pre></div><p class="paragraph"/>As this example shows, since the command object class is marked with <code>Validateable you can define <a href="../guide/single.html#constraints" class="guide">constraints</a> in command objects just like in <a href="../guide/single.html#GORM" class="guide">domain classes</a>.  Another way to make a command object class validateable is to define it in the same source file as the controller which is using the class as a command object.  If a command object class is not defined in the same source file as a controller which uses the class as a command object and the class is not marked with </code>Validateable, the class will not be made validateable.  It is not required that command object classes be validateable.<p class="paragraph"/>
-<h4>コマンドオブジェクトを使用する <div class="hidden-block">Using Command Objects </div></h4><p class="paragraph"/>To use command objects, controller actions may optionally specify any number of command object parameters. The parameter types must be supplied so that Grails knows what objects to create and initialize.<p class="paragraph"/>Before the controller action is executed Grails will automatically create an instance of the command object class and populate its properties by binding the request parameters.  If the command object class is marked with @Validateable then the command object will be validated. For example:<p class="paragraph"/><div class="code"><pre>class LoginController &#123;<p class="paragraph"/>    def login(LoginCommand cmd) &#123;
+&#125;</pre></div><p class="paragraph"/>In this example, the command object is marked with the <code>Validateable</code> annotation. The <code>Validateable</code> annotation allows the definition of <a href="../guide/single.html#constraints" class="guide">constraints</a> just like in <a href="../guide/single.html#GORM" class="guide">domain classes</a>. If the command object is defined in the same source file as the controller that is using it, Grails will automatically mark it as <code>Validateable</code>. It is not required that command object classes be validateable.<p class="paragraph"/>
+<h4>コマンドオブジェクトを使用する <div class="hidden-block">Using Command Objects </div></h4><p class="paragraph"/>To use command objects, controller actions may optionally specify any number of command object parameters. The parameter types must be supplied so that Grails knows what objects to create and initialize.<p class="paragraph"/>Before the controller action is executed Grails will automatically create an instance of the command object class and populate its properties by binding the request parameters.  If the command object class is marked with <code>Validateable</code> then the command object will be validated. For example:<p class="paragraph"/><div class="code"><pre>class LoginController &#123;<p class="paragraph"/>    def login(LoginCommand cmd) &#123;
         <span class="java&#45;keyword">if</span> (cmd.hasErrors()) &#123;
             redirect(action: 'loginForm')
             <span class="java&#45;keyword">return</span>
@@ -798,39 +847,6 @@ GSPタグの<code>attrs</code>パラメータでも、同じ仕組みの型変�
 よくあるケースとして、リクエストパラメータ内の複数の同じ名称を扱う場合があります。クエリーの例として、<code>"?name=Bob&#38;name=Judy"</code>等。<p class="paragraph"/><div class="hidden-block">In this case dealing with one parameter and dealing with many has different semantics since Groovy's iteration mechanics for <code>String</code> iterate over each character. To avoid this problem the <a href="../ref/Controllers/params.html" class="controllers">params</a> object provides a <code>list</code> method that always returns a list:</div>
 パラメータに1つのみしか無い場合にイテレートしてしまうと、<code>String</code>の文字列が1文字ずつ参照されてしまいます。この問題を避けるために、<a href="../ref/Controllers/params.html" class="controllers">params</a>オブジェクトの<code>list</code>メソッドを使用することで毎回リストを返すことが可能です:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">for</span> (name in params.list('name')) &#123;
     println name
-&#125;</pre></div>
-
-
-<a name="6.1.13 Asynchronous Request Processing"><!-- Legacy link --></a>
-<h2 id="asynchronousRequestProcessing">7.1.13 非同期リクエスト処理(OLD)</h2>
-<div class="hidden-block">Grails support asynchronous request processing as provided by the Servlet 3.0 specification. To enable the async features you need to set your servlet target version to 3.0 in BuildConfig.groovy:</div>
-Servlet 3.0での非同期リクエスト処理をサポートしています。有効にするには、BuildConfig.groovy サーブレットバージョン指定を3.0に変更します。<p class="paragraph"/>
-<div class="code"><pre>grails.servlet.version = <span class="java&#45;quote">"3.0"</span></pre></div><p class="paragraph"/><div class="hidden-block">With that done ensure you do a clean re-compile as some async features are enabled at compile time.</div>
-設定を変更したら、async機能がコンパイル時に有効にするために、クリーンしてリコンパイルしてください。<p class="paragraph"/>
-<blockquote class="note">
-<div class="hidden-block">With a Servlet target version of 3.0 you can only deploy on Servlet 3.0 containers such as Tomcat 7 and above.</div>
-Servlet 3.0を指定した場合は、Servlet 3.0のみ対応でデプロイされるので、Servlet 3.0に対応したコンテナ(Tomcatの場合は7以上)で運用しましょう。
-</blockquote><p class="paragraph"/><h4>非同期描写 <div class="hidden-block">Asynchronous Rendering </div></h4><p class="paragraph"/><div class="hidden-block">You can render content (templates, binary data etc.) in an asynchronous manner by calling the <code>startAsync</code> method which returns an instance of the Servlet 3.0 <code>AsyncContext</code>. Once you have a reference to the <code>AsyncContext</code> you can use Grails' regular render method to render content:</div>
-Servlet 3.0のAsyncContextインスタンスを返す<code>startAsync</code>メソッドを呼び出すことで、非同期でコンテンツが描写(テンプレート、バイナリー等)できます。<code>AsyncContext</code>の参照をするだけで、あとは通常のGrailsのrenderメソッドを使用してコンテンツを描写できます。<p class="paragraph"/>
-<div class="code"><pre>def index() &#123;
-    def ctx = startAsync()
-    ctx.start &#123;
-        <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Stand"</span>).save()
-        render template:<span class="java&#45;quote">"books"</span>, model:&#91;books:Book.list()&#93;
-        ctx.complete()
-    &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Note that you must call the <code>complete()</code> method to terminate the connection. </div>
-コネクションを終了するには必ず<code>complete()</code>メソッドをコールしてください。<p class="paragraph"/>
-<h4>非同期リクエストの再開 <div class="hidden-block">Resuming an Async Request </div></h4><p class="paragraph"/><div class="hidden-block">You resume processing of an async request (for example to delegate to view rendering) by using the <code>dispatch</code> method of the <code>AsyncContext</code> class:</div>
-非同期リクエストを再開するには、<code>AsyncContext</code>クラスの<code>dispatch()</code>メソッドを使用します。<p class="paragraph"/>
-<div class="code"><pre>def index() &#123;
-    def ctx = startAsync()
-    ctx.start &#123;
-        // <span class="java&#45;keyword">do</span> working
-        &#8230;
-        // render view
-        ctx.dispatch()
-    &#125;
 &#125;</pre></div>
 
 
@@ -1373,6 +1389,9 @@ Servlet 3.0のAsyncContextインスタンスを返す<code>startAsync</code>メ�
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

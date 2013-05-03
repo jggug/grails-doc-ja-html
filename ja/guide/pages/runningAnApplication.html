@@ -146,13 +146,13 @@ Grailsアプリケーションは、<a href="../ref/Command Line/run-app.html" c
 起動オプションに<code>server.port</code>を指定して別のポートで起動することもできます。<p class="paragraph"/><div class="code"><pre>grails &#45;Dserver.port=8090 run&#45;app</pre></div><p class="paragraph"/>Note that it is better to start up the application in interactive mode since a container restart is much quicker:<p class="paragraph"/><div class="code"><pre>$ grails
 grails&#62; run&#45;app
 | Server running. Browse to http://localhost:8080/helloworld
-| Application loaded in interactive mode. Type 'exit' to shutdown.
+| Application loaded in interactive mode. Type 'stop&#45;app' to shutdown.
 | Downloading: plugins&#45;list.xml
-grails&#62; exit
+grails&#62; stop&#45;app
 | Stopping Grails server
 grails&#62; run&#45;app
 | Server running. Browse to http://localhost:8080/helloworld
-| Application loaded in interactive mode. Type 'exit' to shutdown.
+| Application loaded in interactive mode. Type 'stop&#45;app' to shutdown.
 | Downloading: plugins&#45;list.xml</pre></div><p class="paragraph"/><div class="hidden-block">More information on the <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a> command can be found in the reference guide.</div>
 <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>コマンドの詳細は、リファレンスガイドを参照してください。
 
@@ -695,6 +695,9 @@ grails&#62; run&#45;app
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

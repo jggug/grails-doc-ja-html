@@ -129,12 +129,13 @@ function addJsClass(el) {
 <ul class="star">
 <li><code>action</code> (optional) - the name of the action to use in the link; if not specified the default action will be linked</li>
 <li><code>controller</code> (optional) - the name of the controller to use in the link; if not specified the current controller will be linked</li>
+<li><code>plugin</code> (optional) - the name of the plugin which provides the controller</li>
 <li><code>elementId</code> (optional) - this value will be used to populate the <code>id</code> attribute of the generated href</li>
 <li><code>id</code> (optional) - the id to use in the link</li>
-<li><code>plugin</code> (optional) - the name of the plugin which provides the controller</li>
 <li><code>fragment</code> (optional) - The link fragment (often called anchor tag) to use</li>
 <li><code>mapping</code> (optional) - The <a href="../../guide/single.html#namedMappings" class="guide">named URL mapping</a> to use to rewrite the link</li>
 <li><code>params</code> (optional) - a Map of request parameters</li>
+<li><code>uri</code> (optional) - a relative URI</li>
 <li><code>url</code> (optional) - a Map containing the action, controller, id etc.</li>
 <li><code>absolute</code> (optional) - If <code>true</code> will prefix the link target address with the value of the <code>grails.serverURL</code> property from <code>Config.groovy</code>, or http://localhost:&#60;port&#62; if there is no setting in <code>Config.groovy</code> and not running in production.</li>
 <li><code>base</code> (optional) - Sets the prefix to be added to the link target address, typically an absolute server URL. This overrides the behaviour of the <code>absolute</code> property, if both are specified.</li>
@@ -683,6 +684,9 @@ function addJsClass(el) {
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

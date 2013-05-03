@@ -142,7 +142,10 @@ function addJsClass() {
 <a name="2.2 Upgrading from previous versions of Grails"><!-- Legacy link --></a>
 <h1 id="upgradingFromPreviousVersionsOfGrails">3 Grails下位バージョンからの更新</h1>
 <div class="hidden-block">Although the Grails development team have tried to keep breakages to a minimum there are a number of items to consider when upgrading a Grails 1.0.x, 1.1.x, 1.2.x, or 1.3.x applications to Grails 2.0. The major changes are described in more detail below, but here's a brief summary of what you might encounter when upgrading from Grails 1.3.x:</div>
-Grails開発チームではできる限りの下位互換を心がけていますが、Grails 2.0へ更新する際に、下位バージョンから考慮しなくてはならない内容が幾つか存在します。大きな変更点を以下にまとめます。<p class="paragraph"/><div class="hidden-block">* <code>environment</code> bean added by Spring 3.1, which will be auto-wired into properties of the same name.</div>
+Grails開発チームではできる限りの下位互換を心がけていますが、Grails 2.0へ更新する際に、下位バージョンから考慮しなくてはならない内容が幾つか存在します。大きな変更点を以下にまとめます。
+<ul class="star">
+<li>Dependency resolution has been changed to <strong class="bold">only</strong> use data from the POMs to resolve, this can impact plugins and you may need to republish a plugin with corrected dependency data</li>
+</ul><p class="paragraph"/><div class="hidden-block">* <code>environment</code> bean added by Spring 3.1, which will be auto-wired into properties of the same name.</div>
 Spring 3.1によって、同じ名称の環境が <code>environment</code> ビーンが自動追加されます。<p class="paragraph"/><div class="hidden-block">* Logging by convention packages have changed, so you may not see the logging output you expect. Update your logging configuration as described below.</div>
 <ul class="star">
 <li>ロギングDSLのパッケージが変更されたので正常にログ出力がされない場合があります。ログの設定を変更する必要があります。</li>
@@ -204,7 +207,12 @@ Spring 3.1によって、同じ名称の環境が <code>environment</code> ビ�
 </ul><p class="paragraph"/><div class="hidden-block">* The following deprecated classes have been removed: <code>grails.web.JsonBuilder</code> and <code>grails.web.OpenRicoBuilder</code>.</div>
 <ul class="star">
 <li>次の非推奨クラスが削除されました: <code>grails.web.JsonBuilder</code>、<code>grails.web.OpenRicoBuilder</code></li>
-</ul><p class="paragraph"/><h3>Grails 1.3.xからのアップグレード <div class="hidden-block">Upgrading from Grails 1.3.x</div></h3><p class="paragraph"/><h4>web.xmlテンプレートの内容変更 <div class="hidden-block">Changes to web.xml template</div></h4><p class="paragraph"/><div class="hidden-block">If you have customized the web.xml provided by <code>grails install-templates</code> then you will need to update this customized template with the latest version provided by Grails. Failing to do so will lead to a ClassNotFoundException for the <code>org.codehaus.groovy.grails.web.util.Log4jConfigListener</code> class.</div>
+</ul><p class="paragraph"/><h3>Upgrading to 2.2 from 2.1 or 2.0</h3><p class="paragraph"/><h4>Groovy 2.0</h4><p class="paragraph"/>Grails 2.2 ships with Groovy 2.0 which has some language level changes that may require changes to your code or plugins that you use.<p class="paragraph"/><h4>Dependency resolution</h4><p class="paragraph"/>Grails 2.2 no longer uses the BuildConfig of the plugin for dependency resolution and <strong class="bold">only</strong> uses data provided by POMs, this may impact some plugins that had previously incorrectly 
+specified dependency information.<p class="paragraph"/>If you don't want to immediately deal with the changes necessary to upgrade, then you can open <code>BuildConfig</code> and set the <code>legacyResolve</code> settings to true:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;    
+    &#8230;
+    legacyResolve <span class="java&#45;keyword">false</span> 
+    &#8230;
+&#125;</pre></div><p class="paragraph"/>This is not recommended however, as it will re-enable the previous behavior of using both POM data and BuildConfig to resolve dependencies. The most commmon problem you will face is with plugins that express their dependencies in a scope that is not valid inside a POM (example: "build" scope).<p class="paragraph"/>Plugins like this will need to be re-publish with a corrected scope of "compile". If you then specify the plugin as "build" scope in your application, transitive compile and runtime scoped dependencies will be converted to "build" scope as well.<p class="paragraph"/><h3>Grails 1.3.xからのアップグレード <div class="hidden-block">Upgrading from Grails 1.3.x</div></h3><p class="paragraph"/><h4>web.xmlテンプレートの内容変更 <div class="hidden-block">Changes to web.xml template</div></h4><p class="paragraph"/><div class="hidden-block">If you have customized the web.xml provided by <code>grails install-templates</code> then you will need to update this customized template with the latest version provided by Grails. Failing to do so will lead to a ClassNotFoundException for the <code>org.codehaus.groovy.grails.web.util.Log4jConfigListener</code> class.</div>
 <code>grails install-templates</code>で提供されたweb.xmlをカスタマイズしている場合は、最新のGrailsで提供される無いように更新する必要が有ります。変更を行わなかった場合は、<code>org.codehaus.groovy.grails.web.util.Log4jConfigListener</code>クラスのClassNotFoundExceptionを引き起こします。<p class="paragraph"/><h4>Groovy 1.8での変更点<div class="hidden-block">Groovy 1.8 Changes</div></h4><p class="paragraph"/><div class="hidden-block">Groovy 1.8 is a little stricter in terms of compilation so you may be required to fix compilation errors in your application that didn't occur under Grails 1.3.x.</div>
 Groovy 1.8ではｍコンパイルが少し厳しくなっています。そのため、Grails 1.3.xでは発生しなかったコンパイルエラーに対応する必要があります。<p class="paragraph"/><div class="hidden-block">Groovy 1.8 also requires that you update many of the libraries that you may be using in your application. Libraries known to require an upgrade include:</div>
 さらに、Groovy 1.8では、アプリケーションで使用している幾つかのライブラリを更新する必要があります。解っている更新が必要なライブラリは以下になります。
@@ -963,6 +971,9 @@ grailsHome = Ant.antProject.properties.<span class="java&#45;quote">"env.GRAILS_
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

@@ -196,7 +196,9 @@ Grailsをインストールする前に、Java Development Kit (JDK) 1.6以上�
 <li><a href="http://www.grailsexample.net/installing-a-grails-development-environment-on-linux/" target="blank">Linux</a></li>
 <li><a href="http://www.grailsexample.net/installing-a-grails-development-environment-on-os-x/" target="blank">Mac OS X</a></li>
 </ul><p class="paragraph"/><div class="hidden-block">These will show you how to install Grails too, not just the JDK.</div>
-これらの動画は、JDKのセットアップのみではなく、Grailsのインストールまで解説しています。<p class="paragraph"/><div class="hidden-block">On some platforms (for example OS X) the Java installation is automatically detected. However in many cases you will want to manually configure the location of Java. For example:</div>
+これらの動画は、JDKのセットアップのみではなく、Grailsのインストールまで解説しています。<p class="paragraph"/><blockquote class="note">
+A JDK is required in your Grails development environment. A JRE is not sufficient.
+</blockquote><p class="paragraph"/><div class="hidden-block">On some platforms (for example OS X) the Java installation is automatically detected. However in many cases you will want to manually configure the location of Java. For example:</div>
 一部のOS環境(OSX等)では、自動的にJavaが認識されます。別途設定したい場合は、次のように設定してください:<p class="paragraph"/><div class="code"><pre>export JAVA_HOME=/Library/Java/Home
 export PATH=<span class="java&#45;quote">"$PATH:$JAVA_HOME/bin"</span></pre></div><p class="paragraph"/><div class="hidden-block">if you're using bash or another variant of the Bourne Shell.</div>
 Bashやその他のBourne Shellでの例です。
@@ -246,25 +248,16 @@ cd helloworld</code></pre><p class="paragraph"/>
 
 <a name="2.4 A Hello World Example"><!-- Legacy link --></a>
 <h2 id="aHelloWorldExample">2.4 ハローワールド例</h2>
-<div class="hidden-block">To implement the typical "hello world!" example <code>cd</code> into the "helloworld" directory created in the previous section and activate interactive mode:</div>
-単純な"Hello World！"を実装してみましょう。前のセクションで作成されたディレクトリ"helloworld"に<code>cd</code>コマンドで移動してインタラクティブモードを開始します。<p class="paragraph"/><div class="code"><pre>$ cd helloworld
-$ grails</pre></div><p class="paragraph"/><div class="hidden-block">Grails' interactive mode will be activated and you should see a prompt that looks like the following:</div>
-Grailsのインタラクティブモードが開始されたら、プロンプトが次のように表示されます:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-helloworld.png"></img><p class="paragraph"/><div class="hidden-block">Now run the <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> command:</div>
-では、<a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a>コマンドを実行してみましょう:<p class="paragraph"/><pre class="bq"><code>
-grails&#62; create-controller hello</code></pre><p class="paragraph"/><div class="hidden-block">This will create a new controller (Refer to the section on <a href="../guide/single.html#controllers" class="guide">Controllers</a> for more information) in the <code>grails-app/controllers</code> directory called <code>helloworld/HelloController.groovy</code>.</div>
-このコマンドによって、<code>grails-app/controllers</code>ディレクトリ内に、<code>HelloController.groovy</code>という新しいコントローラ（詳細については<a href="../guide/single.html#controllers" class="guide">コントローラ</a>のセクションを参照してください）が生成されます。<p class="paragraph"/><blockquote class="note">
-<div class="hidden-block">If no package is specified with create-controller script, Grails automatically uses the application name as the package name. This default is configurable with the <code>grails.project.groupId</code> attribute in Config.groovy.</div>
-create-controllerスクリプトでパッケージが指定されなかった場合はGrailsが自動的にアプリケーション名をパッケージ名として使用します。デフォルト値はConfig.groovyに<code>grails.project.groupId</code>を指定することで変更可能です。
-</blockquote><p class="paragraph"/><div class="hidden-block">Controllers are capable of dealing with web requests and to fulfil the "hello world!" use case our implementation needs to look like the following:</div>
-コントローラは、Webリクエストを処理します。"hello world!"を表示するには、次のように記述します。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> helloworld<p class="paragraph"/>class HelloController &#123;<p class="paragraph"/>    def world() &#123;
+Let's now take the new project and turn it into the classic "Hello world!" example. First, change into the "helloworld" directory you just created and start the Grails interactive console:<p class="paragraph"/><pre class="bq"><code>
+$ cd helloworld
+$ grails</code></pre><p class="paragraph"/>You should see a prompt that looks like this:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-helloworld.png"></img><p class="paragraph"/>What we want is a simple page that just prints the message "Hello World!" to the browser. In Grails, whenever you want a new page you just create a new controller action for it. Since we don't yet have a controller, let's create one now with the <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> command:<p class="paragraph"/><pre class="bq"><code>
+grails&#62; create-controller hello</code></pre><p class="paragraph"/>Don't forget that in the interactive console, we have auto-completion on command names. So you can type "cre" and then press &#60;tab&#62; to get a list of all <code>create&#45;&#42;</code> commands. Type a few more letters of the command name and then &#60;tab&#62; again to finish.<p class="paragraph"/>The above command will create a new <a href="../guide/single.html#controllers" class="guide">controller</a> in the <code>grails-app/controllers/helloworld</code> directory called <code>HelloController.groovy</code>. Why the extra <code>helloworld</code> directory? Because in Java land, it's strongly recommended that all classes are placed into packages, so Grails defaults to the application name if you don't provide one. The reference page for <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> provides more detail on this.<p class="paragraph"/>We now have a controller so let's add an action to generate the "Hello World!" page. The code looks like this:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> helloworld<p class="paragraph"/>class HelloController &#123;<p class="paragraph"/>    def index() &#123;
         render <span class="java&#45;quote">"Hello World!"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Job done. Now start-up the container with another new command called <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>:</div>
-作業は以上です。次に<a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>コマンドで、このアプリケーションを起動させましょう:<p class="paragraph"/><pre class="bq"><code>
-grails&#62; run-app</code></pre><p class="paragraph"/><div class="hidden-block">This will start-up a server on port 8080 and you should now be able to access your application with the URL: <code>http://localhost:8080/helloworld</code> </div>
-これで8080番ポートでサーバを起動します。<code>http://localhost:8080/helloworld</code>をブラウザで見てみましょう。<p class="paragraph"/><div class="hidden-block">The result will look something like the following screenshot:</div>
-結果は次のスクリーンショットのようになります:<p class="paragraph"/><img border="0" class="center" src="../../img/intropage.png"></img><p class="paragraph"/><div class="hidden-block">This is the Grails intro page which is rendered by the <code>web-app/index.gsp</code> file. You will note it has a detected the presence of your controller and clicking on the link to our controller we can see the text "Hello World!" printed to the browser window.</div>
-これは<code>grails-app/views/index.gsp</code>ファイルによって描写されたアプリケーションの初期画面です。画面にはコントローラへのリンクが表示されています。このリンクをクリックすることで、画面に"Hello World！"が表示されます。<p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/>The action is simply a method. In this particular case, it calls a special method provided by Grails to <a href="../ref/Tags/render.html" class="tags">render</a> the page.<p class="paragraph"/>Job done. To see your application in action, you just need to start up a server with another command called <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>:<p class="paragraph"/><pre class="bq"><code>
+grails&#62; run-app</code></pre><p class="paragraph"/>This will start an embedded server on port 8080 that hosts your application. You should now be able to access your application at the URL <a href="http://localhost:8080/helloworld/" target="blank">http://localhost:8080/helloworld/</a> - try it!<p class="paragraph"/><blockquote class="note">
+If you see the error "Server failed to start for port 8080: Address already in use", then it means another server is running on that port. You can easily work around this by running your server on a different port using <code>-Dserver.port=9090 run-app</code>. '9090' is just an example: you can pretty much choose anything within the range 1024 to 49151.
+</blockquote><p class="paragraph"/>The result will look something like this:<p class="paragraph"/><img border="0" class="center" src="../../img/intropage.png"></img><p class="paragraph"/>This is the Grails intro page which is rendered by the <code>grails-app/view/index.gsp</code> file. It detects the presence of your controllers and provides links to them. You can click on the "HelloController" link to see our custom page containing the text "Hello World!". Voila! You have your first working Grails application.<p class="paragraph"/>One final thing: a controller can contain many actions, each of which corresponds to a different page (ignoring AJAX at this point). Each page is accessible via a unique URL that is composed from the controller name and the action name: /&#60;appname&#62;/&#60;controller&#62;/&#60;action&#62;. This means you can access the Hello World page via <a href="http://localhost:8080/helloworld/hello/index" target="blank">/helloworld/hello/index</a>, where 'hello' is the controller name (remove the 'Controller' suffix from the class name and lower-case the first letter) and 'index' is the action name. But you can also access the page via the same URL without the action name: this is because 'index' is the  <em class="italic">default action</em> . See the end of the <a href="../guide/single.html#understandingControllersAndActions" class="guide">controllers and actions</a> section of the user guide to find out more on default actions.<p class="paragraph"/>
 
 
 <h2 id="usingInteractiveMode">2.5 インタラクティブモードの利用</h2>
@@ -341,13 +334,13 @@ Grailsアプリケーションは、<a href="../ref/Command Line/run-app.html" c
 起動オプションに<code>server.port</code>を指定して別のポートで起動することもできます。<p class="paragraph"/><div class="code"><pre>grails &#45;Dserver.port=8090 run&#45;app</pre></div><p class="paragraph"/>Note that it is better to start up the application in interactive mode since a container restart is much quicker:<p class="paragraph"/><div class="code"><pre>$ grails
 grails&#62; run&#45;app
 | Server running. Browse to http://localhost:8080/helloworld
-| Application loaded in interactive mode. Type 'exit' to shutdown.
+| Application loaded in interactive mode. Type 'stop&#45;app' to shutdown.
 | Downloading: plugins&#45;list.xml
-grails&#62; exit
+grails&#62; stop&#45;app
 | Stopping Grails server
 grails&#62; run&#45;app
 | Server running. Browse to http://localhost:8080/helloworld
-| Application loaded in interactive mode. Type 'exit' to shutdown.
+| Application loaded in interactive mode. Type 'stop&#45;app' to shutdown.
 | Downloading: plugins&#45;list.xml</pre></div><p class="paragraph"/><div class="hidden-block">More information on the <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a> command can be found in the reference guide.</div>
 <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>コマンドの詳細は、リファレンスガイドを参照してください。
 
@@ -966,6 +959,9 @@ Grailsには<a href="../guide/single.html#controllers" class="guide">コント�
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

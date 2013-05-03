@@ -235,8 +235,9 @@ GroovyロジックをGSPに埋め込むことも可能ですが推奨しませ�
 GSPは通常ビュー描写に使用される変数のセットなどの"モデル"を持っています。モデルはコントローラからGSPビューげ渡されます。例として次のコントローラアクションを見てみましょう。<p class="paragraph"/><div class="code"><pre>def show() &#123;
     &#91;book: Book.get(params.id)&#93;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This action will look up a <code>Book</code> instance and create a model that contains a key called <code>book</code>. This key can then be referenced within the GSP view using the name <code>book</code>:</div>
-このアクションは<code>Book</code>インスタンスを取り出して、<code>book</code>というキーでモデルを作成しています。GSPでは、このキー<code>book</code>が参照できます。<p class="paragraph"/><div class="code"><pre>$&#123;book.title&#125;</pre></div>
-
+このアクションは<code>Book</code>インスタンスを取り出して、<code>book</code>というキーでモデルを作成しています。GSPでは、このキー<code>book</code>が参照できます。<p class="paragraph"/><div class="code"><pre>$&#123;book.title&#125;</pre></div><p class="paragraph"/><blockquote class="warning">
+Embedding data received from user input has the risk of making your application vulnerable to an Cross Site Scripting (XSS) attack. Please read the documentation on <a href="../guide/single.html#xssPrevention" class="guide">XSS prevention</a> for information on how to prevent XSS attacks.
+</blockquote>
 
 <a name="6.2.1 GSP Basics"><!-- Legacy link --></a>
 <h2 id="GSPBasics">7.2.1 GSPの基本</h2>
@@ -257,8 +258,9 @@ GSPは、Groovyを記述できる、スクリプトレットブロック<code>&#
      <span class="xml&#45;tag">&#60;%&#45;&#45; This is my comment &#45;&#45;%&#62;</span>
      <span class="xml&#45;tag">&#60;%=<span class="xml&#45;quote">"Hello GSP!"</span> %&#62;</span>
    <span class="xml&#45;tag">&#60;/body&#62;</span>
-<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div>
-
+<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/><blockquote class="warning">
+Embedding data received from user input has the risk of making your application vulnerable to an Cross Site Scripting (XSS) attack. Please read the documentation on <a href="../guide/single.html#xssPrevention" class="guide">XSS prevention</a> for information on how to prevent XSS attacks.
+</blockquote>
 
 <a name="6.6.3 Variables and Scopes"><!-- Legacy link --></a>
 <h2 id="variablesAndScopes">7.2.1.1 変数とスコープ</h2>
@@ -328,10 +330,10 @@ GSPでは、先に紹介した<code>&#60;%= %&#62;</code>シンタックスは�
   <span class="xml&#45;tag">&#60;body&#62;</span>
     Hello $&#123;params.name&#125;
   <span class="xml&#45;tag">&#60;/body&#62;</span>
-<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">However, unlike JSP EL you can have any Groovy expression within the <code>${..}</code> block. Variables within the <code>${..}</code> block are <strong class="bold">not</strong> escaped by default, so any HTML in the variable's string is rendered directly to the page. To reduce the risk of Cross-site-scripting (XSS) attacks, you can enable automatic HTML escaping with the <code>grails.views.default.codec</code> setting in <code>grails-app/conf/Config.groovy</code>:</div>
-JSP式言語(JSP EL)と違い、Groovy表記は、<code>${…}</code>ブロックに記述します。<code>${…}</code>ブロックの変数はデフォルトではエスケープを行いません。したがって、HTML文字列が直接ページ内に描写されます。これによって起こりうる、XSS(クロスサイトスクリプティング)をリスクを軽減するには、<code>grails-app/conf/Config.groovy</code>に<code>grails.views.default.codec</code>を設定します。<p class="paragraph"/><div class="code"><pre>grails.views.<span class="java&#45;keyword">default</span>.codec='html'</pre></div><p class="paragraph"/><div class="hidden-block">Other possible values are 'none' (for no default encoding) and 'base64'.</div>
-他に設定可能な値は'none'(何も設定しない)と'base64'になります。
-
+<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">However, unlike JSP EL you can have any Groovy expression within the <code>${..}</code> block. </div>
+JSP式言語(JSP EL)と違い、Groovy表記は、 <code>${…}</code> ブロックに記述します。<p class="paragraph"/><blockquote class="warning">
+Embedding data received from user input has the risk of making your application vulnerable to an Cross Site Scripting (XSS) attack. Please read the documentation on <a href="../guide/single.html#xssPrevention" class="guide">XSS prevention</a> for information on how to prevent XSS attacks.
+</blockquote><p class="paragraph"/>
 
 <a name="6.2.2 GSP Tags"><!-- Legacy link --></a>
 <h2 id="tags">7.2.2 GSPタグ</h2>
@@ -1475,6 +1477,9 @@ debugTemplatesでは以下のようなコメントが追記されます:<p class
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

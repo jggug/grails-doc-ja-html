@@ -116,7 +116,9 @@ function addJsClass(el) {
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
-                <h1>install-plugin</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Installs a plugin from the Grails central SVN repository, a file, or a URL<p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>grails install&#45;plugin shiro
+                <h1>install-plugin</h1><p class="paragraph"/><h2>目的 <div class="hidden-block">Purpose</div></h2><p class="paragraph"/>Installs a plugin from the Grails central SVN repository, a file, or a URL<p class="paragraph"/><blockquote class="warning">
+Plugins should be installed by listing them in BuildConfig.groovy with the appropriate scope instead of using install-plugin.
+</blockquote><p class="paragraph"/><h2>使用例 <div class="hidden-block">Examples</div></h2><p class="paragraph"/><div class="code"><pre>grails install&#45;plugin shiro
 grails install&#45;plugin shiro 1.1
 grails install&#45;plugin ../grails&#45;bar&#45;1.0.zip
 grails install&#45;plugin http://foo.com/grails&#45;bar&#45;1.0.zip</pre></div><p class="paragraph"/><h2>詳細 <div class="hidden-block">Description</div></h2><p class="paragraph"/>使用方法: <div class="hidden-block">Usage:</div>
@@ -670,6 +672,9 @@ grails install&#45;plugin &#91;URL/File&#93;</pre></div><p class="paragraph"/>�
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>

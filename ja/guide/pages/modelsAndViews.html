@@ -168,7 +168,7 @@ function addJsClass() {
 <li><code>attributes</code></li>
 <li><code>application</code></li>
 </ul><p class="paragraph"/><div class="hidden-block">Currently, no error will be reported if you do use them, but this will hopefully change in a future version of Grails.</div>
-現状では使用したとしてもエラーが出ることはありませんが、将来的には変わるかもしれません。<p class="paragraph"/><h4>ビューの選択<div class="hidden-block">Selecting the View </div></h4><p class="paragraph"/><div class="hidden-block">In both of the previous two examples there was no code that specified which <a href="../guide/single.html#gsp" class="guide">view</a> to render. So how does Grails know which one to pick? The answer lies in the conventions. Grails will look for a view at the location <code>grails-app/views/book/show.gsp</code> for this <code>list</code> action:</div>
+現状では使用したとしてもエラーが出ることはありませんが、将来的には変わるかもしれません。<p class="paragraph"/><h4>ビューの選択<div class="hidden-block">Selecting the View </div></h4><p class="paragraph"/><div class="hidden-block">In both of the previous two examples there was no code that specified which <a href="../guide/single.html#gsp" class="guide">view</a> to render. So how does Grails know which one to pick? The answer lies in the conventions. Grails will look for a view at the location <code>grails-app/views/book/show.gsp</code> for this <code>show</code> action:</div>
 これまでの例ではビューがどのように設定されるのかを説明しませんでたが、Grailsではどのようにビューを選択しているのでしょうか？答えは慣習にあります。何も指定しなければ、以下のアクションでは、Grailsが自動的に、<code>grails-app/views/book/show.gsp</code>をビューとして使用します。<p class="paragraph"/><div class="code"><pre>class BookController &#123;
     def show() &#123;
          &#91;book: Book.get(params.id)&#93;
@@ -766,6 +766,9 @@ def login() &#123;
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/lock.html">lock</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Domain%20Classes/mapWith.html">mapWith</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Domain%20Classes/mappedBy.html">mappedBy</a>
