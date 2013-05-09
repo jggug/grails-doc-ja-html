@@ -141,7 +141,10 @@ function addJsClass() {
                 
 <a name="15.2 Mapping with Hibernate Annotations"><!-- Legacy link --></a>
 <h2 id="mappingWithHibernateAnnotations">17.2 Hibernateアノテーションでのマッピング</h2>
-To map a domain class with annotations, create a new class in <code>src/java</code> and use the annotations defined as part of the EJB 3.0 spec (for more info on this see the <a href="http://annotations.hibernate.org/" target="blank">Hibernate Annotations Docs</a>):<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> com.books;<p class="paragraph"/><span class="java&#45;keyword">import</span> javax.persistence.Entity;
+<div class="hidden-block">
+To map a domain class with annotations, create a new class in <code>src/java</code> and use the annotations defined as part of the EJB 3.0 spec (for more info on this see the <a href="http://annotations.hibernate.org/" target="blank">Hibernate Annotations Docs</a>):
+</div>
+アノテーションを使用してドメインクラスをマッピングするには、<code>src/java</code>に新たなクラスを作成し、EJB 3.0の仕様として定義されているアノテーションを使用します（より詳細な情報は<a href="http://annotations.hibernate.org/" target="blank">Hibernateのアノテーションに関するドキュメント</a>を参照してください）。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> com.books;<p class="paragraph"/><span class="java&#45;keyword">import</span> javax.persistence.Entity;
 <span class="java&#45;keyword">import</span> javax.persistence.GeneratedValue;
 <span class="java&#45;keyword">import</span> javax.persistence.Id;<p class="paragraph"/>@Entity
 <span class="java&#45;keyword">public</span> class Book &#123;
@@ -163,7 +166,10 @@ To map a domain class with annotations, create a new class in <code>src/java</co
     &#125;<p class="paragraph"/>    <span class="java&#45;keyword">public</span> void setDescription(<span class="java&#45;object">String</span> description) &#123;
         <span class="java&#45;keyword">this</span>.description = description;
     &#125;
-&#125;</pre></div><p class="paragraph"/>Then register the class with the Hibernate <code>sessionFactory</code> by adding relevant entries to the <code>grails-app/conf/hibernate/hibernate.cfg.xml</code> file as follows:<p class="paragraph"/><div class="code"><pre>&#60;!DOCTYPE hibernate&#45;configuration SYSTEM
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Then register the class with the Hibernate <code>sessionFactory</code> by adding relevant entries to the <code>grails-app/conf/hibernate/hibernate.cfg.xml</code> file as follows:
+</div>
+次に、<code>grails-app/conf/hibernate/hibernate.cfg.xml</code>ファイルに関連エントリを以下のように追加することで、Hibernateの<code>sessionFactory</code>にクラスを登録します。<p class="paragraph"/><div class="code"><pre>&#60;!DOCTYPE hibernate&#45;configuration SYSTEM
   <span class="xml&#45;quote">"http://hibernate.sourceforge.net/hibernate&#45;configuration&#45;3.0.dtd"</span>&#62;
 <span class="xml&#45;tag">&#60;hibernate&#45;configuration&#62;</span>
     <span class="xml&#45;tag">&#60;session&#45;factory&#62;</span>
@@ -171,7 +177,14 @@ To map a domain class with annotations, create a new class in <code>src/java</co
         <span class="xml&#45;tag">&#60;mapping class=<span class="xml&#45;quote">"com.books.Book"</span> /&#62;</span>
     <span class="xml&#45;tag">&#60;/session&#45;factory&#62;</span>
 <span class="xml&#45;tag">&#60;/hibernate&#45;configuration&#62;</span></pre></div>
-See the previous section for more information on the <code>hibernate.cfg.xml</code> file.<p class="paragraph"/>When Grails loads it will register the necessary dynamic methods with the class. To see what else you can do with a Hibernate domain class see the section on <a href="../guide/single.html#scaffolding" class="guide">Scaffolding</a>.
+<div class="hidden-block">
+See the previous section for more information on the <code>hibernate.cfg.xml</code> file.
+</div>
+<code>hibernate.cfg.xml</code>ファイルの詳細は、前のセクションを参照してください。<p class="paragraph"/><div class="hidden-block">
+When Grails loads it will register the necessary dynamic methods with the class. To see what else you can do with a Hibernate domain class see the section on <a href="../guide/single.html#scaffolding" class="guide">Scaffolding</a>.
+</div>
+先程のドメインクラスをGrailsがロードするときに、クラスに対し必要なダイナミックメソッドを追加します。
+ダイナミックメソッド以外に、Hibernateのドメインクラスで何ができるかについては、<a href="../guide/single.html#scaffolding" class="guide">スカッフォルディング</a>のセクションを参照してください。
 
 
 

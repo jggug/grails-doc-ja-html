@@ -141,11 +141,22 @@ function addJsClass() {
                 
 <a name="15.3 Adding Constraints"><!-- Legacy link --></a>
 <h2 id="addingConstraints">17.3 制約の追加</h2>
-You can still use GORM validation even if you use a Java domain model. Grails lets you define constraints through separate scripts in the <code>src/java</code> directory. The script must be in a directory that matches the package of the corresponding domain class and its name must have a  <em class="italic">Constraints</em>  suffix. For example, if you had a domain class <code>org.example.Book</code>, then you would create the script <code>src/java/org/example/BookConstraints.groovy</code>&#46;<p class="paragraph"/>Add a standard GORM <code>constraints</code> block to the script:
-<div class="code"><pre>constraints = &#123;
+<div class="hidden-block">
+You can still use GORM validation even if you use a Java domain model. Grails lets you define constraints through separate scripts in the <code>src/java</code> directory. The script must be in a directory that matches the package of the corresponding domain class and its name must have a  <em class="italic">Constraints</em>  suffix. For example, if you had a domain class <code>org.example.Book</code>, then you would create the script <code>src/java/org/example/BookConstraints.groovy</code>&#46;
+</div>
+Javaのドメインモデルを使用する場合でも、GORMのバリデーションを使用できます。
+Grailsでは<code>src/java</code>ディレクトリ内の、別個のスクリプトを通じて制約を定義します。
+このスクリプトは、対応するドメインクラスのパッケージと同じディレクトリ内に格納し、ファイル名のサフィックスは  <em class="italic">Constraints</em>  でなければなりません。
+たとえば、<code>org.example.Book</code>というドメインクラスの場合は、<code>src/java/org/example/BookConstraints.groovy</code>というスクリプトを作成します。<p class="paragraph"/><div class="hidden-block">
+Add a standard GORM <code>constraints</code> block to the script:
+</div>
+そして、このスクリプトに通常のGORMの<code>constraints</code>ブロックを追加してください。<p class="paragraph"/><div class="code"><pre>constraints = &#123;
     title blank: <span class="java&#45;keyword">false</span>
     author blank: <span class="java&#45;keyword">false</span>
-&#125;</pre></div><p class="paragraph"/>Once this is in place you can validate instances of your domain class!
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Once this is in place you can validate instances of your domain class!
+</div>
+正しく設定できていれば、ドメインクラスのインスタンスに対してバリデーションが可能になります。
 
 
 

@@ -170,8 +170,8 @@ WebフローにはHTTP sessionは必要有りません。代わりに、リク�
 Webフローは本質的には、"フロー"の実行のステートの流れを管理する上級ステートマシーンです。
 ステートが管理されると、Webフローが管理してくれるので、ユーザがフロー途中のアクションから入ってくる場合どうするか等を気にしなくても良くなります。これによりショッピングカート、ホテル予約などの複数ページにまたがるワークフローを持つアプリケーションにWebフローがよく合うと言う事です。<p class="paragraph"/>
 <blockquote class="note">
-<div class="hidden-block">From Grails 1.2 onwards Webflow is no longer in Grails core, so you must install the Webflow plugin to use this feature: <code>grails install-plugin webflow</code></div>
-Grails 1.2からWebフローはGrailsのコア機能では無くなりました。この機能を使用するには、<strong class="bold">Webフロープラグインをインストールする必要があります</strong>: <code>grails install-plugin webflow</code>
+<div class="hidden-block">From Grails 1.2 onwards Webflow is no longer in Grails core, so you must install the Webflow plugin to use this feature.</div>
+Grails 1.2からWebフローはGrailsのコア機能では無くなりました。この機能を使用するには、Webフロープラグインをインストールする必要があります. 
 </blockquote><p class="paragraph"/><h4>フローの作成 <div class="hidden-block">Creating a Flow</div></h4><p class="paragraph"/><div class="hidden-block">To create a flow create a regular Grails controller and add an action that ends with the convention <code>Flow</code>. For example:</div>
 フローを作成するには、名称が<code>Flow</code>で終わるアクションをGrailsの通常にコントローラに作成します。例として:<p class="paragraph"/><div class="code"><pre>class BookController &#123;<p class="paragraph"/>   def index() &#123;
       redirect(action: <span class="java&#45;quote">"shoppingCart"</span>)

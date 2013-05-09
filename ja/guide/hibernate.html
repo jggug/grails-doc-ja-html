@@ -155,12 +155,22 @@ function addJsClass() {
                 
 <a name="15. Grails and Hibernate"><!-- Legacy link --></a>
 <h1 id="hibernate">17 GrailsとHibernate</h1>
+<div class="hidden-block">
 If <a href="../guide/single.html#GORM" class="guide">GORM</a> (Grails Object Relational Mapping) is not flexible enough for your liking you can alternatively map your domain classes using Hibernate, either with XML mapping files or JPA annotations. You will be able to map Grails domain classes onto a wider range of legacy systems and have more flexibility in the creation of your database schema. Best of all, you will still be able to call all of the dynamic persistent and query methods provided by GORM!
+</div>
+もし<a href="../guide/single.html#GORM" class="guide">GORM</a>（Grailsオブジェクトリレーショナルマッピング）に好みの設定をする十分な柔軟性がない場合は、XMLマッピングファイル、またはJPAアノテーションを使用して、ドメインクラスに対するHibernateのマッピングができます。
+これにより、レガシーシステムといった広い範囲でドメインクラスのマッピングが可能になり、 また柔軟なデータベースのスキーマ作成が可能にもなります。
+そして、このXMLマッピングファイル、JPAアノテーションを使用した場合も、GORMが提供するダイナミックな永続化メソッド、クエリメソッドをすべて呼び出せます！
 
 
 <a name="15.1 Using Hibernate XML Mapping Files"><!-- Legacy link --></a>
 <h2 id="usingHibernateXMLMappingFiles">17.1 Hibernate XMLマッピングの使用</h2>
-Mapping your domain classes with XML is pretty straightforward. Simply create a <code>hibernate.cfg.xml</code> file in your project's <code>grails-app/conf/hibernate</code> directory, either manually or with the <a href="../ref/Command Line/create-hibernate-cfg-xml.html" class="commandLine">create-hibernate-cfg-xml</a> command, that contains the following:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;?xml version='1.0' encoding='UTF&#45;8'?&#62;</span>
+<div class="hidden-block">
+Mapping your domain classes with XML is pretty straightforward. Simply create a <code>hibernate.cfg.xml</code> file in your project's <code>grails-app/conf/hibernate</code> directory, either manually or with the <a href="../ref/Command Line/create-hibernate-cfg-xml.html" class="commandLine">create-hibernate-cfg-xml</a> command, that contains the following:
+</div>
+XMLを使用したドメインクラスのマッピングは非常に簡単です。
+手動、または<a href="../ref/Command Line/create-hibernate-cfg-xml.html" class="commandLine">create-hibernate-cfg-xml</a>コマンドを使用して、単に<code>grails-app/conf/hibernate</code>ディレクトリに<code>hibernate.cfg.xml</code>ファイルを作成します。
+ファイルの内容は以下のようになります。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;?xml version='1.0' encoding='UTF&#45;8'?&#62;</span>
 &#60;!DOCTYPE hibernate&#45;configuration PUBLIC
         <span class="xml&#45;quote">"&#45;//Hibernate/Hibernate Configuration DTD 3.0//EN"</span>
         <span class="xml&#45;quote">"http://hibernate.sourceforge.net/hibernate&#45;configuration&#45;3.0.dtd"</span>&#62;
@@ -170,17 +180,35 @@ Mapping your domain classes with XML is pretty straightforward. Simply create a 
         <span class="xml&#45;tag">&#60;mapping resource=<span class="xml&#45;quote">"org.example.Book.hbm.xml"</span>/&#62;</span>
         &#8230;
     <span class="xml&#45;tag">&#60;/session&#45;factory&#62;</span>
-<span class="xml&#45;tag">&#60;/hibernate&#45;configuration&#62;</span></pre></div><p class="paragraph"/>The individual mapping files, like 'org.example.Book.hbm.xml' in the above example, also go into the <code>grails-app/conf/hibernate</code> directory. To find out how to map domain classes with XML, check out the <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/mapping.html" target="blank">Hibernate manual</a>.<p class="paragraph"/>If the default location of the <code>hibernate.cfg.xml</code> file doesn't suit you, you can change it by specifying an alternative location in <code>grails-app/conf/DataSource.groovy</code>:<p class="paragraph"/><div class="code"><pre>hibernate &#123;
+<span class="xml&#45;tag">&#60;/hibernate&#45;configuration&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">
+The individual mapping files, like 'org.example.Book.hbm.xml' in the above example, also go into the <code>grails-app/conf/hibernate</code> directory. To find out how to map domain classes with XML, check out the <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/mapping.html" target="blank">Hibernate manual</a>.
+</div>
+上記の例のように'org.example.Book.hbm.xml'といった個々のマッピングファイルも、<code>grails-app/conf/hibernate</code>ディレクトリに格納します。
+XMLを使用して、どうのようにドメインクラスをマッピングするかは<a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/mapping.html" target="blank">Hibernateのマニュアル</a>を確認してください。<p class="paragraph"/><div class="hidden-block">
+If the default location of the <code>hibernate.cfg.xml</code> file doesn't suit you, you can change it by specifying an alternative location in <code>grails-app/conf/DataSource.groovy</code>:
+</div>
+もし<code>hibernate.cfg.xml</code>ファイルのデフォルトの格納場所を変更したい場合は、<code>grails-app/conf/DataSource.groovy</code>に別の場所を指定することで変更できます。<p class="paragraph"/><div class="code"><pre>hibernate &#123;
     config.location = <span class="java&#45;quote">"file:/path/to/my/hibernate.cfg.xml"</span>
-&#125;</pre></div><p class="paragraph"/>or even a list of locations:<p class="paragraph"/><div class="code"><pre>hibernate &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+or even a list of locations:
+</div>
+または、場所の一覧を指定します。<p class="paragraph"/><div class="code"><pre>hibernate &#123;
     config.location = &#91;<span class="java&#45;quote">"file:/path/to/one/hibernate.cfg.xml"</span>,
                        <span class="java&#45;quote">"file:/path/to/two/hibernate.cfg.xml"</span>&#93;
-&#125;</pre></div><p class="paragraph"/>Grails also lets you write your domain model in Java or reuse an existing one that already has Hibernate mapping files. Simply place the mapping files into <code>grails-app/conf/hibernate</code> and either put the Java files in <code>src/java</code> or the classes in the project's <code>lib</code> directory if the domain model is packaged as a JAR. You still need the <code>hibernate.cfg.xml</code> though!
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Grails also lets you write your domain model in Java or reuse an existing one that already has Hibernate mapping files. Simply place the mapping files into <code>grails-app/conf/hibernate</code> and either put the Java files in <code>src/java</code> or the classes in the project's <code>lib</code> directory if the domain model is packaged as a JAR. You still need the <code>hibernate.cfg.xml</code> though!
+</div>
+GrailsではJavaでドメインモデルを書くことも、すでにHibernateのマッピングファイルを持っている既存のJavaクラスをそのまま流用することもできます。
+マッピングファイルは単に<code>grails-app/conf/hibernate</code>に格納し、Javaファイルは<code>src/java</code>に格納するか、ドメインモデルがJARファイルでパッケージングされている場合は、<code>lib</code>ディレクトリにそのクラスのJARファイルを格納します。
+その場合でも<code>hibernate.cfg.xml</code>は必要です。
 
 
 <a name="15.2 Mapping with Hibernate Annotations"><!-- Legacy link --></a>
 <h2 id="mappingWithHibernateAnnotations">17.2 Hibernateアノテーションでのマッピング</h2>
-To map a domain class with annotations, create a new class in <code>src/java</code> and use the annotations defined as part of the EJB 3.0 spec (for more info on this see the <a href="http://annotations.hibernate.org/" target="blank">Hibernate Annotations Docs</a>):<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> com.books;<p class="paragraph"/><span class="java&#45;keyword">import</span> javax.persistence.Entity;
+<div class="hidden-block">
+To map a domain class with annotations, create a new class in <code>src/java</code> and use the annotations defined as part of the EJB 3.0 spec (for more info on this see the <a href="http://annotations.hibernate.org/" target="blank">Hibernate Annotations Docs</a>):
+</div>
+アノテーションを使用してドメインクラスをマッピングするには、<code>src/java</code>に新たなクラスを作成し、EJB 3.0の仕様として定義されているアノテーションを使用します（より詳細な情報は<a href="http://annotations.hibernate.org/" target="blank">Hibernateのアノテーションに関するドキュメント</a>を参照してください）。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> com.books;<p class="paragraph"/><span class="java&#45;keyword">import</span> javax.persistence.Entity;
 <span class="java&#45;keyword">import</span> javax.persistence.GeneratedValue;
 <span class="java&#45;keyword">import</span> javax.persistence.Id;<p class="paragraph"/>@Entity
 <span class="java&#45;keyword">public</span> class Book &#123;
@@ -202,7 +230,10 @@ To map a domain class with annotations, create a new class in <code>src/java</co
     &#125;<p class="paragraph"/>    <span class="java&#45;keyword">public</span> void setDescription(<span class="java&#45;object">String</span> description) &#123;
         <span class="java&#45;keyword">this</span>.description = description;
     &#125;
-&#125;</pre></div><p class="paragraph"/>Then register the class with the Hibernate <code>sessionFactory</code> by adding relevant entries to the <code>grails-app/conf/hibernate/hibernate.cfg.xml</code> file as follows:<p class="paragraph"/><div class="code"><pre>&#60;!DOCTYPE hibernate&#45;configuration SYSTEM
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Then register the class with the Hibernate <code>sessionFactory</code> by adding relevant entries to the <code>grails-app/conf/hibernate/hibernate.cfg.xml</code> file as follows:
+</div>
+次に、<code>grails-app/conf/hibernate/hibernate.cfg.xml</code>ファイルに関連エントリを以下のように追加することで、Hibernateの<code>sessionFactory</code>にクラスを登録します。<p class="paragraph"/><div class="code"><pre>&#60;!DOCTYPE hibernate&#45;configuration SYSTEM
   <span class="xml&#45;quote">"http://hibernate.sourceforge.net/hibernate&#45;configuration&#45;3.0.dtd"</span>&#62;
 <span class="xml&#45;tag">&#60;hibernate&#45;configuration&#62;</span>
     <span class="xml&#45;tag">&#60;session&#45;factory&#62;</span>
@@ -210,16 +241,34 @@ To map a domain class with annotations, create a new class in <code>src/java</co
         <span class="xml&#45;tag">&#60;mapping class=<span class="xml&#45;quote">"com.books.Book"</span> /&#62;</span>
     <span class="xml&#45;tag">&#60;/session&#45;factory&#62;</span>
 <span class="xml&#45;tag">&#60;/hibernate&#45;configuration&#62;</span></pre></div>
-See the previous section for more information on the <code>hibernate.cfg.xml</code> file.<p class="paragraph"/>When Grails loads it will register the necessary dynamic methods with the class. To see what else you can do with a Hibernate domain class see the section on <a href="../guide/single.html#scaffolding" class="guide">Scaffolding</a>.
+<div class="hidden-block">
+See the previous section for more information on the <code>hibernate.cfg.xml</code> file.
+</div>
+<code>hibernate.cfg.xml</code>ファイルの詳細は、前のセクションを参照してください。<p class="paragraph"/><div class="hidden-block">
+When Grails loads it will register the necessary dynamic methods with the class. To see what else you can do with a Hibernate domain class see the section on <a href="../guide/single.html#scaffolding" class="guide">Scaffolding</a>.
+</div>
+先程のドメインクラスをGrailsがロードするときに、クラスに対し必要なダイナミックメソッドを追加します。
+ダイナミックメソッド以外に、Hibernateのドメインクラスで何ができるかについては、<a href="../guide/single.html#scaffolding" class="guide">スカッフォルディング</a>のセクションを参照してください。
 
 
 <a name="15.3 Adding Constraints"><!-- Legacy link --></a>
 <h2 id="addingConstraints">17.3 制約の追加</h2>
-You can still use GORM validation even if you use a Java domain model. Grails lets you define constraints through separate scripts in the <code>src/java</code> directory. The script must be in a directory that matches the package of the corresponding domain class and its name must have a  <em class="italic">Constraints</em>  suffix. For example, if you had a domain class <code>org.example.Book</code>, then you would create the script <code>src/java/org/example/BookConstraints.groovy</code>&#46;<p class="paragraph"/>Add a standard GORM <code>constraints</code> block to the script:
-<div class="code"><pre>constraints = &#123;
+<div class="hidden-block">
+You can still use GORM validation even if you use a Java domain model. Grails lets you define constraints through separate scripts in the <code>src/java</code> directory. The script must be in a directory that matches the package of the corresponding domain class and its name must have a  <em class="italic">Constraints</em>  suffix. For example, if you had a domain class <code>org.example.Book</code>, then you would create the script <code>src/java/org/example/BookConstraints.groovy</code>&#46;
+</div>
+Javaのドメインモデルを使用する場合でも、GORMのバリデーションを使用できます。
+Grailsでは<code>src/java</code>ディレクトリ内の、別個のスクリプトを通じて制約を定義します。
+このスクリプトは、対応するドメインクラスのパッケージと同じディレクトリ内に格納し、ファイル名のサフィックスは  <em class="italic">Constraints</em>  でなければなりません。
+たとえば、<code>org.example.Book</code>というドメインクラスの場合は、<code>src/java/org/example/BookConstraints.groovy</code>というスクリプトを作成します。<p class="paragraph"/><div class="hidden-block">
+Add a standard GORM <code>constraints</code> block to the script:
+</div>
+そして、このスクリプトに通常のGORMの<code>constraints</code>ブロックを追加してください。<p class="paragraph"/><div class="code"><pre>constraints = &#123;
     title blank: <span class="java&#45;keyword">false</span>
     author blank: <span class="java&#45;keyword">false</span>
-&#125;</pre></div><p class="paragraph"/>Once this is in place you can validate instances of your domain class!
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Once this is in place you can validate instances of your domain class!
+</div>
+正しく設定できていれば、ドメインクラスのインスタンスに対してバリデーションが可能になります。
 
 
 

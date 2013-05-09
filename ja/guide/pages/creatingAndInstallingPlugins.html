@@ -204,17 +204,8 @@ underlying system uses the Quartz Enterprise Job Scheduler configured&#92;
 via Spring, but is made simpler by the coding by convention paradigm.&#92;
 '''
     def documentation = <span class="java&#45;quote">"http://grails.org/plugin/quartz"</span><p class="paragraph"/>   &#8230;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
-<h4>Installing and Distributing Plugins</h4>
-</div><p class="paragraph"/><h4>プラグインのインストールと配布</h4><p class="paragraph"/><div class="hidden-block">
-To distribute a plugin you navigate to its root directory in a console and run:
-</div><p class="paragraph"/>プラグインを配布するには、プラグインのルートディレクトリに移動して以下を実行します:<p class="paragraph"/><div class="code"><pre>grails <span class="java&#45;keyword">package</span>&#45;plugin</pre></div><p class="paragraph"/><div class="hidden-block">
-This will create a zip file of the plugin starting with <code>grails-</code> then the plugin name and version. For example with the example plugin created earlier this would be <code>grails-example-0.1.zip</code>. The <code>package-plugin</code> command will also generate a <code>plugin.xml</code> file which contains machine-readable information about plugin's name, version, author, and so on.
-</div><p class="paragraph"/>これで「<code>grails-</code>」で始まり「プラグイン名+バージョン」が続くファイル名で、このプラグインのzipファイルが作成されます。例えば、先ほど作成したexampleプラグインでは<code>grails-example-0.1.zip</code>が作成されます。<code>package-plugin</code>コマンドはプラグインに関するマシンリーダブルな情報(プラグイン名やバージョン、作者など)を含む<code>plugin.xml</code>ファイルも生成します。<p class="paragraph"/><div class="hidden-block">
-Once you have a plugin distribution file you can navigate to a Grails project and run:
-</div><p class="paragraph"/>いったんプラグイン配布ファイルが作成されれば、Grailsプロジェクトのディレクトリに行き、以下のように実行することでプラグインをインストールすることができます:<p class="paragraph"/><div class="code"><pre>grails install&#45;plugin /path/to/grails&#45;example&#45;0.1.zip</pre></div><p class="paragraph"/><div class="hidden-block">
-If the plugin is hosted on an HTTP server you can install it with:
-</div><p class="paragraph"/>プラグインがHTTPサーバに置かれている場合は、以下でインストールできます。<p class="paragraph"/><div class="code"><pre>grails install&#45;plugin http://myserver.com/plugins/grails&#45;example&#45;0.1.zip</pre></div><p class="paragraph"/><div class="hidden-block">
+&#125;</pre></div><p class="paragraph"/><h4>Installing Local Plugins</h4><p class="paragraph"/>To make your plugin available for use in a Grails application run the <code>maven-install</code> command:<p class="paragraph"/><div class="code"><pre>grails maven&#45;install</pre></div><p class="paragraph"/>This will install the plugin into your local Maven cache. Then to use the plugin within an application declare a dependency on the plugin in your <code>grails-app/conf/BuildConfig.groovy</code> file:<p class="paragraph"/><div class="code"><pre>compile <span class="java&#45;quote<a href="quartz:0.1"</span></pre></div>">></a><p class="paragraph"/>
+<div class="hidden-block">
 <h4>Notes on excluded Artefacts</h4>
 </div><p class="paragraph"/><h4>アーテファクト除外についての留意事項</h4><p class="paragraph"/><div class="hidden-block">
 Although the <a href="../ref/Command Line/create-plugin.html" class="commandLine">create-plugin</a> command creates certain files for you so that the plugin can be run as a Grails application, not all of these files are included when packaging a plugin. The following is a list of artefacts created, but not included by <a href="../ref/Command Line/package-plugin.html" class="commandLine">package-plugin</a>:
@@ -274,14 +265,7 @@ This is particularly useful in two cases:
 <li>アプリケーションが複数のプラグイン群に分割されており、それらすべてが同じ「スーパープロジェクト」ディレクトリ配下にある場合。</li>
 </ul><p class="paragraph"/><blockquote class="note">
 The Artifactory repository for Grails now includes all the dependencies for published plugins. So, if you are using inline plugins that have dependencies, it is necessary to do a secondary resolve because these dependencies might not be in the repository. Therefore, you should set <code>legacyResolve</code> to <code>true</code> in your <code>BuildConfig.groovy</code> if you are using inline plugins with dependencies.
-</blockquote><p class="paragraph"/><div class="hidden-block">
-<h4>Global plugins</h4>
-</div><p class="paragraph"/><h4>グローバルプラグイン</h4><p class="paragraph"/><div class="hidden-block">
-Plugins can also be installed globally for all applications for a particular version of Grails using the <code>&#45;global</code> flag, for example:
-</div><p class="paragraph"/><code>grails insatll-plugin</code>コマンドの実行時に<code>&#45;global</code>オプションを指定すると、プラグインは特定バージョンのGrailsごとに「グローバルに」インストールすることができます(訳注:<code>&#45;global</code>を指定しないと、プラグインはアプリごとにインストールされる。つまり複数のアプリであれば、それぞれ用にプラグインが別個にコピーされる)。以下は例です:<p class="paragraph"/><div class="code"><pre>grails install&#45;plugin webtest &#45;global</pre></div><p class="paragraph"/><div class="hidden-block">
-The default location is &#36;USER_HOME/.grails/&#60;grailsVersion&#62;/global-plugins but this can be customized with the <code>grails.global.plugins.dir</code> setting in <code>BuildConfig.groovy</code>.
-</div><p class="paragraph"/>グローバルにインストールしたときにプラグインが保存される場所のデフォルトは、「&#36;USER_HOME/.grails/&#60;grailsVersion&#62;/global-plugins」ですが、<code>BuildConfig.groovy</code>中の<code>grails.global.plugins.dir</code>の設定で変更することも出来ます。
-
+</blockquote><p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>

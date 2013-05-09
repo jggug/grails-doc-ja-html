@@ -148,8 +148,12 @@ The <code>dbCreate</code> property of the <code>DataSource</code> definition is 
 <li><code>update</code></li>
 <li><code>validate</code></li>
 <li>no value</li>
-</ul><p class="paragraph"/>In <a href="../guide/single.html#environments" class="guide">development</a> mode <code>dbCreate</code> is by default set to "create-drop", but at some point in development (and certainly once you go to production) you'll need to stop dropping and re-creating the database every time you start up your server.<p class="paragraph"/>It's tempting to switch to <code>update</code> so you retain existing data and only update the schema when your code changes, but Hibernate's update support is very conservative. It won't make any changes that could result in data loss, and doesn't detect renamed columns or tables, so you'll be left with the old one and will also have the new one.<p class="paragraph"/>Grails supports Rails-style migrations via the <a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> plugin which can be installed by running<p class="paragraph"/><pre class="bq"><code>
-grails install-plugin database-migration</code></pre><p class="paragraph"/>The plugin uses <a href="http://www.liquibase.org/" target="blank">Liquibase</a> and and provides access to all of its functionality, and also has support for GORM (for example generating a change set by comparing your domain classes to a database).
+</ul><p class="paragraph"/>In <a href="../guide/single.html#environments" class="guide">development</a> mode <code>dbCreate</code> is by default set to "create-drop", but at some point in development (and certainly once you go to production) you'll need to stop dropping and re-creating the database every time you start up your server.<p class="paragraph"/>It's tempting to switch to <code>update</code> so you retain existing data and only update the schema when your code changes, but Hibernate's update support is very conservative. It won't make any changes that could result in data loss, and doesn't detect renamed columns or tables, so you'll be left with the old one and will also have the new one.<p class="paragraph"/>Grails supports migrations via the <a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> plugin which can be installed by declaring the plugin in <code>grails-app/conf/BuildConfig.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+    &#8230;
+    plugins &#123;
+        runtime <span class="java&#45;quote<a href="database&#45;migration:1.3.1"</span>">></a>
+    &#125;
+&#125;</pre></div><p class="paragraph"/>The plugin uses <a href="http://www.liquibase.org/" target="blank">Liquibase</a> and and provides access to all of its functionality, and also has support for GORM (for example generating a change set by comparing your domain classes to a database).
 
 
 
