@@ -141,52 +141,112 @@ function addJsClass() {
                 
 <a name="14.4 The BeanBuilder DSL Explained"><!-- Legacy link --></a>
 <h2 id="theBeanBuilderDSLExplained">16.4 ビーンビルダーDSLの解説</h2>
-<h4>Using Constructor Arguments</h4><p class="paragraph"/>Constructor arguments can be defined using parameters to each bean-defining method. Put them after the first argument (the Class):
+<div class="hidden-block">
+<h4>Using Constructor Arguments</h4>
+</div>
+<h4>コンストラクタ引数の使い方</h4><p class="paragraph"/><div class="hidden-block">
+Constructor arguments can be defined using parameters to each bean-defining method. Put them after the first argument (the Class):
+</div>
+コンストラクタ引数は、各ビーン定義のメソッドにパラメータを使うことで定義できます。
+パラメータはビーン定義の最初の引数(クラス)に続けて渡します。
 <div class="code"><pre>bb.beans &#123;
     exampleBean(MyExampleBean, <span class="java&#45;quote">"firstArgument"</span>, 2) &#123;
         someProperty = &#91;1, 2, 3&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/>This configuration corresponds to a <code>MyExampleBean</code> with a constructor that looks like this:<p class="paragraph"/><div class="code"><pre>MyExampleBean(<span class="java&#45;object">String</span> foo, <span class="java&#45;object">int</span> bar) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This configuration corresponds to a <code>MyExampleBean</code> with a constructor that looks like this:
+</div>
+この設定は、次のように定義されている<code>MyExampleBean</code>のコンストラクタに対応付けされます。<p class="paragraph"/><div class="code"><pre>MyExampleBean(<span class="java&#45;object">String</span> foo, <span class="java&#45;object">int</span> bar) &#123;
    &#8230;
-&#125;</pre></div><p class="paragraph"/><h4>Configuring the BeanDefinition (Using factory methods)</h4><p class="paragraph"/>The first argument to the closure is a reference to the bean configuration instance, which you can use to configure factory methods and invoke any method on the <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/beans/factory/support/AbstractBeanDefinition.html" class="api">AbstractBeanDefinition</a> class:<p class="paragraph"/><div class="code"><pre>bb.beans &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Configuring the BeanDefinition (Using factory methods)</h4>
+</div>
+<h4>ビーン定義の設定 (ファクトリメソッドの利用)</h4><p class="paragraph"/><div class="hidden-block">
+The first argument to the closure is a reference to the bean configuration instance, which you can use to configure factory methods and invoke any method on the <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/beans/factory/support/AbstractBeanDefinition.html" class="api">AbstractBeanDefinition</a> class:
+</div>
+クロージャに渡される最初の引数は、対象となるビーンのインスタンスへの参照であり、ファクトリメソッドの設定や<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/beans/factory/support/AbstractBeanDefinition.html" class="api">AbstractBeanDefinition</a>クラス上のメソッドの呼び出しに用いることができます。<p class="paragraph"/><div class="code"><pre>bb.beans &#123;
     exampleBean(MyExampleBean) &#123; bean &#45;&#62;
         bean.factoryMethod = <span class="java&#45;quote">"getInstance"</span>
         bean.singleton = <span class="java&#45;keyword">false</span>
         someProperty = &#91;1, 2, 3&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/>As an alternative you can also use the return value of the bean defining method to configure the bean:<p class="paragraph"/><div class="code"><pre>bb.beans &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+As an alternative you can also use the return value of the bean defining method to configure the bean:
+</div>
+代わりにビーン定義のメソッドの返り値を使って設定することもできます。<p class="paragraph"/><div class="code"><pre>bb.beans &#123;
     def example = exampleBean(MyExampleBean) &#123;
         someProperty = &#91;1, 2, 3&#93;
     &#125;
     example.factoryMethod = <span class="java&#45;quote">"getInstance"</span>
-&#125;</pre></div><p class="paragraph"/><h4>Using Factory beans</h4><p class="paragraph"/>Spring defines the concept of factory beans and often a bean is created not directly from a new instance of a Class, but from one of these factories. In this case the bean has no Class argument and instead you must pass the name of the factory bean to the bean defining method:<p class="paragraph"/><div class="code"><pre>bb.beans &#123;<p class="paragraph"/>    myFactory(ExampleFactoryBean) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Using Factory beans</h4>
+</div>
+<h4>ファクトリビーンの利用</h4><p class="paragraph"/><div class="hidden-block">
+Spring defines the concept of factory beans and often a bean is created not directly from a new instance of a Class, but from one of these factories. In this case the bean has no Class argument and instead you must pass the name of the factory bean to the bean defining method:
+</div>
+Springはファクトリビーンの概念を定義しており、ビーンはクラスの新しいインスタンスから直接作成されないことが多く、いずれかのファクトリが用いられます。
+この場合、ビーン定義のメソッドの引数にクラスを渡さず、代わりにファクトリビーン名を渡す必要があります。<p class="paragraph"/><div class="code"><pre>bb.beans &#123;<p class="paragraph"/>    myFactory(ExampleFactoryBean) &#123;
         someProperty = &#91;1, 2, 3&#93;
     &#125;<p class="paragraph"/>    myBean(myFactory) &#123;
         name = <span class="java&#45;quote">"blah"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>Another common approach is provide the name of the factory method to call on the factory bean. This can be done using Groovy's named parameter syntax:<p class="paragraph"/><div class="code"><pre>bb.beans &#123;<p class="paragraph"/>    myFactory(ExampleFactoryBean) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Another common approach is provide the name of the factory method to call on the factory bean. This can be done using Groovy's named parameter syntax:
+</div>
+別のアプローチとして、ファクトリビーンで呼び出すファクトリメソッドの名前を渡すことができます。
+これにはGroovyの名前付き引数の構文を用います。<p class="paragraph"/><div class="code"><pre>bb.beans &#123;<p class="paragraph"/>    myFactory(ExampleFactoryBean) &#123;
         someProperty = &#91;1, 2, 3&#93;
     &#125;<p class="paragraph"/>    myBean(myFactory: <span class="java&#45;quote">"getInstance"</span>) &#123;
         name = <span class="java&#45;quote">"blah"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>Here the <code>getInstance</code> method on the <code>ExampleFactoryBean</code> bean will be called to create the <code>myBean</code> bean.<p class="paragraph"/><h4>Creating Bean References at Runtime</h4><p class="paragraph"/>Sometimes you don't know the name of the bean to be created until runtime. In this case you can use a string interpolation to invoke a bean defining method dynamically:<p class="paragraph"/><div class="code"><pre>def beanName = <span class="java&#45;quote">"example"</span>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Here the <code>getInstance</code> method on the <code>ExampleFactoryBean</code> bean will be called to create the <code>myBean</code> bean.
+</div>
+この例では<code>ExampleFactoryBean</code>ビーン上の<code>getInstance</code>メソッドが<code>myBean</code>ビーンの生成時に呼び出されます。<p class="paragraph"/><div class="hidden-block">
+<h4>Creating Bean References at Runtime</h4>
+</div>
+<h4>ビーンへの参照を実行時に生成する</h4><p class="paragraph"/><div class="hidden-block">
+Sometimes you don't know the name of the bean to be created until runtime. In this case you can use a string interpolation to invoke a bean defining method dynamically:
+</div>
+生成するビーンの名前を実行時に決めたい場合があります。
+そういったときは、動的にビーン定義メソッドを実行するために文字列の置き換えが使えます。<p class="paragraph"/><div class="code"><pre>def beanName = <span class="java&#45;quote">"example"</span>
 bb.beans &#123;
     <span class="java&#45;quote">"$&#123;beanName&#125;Bean"</span>(MyExampleBean) &#123;
         someProperty = &#91;1, 2, 3&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/>In this case the <code>beanName</code> variable defined earlier is used when invoking a bean defining method. The example has a hard-coded value but would work just as well with a name that is generated programmatically based on configuration, system properties, etc.<p class="paragraph"/>Furthermore, because sometimes bean names are not known until runtime you may need to reference them by name when wiring together other beans, in this case using the <code>ref</code> method:<p class="paragraph"/><div class="code"><pre>def beanName = <span class="java&#45;quote">"example"</span>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In this case the <code>beanName</code> variable defined earlier is used when invoking a bean defining method. The example has a hard-coded value but would work just as well with a name that is generated programmatically based on configuration, system properties, etc.
+</div>
+この場合、前もって定義された<code>beanName</code>変数を用いてビーン定義メソッドを呼び出しています。
+この例では値をハードコードしていますが、設定やシステムプロパティ等に基づいて生成された名前でも同様に動作します。<p class="paragraph"/><div class="hidden-block">
+Furthermore, because sometimes bean names are not known until runtime you may need to reference them by name when wiring together other beans, in this case using the <code>ref</code> method:
+</div>
+さらに、そういった実行時まで名前の分からないビーンへの紐付けを、<code>ref</code>メソッドを用いて他のビーンから名前で参照する必要が生じることがあります。<p class="paragraph"/><div class="code"><pre>def beanName = <span class="java&#45;quote">"example"</span>
 bb.beans &#123;<p class="paragraph"/>    <span class="java&#45;quote">"$&#123;beanName&#125;Bean"</span>(MyExampleBean) &#123;
         someProperty = &#91;1, 2, 3&#93;
     &#125;<p class="paragraph"/>    anotherBean(AnotherBean) &#123;
         example = ref(<span class="java&#45;quote">"$&#123;beanName&#125;Bean"</span>)
     &#125;
-&#125;</pre></div><p class="paragraph"/>Here the example property of <code>AnotherBean</code> is set using a runtime reference to the <code>exampleBean</code>. The <code>ref</code> method can also be used to refer to beans from a parent <code>ApplicationContext</code> that is provided in the constructor of the <code>BeanBuilder</code>:<p class="paragraph"/><div class="code"><pre>ApplicationContext parent = ...//
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Here the example property of <code>AnotherBean</code> is set using a runtime reference to the <code>exampleBean</code>. The <code>ref</code> method can also be used to refer to beans from a parent <code>ApplicationContext</code> that is provided in the constructor of the <code>BeanBuilder</code>:
+</div>
+この例では<code>exampleBean</code>への実行時参照を用いて<code>AnotherBean</code>のプロパティに設定しています。
+<code>BeanBuilder</code>のコンストラクタで提供される親<code>ApplicationContext</code>からビーンを参照するためにも、<code>ref</code>メソッドを使うことができます。<p class="paragraph"/><div class="code"><pre>ApplicationContext parent = ...//
 der bb = <span class="java&#45;keyword">new</span> BeanBuilder(parent)
 bb.beans &#123;
     anotherBean(AnotherBean) &#123;
         example = ref(<span class="java&#45;quote">"$&#123;beanName&#125;Bean"</span>, <span class="java&#45;keyword">true</span>)
     &#125;
-&#125;</pre></div><p class="paragraph"/>Here the second parameter <code>true</code> specifies that the reference will look for the bean in the parent context.<p class="paragraph"/><h4>Using Anonymous (Inner) Beans</h4><p class="paragraph"/>You can use anonymous inner beans by setting a property of the bean to a block that takes an argument that is the bean type:<p class="paragraph"/><div class="code"><pre>bb.beans &#123;<p class="paragraph"/>    marge(Person) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Here the second parameter <code>true</code> specifies that the reference will look for the bean in the parent context.
+</div>
+ここでは<code>ref</code>メソッドの第2引数に<code>true</code>を渡すことで、親となるコンテキストからビーンを探すことを指定しています。<p class="paragraph"/><div class="hidden-block">
+<h4>Using Anonymous (Inner) Beans</h4>
+</div>
+<h4>匿名(内部)ビーンを使う</h4><p class="paragraph"/><div class="hidden-block">
+You can use anonymous inner beans by setting a property of the bean to a block that takes an argument that is the bean type:
+</div>
+ビーンの型を引数に取るブロックで、ビーンのプロパティを設定することにより匿名内部ビーンが使えます。<p class="paragraph"/><div class="code"><pre>bb.beans &#123;<p class="paragraph"/>    marge(Person) &#123;
         name = <span class="java&#45;quote">"Marge"</span>
         husband = &#123; Person p &#45;&#62;
             name = <span class="java&#45;quote">"Homer"</span>
@@ -201,7 +261,11 @@ bb.beans &#123;
         name = <span class="java&#45;quote">"Lisa"</span>
         age = 9
     &#125;
-&#125;</pre></div><p class="paragraph"/>In the above example we set the <code>marge</code> bean's husband property to a block that creates an inner bean reference. Alternatively if you have a factory bean you can omit the type and just use the specified bean definition instead to setup the factory:<p class="paragraph"/><div class="code"><pre>bb.beans &#123;<p class="paragraph"/>    personFactory(PersonFactory)<p class="paragraph"/>    marge(Person) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In the above example we set the <code>marge</code> bean's husband property to a block that creates an inner bean reference. Alternatively if you have a factory bean you can omit the type and just use the specified bean definition instead to setup the factory:
+</div>
+上記の例では<code>merge</code>ビーンの<code>husband</code>プロパティに、内部ビーンの参照を作成したブロックを渡しています。
+ファクトリを持つビーンは型を省略でき、ファクトリをセットアップする代わりに指定されたビーンの定義を利用するだけで済みます。<p class="paragraph"/><div class="code"><pre>bb.beans &#123;<p class="paragraph"/>    personFactory(PersonFactory)<p class="paragraph"/>    marge(Person) &#123;
         name = <span class="java&#45;quote">"Marge"</span>
         husband = &#123; bean &#45;&#62;
             bean.factoryBean = <span class="java&#45;quote">"personFactory"</span>
@@ -212,7 +276,13 @@ bb.beans &#123;
         &#125;
         children = &#91;bart, lisa&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Abstract Beans and Parent Bean Definitions</h4><p class="paragraph"/>To create an abstract bean definition define a bean without a <code>Class</code> parameter:<p class="paragraph"/><div class="code"><pre>class HolyGrailQuest &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Abstract Beans and Parent Bean Definitions</h4>
+</div>
+<h4>抽象ビーンと親ビーンの定義</h4><p class="paragraph"/><div class="hidden-block">
+To create an abstract bean definition define a bean without a <code>Class</code> parameter:
+</div>
+抽象ビーン定義を作成するには、パラメータに<code>Class</code>を渡さずに定義します。<p class="paragraph"/><div class="code"><pre>class HolyGrailQuest &#123;
     def start() &#123; println <span class="java&#45;quote">"lets begin"</span> &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class KnightOfTheRoundTable &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> name
     <span class="java&#45;object">String</span> leader
@@ -227,15 +297,27 @@ bb.beans &#123;
         leader = <span class="java&#45;quote">"Lancelot"</span>
     &#125;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>Here we define an abstract bean that has a <code>leader</code> property with the value of <code>"Lancelot"</code>. To use the abstract bean set it as the parent of the child bean:<p class="paragraph"/><div class="code"><pre>bb.beans &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Here we define an abstract bean that has a <code>leader</code> property with the value of <code>"Lancelot"</code>. To use the abstract bean set it as the parent of the child bean:
+</div>
+ここでは、値に<code>"Lancelot"</code>が入っている<code>leader</code>プロパティを持つ抽象ビーンを定義しています。
+子ビーンの親として抽象ビーンを使うには、次のように設定します。<p class="paragraph"/><div class="code"><pre>bb.beans &#123;
     &#8230;
     quest(HolyGrailQuest)<p class="paragraph"/>    knights(KnightOfTheRoundTable, <span class="java&#45;quote">"Camelot"</span>) &#123; bean &#45;&#62;
         bean.parent = abstractBean
         quest = ref('quest')
     &#125;
-&#125;</pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 When using a parent bean you must set the parent property of the bean before setting any other properties on the bean!
-</blockquote><p class="paragraph"/>If you want an abstract bean that has a <code>Class</code> specified you can do it this way:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.spring.BeanBuilder<p class="paragraph"/>def bb = <span class="java&#45;keyword">new</span> BeanBuilder()
+</blockquote>
+</div>
+<blockquote class="note">
+親ビーンを利用するときは、ビーン上の他のプロパティを設定する前に、ビーンの<code>parent</code>プロパティへ設定する必要があります。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+If you want an abstract bean that has a <code>Class</code> specified you can do it this way:
+</div>
+<code>Class</code>を明示して抽象ビーンを利用したい場合は、次に示す方法で可能です。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.spring.BeanBuilder<p class="paragraph"/>def bb = <span class="java&#45;keyword">new</span> BeanBuilder()
 bb.beans &#123;<p class="paragraph"/>    abstractBean(KnightOfTheRoundTable) &#123; bean &#45;&#62;
         bean.'<span class="java&#45;keyword">abstract</span>' = <span class="java&#45;keyword">true</span>
         leader = <span class="java&#45;quote">"Lancelot"</span>
@@ -243,14 +325,39 @@ bb.beans &#123;<p class="paragraph"/>    abstractBean(KnightOfTheRoundTable) &#1
         bean.parent = abstractBean
         quest = quest
     &#125;
-&#125;</pre></div><p class="paragraph"/>In this example we create an abstract bean of type <code>KnightOfTheRoundTable</code> and use the bean argument to set it to abstract. Later we define a knights bean that has no <code>Class</code> defined, but inherits the <code>Class</code> from the parent bean.<p class="paragraph"/><h4>Using Spring Namespaces</h4><p class="paragraph"/>Since Spring 2.0, users of Spring have had easier access to key features via XML namespaces. You can use a Spring namespace in BeanBuilder by declaring it with this syntax:<p class="paragraph"/><div class="code"><pre>xmlns context:<span class="java&#45;quote">"http://www.springframework.org/schema/context"</span></pre></div><p class="paragraph"/>and then invoking a method that matches the names of the Spring namespace tag and its associated attributes:<p class="paragraph"/><div class="code"><pre>context.'component&#45;scan'('base&#45;<span class="java&#45;keyword">package</span>': <span class="java&#45;quote">"my.company.domain"</span>)</pre></div><p class="paragraph"/>You can do some useful things with Spring namespaces, such as looking up a JNDI resource:<p class="paragraph"/><div class="code"><pre>xmlns jee:<span class="java&#45;quote">"http://www.springframework.org/schema/jee"</span><p class="paragraph"/>jee.'jndi&#45;lookup'(id: <span class="java&#45;quote">"dataSource"</span>, 'jndi&#45;name': <span class="java&#45;quote">"java:comp/env/myDataSource"</span>)</pre></div><p class="paragraph"/>This example will create a Spring bean with the identifier <code>dataSource</code> by performing a JNDI lookup on the given JNDI name. With Spring namespaces you also get full access to all of the powerful AOP support in Spring from BeanBuilder. For example given these two classes:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">int</span> age
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In this example we create an abstract bean of type <code>KnightOfTheRoundTable</code> and use the bean argument to set it to abstract. Later we define a knights bean that has no <code>Class</code> defined, but inherits the <code>Class</code> from the parent bean.
+</div>
+この例では、ビーンの<code>abstract</code>プロパティを利用して<code>KnightOfTheRoundTable</code>型の抽象ビーンを作成しています。
+その後、<code>Class</code>の指定のない<code>knights</code>ビーンを定義していますが、<code>Class</code>は親ビーンから継承されます。<p class="paragraph"/><div class="hidden-block">
+<h4>Using Spring Namespaces</h4>
+</div>
+<h4>Springの名前空間を使う</h4><p class="paragraph"/><div class="hidden-block">
+Since Spring 2.0, users of Spring have had easier access to key features via XML namespaces. You can use a Spring namespace in BeanBuilder by declaring it with this syntax:
+</div>
+Spring 2.0から、XML名前空間を経由して主要な機能へ簡単にアクセスすることができるようになりました。
+次の構文で宣言することにより、<code>BeanBuilder</code>でSpringの名前空間を使うことができます。<p class="paragraph"/><div class="code"><pre>xmlns context:<span class="java&#45;quote">"http://www.springframework.org/schema/context"</span></pre></div><p class="paragraph"/><div class="hidden-block">
+and then invoking a method that matches the names of the Spring namespace tag and its associated attributes:
+</div>
+そしてSpring名前空間のタグと、それに紐付いた属性の名前に一致するメソッドを呼び出します。<p class="paragraph"/><div class="code"><pre>context.'component&#45;scan'('base&#45;<span class="java&#45;keyword">package</span>': <span class="java&#45;quote">"my.company.domain"</span>)</pre></div><p class="paragraph"/><div class="hidden-block">
+You can do some useful things with Spring namespaces, such as looking up a JNDI resource:
+</div>
+JNDIリソースを解決するといったような、Spring名前空間にある有用なものを利用できます。<p class="paragraph"/><div class="code"><pre>xmlns jee:<span class="java&#45;quote">"http://www.springframework.org/schema/jee"</span><p class="paragraph"/>jee.'jndi&#45;lookup'(id: <span class="java&#45;quote">"dataSource"</span>, 'jndi&#45;name': <span class="java&#45;quote">"java:comp/env/myDataSource"</span>)</pre></div><p class="paragraph"/><div class="hidden-block">
+This example will create a Spring bean with the identifier <code>dataSource</code> by performing a JNDI lookup on the given JNDI name. With Spring namespaces you also get full access to all of the powerful AOP support in Spring from BeanBuilder. For example given these two classes:
+</div>
+この例では<code>dataSource</code>という識別子で、与えられたJNDI名でJNDIを解決するSpringビーンを作成します。
+また、Spring名前空間によって<code>BeanBuilder</code>から強力なSpringのAOPサポートにフルアクセスできます。
+2つのクラスを使って例を示します。<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">int</span> age
     <span class="java&#45;object">String</span> name<p class="paragraph"/>    void birthday() &#123;
         ++age;
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class BirthdayCardSender &#123;<p class="paragraph"/>    List peopleSentCards = &#91;&#93;<p class="paragraph"/>    void onBirthday(Person person) &#123;
         peopleSentCards &#60;&#60; person
     &#125;
-&#125;</pre></div><p class="paragraph"/>You can define an aspect that uses a pointcut to detect whenever the <code>birthday()</code> method is called:<p class="paragraph"/><div class="code"><pre>xmlns aop:<span class="java&#45;quote">"http://www.springframework.org/schema/aop"</span><p class="paragraph"/>fred(Person) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+You can define an aspect that uses a pointcut to detect whenever the <code>birthday()</code> method is called:
+</div>
+<code>birthday()</code>メソッドの呼び出しを検出するポイントカットを使用して、アスペクトを次のように定義できます。<p class="paragraph"/><div class="code"><pre>xmlns aop:<span class="java&#45;quote">"http://www.springframework.org/schema/aop"</span><p class="paragraph"/>fred(Person) &#123;
     name = <span class="java&#45;quote">"Fred"</span>
     age = 45
 &#125;<p class="paragraph"/>birthdayCardSenderAspect(BirthdayCardSender)<p class="paragraph"/>aop &#123;
