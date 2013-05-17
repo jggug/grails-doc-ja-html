@@ -373,8 +373,8 @@ you want to verify the logic that is executed on a good form submission and the 
 Testing the successful submission requires providing an appropriate <code>SynchronizerToken</code>:
 </div><p class="paragraph"/>フォームの送信が成功する場合のテストは適切な<code>SynchronizerToken</code>が必要となります。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.servlet.mvc.SynchronizerToken
 ...<p class="paragraph"/>void testValidFormSubmission() &#123;
-    def token = SynchronizerToken.store(session)
-    params&#91;SynchronizerToken.KEY&#93; = token.currentToken.toString()<p class="paragraph"/>    controller.handleForm()
+    def tokenHolder = SynchronizerTokensHolder.store(session)<p class="paragraph"/>    params&#91;SynchronizerTokensHolder.TOKEN_URI&#93; = '/controller/handleForm'
+    params&#91;SynchronizerTokensHolder.TOKEN_KEY&#93; = tokenHolder.generateToken(params&#91;SynchronizerTokensHolder.TOKEN_URI&#93;)<p class="paragraph"/>    controller.handleForm()
     assert <span class="java&#45;quote">"Good"</span> == response.text
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
 If you test both the valid and the invalid request in the same test be sure to reset the response between executions of the controller:

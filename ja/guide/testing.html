@@ -515,8 +515,8 @@ you want to verify the logic that is executed on a good form submission and the 
 Testing the successful submission requires providing an appropriate <code>SynchronizerToken</code>:
 </div><p class="paragraph"/>フォームの送信が成功する場合のテストは適切な<code>SynchronizerToken</code>が必要となります。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.servlet.mvc.SynchronizerToken
 ...<p class="paragraph"/>void testValidFormSubmission() &#123;
-    def token = SynchronizerToken.store(session)
-    params&#91;SynchronizerToken.KEY&#93; = token.currentToken.toString()<p class="paragraph"/>    controller.handleForm()
+    def tokenHolder = SynchronizerTokensHolder.store(session)<p class="paragraph"/>    params&#91;SynchronizerTokensHolder.TOKEN_URI&#93; = '/controller/handleForm'
+    params&#91;SynchronizerTokensHolder.TOKEN_KEY&#93; = tokenHolder.generateToken(params&#91;SynchronizerTokensHolder.TOKEN_URI&#93;)<p class="paragraph"/>    controller.handleForm()
     assert <span class="java&#45;quote">"Good"</span> == response.text
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
 If you test both the valid and the invalid request in the same test be sure to reset the response between executions of the controller:
@@ -1088,8 +1088,8 @@ Subclasses of <code>WebFlowTestCase</code> <strong class="bold">must</strong> be
 
 <a name="9.3 Functional Testing"><!-- Legacy link --></a>
 <h2 id="functionalTesting">11.3 ファンクショナルテスト</h2>
-<div class="hidden-block">Functional tests involve making HTTP requests against the running application and verifying the resultant behaviour. Grails does not ship with any support for writing functional tests directly, but there are several plugins available for this.</div>
-ファンクショナルテストは実行中のアプリケーションに対してHTTPリクエストを行い、結果として得られた振る舞いを検証します。Grailsはファンクショナルテストを書くための直接的なサポートは提供しませんが、ファンクショナルテストのためのいくつかのプラグインが利用可能です。
+Functional tests involve making HTTP requests against the running application and verifying the resultant behaviour. The functional testing phase differs from the integration phase in that the Grails application is now listening and responding to actual HTTP requests. This is useful for end-to-end testing scenarios, such as making REST calls against a JSON API.<p class="paragraph"/><div class="hidden-block">Grails does not ship with any support for writing functional tests directly, but there are several plugins available for this.</div>
+Grailsはファンクショナルテストを書くための直接的なサポートは提供しませんが、ファンクショナルテストのためのいくつかのプラグインが利用可能です。
 <ul class="star">
 <li><code>Canoo Webtest</code> - <a href="http://grails.org/plugin/webtest" target="blank">http://grails.org/plugin/webtest</a></li>
 <li><code>G-Func</code> - <a href="http://grails.org/plugin/functional-test" target="blank">http://grails.org/plugin/functional-test</a></li>

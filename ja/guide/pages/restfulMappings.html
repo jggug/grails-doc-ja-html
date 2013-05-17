@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>7.4.12 &#12467;&#12531;&#12488;&#12525;&#12540;&#12521;&#12493;&#12540;&#12512;&#12473;&#12506;&#12540;&#12473; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>7.4.2 REST&#12522;&#12477;&#12540;&#12473;&#12408;&#12398;&#12510;&#12483;&#12500;&#12531;&#12464; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -125,7 +125,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>7.4.12 &#12467;&#12531;&#12488;&#12525;&#12540;&#12521;&#12493;&#12540;&#12512;&#12473;&#12506;&#12540;&#12473; - Reference Documentation</h1>
+                    <h1>7.4.2 REST&#12522;&#12477;&#12540;&#12473;&#12408;&#12398;&#12510;&#12483;&#12500;&#12531;&#12464; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -140,45 +140,17 @@ function addJsClass() {
 
                 
 
-<h2 id="namespacedControllers">7.4.12 コントローラネームスペース</h2>
-An application is not allowed to define multiple controllers with the same
-name, even if they are defined in separate packages.  For example an
-application may not contain <code>com.accounting.ReportingController</code> and
-<code>com.humanresources.ReportingController</code>.  However it is allowed for
-an application to use a plugin which provides a controller with the
-same name as a controller provided by the application as long as the
-controllers are in separate packages.  For example, an application
-may include a controller named <code>com.accounting.ReportingController</code>
-and the application may use a plugin which provides a controller
-named <code>com.humanresources.ReportingController</code>.  The only issue
-with that is the URL mapping for the controller provided by the
-plugin needs to be explicit in specifying that the mapping applies
-to the <code>ReportingController</code> which is provided by the plugin.<p class="paragraph"/>See the following example.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
-    <span class="java&#45;quote">"/accountingReports"</span> &#123;
-        controller = <span class="java&#45;quote">"reporting"</span>
-    &#125;
-    <span class="java&#45;quote">"/humanResourceReports"</span> &#123;
-        controller = <span class="java&#45;quote">"reporting"</span>
-        plugin = <span class="java&#45;quote">"humanResources"</span>
-    &#125;
-&#125;</pre></div><p class="paragraph"/>With that mapping in place, a request to <code>/accountingReports</code> will
-be handled by the <code>ReportingController</code> which is defined in the
-application.  A request to <code>/humanResourceReports</code> will be handled
-by the <code>ReportingController</code> which is provided by the <code>humanResources</code>
-plugin.<p class="paragraph"/>There could be any number of <code>ReportingController</code> controllers provided
-by any number of plugins but no plugin may provide more than one
-<code>ReportingController</code> even if they are defined in separate packages.<p class="paragraph"/>Assigning a value to the <code>plugin</code> variable in the mapping is only
-required if there are multiple controllers with the same name
-available at runtime provided by the application and/or plugins.
-If the <code>humanResources</code> plugin provides a <code>ReportingController</code> and
-there is no other <code>ReportingController</code> available at runtime, the
-following mapping would work.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
-    <span class="java&#45;quote">"/humanResourceReports"</span> &#123;
-        controller = <span class="java&#45;quote">"reporting"</span>
-    &#125;
-&#125;</pre></div><p class="paragraph"/>It is best practice to be explicit about the fact that the controller
-is being provided by a plugin though.<p class="paragraph"/>
-
+<h2 id="restfulMappings">7.4.2 RESTリソースへのマッピング</h2>
+Since Grails 2.3, it possible to create RESTful URL mappings that map onto controllers by convention. The syntax to do so is as follows:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book')</pre></div><p class="paragraph"/>You define a base URI and the name of the controller to map to using the <code>resources</code> parameter. The above mapping will result in the following URLs:<p class="paragraph"/>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${id}/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${id}</td><td>delete</td></tr></table><p class="paragraph"/>If you wish to include or exclude any of the generated URL mappings you can do so with the <code>include</code> or <code>exclude</code> parameter, which accepts the name of the Grails action to include or exclude:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book', exclude:&#91;'delete', 'update'&#93;)<p class="paragraph"/>or<p class="paragraph"/><span class="java&#45;quote">"/books"</span>(resources:'book', include:&#91;'index', 'show'&#93;)</pre></div><p class="paragraph"/><h4>Single resources</h4><p class="paragraph"/>A single resource is a resource for which there is only one (possibly per user) in the system. You can create a single resource using the <code>resource</code> parameter (as oppose to <code>resources</code>):<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/book"</span>(resource:'book')</pre></div><p class="paragraph"/>This results in the following URL mappings:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/book</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/book/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/book</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/book</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/book/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/book</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/book</td><td>delete</td></tr></table><p class="paragraph"/>The main difference is that the id is not included in the URL mapping.<p class="paragraph"/><h4>Nested Resources</h4><p class="paragraph"/>You can nest resource mappings to generate child resources. For example:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
+  <span class="java&#45;quote">"/authors"</span>(resources:<span class="java&#45;quote">"author"</span>)
+&#125;</pre></div><p class="paragraph"/>The above will result in the following URL mappings:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URL</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books/${bookId}/authors</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/${bookId}/authors/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books/${bookId}/authors</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${bookId}/authors/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${bookId}/authors/edit/${id}</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${bookId}/authors/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${bookId}/authors/${id}</td><td>delete</td></tr></table><p class="paragraph"/>You can also nest regular URL mappings within a resource mapping:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources: <span class="java&#45;quote">"book"</span>) &#123;
+    <span class="java&#45;quote">"/publisher"</span>(controller:<span class="java&#45;quote">"publisher"</span>)
+&#125;</pre></div><p class="paragraph"/>This will result in the following URL being available:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URL</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books/1/publisher</td><td>index</td></tr></table><p class="paragraph"/><h4>Linking to RESTful Mappings</h4><p class="paragraph"/>You can link to any URL mapping created with the <code>g:link</code> tag provided by Grails simply by referencing the controller and action to link to:<p class="paragraph"/><div class="code"><pre>&#60;g:link controller=<span class="java&#45;quote">"book"</span> action=<span class="java&#45;quote">"index"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>The same applies with nested resource. For example given the nested resources:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
+  <span class="java&#45;quote">"/authors"</span>(resources:<span class="java&#45;quote">"author"</span>)
+&#125;</pre></div><p class="paragraph"/>If you wished to link to the <code>show</code> action of the <code>author</code> controller, you would write:<p class="paragraph"/><div class="code"><pre>// Results in /books/1/authors/2
+&#60;g:link controller=<span class="java&#45;quote">"author"</span> action=<span class="java&#45;quote">"show"</span> method=<span class="java&#45;quote">"GET"</span> params=<span class="java&#45;quote">"&#91;bookId:1&#93;"</span> id=<span class="java&#45;quote">"2"</span>&#62;The Author&#60;/g:link&#62;</pre></div><p class="paragraph"/>However, to make this more concise there is a <code>resource</code> attribute to the link tag which can be used instead:<p class="paragraph"/><div class="code"><pre>// Results in /books/1/authors/2
+&#60;g:link resource=<span class="java&#45;quote">"book/author"</span> action=<span class="java&#45;quote">"show"</span> bookId=<span class="java&#45;quote">"1"</span> id=<span class="java&#45;quote">"2"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>The resource attribute accepts a path to the resource separated by a slash (in this case "book/author"). The attributes of the tag can be used to specify the necessary <code>bookId</code> parameter.
 
 
                 <div style="clear:both;margin-top:15px;"></div>

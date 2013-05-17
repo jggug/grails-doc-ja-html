@@ -142,7 +142,89 @@ function addJsClass() {
 <a name="6.1.6 Data Binding"><!-- Legacy link --></a>
 <h2 id="dataBinding">7.1.6 データバインディング</h2>
 <div class="hidden-block">Data binding is the act of "binding" incoming request parameters onto the properties of an object or an entire graph of objects. Data binding should deal with all necessary type conversion since request parameters, which are typically delivered by a form submission, are always strings whilst the properties of a Groovy or Java object may well not be.</div>
-データバインディングとは、受信したリクエストパラメータを、オブジェクトのプロパティまたオブジェクト構造へ結合させる機能です。データバインディングでは、フォームから送信された文字列のリクエストパラメータを、必要な型への変換を行います。<p class="paragraph"/><h4>モデルにリクエストデータをバインドする <div class="hidden-block">Binding Request Data to the Model </div></h4><p class="paragraph"/><div class="hidden-block">There are two ways to bind request parameters onto the properties of a domain class. The first involves using a domain classes' Map constructor:</div>
+データバインディングとは、受信したリクエストパラメータを、オブジェクトのプロパティまたオブジェクト構造へ結合させる機能です。データバインディングでは、フォームから送信された文字列のリクエストパラメータを、必要な型への変換を行います。<p class="paragraph"/>
+<h4>Map Based Binding</h4><p class="paragraph"/>The data binder is capable of converting and assigning values in a Map to properties of an object.  The binder will associate entries in the Map to properties of the object using the keys in the Map that have values which correspond to property names on the object.  The following code demonstrates the basics:<p class="paragraph"/><div class="code"><pre>// grails&#45;app/domain/Person.groovy
+class Person &#123;
+    <span class="java&#45;object">String</span> firstName
+    <span class="java&#45;object">String</span> lastName
+    <span class="java&#45;object">Integer</span> age
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>def bindingMap = &#91;firstName: 'Peter', lastName: 'Gabriel', age: 63&#93;<p class="paragraph"/>def person = <span class="java&#45;keyword">new</span> Person(bindingMap)<p class="paragraph"/>assert person.firstName == 'Peter'
+assert person.lastNaem == 'Gabriel'
+assert person.age == 63</pre></div><p class="paragraph"/>To update properties of a domain object you may assign a Map to the <code>properties</code> property of the domain class:<p class="paragraph"/><div class="code"><pre>def bindingMap = &#91;firstName: 'Peter', lastName: 'Gabriel', age: 63&#93;<p class="paragraph"/>def person = Person.get(someId)
+person.properties = bindingMap<p class="paragraph"/>assert person.firstName == 'Peter'
+assert person.lastNaem == 'Gabriel'
+assert person.age == 63</pre></div><p class="paragraph"/>The binder can populate a full graph of objects using Maps of Maps.<p class="paragraph"/><div class="code"><pre>class Person &#123;
+    <span class="java&#45;object">String</span> firstName
+    <span class="java&#45;object">String</span> lastName
+    <span class="java&#45;object">Integer</span> age
+    Address homeAddress
+&#125;<p class="paragraph"/>class Address &#123;
+    <span class="java&#45;object">String</span> county
+    <span class="java&#45;object">String</span> country
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>def bindingMap = &#91;firstName: 'Peter', lastName: 'Gabriel', age: 63, homeAddress: &#91;county: 'Surrey', country: 'England'&#93; &#93;<p class="paragraph"/>def person = <span class="java&#45;keyword">new</span> Person(bindingMap)<p class="paragraph"/>assert person.firstName == 'Peter'
+assert person.lastNaem == 'Gabriel'
+assert person.age == 63
+assert person.homeAddress.county == 'Surrey'
+assert person.homeAddress.country == 'England'</pre></div><p class="paragraph"/><h4>Binding To Collections And Maps</h4><p class="paragraph"/>The data binder can populate and update Collections and Maps.  The following code shows a simple example of populating a <code>List</code> of objects in a domain class:<p class="paragraph"/><div class="code"><pre>class Band &#123;
+    <span class="java&#45;object">String</span> name
+    <span class="java&#45;keyword">static</span> hasMany = &#91;albums: Album&#93;
+    List albums
+&#125;<p class="paragraph"/>class Album &#123;
+    <span class="java&#45;object">String</span> title
+    <span class="java&#45;object">Integer</span> numberOfTracks
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>def bindingMap = &#91;name: 'Genesis', 
+                  'albums&#91;0&#93;': &#91;title: 'Foxtrot', numberOfTracks: 6&#93;, 
+                  'albums&#91;1&#93;': &#91;title: 'Nursery Cryme', numberOfTracks: 7&#93;&#93;<p class="paragraph"/>def band = <span class="java&#45;keyword">new</span> Band(bindingMap)<p class="paragraph"/>assert band.name == 'Genesis'
+assert band.albums.size() == 2
+assert band.albums&#91;0&#93;.title == 'Foxtrot'
+assert band.albums&#91;0&#93;.numberOfTracks == 6
+assert band.albums&#91;1&#93;.title == 'Nursery Cryme'
+assert band.albums&#91;1&#93;.numberOfTracks == 7</pre></div><p class="paragraph"/>That code would work in the same way if <code>albums</code> were an array instead of a <code>List</code>.<p class="paragraph"/>Note that when binding to a <code>Set</code> the structure of the <code>Map</code> being bound to the <code>Set</code> is the same as that of a <code>Map</code> being bound to a <code>List</code> but since a <code>Set</code> is unordered, the indexes don't necessarily correspond to the order of elements in the <code>Set</code>.  In the code example above, if <code>albums</code> were a <code>Set</code> instead of a <code>List</code>, the <code>bindingMap</code> could look exactly the same but 'Foxtrot' might be the first album in the <code>Set</code> or it might be the second.  When updating existing elements in a <code>Set</code> the <code>Map</code> being assigned to the <code>Set</code> must have <code>id</code> elements in it which represent the element in the <code>Set</code> being updated, as in the following example:<p class="paragraph"/><div class="code"><pre>/&#42;
+ &#42; The value of the indexes 0 and 1 in albums&#91;0&#93; and albums&#91;1&#93; are arbitrary
+ &#42; values that can be anything as <span class="java&#45;object">long</span> as they are unique within the Map.
+ &#42; They <span class="java&#45;keyword">do</span> not correspond to the order of elements in albums because albums
+ &#42; is a Set.
+ &#42;/
+def bindingMap = &#91;'albums&#91;0&#93;': &#91;id: 9, title: 'The Lamb Lies Down On Broadway'&#93;
+                  'albums&#91;1&#93;': &#91;id: 4, title: 'Selling England By The Pound'&#93;&#93;<p class="paragraph"/>def band = Band.get(someBandId)<p class="paragraph"/>/&#42;
+ &#42; This will find the Album in albums that has an id of 9 and will set its title
+ &#42; to 'The Lamb Lies Down On Broadway' and will find the Album in albums that has
+ &#42; an id of 4 and set its title to 'Selling England By The Pound'.  In both 
+ &#42; cases <span class="java&#45;keyword">if</span> the Album cannot be found in albums then the album will be retrieved
+ &#42; from the database by id, the Album will be added to albums and will be updated 
+ &#42; with the values described above.  If a Album with the specified id cannot be
+ &#42; found in the database, then a binding error will be created and associated
+ &#42; with the band object.  More on binding errors later.
+ &#42;/
+band.properties = bindingMap</pre></div><p class="paragraph"/>When binding to a <code>Map</code> the structure of the binding <code>Map</code> is the same as the structore of a <code>Map</code> used for binding to a <code>List</code> or a <code>Set</code> and the index inside of square brackets corresponds to the key in the <code>Map</code> being bound to.  See the following code:<p class="paragraph"/><div class="code"><pre>class Album &#123;
+    <span class="java&#45;object">String</span> title
+    <span class="java&#45;keyword">static</span> hasMany = &#91;players: Player&#93;
+    Map players
+&#125;<p class="paragraph"/>class Player &#123;
+    <span class="java&#45;object">String</span> name
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>def bindingMap = &#91;title: 'The Lamb Lies Down On Broadway',
+                  'players&#91;guitar&#93;': &#91;name: 'Steve Hacket'&#93;,
+                  'players&#91;vocals&#93;': &#91;name: 'Peter Gabriel'&#93;
+                  'players&#91;keyboards&#93;': &#91;name: 'Tony Banks'&#93;&#93;<p class="paragraph"/>def album = <span class="java&#45;keyword">new</span> Album(bindingMap)<p class="paragraph"/>assert album.title == 'The Lamb Lies Down On Broadway'
+assert album.players.size() == 3
+assert album.players.guitar == 'Steve Hacket'
+assert album.players.vocals == 'Peter Gabriel'
+assert album.players.keyboards == 'Tony Banks'</pre></div><p class="paragraph"/>When updating an exisiting <code>Map</code>, if the key specified in the binding <code>Map</code> does not exist in the <code>Map</code> being bound to then a new value will be created and added to the <code>Map</code> with the specified key as in the following example:<p class="paragraph"/>
+<div class="code"><pre>def bindingMap = &#91;title: 'The Lamb Lies Down On Broadway',
+                  'players&#91;guitar&#93;': &#91;name: 'Steve Hacket'&#93;,
+                  'players&#91;vocals&#93;': &#91;name: 'Peter Gabriel'&#93;
+                  'players&#91;keyboards&#93;': &#91;name: 'Tony Banks'&#93;&#93;<p class="paragraph"/>def album = <span class="java&#45;keyword">new</span> Album(bindingMap)<p class="paragraph"/>assert album.title == 'The Lamb Lies Down On Broadway'
+assert album.players.size() == 3
+assert album.players.guitar == 'Steve Hacket'
+assert album.players.vocals == 'Peter Gabriel'
+assert album.players.keyboards == 'Tony Banks'<p class="paragraph"/>def updatedBindingMap = &#91;'players&#91;drums&#93;': &#91;name: 'Phil Collins'&#93;,
+                         'players&#91;keyboards&#93;': &#91;name: 'Anthony George Banks'&#93;&#93;<p class="paragraph"/>album.properties = updatedBindingMap<p class="paragraph"/>assert album.title == 'The Lamb Lies Down On Broadway'
+assert album.players.size() == 4
+assert album.players.guitar == 'Steve Hacket'
+assert album.players.vocals == 'Peter Gabriel'
+assert album.players.keyboards == 'Anthony George Banks'
+assert album.players.drums == 'Phil Collins'</pre></div><p class="paragraph"/>
+<h4>モデルにリクエストデータをバインドする <div class="hidden-block">Binding Request Data to the Model </div></h4><p class="paragraph"/>The <a href="../ref/Controllers/params.html" class="controllers">params</a> object that is available in a controller has special behavior that helps convert dotted request parameter names into nested Maps that the data binder can work with.  For example, if a request includes request parameters named <code>person.homeAddress.country</code> and <code>person.homeAddress.city</code> with values 'USA' and 'St. Louis' respectively, <code>params</code> would include entries like these:<p class="paragraph"/><div class="code"><pre>&#91;person: &#91;homeAddress: &#91;country: 'USA', city: 'St. Louis'&#93;&#93;&#93;</pre></div><p class="paragraph"/><div class="hidden-block">There are two ways to bind request parameters onto the properties of a domain class. The first involves using a domain classes' Map constructor:</div>
 リクエストパラメータをドメインクラスのプロパティへバインドする２通りの方法があります。１つめはドメインクラスのMapを指定するコンストラクタを使用します。<p class="paragraph"/><div class="code"><pre>def save() &#123;
     def b = <span class="java&#45;keyword">new</span> Book(params)
     b.save()
@@ -153,7 +235,7 @@ function addJsClass() {
     b.properties = params
     b.save()
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This has the same effect as using the implicit constructor.</div>
-上記の例で先ほどのコンストラクタと同じ結果となります。<p class="paragraph"/>When binding an empty String (a String with no characters in it, not even spaces) to a constrained property which has been configured as nullable, the data binder will convert the empty String to null.  This simplifies the most common case where the intent is to treat an empty form field as having the value null since there isn't a way to actually submit a null as a request parameter.  When this behavior is not desireable the application may assign the value directly.<p class="paragraph"/>The mass property binding mechanism will by default automatically trim all Strings at binding time.  To disable this behavior set the <code>grails.databinding.trimStrings</code> property to false in <code>grails-app/conf/Config.groovy</code>.<p class="paragraph"/><div class="code"><pre>// the <span class="java&#45;keyword">default</span> value is <span class="java&#45;keyword">true</span>
+上記の例で先ほどのコンストラクタと同じ結果となります。<p class="paragraph"/>When binding an empty String (a String with no characters in it, not even spaces), the data binder will convert the empty String to null.  This simplifies the most common case where the intent is to treat an empty form field as having the value null since there isn't a way to actually submit a null as a request parameter.  When this behavior is not desireable the application may assign the value directly.<p class="paragraph"/>The mass property binding mechanism will by default automatically trim all Strings at binding time.  To disable this behavior set the <code>grails.databinding.trimStrings</code> property to false in <code>grails-app/conf/Config.groovy</code>.<p class="paragraph"/><div class="code"><pre>// the <span class="java&#45;keyword">default</span> value is <span class="java&#45;keyword">true</span>
 grails.databinding.trimStrings = <span class="java&#45;keyword">false</span><p class="paragraph"/>// ...</pre></div><p class="paragraph"/>The mass property binding mechanism will by default automatically convert all empty Strings to null at binding time.  To disable this behavior set the <code>grails.databinding.convertEmptyStringsToNull</code> property to false in <code>grials-app/conf/Config.groovy</code>.<p class="paragraph"/><div class="code"><pre>// the <span class="java&#45;keyword">default</span> value is <span class="java&#45;keyword">true</span>
 grails.databinding.convertEmptyStringsToNull = <span class="java&#45;keyword">false</span><p class="paragraph"/>// ...</pre></div><p class="paragraph"/>The order of events is that the String trimming happens and then null conversion happens so if <code>trimStrings</code> is <code>true</code> and <code>convertEmptyStringsToNull</code> is <code>true</code>, not only will empty Strings be converted to null but also blank Strings.  A blank String is any String such that the <code>trim()</code> method returns an empty String.<p class="paragraph"/><blockquote class="warning">
 These forms of data binding in Grails are very convenient, but also indiscriminate. In other words, they will bind  <em class="italic">all</em>  non-transient, typed instance properties of the target object, including ones that you may not want bound. Just because the form in your UI doesn't submit all the properties, an attacker can still send malign data via a raw HTTP request. Fortunately, Grails also makes it easy to protect against such attacks - see the section titled "Data Binding and Security concerns" for more information.
