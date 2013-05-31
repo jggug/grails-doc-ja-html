@@ -1619,19 +1619,27 @@ GORMのDSLで、どのカラムがどのインデックスを使うかを指定�
 
 <a name="5.5.2.7 Optimistic Locking and Versioning"><!-- Legacy link --></a>
 <h2 id="optimisticLockingAndVersioning">6.5.2.7 楽観的ロックとバージョニング</h2>
-As discussed in the section on <a href="../guide/single.html#locking" class="guide">Optimistic and Pessimistic Locking</a>, by default GORM uses optimistic locking and automatically injects a <code>version</code> property into every class which is in turn mapped to a <code>version</code> column at the database level.<p class="paragraph"/>If you're mapping to a legacy schema that doesn't have version columns (or there's some other reason why you don't want/need this feature) you can disable this with the <code>version</code> method:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+<div class="hidden-block">As discussed in the section on <a href="../guide/single.html#locking" class="guide">Optimistic and Pessimistic Locking</a>, by default GORM uses optimistic locking and automatically injects a <code>version</code> property into every class which is in turn mapped to a <code>version</code> column at the database level.</div>
+<a href="../guide/single.html#locking" class="guide">楽観的ロックと悲観的ロック</a>のセクションで書いたように、GORMはデフォルトで、楽観的ロックを使用し、データベースの<code>version</code>カラムにそれぞれ対応付けられている<code>version</code>プロパティを全てのドメインクラスに自動的に注入します。<p class="paragraph"/><div class="hidden-block">If you're mapping to a legacy schema that doesn't have version columns (or there's some other reason why you don't want/need this feature) you can disable this with the <code>version</code> method:</div>
+もし<code>version</code>カラムを持たないレガシースキーマとの対応付けをしている(または、楽観的ロックを必要としない他の理由がある)ならば、<code>version</code>メソッドを使ってこの機能を無効化できます。<p class="paragraph"/><div class="code"><pre>class Person &#123;
     &#8230;
     <span class="java&#45;keyword">static</span> mapping = &#123;
         table 'people'
         version <span class="java&#45;keyword">false</span>
     &#125;
 &#125;</pre></div><p class="paragraph"/><blockquote class="note">
-If you disable optimistic locking you are essentially on your own with regards to concurrent updates and are open to the risk of users losing data (due to data overriding) unless you use <a href="../guide/single.html#locking" class="guide">pessimistic locking</a>
-</blockquote><p class="paragraph"/><h4>Version columns types</h4><p class="paragraph"/>By default Grails maps the <code>version</code> property as a <code>Long</code> that gets incremented by one each time an instance is updated. But Hibernate also supports using a <code>Timestamp</code>, for example:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> java.sql.Timestamp<p class="paragraph"/>class Person &#123;<p class="paragraph"/>    &#8230;
+<div class="hidden-block">If you disable optimistic locking you are essentially on your own with regards to concurrent updates and are open to the risk of users losing data (due to data overriding) unless you use <a href="../guide/single.html#locking" class="guide">pessimistic locking</a></div>
+楽観的ロックを無効化した場合、同時更新に対するサポートがなくなるため、<a href="../guide/single.html#locking" class="guide">悲観的ロック</a>を使わない限り(データ上書きによる)ユーザのデータ消失リスクに晒されます。
+</blockquote><p class="paragraph"/><div class="hidden-block">h4. Version columns types</div>
+<h4>バージョンのカラム型</h4><p class="paragraph"/><div class="hidden-block">By default Grails maps the <code>version</code> property as a <code>Long</code> that gets incremented by one each time an instance is updated. But Hibernate also supports using a <code>Timestamp</code>, for example:</div>
+Grailsはデフォルトで、<code>version</code>プロパティを<code>Long</code>型にマッピングし、インスタンスが更新されるごとにインクリメントします。
+しかし、Hibernateは<code>Timetamp</code>型もサポートしています。例えば:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> java.sql.Timestamp<p class="paragraph"/>class Person &#123;<p class="paragraph"/>    &#8230;
     Timestamp version<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         table 'people'
     &#125;
-&#125;</pre></div><p class="paragraph"/>There's a slight risk that two updates occurring at nearly the same time on a fast server can end up with the same timestamp value but this risk is very low. One benefit of using a <code>Timestamp</code> instead of a <code>Long</code> is that you combine the optimistic locking and last-updated semantics into a single column.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">There's a slight risk that two updates occurring at nearly the same time on a fast server can end up with the same timestamp value but this risk is very low. One benefit of using a <code>Timestamp</code> instead of a <code>Long</code> is that you combine the optimistic locking and last-updated semantics into a single column.</div>
+高性能なサーバ上でほぼ同時に発生した2つの更新が同一のタイムスタンプ値になってしまう、というリスクが僅かながらあります。しかし、このリスクは非常に小さいです。
+<code>Long</code>型の代わりに<code>Timestamp</code>型を使うメリットの1つは、1つのカラムで楽観的ロックと最終更新日時の意味を兼任できることです。
 
 
 <a name="5.5.2.8 Eager and Lazy Fetching"><!-- Legacy link --></a>
