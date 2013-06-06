@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>11.1.4 &#12501;&#12451;&#12523;&#12479;&#12518;&#12491;&#12483;&#12488;&#12486;&#12473;&#12488; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>11.1.4 &#12501;&#12451;&#12523;&#12479;&#12398;&#12518;&#12491;&#12483;&#12488;&#12486;&#12473;&#12488; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -125,7 +125,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>11.1.4 &#12501;&#12451;&#12523;&#12479;&#12518;&#12491;&#12483;&#12488;&#12486;&#12473;&#12488; - Reference Documentation</h1>
+                    <h1>11.1.4 &#12501;&#12451;&#12523;&#12479;&#12398;&#12518;&#12491;&#12483;&#12488;&#12486;&#12473;&#12488; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -140,8 +140,10 @@ function addJsClass() {
 
                 
 <a name="9.1.4 Unit Testing Filters"><!-- Legacy link --></a>
-<h2 id="unitTestingFilters">11.1.4 フィルタユニットテスト</h2>
-Unit testing filters is typically a matter of testing a controller where a filter is a mock collaborator. For example consider the following filters class:<p class="paragraph"/><div class="code"><pre>class CancellingFilters &#123;
+<h2 id="unitTestingFilters">11.1.4 フィルタのユニットテスト</h2>
+<div class="hidden-block">Unit testing filters is typically a matter of testing a controller where a filter is a mock collaborator. For example consider the following filters class:</div>
+フィルタをユニットテストするには、一般的に、フィルタがモックコラボレータであるようなコントローラをテストすることになります。
+例えば、次のフィルタクラスを考えてみましょう:<p class="paragraph"/><div class="code"><pre>class CancellingFilters &#123;
     def filters = &#123;
         all(controller:<span class="java&#45;quote">"simple"</span>, action:<span class="java&#45;quote">"list"</span>) &#123;
             before = &#123;
@@ -150,14 +152,19 @@ Unit testing filters is typically a matter of testing a controller where a filte
             &#125;
         &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/>This filter interceptors the <code>list</code> action of the <code>simple</code> controller and redirects to the <code>book</code> controller. To test this filter you start off with a test that targets the <code>SimpleController</code> class and add the <code>CancellingFilters</code> as a mock collaborator:<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleController)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This filter interceptors the <code>list</code> action of the <code>simple</code> controller and redirects to the <code>book</code> controller. To test this filter you start off with a test that targets the <code>SimpleController</code> class and add the <code>CancellingFilters</code> as a mock collaborator:</div>
+このフィルタは<code>simple</code>コントローラの<code>list</code>アクションをインターセプトし、<code>book</code>コントローラにリダイレクトします。このフィルタをテストするには、まず<code>SimpleController</code>クラスを対象としたテストを作り、<code>CancellingFilters</code>をモックコラボレータとして設定します:<p class="paragraph"/><div class="code"><pre>@TestFor(SimpleController)
 @Mock(CancellingFilters)
-class SimpleControllerTests &#123;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>You can then implement a test that uses the <code>withFilters</code> method to wrap the call to an action in filter execution:<p class="paragraph"/><div class="code"><pre>void testInvocationOfListActionIsFiltered() &#123;
+class SimpleControllerTests &#123;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can then implement a test that uses the <code>withFilters</code> method to wrap the call to an action in filter execution:</div>
+次に、フィルタを通して実行されるアクションの呼び出しを<code>withFilters</code>メソッドで囲むようにテストを実装します:<p class="paragraph"/><div class="code"><pre>void testInvocationOfListActionIsFiltered() &#123;
     withFilters(action:<span class="java&#45;quote">"list"</span>) &#123;
         controller.list()
     &#125;
     assert response.redirectedUrl == '/book'
-&#125;</pre></div><p class="paragraph"/>Note that the <code>action</code> parameter is required because it is unknown what the action to invoke is until the action is actually called. The <code>controller</code> parameter is optional and taken from the controller under test. If it is another controller you are testing then you can specify it:<p class="paragraph"/><div class="code"><pre>withFilters(controller:<span class="java&#45;quote">"book"</span>,action:<span class="java&#45;quote">"list"</span>) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Note that the <code>action</code> parameter is required because it is unknown what the action to invoke is until the action is actually called. The <code>controller</code> parameter is optional and taken from the controller under test. If it is another controller you are testing then you can specify it:</div>
+実際にアクションが呼び出されるまで、どのアクションが実行されるか不明なため、<code>action</code>パラメータが必須であることに注意してください。
+<code>controller</code>パラメータは省略可能です。省略時はテスト対象のコントローラが適用されます。
+もしテストしているのが別のコントローラである場合はそれを指定します。<p class="paragraph"/><div class="code"><pre>withFilters(controller:<span class="java&#45;quote">"book"</span>, action:<span class="java&#45;quote">"list"</span>) &#123;
     controller.list()
 &#125;</pre></div>
 
