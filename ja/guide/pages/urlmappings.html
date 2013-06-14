@@ -45,28 +45,28 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/theWebLayer.html"><strong>7</strong><span>Web&#12524;&#12452;&#12516;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/validation.html"><strong>9</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/async.html"><strong>9</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/services.html"><strong>10</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/validation.html"><strong>10</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>11</strong><span>&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/services.html"><strong>11</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/i18n.html"><strong>12</strong><span>&#22269;&#38555;&#21270;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>12</strong><span>&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/security.html"><strong>13</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/i18n.html"><strong>13</strong><span>&#22269;&#38555;&#21270;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/plugins.html"><strong>14</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/security.html"><strong>14</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/webServices.html"><strong>15</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/plugins.html"><strong>15</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/spring.html"><strong>16</strong><span>Grails&#12392;Spring</span></a>
@@ -120,7 +120,7 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span> >></a></div>
                 
 
 
@@ -180,7 +180,7 @@ function addJsClass() {
                 
 
                 
-<a name="6.4 URL Mappings"><!-- Legacy link --></a>
+<a name="7.4 URL Mappings"><!-- Legacy link --></a>
 <h2 id="urlmappings">7.4 URLマッピング</h2>
 <div class="hidden-block">Throughout the documentation so far the convention used for URLs has been the default of <code>/controller/action/id</code>. However, this convention is not hard wired into Grails and is in fact controlled by a URL Mappings class located at <code>grails-app/conf/UrlMappings.groovy</code>.</div>
 ここまでのドキュメント内容では、URLのルールはデフォルトの<code>/controller/action/id</code>を使用しています。このルールはGrailsで必須になっているわけでは無く、<code>grails-app/conf/UrlMappings.groovy</code>に配置されているURLマッピングクラスでコントロールされています。<p class="paragraph"/><div class="hidden-block">The <code>UrlMappings</code> class contains a single property called <code>mappings</code> that has been assigned a block of code:</div>
@@ -189,7 +189,7 @@ function addJsClass() {
     &#125;
 &#125;</pre></div><p class="paragraph"/>
 
-<a name="6.4.1 Mapping to Controllers and Actions"><!-- Legacy link --></a>
+<a name="7.4.1 Mapping to Controllers and Actions"><!-- Legacy link --></a>
 <h2 id="mappingToControllersAndActions">7.4.1 コントローラとアクションにマッピング</h2>
 <div class="hidden-block">To create a simple mapping simply use a relative URL as the method name and specify named parameters for the controller and action to map to:</div>
 簡単なマッピングは、相対URLをメソッド名とするメソッドに、マップ対象のコントローラとアクション名称を、名前付きパラメータ引数として作成します:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/product"</span>(controller: <span class="java&#45;quote">"product"</span>, action: <span class="java&#45;quote">"list"</span>)</pre></div><p class="paragraph"/><div class="hidden-block">In this case we've mapped the URL <code>/product</code> to the <code>list</code> action of the <code>ProductController</code>. Omit the action definition to map to the default action of the controller:</div>
@@ -197,25 +197,30 @@ function addJsClass() {
 他のシンタックスとして、コントローラとアクションを指定したコードブロックをメソッドに渡すこともできます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/product"</span> &#123;
     controller = <span class="java&#45;quote">"product"</span>
     action = <span class="java&#45;quote">"list"</span>
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Which syntax you use is largely dependent on personal preference. To rewrite one URI onto another explicit URI (rather than a controller/action pair) do something like this:</div>
-どちらのシンタックスを使用するかは個人の選択に依存します。(コントローラ・アクションを指定するのでは無く)URIを明示的なURIへ書き換えする場合は:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/hello"</span>(uri: <span class="java&#45;quote">"/hello.dispatch"</span>)</pre></div><p class="paragraph"/><div class="hidden-block">Rewriting specific URIs is often useful when integrating with other frameworks.</div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Which syntax you use is largely dependent on personal preference. </div>
+どちらのシンタックスを使用するかは個人の選択に依存します。<p class="paragraph"/>If you have mappings that all fall under a particular path you can group mappings with the <code>group</code> method:<p class="paragraph"/><div class="code"><pre>group <span class="java&#45;quote">"/product"</span>, &#123;
+    <span class="java&#45;quote">"/apple"</span>(controller:<span class="java&#45;quote">"product"</span>, id:<span class="java&#45;quote">"apple"</span>)
+    <span class="java&#45;quote">"/htc"</span>(controller:<span class="java&#45;quote">"product"</span>, id:<span class="java&#45;quote">"htc"</span>)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">To rewrite one URI onto another explicit URI (rather than a controller/action pair) do something like this:</div>
+URIを明示的なURIへ(コントローラ・アクションを指定するのでは無く)書き換えする場合は:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/hello"</span>(uri: <span class="java&#45;quote">"/hello.dispatch"</span>)</pre></div><p class="paragraph"/><div class="hidden-block">Rewriting specific URIs is often useful when integrating with other frameworks.</div>
 特定のURIへの書き換えは、他のフレームワークと統合する場合に便利です。
 
 
-
+<a name="7.4.2 Mapping to REST resources"><!-- Legacy link --></a>
 <h2 id="restfulMappings">7.4.2 RESTリソースへのマッピング</h2>
 Since Grails 2.3, it possible to create RESTful URL mappings that map onto controllers by convention. The syntax to do so is as follows:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book')</pre></div><p class="paragraph"/>You define a base URI and the name of the controller to map to using the <code>resources</code> parameter. The above mapping will result in the following URLs:<p class="paragraph"/>
 <table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${id}/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${id}</td><td>delete</td></tr></table><p class="paragraph"/>If you wish to include or exclude any of the generated URL mappings you can do so with the <code>include</code> or <code>exclude</code> parameter, which accepts the name of the Grails action to include or exclude:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book', exclude:&#91;'delete', 'update'&#93;)<p class="paragraph"/>or<p class="paragraph"/><span class="java&#45;quote">"/books"</span>(resources:'book', include:&#91;'index', 'show'&#93;)</pre></div><p class="paragraph"/><h4>Single resources</h4><p class="paragraph"/>A single resource is a resource for which there is only one (possibly per user) in the system. You can create a single resource using the <code>resource</code> parameter (as oppose to <code>resources</code>):<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/book"</span>(resource:'book')</pre></div><p class="paragraph"/>This results in the following URL mappings:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/book</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/book/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/book</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/book</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/book/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/book</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/book</td><td>delete</td></tr></table><p class="paragraph"/>The main difference is that the id is not included in the URL mapping.<p class="paragraph"/><h4>Nested Resources</h4><p class="paragraph"/>You can nest resource mappings to generate child resources. For example:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
   <span class="java&#45;quote">"/authors"</span>(resources:<span class="java&#45;quote">"author"</span>)
 &#125;</pre></div><p class="paragraph"/>The above will result in the following URL mappings:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URL</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books/${bookId}/authors</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/${bookId}/authors/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books/${bookId}/authors</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${bookId}/authors/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${bookId}/authors/edit/${id}</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${bookId}/authors/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${bookId}/authors/${id}</td><td>delete</td></tr></table><p class="paragraph"/>You can also nest regular URL mappings within a resource mapping:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources: <span class="java&#45;quote">"book"</span>) &#123;
     <span class="java&#45;quote">"/publisher"</span>(controller:<span class="java&#45;quote">"publisher"</span>)
-&#125;</pre></div><p class="paragraph"/>This will result in the following URL being available:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URL</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books/1/publisher</td><td>index</td></tr></table><p class="paragraph"/><h4>Linking to RESTful Mappings</h4><p class="paragraph"/>You can link to any URL mapping created with the <code>g:link</code> tag provided by Grails simply by referencing the controller and action to link to:<p class="paragraph"/><div class="code"><pre>&#60;g:link controller=<span class="java&#45;quote">"book"</span> action=<span class="java&#45;quote">"index"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>The same applies with nested resource. For example given the nested resources:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
+&#125;</pre></div><p class="paragraph"/>This will result in the following URL being available:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URL</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books/1/publisher</td><td>index</td></tr></table><p class="paragraph"/><h4>Linking to RESTful Mappings</h4><p class="paragraph"/>You can link to any URL mapping created with the <code>g:link</code> tag provided by Grails simply by referencing the controller and action to link to:<p class="paragraph"/><div class="code"><pre>&#60;g:link controller=<span class="java&#45;quote">"book"</span> action=<span class="java&#45;quote">"index"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>As a convenience you  can also pass a domain instance to the <code>resource</code> attribute of the <code>link</code> tag:<p class="paragraph"/><div class="code"><pre>&#60;g:link resource=<span class="java&#45;quote">"$&#123;book&#125;"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>This will automatically produce the correct link (in this case "/books/1" for an id of "1").<p class="paragraph"/>
+The case of nested resources is a little different as they typically required two identifiers (the id of the resource and the one it is nested within). For example given the nested resources:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
   <span class="java&#45;quote">"/authors"</span>(resources:<span class="java&#45;quote">"author"</span>)
 &#125;</pre></div><p class="paragraph"/>If you wished to link to the <code>show</code> action of the <code>author</code> controller, you would write:<p class="paragraph"/><div class="code"><pre>// Results in /books/1/authors/2
 &#60;g:link controller=<span class="java&#45;quote">"author"</span> action=<span class="java&#45;quote">"show"</span> method=<span class="java&#45;quote">"GET"</span> params=<span class="java&#45;quote">"&#91;bookId:1&#93;"</span> id=<span class="java&#45;quote">"2"</span>&#62;The Author&#60;/g:link&#62;</pre></div><p class="paragraph"/>However, to make this more concise there is a <code>resource</code> attribute to the link tag which can be used instead:<p class="paragraph"/><div class="code"><pre>// Results in /books/1/authors/2
 &#60;g:link resource=<span class="java&#45;quote">"book/author"</span> action=<span class="java&#45;quote">"show"</span> bookId=<span class="java&#45;quote">"1"</span> id=<span class="java&#45;quote">"2"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>The resource attribute accepts a path to the resource separated by a slash (in this case "book/author"). The attributes of the tag can be used to specify the necessary <code>bookId</code> parameter.
 
-<a name="6.4.2 Embedded Variables"><!-- Legacy link --></a>
+<a name="7.4.3 Embedded Variables"><!-- Legacy link --></a>
 <h2 id="embeddedVariables">7.4.3 埋込変数</h2>
 <h4>簡単な変数 <div class="hidden-block">Simple Variables </div></h4><p class="paragraph"/><div class="hidden-block">The previous section demonstrated how to map simple URLs with concrete "tokens". In URL mapping speak tokens are the sequence of characters between each slash, '/'. A concrete token is one which is well defined such as as <code>/product</code>. However, in many circumstances you don't know what the value of a particular token will be until runtime. In this case you can use variable placeholders within the URL for example:</div>
 前セクションでは、具体トークンURLを簡単にマップする方法を紹介しました。URLマッピングでのトークンとは"/"スラッシュの間にある文字列の事を指します。具体トークンは<code>/product</code>のように適切に指定できますが、状況によっては、ランタイム時にしか一部のトークンが予測できない場合があります。その場合は以下の例のように変数を指定できます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -246,7 +251,9 @@ URLに指定された内容から、変数<code>controller</code>,<code>action</
 /graemerocher/2007/01/10
 /graemerocher/2007/01
 /graemerocher/2007
-/graemerocher</code></pre><p class="paragraph"/><h4>任意変数 <div class="hidden-block">Arbitrary Variables </div></h4><p class="paragraph"/><div class="hidden-block">You can also pass arbitrary parameters from the URL mapping into the controller by just setting them in the block passed to the mapping:</div>
+/graemerocher</code></pre><p class="paragraph"/><h4>Optional File Extensions</h4><p class="paragraph"/>If you wish to capture the extension of a particular path, then a special case mapping exists:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/$controller/$action?/$id?(.$format)?"</span>()</pre></div><p class="paragraph"/>By adding the <code>(.$format)?</code> mapping you can access the file extension using the <code>response.format</code> property in a controller:<p class="paragraph"/><div class="code"><pre>def index() &#123;
+    render <span class="java&#45;quote">"extension is $&#123;response.format&#125;"</span>
+&#125;</pre></div><p class="paragraph"/><h4>任意変数 <div class="hidden-block">Arbitrary Variables </div></h4><p class="paragraph"/><div class="hidden-block">You can also pass arbitrary parameters from the URL mapping into the controller by just setting them in the block passed to the mapping:</div>
 URLマッピングからコントローラへ、コードブロック内で設定した任意のパラメータを渡すことが可能です:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/holiday/win"</span> &#123;
      id = <span class="java&#45;quote">"Marrakech"</span>
      year = 2007
@@ -259,7 +266,7 @@ URLマッピングからコントローラへ、コードブロック内で設�
 URLが実際にマッチした時にコードブロックのロジックが実行されて変数の内容が解決されます。
 
 
-<a name="6.4.3 Mapping to Views"><!-- Legacy link --></a>
+<a name="7.4.4 Mapping to Views"><!-- Legacy link --></a>
 <h2 id="mappingToViews">7.4.4 ビューへマッピング</h2>
 <div class="hidden-block">You can resolve a URL to a view without a controller or action involved. For example to map the root URL <code>/</code> to a GSP at the location <code>grails-app/views/index.gsp</code> you could use:</div>
 コントローラまたはアクションを含まずにビューへURLをマップできます。例としてルートURL <code>/</code> を、<code>grails-app/views/index.gsp</code>にマッピングするには:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -270,7 +277,7 @@ URLが実際にマッチした時にコードブロックのロジックが実�
 &#125;</pre></div>
 
 
-<a name="6.4.4 Mapping to Response Codes"><!-- Legacy link --></a>
+<a name="7.4.5 Mapping to Response Codes"><!-- Legacy link --></a>
 <h2 id="mappingToResponseCodes">7.4.5 レスポンスコードへマッピング</h2>
 <div class="hidden-block">Grails also lets you map HTTP response codes to controllers, actions or views. Just use a method name that matches the response code you are interested in:</div>
 GrailsではHTTPレスポンスコードをコントローラ、アクション、ビューにマッピングすることができます。使用したいレスポンスコードをメソッド名に指定するだけです:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -306,7 +313,7 @@ GrailsではHTTPレスポンスコードをコントローラ、アクション�
 </blockquote>
 
 
-<a name="6.4.5 Mapping to HTTP methods"><!-- Legacy link --></a>
+<a name="7.4.6 Mapping to HTTP methods"><!-- Legacy link --></a>
 <h2 id="mappingHTTP">7.4.6 HTTPメソッドへマッピング</h2>
 <div class="hidden-block">URL mappings can also be configured to map based on the HTTP method (GET, POST, PUT or DELETE). This is very useful for RESTful APIs and for restricting mappings based on HTTP method.</div>
 URLマッピングでは、HTTPメソッド(GET, POST, PUT, DELETE)へのマップを定義することができます。HTTPメソッドをベースに制限したり、RESTful API等に便利です。<p class="paragraph"/><div class="hidden-block">As an example the following mappings provide a RESTful API URL mappings for the <code>ProductController</code>:</div>
@@ -316,7 +323,7 @@ URLマッピングでは、HTTPメソッド(GET, POST, PUT, DELETE)へのマッ�
    &#125;
 &#125;</pre></div>
 
-<a name="6.4.6 Mapping Wildcards"><!-- Legacy link --></a>
+<a name="7.4.7 Mapping Wildcards"><!-- Legacy link --></a>
 <h2 id="mappingWildcards">7.4.7 マッピングワイルドカード</h2>
 <div class="hidden-block">Grails' URL mappings mechanism also supports wildcard mappings. For example consider the following mapping:</div>
 GrailsのURLマッピング機能ではワイルドカードもサポートしています。例として次ぎのマッピングに注目してください:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -343,7 +350,7 @@ println name // prints <span class="java&#45;quote">"logo"</span> or <span class
 この例では、 <code>/images</code>また<code>/css</code>で始まるURIはURLマッピングから除外されます.
 
 
-<a name="6.4.7 Automatic Link Re-Writing"><!-- Legacy link --></a>
+<a name="7.4.8 Automatic Link Re-Writing"><!-- Legacy link --></a>
 <h2 id="automaticLinkRewriting">7.4.8 自動リンクリライト</h2>
 <div class="hidden-block">Another great feature of URL mappings is that they automatically customize the behaviour of the <a href="../ref/Tags/link.html" class="tags">link</a> tag so that changing the mappings don't require you to go and change all of your links.</div>
 URLマッピングには、<a href="../ref/Tags/link.html" class="tags">link</a>タグの振る舞いを自動的にカスタマイズ するという優れた機能が存在します。その機能のおかげでURLマッピングを変更しても、その都度リンクを変更しなくても良くなります。<p class="paragraph"/><div class="hidden-block">This is done through a URL re-writing technique that reverse engineers the links from the URL mappings. So given a mapping such as the blog one from an earlier section:</div>
@@ -361,7 +368,7 @@ GrailsがURLを自動的にリライトします:<p class="paragraph"/><div clas
 <span class="xml&#45;tag">&#60;a href=<span class="xml&#45;quote">"/fred/2007/10"</span>&#62;</span>My Blog &#45; October 2007 Posts<span class="xml&#45;tag">&#60;/a&#62;</span></pre></div>
 
 
-<a name="6.4.8 Applying Constraints"><!-- Legacy link --></a>
+<a name="7.4.9 Applying Constraints"><!-- Legacy link --></a>
 <h2 id="applyingConstraints">7.4.9 制約の適用</h2>
 <div class="hidden-block">URL Mappings also support Grails' unified <a href="../guide/single.html#constraints" class="guide">validation constraints</a> mechanism, which lets you further "constrain" how a URL is matched. For example, if we revisit the blog sample code from earlier, the mapping currently looks like this:</div>
 URLマッピングでは、URLがマッチしてるか確認するために、<a href="../guide/single.html#constraints" class="guide">バリデーション制約</a>が使用できます。例として、前と同じブログのサンプルを使用します:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -381,7 +388,7 @@ URLマッピングでは、URLがマッチしてるか確認するために、<a
 この例では、<code>year</code>,<code>month</code>,<code>day</code>パラメータが特定のパターンにマッチするように制約を定義しています。
 
 
-<a name="6.4.9 Named URL Mappings"><!-- Legacy link --></a>
+<a name="7.4.10 Named URL Mappings"><!-- Legacy link --></a>
 <h2 id="namedMappings">7.4.10 名前付きURLマッピング</h2>
 <div class="hidden-block">URL Mappings also support named mappings, that is mappings which have a name associated with them. The name may be used to refer to a specific mapping when links are generated.</div>
 URLマッピングでは、名前で連携ができるように、名前付きマッピングに対応しています。<p class="paragraph"/><div class="hidden-block">The syntax for defining a named mapping is as follows:</div>
@@ -441,12 +448,35 @@ Arbitrary strategies may be plugged in by providing a class which implements the
 
 
 <h2 id="namespacedControllers">7.4.12 コントローラネームスペース</h2>
-An application is not allowed to define multiple controllers with the same
-name, even if they are defined in separate packages.  For example an
-application may not contain <code>com.accounting.ReportingController</code> and
-<code>com.humanresources.ReportingController</code>.  However it is allowed for
-an application to use a plugin which provides a controller with the
-same name as a controller provided by the application as long as the
+If an application defines multiple controllers with the same name
+in different packages, the controllers must be defined in a
+namespace.  The way to define a namespace for a controller is to 
+define a static property named <code>namespace</code> in the controller and 
+assign a String to the property that represents the namespace.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/com/app/reporting/AdminController.groovy
+<span class="java&#45;keyword">package</span> com.app.reporting<p class="paragraph"/>class AdminController &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> namespace = 'reports'<p class="paragraph"/>    // &#8230;
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/com/app/security/AdminController.groovy
+<span class="java&#45;keyword">package</span> com.app.security<p class="paragraph"/>class AdminController &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> namespace = 'users'<p class="paragraph"/>    // &#8230;
+&#125;</pre></div><p class="paragraph"/>When defining url mappings which should be associated with a namespaced
+controller, the <code>namespace</code> variable needs to be part of the URL mapping.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/UrlMappings.groovy
+class UrlMappings &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mappings = &#123;
+        '/userAdmin' &#123;
+            controller = 'admin'
+            namespace = 'users'
+        &#125;<p class="paragraph"/>        '/reportAdmin' &#123;
+            controller = 'admin'
+            namespace = 'reports'
+        &#125;<p class="paragraph"/>        <span class="java&#45;quote">"/$namespace/$controller/$action?"</span>()
+    &#125;
+&#125;</pre></div><p class="paragraph"/>Reverse URL mappings also require that the <code>namespace</code> be specified.<p class="paragraph"/><div class="code"><pre>&#60;g:link controller=<span class="java&#45;quote">"admin"</span> namespace=<span class="java&#45;quote">"reports"</span>&#62;Click For Report Admin&#60;/g:link&#62;
+&#60;g:link controller=<span class="java&#45;quote">"admin"</span> namespace=<span class="java&#45;quote">"users"</span>&#62;Click For User Admin&#60;/g:link&#62;</pre></div><p class="paragraph"/>When resolving a URL mapping (forward or reverse) to a namespaced controller,
+a mapping will only match if the <code>namespace</code> has been provided.  If
+the application provides several controllers with the same name in different
+packages, at most 1 of them may be defined without a <code>namespace</code> property.  If
+there are multiple controllers with the same name that do not define a
+<code>namespace</code> property, the framework will not know how to distinguish between
+them for forward or reverse mapping resolutions.<p class="paragraph"/>It is allowed for an application to use a plugin which provides a controller
+with the same name as a controller provided by the application and for neither
+of the controllers to define a <code>namespace</code> property as long as the
 controllers are in separate packages.  For example, an application
 may include a controller named <code>com.accounting.ReportingController</code>
 and the application may use a plugin which provides a controller
@@ -477,7 +507,7 @@ following mapping would work.<p class="paragraph"/><div class="code"><pre><span 
         controller = <span class="java&#45;quote">"reporting"</span>
     &#125;
 &#125;</pre></div><p class="paragraph"/>It is best practice to be explicit about the fact that the controller
-is being provided by a plugin though.<p class="paragraph"/>
+is being provided by a plugin.<p class="paragraph"/>
 
 
 
@@ -485,7 +515,7 @@ is being provided by a plugin though.<p class="paragraph"/>
                 
                     <div class="toc-item prev-left"><a href="../../guide/GORM.html">&lt;&lt; <strong>6</strong><span>O/R&#12510;&#12483;&#12500;&#12531;&#12464; (GORM)</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -780,6 +810,9 @@ is being provided by a plugin though.<p class="paragraph"/>
                             <div class="menu-item"><a href="../../ref/Controllers/grailsApplication.html">grailsApplication</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Controllers/namespace.html">namespace</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Controllers/params.html">params</a>
                             </div>
                             
@@ -792,7 +825,13 @@ is being provided by a plugin though.<p class="paragraph"/>
                             <div class="menu-item"><a href="../../ref/Controllers/request.html">request</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Controllers/respond.html">respond</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Controllers/response.html">response</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Controllers/responseFormats.html">responseFormats</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Controllers/servletContext.html">servletContext</a>

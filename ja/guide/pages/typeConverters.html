@@ -45,28 +45,28 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/theWebLayer.html"><strong>7</strong><span>Web&#12524;&#12452;&#12516;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/validation.html"><strong>9</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/async.html"><strong>9</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/services.html"><strong>10</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/validation.html"><strong>10</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>11</strong><span>&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/services.html"><strong>11</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/i18n.html"><strong>12</strong><span>&#22269;&#38555;&#21270;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>12</strong><span>&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/security.html"><strong>13</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/i18n.html"><strong>13</strong><span>&#22269;&#38555;&#21270;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/plugins.html"><strong>14</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/security.html"><strong>14</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/webServices.html"><strong>15</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/plugins.html"><strong>15</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/spring.html"><strong>16</strong><span>Grails&#12392;Spring</span></a>
@@ -120,7 +120,7 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span> >></a></div>
                 
 
 
@@ -139,7 +139,7 @@ function addJsClass() {
                 
 
                 
-<a name="6.1.12 Simple Type Converters"><!-- Legacy link --></a>
+<a name="7.1.12 Simple Type Converters"><!-- Legacy link --></a>
 <h2 id="typeConverters">7.1.12 シンプルタイプコンバータ</h2>
 <h3>型変換メソッド <div class="hidden-block">Type Conversion Methods </div></h3><p class="paragraph"/><div class="hidden-block">If you prefer to avoid the overhead of <a href="../guide/single.html#dataBinding" class="guide">Data Binding</a> and simply want to convert incoming parameters (typically Strings) into another more appropriate type the <a href="../ref/Controllers/params.html" class="controllers">params</a> object has a number of convenience methods for each type:</div>
 <a href="../guide/single.html#dataBinding" class="guide">データバインディング</a>でのオーバーヘッドを避けたい場合や、受信したパラメータに対して、単純な型変換行いたい場合、 <a href="../ref/Controllers/params.html" class="controllers">params</a>オブジェクトには、型によって幾つかの便利なメソッドが有ります:<p class="paragraph"/><div class="code"><pre>def total = params.<span class="java&#45;object">int</span>('total')</pre></div><p class="paragraph"/><div class="hidden-block">The above example uses the <code>int</code> method, and there are also methods for <code>boolean</code>, <code>long</code>, <code>char</code>, <code>short</code> and so on. Each of these methods is null-safe and safe from any parsing errors, so you don't have to perform any additional checks on the parameters.</div>
@@ -158,7 +158,7 @@ GSPタグの<code>attrs</code>パラメータでも、同じ仕組みの型変�
                 
                     <div class="toc-item prev-left"><a href="../../guide/GORM.html">&lt;&lt; <strong>6</strong><span>O/R&#12510;&#12483;&#12500;&#12531;&#12464; (GORM)</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -453,6 +453,9 @@ GSPタグの<code>attrs</code>パラメータでも、同じ仕組みの型変�
                             <div class="menu-item"><a href="../../ref/Controllers/grailsApplication.html">grailsApplication</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Controllers/namespace.html">namespace</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Controllers/params.html">params</a>
                             </div>
                             
@@ -465,7 +468,13 @@ GSPタグの<code>attrs</code>パラメータでも、同じ仕組みの型変�
                             <div class="menu-item"><a href="../../ref/Controllers/request.html">request</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Controllers/respond.html">respond</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Controllers/response.html">response</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Controllers/responseFormats.html">responseFormats</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Controllers/servletContext.html">servletContext</a>

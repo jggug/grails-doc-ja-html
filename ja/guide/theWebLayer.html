@@ -45,28 +45,28 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/theWebLayer.html"><strong>7</strong><span>Web&#12524;&#12452;&#12516;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/validation.html"><strong>9</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/async.html"><strong>9</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/services.html"><strong>10</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/validation.html"><strong>10</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>11</strong><span>&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/services.html"><strong>11</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/i18n.html"><strong>12</strong><span>&#22269;&#38555;&#21270;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>12</strong><span>&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/security.html"><strong>13</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/i18n.html"><strong>13</strong><span>&#22269;&#38555;&#21270;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/plugins.html"><strong>14</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/security.html"><strong>14</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/webServices.html"><strong>15</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/plugins.html"><strong>15</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0"><a href="../guide/spring.html"><strong>16</strong><span>Grails&#12392;Spring</span></a>
@@ -120,7 +120,7 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span> >></a></div>
                 
 
 
@@ -396,18 +396,18 @@ function addJsClass() {
                 
 
                 
-<a name="6. The Web Layer"><!-- Legacy link --></a>
+<a name="7. The Web Layer"><!-- Legacy link --></a>
 <h1 id="theWebLayer">7 Webレイヤ</h1>
 
 
-<a name="6.1 Controllers"><!-- Legacy link --></a>
+<a name="7.1 Controllers"><!-- Legacy link --></a>
 <h2 id="controllers">7.1 コントローラ</h2>
 <div class="hidden-block">A controller handles requests and creates or prepares the response. A controller can generate the response directly or delegate to a view. To create a controller, simply create a class whose name ends with <code>Controller</code> in the <code>grails-app/controllers</code> directory (in a subdirectory if it's in a package).</div>
 コントローラはリクエストを処理してレスポンスの準備・作成を行います。コントローラはレスポンスをビューに委譲したり、直接返す事ができます。単純に<code>grails-app/controlers</code>ディレクトリに、クラス名称の最後を<code>Controller</code>にしたクラスを作成することで、コントローラを追加できます。(パッケージに入れる場合は、パッケージ名のサブディレクトリに作成します。)<p class="paragraph"/><div class="hidden-block">The default <a href="../guide/single.html#urlmappings" class="guide">URL Mapping</a> configuration ensures that the first part of your controller name is mapped to a URI and each action defined within your controller maps to URIs within the controller name URI.</div>
 <a href="../guide/single.html#urlmappings" class="guide">URL マッピング</a>のデフォルト設定では、Controllerの前に付けた名称がベースのURIにマップされ、コントローラに定義したそれぞれのアクション名称がコントローラ名称と繫がれてURIをマップします。
 
 
-<a name="6.1.1 Understanding Controllers and Actions"><!-- Legacy link --></a>
+<a name="7.1.1 Understanding Controllers and Actions"><!-- Legacy link --></a>
 <h2 id="understandingControllersAndActions">7.1.1 コントローラとアクションの理解</h2>
 <h4>コントローラを作成する</h4><p class="paragraph"/><div class="hidden-block">Controllers can be created with the <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> or <a href="../ref/Command Line/generate-controller.html" class="commandLine">generate-controller</a> command. For example try running the following command from the root of a Grails project:</div>
 <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a>または<a href="../ref/Command Line/generate-controller.html" class="commandLine">generate-controller</a>コマンドでコントローラが作成できます。Grailsプロジェクトのルートで以下のようにコマンドを実行します。<p class="paragraph"/><div class="code"><pre>grails create&#45;controller book</pre></div><p class="paragraph"/><div class="hidden-block">The command will create a controller at the location <code>grails-app/controllers/myapp/BookController.groovy</code>:</div>
@@ -460,7 +460,7 @@ If a controller class extends some other class which is not defined under the <c
 </ul><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> defaultAction = <span class="java&#45;quote">"list"</span></pre></div>
 
 
-<a name="6.1.2 Controllers and Scopes"><!-- Legacy link --></a>
+<a name="7.1.2 Controllers and Scopes"><!-- Legacy link --></a>
 <h2 id="controllersAndScopes">7.1.2 コントローラとスコープ</h2>
 <h4>使用可能なスコープ</h4><p class="paragraph"/><div class="hidden-block">Scopes are hash-like objects where you can store variables. The following scopes are available to controllers:</div>
 スコープは、変数を収納可能なハッシュのようなオブジェクトです。コントローラでは、次のスコープが使用可能です。
@@ -529,7 +529,7 @@ Use scoped controllers wisely. For instance, we don't recommend having any prope
 </blockquote>
 
 
-<a name="6.1.3 Models and Views"><!-- Legacy link --></a>
+<a name="7.1.3 Models and Views"><!-- Legacy link --></a>
 <h2 id="modelsAndViews">7.1.3 モデルとビュー</h2>
 <h4>モデルを返す</h4><p class="paragraph"/><div class="hidden-block">A model is a Map that the view uses when rendering. The keys within that Map correspond to variable names accessible by the view. There are a couple of ways to return a model. First, you can explicitly return a Map instance:</div>
 モデルはビューを描写する際に使用するMapインスタンスです。ビュー内でMapのキーに一致する変数名が使用できます。モデルを返すには、数種類の方法があります。先ずはじめにMapインスタンスを明示的に返す方法です。<p class="paragraph"/><div class="code"><pre>def show() &#123;
@@ -617,7 +617,7 @@ def login() &#123;
 &#125;</pre></div>
 
 
-<a name="6.1.4 Redirects and Chaining"><!-- Legacy link --></a>
+<a name="7.1.4 Redirects and Chaining"><!-- Legacy link --></a>
 <h2 id="redirectsAndChaining">7.1.4 リダイレクトとチェイン</h2>
 <h4>リダイレクト<div class="hidden-block">Redirects</div></h4><p class="paragraph"/><div class="hidden-block">Actions can be redirected using the <a href="../ref/Controllers/redirect.html" class="controllers">redirect</a> controller method:</div>
 コントローラのメソッド、<a href="../ref/Controllers/redirect.html" class="controllers">redirect</a>を使用して、アクションをリダイレクトすることができます:<p class="paragraph"/><div class="code"><pre>class OverviewController &#123;<p class="paragraph"/>    def login() &#123;&#125;<p class="paragraph"/>    def find() &#123;
@@ -666,7 +666,7 @@ redirect(url: <span class="java&#45;quote">"http://grails.org"</span>)</pre></di
 <code>redirect</code>メソッドと同じように、<code>chain</code>メソッドにパラメータを渡すこともできます:<p class="paragraph"/><div class="code"><pre>chain(action: <span class="java&#45;quote">"action1"</span>, model: &#91;one: 1&#93;, params: &#91;myparam: <span class="java&#45;quote">"param1"</span>&#93;)</pre></div>
 
 
-<a name="6.1.5 Controller Interceptors"><!-- Legacy link --></a>
+<a name="7.1.5 Controller Interceptors"><!-- Legacy link --></a>
 <h2 id="interceptors">7.1.5 コントローラ・インターセプター</h2>
 <div class="hidden-block">Often it is useful to intercept processing based on either request, session or application state. This can be achieved with action interceptors. There are currently two types of interceptors: before and after.</div>
 リクエスト、セッションまたはアプリケーションで処理のインターセプトができると、たいへん役に立ちます。これはアクションインターセプターで達成できます。現在2種類のインターセプターbeforeとafterがあります。<p class="paragraph"/><blockquote class="note">
@@ -705,7 +705,7 @@ redirect(url: <span class="java&#45;quote">"http://grails.org"</span>)</pre></di
 指定したアクションのみでインターセプターを実行する場合は、'only'を使用します:<p class="paragraph"/><div class="code"><pre>def beforeInterceptor = &#91;action: <span class="java&#45;keyword">this</span>.&#38;auth, only: &#91;'secure'&#93;&#93;</pre></div>
 
 
-<a name="6.1.6 Data Binding"><!-- Legacy link --></a>
+<a name="7.1.6 Data Binding"><!-- Legacy link --></a>
 <h2 id="dataBinding">7.1.6 データバインディング</h2>
 <div class="hidden-block">Data binding is the act of "binding" incoming request parameters onto the properties of an object or an entire graph of objects. Data binding should deal with all necessary type conversion since request parameters, which are typically delivered by a form submission, are always strings whilst the properties of a Groovy or Java object may well not be.</div>
 データバインディングとは、受信したリクエストパラメータを、オブジェクトのプロパティまたオブジェクト構造へ結合させる機能です。データバインディングでは、フォームから送信された文字列のリクエストパラメータを、必要な型への変換を行います。<p class="paragraph"/>
@@ -914,7 +914,7 @@ assert person.homeAddress.state = 'Missouri'</pre></div><p class="paragraph"/><h
         // specifies the type to which <span class="java&#45;keyword">this</span> converter may be applied
         <span class="java&#45;object">String</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented FormattedValueConverter will be automatically plugged in to the data binding process.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/spring/resources.groovy<p class="paragraph"/>beans = &#123;<p class="paragraph"/>    formattedStringConverter com.myapp.converters.FormattedStringValueConverter<p class="paragraph"/>    // ...<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>With that in place the BindUsing annotation may be applied to String fields to inform the data binder to take advantage of the custom converter.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat<p class="paragraph"/>class Person &#123;
+&#125;</pre></div><p class="paragraph"/>An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented FormattedValueConverter will be automatically plugged in to the data binding process.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/spring/resources.groovy<p class="paragraph"/>beans = &#123;<p class="paragraph"/>    formattedStringConverter com.myapp.converters.FormattedStringValueConverter<p class="paragraph"/>    // ...<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>With that in place the <code>BindingFormat</code> annotation may be applied to String fields to inform the data binder to take advantage of the custom converter.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat<p class="paragraph"/>class Person &#123;
     @BindingFormat('UPPERCASE')
     <span class="java&#45;object">String</span> someUpperCaseString<p class="paragraph"/>    @BindingFormat('LOWERCASE')
     <span class="java&#45;object">String</span> someLowerCaseString<p class="paragraph"/>    <span class="java&#45;object">String</span> someOtherString
@@ -967,8 +967,8 @@ JSONを出力する場合も<code>render</code>メソッドが使用できます
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case the result would be something along the lines of:</div>
 このコードの結果は以下のようになります:<p class="paragraph"/><div class="code"><pre>&#91;
-    &#123;title:<span class="java&#45;quote">"The Stand"</span>&#125;,
-    &#123;title:<span class="java&#45;quote">"The Shining"</span>&#125;
+    &#123;<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;,
+    &#123;<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Shining"</span>&#125;
 &#93;</pre></div><p class="paragraph"/><div class="hidden-block">The same dangers with naming conflicts described above for XML also apply to JSON building.</div>
 JSONビルダーもXMLと同じく、変数名称の衝突を回避する必要があります。<p class="paragraph"/><h4>自動XMLマーシャリング <div class="hidden-block">Automatic XML Marshalling </div></h4><p class="paragraph"/><div class="hidden-block">Grails also supports automatic marshalling of <a href="../guide/single.html#GORM" class="guide">domain classes</a> to XML using special converters.</div>
 Grailsでは<a href="../guide/single.html#GORM" class="guide">ドメインクラス</a>から特別なコンバータを使用した自動マーシャリングをサポートしています。<p class="paragraph"/><div class="hidden-block">To start off with, import the <code>grails.converters</code> package into your controller:</div>
@@ -1003,7 +1003,7 @@ Grailsでは<code>XML</code>と同じ仕組みで、<code>JSON</code>の自動�
 もちろん、<code>encodeAsJSON</code>も同じ結果になります。
 
 
-<a name="6.1.8 More on JSONBuilder"><!-- Legacy link --></a>
+<a name="7.1.8 More on JSONBuilder"><!-- Legacy link --></a>
 <h2 id="moreOnJSONBuilder">7.1.8 JSONBuilder (JSONビルダー)</h2>
 <div class="hidden-block">The previous section on on XML and JSON responses covered simplistic examples of rendering XML and JSON responses. Whilst the XML builder used by Grails is the standard <a href="http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper" target="blank">XmlSlurper</a> found in Groovy, the JSON builder is a custom implementation specific to Grails.</div>
 前のセクション「 XMLとJSONレスポンス」で単純なXMLとJSONのを描写してレスポンスする例を紹介しました。Grailsで使用してるXMLビルダーがGroovyの標準的な <a href="http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper" target="blank">XmlSlurper</a> に対して、JSONビルダーに関してはGrails特有の実装になっています。<p class="paragraph"/><h4>JSONBuilderとGrailsのバージョン <div class="hidden-block">JSONBuilder and Grails versions </div></h4><p class="paragraph"/><div class="hidden-block">JSONBuilder behaves different depending on the version of Grails you use. For version below 1.2 the deprecated <a href="http://grails.org/doc/latest/api/grails/web/JSONBuilder.html" class="api">grails.web.JSONBuilder</a> class is used. This section covers the usage of the Grails 1.2 JSONBuilder </div>
@@ -1057,7 +1057,7 @@ println result.toString()<p class="paragraph"/>def sw = <span class="java&#45;ke
 result.render sw</pre></div>
 
 
-<a name="6.1.9 Uploading Files"><!-- Legacy link --></a>
+<a name="7.1.9 Uploading Files"><!-- Legacy link --></a>
 <h2 id="uploadingFiles">7.1.9 ファイルアップロード</h2>
 <h4>プログラムによるファイルアップロード <div class="hidden-block">Programmatic File Uploads </div></h4><p class="paragraph"/><div class="hidden-block">Grails supports file uploads using Spring's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/multipart/MultipartHttpServletRequest.html" class="api">MultipartHttpServletRequest</a> interface. The first step for file uploading is to create a multipart form like this:</div>
 Grailsでは、Springの<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/multipart/MultipartHttpServletRequest.html" class="api">MultipartHttpServletRequest</a>インターフェイスを使用してファイルアップロードをサポートしています。ファイルアップロードを実装するには、先に次のようにフォームをマルチパートフォームにします:<p class="paragraph"/><div class="code"><pre>Upload Form: <span class="xml&#45;tag">&#60;br /&#62;</span>
@@ -1089,7 +1089,7 @@ Grailsでは、Springの<a href="http://static.springsource.org/spring/docs/3.0.
 &#125;</pre></div>
 
 
-<a name="6.1.10 Command Objects"><!-- Legacy link --></a>
+<a name="7.1.10 Command Objects"><!-- Legacy link --></a>
 <h2 id="commandObjects">7.1.10 コマンドオブジェクト</h2>
 <div class="hidden-block">Grails controllers support the concept of command objects. A command object is a class that is used in conjunction with <a href="../guide/single.html#dataBinding" class="guide">data binding</a>, usually to allow validation of data that may not fit into an existing domain class.</div><p class="paragraph"/>Grailsのコマンドオブジェクトの設計概念をサポートしています。 コマンドオブジェクトは <a href="../guide/single.html#dataBinding" class="guide">data binding</a> と連結して使用するクラスであり、通常ドメインクラスとして扱わないデータに対してバリデーションを可能にします。<p class="paragraph"/><blockquote class="note">
 Note: A class is only considered to be a command object when it is used as a parameter of an action.
@@ -1108,7 +1108,7 @@ class LoginCommand &#123;
             <span class="java&#45;keyword">return</span>
         &#125;<p class="paragraph"/>        // work with the command object data
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>コマンドオブジェクトと依存注入 <div class="hidden-block">Command Objects and Dependency Injection </div></h4><p class="paragraph"/><div class="hidden-block">Command objects can participate in dependency injection. This is useful if your command object has some custom validation logic which uses a Grails <a href="../guide/single.html#services" class="guide">service</a>:</div>
+&#125;</pre></div><p class="paragraph"/>If the command object's type is that of a domain class and there is an <code>id</code> request parameter then instead of invoking the domain class constructor to create a new instance a call will be made to the static <code>get</code> method on the domain class and the value of the <code>id</code> parameter will be passed as an argument.  Whatever is returned from that call to <code>get</code> is what will be passed into the controller action.  This means that if there is an <code>id</code> request parameter and no corresponding record is found in the database then the value of the command object will be <code>null</code>.<p class="paragraph"/><h4>コマンドオブジェクトと依存注入 <div class="hidden-block">Command Objects and Dependency Injection </div></h4><p class="paragraph"/><div class="hidden-block">Command objects can participate in dependency injection. This is useful if your command object has some custom validation logic which uses a Grails <a href="../guide/single.html#services" class="guide">service</a>:</div>
 コマンドオブジェクトに依存注入をすることが可能です。Grailsの<a href="../guide/single.html#services" class="guide">サービス</a>を使用したカスタムバリデーションなどを使用する際に便利です:<p class="paragraph"/>
 <div class="code"><pre>@grails.validation.Validateable
 class LoginCommand &#123;<p class="paragraph"/>    def loginService<p class="paragraph"/>    <span class="java&#45;object">String</span> username
@@ -1121,7 +1121,7 @@ class LoginCommand &#123;<p class="paragraph"/>    def loginService<p class="par
 この例では、<code>loginService</code>をSpringの<code>ApplicatinContext</code>から名前解決でコマンドオブジェクトに注入しています。
 
 
-<a name="6.1.11 Handling Duplicate Form Submissions"><!-- Legacy link --></a>
+<a name="7.1.11 Handling Duplicate Form Submissions"><!-- Legacy link --></a>
 <h2 id="formtokens">7.1.11 フォーム二重送信のハンドリング</h2>
 <div class="hidden-block">Grails has built-in support for handling duplicate form submissions using the "Synchronizer Token Pattern". To get started you define a token on the <a href="../ref/Tags/form.html" class="tags">form</a> tag:</div>
 Grailsには、"同期トークンパターン"を使用した、フォーム二重送信ハンドリングをサポートしています。使用するには、先ずは<a href="../ref/Tags/form.html" class="tags">form</a>タグにuseToken属性を指定します:<p class="paragraph"/><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:form useToken=<span class="xml&#45;quote">"true"</span> ...&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">Then in your controller code you can use the <a href="../ref/Controllers/withForm.html" class="controllers">withForm</a> method to handle valid and invalid requests:</div>
@@ -1139,7 +1139,7 @@ Grailsには、"同期トークンパターン"を使用した、フォーム二
 </blockquote>
 
 
-<a name="6.1.12 Simple Type Converters"><!-- Legacy link --></a>
+<a name="7.1.12 Simple Type Converters"><!-- Legacy link --></a>
 <h2 id="typeConverters">7.1.12 シンプルタイプコンバータ</h2>
 <h3>型変換メソッド <div class="hidden-block">Type Conversion Methods </div></h3><p class="paragraph"/><div class="hidden-block">If you prefer to avoid the overhead of <a href="../guide/single.html#dataBinding" class="guide">Data Binding</a> and simply want to convert incoming parameters (typically Strings) into another more appropriate type the <a href="../ref/Controllers/params.html" class="controllers">params</a> object has a number of convenience methods for each type:</div>
 <a href="../guide/single.html#dataBinding" class="guide">データバインディング</a>でのオーバーヘッドを避けたい場合や、受信したパラメータに対して、単純な型変換行いたい場合、 <a href="../ref/Controllers/params.html" class="controllers">params</a>オブジェクトには、型によって幾つかの便利なメソッドが有ります:<p class="paragraph"/><div class="code"><pre>def total = params.<span class="java&#45;object">int</span>('total')</pre></div><p class="paragraph"/><div class="hidden-block">The above example uses the <code>int</code> method, and there are also methods for <code>boolean</code>, <code>long</code>, <code>char</code>, <code>short</code> and so on. Each of these methods is null-safe and safe from any parsing errors, so you don't have to perform any additional checks on the parameters.</div>
@@ -1153,7 +1153,7 @@ GSPタグの<code>attrs</code>パラメータでも、同じ仕組みの型変�
 &#125;</pre></div>
 
 
-<a name="6.2 Groovy Server Pages"><!-- Legacy link --></a>
+<a name="7.2 Groovy Server Pages"><!-- Legacy link --></a>
 <h2 id="gsp">7.2 Groovyサーバーページ</h2>
 <div class="hidden-block">Groovy Servers Pages (or GSP for short) is Grails' view technology. It is designed to be familiar for users of technologies such as ASP and JSP, but to be far more flexible and intuitive.</div>
 Groovy Server Pages(GSPと略す)は、Grailsのビュー技術です。より柔軟で直感的であり、ASPやJSPのような技術に精通しているユーザ向けに設計されています。<p class="paragraph"/>
@@ -1170,7 +1170,7 @@ GSPは通常ビュー描写に使用される変数のセットなどの"モデ�
 Embedding data received from user input has the risk of making your application vulnerable to an Cross Site Scripting (XSS) attack. Please read the documentation on <a href="../guide/single.html#xssPrevention" class="guide">XSS prevention</a> for information on how to prevent XSS attacks.
 </blockquote>
 
-<a name="6.2.1 GSP Basics"><!-- Legacy link --></a>
+<a name="7.2.1 GSP Basics"><!-- Legacy link --></a>
 <h2 id="GSPBasics">7.2.1 GSPの基本</h2>
 <div class="hidden-block">In the next view sections we'll go through the basics of GSP and what is available to you. First off let's cover some basic syntax that users of JSP and ASP should be familiar with.</div>
 ここのセクションでは、GSPで何が可能かの基礎を見ていきましょう。先ずはじめにJSPやASPのユーザに親和性の高い基本的なシンタックスをカバーしていきます。<p class="paragraph"/><div class="hidden-block">GSP supports the usage of <code>&#60;% %&#62;</code> scriptlet blocks to embed Groovy code (again this is discouraged):</div>
@@ -1224,7 +1224,7 @@ GSPには、初期定義されたスコープ変数がいくつか存在しま�
 <li><code>webRequest</code> - <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/servlet/mvc/GrailsWebRequest.html" class="api">GrailsWebRequest</a>インスタンス</li>
 </ul><p class="paragraph"/>
 
-<a name="6.2.2.2 Logic and Iteration"><!-- Legacy link --></a>
+<a name="7.2.2.2 Logic and Iteration"><!-- Legacy link --></a>
 <h2 id="logicAndIteration">7.2.1.2 ロジックとイテレーション</h2>
 <div class="hidden-block">Using the <code>&#60;% %&#62;</code> syntax you can embed loops and so on using this syntax:</div>
 以下のように<code>&#60;% %&#62;</code>シンタックスを使ってループなどを記述できます。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;html&#62;</span>
@@ -1244,7 +1244,7 @@ GSPには、初期定義されたスコープ変数がいくつか存在しま�
 <span class="xml&#45;tag">&#60;/html&#62;</span></pre></div>
 
 
-<a name="6.2.1.3 Page Directives"><!-- Legacy link --></a>
+<a name="7.2.1.3 Page Directives"><!-- Legacy link --></a>
 <h2 id="pageDirectives">7.2.1.3 ページディレクティブ</h2>
 <div class="hidden-block">GSP also supports a few JSP-style page directives.</div>
 GSPはJSPのページディレクティブの一部をサポートしています。<p class="paragraph"/><div class="hidden-block">The import directive lets you import classes into the page. However, it is rarely needed due to Groovy's default imports and <a href="../guide/single.html#tags" class="guide">GSP Tags</a>:</div>
@@ -1253,7 +1253,7 @@ contentTypeディレクティブもサポートしています。<p class="parag
 contentTypeディレクティブはGSPを別のフォーマットを可能にします。
 
 
-<a name="6.2.1.4 Expressions"><!-- Legacy link --></a>
+<a name="7.2.1.4 Expressions"><!-- Legacy link --></a>
 <h2 id="expressions">7.2.1.4 エクスプレッション</h2>
 <div class="hidden-block">In GSP the <code>&#60;%= %&#62;</code> syntax introduced earlier is rarely used due to the support for GSP expressions. A GSP expression is similar to a JSP EL expression or a Groovy GString and takes the form <code>${expr}</code>:</div>
 GSPでは、先に紹介した<code>&#60;%= %&#62;</code>シンタックスは滅多に使用しません。代わりに、JSPの式言語(JSP EL)と同じような機能をもつGSP(Groovy)表記または、<code>${expr}</code>のようなGroovyのGStringを使用します。<p class="paragraph"/>
@@ -1266,7 +1266,7 @@ JSP式言語(JSP EL)と違い、Groovy表記は、 <code>${…}</code> ブロッ
 Embedding data received from user input has the risk of making your application vulnerable to an Cross Site Scripting (XSS) attack. Please read the documentation on <a href="../guide/single.html#xssPrevention" class="guide">XSS prevention</a> for information on how to prevent XSS attacks.
 </blockquote><p class="paragraph"/>
 
-<a name="6.2.2 GSP Tags"><!-- Legacy link --></a>
+<a name="7.2.2 GSP Tags"><!-- Legacy link --></a>
 <h2 id="tags">7.2.2 GSPタグ</h2>
 <div class="hidden-block">Now that the less attractive JSP heritage has been set aside, the following sections cover GSP's built-in tags, which are the preferred way to define GSP pages.</div>
 魅力の低い遺産JSPはさておき、このセクションではGSPの組込タグを、GSPページでどのように活用すると良いか解説していきます。<p class="paragraph"/>
@@ -1335,7 +1335,7 @@ GSPにはすぐに活用できるロジックタグとイテレーションタ�
 <span class="xml&#45;tag">&#60;/g:while&#62;</span></pre></div>
 
 
-<a name="6.2.2.3 Search and Filtering"><!-- Legacy link --></a>
+<a name="7.2.2.3 Search and Filtering"><!-- Legacy link --></a>
 <h2 id="searchAndFiltering">7.2.2.3 検索とフィルタリング</h2>
 <div class="hidden-block">If you have collections of objects you often need to sort and filter them. Use the <a href="../ref/Tags/findAll.html" class="tags">findAll</a> and <a href="../ref/Tags/grep.html" class="tags">grep</a> tags for these tasks:</div>
 オブジェクトのコレクションを扱う場合はソート、フィルタリングが必要になります。その場合は <a href="../ref/Tags/findAll.html" class="tags">findAll</a>タグと<a href="../ref/Tags/grep.html" class="tags">grep</a>タグが活用できます:<p class="paragraph"/><div class="code"><pre>Stephen King's Books:
@@ -1351,14 +1351,14 @@ GSPにはすぐに活用できるロジックタグとイテレーションタ�
 上記の例ではGPathも使用方法も紹介されています。GPathはGroovyでのXpathのような言語です。変数<code>books</code>は<code>Book</code>インスタンスのコレクションです。全ての<code>Book</code>にプロパティ<code>title</code>が有る場合、<code>books.title</code>とすることで<code>Book</code>の<code>title</code>プロパティのリストを得られます。Groovyは自動的にコレクションを検索して全ての<code>title</code>を含んだリストを返してくれます。
 
 
-<a name="6.2.2.4 Links and Resources"><!-- Legacy link --></a>
+<a name="7.2.2.4 Links and Resources"><!-- Legacy link --></a>
 <h2 id="linksAndResources">7.2.2.4 リンクとリソース</h2>
 <div class="hidden-block">GSP also features tags to help you manage linking to controllers and actions. The <a href="../ref/Tags/link.html" class="tags">link</a> tag lets you specify controller and action name pairing and it will automatically work out the link based on the <a href="../guide/single.html#urlmappings" class="guide">URL Mappings</a>, even if you change them! For example:</div>
 コントローラとアクションでのリンクを操作するGSPタグがあります。<a href="../ref/Tags/link.html" class="tags">link</a>タグはコントローラとアクション名を指定するだけで<a href="../guide/single.html#urlmappings" class="guide">URLマッピング</a>をベースとしたリンクを自動的に生成します(<a href="../guide/single.html#urlmappings" class="guide">URLマッピング</a>で変更をしても)。:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:link action=<span class="xml&#45;quote">"show"</span> id=<span class="xml&#45;quote">"1"</span>&#62;</span>Book 1<span class="xml&#45;tag">&#60;/g:link&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;g:link action=<span class="xml&#45;quote">"show"</span> id=<span class="xml&#45;quote">"$&#123;currentBook.id&#125;"</span>&#62;</span>$&#123;currentBook.name&#125;<span class="xml&#45;tag">&#60;/g:link&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;g:link controller=<span class="xml&#45;quote">"book"</span>&#62;</span>Book Home<span class="xml&#45;tag">&#60;/g:link&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;g:link controller=<span class="xml&#45;quote">"book"</span> action=<span class="xml&#45;quote">"list"</span>&#62;</span>Book List<span class="xml&#45;tag">&#60;/g:link&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;g:link url=<span class="xml&#45;quote">"&#91;action: 'list', controller: 'book'&#93;"</span>&#62;</span>Book List<span class="xml&#45;tag">&#60;/g:link&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;g:link params=<span class="xml&#45;quote">"&#91;sort: 'title', order: 'asc', author: currentBook.author&#93;"</span>
         action=<span class="xml&#45;quote">"list"</span>&#62;</span>Book List<span class="xml&#45;tag">&#60;/g:link&#62;</span></pre></div>
 
 
-<a name="6.2.2.5 Forms and Fields"><!-- Legacy link --></a>
+<a name="7.2.2.5 Forms and Fields"><!-- Legacy link --></a>
 <h2 id="formsAndFields">7.2.2.5 フォームとフィールド</h2>
 <h4>フォームの基礎 <div class="hidden-block">Form Basics </div></h4><p class="paragraph"/><div class="hidden-block">GSP supports many different tags for working with HTML forms and fields, the most basic of which is the <a href="../ref/Tags/form.html" class="tags">form</a> tag. This is a controller/action aware version of the regular HTML form tag. The <code>url</code> attribute lets you specify which controller and action to map to:</div>
 GSPではHTMLのフォームとフィールドに対応した様々なタグをサポートしています。フォーム・フィールドの基礎となるタグはformタグです。<a href="../ref/Tags/form.html" class="tags">form</a>タグは、通常のHTML formタグが、コントローラ・アクションを意識してる版みたいな物です。次のように、<code>url</code>属性にマップでコントローラアクションを指定します:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:form name=<span class="xml&#45;quote">"myForm"</span> url=<span class="xml&#45;quote">"&#91;controller:'book',action:'list'&#93;"</span>&#62;</span>...<span class="xml&#45;tag">&#60;/g:form&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">In this case we create a form called <code>myForm</code> that submits to the <code>BookController</code>'s <code>list</code> action. Beyond that all of the usual HTML attributes apply.</div>
@@ -1385,7 +1385,7 @@ value属性の値にGSPエクスプレッションを使用できます:<p class
 Grailsでは、<a href="../ref/Tags/actionSubmit.html" class="tags">actionSubmit</a>タグを使用することで、マルチ送信ボタン対応は、すっきりと実装できます。単純な送信ボタンのように見えますが、action属性にアクションを指定すると、指定したアクションへフォームが送信されるようになります。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:actionSubmit value=<span class="xml&#45;quote">"Some update label"</span> action=<span class="xml&#45;quote">"update"</span> /&#62;</span></pre></div>
 
 
-<a name="6.2.2.6 Tags as Method Calls"><!-- Legacy link --></a>
+<a name="7.2.2.6 Tags as Method Calls"><!-- Legacy link --></a>
 <h2 id="tagsAsMethodCalls">7.2.2.6 タグをメソッドとして使用</h2>
 <div class="hidden-block">One major different between GSP tags and other tagging technologies is that GSP tags can be called as either regular tags or as method calls from <a href="../guide/single.html#controllers" class="guide">controllers</a>, <a href="../guide/single.html#taglibs" class="guide">tag libraries</a> or GSP views.</div>
 GSPタグと他のタグ技術との大きな違いは、通常のタグとしての利用だけではなく、<a href="../guide/single.html#controllers" class="guide">コントローラ</a>、<a href="../guide/single.html#taglibs" class="guide">タグライブラリ</a>またはGSPビューから、メソッドとして呼び出せるという点です。<p class="paragraph"/><h4>GSPでタグをメソッドとして使用する <div class="hidden-block">Tags as method calls from GSPs </div></h4><p class="paragraph"/><div class="hidden-block">Tags return their results as a String-like object (a <code>StreamCharBuffer</code> which has all of the same methods as String) instead of writing directly to the response when called as methods. For example:</div>
@@ -1397,7 +1397,7 @@ GSPタグと他のタグ技術との大きな違いは、通常のタグとし�
 カスタムネームスペースを使用しているタグの場合は、<a href="../guide/single.html#namespaces" class="guide">カスタムネームスペース</a>を接頭辞として使います。<a href="http://grails.org/plugin/fckeditor" target="blank">FCKエディタープラグイン</a>を例とすると:<p class="paragraph"/><div class="code"><pre>def editor = fckeditor.editor(name: <span class="java&#45;quote">"text"</span>, width: <span class="java&#45;quote">"100%"</span>, height: <span class="java&#45;quote">"400"</span>)</pre></div>
 
 
-<a name="6.2.3 Views and Templates"><!-- Legacy link --></a>
+<a name="7.2.3 Views and Templates"><!-- Legacy link --></a>
 <h2 id="viewsAndTemplates">7.2.3 ビューとテンプレート</h2>
 <div class="hidden-block">Grails also has the concept of templates. These are useful for partitioning your views into maintainable chunks, and combined with <a href="../guide/single.html#layouts" class="guide">Layouts</a> provide a highly re-usable mechanism for structured views.</div>
 Grailsもテンプレートの概念を持っています。ビューを管理しやすいかたまりに分類して<a href="../guide/single.html#layouts" class="guide">レイアウト</a>機能で結合する際に活用できます。<p class="paragraph"/><h4>テンプレートの基礎 <div class="hidden-block">Template Basics </div></h4><p class="paragraph"/><div class="hidden-block">Grails uses the convention of placing an underscore before the name of a view to identify it as a template. For example, you might have a template that renders Books located at <code>grails-app/views/book/_bookTemplate.gsp</code>:</div>
@@ -1424,7 +1424,7 @@ Grailsでは、アンダースコアがビュー名称の前にあるとテン�
 ネームスペース<code>g</code>を使用することで<a href="../guide/single.html#tagsAsMethodCalls" class="guide">タグをメソッドとして使用</a>するのか、コントローラの<a href="../ref/Controllers/render.html" class="controllers">render</a>メソッドなのかを区別しています。
 
 
-<a name="6.2.4 Layouts with Sitemesh"><!-- Legacy link --></a>
+<a name="7.2.4 Layouts with Sitemesh"><!-- Legacy link --></a>
 <h2 id="layouts">7.2.4 Sitemeshでレイアウト</h2>
 <h4>レイアウトを作成する <div class="hidden-block">Creating Layouts </div></h4><p class="paragraph"/><div class="hidden-block">Grails leverages <a href="http://www.opensymphony.com/sitemesh/" target="blank">Sitemesh</a>, a decorator engine, to support view layouts. Layouts are located in the <code>grails-app/views/layouts</code> directory. A typical layout can be seen below:</div>
 Grailsはデコレータエンジン<a href="http://www.opensymphony.com/sitemesh/" target="blank">Sitemesh</a>の力を借りてビューレイアウトをサポートしています。レイアウトは<code>grails-app/views/layouts</code>ディレクトリに配置します。標準的なレイアウトは以下のようになります:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;html&#62;</span>
@@ -1500,7 +1500,7 @@ The content to apply a layout to
 コンテントの結果は、<a href="../ref/Tags/include.html" class="tags">include</a>タグの返値で提供されます。
 
 
-<a name="6.2.5 Static Resources"><!-- Legacy link --></a>
+<a name="7.2.5 Static Resources"><!-- Legacy link --></a>
 <h2 id="resources">7.2.5 静的リソース</h2>
 <div class="hidden-block">Grails 2.0 integrates with the <a href="http://grails.org/plugin/resources" target="blank">Resources plugin</a> to provide sophisticated static resource management. This plugin is installed by default in new Grails applications.</div>
  2.0から、洗練された静的リソース管理を提供する<a href="http://grails.org/plugin/resources" target="blank">Resourcesプラグイン</a>を統合しています。このプラグインはデフォルトで新規Grailsアプリケーションにインストールされます。<p class="paragraph"/><div class="hidden-block">The basic way to include a link to a static resource in your application is to use the <a href="../ref/Tags/resource.html" class="tags">resource</a> tag. This simple approach creates a URI pointing to the file.</div>
@@ -1531,7 +1531,7 @@ Resourceフレームワークの取り組んだ課題:
 リソースプラグインの<a href="http://grails-plugins.github.com/grails-resources/" target="blank">ドキュメント</a>では、さらに詳細な内容を提供しています。
 
 
-<a name="6.2.5.1 Including resources using the resource tags"><!-- Legacy link --></a>
+<a name="7.2.5.1 Including resources using the resource tags"><!-- Legacy link --></a>
 <h2 id="includingResourcesUsingTheResourceTags">7.2.5.1 リソースタグでのリソースの使用</h2>
 <h4>r:requireでリソースを制御する <div class="hidden-block">Pulling in resources with r:require</div></h4><p class="paragraph"/><div class="hidden-block">To use resources, your GSP page must indicate which resource modules it requires. For example with the <a href="http://grails.org/plugin/jquery" target="blank">jQuery plugin</a>, which exposes a "jquery" resource module, to use jQuery in any page on your site you simply add:</div>
 リソースを使用するにはどのリソースモジュールが必要がGSPページで示す必要があります。例として、"jquery"リソースモジュールを提供している<a href="http://grails.org/plugin/jquery" target="blank">jQueryプラグイン</a>を、サイトの全てのページで使用する場合は単に次のように追加するだけです:<p class="paragraph"/>
@@ -1616,7 +1616,7 @@ Grailsには、<code>&#60;img&#62;</code>タグを描写する、リソース参
 通常のGrails <a href="../ref/Tags/img.html" class="tags">img</a>タグと一緒で、簡潔に記述できる"uri"属性にも対応しています。<p class="paragraph"/><div class="hidden-block">See <a href="http://grails-plugins.github.com/grails-resources" target="blank">r:resource documentation</a> for full details.</div>
 詳細は<a href="http://grails-plugins.github.com/grails-resources" target="blank">Resources</a>プラグインのドキュメントを参照。
 
-<a name="6.2.5.2 Other resource tags"><!-- Legacy link --></a>
+<a name="7.2.5.2 Other resource tags"><!-- Legacy link --></a>
 <h2 id="otherResourceTags">7.2.5.2 他のリソースタグ</h2>
 <h4>r:resource</h4><p class="paragraph"/><div class="hidden-block">This is equivalent to the Grails <a href="../ref/Tags/resource.html" class="Tags">resource</a> tag, returning a link to the processed static resource. Grails' own <code>g:resource</code> tag delegates to this implementation if found, but if your code requires the Resources plugin, you should use <code>r:resource</code> directly.</div>
 これはGrails <a href="../ref/Tags/resource.html" class="Tags">resource</a>タグと同じで静的リソースへのリンクを処理して返します。Grailsの<code>g:resource</code>タグが有った場合はこのタグに委譲します。リソースプラグインを使用している場合は直接<code>r:resource</code>を使用しましょう。<p class="paragraph"/><div class="hidden-block">Alongside the regular Grails <a href="../ref/Tags/resource.html" class="Tags">resource</a> tag attributes, this also supports the "uri" attribute for increased brevity.</div>
@@ -1626,7 +1626,7 @@ Grailsには、<code>&#60;img&#62;</code>タグを描写する、リソース参
 Grailsでの<a href="../ref/Tags/external.html" class="Tags">external</a>タグのリソースフレームワーク版です。CSS,JS,favicon等の外部リソースを含む為のHTMLマークアップを描写します。<p class="paragraph"/><div class="hidden-block">See <a href="http://grails-plugins.github.com/grails-resources" target="blank">r:resource documentation</a> for full details.</div>
 詳細は<a href="http://grails-plugins.github.com/grails-resources" target="blank">Resources</a>プラグインのドキュメントを参照。
 
-<a name="6.2.5.3 Declaring resources"><!-- Legacy link --></a>
+<a name="7.2.5.3 Declaring resources"><!-- Legacy link --></a>
 <h2 id="declaringResources">7.2.5.3 リソースの宣言</h2>
 <div class="hidden-block">A DSL is provided for declaring resources and modules. This can go either in your <code>Config.groovy</code> in the case of application-specific resources, or more commonly in a resources artefact in <code>grails-app/conf</code>.</div>
 リソースとモジュールを宣言するためのDSLが提供されています。アプリケーション固有の場合は<code>Config.groovy</code>ファイルに記述、また通常はリソースアーテファクトとして<code>grails-app/conf</code>にファイルで配置します。<p class="paragraph"/><div class="hidden-block">Note that you do not need to declare all your static resources, especially images. However you must to establish dependencies or other resources-specific attributes. Any resource that is not declared is called "ad-hoc" and will still be processed using defaults for that resource type.</div>
@@ -1655,7 +1655,7 @@ GSPに<code>&#60;r:require module="forms"/&#62;</code>を含んだ場合、こ�
 リソースDSLの詳細は<a href="http://grails-plugins.github.com/grails-resources" target="blank">Resourcesプラグイン</a>のドキュメントを参考にしてください。
 
 
-<a name="6.2.5.4 Overriding plugin resources"><!-- Legacy link --></a>
+<a name="7.2.5.4 Overriding plugin resources"><!-- Legacy link --></a>
 <h2 id="overridingPluginResources">7.2.5.4 プラグインリソースのオーバーライド</h2>
 <div class="hidden-block">Because a resource module can define the bundle groupings and other attributes of resources, you may find that the settings provided are not correct for your application.</div>
 リソースモジュールにバンドルのグルーピングと他のリソース属性の宣言ができることで、提供されている設定が個々のアプリケーションで違う場合が有るのを認識します。<p class="paragraph"/><div class="hidden-block">For example, you may wish to bundle jQuery and some other libraries all together in one file. There is a load-time and caching trade-off here, but often it is the case that you'd like to override some of these settings.</div>
@@ -1685,7 +1685,7 @@ GSPに<code>&#60;r:require module="forms"/&#62;</code>を含んだ場合、こ�
 固有のリソースをオーバライドする場合は、もとの宣言がリソース毎にユニークIDで含まれている必要があります。<p class="paragraph"/>For full details of the resource DSL please see the <a href="http://grails-plugins.github.com/grails-resources" target="blank">resources plugin documentation</a>.
 リソースDSLの詳細は<a href="http://grails-plugins.github.com/grails-resources" target="blank">リソースプラグイン</a>のドキュメントを参考にしてください。
 
-<a name="6.2.5.5 Optimizing your resources"><!-- Legacy link --></a>
+<a name="7.2.5.5 Optimizing your resources"><!-- Legacy link --></a>
 <h2 id="optimizingYourResources">7.2.5.5 リソースの最適化</h2>
 <div class="hidden-block">The Resources framework uses "mappers" to mutate the resources into the final format served to the user.</div>
 リソースフレームワークは"マッパー"を使用して、最終フォーマットへリソースを変化させてユーザへ配信します。<p class="paragraph"/><div class="hidden-block">The resource mappers are applied to each static resource once, in a specific order. You can create your own resource mappers, and several plugins provide some already for zipping, caching and minifying.</div>
@@ -1718,7 +1718,7 @@ GSPに<code>&#60;r:require module="forms"/&#62;</code>を含んだ場合、こ�
 最小化してコード内容をわかりにくくしたりサイズを縮小する幾つかのCSSとJavascript minifierが有ります。現段階ではプラグインの提供は無いですが近々リリースされると思います。
 
 
-<a name="6.2.5.6 Debugging"><!-- Legacy link --></a>
+<a name="7.2.5.6 Debugging"><!-- Legacy link --></a>
 <h2 id="debugging">7.2.5.6 デバッグ</h2>
 <div class="hidden-block">When your resources are being moved around, renamed and otherwise mutated, it can be hard to debug client-side issues. Modern browsers, especially Safari, Chrome and Firefox have excellent tools that let you view all the resources requested by a page, including the headers and other information about them.</div>
 リソースが、リソースフレームワークにより、動き回り、名称変更されたり、変更されるとクライアントサイドのデバッグが大変になります。最近のブラウザSafari,Chrome,Firefoxには、リクエストでのページの全てのリソースやヘッダーやその他の情報が閲覧できる優秀なツールがあります。<p class="paragraph"/><div class="hidden-block">There are several debugging features built in to the Resources framework.</div>
@@ -1730,7 +1730,7 @@ GSPに<code>&#60;r:require module="forms"/&#62;</code>を含んだ場合、こ�
 もちろんこの設定は環境ごとに定義できます。
 
 
-<a name="6.2.5.7 Preventing processing of resources"><!-- Legacy link --></a>
+<a name="7.2.5.7 Preventing processing of resources"><!-- Legacy link --></a>
 <h2 id="preventingProcessingOfResources">7.2.5.7 リソース生成・変換処理を防ぐ</h2>
 <div class="hidden-block">Sometimes you do not want a resource to be processed in a particular way, or even at all. Occasionally you may also want to disable all resource mapping.</div>
 特定のリソースだけ変換処理を行わない事もあります。時折リソースマッピングを無効にしたいこともあります。<p class="paragraph"/><h4>個々のリソースの特定のマッパー処理を防ぐ <div class="hidden-block">Preventing the application of a specific mapper to an individual resource </div></h4><p class="paragraph"/><div class="hidden-block">All resource declarations support a convention of noXXXX:true where XXXX is a mapper name.</div>
@@ -1753,7 +1753,7 @@ grails.resources.bundle.excludes = &#91;'&#42;&#42;/&#42;.less'&#93;</pre></div>
 <div class="code"><pre>grails.resources.adhoc.patterns = &#91;'images/&#42;', '&#42;.js', '&#42;.css'&#93;</pre></div>
 
 
-<a name="6.2.5.8 Other Resources-aware plugins"><!-- Legacy link --></a>
+<a name="7.2.5.8 Other Resources-aware plugins"><!-- Legacy link --></a>
 <h2 id="otherResourcesPlugins">7.2.5.8 リソース関連のプラグイン</h2>
 <div class="hidden-block">At the time of writing, the following plugins include support for the Resources framework:</div>
 現時点でのリソースフレームワークに対応したプラグイン:
@@ -1766,7 +1766,7 @@ grails.resources.bundle.excludes = &#91;'&#42;&#42;/&#42;.less'&#93;</pre></div>
 <li><a href="http://grails.org/plugin/cached-resources" target="blank">cached-resources</a></li>
 </ul><p class="paragraph"/>
 
-<a name="6.2.6 Sitemesh Content Blocks"><!-- Legacy link --></a>
+<a name="7.2.6 Sitemesh Content Blocks"><!-- Legacy link --></a>
 <h2 id="sitemeshContentBlocks">7.2.6 Sitemeshコンテントブロック</h2>
 <div class="hidden-block">Although it is useful to decorate an entire page sometimes you may find the need to decorate independent sections of your site. To do this you can use content blocks. To get started, partition the page to be decorated using the <code>&#60;content&#62;</code> tag:</div>
 サイト全体のページをデコレートするのに便利ですが、ページ内のブロック(パーツ)をデコレートする必要も有ると思います。この場合はコンテントブロックを使用します。コンテントブロックを使用するには<code>&#60;content&#62;</code>タグでページ内をブロック分割します。<p class="paragraph"/><div class="hidden-block">
@@ -1809,7 +1809,7 @@ grails.resources.bundle.excludes = &#91;'&#42;&#42;/&#42;.less'&#93;</pre></div>
 <span class="xml&#45;tag">&#60;/html&#62;</span></pre></div>
 
 
-<a name="6.2.7 Making Changes to a Deployed Application"><!-- Legacy link --></a>
+<a name="7.2.7 Making Changes to a Deployed Application"><!-- Legacy link --></a>
 <h2 id="makingChangesToADeployedApplication">7.2.7 デプロイされたアプリケーションへの変更</h2>
 <div class="hidden-block">One of the main issues with deploying a Grails application (or typically any servlet-based one) is that any change to the views requires that you redeploy your whole application. If all you want to do is fix a typo on a page, or change an image link, it can seem like a lot of unnecessary work. For such simple requirements, Grails does have a solution: the  <code>grails.gsp.view.dir</code>  configuration setting.</div>
 Grailsアプリケーションをデプロイする際に起きる大きな問題の一つに(または他のサーブレットベースのアプリケーションも含む)、ビューを変更するたびにアプリケーション全体を再デプロイする必要がある事です。もし誤植や画像リンクの修正など有る場合は無駄な作業が発生します。そのような事を発生させないために、Grailsには、<code>grails.gsp.view.dir</code>定義という解決方法が存在します。<p class="paragraph"/><div class="hidden-block">How does this work? The first step is to decide where the GSP files should go. Let's say we want to keep them unpacked in a  <code>/var/www/grails/my-app</code>  directory. We add these two lines to  <code>grails-app/conf/Config.groovy</code> :</div>
@@ -1834,7 +1834,7 @@ GSPリロードをコントロールするシステムプロパティも提供�
 プリコンパイルGSPに対してのGSPリロードはGrails 1.3.5からサポートされています。
 
 
-<a name="6.2.8 GSP Debugging"><!-- Legacy link --></a>
+<a name="7.2.8 GSP Debugging"><!-- Legacy link --></a>
 <h2 id="GSPDebugging">7.2.8 GSPデバッグ</h2>
 <h4>生成されたソースコードを表示する <div class="hidden-block">Viewing the generated source code </div></h4><p class="paragraph"/><div class="hidden-block">
 <ul class="star">
@@ -1869,7 +1869,7 @@ debugTemplatesでは以下のようなコメントが追記されます:<p class
 それぞれのコメントブロックには番号を持っていて、テンプレートの開始と終了を探し安くしてあります。
 
 
-<a name="6.3 Tag Libraries"><!-- Legacy link --></a>
+<a name="7.3 Tag Libraries"><!-- Legacy link --></a>
 <h2 id="taglibs">7.3 タグライブラリ</h2>
 <div class="hidden-block">Like <a href="http://www.oracle.com/technetwork/java/javaee/jsp/index.html" target="blank">Java Server Pages</a> (JSP), GSP supports the concept of custom tag libraries. Unlike JSP, Grails' tag library mechanism is simple, elegant and completely reloadable at runtime.</div>
 <a href="http://www.oracle.com/technetwork/java/javaee/jsp/index.html" target="blank">Java Server Pages</a> (JSP)のように、GSPでもカスタムタグライブラリをサポートしています。JSPと違いGrailsでのタグライブラリは単純簡潔です。<p class="paragraph"/><div class="hidden-block">Quite simply, to create a tag library create a Groovy class that ends with the convention <code>TagLib</code> and place it within the <code>grails-app/taglib</code> directory:</div>
@@ -1943,7 +1943,7 @@ debugTemplatesでは以下のようなコメントが追記されます:<p class
 <li><code>session</code> - <a href="http://download.oracle.com/javaee/1.4/api/javax/servlet/http/HttpSession.html" class="api">HttpSession</a>インスタンス</li>
 </ul><p class="paragraph"/>
 
-<a name="6.3.2 Simple Tags"><!-- Legacy link --></a>
+<a name="7.3.2 Simple Tags"><!-- Legacy link --></a>
 <h2 id="simpleTags">7.3.2 簡単なタグ</h2>
 <div class="hidden-block">As demonstrated in the previous example it is easy to write simple tags that have no body and just output content. Another example is a <code>dateFormat</code> style tag:</div>
 前の説明で、簡単にコンテンツを出力するタグは簡単に記述できると説明しました。他の例として<code>dateFormat</code>タグを紹介します:<p class="paragraph"/><div class="code"><pre>def dateFormat = &#123; attrs, body &#45;&#62;
@@ -1963,7 +1963,7 @@ debugTemplatesでは以下のようなコメントが追記されます:<p class
 このようにして、実際に描写されるGSPテンプレートと切り離せます.
 
 
-<a name="6.3.3 Logical Tags"><!-- Legacy link --></a>
+<a name="7.3.3 Logical Tags"><!-- Legacy link --></a>
 <h2 id="logicalTags">7.3.3 制御タグ</h2>
 <div class="hidden-block">You can also create logical tags where the body of the tag is only output once a set of conditions have been met. An example of this may be a set of security tags:</div>
 条件に合ったときのみにタグ内容を出力する制御タグを作成できます。セキュリティタグを例とします:<p class="paragraph"/><div class="code"><pre>def isAdmin = &#123; attrs, body &#45;&#62;
@@ -1977,7 +1977,7 @@ debugTemplatesでは以下のようなコメントが追記されます:<p class
 <span class="xml&#45;tag">&#60;/g:isAdmin&#62;</span></pre></div>
 
 
-<a name="6.3.4 Iterative Tags"><!-- Legacy link --></a>
+<a name="7.3.4 Iterative Tags"><!-- Legacy link --></a>
 <h2 id="iterativeTags">7.3.4 イテレートタグ</h2>
 <div class="hidden-block">Iterative tags are easy too, since you can invoke the body multiple times:</div>
 タグ内容を複数回実行するような、イテレートタグも簡単に作れます:<p class="paragraph"/><div class="code"><pre>def repeat = &#123; attrs, body &#45;&#62;
@@ -2005,7 +2005,7 @@ debugTemplatesでは以下のようなコメントが追記されます:<p class
 こうすることで、<code>var</code>属性に指定した変数名<code>j</code>をタグ内部で変数として参照することができます。
 
 
-<a name="6.3.5 Tag Namespaces"><!-- Legacy link --></a>
+<a name="7.3.5 Tag Namespaces"><!-- Legacy link --></a>
 <h2 id="namespaces">7.3.5 タグネームスペース</h2>
 <div class="hidden-block">By default, tags are added to the default Grails namespace and are used with the <code>g:</code> prefix in GSP pages. However, you can specify a different namespace by adding a static property to your <code>TagLib</code> class:</div>
 デフォルトでのタグは、Grailsのデフォルトネームスペースに追加され、GSPでは<code>g:</code>接頭辞が使用できます。ネームスペースはstaticプロパティ<code>namespace</code>を<code>TagLib</code>クラスに追加する事で、独自に定義することが可能です。:<p class="paragraph"/><div class="code"><pre>class SimpleTagLib &#123;
@@ -2019,14 +2019,14 @@ debugTemplatesでは以下のようなコメントが追記されます:<p class
 GSP、コントローラ、タグライブラリで使用できます。
 
 
-<a name="6.3.6 Using JSP Tag Libraries"><!-- Legacy link --></a>
+<a name="7.3.6 Using JSP Tag Libraries"><!-- Legacy link --></a>
 <h2 id="usingJSPTagLibraries">7.3.6 JSPタグライブラリの使用</h2>
 <div class="hidden-block">In addition to the simplified tag library mechanism provided by GSP, you can also use JSP tags from GSP. To do so simply declare the JSP to use with the <code>taglib</code> directive:</div>
 単純なタグライブラリ機能がGSPで提供されているのに加えて、GSPでは、JSPタグを使用することもできます。使用するには、<code>taglib</code>ディレクティブを定義します。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;%@ taglib prefix=<span class="xml&#45;quote">"fmt"</span> uri=<span class="xml&#45;quote">"http://java.sun.com/jsp/jstl/fmt"</span> %&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">Then you can use it like any other tag:</div>
 他のタグと同じように使用できます:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;fmt:formatNumber value=<span class="xml&#45;quote">"$&#123;10&#125;"</span> pattern=<span class="xml&#45;quote">".00"</span>/&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">With the added bonus that you can invoke JSP tags like methods:</div>
 さらに追加として、JSPタグをメソッドとして実行可能です:<p class="paragraph"/><div class="code"><pre>$&#123;fmt.formatNumber(value:10, pattern:<span class="java&#45;quote">".00"</span>)&#125;</pre></div>
 
-<a name="6.3.7 Tag return value"><!-- Legacy link --></a>
+<a name="7.3.7 Tag return value"><!-- Legacy link --></a>
 <h2 id="tagReturnValue">7.3.7 タグの戻り値</h2>
 <div class="hidden-block">Since Grails 1.2, a tag library call returns an instance of <code>org.codehaus.groovy.grails.web.util.StreamCharBuffer</code> class by default.
 This change improves performance by reducing object creation and optimizing buffering during request processing.
@@ -2044,7 +2044,7 @@ Object returning tag names are listed in a static <code>returnObjectForTags</cod
     &#125;
 &#125;</pre></div>
 
-<a name="6.4 URL Mappings"><!-- Legacy link --></a>
+<a name="7.4 URL Mappings"><!-- Legacy link --></a>
 <h2 id="urlmappings">7.4 URLマッピング</h2>
 <div class="hidden-block">Throughout the documentation so far the convention used for URLs has been the default of <code>/controller/action/id</code>. However, this convention is not hard wired into Grails and is in fact controlled by a URL Mappings class located at <code>grails-app/conf/UrlMappings.groovy</code>.</div>
 ここまでのドキュメント内容では、URLのルールはデフォルトの<code>/controller/action/id</code>を使用しています。このルールはGrailsで必須になっているわけでは無く、<code>grails-app/conf/UrlMappings.groovy</code>に配置されているURLマッピングクラスでコントロールされています。<p class="paragraph"/><div class="hidden-block">The <code>UrlMappings</code> class contains a single property called <code>mappings</code> that has been assigned a block of code:</div>
@@ -2053,7 +2053,7 @@ Object returning tag names are listed in a static <code>returnObjectForTags</cod
     &#125;
 &#125;</pre></div><p class="paragraph"/>
 
-<a name="6.4.1 Mapping to Controllers and Actions"><!-- Legacy link --></a>
+<a name="7.4.1 Mapping to Controllers and Actions"><!-- Legacy link --></a>
 <h2 id="mappingToControllersAndActions">7.4.1 コントローラとアクションにマッピング</h2>
 <div class="hidden-block">To create a simple mapping simply use a relative URL as the method name and specify named parameters for the controller and action to map to:</div>
 簡単なマッピングは、相対URLをメソッド名とするメソッドに、マップ対象のコントローラとアクション名称を、名前付きパラメータ引数として作成します:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/product"</span>(controller: <span class="java&#45;quote">"product"</span>, action: <span class="java&#45;quote">"list"</span>)</pre></div><p class="paragraph"/><div class="hidden-block">In this case we've mapped the URL <code>/product</code> to the <code>list</code> action of the <code>ProductController</code>. Omit the action definition to map to the default action of the controller:</div>
@@ -2061,25 +2061,30 @@ Object returning tag names are listed in a static <code>returnObjectForTags</cod
 他のシンタックスとして、コントローラとアクションを指定したコードブロックをメソッドに渡すこともできます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/product"</span> &#123;
     controller = <span class="java&#45;quote">"product"</span>
     action = <span class="java&#45;quote">"list"</span>
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Which syntax you use is largely dependent on personal preference. To rewrite one URI onto another explicit URI (rather than a controller/action pair) do something like this:</div>
-どちらのシンタックスを使用するかは個人の選択に依存します。(コントローラ・アクションを指定するのでは無く)URIを明示的なURIへ書き換えする場合は:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/hello"</span>(uri: <span class="java&#45;quote">"/hello.dispatch"</span>)</pre></div><p class="paragraph"/><div class="hidden-block">Rewriting specific URIs is often useful when integrating with other frameworks.</div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Which syntax you use is largely dependent on personal preference. </div>
+どちらのシンタックスを使用するかは個人の選択に依存します。<p class="paragraph"/>If you have mappings that all fall under a particular path you can group mappings with the <code>group</code> method:<p class="paragraph"/><div class="code"><pre>group <span class="java&#45;quote">"/product"</span>, &#123;
+    <span class="java&#45;quote">"/apple"</span>(controller:<span class="java&#45;quote">"product"</span>, id:<span class="java&#45;quote">"apple"</span>)
+    <span class="java&#45;quote">"/htc"</span>(controller:<span class="java&#45;quote">"product"</span>, id:<span class="java&#45;quote">"htc"</span>)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">To rewrite one URI onto another explicit URI (rather than a controller/action pair) do something like this:</div>
+URIを明示的なURIへ(コントローラ・アクションを指定するのでは無く)書き換えする場合は:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/hello"</span>(uri: <span class="java&#45;quote">"/hello.dispatch"</span>)</pre></div><p class="paragraph"/><div class="hidden-block">Rewriting specific URIs is often useful when integrating with other frameworks.</div>
 特定のURIへの書き換えは、他のフレームワークと統合する場合に便利です。
 
 
-
+<a name="7.4.2 Mapping to REST resources"><!-- Legacy link --></a>
 <h2 id="restfulMappings">7.4.2 RESTリソースへのマッピング</h2>
 Since Grails 2.3, it possible to create RESTful URL mappings that map onto controllers by convention. The syntax to do so is as follows:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book')</pre></div><p class="paragraph"/>You define a base URI and the name of the controller to map to using the <code>resources</code> parameter. The above mapping will result in the following URLs:<p class="paragraph"/>
 <table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${id}/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${id}</td><td>delete</td></tr></table><p class="paragraph"/>If you wish to include or exclude any of the generated URL mappings you can do so with the <code>include</code> or <code>exclude</code> parameter, which accepts the name of the Grails action to include or exclude:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book', exclude:&#91;'delete', 'update'&#93;)<p class="paragraph"/>or<p class="paragraph"/><span class="java&#45;quote">"/books"</span>(resources:'book', include:&#91;'index', 'show'&#93;)</pre></div><p class="paragraph"/><h4>Single resources</h4><p class="paragraph"/>A single resource is a resource for which there is only one (possibly per user) in the system. You can create a single resource using the <code>resource</code> parameter (as oppose to <code>resources</code>):<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/book"</span>(resource:'book')</pre></div><p class="paragraph"/>This results in the following URL mappings:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/book</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/book/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/book</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/book</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/book/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/book</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/book</td><td>delete</td></tr></table><p class="paragraph"/>The main difference is that the id is not included in the URL mapping.<p class="paragraph"/><h4>Nested Resources</h4><p class="paragraph"/>You can nest resource mappings to generate child resources. For example:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
   <span class="java&#45;quote">"/authors"</span>(resources:<span class="java&#45;quote">"author"</span>)
 &#125;</pre></div><p class="paragraph"/>The above will result in the following URL mappings:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URL</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books/${bookId}/authors</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/${bookId}/authors/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books/${bookId}/authors</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${bookId}/authors/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${bookId}/authors/edit/${id}</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${bookId}/authors/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${bookId}/authors/${id}</td><td>delete</td></tr></table><p class="paragraph"/>You can also nest regular URL mappings within a resource mapping:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources: <span class="java&#45;quote">"book"</span>) &#123;
     <span class="java&#45;quote">"/publisher"</span>(controller:<span class="java&#45;quote">"publisher"</span>)
-&#125;</pre></div><p class="paragraph"/>This will result in the following URL being available:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URL</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books/1/publisher</td><td>index</td></tr></table><p class="paragraph"/><h4>Linking to RESTful Mappings</h4><p class="paragraph"/>You can link to any URL mapping created with the <code>g:link</code> tag provided by Grails simply by referencing the controller and action to link to:<p class="paragraph"/><div class="code"><pre>&#60;g:link controller=<span class="java&#45;quote">"book"</span> action=<span class="java&#45;quote">"index"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>The same applies with nested resource. For example given the nested resources:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
+&#125;</pre></div><p class="paragraph"/>This will result in the following URL being available:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URL</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books/1/publisher</td><td>index</td></tr></table><p class="paragraph"/><h4>Linking to RESTful Mappings</h4><p class="paragraph"/>You can link to any URL mapping created with the <code>g:link</code> tag provided by Grails simply by referencing the controller and action to link to:<p class="paragraph"/><div class="code"><pre>&#60;g:link controller=<span class="java&#45;quote">"book"</span> action=<span class="java&#45;quote">"index"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>As a convenience you  can also pass a domain instance to the <code>resource</code> attribute of the <code>link</code> tag:<p class="paragraph"/><div class="code"><pre>&#60;g:link resource=<span class="java&#45;quote">"$&#123;book&#125;"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>This will automatically produce the correct link (in this case "/books/1" for an id of "1").<p class="paragraph"/>
+The case of nested resources is a little different as they typically required two identifiers (the id of the resource and the one it is nested within). For example given the nested resources:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
   <span class="java&#45;quote">"/authors"</span>(resources:<span class="java&#45;quote">"author"</span>)
 &#125;</pre></div><p class="paragraph"/>If you wished to link to the <code>show</code> action of the <code>author</code> controller, you would write:<p class="paragraph"/><div class="code"><pre>// Results in /books/1/authors/2
 &#60;g:link controller=<span class="java&#45;quote">"author"</span> action=<span class="java&#45;quote">"show"</span> method=<span class="java&#45;quote">"GET"</span> params=<span class="java&#45;quote">"&#91;bookId:1&#93;"</span> id=<span class="java&#45;quote">"2"</span>&#62;The Author&#60;/g:link&#62;</pre></div><p class="paragraph"/>However, to make this more concise there is a <code>resource</code> attribute to the link tag which can be used instead:<p class="paragraph"/><div class="code"><pre>// Results in /books/1/authors/2
 &#60;g:link resource=<span class="java&#45;quote">"book/author"</span> action=<span class="java&#45;quote">"show"</span> bookId=<span class="java&#45;quote">"1"</span> id=<span class="java&#45;quote">"2"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>The resource attribute accepts a path to the resource separated by a slash (in this case "book/author"). The attributes of the tag can be used to specify the necessary <code>bookId</code> parameter.
 
-<a name="6.4.2 Embedded Variables"><!-- Legacy link --></a>
+<a name="7.4.3 Embedded Variables"><!-- Legacy link --></a>
 <h2 id="embeddedVariables">7.4.3 埋込変数</h2>
 <h4>簡単な変数 <div class="hidden-block">Simple Variables </div></h4><p class="paragraph"/><div class="hidden-block">The previous section demonstrated how to map simple URLs with concrete "tokens". In URL mapping speak tokens are the sequence of characters between each slash, '/'. A concrete token is one which is well defined such as as <code>/product</code>. However, in many circumstances you don't know what the value of a particular token will be until runtime. In this case you can use variable placeholders within the URL for example:</div>
 前セクションでは、具体トークンURLを簡単にマップする方法を紹介しました。URLマッピングでのトークンとは"/"スラッシュの間にある文字列の事を指します。具体トークンは<code>/product</code>のように適切に指定できますが、状況によっては、ランタイム時にしか一部のトークンが予測できない場合があります。その場合は以下の例のように変数を指定できます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -2110,7 +2115,9 @@ URLに指定された内容から、変数<code>controller</code>,<code>action</
 /graemerocher/2007/01/10
 /graemerocher/2007/01
 /graemerocher/2007
-/graemerocher</code></pre><p class="paragraph"/><h4>任意変数 <div class="hidden-block">Arbitrary Variables </div></h4><p class="paragraph"/><div class="hidden-block">You can also pass arbitrary parameters from the URL mapping into the controller by just setting them in the block passed to the mapping:</div>
+/graemerocher</code></pre><p class="paragraph"/><h4>Optional File Extensions</h4><p class="paragraph"/>If you wish to capture the extension of a particular path, then a special case mapping exists:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/$controller/$action?/$id?(.$format)?"</span>()</pre></div><p class="paragraph"/>By adding the <code>(.$format)?</code> mapping you can access the file extension using the <code>response.format</code> property in a controller:<p class="paragraph"/><div class="code"><pre>def index() &#123;
+    render <span class="java&#45;quote">"extension is $&#123;response.format&#125;"</span>
+&#125;</pre></div><p class="paragraph"/><h4>任意変数 <div class="hidden-block">Arbitrary Variables </div></h4><p class="paragraph"/><div class="hidden-block">You can also pass arbitrary parameters from the URL mapping into the controller by just setting them in the block passed to the mapping:</div>
 URLマッピングからコントローラへ、コードブロック内で設定した任意のパラメータを渡すことが可能です:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/holiday/win"</span> &#123;
      id = <span class="java&#45;quote">"Marrakech"</span>
      year = 2007
@@ -2123,7 +2130,7 @@ URLマッピングからコントローラへ、コードブロック内で設�
 URLが実際にマッチした時にコードブロックのロジックが実行されて変数の内容が解決されます。
 
 
-<a name="6.4.3 Mapping to Views"><!-- Legacy link --></a>
+<a name="7.4.4 Mapping to Views"><!-- Legacy link --></a>
 <h2 id="mappingToViews">7.4.4 ビューへマッピング</h2>
 <div class="hidden-block">You can resolve a URL to a view without a controller or action involved. For example to map the root URL <code>/</code> to a GSP at the location <code>grails-app/views/index.gsp</code> you could use:</div>
 コントローラまたはアクションを含まずにビューへURLをマップできます。例としてルートURL <code>/</code> を、<code>grails-app/views/index.gsp</code>にマッピングするには:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -2134,7 +2141,7 @@ URLが実際にマッチした時にコードブロックのロジックが実�
 &#125;</pre></div>
 
 
-<a name="6.4.4 Mapping to Response Codes"><!-- Legacy link --></a>
+<a name="7.4.5 Mapping to Response Codes"><!-- Legacy link --></a>
 <h2 id="mappingToResponseCodes">7.4.5 レスポンスコードへマッピング</h2>
 <div class="hidden-block">Grails also lets you map HTTP response codes to controllers, actions or views. Just use a method name that matches the response code you are interested in:</div>
 GrailsではHTTPレスポンスコードをコントローラ、アクション、ビューにマッピングすることができます。使用したいレスポンスコードをメソッド名に指定するだけです:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -2170,7 +2177,7 @@ GrailsではHTTPレスポンスコードをコントローラ、アクション�
 </blockquote>
 
 
-<a name="6.4.5 Mapping to HTTP methods"><!-- Legacy link --></a>
+<a name="7.4.6 Mapping to HTTP methods"><!-- Legacy link --></a>
 <h2 id="mappingHTTP">7.4.6 HTTPメソッドへマッピング</h2>
 <div class="hidden-block">URL mappings can also be configured to map based on the HTTP method (GET, POST, PUT or DELETE). This is very useful for RESTful APIs and for restricting mappings based on HTTP method.</div>
 URLマッピングでは、HTTPメソッド(GET, POST, PUT, DELETE)へのマップを定義することができます。HTTPメソッドをベースに制限したり、RESTful API等に便利です。<p class="paragraph"/><div class="hidden-block">As an example the following mappings provide a RESTful API URL mappings for the <code>ProductController</code>:</div>
@@ -2180,7 +2187,7 @@ URLマッピングでは、HTTPメソッド(GET, POST, PUT, DELETE)へのマッ�
    &#125;
 &#125;</pre></div>
 
-<a name="6.4.6 Mapping Wildcards"><!-- Legacy link --></a>
+<a name="7.4.7 Mapping Wildcards"><!-- Legacy link --></a>
 <h2 id="mappingWildcards">7.4.7 マッピングワイルドカード</h2>
 <div class="hidden-block">Grails' URL mappings mechanism also supports wildcard mappings. For example consider the following mapping:</div>
 GrailsのURLマッピング機能ではワイルドカードもサポートしています。例として次ぎのマッピングに注目してください:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -2207,7 +2214,7 @@ println name // prints <span class="java&#45;quote">"logo"</span> or <span class
 この例では、 <code>/images</code>また<code>/css</code>で始まるURIはURLマッピングから除外されます.
 
 
-<a name="6.4.7 Automatic Link Re-Writing"><!-- Legacy link --></a>
+<a name="7.4.8 Automatic Link Re-Writing"><!-- Legacy link --></a>
 <h2 id="automaticLinkRewriting">7.4.8 自動リンクリライト</h2>
 <div class="hidden-block">Another great feature of URL mappings is that they automatically customize the behaviour of the <a href="../ref/Tags/link.html" class="tags">link</a> tag so that changing the mappings don't require you to go and change all of your links.</div>
 URLマッピングには、<a href="../ref/Tags/link.html" class="tags">link</a>タグの振る舞いを自動的にカスタマイズ するという優れた機能が存在します。その機能のおかげでURLマッピングを変更しても、その都度リンクを変更しなくても良くなります。<p class="paragraph"/><div class="hidden-block">This is done through a URL re-writing technique that reverse engineers the links from the URL mappings. So given a mapping such as the blog one from an earlier section:</div>
@@ -2225,7 +2232,7 @@ GrailsがURLを自動的にリライトします:<p class="paragraph"/><div clas
 <span class="xml&#45;tag">&#60;a href=<span class="xml&#45;quote">"/fred/2007/10"</span>&#62;</span>My Blog &#45; October 2007 Posts<span class="xml&#45;tag">&#60;/a&#62;</span></pre></div>
 
 
-<a name="6.4.8 Applying Constraints"><!-- Legacy link --></a>
+<a name="7.4.9 Applying Constraints"><!-- Legacy link --></a>
 <h2 id="applyingConstraints">7.4.9 制約の適用</h2>
 <div class="hidden-block">URL Mappings also support Grails' unified <a href="../guide/single.html#constraints" class="guide">validation constraints</a> mechanism, which lets you further "constrain" how a URL is matched. For example, if we revisit the blog sample code from earlier, the mapping currently looks like this:</div>
 URLマッピングでは、URLがマッチしてるか確認するために、<a href="../guide/single.html#constraints" class="guide">バリデーション制約</a>が使用できます。例として、前と同じブログのサンプルを使用します:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -2245,7 +2252,7 @@ URLマッピングでは、URLがマッチしてるか確認するために、<a
 この例では、<code>year</code>,<code>month</code>,<code>day</code>パラメータが特定のパターンにマッチするように制約を定義しています。
 
 
-<a name="6.4.9 Named URL Mappings"><!-- Legacy link --></a>
+<a name="7.4.10 Named URL Mappings"><!-- Legacy link --></a>
 <h2 id="namedMappings">7.4.10 名前付きURLマッピング</h2>
 <div class="hidden-block">URL Mappings also support named mappings, that is mappings which have a name associated with them. The name may be used to refer to a specific mapping when links are generated.</div>
 URLマッピングでは、名前で連携ができるように、名前付きマッピングに対応しています。<p class="paragraph"/><div class="hidden-block">The syntax for defining a named mapping is as follows:</div>
@@ -2305,12 +2312,35 @@ Arbitrary strategies may be plugged in by providing a class which implements the
 
 
 <h2 id="namespacedControllers">7.4.12 コントローラネームスペース</h2>
-An application is not allowed to define multiple controllers with the same
-name, even if they are defined in separate packages.  For example an
-application may not contain <code>com.accounting.ReportingController</code> and
-<code>com.humanresources.ReportingController</code>.  However it is allowed for
-an application to use a plugin which provides a controller with the
-same name as a controller provided by the application as long as the
+If an application defines multiple controllers with the same name
+in different packages, the controllers must be defined in a
+namespace.  The way to define a namespace for a controller is to 
+define a static property named <code>namespace</code> in the controller and 
+assign a String to the property that represents the namespace.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/com/app/reporting/AdminController.groovy
+<span class="java&#45;keyword">package</span> com.app.reporting<p class="paragraph"/>class AdminController &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> namespace = 'reports'<p class="paragraph"/>    // &#8230;
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/com/app/security/AdminController.groovy
+<span class="java&#45;keyword">package</span> com.app.security<p class="paragraph"/>class AdminController &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> namespace = 'users'<p class="paragraph"/>    // &#8230;
+&#125;</pre></div><p class="paragraph"/>When defining url mappings which should be associated with a namespaced
+controller, the <code>namespace</code> variable needs to be part of the URL mapping.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/UrlMappings.groovy
+class UrlMappings &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mappings = &#123;
+        '/userAdmin' &#123;
+            controller = 'admin'
+            namespace = 'users'
+        &#125;<p class="paragraph"/>        '/reportAdmin' &#123;
+            controller = 'admin'
+            namespace = 'reports'
+        &#125;<p class="paragraph"/>        <span class="java&#45;quote">"/$namespace/$controller/$action?"</span>()
+    &#125;
+&#125;</pre></div><p class="paragraph"/>Reverse URL mappings also require that the <code>namespace</code> be specified.<p class="paragraph"/><div class="code"><pre>&#60;g:link controller=<span class="java&#45;quote">"admin"</span> namespace=<span class="java&#45;quote">"reports"</span>&#62;Click For Report Admin&#60;/g:link&#62;
+&#60;g:link controller=<span class="java&#45;quote">"admin"</span> namespace=<span class="java&#45;quote">"users"</span>&#62;Click For User Admin&#60;/g:link&#62;</pre></div><p class="paragraph"/>When resolving a URL mapping (forward or reverse) to a namespaced controller,
+a mapping will only match if the <code>namespace</code> has been provided.  If
+the application provides several controllers with the same name in different
+packages, at most 1 of them may be defined without a <code>namespace</code> property.  If
+there are multiple controllers with the same name that do not define a
+<code>namespace</code> property, the framework will not know how to distinguish between
+them for forward or reverse mapping resolutions.<p class="paragraph"/>It is allowed for an application to use a plugin which provides a controller
+with the same name as a controller provided by the application and for neither
+of the controllers to define a <code>namespace</code> property as long as the
 controllers are in separate packages.  For example, an application
 may include a controller named <code>com.accounting.ReportingController</code>
 and the application may use a plugin which provides a controller
@@ -2341,10 +2371,10 @@ following mapping would work.<p class="paragraph"/><div class="code"><pre><span 
         controller = <span class="java&#45;quote">"reporting"</span>
     &#125;
 &#125;</pre></div><p class="paragraph"/>It is best practice to be explicit about the fact that the controller
-is being provided by a plugin though.<p class="paragraph"/>
+is being provided by a plugin.<p class="paragraph"/>
 
 
-<a name="6.5 Web Flow"><!-- Legacy link --></a>
+<a name="7.5 Web Flow"><!-- Legacy link --></a>
 <h2 id="webflow">7.5 Webフロー</h2>
 <h4>概要 <div class="hidden-block">Overview</div></h4><p class="paragraph"/><div class="hidden-block">Grails supports the creation of web flows built on the <a href="http://www.springsource.org/webflow" target="blank">Spring Web Flow</a> project. A web flow is a conversation that spans multiple requests and retains state for the scope of the flow. A web flow also has a defined start and end state.</div>
 Grailsでは、<a href="http://www.springsource.org/webflow" target="blank">Spring Web Flow</a> をベースにしたWebフローをサポートしています。Webフローとは、処理範囲での複数のリクエストと保有するステート間の対話です。Webフローでは明示された開始と終了ステートも持っています。<p class="paragraph"/><div class="hidden-block">Web flows don't require an HTTP session, but instead store their state in a serialized form, which is then restored using a flow execution key that Grails passes around as a request parameter. This makes flows far more scalable than other forms of stateful application that use the HttpSession and its inherit memory and clustering concerns.</div>
@@ -2364,7 +2394,7 @@ Grails 1.2からWebフローはGrailsのコア機能では無くなりました�
 フローをアクションとしてリダイレクトまたは参照をするには、接尾辞の<code>Flow</code>を省略します。言い換えれば上記のフローのアクション名は<code>shoppingCart</code>となります。
 
 
-<a name="6.5.1 Start and End States"><!-- Legacy link --></a>
+<a name="7.5.1 Start and End States"><!-- Legacy link --></a>
 <h2 id="startAndEndStates">7.5.1 開始と終了のステート</h2>
 <div class="hidden-block">As mentioned before a flow has a defined start and end state. A start state is the state which is entered when a user first initiates a conversation (or flow). The start state of a Grails flow is the first method call that takes a block. For example: </div>
 前述したように、Webフローでは明示された開始と終了ステートも持っています。開始ステートは、ユーザが最初に対話(またはフロー)を開始するステートです。最初のブロックのメソッドコールがGrailsフローの開始ステートです:<p class="paragraph"/><div class="code"><pre>class BookController &#123;
@@ -2388,7 +2418,7 @@ Grails 1.2からWebフローはGrailsのコア機能では無くなりました�
 フローが終了したら、開始フローのみから再開できます。この例では<code>showCart</code>になります。
 
 
-<a name="6.5.2 Action States and View States"><!-- Legacy link --></a>
+<a name="7.5.2 Action States and View States"><!-- Legacy link --></a>
 <h2 id="actionStatesAndViewStates">7.5.2 アクションステートとビューステート</h2>
 <h4>ビューステート <div class="hidden-block">View states</div></h4><p class="paragraph"/><div class="hidden-block">A view state is a one that doesn't define an <code>action</code> or a <code>redirect</code>. So for example this is a view state:</div>
 <code>action</code>また<code>ridairect</code>を定義していないものがビューステートです。この例がビューステートになります:<p class="paragraph"/><div class="code"><pre>enterPersonalDetails &#123;
@@ -2443,7 +2473,7 @@ Grails 1.2からWebフローはGrailsのコア機能では無くなりました�
 この例では、<code>submit</code>イベントにコードブロックを渡してトランジションのログを実行しています。この後に解説をする、<a href="../guide/single.html#dataBindingAndValidation" class="guide">データバインディングとバリデーション</a>で、このトランジションステートが便利に活用できます。
 
 
-<a name="6.5.3 Flow Execution Events"><!-- Legacy link --></a>
+<a name="7.5.3 Flow Execution Events"><!-- Legacy link --></a>
 <h2 id="flowExecutionEvents">7.5.3 フロー実行イベント</h2>
 <div class="hidden-block">In order to  <em class="italic">transition</em>  execution of a flow from one state to the next you need some way of trigger an  <em class="italic">event</em>  that indicates what the flow should do next. Events can be triggered from either view states or action states.</div>
 ステートから次のステートへのフローでの  <em class="italic">トランジション</em>  実行ができると、次のフローの  <em class="italic">イベントトリガー</em>  を指定する方法が必要になります。ビューステートまたはアクションステートからイベントをトリガーできます。<p class="paragraph"/><h4>ビューステートからのイベントトリガー <div class="hidden-block">Triggering Events from a View State</div></h4><p class="paragraph"/><div class="hidden-block">As discussed previously the start state of the flow in a previous code listing deals with two possible events. A <code>checkout</code> event and a <code>continueShopping</code> event:</div>
@@ -2480,7 +2510,7 @@ all url's are relative to the main flow execution url, which makes your flows re
    on(<span class="java&#45;quote">"no"</span>).to <span class="java&#45;quote">"enterPayment"</span>
 &#125;</pre></div><p class="paragraph"/>
 
-<a name="6.5.4 Flow Scopes"><!-- Legacy link --></a>
+<a name="7.5.4 Flow Scopes"><!-- Legacy link --></a>
 <h2 id="flowScopes">7.5.4 フローのスコープ</h2>
 <h4>スコープの基礎 <div class="hidden-block">Scope Basics</div></h4><p class="paragraph"/><div class="hidden-block">You'll notice from previous examples that we used a special object called <code>flow</code> to store objects within "flow scope". Grails flows have five different scopes you can utilize:</div>
 先ほどの例で、"フロー範囲で有効な"オブジェクトを蓄積する、<code>flow</code>という特殊なオブジェクトを使用しました。Grailsフローでは５つのスコープが利用できます:<p class="paragraph"/><div class="hidden-block">
@@ -2542,7 +2572,7 @@ The flow scope contains a reference to the Hibernate session. As a result, any o
 </blockquote>
 
 
-<a name="6.5.5 Data Binding and Validation"><!-- Legacy link --></a>
+<a name="7.5.5 Data Binding and Validation"><!-- Legacy link --></a>
 <h2 id="dataBindingAndValidation">7.5.5 データバインディングとバリデーション</h2>
 <div class="hidden-block">In the section on <a href="../guide/single.html#startAndEndStates" class="guide">start and end states</a>, the start state in the first example triggered a transition to the <code>enterPersonalDetails</code> state. This state renders a view and waits for the user to enter the required information:</div>
 <a href="../guide/single.html#startAndEndStates" class="guide">開始と終了ステート</a>のセクションの中で、最初の例の開始ステートは<code>enterPersonalDetails</code>ステートへトリガーしています。このステートはビューを描写して、ユーザが必要な情報をエントリーするのを待ちます:<p class="paragraph"/><div class="code"><pre>enterPersonalDetails &#123;
@@ -2571,7 +2601,7 @@ The flow scope contains a reference to the Hibernate session. As a result, any o
 &#125;</pre></div>
 
 
-<a name="6.5.6 Subflows and Conversations"><!-- Legacy link --></a>
+<a name="7.5.6 Subflows and Conversations"><!-- Legacy link --></a>
 <h2 id="subflowsAndConversations">7.5.6 サブフローとの対話</h2>
 <div class="hidden-block">Grails' Web Flow integration also supports subflows. A subflow is like a flow within a flow. For example take this search flow:</div>
 GrailsのWebフローはサブフローにも対応しています。サブフローはフォローの中にあるフローです。この検索フローを例とします:<p class="paragraph"/><div class="code"><pre>def searchFlow = &#123;
@@ -2664,7 +2694,7 @@ If the value is not a closure, the value will be a constant that is only calcula
     &#125;<p class="paragraph"/>    ...<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Notice again the difference between constant values like <code>expertise : "management"</code> and dynamic values like <code>expertise : { flow.technology }</code><p class="paragraph"/>The subflow output is available via <code>currentEvent.attributes</code>
 
 
-<a name="6.6 Filters"><!-- Legacy link --></a>
+<a name="7.6 Filters"><!-- Legacy link --></a>
 <h2 id="filters">7.6 フィルタ</h2>
 <div class="hidden-block">
 Although Grails <a href="../guide/single.html#controllers" class="guide">controllers</a> support fine grained interceptors, these are only really useful when applied to a few controllers and become difficult to manage with larger applications. Filters on the other hand can be applied across a whole group of controllers, a URI space or to a specific action. Filters are far easier to plugin and maintain completely separately to your main controller logic and are useful for all sorts of cross cutting concerns such as security, logging, and so on.
@@ -2917,7 +2947,7 @@ MyOtherFiltersクラスのフィルタが先に実行されて、MyFiltersクラ
 循環依存関係を検出したら、循環依存関係のあるフィルタをフィルタチェインの最後に追加して処理を続行します。その後、循環依存関係を検出した事をログへ出力します。ログを出力するには、ルートロガーレベルがWARNに設定されFilers用のログ定義をする必要があります。
 
 
-<a name="6.7 Ajax"><!-- Legacy link --></a>
+<a name="7.7 Ajax"><!-- Legacy link --></a>
 <h2 id="ajax">7.7 Ajax</h2>
 <div class="hidden-block">Ajax is the driving force behind the shift to richer web applications. These types of applications in general are better suited to agile, dynamic frameworks written in languages like <a href="http://groovy.codehaus.org" target="blank">Groovy</a> and <a href="http://www.ruby-lang.org/." target="blank">Ruby</a> Grails provides support for building Ajax applications through its Ajax tag library. For a full list of these see the Tag Library Reference.</div>
 AjaxはリッチWebアプリケーションでは欠かせない物となっています。この手のアプリケーションには通常、GroovyやRuby等で実装されたアジャイル、ダイナミックフレームワークがお似合いです。GrailsではAjaxアプリケーションを構築をサポートするためのAjaxタグライブラリを提供しています。Ajaxタグライブラリのリストはタグリファレンスを参照してください。<p class="paragraph"/><blockquote class="note">
@@ -2925,7 +2955,7 @@ Note: JavaScript examples use the jQuery library.
 </blockquote>
 
 
-<a name="6.7.1 Ajax Support"><!-- Legacy link --></a>
+<a name="7.7.1 Ajax Support"><!-- Legacy link --></a>
 <h2 id="ajaxSupport">7.7.1 Ajax対応</h2>
 <div class="hidden-block">
 By default Grails ships with the <a href="http://jquery.com/" target="blank">jQuery</a> library, but through the <a href="../guide/single.html#plugins" class="guide">Plugin system</a> provides support for other frameworks such as <a href="http://www.prototypejs.org/" target="blank">Prototype</a>, Dojo:http://dojotoolkit.org/, Yahoo UI:http://developer.yahoo.com/yui/ and the <a href="http://code.google.com/webtoolkit/" target="blank">Google Web Toolkit</a>.
@@ -2941,7 +2971,7 @@ Grailsはデフォルトで <a href="http://jquery.com/" target="blank">jQuery</
 <li>MooTools</li>
 </ul><p class="paragraph"/>
 
-<a name="6.7.1.1 Remoting Linking"><!-- Legacy link --></a>
+<a name="7.7.1.1 Remoting Linking"><!-- Legacy link --></a>
 <h2 id="remotingLinking">7.7.1.1 リモートリンク</h2>
 <div class="hidden-block">Remote content can be loaded in a number of ways, the most commons way is through the <a href="../ref/Tags/remoteLink.html" class="tags">remoteLink</a> tag. This tag allows the creation of HTML anchor tags that perform an asynchronous request and optionally set the response in an element. The simplest way to create a remote link is as follows:</div>
 多くの方法でリモートコンテントをロードすることが可能ですが、一般的な方法として<a href="../ref/Tags/remoteLink.html" class="tags">remoteLink</a>タグを使用します。
@@ -2949,7 +2979,7 @@ Grailsはデフォルトで <a href="http://jquery.com/" target="blank">jQuery</
 上記の例で生成されたタグは、id:1をリクエストパラメータとして<code>delete</code>アクションに非同期リクエストを送信します。
 
 
-<a name="6.7.1.2 Updating Content"><!-- Legacy link --></a>
+<a name="7.7.1.2 Updating Content"><!-- Legacy link --></a>
 <h2 id="updatingContent">7.7.1.2 コンテンツの更新</h2>
 <div class="hidden-block">This is great, but usually you provide feedback to the user about what happened:</div>
 先ほどの例で非同期送信を行いましたが、通常ユーザへ何が行われたかのフィードバックを提供する必要があります:<p class="paragraph"/><div class="code"><pre>def delete() &#123;
@@ -2971,7 +3001,7 @@ Delete Book
 この例ではリクエストに失敗すると、<code>error</code>のIDをもつdivタグ内が更新されます。
 
 
-<a name="6.7.1.3 Remote Form Submission"><!-- Legacy link --></a>
+<a name="7.7.1.3 Remote Form Submission"><!-- Legacy link --></a>
 <h2 id="remoteFormSubmission">7.7.1.3 リモートフォーム送信</h2>
 <div class="hidden-block">An HTML form can also be submitted asynchronously in one of two ways. Firstly using the <a href="../ref/Tags/formRemote.html" class="tags">formRemote</a> tag which expects similar attributes to those for the <a href="../ref/Tags/remoteLink.html" class="tags">remoteLink</a> tag:</div>
 HTMLフォームを非同期で送信することができます。<a href="../ref/Tags/remoteLink.html" class="tags">remoteLink</a>タグと同じような属性を使用できる<a href="../ref/Tags/formRemote.html" class="tags">formRemote</a>タグを使用する例です:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:formRemote url=<span class="xml&#45;quote">"&#91;controller: 'book', action: 'delete'&#93;"</span>
@@ -2985,7 +3015,7 @@ HTMLフォームを非同期で送信することができます。<a href="../r
                       update=<span class="xml&#45;quote">"&#91;success: 'message', failure: 'error'&#93;"</span> /&#62;</span>
 <span class="xml&#45;tag">&#60;/form&#62;</span></pre></div><p class="paragraph"/>
 
-<a name="6.7.1.4 Ajax Events"><!-- Legacy link --></a>
+<a name="7.7.1.4 Ajax Events"><!-- Legacy link --></a>
 <h2 id="ajaxEvents">7.7.1.4 Ajaxイベント</h2>
 <div class="hidden-block">Specific JavaScript can be called if certain events occur, all the events start with the "on" prefix and let you give feedback to the user where appropriate, or take other action:</div>
 指定したJavaScriptを、イベントが発生した際にコールすることができます。全てのイベントは接頭辞"on"で指定します:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:remoteLink action=<span class="xml&#45;quote">"show"</span>
@@ -3023,7 +3053,7 @@ HTMLフォームを非同期で送信することができます。<a href="../r
               onFailure=<span class="xml&#45;quote">"fireMe(XMLHttpRequest)"</span>&#62;</span>Ajax Link<span class="xml&#45;tag">&#60;/g:remoteLink&#62;</span></pre></div>
 
 
-<a name="6.7.2 Ajax with Prototype"><!-- Legacy link --></a>
+<a name="7.7.2 Ajax with Prototype"><!-- Legacy link --></a>
 <h2 id="ajaxWithPrototype">7.7.2 Prototypeを使用したAjax</h2>
 <div class="hidden-block">Grails features an external plugin to add <a href="http://www.prototypejs.org/" target="blank">Prototype</a> support to Grails. To install the plugin, list it in BuildConfig.groovy:</div>
 <a href="http://www.prototypejs.org/" target="blank">Prototype</a> はプラグインで対応しています。インストールするにはBuildConfig.groovyにプラグインを定義します:<p class="paragraph"/><div class="code"><pre>runtime <span class="java&#45;quote">"&#58;prototype&#58;latest.release"</span></pre></div><p class="paragraph"/><div class="hidden-block">This will download the current supported version of the Prototype plugin and install it into your Grails project. With that done you can add the following reference to the top of your page:</div>
@@ -3032,7 +3062,7 @@ HTMLフォームを非同期で送信することができます。<a href="../r
 この定義で他の<a href="../ref/Tags/remoteLink.html" class="tags">remoteLink</a>,<a href="../ref/Tags/formRemote.html" class="tags">formRemote</a>や<a href="../ref/Tags/submitToRemote.html" class="tags">submitToRemote</a>等のGrailsタグを使用できます。
 
 
-<a name="6.7.3 Ajax with Dojo"><!-- Legacy link --></a>
+<a name="7.7.3 Ajax with Dojo"><!-- Legacy link --></a>
 <h2 id="ajaxWithDojo">7.7.3 Dojoを使用したAjax</h2>
 <div class="hidden-block">Grails features an external plugin to add <a href="http://dojotoolkit.org/" target="blank">Dojo</a> support to Grails. To install the plugin type the following command from the root of your project in a terminal window:</div>
 <div class="hidden-block">Grails features an external plugin to add <a href="http://dojotoolkit.org/" target="blank">Dojo</a> support to Grails. To install the plugin, list it in BuildConfig.groovy:</div>
@@ -3041,13 +3071,13 @@ HTMLフォームを非同期で送信することができます。<a href="../r
 この定義で他の<a href="../ref/Tags/remoteLink.html" class="tags">remoteLink</a>,<a href="../ref/Tags/formRemote.html" class="tags">formRemote</a>や<a href="../ref/Tags/submitToRemote.html" class="tags">submitToRemote</a>等のGrailsタグを使用できます。
 
 
-<a name="6.7.4 Ajax with GWT"><!-- Legacy link --></a>
+<a name="7.7.4 Ajax with GWT"><!-- Legacy link --></a>
 <h2 id="ajaxWithGWT">7.7.4 GWTを使用したAjax</h2>
 <div class="hidden-block">Grails also features support for the <a href="http://code.google.com/webtoolkit/" target="blank">Google Web Toolkit</a> through a plugin. There is comprehensive <a href="http://grails.org/plugin/gwt" target="blank">documentation</a> available on the Grails wiki.</div>
 <a href="http://code.google.com/webtoolkit/" target="blank">Google Web Toolkit</a> をプラグインでサポートしています。詳しくは<a href="http://grails.org/plugin/gwt" target="blank">ドキュメント</a>を参照してください。
 
 
-<a name="6.7.5 Ajax on the Server"><!-- Legacy link --></a>
+<a name="7.7.5 Ajax on the Server"><!-- Legacy link --></a>
 <h2 id="ajaxOnTheServer">7.7.5 Ajax使用時のサーバサイド</h2>
 <div class="hidden-block">There are a number of different ways to implement Ajax which are typically broken down into:</div>
 Ajaxを実装するには幾つかの方法があります。通常次のように分類できます:<p class="paragraph"/><div class="hidden-block">
@@ -3117,7 +3147,7 @@ AjaxとAjaxではないリクエストを同じコントローラアクション
 &#125;</pre></div>
 
 
-<a name="6.8 Content Negotiation"><!-- Legacy link --></a>
+<a name="7.8 Content Negotiation"><!-- Legacy link --></a>
 <h2 id="contentNegotiation">7.8 コンテントネゴシエーション</h2>
 <div class="hidden-block">Grails has built in support for <a href="http://en.wikipedia.org/wiki/Content_negotiation" target="blank">Content negotiation</a> using either the HTTP <code>Accept</code> header, an explicit format request parameter or the extension of a mapped URI.</div>
 Grailsには、明示的なフォーマットに対するリクエストのHTTP <code>Accept</code>ヘッダーまたはマップされたURIの拡張子での<a href="http://en.wikipedia.org/wiki/Content_negotiation" target="blank">コンテントネゴシエーション</a>に対応しています。<p class="paragraph"/><h4>Mimeタイプの定義 <div class="hidden-block">Configuring Mime Types</div></h4><p class="paragraph"/><div class="hidden-block">Before you can start dealing with content negotiation you need to tell Grails what content types you wish to support. By default Grails comes configured with a number of different content types within <code>grails-app/conf/Config.groovy</code> using the <code>grails.mime.types</code> setting: </div>
@@ -3142,9 +3172,8 @@ Grailsには、明示的なフォーマットに対するリクエストのHTTP 
     &#125;
 &#125;</pre></div><p class="paragraph"/>In this example, Grails will only execute the block inside <code>withFormat()</code> that matches the requested content type. So if the preferred format is <code>html</code> then Grails will execute the <code>html()</code> call only. Each 'block' can either be a map model for the corresponding view (as we are doing for 'html' in the above example) or a closure. The closure can contain any standard action code, for example it can return a model or render content directly.<p class="paragraph"/>There is a special format, "all", that is handled differently from the explicit formats. If "all" is specified (normally this happens through the Accept header - see below), then the first block of <code>withFormat()</code> is executed. You should not add an explicit "all" block. In the above example, a format of "all" will trigger the <code>html</code> handler.<p class="paragraph"/><blockquote class="note">
 When using <a href="../ref/Controllers/withFormat.html" class="controllers">withFormat</a> make sure it is the last call in your controller action as the return value of the <code>withFormat</code> method is used by the action to dictate what happens next.
-</blockquote><p class="paragraph"/><h4>Acceptヘッダーを使用する <div class="hidden-block">Using the Accept header </div></h4><p class="paragraph"/>Every incoming HTTP request has a special <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" target="blank">Accept</a> header that defines what media types (or mime types) a client can "accept". In older browsers this is typically:<p class="paragraph"/><div class="code"><pre>&#42;/&#42;</pre></div><p class="paragraph"/>which simply means anything. However, newer browsers send more interesting values such as this one sent by Firefox 3:<p class="paragraph"/><div class="code"><pre>text/xml, application/xml, application/xhtml+xml, text/html;q=0.9, &#10;    text/plain;q=0.8, image/png, &#42;/&#42;;q=0.5</pre></div><p class="paragraph"/>This particular accept header is unhelpful because it indicates that XML is the preferred response format whereas the user is really expecting HTML. That's why Grails ignores the accept header by default. However, non-browser clients are typically more specific in their requirements and can send accept headers such as<p class="paragraph"/><div class="code"><pre>application/json</pre></div><p class="paragraph"/>If you want to support such clients and their accept headers, then simply add (or change) the <code>grails.mime.use.accept.header</code> setting in <code>Config.groovy</code> :<p class="paragraph"/><div class="code"><pre>grails.mime.use.accept.header = <span class="java&#45;keyword">true</span></pre></div><p class="paragraph"/>With this setting, Grails parses the incoming accept header and sets the appropriate value for the <code>format</code> response property. For example, if it sees the accept header above ('application/json') it will set <code>format</code> to <code>json</code> as you'd expect. And of course this works with the <code>withFormat()</code> method in just the same way as when the <code>format</code> URL parameter is set (although the URL parameter takes precedence).<p class="paragraph"/>An accept header of '&#42;/&#42;' results in a value of <code>all</code> for the <code>format</code> property.<p class="paragraph"/><blockquote class="note">
-If you enable accept header parsing, it's usually best to handle XML and JSON responses in a different action from the HTML ones due to the problems with various browsers. You can then use <code>withFormat()</code> exclusively for the REST interface and avoid it for actions that render the normal HTML pages.
-</blockquote><p class="paragraph"/><h4>リクエストフォーマット vs レスポンスフォーマット <div class="hidden-block">Request format vs. Response format </div></h4><p class="paragraph"/><div class="hidden-block">As of Grails 2.0, there is a separate notion of the  <em class="italic">request</em>  format and the  <em class="italic">response</em>  format. The request format is dictated by the <code>CONTENT_TYPE</code> header and is typically used to detect if the incoming request can be parsed into XML or JSON, whilst the response format uses the file extension, format parameter or ACCEPT header to attempt to deliver an appropriate response to the client.</div>
+</blockquote><p class="paragraph"/><h4>Acceptヘッダーを使用する <div class="hidden-block">Using the Accept header </div></h4><p class="paragraph"/>Every incoming HTTP request has a special <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" target="blank">Accept</a> header that defines what media types (or mime types) a client can "accept". In older browsers this is typically:<p class="paragraph"/><div class="code"><pre>&#42;/&#42;</pre></div><p class="paragraph"/>which simply means anything. However, newer browsers send more interesting values such as this one sent by Firefox:<p class="paragraph"/><div class="code"><pre>text/xml, application/xml, application/xhtml+xml, text/html;q=0.9, &#10;    text/plain;q=0.8, image/png, &#42;/&#42;;q=0.5</pre></div><p class="paragraph"/>This particular accept header is unhelpful because it indicates that XML is the preferred response format whereas the user is really expecting HTML. That's why Grails ignores the accept header by default for browsers. However, non-browser clients are typically more specific in their requirements and can send accept headers such as<p class="paragraph"/><div class="code"><pre>application/json</pre></div><p class="paragraph"/>As mentioned the default configuration in Grails is to ignore the accept header for browsers. This is done by the configuration setting <code>grails.mime.disable.accept.header.userAgents</code>, which is configured to detect the major rendering engines and ignore their ACCEPT headers. This allows Grails' content negotiation to continue to work for non-browser clients:<p class="paragraph"/><div class="code"><pre>grails.mime.disable.accept.header.userAgents = &#91;'Gecko', 'WebKit', 'Presto', 'Trident'&#93;</pre></div><p class="paragraph"/>For example, if it sees the accept header above ('application/json') it will set <code>format</code> to <code>json</code> as you'd expect. And of course this works with the <code>withFormat()</code> method in just the same way as when the <code>format</code> URL parameter is set (although the URL parameter takes precedence).<p class="paragraph"/>An accept header of '&#42;/&#42;' results in a value of <code>all</code> for the <code>format</code> property.<p class="paragraph"/>
+<h4>リクエストフォーマット vs レスポンスフォーマット <div class="hidden-block">Request format vs. Response format </div></h4><p class="paragraph"/><div class="hidden-block">As of Grails 2.0, there is a separate notion of the  <em class="italic">request</em>  format and the  <em class="italic">response</em>  format. The request format is dictated by the <code>CONTENT_TYPE</code> header and is typically used to detect if the incoming request can be parsed into XML or JSON, whilst the response format uses the file extension, format parameter or ACCEPT header to attempt to deliver an appropriate response to the client.</div>
 Grails 2.0からの対応で、リクエストフォーマットとレスポンスフォーマットでは分離して認識するようになりました。リクエストフォーマットは、<code>CONTENT_TYPE</code>ヘッダの指定で入ってくるリクエストを認識してXMLまたJSON等に分類します。レスポンスフォーマットでは、ファイル拡張子、フォーマットパラメータまたはACCEPTヘッダを認識して適したレスポンスをクライアントに返します。<p class="paragraph"/><div class="hidden-block">The <a href="../ref/Controllers/withFormat.html" class="controllers">withFormat</a> available on controllers deals specifically with the response format. If you wish to add logic that deals with the request format then you can do so using a separate <code>withFormat</code> method available on the request:</div>
 コントローラでの<a href="../ref/Controllers/withFormat.html" class="controllers">withFormat</a>はレスポンスフォーマット専用となります。リクエストフォーマットでロジックを記述する場合は、requestオブジェクトの<code>withFormat</code>メソッドを使用します:<p class="paragraph"/><div class="code"><pre>request.withFormat &#123;
     xml &#123;
@@ -3158,8 +3187,8 @@ Grails 2.0からの対応で、リクエストフォーマットとレスポン�
 このパラメータは<a href="../guide/single.html#urlmappings" class="guide">URLマッピング</a>でも定義できます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/book/list"</span>(controller:<span class="java&#45;quote">"book"</span>, action:<span class="java&#45;quote">"list"</span>) &#123;
     format = <span class="java&#45;quote">"xml"</span>
 &#125;</pre></div><p class="paragraph"/><h4>URI拡張子でのコンテントネゴシエーション <div class="hidden-block">Content Negotiation with URI Extensions </div></h4><p class="paragraph"/><div class="hidden-block">Grails also supports content negotiation using URI extensions. For example given the following URI:</div>
-URI拡張子でのコンテントネゴシエーションにも対応しています。例として次のようなURIがあるとします:<p class="paragraph"/><div class="code"><pre>/book/list.xml</pre></div><p class="paragraph"/><div class="hidden-block">Grails will remove the extension and map it to <code>/book/list</code> instead whilst simultaneously setting the content format to <code>xml</code> based on this extension. This behaviour is enabled by default, so if you wish to turn it off, you must set the <code>grails.mime.file.extensions</code> property in <code>grails-app/conf/Config.groovy</code> to <code>false</code>:</div>
-Grailsが拡張子を外して、<code>xml</code>としてフォーマットをセットして<code>/book/list</code>にマップします。この振る舞いはデフォルトで使用可能です。この機能を外したい場合は<code>grails-app/conf/Config.groovy</code>の<code>grails.mime.file.extensions</code>プロパティを<code>false</code>に指定します:<p class="paragraph"/><div class="code"><pre>grails.mime.file.extensions = <span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><h4>コンテントネゴシエーションをテスト <div class="hidden-block">Testing Content Negotiation </div></h4><p class="paragraph"/><div class="hidden-block">To test content negotiation in a unit or integration test (see the section on <a href="../guide/single.html#testing" class="guide">Testing</a>) you can either manipulate the incoming request headers:</div>
+URI拡張子でのコンテントネゴシエーションにも対応しています。例として次のようなURIがあるとします:<p class="paragraph"/><div class="code"><pre>/book/list.xml</pre></div><p class="paragraph"/>This works as a result of the default URL Mapping definition which is:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/$controller/$action?/$id?(.$&#123;format&#125;)?"</span>&#123;</pre></div><p class="paragraph"/>Note the inclusion of the <code>format</code> variable in the path. If you do not wish to use content negotiation via the file extension then simply remove this part of the URL mapping:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/$controller/$action?/$id?"</span>&#123;</pre></div><p class="paragraph"/>
+<h4>コンテントネゴシエーションをテスト <div class="hidden-block">Testing Content Negotiation </div></h4><p class="paragraph"/><div class="hidden-block">To test content negotiation in a unit or integration test (see the section on <a href="../guide/single.html#testing" class="guide">Testing</a>) you can either manipulate the incoming request headers:</div>
 ユニットテストまたは統合テスト(<a href="../guide/single.html#testing" class="guide">テスト</a>のセクションを参照)でコンテントネゴシエーションをテストする際に、入ってくるリクエストヘッダを操作することができます:<p class="paragraph"/><div class="code"><pre>void testJavascriptOutput() &#123;
     def controller = <span class="java&#45;keyword">new</span> TestController()
     controller.request.addHeader <span class="java&#45;quote">"Accept"</span>,
@@ -3178,7 +3207,7 @@ Grailsが拡張子を外して、<code>xml</code>としてフォーマットを�
                 
                     <div class="toc-item prev-left"><a href="../guide/GORM.html">&lt;&lt; <strong>6</strong><span>O/R&#12510;&#12483;&#12500;&#12531;&#12464; (GORM)</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -3473,6 +3502,9 @@ Grailsが拡張子を外して、<code>xml</code>としてフォーマットを�
                             <div class="menu-item"><a href="../ref/Controllers/grailsApplication.html">grailsApplication</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../ref/Controllers/namespace.html">namespace</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../ref/Controllers/params.html">params</a>
                             </div>
                             
@@ -3485,7 +3517,13 @@ Grailsが拡張子を外して、<code>xml</code>としてフォーマットを�
                             <div class="menu-item"><a href="../ref/Controllers/request.html">request</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../ref/Controllers/respond.html">respond</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../ref/Controllers/response.html">response</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Controllers/responseFormats.html">responseFormats</a>
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Controllers/servletContext.html">servletContext</a>

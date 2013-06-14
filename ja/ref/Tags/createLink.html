@@ -46,28 +46,28 @@ function addJsClass(el) {
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/theWebLayer.html"><strong>7</strong><span>Web&#12524;&#12452;&#12516;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/validation.html"><strong>9</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/async.html"><strong>9</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/services.html"><strong>10</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/validation.html"><strong>10</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>11</strong><span>&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/services.html"><strong>11</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/i18n.html"><strong>12</strong><span>&#22269;&#38555;&#21270;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>12</strong><span>&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/security.html"><strong>13</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/i18n.html"><strong>13</strong><span>&#22269;&#38555;&#21270;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/plugins.html"><strong>14</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/security.html"><strong>14</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/webServices.html"><strong>15</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/plugins.html"><strong>15</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/spring.html"><strong>16</strong><span>Grails&#12392;Spring</span></a>
@@ -126,7 +126,8 @@ function addJsClass(el) {
 <span class="xml&#45;tag">&#60;g:createLink action=<span class="xml&#45;quote">"show"</span> params=<span class="xml&#45;quote">"&#91;foo: 'bar', boo: 'far'&#93;"</span>/&#62;</span><p class="paragraph"/>// generates <span class="xml&#45;quote">"/shop/book"</span>
 <span class="xml&#45;tag">&#60;g:createLink controller=<span class="xml&#45;quote">"book"</span> /&#62;</span><p class="paragraph"/>// generates <span class="xml&#45;quote">"/shop/book/list"</span>
 <span class="xml&#45;tag">&#60;g:createLink controller=<span class="xml&#45;quote">"book"</span> action=<span class="xml&#45;quote">"list"</span> /&#62;</span><p class="paragraph"/>// generates <span class="xml&#45;quote">"/shop/book/list"</span>
-<span class="xml&#45;tag">&#60;g:createLink url=<span class="xml&#45;quote">"&#91;action:'list',controller:'book'&#93;"</span> /&#62;</span><p class="paragraph"/>// generates <span class="xml&#45;quote">"http://portal.mygreatsite.com/book"</span>
+<span class="xml&#45;tag">&#60;g:createLink url=<span class="xml&#45;quote">"&#91;action:'list',controller:'book'&#93;"</span> /&#62;</span><p class="paragraph"/>// generates a link tot he book controller in the publishing namespace
+<span class="xml&#45;tag">&#60;g:createLink controller=<span class="xml&#45;quote">"book"</span> namespace=<span class="xml&#45;quote">"publishing"</span>/&#62;</span><p class="paragraph"/>// generates <span class="xml&#45;quote">"http://portal.mygreatsite.com/book"</span>
 <span class="xml&#45;tag">&#60;g:createLink controller=<span class="xml&#45;quote">"book"</span> absolute=<span class="xml&#45;quote">"true"</span>/&#62;</span><p class="paragraph"/>// generates <span class="xml&#45;quote">"http://admin.mygreatsite.com/book"</span>
 <span class="xml&#45;tag">&#60;g:createLink controller=<span class="xml&#45;quote">"book"</span> base=<span class="xml&#45;quote">"http://admin.mygreatsite.com"</span>/&#62;</span><p class="paragraph"/>// generates <span class="xml&#45;quote">"/shop/book/list/1?title=The+Shining&#38;author=Stephen+King"</span>
 <span class="xml&#45;tag">&#60;g:createLink controller=<span class="xml&#45;quote">"book"</span> action=<span class="xml&#45;quote">"list"</span>
@@ -134,6 +135,7 @@ function addJsClass(el) {
 <ul class="star">
 <li><code>action</code> (optional) - The name of the action to use in the link; if not specified the default action will be linked</li>
 <li><code>controller</code> (optional) - The name of the controller to use in the link; if not specified the current controller will be linked</li>
+<li><code>namespace</code> (optional) - the namespace of the controller to use in the link</li>
 <li><code>plugin</code> (optional) - the name of the plugin which provides the controller</li>
 <li><code>id</code> (optional) - The id to use in the link</li>
 <li><code>fragment</code> (optional) - The link fragment (often called anchor tag) to use</li>
@@ -444,6 +446,9 @@ function addJsClass(el) {
                             <div class="menu-item"><a href="../../ref/Controllers/grailsApplication.html">grailsApplication</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Controllers/namespace.html">namespace</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Controllers/params.html">params</a>
                             </div>
                             
@@ -456,7 +461,13 @@ function addJsClass(el) {
                             <div class="menu-item"><a href="../../ref/Controllers/request.html">request</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Controllers/respond.html">respond</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Controllers/response.html">response</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Controllers/responseFormats.html">responseFormats</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Controllers/servletContext.html">servletContext</a>

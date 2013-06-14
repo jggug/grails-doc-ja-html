@@ -45,28 +45,28 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/theWebLayer.html"><strong>7</strong><span>Web&#12524;&#12452;&#12516;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/validation.html"><strong>9</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/async.html"><strong>9</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/services.html"><strong>10</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/validation.html"><strong>10</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>11</strong><span>&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/services.html"><strong>11</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/i18n.html"><strong>12</strong><span>&#22269;&#38555;&#21270;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>12</strong><span>&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/security.html"><strong>13</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/i18n.html"><strong>13</strong><span>&#22269;&#38555;&#21270;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/plugins.html"><strong>14</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/security.html"><strong>14</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/webServices.html"><strong>15</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/plugins.html"><strong>15</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0"><a href="../guide/spring.html"><strong>16</strong><span>Grails&#12392;Spring</span></a>
@@ -153,7 +153,7 @@ function addJsClass() {
                 
 
                 
-<a name="15. Grails and Hibernate"><!-- Legacy link --></a>
+<a name="17. Grails and Hibernate"><!-- Legacy link --></a>
 <h1 id="hibernate">17 GrailsとHibernate</h1>
 <div class="hidden-block">
 If <a href="../guide/single.html#GORM" class="guide">GORM</a> (Grails Object Relational Mapping) is not flexible enough for your liking you can alternatively map your domain classes using Hibernate, either with XML mapping files or JPA annotations. You will be able to map Grails domain classes onto a wider range of legacy systems and have more flexibility in the creation of your database schema. Best of all, you will still be able to call all of the dynamic persistent and query methods provided by GORM!
@@ -163,7 +163,7 @@ If <a href="../guide/single.html#GORM" class="guide">GORM</a> (Grails Object Rel
 そして、このXMLマッピングファイル、JPAアノテーションを使用した場合も、GORMが提供するダイナミックな永続化メソッド、クエリメソッドをすべて呼び出せます！
 
 
-<a name="15.1 Using Hibernate XML Mapping Files"><!-- Legacy link --></a>
+<a name="17.1 Using Hibernate XML Mapping Files"><!-- Legacy link --></a>
 <h2 id="usingHibernateXMLMappingFiles">17.1 Hibernate XMLマッピングの使用</h2>
 <div class="hidden-block">
 Mapping your domain classes with XML is pretty straightforward. Simply create a <code>hibernate.cfg.xml</code> file in your project's <code>grails-app/conf/hibernate</code> directory, either manually or with the <a href="../ref/Command Line/create-hibernate-cfg-xml.html" class="commandLine">create-hibernate-cfg-xml</a> command, that contains the following:
@@ -203,7 +203,7 @@ GrailsではJavaでドメインモデルを書くことも、すでにHibernate�
 その場合でも<code>hibernate.cfg.xml</code>は必要です。
 
 
-<a name="15.2 Mapping with Hibernate Annotations"><!-- Legacy link --></a>
+<a name="17.2 Mapping with Hibernate Annotations"><!-- Legacy link --></a>
 <h2 id="mappingWithHibernateAnnotations">17.2 Hibernateアノテーションでのマッピング</h2>
 <div class="hidden-block">
 To map a domain class with annotations, create a new class in <code>src/java</code> and use the annotations defined as part of the EJB 3.0 spec (for more info on this see the <a href="http://annotations.hibernate.org/" target="blank">Hibernate Annotations Docs</a>):
@@ -251,7 +251,7 @@ When Grails loads it will register the necessary dynamic methods with the class.
 ダイナミックメソッド以外に、Hibernateのドメインクラスで何ができるかについては、<a href="../guide/single.html#scaffolding" class="guide">スカッフォルディング</a>のセクションを参照してください。
 
 
-<a name="15.3 Adding Constraints"><!-- Legacy link --></a>
+<a name="17.3 Adding Constraints"><!-- Legacy link --></a>
 <h2 id="addingConstraints">17.3 制約の追加</h2>
 <div class="hidden-block">
 You can still use GORM validation even if you use a Java domain model. Grails lets you define constraints through separate scripts in the <code>src/java</code> directory. The script must be in a directory that matches the package of the corresponding domain class and its name must have a  <em class="italic">Constraints</em>  suffix. For example, if you had a domain class <code>org.example.Book</code>, then you would create the script <code>src/java/org/example/BookConstraints.groovy</code>&#46;
@@ -571,6 +571,9 @@ Once this is in place you can validate instances of your domain class!
                             <div class="menu-item"><a href="../ref/Controllers/grailsApplication.html">grailsApplication</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../ref/Controllers/namespace.html">namespace</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../ref/Controllers/params.html">params</a>
                             </div>
                             
@@ -583,7 +586,13 @@ Once this is in place you can validate instances of your domain class!
                             <div class="menu-item"><a href="../ref/Controllers/request.html">request</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../ref/Controllers/respond.html">respond</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../ref/Controllers/response.html">response</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Controllers/responseFormats.html">responseFormats</a>
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Controllers/servletContext.html">servletContext</a>

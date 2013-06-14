@@ -45,28 +45,28 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/theWebLayer.html"><strong>7</strong><span>Web&#12524;&#12452;&#12516;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/validation.html"><strong>9</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/async.html"><strong>9</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/services.html"><strong>10</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/validation.html"><strong>10</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>11</strong><span>&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/services.html"><strong>11</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/i18n.html"><strong>12</strong><span>&#22269;&#38555;&#21270;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>12</strong><span>&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/security.html"><strong>13</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/i18n.html"><strong>13</strong><span>&#22269;&#38555;&#21270;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/plugins.html"><strong>14</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/security.html"><strong>14</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/webServices.html"><strong>15</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/plugins.html"><strong>15</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/spring.html"><strong>16</strong><span>Grails&#12392;Spring</span></a>
@@ -120,7 +120,7 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span> >></a></div>
                 
 
 
@@ -139,7 +139,7 @@ function addJsClass() {
                 
 
                 
-<a name="6.1.10 Command Objects"><!-- Legacy link --></a>
+<a name="7.1.10 Command Objects"><!-- Legacy link --></a>
 <h2 id="commandObjects">7.1.10 コマンドオブジェクト</h2>
 <div class="hidden-block">Grails controllers support the concept of command objects. A command object is a class that is used in conjunction with <a href="../guide/single.html#dataBinding" class="guide">data binding</a>, usually to allow validation of data that may not fit into an existing domain class.</div><p class="paragraph"/>Grailsのコマンドオブジェクトの設計概念をサポートしています。 コマンドオブジェクトは <a href="../guide/single.html#dataBinding" class="guide">data binding</a> と連結して使用するクラスであり、通常ドメインクラスとして扱わないデータに対してバリデーションを可能にします。<p class="paragraph"/><blockquote class="note">
 Note: A class is only considered to be a command object when it is used as a parameter of an action.
@@ -158,7 +158,7 @@ class LoginCommand &#123;
             <span class="java&#45;keyword">return</span>
         &#125;<p class="paragraph"/>        // work with the command object data
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>コマンドオブジェクトと依存注入 <div class="hidden-block">Command Objects and Dependency Injection </div></h4><p class="paragraph"/><div class="hidden-block">Command objects can participate in dependency injection. This is useful if your command object has some custom validation logic which uses a Grails <a href="../guide/single.html#services" class="guide">service</a>:</div>
+&#125;</pre></div><p class="paragraph"/>If the command object's type is that of a domain class and there is an <code>id</code> request parameter then instead of invoking the domain class constructor to create a new instance a call will be made to the static <code>get</code> method on the domain class and the value of the <code>id</code> parameter will be passed as an argument.  Whatever is returned from that call to <code>get</code> is what will be passed into the controller action.  This means that if there is an <code>id</code> request parameter and no corresponding record is found in the database then the value of the command object will be <code>null</code>.<p class="paragraph"/><h4>コマンドオブジェクトと依存注入 <div class="hidden-block">Command Objects and Dependency Injection </div></h4><p class="paragraph"/><div class="hidden-block">Command objects can participate in dependency injection. This is useful if your command object has some custom validation logic which uses a Grails <a href="../guide/single.html#services" class="guide">service</a>:</div>
 コマンドオブジェクトに依存注入をすることが可能です。Grailsの<a href="../guide/single.html#services" class="guide">サービス</a>を使用したカスタムバリデーションなどを使用する際に便利です:<p class="paragraph"/>
 <div class="code"><pre>@grails.validation.Validateable
 class LoginCommand &#123;<p class="paragraph"/>    def loginService<p class="paragraph"/>    <span class="java&#45;object">String</span> username
@@ -176,7 +176,7 @@ class LoginCommand &#123;<p class="paragraph"/>    def loginService<p class="par
                 
                     <div class="toc-item prev-left"><a href="../../guide/GORM.html">&lt;&lt; <strong>6</strong><span>O/R&#12510;&#12483;&#12500;&#12531;&#12464; (GORM)</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -471,6 +471,9 @@ class LoginCommand &#123;<p class="paragraph"/>    def loginService<p class="par
                             <div class="menu-item"><a href="../../ref/Controllers/grailsApplication.html">grailsApplication</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Controllers/namespace.html">namespace</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Controllers/params.html">params</a>
                             </div>
                             
@@ -483,7 +486,13 @@ class LoginCommand &#123;<p class="paragraph"/>    def loginService<p class="par
                             <div class="menu-item"><a href="../../ref/Controllers/request.html">request</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Controllers/respond.html">respond</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Controllers/response.html">response</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Controllers/responseFormats.html">responseFormats</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Controllers/servletContext.html">servletContext</a>

@@ -45,28 +45,28 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/theWebLayer.html"><strong>7</strong><span>Web&#12524;&#12452;&#12516;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/validation.html"><strong>9</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/async.html"><strong>9</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/services.html"><strong>10</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/validation.html"><strong>10</strong><span>&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>11</strong><span>&#12486;&#12473;&#12488;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/services.html"><strong>11</strong><span>&#12469;&#12540;&#12499;&#12473;&#12524;&#12452;&#12516;&#12540;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/i18n.html"><strong>12</strong><span>&#22269;&#38555;&#21270;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>12</strong><span>&#12486;&#12473;&#12488;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/security.html"><strong>13</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/i18n.html"><strong>13</strong><span>&#22269;&#38555;&#21270;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/plugins.html"><strong>14</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/security.html"><strong>14</strong><span>&#12475;&#12461;&#12517;&#12522;&#12486;&#12451;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/webServices.html"><strong>15</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/plugins.html"><strong>15</strong><span>&#12503;&#12521;&#12464;&#12452;&#12531;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/spring.html"><strong>16</strong><span>Grails&#12392;Spring</span></a>
@@ -120,7 +120,7 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span> >></a></div>
                 
 
 
@@ -180,14 +180,14 @@ function addJsClass() {
                 
 
                 
-<a name="6.1 Controllers"><!-- Legacy link --></a>
+<a name="7.1 Controllers"><!-- Legacy link --></a>
 <h2 id="controllers">7.1 コントローラ</h2>
 <div class="hidden-block">A controller handles requests and creates or prepares the response. A controller can generate the response directly or delegate to a view. To create a controller, simply create a class whose name ends with <code>Controller</code> in the <code>grails-app/controllers</code> directory (in a subdirectory if it's in a package).</div>
 コントローラはリクエストを処理してレスポンスの準備・作成を行います。コントローラはレスポンスをビューに委譲したり、直接返す事ができます。単純に<code>grails-app/controlers</code>ディレクトリに、クラス名称の最後を<code>Controller</code>にしたクラスを作成することで、コントローラを追加できます。(パッケージに入れる場合は、パッケージ名のサブディレクトリに作成します。)<p class="paragraph"/><div class="hidden-block">The default <a href="../guide/single.html#urlmappings" class="guide">URL Mapping</a> configuration ensures that the first part of your controller name is mapped to a URI and each action defined within your controller maps to URIs within the controller name URI.</div>
 <a href="../guide/single.html#urlmappings" class="guide">URL マッピング</a>のデフォルト設定では、Controllerの前に付けた名称がベースのURIにマップされ、コントローラに定義したそれぞれのアクション名称がコントローラ名称と繫がれてURIをマップします。
 
 
-<a name="6.1.1 Understanding Controllers and Actions"><!-- Legacy link --></a>
+<a name="7.1.1 Understanding Controllers and Actions"><!-- Legacy link --></a>
 <h2 id="understandingControllersAndActions">7.1.1 コントローラとアクションの理解</h2>
 <h4>コントローラを作成する</h4><p class="paragraph"/><div class="hidden-block">Controllers can be created with the <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> or <a href="../ref/Command Line/generate-controller.html" class="commandLine">generate-controller</a> command. For example try running the following command from the root of a Grails project:</div>
 <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a>または<a href="../ref/Command Line/generate-controller.html" class="commandLine">generate-controller</a>コマンドでコントローラが作成できます。Grailsプロジェクトのルートで以下のようにコマンドを実行します。<p class="paragraph"/><div class="code"><pre>grails create&#45;controller book</pre></div><p class="paragraph"/><div class="hidden-block">The command will create a controller at the location <code>grails-app/controllers/myapp/BookController.groovy</code>:</div>
@@ -240,7 +240,7 @@ If a controller class extends some other class which is not defined under the <c
 </ul><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> defaultAction = <span class="java&#45;quote">"list"</span></pre></div>
 
 
-<a name="6.1.2 Controllers and Scopes"><!-- Legacy link --></a>
+<a name="7.1.2 Controllers and Scopes"><!-- Legacy link --></a>
 <h2 id="controllersAndScopes">7.1.2 コントローラとスコープ</h2>
 <h4>使用可能なスコープ</h4><p class="paragraph"/><div class="hidden-block">Scopes are hash-like objects where you can store variables. The following scopes are available to controllers:</div>
 スコープは、変数を収納可能なハッシュのようなオブジェクトです。コントローラでは、次のスコープが使用可能です。
@@ -309,7 +309,7 @@ Use scoped controllers wisely. For instance, we don't recommend having any prope
 </blockquote>
 
 
-<a name="6.1.3 Models and Views"><!-- Legacy link --></a>
+<a name="7.1.3 Models and Views"><!-- Legacy link --></a>
 <h2 id="modelsAndViews">7.1.3 モデルとビュー</h2>
 <h4>モデルを返す</h4><p class="paragraph"/><div class="hidden-block">A model is a Map that the view uses when rendering. The keys within that Map correspond to variable names accessible by the view. There are a couple of ways to return a model. First, you can explicitly return a Map instance:</div>
 モデルはビューを描写する際に使用するMapインスタンスです。ビュー内でMapのキーに一致する変数名が使用できます。モデルを返すには、数種類の方法があります。先ずはじめにMapインスタンスを明示的に返す方法です。<p class="paragraph"/><div class="code"><pre>def show() &#123;
@@ -397,7 +397,7 @@ def login() &#123;
 &#125;</pre></div>
 
 
-<a name="6.1.4 Redirects and Chaining"><!-- Legacy link --></a>
+<a name="7.1.4 Redirects and Chaining"><!-- Legacy link --></a>
 <h2 id="redirectsAndChaining">7.1.4 リダイレクトとチェイン</h2>
 <h4>リダイレクト<div class="hidden-block">Redirects</div></h4><p class="paragraph"/><div class="hidden-block">Actions can be redirected using the <a href="../ref/Controllers/redirect.html" class="controllers">redirect</a> controller method:</div>
 コントローラのメソッド、<a href="../ref/Controllers/redirect.html" class="controllers">redirect</a>を使用して、アクションをリダイレクトすることができます:<p class="paragraph"/><div class="code"><pre>class OverviewController &#123;<p class="paragraph"/>    def login() &#123;&#125;<p class="paragraph"/>    def find() &#123;
@@ -446,7 +446,7 @@ redirect(url: <span class="java&#45;quote">"http://grails.org"</span>)</pre></di
 <code>redirect</code>メソッドと同じように、<code>chain</code>メソッドにパラメータを渡すこともできます:<p class="paragraph"/><div class="code"><pre>chain(action: <span class="java&#45;quote">"action1"</span>, model: &#91;one: 1&#93;, params: &#91;myparam: <span class="java&#45;quote">"param1"</span>&#93;)</pre></div>
 
 
-<a name="6.1.5 Controller Interceptors"><!-- Legacy link --></a>
+<a name="7.1.5 Controller Interceptors"><!-- Legacy link --></a>
 <h2 id="interceptors">7.1.5 コントローラ・インターセプター</h2>
 <div class="hidden-block">Often it is useful to intercept processing based on either request, session or application state. This can be achieved with action interceptors. There are currently two types of interceptors: before and after.</div>
 リクエスト、セッションまたはアプリケーションで処理のインターセプトができると、たいへん役に立ちます。これはアクションインターセプターで達成できます。現在2種類のインターセプターbeforeとafterがあります。<p class="paragraph"/><blockquote class="note">
@@ -485,7 +485,7 @@ redirect(url: <span class="java&#45;quote">"http://grails.org"</span>)</pre></di
 指定したアクションのみでインターセプターを実行する場合は、'only'を使用します:<p class="paragraph"/><div class="code"><pre>def beforeInterceptor = &#91;action: <span class="java&#45;keyword">this</span>.&#38;auth, only: &#91;'secure'&#93;&#93;</pre></div>
 
 
-<a name="6.1.6 Data Binding"><!-- Legacy link --></a>
+<a name="7.1.6 Data Binding"><!-- Legacy link --></a>
 <h2 id="dataBinding">7.1.6 データバインディング</h2>
 <div class="hidden-block">Data binding is the act of "binding" incoming request parameters onto the properties of an object or an entire graph of objects. Data binding should deal with all necessary type conversion since request parameters, which are typically delivered by a form submission, are always strings whilst the properties of a Groovy or Java object may well not be.</div>
 データバインディングとは、受信したリクエストパラメータを、オブジェクトのプロパティまたオブジェクト構造へ結合させる機能です。データバインディングでは、フォームから送信された文字列のリクエストパラメータを、必要な型への変換を行います。<p class="paragraph"/>
@@ -694,7 +694,7 @@ assert person.homeAddress.state = 'Missouri'</pre></div><p class="paragraph"/><h
         // specifies the type to which <span class="java&#45;keyword">this</span> converter may be applied
         <span class="java&#45;object">String</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented FormattedValueConverter will be automatically plugged in to the data binding process.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/spring/resources.groovy<p class="paragraph"/>beans = &#123;<p class="paragraph"/>    formattedStringConverter com.myapp.converters.FormattedStringValueConverter<p class="paragraph"/>    // ...<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>With that in place the BindUsing annotation may be applied to String fields to inform the data binder to take advantage of the custom converter.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat<p class="paragraph"/>class Person &#123;
+&#125;</pre></div><p class="paragraph"/>An instance of that class needs to be registered as a bean in the Spring application context.  The bean name is not important.  All beans that implemented FormattedValueConverter will be automatically plugged in to the data binding process.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/spring/resources.groovy<p class="paragraph"/>beans = &#123;<p class="paragraph"/>    formattedStringConverter com.myapp.converters.FormattedStringValueConverter<p class="paragraph"/>    // ...<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>With that in place the <code>BindingFormat</code> annotation may be applied to String fields to inform the data binder to take advantage of the custom converter.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat<p class="paragraph"/>class Person &#123;
     @BindingFormat('UPPERCASE')
     <span class="java&#45;object">String</span> someUpperCaseString<p class="paragraph"/>    @BindingFormat('LOWERCASE')
     <span class="java&#45;object">String</span> someLowerCaseString<p class="paragraph"/>    <span class="java&#45;object">String</span> someOtherString
@@ -747,8 +747,8 @@ JSONを出力する場合も<code>render</code>メソッドが使用できます
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case the result would be something along the lines of:</div>
 このコードの結果は以下のようになります:<p class="paragraph"/><div class="code"><pre>&#91;
-    &#123;title:<span class="java&#45;quote">"The Stand"</span>&#125;,
-    &#123;title:<span class="java&#45;quote">"The Shining"</span>&#125;
+    &#123;<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;,
+    &#123;<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Shining"</span>&#125;
 &#93;</pre></div><p class="paragraph"/><div class="hidden-block">The same dangers with naming conflicts described above for XML also apply to JSON building.</div>
 JSONビルダーもXMLと同じく、変数名称の衝突を回避する必要があります。<p class="paragraph"/><h4>自動XMLマーシャリング <div class="hidden-block">Automatic XML Marshalling </div></h4><p class="paragraph"/><div class="hidden-block">Grails also supports automatic marshalling of <a href="../guide/single.html#GORM" class="guide">domain classes</a> to XML using special converters.</div>
 Grailsでは<a href="../guide/single.html#GORM" class="guide">ドメインクラス</a>から特別なコンバータを使用した自動マーシャリングをサポートしています。<p class="paragraph"/><div class="hidden-block">To start off with, import the <code>grails.converters</code> package into your controller:</div>
@@ -783,7 +783,7 @@ Grailsでは<code>XML</code>と同じ仕組みで、<code>JSON</code>の自動�
 もちろん、<code>encodeAsJSON</code>も同じ結果になります。
 
 
-<a name="6.1.8 More on JSONBuilder"><!-- Legacy link --></a>
+<a name="7.1.8 More on JSONBuilder"><!-- Legacy link --></a>
 <h2 id="moreOnJSONBuilder">7.1.8 JSONBuilder (JSONビルダー)</h2>
 <div class="hidden-block">The previous section on on XML and JSON responses covered simplistic examples of rendering XML and JSON responses. Whilst the XML builder used by Grails is the standard <a href="http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper" target="blank">XmlSlurper</a> found in Groovy, the JSON builder is a custom implementation specific to Grails.</div>
 前のセクション「 XMLとJSONレスポンス」で単純なXMLとJSONのを描写してレスポンスする例を紹介しました。Grailsで使用してるXMLビルダーがGroovyの標準的な <a href="http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper" target="blank">XmlSlurper</a> に対して、JSONビルダーに関してはGrails特有の実装になっています。<p class="paragraph"/><h4>JSONBuilderとGrailsのバージョン <div class="hidden-block">JSONBuilder and Grails versions </div></h4><p class="paragraph"/><div class="hidden-block">JSONBuilder behaves different depending on the version of Grails you use. For version below 1.2 the deprecated <a href="http://grails.org/doc/latest/api/grails/web/JSONBuilder.html" class="api">grails.web.JSONBuilder</a> class is used. This section covers the usage of the Grails 1.2 JSONBuilder </div>
@@ -837,7 +837,7 @@ println result.toString()<p class="paragraph"/>def sw = <span class="java&#45;ke
 result.render sw</pre></div>
 
 
-<a name="6.1.9 Uploading Files"><!-- Legacy link --></a>
+<a name="7.1.9 Uploading Files"><!-- Legacy link --></a>
 <h2 id="uploadingFiles">7.1.9 ファイルアップロード</h2>
 <h4>プログラムによるファイルアップロード <div class="hidden-block">Programmatic File Uploads </div></h4><p class="paragraph"/><div class="hidden-block">Grails supports file uploads using Spring's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/multipart/MultipartHttpServletRequest.html" class="api">MultipartHttpServletRequest</a> interface. The first step for file uploading is to create a multipart form like this:</div>
 Grailsでは、Springの<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/multipart/MultipartHttpServletRequest.html" class="api">MultipartHttpServletRequest</a>インターフェイスを使用してファイルアップロードをサポートしています。ファイルアップロードを実装するには、先に次のようにフォームをマルチパートフォームにします:<p class="paragraph"/><div class="code"><pre>Upload Form: <span class="xml&#45;tag">&#60;br /&#62;</span>
@@ -869,7 +869,7 @@ Grailsでは、Springの<a href="http://static.springsource.org/spring/docs/3.0.
 &#125;</pre></div>
 
 
-<a name="6.1.10 Command Objects"><!-- Legacy link --></a>
+<a name="7.1.10 Command Objects"><!-- Legacy link --></a>
 <h2 id="commandObjects">7.1.10 コマンドオブジェクト</h2>
 <div class="hidden-block">Grails controllers support the concept of command objects. A command object is a class that is used in conjunction with <a href="../guide/single.html#dataBinding" class="guide">data binding</a>, usually to allow validation of data that may not fit into an existing domain class.</div><p class="paragraph"/>Grailsのコマンドオブジェクトの設計概念をサポートしています。 コマンドオブジェクトは <a href="../guide/single.html#dataBinding" class="guide">data binding</a> と連結して使用するクラスであり、通常ドメインクラスとして扱わないデータに対してバリデーションを可能にします。<p class="paragraph"/><blockquote class="note">
 Note: A class is only considered to be a command object when it is used as a parameter of an action.
@@ -888,7 +888,7 @@ class LoginCommand &#123;
             <span class="java&#45;keyword">return</span>
         &#125;<p class="paragraph"/>        // work with the command object data
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>コマンドオブジェクトと依存注入 <div class="hidden-block">Command Objects and Dependency Injection </div></h4><p class="paragraph"/><div class="hidden-block">Command objects can participate in dependency injection. This is useful if your command object has some custom validation logic which uses a Grails <a href="../guide/single.html#services" class="guide">service</a>:</div>
+&#125;</pre></div><p class="paragraph"/>If the command object's type is that of a domain class and there is an <code>id</code> request parameter then instead of invoking the domain class constructor to create a new instance a call will be made to the static <code>get</code> method on the domain class and the value of the <code>id</code> parameter will be passed as an argument.  Whatever is returned from that call to <code>get</code> is what will be passed into the controller action.  This means that if there is an <code>id</code> request parameter and no corresponding record is found in the database then the value of the command object will be <code>null</code>.<p class="paragraph"/><h4>コマンドオブジェクトと依存注入 <div class="hidden-block">Command Objects and Dependency Injection </div></h4><p class="paragraph"/><div class="hidden-block">Command objects can participate in dependency injection. This is useful if your command object has some custom validation logic which uses a Grails <a href="../guide/single.html#services" class="guide">service</a>:</div>
 コマンドオブジェクトに依存注入をすることが可能です。Grailsの<a href="../guide/single.html#services" class="guide">サービス</a>を使用したカスタムバリデーションなどを使用する際に便利です:<p class="paragraph"/>
 <div class="code"><pre>@grails.validation.Validateable
 class LoginCommand &#123;<p class="paragraph"/>    def loginService<p class="paragraph"/>    <span class="java&#45;object">String</span> username
@@ -901,7 +901,7 @@ class LoginCommand &#123;<p class="paragraph"/>    def loginService<p class="par
 この例では、<code>loginService</code>をSpringの<code>ApplicatinContext</code>から名前解決でコマンドオブジェクトに注入しています。
 
 
-<a name="6.1.11 Handling Duplicate Form Submissions"><!-- Legacy link --></a>
+<a name="7.1.11 Handling Duplicate Form Submissions"><!-- Legacy link --></a>
 <h2 id="formtokens">7.1.11 フォーム二重送信のハンドリング</h2>
 <div class="hidden-block">Grails has built-in support for handling duplicate form submissions using the "Synchronizer Token Pattern". To get started you define a token on the <a href="../ref/Tags/form.html" class="tags">form</a> tag:</div>
 Grailsには、"同期トークンパターン"を使用した、フォーム二重送信ハンドリングをサポートしています。使用するには、先ずは<a href="../ref/Tags/form.html" class="tags">form</a>タグにuseToken属性を指定します:<p class="paragraph"/><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:form useToken=<span class="xml&#45;quote">"true"</span> ...&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">Then in your controller code you can use the <a href="../ref/Controllers/withForm.html" class="controllers">withForm</a> method to handle valid and invalid requests:</div>
@@ -919,7 +919,7 @@ Grailsには、"同期トークンパターン"を使用した、フォーム二
 </blockquote>
 
 
-<a name="6.1.12 Simple Type Converters"><!-- Legacy link --></a>
+<a name="7.1.12 Simple Type Converters"><!-- Legacy link --></a>
 <h2 id="typeConverters">7.1.12 シンプルタイプコンバータ</h2>
 <h3>型変換メソッド <div class="hidden-block">Type Conversion Methods </div></h3><p class="paragraph"/><div class="hidden-block">If you prefer to avoid the overhead of <a href="../guide/single.html#dataBinding" class="guide">Data Binding</a> and simply want to convert incoming parameters (typically Strings) into another more appropriate type the <a href="../ref/Controllers/params.html" class="controllers">params</a> object has a number of convenience methods for each type:</div>
 <a href="../guide/single.html#dataBinding" class="guide">データバインディング</a>でのオーバーヘッドを避けたい場合や、受信したパラメータに対して、単純な型変換行いたい場合、 <a href="../ref/Controllers/params.html" class="controllers">params</a>オブジェクトには、型によって幾つかの便利なメソッドが有ります:<p class="paragraph"/><div class="code"><pre>def total = params.<span class="java&#45;object">int</span>('total')</pre></div><p class="paragraph"/><div class="hidden-block">The above example uses the <code>int</code> method, and there are also methods for <code>boolean</code>, <code>long</code>, <code>char</code>, <code>short</code> and so on. Each of these methods is null-safe and safe from any parsing errors, so you don't have to perform any additional checks on the parameters.</div>
@@ -938,7 +938,7 @@ GSPタグの<code>attrs</code>パラメータでも、同じ仕組みの型変�
                 
                     <div class="toc-item prev-left"><a href="../../guide/GORM.html">&lt;&lt; <strong>6</strong><span>O/R&#12510;&#12483;&#12500;&#12531;&#12464; (GORM)</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/async.html"><strong>8</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/webServices.html"><strong>8</strong><span>Web&#12469;&#12540;&#12499;&#12473;</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -1233,6 +1233,9 @@ GSPタグの<code>attrs</code>パラメータでも、同じ仕組みの型変�
                             <div class="menu-item"><a href="../../ref/Controllers/grailsApplication.html">grailsApplication</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Controllers/namespace.html">namespace</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Controllers/params.html">params</a>
                             </div>
                             
@@ -1245,7 +1248,13 @@ GSPタグの<code>attrs</code>パラメータでも、同じ仕組みの型変�
                             <div class="menu-item"><a href="../../ref/Controllers/request.html">request</a>
                             </div>
                             
+                            <div class="menu-item"><a href="../../ref/Controllers/respond.html">respond</a>
+                            </div>
+                            
                             <div class="menu-item"><a href="../../ref/Controllers/response.html">response</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Controllers/responseFormats.html">responseFormats</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Controllers/servletContext.html">servletContext</a>
