@@ -141,15 +141,28 @@ function addJsClass() {
                 
 <a name="5.2.2 Composition in GORM"><!-- Legacy link --></a>
 <h2 id="gormComposition">6.2.2 GORMでのコンポジション</h2>
-As well as <a href="../guide/single.html#gormAssociation" class="guide">association</a>, Grails supports the notion of composition. In this case instead of mapping classes onto separate tables a class can be "embedded" within the current table. For example:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+<div class="hidden-block">
+As well as <a href="../guide/single.html#gormAssociation" class="guide">association</a>, Grails supports the notion of composition. In this case instead of mapping classes onto separate tables a class can be "embedded" within the current table. For example:
+</div>
+<a href="../guide/single.html#gormAssociation" class="guide">関連</a>に加えて、Grailsはコンポジションの概念をサポートしています。
+次の場合は、それぞれのドメインクラス毎に別々のテーブルにマッピングされる代わりに、別のドメインクラスのカラムを対象ドメインクラスのテーブルに「埋め込む」ことができます。<p class="paragraph"/><div class="code"><pre>class Person &#123;
     Address homeAddress
     Address workAddress
     <span class="java&#45;keyword">static</span> embedded = &#91;'homeAddress', 'workAddress'&#93;
 &#125;<p class="paragraph"/>class Address &#123;
     <span class="java&#45;object">String</span> number
     <span class="java&#45;object">String</span> code
-&#125;</pre></div><p class="paragraph"/>The resulting mapping would looking like this:<p class="paragraph"/><img border="0" class="center" src="../../img/5.2.2-composition.jpg"></img><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The resulting mapping would looking like this:
+</div>
+マッピング結果はこのようになります。<p class="paragraph"/><img border="0" class="center" src="../../img/5.2.2-composition.jpg"></img><p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 If you define the <code>Address</code> class in a separate Groovy file in the <code>grails-app/domain</code> directory you will also get an <code>address</code> table. If you don't want this to happen use Groovy's ability to define multiple classes per file and include the <code>Address</code> class below the <code>Person</code> class in the <code>grails-app/domain/Person.groovy</code> file
+</blockquote>
+</div>
+<blockquote class="note">
+もし<code>grails-app/domain</code>ディレクトリ内に別のGroovyファイルとして<code>Address</code>クラスを定義した場合は、以前と同じように<code>address</code>テーブルが作成されてしまいます。
+これを避けたい場合は、1ファイルに複数のクラスを定義できるGroovyの能力を使い、<code>grails-app/domain/Person.groovy</code>ファイルの<code>Person</code>クラスの下に<code>Address</code>クラスを含めてください。
 </blockquote>
 
 

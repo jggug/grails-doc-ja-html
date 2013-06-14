@@ -665,11 +665,16 @@ Grailsはデフォルトで、<code>version</code>プロパティを<code>Long</
 
 <a name="5.5.2.8 Eager and Lazy Fetching"><!-- Legacy link --></a>
 <h2 id="fetchingDSL">6.5.2.8 EagerフェッチとLazyフェッチ</h2>
-<h4>Lazy Collections</h4><p class="paragraph"/>As discussed in the section on <a href="../guide/single.html#fetching" class="guide">Eager and Lazy fetching</a>, GORM collections are lazily loaded by default but you can change this behaviour with the ORM DSL. There are several options available to you, but the most common ones are:
+<div class="hidden-block">h4. Lazy Collections</div>
+<h4>Lazyコレクション</h4><p class="paragraph"/><div class="hidden-block">As discussed in the section on <a href="../guide/single.html#fetching" class="guide">Eager and Lazy fetching</a>, GORM collections are lazily loaded by default but you can change this behaviour with the ORM DSL. There are several options available to you, but the most common ones are:</div>
+永続化の基礎の<a href="../guide/single.html#fetching" class="guide">EagerフェッチとLazyフェッチ</a>のセクションで書いたように、GORMのコレクションはデフォルトでLazyにロードされます。
+しかし、ORM DSLでこの振る舞いを変更することができます。
+いくつかのオプションが使えますが、もっともよく使われるのは次の2つです:
 <ul class="star">
 <li>lazy: false</li>
 <li>fetch: 'join'</li>
-</ul><p class="paragraph"/>and they're used like this:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName
+</ul><p class="paragraph"/><div class="hidden-block">and they're used like this:</div>
+次のように使います:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName
     Pet pet<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;addresses: Address&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         addresses lazy: <span class="java&#45;keyword">false</span>
         pet fetch: 'join'
@@ -679,40 +684,91 @@ Grailsはデフォルトで、<code>version</code>プロパティを<code>Long</
     <span class="java&#45;object">String</span> postCode
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Pet &#123;
     <span class="java&#45;object">String</span> name
-&#125;</pre></div><p class="paragraph"/>The first option, <code>lazy: false</code> , ensures that when a <code>Person</code> instance is loaded, its <code>addresses</code> collection is loaded at the same time with a second SELECT. The second option is basically the same, except the collection is loaded with a JOIN rather than another SELECT. Typically you want to reduce the number of queries, so <code>fetch: 'join'</code> is the more appropriate option. On the other hand, it could feasibly be the more expensive approach if your domain model and data result in more and larger results than would otherwise be necessary.<p class="paragraph"/>For more advanced users, the other settings available are:
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The first option, <code>lazy: false</code> , ensures that when a <code>Person</code> instance is loaded, its <code>addresses</code> collection is loaded at the same time with a second SELECT. The second option is basically the same, except the collection is loaded with a JOIN rather than another SELECT. Typically you want to reduce the number of queries, so <code>fetch: 'join'</code> is the more appropriate option. On the other hand, it could feasibly be the more expensive approach if your domain model and data result in more and larger results than would otherwise be necessary.</div>
+最初のオプションの<code>lazy: false</code>は、<code>Person</code>インスタンスがロードされるときに、同時に2本目のSELECTが発行されて<code>addresses</code>コレクションがロードされることを保証します。
+2つめのオプションは別のSELECT文ではなくJOIN構文によってロードされる点を除けば、基本的に同じです。
+一般的にクエリの数を減らしたいときは、<code>fetch: 'join'</code>は適切なオプションです。
+一方で、ドメインモデルとデータが大量にヒットしてしまう場合、JOINはより高コストなアプローチになってしまう可能性もあります。<p class="paragraph"/><div class="hidden-block">For more advanced users, the other settings available are:</div>
+他にも上級ユーザ向けの役立つ設定があります:
 <ol>
 <li>batchSize: N</li>
 <li>lazy: false, batchSize: N</li>
-</ol><p class="paragraph"/>where N is an integer. These let you fetch results in batches, with one query per batch. As a simple example, consider this mapping for <code>Person</code>:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName
+</ol><p class="paragraph"/><div class="hidden-block">where N is an integer. These let you fetch results in batches, with one query per batch. As a simple example, consider this mapping for <code>Person</code>:</div>
+Nは整数とします。
+これによって結果をバッチでフェッチできます。
+それぞれのバッチごとに1つのクエリが発行されます。
+単純な例として、<code>Person</code>でのマッピングを考えます。<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName
     Pet pet<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         pet batchSize: 5
     &#125;
 &#125;</pre></div>
-If a query returns multiple <code>Person</code> instances, then when we access the first <code>pet</code> property, Hibernate will fetch that <code>Pet</code> plus the four next ones. You can get the same behaviour with eager loading by combining <code>batchSize</code> with the <code>lazy: false</code> option. You can find out more about these options in the <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/performance.html#performance-fetching" target="blank">Hibernate user guide</a> and this <a href="http://community.jboss.org/wiki/AShortPrimerOnFetchingStrategies" target="blank">primer on fetching strategies</a>. Note that ORM DSL does not currently support the "subselect" fetching strategy.<p class="paragraph"/><h4>Lazy Single-Ended Associations</h4><p class="paragraph"/>In GORM, one-to-one and many-to-one associations are by default lazy. Non-lazy single ended associations can be problematic when you load many entities because each non-lazy association will result in an extra SELECT statement. If the associated entities also have non-lazy associations, the number of queries grows significantly!<p class="paragraph"/>Use the same technique as for lazy collections to make a one-to-one or many-to-one association non-lazy/eager:<p class="paragraph"/><div class="code"><pre>class Person &#123;
+<div class="hidden-block">If a query returns multiple <code>Person</code> instances, then when we access the first <code>pet</code> property, Hibernate will fetch that <code>Pet</code> plus the four next ones. You can get the same behaviour with eager loading by combining <code>batchSize</code> with the <code>lazy: false</code> option. You can find out more about these options in the <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/performance.html#performance-fetching" target="blank">Hibernate user guide</a> and this <a href="http://community.jboss.org/wiki/AShortPrimerOnFetchingStrategies" target="blank">primer on fetching strategies</a>. Note that ORM DSL does not currently support the "subselect" fetching strategy.</div>
+クエリが複数の<code>Person</code>インスタンスを返す場合、最初の<code>Person</code>インスタンスの<code>pet</code>プロパティにアクセスしたときに、Hibernateはその<code>Person</code>インスタンスに関連する<code>Pet</code>インスタンスと、それに続く4つの<code>Pet</code>インスタンスをフェッチします。
+<code>batchSize</code>と<code>lazy: false</code>オプションを同時に指定したEagerフェッチの場合も同じ挙動になります。
+<a href="http://docs.jboss.org/hibernate/core/3.6/reference/ja-JP/html/performance.html#performance-fetching" target="blank">Hibernateユーザガイドのフェッチ戦略</a>と<a href="http://community.jboss.org/wiki/AShortPrimerOnFetchingStrategies" target="blank">フェッチ戦略入門</a>で、これらのオプションについてもっと情報を得ることができます。
+ORM DSLは今のところ「subselect」フェッチ戦略をサポートしていないことに注意してください。<p class="paragraph"/><div class="hidden-block">h4. Lazy Single-Ended Associations</div>
+<h4>Lazy単一終端関連</h4><p class="paragraph"/><div class="hidden-block">In GORM, one-to-one and many-to-one associations are by default lazy. Non-lazy single ended associations can be problematic when you load many entities because each non-lazy association will result in an extra SELECT statement. If the associated entities also have non-lazy associations, the number of queries grows significantly!</div>
+GORMでは、1対1と多対1関連はデフォルトでLazyです。
+非Lazyの単一終端関連では、大量のエンティティをロードするときに問題が発生する可能性があります。
+非Lazy関連ごとに追加のSELECT文を発行してしまうためです。
+関連エンティティが更に非Lazy関連を持つ場合、クエリは相当な数になってしまいます!<p class="paragraph"/><div class="hidden-block">Use the same technique as for lazy collections to make a one-to-one or many-to-one association non-lazy/eager:</div>
+1対1/多対1関連を非LazyつまりEagerにするには、Lazyコレクションのときと同じ方法を使います:<p class="paragraph"/><div class="code"><pre>class Person &#123;
     <span class="java&#45;object">String</span> firstName
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Address &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> street
     <span class="java&#45;object">String</span> postCode<p class="paragraph"/>    <span class="java&#45;keyword">static</span> belongsTo = &#91;person: Person&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         person lazy: <span class="java&#45;keyword">false</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>Here we configure GORM to load the associated <code>Person</code> instance (through the <code>person</code> property) whenever an <code>Address</code> is loaded.<p class="paragraph"/><h4>Lazy Single-Ended Associations and Proxies</h4><p class="paragraph"/>Hibernate uses runtime-generated proxies to facilitate single-ended lazy associations; Hibernate dynamically subclasses the entity class to create the proxy.<p class="paragraph"/>Consider the previous example but with a lazily-loaded <code>person</code> association: Hibernate will set the <code>person</code> property to a proxy that is a subclass of <code>Person</code>. When you call any of the getters (except for the <code>id</code> property) or setters on that proxy, Hibernate will load the entity from the database.<p class="paragraph"/>Unfortunately this technique can produce surprising results. Consider the following example classes:<p class="paragraph"/><div class="code"><pre>class Pet &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Here we configure GORM to load the associated <code>Person</code> instance (through the <code>person</code> property) whenever an <code>Address</code> is loaded.</div>
+ここでは、<code>Address</code>がロードされるごとに、(<code>person</code>プロパティを通して)関連づけられた<code>Person</code>インスタンスをロードするようにGORMを設定しています。<p class="paragraph"/><div class="hidden-block">h4. Lazy Single-Ended Associations and Proxies</div>
+<h4>Lazy単一終端関連とプロキシ</h4><p class="paragraph"/><div class="hidden-block">Hibernate uses runtime-generated proxies to facilitate single-ended lazy associations; Hibernate dynamically subclasses the entity class to create the proxy.</div>
+HibernateはLazy単一終端関連を扱うためにプロキシを実行時に生成して利用しています。
+Hibernateはプロキシを生成するためにエンティティクラスを動的にサブクラス化します。<p class="paragraph"/><div class="hidden-block">Consider the previous example but with a lazily-loaded <code>person</code> association: Hibernate will set the <code>person</code> property to a proxy that is a subclass of <code>Person</code>. When you call any of the getters (except for the <code>id</code> property) or setters on that proxy, Hibernate will load the entity from the database.</div>
+前項の例で、<code>person</code>関連がLazyロードされる場合を考えます。
+Hibernateは<code>Person</code>のサブクラスであるプロキシを<code>person</code>プロパティにセットします。
+そのプロキシに対してsetterか(<code>id</code>プロパティ以外の)getterを呼んだとき、Hibernateはデータベースからそのエンティティをロードします。<p class="paragraph"/><div class="hidden-block">Unfortunately this technique can produce surprising results. Consider the following example classes:</div>
+残念なことに、この機構は驚くべき結果をもたらします。
+以下のようなサンプルクラスを考えます:<p class="paragraph"/><div class="code"><pre>class Pet &#123;
     <span class="java&#45;object">String</span> name
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Dog <span class="java&#45;keyword">extends</span> Pet &#123;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Person &#123;
     <span class="java&#45;object">String</span> name
     Pet pet
-&#125;</pre></div><p class="paragraph"/>and assume that we have a single <code>Person</code> instance with a <code>Dog</code> as the <code>pet</code>. The following code will work as you would expect:
-<div class="code"><pre>def person = Person.get(1)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">and assume that we have a single <code>Person</code> instance with a <code>Dog</code> as the <code>pet</code>. The following code will work as you would expect:</div>
+ここで、<code>pet</code>として<code>Dog</code>を持っている1つの<code>Person</code>インスタンスがあると仮定します。
+以下のコードは期待通りに動作します:<p class="paragraph"/><div class="code"><pre>def person = Person.get(1)
 assert person.pet <span class="java&#45;keyword">instanceof</span> Dog
-assert Pet.get(person.petId) <span class="java&#45;keyword">instanceof</span> Dog</pre></div><p class="paragraph"/>But this won't:<p class="paragraph"/><div class="code"><pre>def person = Person.get(1)
+assert Pet.get(person.petId) <span class="java&#45;keyword">instanceof</span> Dog</pre></div><p class="paragraph"/><div class="hidden-block">But this won't:</div>
+しかし、次のコードは期待通りに動作しません:<p class="paragraph"/><div class="code"><pre>def person = Person.get(1)
 assert person.pet <span class="java&#45;keyword">instanceof</span> Dog
-assert Pet.list()&#91;0&#93; <span class="java&#45;keyword">instanceof</span> Dog</pre></div><p class="paragraph"/>The second assertion fails, and to add to the confusion, this will work:<p class="paragraph"/><div class="code"><pre>assert Pet.list()&#91;0&#93; <span class="java&#45;keyword">instanceof</span> Dog</pre></div><p class="paragraph"/>What's going on here? It's down to a combination of how proxies work and the guarantees that the Hibernate session makes. When you load the <code>Person</code> instance, Hibernate creates a proxy for its <code>pet</code> relation and attaches it to the session. Once that happens, whenever you retrieve that <code>Pet</code> instance with a query, a <code>get()</code>, or the <code>pet</code> relation  <em class="italic">within the same session</em>  , Hibernate gives you the proxy.<p class="paragraph"/>Fortunately for us, GORM automatically unwraps the proxy when you use <code>get()</code> and <code>findBy&#42;()</code>, or when you directly access the relation. That means you don't have to worry at all about proxies in the majority of cases. But GORM doesn't do that for objects returned with a query that returns a list, such as <code>list()</code> and <code>findAllBy&#42;()</code>. However, if Hibernate hasn't attached the proxy to the session, those queries will return the real instances - hence why the last example works.<p class="paragraph"/>You can protect yourself to a degree from this problem by using the <code>instanceOf</code> method by GORM:<p class="paragraph"/><div class="code"><pre>def person = Person.get(1)
-assert Pet.list()&#91;0&#93;.instanceOf(Dog)</pre></div><p class="paragraph"/>However, it won't help here if casting is involved. For example, the following code will throw a <code>ClassCastException</code> because the first pet in the list is a proxy instance with a class that is neither <code>Dog</code> nor a sub-class of <code>Dog</code>:<p class="paragraph"/><div class="code"><pre>def person = Person.get(1)
-Dog pet = Pet.list()&#91;0&#93;</pre></div><p class="paragraph"/>Of course, it's best not to use static types in this situation. If you use an untyped variable for the pet instead, you can access any <code>Dog</code> properties or methods on the instance without any problems.<p class="paragraph"/>These days it's rare that you will come across this issue, but it's best to be aware of it just in case. At least you will know why such an error occurs and be able to work around it.
+assert Pet.list()&#91;0&#93; <span class="java&#45;keyword">instanceof</span> Dog</pre></div><p class="paragraph"/><div class="hidden-block">The second assertion fails, and to add to the confusion, this will work:</div>
+2番目のアサーションが失敗します。
+混乱がさらに深まるでしょうが、次のコードは動作します。<p class="paragraph"/><div class="code"><pre>assert Pet.list()&#91;0&#93; <span class="java&#45;keyword">instanceof</span> Dog</pre></div><p class="paragraph"/><div class="hidden-block">What's going on here? It's down to a combination of how proxies work and the guarantees that the Hibernate session makes. When you load the <code>Person</code> instance, Hibernate creates a proxy for its <code>pet</code> relation and attaches it to the session. Once that happens, whenever you retrieve that <code>Pet</code> instance with a query, a <code>get()</code>, or the <code>pet</code> relation  <em class="italic">within the same session</em>  , Hibernate gives you the proxy.</div>
+一体何が起こっているのでしょうか？
+この原因はプロキシの働きとHibernateセッションによる1次キャッシュの連携です。
+<code>Person</code>インスタンスをロードしたとき、Hibernateは<code>pet</code>プロパティ用にプロキシを生成してセッションにアタッチします。
+一度その状態になってしまうと、  <em class="italic">同一セッション内で</em>  クエリや<code>get()</code>や<code>pet</code>プロパティを経由して<code>Pet</code>インスタンスを取得するたびに、Hibernateはセッションに登録されているプロキシを返します。<p class="paragraph"/><div class="hidden-block">Fortunately for us, GORM automatically unwraps the proxy when you use <code>get()</code> and <code>findBy&#42;()</code>, or when you directly access the relation. That means you don't have to worry at all about proxies in the majority of cases. But GORM doesn't do that for objects returned with a query that returns a list, such as <code>list()</code> and <code>findAllBy&#42;()</code>. However, if Hibernate hasn't attached the proxy to the session, those queries will return the real instances - hence why the last example works.</div>
+幸いなことに、GORMは<code>get()</code>と<code>findBy&#42;()</code>を使ったとき、または、直接関連プロパティにアクセスしたときには、自動的にプロキシをアンラップしてくれます。
+これは大部分のケースにおいては、プロキシについて少しも心配する必要がないことを意味します。
+しかし、<code>list()</code>や<code>findAllBy&#42;()</code>のようなリストを返すクエリによって取得したオブジェクトに対しては、GORMはそのようなサポートをしてくれません。
+しかし、Hibernateがプロキシをセッションにアタッチしていなければ、これらのクエリはプロキシではない本物のインスタンスを返します。このため、先ほどの最後の例はうまく動作したのです。<p class="paragraph"/><div class="hidden-block">You can protect yourself to a degree from this problem by using the <code>instanceOf</code> method by GORM:</div>
+GORMが提供する<code>instanceOf</code>メソッドを使ってこの問題をある程度回避することもできます。<p class="paragraph"/><div class="code"><pre>def person = Person.get(1)
+assert Pet.list()&#91;0&#93;.instanceOf(Dog)</pre></div><p class="paragraph"/><div class="hidden-block">However, it won't help here if casting is involved. For example, the following code will throw a <code>ClassCastException</code> because the first pet in the list is a proxy instance with a class that is neither <code>Dog</code> nor a sub-class of <code>Dog</code>:</div>
+しかし、キャストを伴う場合はこれでは解決できません。
+たとえば、以下のコードは<code>ClassCastException</code>をスローします。
+なぜなら、リスト中の最初のペットが<code>Dog</code>でも<code>Dog</code>のサブクラスでもないプロキシインスタンスだからです。<p class="paragraph"/><div class="code"><pre>def person = Person.get(1)
+Dog pet = Pet.list()&#91;0&#93;</pre></div><p class="paragraph"/><div class="hidden-block">Of course, it's best not to use static types in this situation. If you use an untyped variable for the pet instead, you can access any <code>Dog</code> properties or methods on the instance without any problems.</div>
+もちろん、この場合は静的型を使わないのがベストです。
+代わりに型宣言の無い変数をpetに使えば、問題なくそのインスタンス上の<code>Dog</code>プロパティやメソッドにアクセスできます。<p class="paragraph"/><div class="hidden-block">These days it's rare that you will come across this issue, but it's best to be aware of it just in case. At least you will know why such an error occurs and be able to work around it.</div>
+最近はこの問題に出くわすことは滅多にないですが、万一のために知っておくことは大切です。
+少なくとも、なぜそのようなエラーが発生するのかを理解して回避できます。
 
 
 <a name="5.5.2.9 Custom Cascade Behaviour"><!-- Legacy link --></a>
 <h2 id="customCascadeBehaviour">6.5.2.9 カスケードの振る舞いを変える</h2>
-As described in the section on <a href="../guide/single.html#cascades" class="guide">cascading updates</a>, the primary mechanism to control the way updates and deletes cascade from one association to another is the static <a href="../ref/Domain Classes/belongsTo.html" class="domainClasses">belongsTo</a> property.<p class="paragraph"/>However, the ORM DSL gives you complete access to Hibernate's <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/objectstate.html#objectstate-transitive" target="blank">transitive persistence</a> capabilities using the <code>cascade</code> attribute.<p class="paragraph"/>Valid settings for the cascade attribute include:
+<div class="hidden-block">As described in the section on <a href="../guide/single.html#cascades" class="guide">cascading updates</a>, the primary mechanism to control the way updates and deletes cascade from one association to another is the static <a href="../ref/Domain Classes/belongsTo.html" class="domainClasses">belongsTo</a> property.</div>
+<a href="../guide/single.html#cascades" class="guide">カスケード更新</a>のセクションで記載した通り、更新と削除が1つの関連からもう一方へとカスケードする方法を制御するためには、staticの<a href="../ref/Domain Classes/belongsTo.html" class="domainClasses">belongsTo</a>プロパティを使います。<p class="paragraph"/><div class="hidden-block">However, the ORM DSL gives you complete access to Hibernate's <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/objectstate.html#objectstate-transitive" target="blank">transitive persistence</a> capabilities using the <code>cascade</code> attribute.</div>
+しかし、ORM DSLでは、Hibernateの<a href="http://docs.jboss.org/hibernate/core/3.6/reference/ja-JP/html/objectstate.html#objectstate-transitive" target="blank">連鎖的な永続化</a>機能への<code>cascade</code>属性を使った完全なアクセスを提供しています。<p class="paragraph"/><div class="hidden-block">Valid settings for the cascade attribute include:</div>
+<code>cascade</code>属性のための有効な設定値は以下の通りです:<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li><code>merge</code> - merges the state of a detached association</li>
 <li><code>save-update</code> - cascades only saves and updates to an association</li>
@@ -722,9 +778,23 @@ As described in the section on <a href="../guide/single.html#cascades" class="gu
 <li><code>evict</code> - cascades evictions (equivalent to <code>discard()</code> in GORM) to associations if set</li>
 <li><code>all</code> - cascade  <em class="italic">all</em>  operations to associations</li>
 <li><code>all-delete-orphan</code> - Applies only to one-to-many associations and indicates that when a child is removed from an association then it should be automatically deleted. Children are also deleted when the parent is.</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>merge</code> - デタッチされた関連の状態をマージする</li>
+<li><code>save-update</code> - saveとupdateのみを関連先にカスケードする</li>
+<li><code>delete</code> - deleteのみを関連先にカスケードする</li>
+<li><code>lock</code> - 悲観的ロックを関連先にカスケードしたいときに役立つ</li>
+<li><code>refresh</code> - refreshを関連先にカスケードする</li>
+<li><code>evict</code> - これをセットすると、evict(GORMでの<code>discard()</code>に相当)を関連先にカスケードする</li>
+<li><code>all</code> -  <em class="italic">すべての</em>  操作を関連先にカスケードする</li>
+<li><code>all-delete-orphan</code> - 1対多関連にのみ適用する。子要素を関連から取り除いたときに自動的にその子要素を削除することを意味する。親が削除されたときは、子要素すべてが削除される。</li>
 </ul><p class="paragraph"/><blockquote class="note">
+<div class="hidden-block">
 It is advisable to read the section in the Hibernate documentation on <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/objectstate.html#objectstate-transitive" target="blank">transitive persistence</a> to obtain a better understanding of the different cascade styles and recommendations for their usage
-</blockquote><p class="paragraph"/>To specify the cascade attribute simply define one or more (comma-separated) of the aforementioned settings as its value:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;addresses: Address&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
+</div>
+様々なカスケード方式と推奨される利用方法についてより良く理解するために、Hibernateのドキュメントの<a href="http://docs.jboss.org/hibernate/core/3.6/reference/ja-JP/html/objectstate.html#objectstate-transitive" target="blank">連鎖的な永続化</a>のセクションを読むことをお勧めします。
+</blockquote><p class="paragraph"/><div class="hidden-block">To specify the cascade attribute simply define one or more (comma-separated) of the aforementioned settings as its value:</div>
+<code>cascade</code>属性を指定するには、単純に1つまたは(カンマで区切られた)複数の前述の設定値を定義します。<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;addresses: Address&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         addresses cascade: <span class="java&#45;quote">"all&#45;delete&#45;orphan"</span>
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Address &#123;

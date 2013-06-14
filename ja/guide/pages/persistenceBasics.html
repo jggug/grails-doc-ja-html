@@ -307,23 +307,54 @@ eagerフェッチングが適切なケースはもちろん有りますが、常
 
 <a name="5.3.5 Pessimistic and Optimistic Locking"><!-- Legacy link --></a>
 <h2 id="locking">6.3.5 悲観的ロックと楽観的ロック</h2>
-<h4>Optimistic Locking</h4><p class="paragraph"/>By default GORM classes are configured for optimistic locking. Optimistic locking is a feature of Hibernate which involves storing a version value in a special <code>version</code> column in the database that is incremented after each update.<p class="paragraph"/>The <code>version</code> column gets read into a <code>version</code> property that contains the current versioned state of persistent instance which you can access:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)<p class="paragraph"/>println airport.version</pre></div><p class="paragraph"/>When you perform updates Hibernate will automatically check the version property against the  version column in the database and if they differ will throw a <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/StaleObjectStateException.html" class="api">StaleObjectException</a>. This will roll back the transaction if one is active.<p class="paragraph"/>This is useful as it allows a certain level of atomicity without resorting to pessimistic locking that has an inherit performance penalty. The downside is that you have to deal with this exception if you have highly concurrent writes. This requires flushing the session:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)<p class="paragraph"/><span class="java&#45;keyword">try</span> &#123;
+<div class="hidden-block">h4. Optimistic Locking</div>
+<h4>楽観的ロック</h4><p class="paragraph"/><div class="hidden-block">By default GORM classes are configured for optimistic locking. Optimistic locking is a feature of Hibernate which involves storing a version value in a special <code>version</code> column in the database that is incremented after each update.</div>
+GORMでは、デフォルトで、各ドメインクラスは楽観的ロックを使うように設定されています。
+楽観的ロックは、Hibernateが備えている機能の1つです。
+データベース上の専用の<code>version</code>カラムにバージョン番号を格納して、レコードを更新する度に値をインクリメントします。<p class="paragraph"/><div class="hidden-block">The <code>version</code> column gets read into a <code>version</code> property that contains the current versioned state of persistent instance which you can access:</div>
+<code>version</code>カラムは、永続化済みのドメインクラスインスタンスの<code>version</code>プロパティとして読み込まれます。
+このプロパティを使って、データベースから取得した時点のバージョン番号を取得できます。
+以下にコード例を示します:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)<p class="paragraph"/>println airport.version</pre></div><p class="paragraph"/><div class="hidden-block">When you perform updates Hibernate will automatically check the version property against the  version column in the database and if they differ will throw a <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/StaleObjectStateException.html" class="api">StaleObjectException</a>. This will roll back the transaction if one is active.</div>
+データベースを更新するときには、Hibernateは自動的に、データベースの<code>version</code>カラムに格納されている値と、更新対象のインスタンスが保持している<code>version</code>プロパティの値を比較します。
+そして、2つの値が異なる場合には<a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/StaleObjectStateException.html" class="api">StaleObjectException</a>例外をスローします。
+トランザクションが有効な場合は、この例外発生によって、トランザクションもロールバックします。<p class="paragraph"/><div class="hidden-block">This is useful as it allows a certain level of atomicity without resorting to pessimistic locking that has an inherit performance penalty. The downside is that you have to deal with this exception if you have highly concurrent writes. This requires flushing the session:</div>
+この方法は、本質的に性能上の問題をかかえている悲観的ロックに頼らずとも、ある水準の原子性を保証することができる点が便利ですが、一方で短所も存在します。
+それは、実際に並行に更新が発生してしまった場合に、開発者が明示的に例外処理しなければならいという点です。
+そして、この例外処理のためにはセッションのフラッシュが必要になります:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)<p class="paragraph"/><span class="java&#45;keyword">try</span> &#123;
     airport.name = <span class="java&#45;quote">"Heathrow"</span>
     airport.save(flush: <span class="java&#45;keyword">true</span>)
 &#125;
 <span class="java&#45;keyword">catch</span> (org.springframework.dao.OptimisticLockingFailureException e) &#123;
     // deal with exception
-&#125;</pre></div><p class="paragraph"/>The way you deal with the exception depends on the application. You could attempt a programmatic merge of the data or go back to the user and ask them to resolve the conflict.<p class="paragraph"/>Alternatively, if it becomes a problem you can resort to pessimistic locking.<p class="paragraph"/><blockquote class="note">
-The <code>version</code> will only be updated after flushing the session.
-</blockquote><p class="paragraph"/><h4>Pessimistic Locking</h4><p class="paragraph"/>Pessimistic locking is equivalent to doing a SQL "SELECT * FOR UPDATE" statement and locking a row in the database. This has the implication that other read operations will be blocking until the lock is released.<p class="paragraph"/>In Grails pessimistic locking is performed on an existing instance with the <a href="../ref/Domain Classes/lock.html" class="domainClasses">lock</a> method:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The way you deal with the exception depends on the application. You could attempt a programmatic merge of the data or go back to the user and ask them to resolve the conflict.</div>
+この例外が発生した時にどのように振る舞うべきかは、アプリケーションの要件に依存します。
+たとえば、競合が発生したデータを機械的にマージする、エンドユーザに競合を解決するように頼む、などの振る舞いが考えられるでしょう。<p class="paragraph"/><div class="hidden-block">Alternatively, if it becomes a problem you can resort to pessimistic locking.</div>
+あるいは、そのような振る舞いをすることが問題になることもあるでしょう。
+そのときは最後の手段として、悲観的ロックを使うこともできます。<p class="paragraph"/><blockquote class="note">
+<div class="hidden-block">The <code>version</code> will only be updated after flushing the session.</div>
+<code>version</code>プロパティの値は、セッションをフラッシュしない限り更新されません。
+</blockquote><p class="paragraph"/><div class="hidden-block">h4. Pessimistic Locking</div>
+<h4>悲観的ロック</h4><p class="paragraph"/><div class="hidden-block">Pessimistic locking is equivalent to doing a SQL "SELECT * FOR UPDATE" statement and locking a row in the database. This has the implication that other read operations will be blocking until the lock is released.</div>
+悲観的ロックの利用は、"SELECT * FOR UPDATE" というSQL文を発行して、データベースの行をロックすることに相当します。
+そのため、行ロックがリリースされるまでは、他の読み取り操作もブロックされてしまいます。<p class="paragraph"/><div class="hidden-block">In Grails pessimistic locking is performed on an existing instance with the <a href="../ref/Domain Classes/lock.html" class="domainClasses">lock</a> method:</div>
+Grailsでは、ドメインクラスのインスタンスに対して<a href="../ref/Domain Classes/lock.html" class="domainClasses">lock</a>メソッドを発行することで、悲観的ロックを使うことができます:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)
 airport.lock() // lock <span class="java&#45;keyword">for</span> update
 airport.name = <span class="java&#45;quote">"Heathrow"</span>
-airport.save()</pre></div><p class="paragraph"/>Grails will automatically deal with releasing the lock for you once the transaction has been committed. However, in the above case what we are doing is "upgrading" from a regular SELECT to a SELECT..FOR UPDATE and another thread could still have updated the record in between the call to <code>get()</code> and the call to <code>lock()</code>.<p class="paragraph"/>To get around this problem you can use the static <a href="../ref/Domain Classes/lock.html" class="domainClasses">lock</a> method that takes an id just like <a href="../ref/Domain Classes/get.html" class="domainClasses">get</a>:<p class="paragraph"/><div class="code"><pre>def airport = Airport.lock(10) // lock <span class="java&#45;keyword">for</span> update
+airport.save()</pre></div><p class="paragraph"/><div class="hidden-block">Grails will automatically deal with releasing the lock for you once the transaction has been committed. However, in the above case what we are doing is "upgrading" from a regular SELECT to a SELECT..FOR UPDATE and another thread could still have updated the record in between the call to <code>get()</code> and the call to <code>lock()</code>.</div>
+このようにして獲得したロックは、トランザクションがコミットされたタイミングで、Grailsによって自動的にリリースされます。
+ただし、この方法は、通常のSELECT文で一旦レコードを取得した後に、SELECT..FOR UPDATE文で取得し直すことになってしまうことに注意してください。
+そのため、<code>get()</code>メソッドを呼び出してから<code>lock()</code>メソッドを呼び出す間に、他のスレッドがレコードを更新する可能性が残ってしまいます。<p class="paragraph"/><div class="hidden-block">To get around this problem you can use the static <a href="../ref/Domain Classes/lock.html" class="domainClasses">lock</a> method that takes an id just like <a href="../ref/Domain Classes/get.html" class="domainClasses">get</a>:</div>
+この問題を回避するために、<a href="../ref/Domain Classes/get.html" class="domainClasses">get</a>メソッドと同様にidを引数に取るstaticな<a href="../ref/Domain Classes/lock.html" class="domainClasses">lock</a>メソッドが使えます:<p class="paragraph"/><div class="code"><pre>def airport = Airport.lock(10) // lock <span class="java&#45;keyword">for</span> update
 airport.name = <span class="java&#45;quote">"Heathrow"</span>
-airport.save()</pre></div><p class="paragraph"/>In this case only SELECT..FOR UPDATE is issued.<p class="paragraph"/>As well as the <a href="../ref/Domain Classes/lock.html" class="domainClasses">lock</a> method you can also obtain a pessimistic locking using queries. For example using a dynamic finder:<p class="paragraph"/><div class="code"><pre>def airport = Airport.findByName(<span class="java&#45;quote">"Heathrow"</span>, &#91;lock: <span class="java&#45;keyword">true</span>&#93;)</pre></div><p class="paragraph"/>Or using criteria:<p class="paragraph"/><div class="code"><pre>def airport = Airport.createCriteria().get &#123;
+airport.save()</pre></div><p class="paragraph"/><div class="hidden-block">In this case only SELECT..FOR UPDATE is issued.</div>
+この方法を使えば、SELECT..FOR UPDATE文だけが発行されるので、最初の方法のような問題は発生しません。<p class="paragraph"/><div class="hidden-block">As well as the <a href="../ref/Domain Classes/lock.html" class="domainClasses">lock</a> method you can also obtain a pessimistic locking using queries. For example using a dynamic finder:</div>
+<a href="../ref/Domain Classes/lock.html" class="domainClasses">lock</a>メソッドを使う方法以外に、クエリで悲観的ロックを使う方法もあります。
+たとえば、ダイナミックファインダを使う場合は:<p class="paragraph"/><div class="code"><pre>def airport = Airport.findByName(<span class="java&#45;quote">"Heathrow"</span>, &#91;lock: <span class="java&#45;keyword">true</span>&#93;)</pre></div><p class="paragraph"/><div class="hidden-block">Or using criteria:</div>
+クライテリアを使う場合は:<p class="paragraph"/><div class="code"><pre>def airport = Airport.createCriteria().get &#123;
     eq('name', 'Heathrow')
     lock <span class="java&#45;keyword">true</span>
-&#125;</pre></div><p class="paragraph"/>
+&#125;</pre></div>
+
 
 <a name="5.3.6 Modification Checking"><!-- Legacy link --></a>
 <h2 id="modificationChecking">6.3.6 変更確認</h2>

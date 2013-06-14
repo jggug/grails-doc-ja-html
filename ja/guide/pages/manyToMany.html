@@ -144,7 +144,7 @@ function addJsClass() {
 <div class="hidden-block">
 Grails supports many-to-many relationships by defining a <code>hasMany</code> on both sides of the relationship and having a <code>belongsTo</code> on the owned side of the relationship:
 </div>
-Grailsでは関連の両側で<code>hasMany</code>を定義し、関連の所有される側で<code>belongsTo</code>を持つことで、多対多の関連をサポートします。<p class="paragraph"/><div class="code"><pre>class Book &#123;
+Grailsでは関連の両側で<code>hasMany</code>を定義し、関連の所有される側に<code>belongsTo</code>を付けることで、多対多の関連をサポートします。<p class="paragraph"/><div class="code"><pre>class Book &#123;
     <span class="java&#45;keyword">static</span> belongsTo = Author
     <span class="java&#45;keyword">static</span> hasMany = &#91;authors:Author&#93;
     <span class="java&#45;object">String</span> title
@@ -154,7 +154,7 @@ Grailsでは関連の両側で<code>hasMany</code>を定義し、関連の所有
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
 Grails maps a many-to-many using a join table at the database level. The owning side of the relationship, in this case <code>Author</code>, takes responsibility for persisting the relationship and is the only side that can cascade saves across.
 </div>
-Grailsはデータベースレベルでは関連テーブルを使用して多対多をマップします。
+Grailsはデータベースレベルでは結合テーブルを使用して多対多をマップします。
 関連の所有する側（この例では<code>Author</code>）は、関連の永続化の責務を持ちます。そして、この所有する側からのみ保存のカスケードが可能です。<p class="paragraph"/><div class="hidden-block">
 For example this will work and cascade saves:
 </div>
@@ -164,20 +164,20 @@ For example this will work and cascade saves:
         .save()</pre></div><p class="paragraph"/><div class="hidden-block">
 However this will only save the <code>Book</code> and not the authors!
 </div>
-しかし、これは<code>Book</code>だけが保存されauthorsは保存されません。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">new</span> Book(name:<span class="java&#45;quote">"Groovy in Action"</span>)
+しかし、これは<code>Book</code>だけが保存されauthorsは保存されません！<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">new</span> Book(name:<span class="java&#45;quote">"Groovy in Action"</span>)
         .addToAuthors(<span class="java&#45;keyword">new</span> Author(name:<span class="java&#45;quote">"Dierk Koenig"</span>))
         .addToAuthors(<span class="java&#45;keyword">new</span> Author(name:<span class="java&#45;quote">"Guillaume Laforge"</span>))
         .save()</pre></div><p class="paragraph"/><div class="hidden-block">
 This is the expected behaviour as, just like Hibernate, only one side of a many-to-many can take responsibility for managing the relationship.
 </div>
-これはHibernateと同様に多対多のどちらか片方が関連の責務を持つという振る舞いを想定しているためです。<p class="paragraph"/><div class="hidden-block">
+Hibernateがそうであるように、多対多の片側だけが関連を管理する責務を持てるので、これは期待通りの振る舞いです。<p class="paragraph"/><div class="hidden-block">
 <blockquote class="warning">
 Grails' <a href="../guide/single.html#scaffolding" class="guide">Scaffolding</a> feature <strong class="bold">does not</strong> currently support many-to-many relationship and hence you must write the code to manage the relationship yourself
 </blockquote>
 </div>
 <blockquote class="warning">
-Grailsの<a href="../guide/single.html#scaffolding" class="guide">Scaffolding</a>は現在、多対多の関連をサポートしていません。
-そのため、関連を管理するためには自身でコードを記述しなければなりません。
+Grailsの<a href="../guide/single.html#scaffolding" class="guide">スカッフォルド</a>は現在、多対多の関連をサポートしていません。
+そのため、関連を管理するコードは自分で書かなければなりません。
 </blockquote>
 
 

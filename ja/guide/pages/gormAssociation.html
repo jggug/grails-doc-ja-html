@@ -194,28 +194,60 @@ If you have a property called "none" on your domain class, this approach won't w
 
 <a name="5.2.1.2 One-to-many"><!-- Legacy link --></a>
 <h2 id="oneToMany">6.2.1.2 1対多 (One-to-many)</h2>
-A one-to-many relationship is when one class, example <code>Author</code>, has many instances of another class, example <code>Book</code>. With Grails you define such a relationship with the <code>hasMany</code> setting:<p class="paragraph"/><div class="code"><pre>class Author &#123;
+<div class="hidden-block">
+A one-to-many relationship is when one class, example <code>Author</code>, has many instances of another class, example <code>Book</code>. With Grails you define such a relationship with the <code>hasMany</code> setting:
+</div>
+1対多の関連は、<code>Author</code>のような1つのクラス、<code>Book</code>のような他クラスのインスタンスを複数保持します。
+Grailsでは<code>hasMany</code>の設定でこの関連を定義します。<p class="paragraph"/><div class="code"><pre>class Author &#123;
     <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;<p class="paragraph"/>    <span class="java&#45;object">String</span> name
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Book &#123;
     <span class="java&#45;object">String</span> title
-&#125;</pre></div><p class="paragraph"/>In this case we have a unidirectional one-to-many. Grails will, by default, map this kind of relationship with a join table.<p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In this case we have a unidirectional one-to-many. Grails will, by default, map this kind of relationship with a join table.
+</div>
+この場合は単方向の1対多を持っています。
+Grailsはデフォルトでは結合テーブルによって、この種類の関連をマップします。<p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 The <a href="../guide/single.html#ormdsl" class="guide">ORM DSL</a> allows mapping unidirectional relationships using a foreign key association instead
-</blockquote><p class="paragraph"/>Grails will automatically inject a property of type <code>java.util.Set</code> into the domain class based on the <code>hasMany</code> setting. This can be used to iterate over the collection:<p class="paragraph"/><div class="code"><pre>def a = Author.get(1)<p class="paragraph"/><span class="java&#45;keyword">for</span> (book in a.books) &#123;
+</blockquote>
+</div>
+<blockquote class="note">
+<a href="../guide/single.html#ormdsl" class="guide">ORM DSL</a>では代わりに外部キーの参照を使用した単方向関連の設定もできます。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+Grails will automatically inject a property of type <code>java.util.Set</code> into the domain class based on the <code>hasMany</code> setting. This can be used to iterate over the collection:
+</div>
+Grailsは<code>hasMany</code>を持つドメインクラスに<code>java.util.Set</code>型のプロパティを自動的に注入します。
+このコレクションはイテレートして使えます。<p class="paragraph"/><div class="code"><pre>def a = Author.get(1)<p class="paragraph"/><span class="java&#45;keyword">for</span> (book in a.books) &#123;
     println book.title
-&#125;</pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 The default fetch strategy used by Grails is "lazy", which means that the collection will be lazily initialized on first access. This can lead to the <a href="http://www.javalobby.org/java/forums/t20533.html" target="blank">n+1 problem</a> if you are not careful.<p class="paragraph"/>If you need "eager" fetching you can use the <a href="../guide/single.html#ormdsl" class="guide">ORM DSL</a> or specify eager fetching as part of a <a href="../guide/single.html#querying" class="guide">query</a>
-</blockquote><p class="paragraph"/>The default cascading behaviour is to cascade saves and updates, but not deletes unless a <code>belongsTo</code> is also specified:<p class="paragraph"/><div class="code"><pre>class Author &#123;
+</blockquote>
+</div>
+<blockquote class="note">
+Grailsによるデフォルトのフェッチ戦略は"lazy"です。これは最初のアクセスによってコレクションが遅延初期化されること意味します。
+この遅延初期化は、注意を怠ると<a href="http://www.javalobby.org/java/forums/t20533.html" target="blank">N+1問題</a>を引き起こします。<p class="paragraph"/>もし"eager"フェッチが必要な場合は、<a href="../guide/single.html#ormdsl" class="guide">ORM DSL</a>を使うか、または<a href="../guide/single.html#querying" class="guide">クエリ</a>中で"eager"フェッチを指定してください。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+The default cascading behaviour is to cascade saves and updates, but not deletes unless a <code>belongsTo</code> is also specified:
+</div>
+デフォルトでは保存と更新がカスケードされます。しかし、削除は<code>belongsTo</code>が指定されるまでカスケードされません。<p class="paragraph"/><div class="code"><pre>class Author &#123;
     <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;<p class="paragraph"/>    <span class="java&#45;object">String</span> name
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Book &#123;
     <span class="java&#45;keyword">static</span> belongsTo = &#91;author: Author&#93;
     <span class="java&#45;object">String</span> title
-&#125;</pre></div><p class="paragraph"/>If you have two properties of the same type on the many side of a one-to-many you have to use <code>mappedBy</code> to specify which the collection is mapped:<p class="paragraph"/><div class="code"><pre>class Airport &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+If you have two properties of the same type on the many side of a one-to-many you have to use <code>mappedBy</code> to specify which the collection is mapped:
+</div>
+もし、1対多の「多」側で同じ型のプロパティが2つある場合は、マップされるコレクションを指定するために<code>mappedBy</code>を使ってください。<p class="paragraph"/><div class="code"><pre>class Airport &#123;
     <span class="java&#45;keyword">static</span> hasMany = &#91;flights: Flight&#93;
     <span class="java&#45;keyword">static</span> mappedBy = &#91;flights: <span class="java&#45;quote">"departureAirport"</span>&#93;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Flight &#123;
     Airport departureAirport
     Airport destinationAirport
-&#125;</pre></div><p class="paragraph"/>This is also true if you have multiple collections that map to different properties on the many side:<p class="paragraph"/><div class="code"><pre>class Airport &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This is also true if you have multiple collections that map to different properties on the many side:
+</div>
+これは、「多」側で異なるプロパティへマップされた複数のコレクションがある場合でも同じです。<p class="paragraph"/><div class="code"><pre>class Airport &#123;
     <span class="java&#45;keyword">static</span> hasMany = &#91;outboundFlights: Flight, inboundFlights: Flight&#93;
     <span class="java&#45;keyword">static</span> mappedBy = &#91;outboundFlights: <span class="java&#45;quote">"departureAirport"</span>,
                        inboundFlights: <span class="java&#45;quote">"destinationAirport"</span>&#93;
@@ -229,7 +261,7 @@ The default fetch strategy used by Grails is "lazy", which means that the collec
 <div class="hidden-block">
 Grails supports many-to-many relationships by defining a <code>hasMany</code> on both sides of the relationship and having a <code>belongsTo</code> on the owned side of the relationship:
 </div>
-Grailsでは関連の両側で<code>hasMany</code>を定義し、関連の所有される側で<code>belongsTo</code>を持つことで、多対多の関連をサポートします。<p class="paragraph"/><div class="code"><pre>class Book &#123;
+Grailsでは関連の両側で<code>hasMany</code>を定義し、関連の所有される側に<code>belongsTo</code>を付けることで、多対多の関連をサポートします。<p class="paragraph"/><div class="code"><pre>class Book &#123;
     <span class="java&#45;keyword">static</span> belongsTo = Author
     <span class="java&#45;keyword">static</span> hasMany = &#91;authors:Author&#93;
     <span class="java&#45;object">String</span> title
@@ -239,7 +271,7 @@ Grailsでは関連の両側で<code>hasMany</code>を定義し、関連の所有
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
 Grails maps a many-to-many using a join table at the database level. The owning side of the relationship, in this case <code>Author</code>, takes responsibility for persisting the relationship and is the only side that can cascade saves across.
 </div>
-Grailsはデータベースレベルでは関連テーブルを使用して多対多をマップします。
+Grailsはデータベースレベルでは結合テーブルを使用して多対多をマップします。
 関連の所有する側（この例では<code>Author</code>）は、関連の永続化の責務を持ちます。そして、この所有する側からのみ保存のカスケードが可能です。<p class="paragraph"/><div class="hidden-block">
 For example this will work and cascade saves:
 </div>
@@ -249,20 +281,20 @@ For example this will work and cascade saves:
         .save()</pre></div><p class="paragraph"/><div class="hidden-block">
 However this will only save the <code>Book</code> and not the authors!
 </div>
-しかし、これは<code>Book</code>だけが保存されauthorsは保存されません。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">new</span> Book(name:<span class="java&#45;quote">"Groovy in Action"</span>)
+しかし、これは<code>Book</code>だけが保存されauthorsは保存されません！<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">new</span> Book(name:<span class="java&#45;quote">"Groovy in Action"</span>)
         .addToAuthors(<span class="java&#45;keyword">new</span> Author(name:<span class="java&#45;quote">"Dierk Koenig"</span>))
         .addToAuthors(<span class="java&#45;keyword">new</span> Author(name:<span class="java&#45;quote">"Guillaume Laforge"</span>))
         .save()</pre></div><p class="paragraph"/><div class="hidden-block">
 This is the expected behaviour as, just like Hibernate, only one side of a many-to-many can take responsibility for managing the relationship.
 </div>
-これはHibernateと同様に多対多のどちらか片方が関連の責務を持つという振る舞いを想定しているためです。<p class="paragraph"/><div class="hidden-block">
+Hibernateがそうであるように、多対多の片側だけが関連を管理する責務を持てるので、これは期待通りの振る舞いです。<p class="paragraph"/><div class="hidden-block">
 <blockquote class="warning">
 Grails' <a href="../guide/single.html#scaffolding" class="guide">Scaffolding</a> feature <strong class="bold">does not</strong> currently support many-to-many relationship and hence you must write the code to manage the relationship yourself
 </blockquote>
 </div>
 <blockquote class="warning">
-Grailsの<a href="../guide/single.html#scaffolding" class="guide">Scaffolding</a>は現在、多対多の関連をサポートしていません。
-そのため、関連を管理するためには自身でコードを記述しなければなりません。
+Grailsの<a href="../guide/single.html#scaffolding" class="guide">スカッフォルド</a>は現在、多対多の関連をサポートしていません。
+そのため、関連を管理するコードは自分で書かなければなりません。
 </blockquote>
 
 

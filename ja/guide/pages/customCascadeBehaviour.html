@@ -141,7 +141,10 @@ function addJsClass() {
                 
 <a name="5.5.2.9 Custom Cascade Behaviour"><!-- Legacy link --></a>
 <h2 id="customCascadeBehaviour">6.5.2.9 カスケードの振る舞いを変える</h2>
-As described in the section on <a href="../guide/single.html#cascades" class="guide">cascading updates</a>, the primary mechanism to control the way updates and deletes cascade from one association to another is the static <a href="../ref/Domain Classes/belongsTo.html" class="domainClasses">belongsTo</a> property.<p class="paragraph"/>However, the ORM DSL gives you complete access to Hibernate's <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/objectstate.html#objectstate-transitive" target="blank">transitive persistence</a> capabilities using the <code>cascade</code> attribute.<p class="paragraph"/>Valid settings for the cascade attribute include:
+<div class="hidden-block">As described in the section on <a href="../guide/single.html#cascades" class="guide">cascading updates</a>, the primary mechanism to control the way updates and deletes cascade from one association to another is the static <a href="../ref/Domain Classes/belongsTo.html" class="domainClasses">belongsTo</a> property.</div>
+<a href="../guide/single.html#cascades" class="guide">カスケード更新</a>のセクションで記載した通り、更新と削除が1つの関連からもう一方へとカスケードする方法を制御するためには、staticの<a href="../ref/Domain Classes/belongsTo.html" class="domainClasses">belongsTo</a>プロパティを使います。<p class="paragraph"/><div class="hidden-block">However, the ORM DSL gives you complete access to Hibernate's <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/objectstate.html#objectstate-transitive" target="blank">transitive persistence</a> capabilities using the <code>cascade</code> attribute.</div>
+しかし、ORM DSLでは、Hibernateの<a href="http://docs.jboss.org/hibernate/core/3.6/reference/ja-JP/html/objectstate.html#objectstate-transitive" target="blank">連鎖的な永続化</a>機能への<code>cascade</code>属性を使った完全なアクセスを提供しています。<p class="paragraph"/><div class="hidden-block">Valid settings for the cascade attribute include:</div>
+<code>cascade</code>属性のための有効な設定値は以下の通りです:<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li><code>merge</code> - merges the state of a detached association</li>
 <li><code>save-update</code> - cascades only saves and updates to an association</li>
@@ -151,9 +154,23 @@ As described in the section on <a href="../guide/single.html#cascades" class="gu
 <li><code>evict</code> - cascades evictions (equivalent to <code>discard()</code> in GORM) to associations if set</li>
 <li><code>all</code> - cascade  <em class="italic">all</em>  operations to associations</li>
 <li><code>all-delete-orphan</code> - Applies only to one-to-many associations and indicates that when a child is removed from an association then it should be automatically deleted. Children are also deleted when the parent is.</li>
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>merge</code> - デタッチされた関連の状態をマージする</li>
+<li><code>save-update</code> - saveとupdateのみを関連先にカスケードする</li>
+<li><code>delete</code> - deleteのみを関連先にカスケードする</li>
+<li><code>lock</code> - 悲観的ロックを関連先にカスケードしたいときに役立つ</li>
+<li><code>refresh</code> - refreshを関連先にカスケードする</li>
+<li><code>evict</code> - これをセットすると、evict(GORMでの<code>discard()</code>に相当)を関連先にカスケードする</li>
+<li><code>all</code> -  <em class="italic">すべての</em>  操作を関連先にカスケードする</li>
+<li><code>all-delete-orphan</code> - 1対多関連にのみ適用する。子要素を関連から取り除いたときに自動的にその子要素を削除することを意味する。親が削除されたときは、子要素すべてが削除される。</li>
 </ul><p class="paragraph"/><blockquote class="note">
+<div class="hidden-block">
 It is advisable to read the section in the Hibernate documentation on <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/objectstate.html#objectstate-transitive" target="blank">transitive persistence</a> to obtain a better understanding of the different cascade styles and recommendations for their usage
-</blockquote><p class="paragraph"/>To specify the cascade attribute simply define one or more (comma-separated) of the aforementioned settings as its value:<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;addresses: Address&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
+</div>
+様々なカスケード方式と推奨される利用方法についてより良く理解するために、Hibernateのドキュメントの<a href="http://docs.jboss.org/hibernate/core/3.6/reference/ja-JP/html/objectstate.html#objectstate-transitive" target="blank">連鎖的な永続化</a>のセクションを読むことをお勧めします。
+</blockquote><p class="paragraph"/><div class="hidden-block">To specify the cascade attribute simply define one or more (comma-separated) of the aforementioned settings as its value:</div>
+<code>cascade</code>属性を指定するには、単純に1つまたは(カンマで区切られた)複数の前述の設定値を定義します。<p class="paragraph"/><div class="code"><pre>class Person &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> firstName<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;addresses: Address&#93;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         addresses cascade: <span class="java&#45;quote">"all&#45;delete&#45;orphan"</span>
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class Address &#123;
