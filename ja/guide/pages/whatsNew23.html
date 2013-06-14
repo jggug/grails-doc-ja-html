@@ -147,19 +147,19 @@ Aether依存管理を使用するとGrailsではMavenビルドツールと同じ
 <h4>データバインダー</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 includes a new data binding mechanism which is more flexible and easier to maintain than the data binder used in previous versions.  The new data binder includes numerous enhancements including:</div>
 Grails 2.3では、依存のバージョンよりもフレキシブルで保守性の高く簡単な新データバインダーを実装しています。<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
-<li>Custom date formats on a per field basis using api:org.grails.databinding.BindingFormat</li>
-<li>User defined data converters using api:org.grails.databinding.converters.ValueConverter</li>
-<li>User defined formatted data converters using api:org.grails.databinding.BindingFormat and api:org.grails.databinding.converters.FormattedValueConverter</li>
-<li>Custom binding on a per class basis using api:org.grails.databinding.BindUsing</li>
-<li>Custom binding on a per field basis using api:org.grails.databinding.BindUsing</li>
+<li>Custom date formats on a per field basis using <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingFormat.html" class="api">BindingFormat</a></li>
+<li>User defined data converters using <a href="http://grails.org/doc/latest/api/org/grails/databinding/converters/ValueConverter.html" class="api">ValueConverter</a></li>
+<li>User defined formatted data converters using <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingFormat.html" class="api">BindingFormat</a> and <a href="http://grails.org/doc/latest/api/org/grails/databinding/converters/FormattedValueConverter.html" class="api">FormattedValueConverter</a></li>
+<li>Custom binding on a per class basis using <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindUsing.html" class="api">BindUsing</a></li>
+<li>Custom binding on a per field basis using <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindUsing.html" class="api">BindUsing</a></li>
 <li>By default all blank and empty Strings will be converted to null during data binding (configurable)</li>
 </ul><p class="paragraph"/></div>
 <ul class="star">
-<li>フィールドごとのカスタムデータフォーマット - api:org.grails.databinding.BindingFormat</li>
-<li>ユーザ定義可能なデータコンバーター - api:org.grails.databinding.converters.ValueConverter</li>
-<li>ユーザ定義フォーマットデータコンバーター - api:org.grails.databinding.BindingFormat  api:org.grails.databinding.converters.FormattedValueConverter</li>
-<li>クラスごとのカスタムバインディング - api:org.grails.databinding.BindUsing</li>
-<li>フィールドごとのカスタムバインディング - api:org.grails.databinding.BindUsing</li>
+<li>フィールドごとのカスタムデータフォーマット - <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingFormat.html" class="api">BindingFormat</a></li>
+<li>ユーザ定義可能なデータコンバーター - <a href="http://grails.org/doc/latest/api/org/grails/databinding/converters/ValueConverter.html" class="api">ValueConverter</a></li>
+<li>ユーザ定義フォーマットデータコンバーター - <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingFormat.html" class="api">BindingFormat</a>  <a href="http://grails.org/doc/latest/api/org/grails/databinding/converters/FormattedValueConverter.html" class="api">FormattedValueConverter</a></li>
+<li>クラスごとのカスタムバインディング - <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindUsing.html" class="api">BindUsing</a></li>
+<li>フィールドごとのカスタムバインディング - <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindUsing.html" class="api">BindUsing</a></li>
 <li>デフォルトで全ての空文字列とブランクはデータバインディングでnullに変換されます。(設定可能)</li>
 </ul><p class="paragraph"/><div class="hidden-block">See the <a href="../guide/single.html#dataBinding" class="guide">Data Binding</a> section for details.</div>
 詳細は <a href="../guide/single.html#dataBinding" class="guide">データバインディング</a> のセクションを参照してください。<p class="paragraph"/><div class="hidden-block">The legacy data binder may be used by assigning <code>true</code> to the <code>grails.databinding.useSpringBinder</code> property in <code>grails-app/conf/Config.groovy</code>.  Note that the legacy binder does not support any of the new features provided by the new data binder.</div>
