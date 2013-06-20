@@ -141,9 +141,14 @@ function addJsClass() {
                 
 <a name="3.3.4 Transaction-aware DataSource Proxy"><!-- Legacy link --></a>
 <h2 id="transactionAwareDataSourceProxy">4.3.4 Transaction-awareデータソースプロキシ</h2>
-The actual <code>dataSource</code> bean is wrapped in a transaction-aware proxy so you will be given the connection that's being used by the current transaction or Hibernate <code>Session</code> if one is active.<p class="paragraph"/>If this were not the case, then retrieving a connection from the <code>dataSource</code> would be a new connection, and you wouldn't be able to see changes that haven't been committed yet (assuming you have a sensible transaction isolation setting, e.g. <code>READ_COMMITTED</code> or better).<p class="paragraph"/>The "real" unproxied <code>dataSource</code> is still available to you if you need access to it; its bean name is <code>dataSourceUnproxied</code>.<p class="paragraph"/>You can access this bean like any other Spring bean, i.e. using dependency injection:<p class="paragraph"/><div class="code"><pre>class MyService &#123;<p class="paragraph"/>   def dataSourceUnproxied
+<div class="hidden-block">The actual <code>dataSource</code> bean is wrapped in a transaction-aware proxy so you will be given the connection that's being used by the current transaction or Hibernate <code>Session</code> if one is active.</div>
+実際の<code>dataSource</code>ビーンはトランザクション対応のプロキシでラップされているため、それらが開始されているのであれば、現在のトランザクションやHibernateセッションで使われているコネクションが得られます。<p class="paragraph"/><div class="hidden-block">If this were not the case, then retrieving a connection from the <code>dataSource</code> would be a new connection, and you wouldn't be able to see changes that haven't been committed yet (assuming you have a sensible transaction isolation setting, e.g. <code>READ_COMMITTED</code> or better).</div>
+もし<code>dataSource</code>としてトランザクション対応のプロキシを使っていなかったとしたら、その<code>dataSource</code>から取得したコネクションは新規コネクションであり、(<code>READ_COMMITTED</code>やより上位の適切なトランザクション分離が設定されていると仮定すれば)まだコミットされていない変更はみえないことでしょう。<p class="paragraph"/>　<div class="hidden-block">The "real" unproxied <code>dataSource</code> is still available to you if you need access to it; its bean name is <code>dataSourceUnproxied</code>.</div>
+もしプロキシではない「素」の<code>dataSource</code>にアクセスする必要があるなら、<code>dataSourceUnproxied</code>というビーン名を使って利用できます。<p class="paragraph"/><div class="hidden-block">You can access this bean like any other Spring bean, i.e. using dependency injection:</div>
+他のSpringビーンのように依存性注入を利用するなどして、ビーンにアクセスできます。<p class="paragraph"/><div class="code"><pre>class MyService &#123;<p class="paragraph"/>   def dataSourceUnproxied
    &#8230;
-&#125;</pre></div><p class="paragraph"/>or by pulling it from the <code>ApplicationContext</code>:<p class="paragraph"/><div class="code"><pre>def dataSourceUnproxied = ctx.dataSourceUnproxied</pre></div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">or by pulling it from the <code>ApplicationContext</code>:</div>
+または<code>ApplicationContext</code>から取得できます。<p class="paragraph"/><div class="code"><pre>def dataSourceUnproxied = ctx.dataSourceUnproxied</pre></div>
 
 
 

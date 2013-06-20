@@ -141,7 +141,9 @@ function addJsClass() {
                 
 <a name="3.3.1 DataSources and Environments"><!-- Legacy link --></a>
 <h2 id="dataSourcesAndEnvironments">4.3.1 データソースと環境</h2>
-The previous example configuration assumes you want the same config for all environments: production, test, development etc.<p class="paragraph"/>Grails' DataSource definition is "environment aware", however, so you can do:<p class="paragraph"/><div class="code"><pre>dataSource &#123;
+<div class="hidden-block">The previous example configuration assumes you want the same config for all environments: production, test, development etc.</div>
+これまでの例ではすべての環境（production, test, developmentなど）で同じ設定を行うことを想定していました。<p class="paragraph"/><div class="hidden-block">Grails' DataSource definition is "environment aware", however, so you can do:</div>
+Grailsのデータソース定義では環境ごとの設定が可能になっています。<p class="paragraph"/><div class="code"><pre>dataSource &#123;
     pooled = <span class="java&#45;keyword">true</span>
     driverClassName = <span class="java&#45;quote">"com.mysql.jdbc.Driver"</span>
     dialect = org.hibernate.dialect.MySQL5InnoDBDialect

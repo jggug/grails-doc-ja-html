@@ -141,7 +141,9 @@ function addJsClass() {
                 
 <a name="3.2 Environments"><!-- Legacy link --></a>
 <h2 id="environments">4.2 環境</h2>
-<h4>Per Environment Configuration</h4><p class="paragraph"/>Grails supports the concept of per environment configuration. The <code>Config.groovy</code>, <code>DataSource.groovy</code>, and <code>BootStrap.groovy</code> files in the <code>grails-app/conf</code> directory can use per-environment configuration using the syntax provided by <a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a>. As an example consider the following default <code>DataSource</code> definition provided by Grails:<p class="paragraph"/><div class="code"><pre>dataSource &#123;
+<div class="hidden-block">h4. Per Environment Configuration</div>
+<h4>環境ごとの設定</h4><p class="paragraph"/><div class="hidden-block">Grails supports the concept of per environment configuration. The <code>Config.groovy</code>, <code>DataSource.groovy</code>, and <code>BootStrap.groovy</code> files in the <code>grails-app/conf</code> directory can use per-environment configuration using the syntax provided by <a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a>. As an example consider the following default <code>DataSource</code> definition provided by Grails:</div>
+Grailsは環境ごとで設定値を変更する概念をサポートしています。<code>grails-app/conf</code>ディレクトリ内の<code>Config.groovy</code>, <code>DataSource.groovy</code>,<code>BootStrap.groovy</code>ファイルは<a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a>によって提供される構文を使用して、環境ごとの設定を行うことができます。次の例では、Grailsによって与えられるデフォルトの<code>DataSource</code>定義について記述しています。<p class="paragraph"/><div class="code"><pre>dataSource &#123;
     pooled = <span class="java&#45;keyword">false</span>
     driverClassName = <span class="java&#45;quote">"org.h2.Driver"</span>
     username = <span class="java&#45;quote">"sa"</span>
@@ -166,14 +168,23 @@ environments &#123;
             url = <span class="java&#45;quote">"jdbc:h2:prodDb"</span>
         &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/>Notice how the common configuration is provided at the top level and then an <code>environments</code> block specifies per environment settings for the <code>dbCreate</code> and <code>url</code> properties of the <code>DataSource</code>.<p class="paragraph"/><h4>Packaging and Running for Different Environments</h4><p class="paragraph"/>Grails' <a href="../guide/single.html#commandLine" class="guide">command line</a> has built in capabilities to execute any command within the context of a specific environment. The format is:<p class="paragraph"/><div class="code"><pre>grails &#91;environment&#93; &#91;command name&#93;</pre></div><p class="paragraph"/>In addition, there are 3 preset environments known to Grails: <code>dev</code>, <code>prod</code>, and <code>test</code> for <code>development</code>, <code>production</code> and <code>test</code>. For example to create a WAR for the <code>test</code> environment you wound run:<p class="paragraph"/><div class="code"><pre>grails test war</pre></div><p class="paragraph"/>To target other environments you can pass a <code>grails.env</code> variable to any command:<p class="paragraph"/><div class="code"><pre>grails &#45;Dgrails.env=UAT run&#45;app</pre></div><p class="paragraph"/><h4>Programmatic Environment Detection</h4><p class="paragraph"/>Within your code, such as in a Gant script or a bootstrap class you can detect the environment using the <a href="http://grails.org/doc/latest/api/grails/util/Environment.html" class="api">Environment</a> class:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.util.Environment<p class="paragraph"/>...<p class="paragraph"/><span class="java&#45;keyword">switch</span> (Environment.current) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Notice how the common configuration is provided at the top level and then an <code>environments</code> block specifies per environment settings for the <code>dbCreate</code> and <code>url</code> properties of the <code>DataSource</code>.</div>
+一般的な構成として、共通的な設定はトップレベルで提供され、<code>environments</code>ブロックには<code>DataSource</code>の<code>dbCreate</code>や<code>url</code>プロパティを環境ごとに指定している様子がわかります。<p class="paragraph"/><div class="hidden-block">h4. Packaging and Running for Different Environments</div>
+<h4>異なる環境のパッケージングと実行</h4><p class="paragraph"/><div class="hidden-block">Grails' <a href="../guide/single.html#commandLine" class="guide">command line</a> has built in capabilities to execute any command within the context of a specific environment. The format is:</div>
+Grailsの<a href="../guide/single.html#commandLine" class="guide">コマンドライン</a>は、特定の環境下で、任意のコマンドを実行する機能が組み込まれています。そのフォーマットは以下となります。<p class="paragraph"/><div class="code"><pre>grails &#91;environment&#93; &#91;command name&#93;</pre></div><p class="paragraph"/><div class="hidden-block">In addition, there are 3 preset environments known to Grails: <code>dev</code>, <code>prod</code>, and <code>test</code> for <code>development</code>, <code>production</code> and <code>test</code>. For example to create a WAR for the <code>test</code> environment you wound run:</div>
+加えて、Grailsでは<code>dev</code>,<code>prod</code>,<code>test</code>(<code>development</code>,<code>production</code>,<code>test</code>)といった、あらかじめ定義されている３つの環境が知られています。例えば、<code>test</code>環境でWARを作成するには、以下のように実行します。<p class="paragraph"/><div class="code"><pre>grails test war</pre></div><p class="paragraph"/><div class="hidden-block">To target other environments you can pass a <code>grails.env</code> variable to any command:</div>
+上記の３つ以外の環境をターゲットにするには、任意のコマンドに<code>grails.env</code>変数を渡すことで実現できます。<p class="paragraph"/><div class="code"><pre>grails &#45;Dgrails.env=UAT run&#45;app</pre></div><p class="paragraph"/><div class="hidden-block">h4. Programmatic Environment Detection</div>
+<h4>プログラマチック環境検出</h4><p class="paragraph"/><div class="hidden-block">Within your code, such as in a Gant script or a bootstrap class you can detect the environment using the <a href="http://grails.org/doc/latest/api/grails/util/Environment.html" class="api">Environment</a> class:</div>
+Gantスクリプトやbootstrapクラスのコード内では<a href="http://grails.org/doc/latest/api/grails/util/Environment.html" class="api">Environment</a>クラスを使って、環境を検出できます。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.util.Environment<p class="paragraph"/>...<p class="paragraph"/><span class="java&#45;keyword">switch</span> (Environment.current) &#123;
     <span class="java&#45;keyword">case</span> Environment.DEVELOPMENT:
         configureForDevelopment()
         <span class="java&#45;keyword">break</span>
     <span class="java&#45;keyword">case</span> Environment.PRODUCTION:
         configureForProduction()
         <span class="java&#45;keyword">break</span>
-&#125;</pre></div><p class="paragraph"/><h4>Per Environment Bootstrapping</h4><p class="paragraph"/>It's often desirable to run code when your application starts up on a per-environment basis. To do so you can use the <code>grails-app/conf/BootStrap.groovy</code> file's support for per-environment execution:<p class="paragraph"/><div class="code"><pre>def init = &#123; ServletContext ctx &#45;&#62;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Per Environment Bootstrapping</div>
+<h4>環境ごとのブートストラップ</h4><p class="paragraph"/><div class="hidden-block">It's often desirable to run code when your application starts up on a per-environment basis. To do so you can use the <code>grails-app/conf/BootStrap.groovy</code> file's support for per-environment execution:</div>
+アプリケーションの起動時に、環境に基づいたコードを実行することが望ましい場合があります。そのためには、<code>grails-app/conf/BootStrap.groovy</code>ファイルの環境ごとの実行サポートを使います。<p class="paragraph"/><div class="code"><pre>def init = &#123; ServletContext ctx &#45;&#62;
     environments &#123;
         production &#123;
             ctx.setAttribute(<span class="java&#45;quote">"env"</span>, <span class="java&#45;quote">"prod"</span>)
@@ -183,7 +194,9 @@ environments &#123;
         &#125;
     &#125;
     ctx.setAttribute(<span class="java&#45;quote">"foo"</span>, <span class="java&#45;quote">"bar"</span>)
-&#125;</pre></div><p class="paragraph"/><h4>Generic Per Environment Execution</h4><p class="paragraph"/>The previous <code>BootStrap</code> example uses the <code>grails.util.Environment</code> class internally to execute. You can also use this class yourself to execute your own environment specific logic:<p class="paragraph"/><div class="code"><pre>Environment.executeForCurrentEnvironment &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Generic Per Environment Execution</div>
+ジェネリックな環境の実行<p class="paragraph"/><div class="hidden-block">The previous <code>BootStrap</code> example uses the <code>grails.util.Environment</code> class internally to execute. You can also use this class yourself to execute your own environment specific logic:</div>
+以前の<code>BootStrap</code>の例では、内部的に<code>grails.util.Environment</code>クラスを使用して実行しています。独自の環境ロジックを実行するために、このクラスを以下のように使うこともできます。<p class="paragraph"/><div class="code"><pre>Environment.executeForCurrentEnvironment &#123;
     production &#123;
         // <span class="java&#45;keyword">do</span> something in production
     &#125;

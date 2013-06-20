@@ -141,9 +141,14 @@ function addJsClass() {
                 
 <a name="3.3.2 JNDI DataSources"><!-- Legacy link --></a>
 <h2 id="JNDIDataSources">4.3.2 JNDI データソース</h2>
-<h4>Referring to a JNDI DataSource</h4><p class="paragraph"/>Most Java EE containers supply <code>DataSource</code> instances via <a href="http://www.oracle.com/technetwork/java/jndi/index.html" target="blank">Java Naming and Directory Interface</a> (JNDI). Grails supports the definition of JNDI data sources as follows:<p class="paragraph"/><div class="code"><pre>dataSource &#123;
+<div class="hidden-block">h4. Referring to a JNDI DataSource</div>
+<h4>JNDIデータソースの参照</h4><p class="paragraph"/><div class="hidden-block">Most Java EE containers supply <code>DataSource</code> instances via <a href="http://www.oracle.com/technetwork/java/jndi/index.html" target="blank">Java Naming and Directory Interface</a> (JNDI). Grails supports the definition of JNDI data sources as follows:</div>
+ほとんどのJavaEEコンテナは<a href="http://www.oracle.com/technetwork/java/jndi/index.html" target="blank">Java Naming and Directory Interface</a> (JNDI)を通して、<code>DataSource</code>インスタンスを提供しています。Grailsでは次のようにJNDIデータソースの定義をサポートしています。<p class="paragraph"/><div class="code"><pre>dataSource &#123;
     jndiName = <span class="java&#45;quote">"java:comp/env/myDataSource"</span>
-&#125;</pre></div><p class="paragraph"/>The format on the JNDI name may vary from container to container, but the way you define the <code>DataSource</code> in Grails remains the same.<p class="paragraph"/><h4>Configuring a Development time JNDI resource</h4><p class="paragraph"/>The way in which you configure JNDI data sources at development time is plugin dependent. Using the <a href="http://grails.org/plugin/tomcat" target="blank">Tomcat</a> plugin you can define JNDI resources using the <code>grails.naming.entries</code> setting in <code>grails-app/conf/Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.naming.entries = &#91;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The format on the JNDI name may vary from container to container, but the way you define the <code>DataSource</code> in Grails remains the same.</div>
+JNDI名のフォーマットはコンテナによって変化するかもしれませんが、Grailsで<code>DataSource</code>を定義する方法は変わらず同じです。<p class="paragraph"/><div class="hidden-block">h4. Configuring a Development time JNDI resource</div>
+<h4>開発時におけるJNDIリソースの設定</h4><p class="paragraph"/><div class="hidden-block">The way in which you configure JNDI data sources at development time is plugin dependent. Using the <a href="http://grails.org/plugin/tomcat" target="blank">Tomcat</a> plugin you can define JNDI resources using the <code>grails.naming.entries</code> setting in <code>grails-app/conf/Config.groovy</code>:</div>
+開発時におけるJNDIデータソースの設定方法はプラグインに依存しています。Tomcatプラグインを使う場合は、<code>grails-app/conf/Config.groovy</code>内の<code>grails.naming.entries</code>の設定を使用することで、JNDIリソースを定義します。<p class="paragraph"/><div class="code"><pre>grails.naming.entries = &#91;
     <span class="java&#45;quote">"bean/MyBeanFactory"</span>: &#91;
         auth: <span class="java&#45;quote">"Container"</span>,
         type: <span class="java&#45;quote">"com.mycompany.MyBean"</span>,

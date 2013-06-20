@@ -141,19 +141,24 @@ function addJsClass() {
                 
 <a name="3.3.3 Automatic Database Migration"><!-- Legacy link --></a>
 <h2 id="automaticDatabaseMigration">4.3.3 自動データベースマイグレーション</h2>
-The <code>dbCreate</code> property of the <code>DataSource</code> definition is important as it dictates what Grails should do at runtime with regards to automatically generating the database tables from <a href="../guide/single.html#GORM" class="guide">GORM</a> classes. The options are described in the <a href="../guide/single.html#dataSource" class="guide">DataSource</a> section:
+<div class="hidden-block">The <code>dbCreate</code> property of the <code>DataSource</code> definition is important as it dictates what Grails should do at runtime with regards to automatically generating the database tables from <a href="../guide/single.html#GORM" class="guide">GORM</a> classes. The options are described in the <a href="../guide/single.html#dataSource" class="guide">DataSource</a> section:</div>
+<code>DataSource</code>定義の<code>dbCreate</code>プロパティは、Grailsが実行時に<a href="../guide/single.html#GORM" class="guide">GORM</a>のクラスから自動的にデータベーステーブルを生成すべきかを指示する重要なプロパティです。以下のオプションは<a href="../guide/single.html#dataSource" class="guide">DataSource</a>のセクションで説明しています。
 <ul class="star">
 <li><code>create</code></li>
 <li><code>create-drop</code></li>
 <li><code>update</code></li>
 <li><code>validate</code></li>
 <li>no value</li>
-</ul><p class="paragraph"/>In <a href="../guide/single.html#environments" class="guide">development</a> mode <code>dbCreate</code> is by default set to "create-drop", but at some point in development (and certainly once you go to production) you'll need to stop dropping and re-creating the database every time you start up your server.<p class="paragraph"/>It's tempting to switch to <code>update</code> so you retain existing data and only update the schema when your code changes, but Hibernate's update support is very conservative. It won't make any changes that could result in data loss, and doesn't detect renamed columns or tables, so you'll be left with the old one and will also have the new one.<p class="paragraph"/>Grails supports migrations via the <a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> plugin which can be installed by declaring the plugin in <code>grails-app/conf/BuildConfig.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+</ul><p class="paragraph"/><div class="hidden-block">In <a href="../guide/single.html#environments" class="guide">development</a> mode <code>dbCreate</code> is by default set to "create-drop", but at some point in development (and certainly once you go to production) you'll need to stop dropping and re-creating the database every time you start up your server.</div>
+<a href="../guide/single.html#environments" class="guide">development</a>モードでは、<code>dbCreate</code>はデフォルト値が"create-drop"で設定されていますが、開発中（もしくは本番以前）では、サーバの起動ごとにデータベースが削除、再作成されることが不都合な場合があります。<p class="paragraph"/><div class="hidden-block">It's tempting to switch to <code>update</code> so you retain existing data and only update the schema when your code changes, but Hibernate's update support is very conservative. It won't make any changes that could result in data loss, and doesn't detect renamed columns or tables, so you'll be left with the old one and will also have the new one.</div>
+コードを変更したときに、既存データを維持したままスキーマだけを更新するため<code>update</code>に切り替えたくなりますが、Hibernateの更新サポートはあまりパッとしません。データの損失につながる可能性のある変更をすることはありませんが、テーブルやカラム名の変更を見つけることができないので、古いテーブルやカラムは残されて新しいものも持つことになります。<p class="paragraph"/><div class="hidden-block">Grails supports migrations via the <a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> plugin which can be installed by declaring the plugin in <code>grails-app/conf/BuildConfig.groovy</code>:</div>
+Grailsは<a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> を介してマイグレーションをサポートしています。それは<code>grails-app/conf/BuildConfig.groovy</code>に宣言することでプラグインとしてインストールすることができます。:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     &#8230;
     plugins &#123;
-        runtime <span class="java&#45;quote<a href="database&#45;migration:1.3.1"</span>">></a>
+        runtime <span class="java&#45;quote">"&#58;database&#45;migration:1.3.1"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>The plugin uses <a href="http://www.liquibase.org/" target="blank">Liquibase</a> and and provides access to all of its functionality, and also has support for GORM (for example generating a change set by comparing your domain classes to a database).
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The plugin uses <a href="http://www.liquibase.org/" target="blank">Liquibase</a> and and provides access to all of its functionality, and also has support for GORM (for example generating a change set by comparing your domain classes to a database).</div>
+このプラグインは<a href="http://www.liquibase.org/" target="blank">Liquibase</a> を使用しており、Liquibaseすべての機能へのアクセスを提供しています。また、GORMのサポートも提供しています（例えばドメインクラスとデータベースを比較しチェンジセットを生成します）。
 
 
 

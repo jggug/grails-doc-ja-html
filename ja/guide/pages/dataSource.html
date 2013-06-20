@@ -164,7 +164,12 @@ function addJsClass() {
                 
 <a name="3.3 The DataSource"><!-- Legacy link --></a>
 <h2 id="dataSource">4.3 データソース</h2>
-Since Grails is built on Java technology setting up a data source requires some knowledge of JDBC (the technology that doesn't stand for Java Database Connectivity).<p class="paragraph"/>If you use a database other than H2 you need a JDBC driver. For example for MySQL you would need <a href="http://www.mysql.com/downloads/connector/j/" target="blank">Connector/J</a><p class="paragraph"/>Drivers typically come in the form of a JAR archive. It's best to use Ivy to resolve the jar if it's available in a Maven repository, for example you could add a dependency for the MySQL driver like this:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+<div class="hidden-block">Since Grails is built on Java technology setting up a data source requires some knowledge of JDBC (the technology that doesn't stand for Java Database Connectivity).</div>
+Grailsはデータソースの設定がJava技術で構築されているため、ある程度JDBC（Java DataBase Connectivityの略ではない）の知識が必要になります。<p class="paragraph"/><div class="hidden-block">
+If you use a database other than H2 you need a JDBC driver. For example for MySQL you would need <a href="http://www.mysql.com/downloads/connector/j/" target="blank">Connector/J</a>
+</div>
+もしH2以外のデータベースを使うなら、JDBCドライバが必要になります。例えばMySQLであれば<a href="http://www.mysql.com/downloads/connector/j/" target="blank">Connector/J</a> が必要になります。<p class="paragraph"/><div class="hidden-block">Drivers typically come in the form of a JAR archive. It's best to use Ivy to resolve the jar if it's available in a Maven repository, for example you could add a dependency for the MySQL driver like this:</div>
+ドライバは、一般的にはJAR形式で提供されています。もしIvyが使える場合は、Mavenリポジトリからjarを取得するのがよいでしょう。例えば、このようにMySQLの依存関係を加えることができます。<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     inherits(<span class="java&#45;quote">"global"</span>)
     log <span class="java&#45;quote">"warn"</span>
     repositories &#123;
@@ -176,9 +181,11 @@ Since Grails is built on Java technology setting up a data source requires some 
     dependencies &#123;
         runtime 'mysql:mysql&#45;connector&#45;java:5.1.16'
     &#125;
-&#125;</pre></div><p class="paragraph"/>Note that the built-in <code>mavenCentral()</code> repository is included here since that's a reliable location for this library.<p class="paragraph"/>If you can't use Ivy then just put the JAR in your project's <code>lib</code> directory.<p class="paragraph"/>Once you have the JAR resolved you need to get familiar Grails' DataSource descriptor file located at <code>grails-app/conf/DataSource.groovy</code>. This file contains the dataSource definition which includes the following settings:
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Note that the built-in <code>mavenCentral()</code> repository is included here since that's a reliable location for this library.</div>
+<code>mavenCentral()</code>リポジトリが記述されているのは、このライブラリの取得元として信頼できる場所だからです。<p class="paragraph"/><div class="hidden-block">If you can't use Ivy then just put the JAR in your project's <code>lib</code> directory.</div>
+Ivyが使えない場合は、プロジェクトの<code>lib</code>ディレクトリにJARを置いてください。<p class="paragraph"/><div class="hidden-block">Once you have the JAR resolved you need to get familiar Grails' DataSource descriptor file located at <code>grails-app/conf/DataSource.groovy</code>. This file contains the dataSource definition which includes the following settings:</div>
+JARが解決できたら、<code>grails-app/conf/DataSource.groovy</code>ファイルで使用する、Grailsにおけるデータソースの定義方法を覚える必要があります。このファイルはデータソースの定義として、以下の項目を含んでいます。<p class="paragraph"/><div class="hidden-block">* <code>driverClassName</code> - The class name of the JDBC driver
 <ul class="star">
-<li><code>driverClassName</code> - The class name of the JDBC driver</li>
 <li><code>username</code> - The username used to establish a JDBC connection</li>
 <li><code>password</code> - The password used to establish a JDBC connection</li>
 <li><code>url</code> - The JDBC URL of the database</li>
@@ -188,8 +195,20 @@ Since Grails is built on Java technology setting up a data source requires some 
 <li><code>formatSql</code> - Format logged SQL</li>
 <li><code>dialect</code> - A String or Class that represents the Hibernate dialect used to communicate with the database. See the <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/dialect/package-summary.html" target="blank">org.hibernate.dialect</a> package for available dialects.</li>
 <li><code>readOnly</code> - If <code>true</code> makes the DataSource read-only, which results in the connection pool calling <code>setReadOnly(true)</code> on each <code>Connection</code></li>
-<li><code>properties</code> - Extra properties to set on the DataSource bean. See the <a href="http://commons.apache.org/dbcp/api-1.2.2/org/apache/commons/dbcp/BasicDataSource.html" target="blank">Commons DBCP BasicDataSource</a> documentation.</li>
-</ul><p class="paragraph"/>A typical configuration for MySQL may be something like:<p class="paragraph"/><div class="code"><pre>dataSource &#123;
+<li><code>properties</code> - Extra properties to set on the DataSource bean. See the <a href="http://commons.apache.org/dbcp/api-1.2.2/org/apache/commons/dbcp/BasicDataSource.html" target="blank">Commons DBCP BasicDataSource</a> documentation.</div></li>
+<li><code>driverClassName</code> - JDBCドライバのクラス名</li>
+<li><code>username</code> - JDBCコネクションの接続に使用するユーザ名</li>
+<li><code>password</code> - JDBCコネクションの接続に使用するパスワード</li>
+<li><code>url</code> - データベースのJDBC URL</li>
+<li><code>dbCreate</code> -  ドメインモデルからデータベースを自動で生成するか。'create-drop'、'create'、'update'、もしくは'validate'の中から1つ指定</li>
+<li><code>pooled</code> - コネクションプールを使うか（デフォルトではtrue)</li>
+<li><code>logSql</code> - 標準出力へのSQLロギングを有効にするか</li>
+<li><code>formatSql</code> - SQLログをフォーマットするか</li>
+<li><code>dialect</code> - データベースの通信に使用されるHibernateの方言を表す文字型かクラス。利用できる方言は<a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/dialect/package-summary.html" target="blank">org.hibernate.dialect</a>パッケージを参照</li>
+<li><code>readOnly</code> - <code>true</code>にした場合は読み取り専用のデータソースとなり、各<code>Connection</code>で<code>setReadOnly(true)</code>がコネクションプールより呼ばれる</li>
+<li><code>properties</code> - DataSourceビーンを設定するための追加プロパティ。<a href="http://commons.apache.org/dbcp/api-1.2.2/org/apache/commons/dbcp/BasicDataSource.html" target="blank">Commons DBCP BasicDataSource</a>ドキュメント参照</li>
+</ul><p class="paragraph"/><div class="hidden-block">A typical configuration for MySQL may be something like:</div>
+MySQLの一般的な構成はおおむね以下のようになります。<p class="paragraph"/><div class="code"><pre>dataSource &#123;
     pooled = <span class="java&#45;keyword">true</span>
     dbCreate = <span class="java&#45;quote">"update"</span>
     url = <span class="java&#45;quote">"jdbc:mysql://localhost/yourDB"</span>
@@ -197,12 +216,14 @@ Since Grails is built on Java technology setting up a data source requires some 
     dialect = org.hibernate.dialect.MySQL5InnoDBDialect
     username = <span class="java&#45;quote">"yourUser"</span>
     password = <span class="java&#45;quote">"yourPassword"</span>
-&#125;</pre></div><p class="paragraph"/><blockquote class="warning">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block"><blockquote class="warning">
 When configuring the DataSource do not include the type or the def keyword before any of the configuration settings as Groovy will treat these as local variable definitions and they will not be processed. For example the following is invalid:
-</blockquote><p class="paragraph"/><div class="code"><pre>dataSource &#123;
+</blockquote></div>
+データソースを設定する際、設定値の前には型やdefキーワードは含まれません。キーワードが含まれる場合はGroovyのローカル変数として処理されます。例えば、以下の記述では設定値としては無効になります。<p class="paragraph"/><div class="code"><pre>dataSource &#123;
     <span class="java&#45;object">boolean</span> pooled = <span class="java&#45;keyword">true</span> // type declaration results in ignored local variable
     &#8230;
-&#125;</pre></div><p class="paragraph"/>Example of advanced configuration using extra properties:
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Example of advanced configuration using extra properties:</div>
+追加プロパティを使い、高度な設定を行う例は以下になります。
 <div class="code"><pre>dataSource &#123;
     pooled = <span class="java&#45;keyword">true</span>
     dbCreate = <span class="java&#45;quote">"update"</span>
@@ -221,19 +242,28 @@ When configuring the DataSource do not include the type or the def keyword befor
         maxWait = 10000
         validationQuery = <span class="java&#45;quote">"/&#42; ping &#42;/"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>More on dbCreate</h4><p class="paragraph"/>Hibernate can automatically create the database tables required for your domain model. You have some control over when and how it does this through the <code>dbCreate</code> property, which can take these values:
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. More on dbCreate</div>
+<h4>dbCreateの詳細</h4><p class="paragraph"/><div class="hidden-block">Hibernate can automatically create the database tables required for your domain model. You have some control over when and how it does this through the <code>dbCreate</code> property, which can take these values:</div>
+Hibernateは自動的にドメインモデルに必要なデータベーステーブルを作成することができます。ユーザは<code>dbCreate</code>プロパティを使い、どのようにテーブルの作成を行うのかコントロールすることができ、以下のような値を取ることができます。<p class="paragraph"/><div class="hidden-block"><strong class="bold"> </strong>create* - Drops the existing schemaCreates the schema on startup, dropping existing tables, indexes, etc. first.
 <ul class="star">
-<li><strong class="bold">create</strong> - Drops the existing schemaCreates the schema on startup, dropping existing tables, indexes, etc. first.</li>
 <li><strong class="bold">create-drop</strong> - Same as <strong class="bold">create</strong>, but also drops the tables when the application shuts down cleanly.</li>
 <li><strong class="bold">update</strong> - Creates missing tables and indexes, and updates the current schema without dropping any tables or data. Note that this can't properly handle many schema changes like column renames (you're left with the old column containing the existing data).</li>
 <li><strong class="bold">validate</strong> - Makes no changes to your database. Compares the configuration with the existing database schema and reports warnings.</li>
-<li>any other value - does nothing</li>
-</ul><p class="paragraph"/>You can also remove the <code>dbCreate</code> setting completely, which is recommended once your schema is relatively stable and definitely when your application and database are deployed in production. Database changes are then managed through proper migrations, either with SQL scripts or a migration tool like <a href="http://www.liquibase.org/" target="blank">Liquibase</a> (the <a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> plugin uses Liquibase and is tightly integrated with Grails and GORM).
+<li>any other value - does nothing</div></li>
+<li><strong class="bold">create</strong> - 起動時に既存のテーブルやインデックスなどを削除することで、既存のスキーマを削除する</li>
+<li><strong class="bold">create-drop</strong> - <strong class="bold">create</strong>と同じだが、アプリケーションを停止させた時にテーブルを削除する</li>
+<li><strong class="bold">update</strong> - テーブルやデータなどを削除することなく、現在のスキーマを更新する形で存在しないテーブルやインデックスを作成する。これはカラムのリネームのような多くのスキーマ変更を正確に処理できないことに注意してください（既存のデータを含む、古い列が残ってしまう）</li>
+<li><strong class="bold">validate</strong> - データベースは変更されません。既存のデータベースとスキーマを比較し、警告を出します</li>
+<li>any other value - 何もしません</li>
+</ul><p class="paragraph"/><div class="hidden-block">You can also remove the <code>dbCreate</code> setting completely, which is recommended once your schema is relatively stable and definitely when your application and database are deployed in production. Database changes are then managed through proper migrations, either with SQL scripts or a migration tool like <a href="http://www.liquibase.org/" target="blank">Liquibase</a> (the <a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> plugin uses Liquibase and is tightly integrated with Grails and GORM).</div>
+<code>dbCreate</code>設定を完全に削除することもできます。それは、アプリケーションとデータベースが本番環境にデプロイされている場合、スキーマが比較的安定してきた段階で推奨されています。データベースの変更は、SQLスクリプトや<a href="http://www.liquibase.org/" target="blank">Liquibase</a>のようなマイグレーションツールのどちらかで、適切にマイグレーションを管理してください。（<a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> プラグインはLiquibaseを使用し、GrailsやGORMと統合されます。）
 
 
 <a name="3.3.1 DataSources and Environments"><!-- Legacy link --></a>
 <h2 id="dataSourcesAndEnvironments">4.3.1 データソースと環境</h2>
-The previous example configuration assumes you want the same config for all environments: production, test, development etc.<p class="paragraph"/>Grails' DataSource definition is "environment aware", however, so you can do:<p class="paragraph"/><div class="code"><pre>dataSource &#123;
+<div class="hidden-block">The previous example configuration assumes you want the same config for all environments: production, test, development etc.</div>
+これまでの例ではすべての環境（production, test, developmentなど）で同じ設定を行うことを想定していました。<p class="paragraph"/><div class="hidden-block">Grails' DataSource definition is "environment aware", however, so you can do:</div>
+Grailsのデータソース定義では環境ごとの設定が可能になっています。<p class="paragraph"/><div class="code"><pre>dataSource &#123;
     pooled = <span class="java&#45;keyword">true</span>
     driverClassName = <span class="java&#45;quote">"com.mysql.jdbc.Driver"</span>
     dialect = org.hibernate.dialect.MySQL5InnoDBDialect
@@ -250,9 +280,14 @@ The previous example configuration assumes you want the same config for all envi
 
 <a name="3.3.2 JNDI DataSources"><!-- Legacy link --></a>
 <h2 id="JNDIDataSources">4.3.2 JNDI データソース</h2>
-<h4>Referring to a JNDI DataSource</h4><p class="paragraph"/>Most Java EE containers supply <code>DataSource</code> instances via <a href="http://www.oracle.com/technetwork/java/jndi/index.html" target="blank">Java Naming and Directory Interface</a> (JNDI). Grails supports the definition of JNDI data sources as follows:<p class="paragraph"/><div class="code"><pre>dataSource &#123;
+<div class="hidden-block">h4. Referring to a JNDI DataSource</div>
+<h4>JNDIデータソースの参照</h4><p class="paragraph"/><div class="hidden-block">Most Java EE containers supply <code>DataSource</code> instances via <a href="http://www.oracle.com/technetwork/java/jndi/index.html" target="blank">Java Naming and Directory Interface</a> (JNDI). Grails supports the definition of JNDI data sources as follows:</div>
+ほとんどのJavaEEコンテナは<a href="http://www.oracle.com/technetwork/java/jndi/index.html" target="blank">Java Naming and Directory Interface</a> (JNDI)を通して、<code>DataSource</code>インスタンスを提供しています。Grailsでは次のようにJNDIデータソースの定義をサポートしています。<p class="paragraph"/><div class="code"><pre>dataSource &#123;
     jndiName = <span class="java&#45;quote">"java:comp/env/myDataSource"</span>
-&#125;</pre></div><p class="paragraph"/>The format on the JNDI name may vary from container to container, but the way you define the <code>DataSource</code> in Grails remains the same.<p class="paragraph"/><h4>Configuring a Development time JNDI resource</h4><p class="paragraph"/>The way in which you configure JNDI data sources at development time is plugin dependent. Using the <a href="http://grails.org/plugin/tomcat" target="blank">Tomcat</a> plugin you can define JNDI resources using the <code>grails.naming.entries</code> setting in <code>grails-app/conf/Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.naming.entries = &#91;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The format on the JNDI name may vary from container to container, but the way you define the <code>DataSource</code> in Grails remains the same.</div>
+JNDI名のフォーマットはコンテナによって変化するかもしれませんが、Grailsで<code>DataSource</code>を定義する方法は変わらず同じです。<p class="paragraph"/><div class="hidden-block">h4. Configuring a Development time JNDI resource</div>
+<h4>開発時におけるJNDIリソースの設定</h4><p class="paragraph"/><div class="hidden-block">The way in which you configure JNDI data sources at development time is plugin dependent. Using the <a href="http://grails.org/plugin/tomcat" target="blank">Tomcat</a> plugin you can define JNDI resources using the <code>grails.naming.entries</code> setting in <code>grails-app/conf/Config.groovy</code>:</div>
+開発時におけるJNDIデータソースの設定方法はプラグインに依存しています。Tomcatプラグインを使う場合は、<code>grails-app/conf/Config.groovy</code>内の<code>grails.naming.entries</code>の設定を使用することで、JNDIリソースを定義します。<p class="paragraph"/><div class="code"><pre>grails.naming.entries = &#91;
     <span class="java&#45;quote">"bean/MyBeanFactory"</span>: &#91;
         auth: <span class="java&#45;quote">"Container"</span>,
         type: <span class="java&#45;quote">"com.mycompany.MyBean"</span>,
@@ -280,31 +315,44 @@ The previous example configuration assumes you want the same config for all envi
 
 <a name="3.3.3 Automatic Database Migration"><!-- Legacy link --></a>
 <h2 id="automaticDatabaseMigration">4.3.3 自動データベースマイグレーション</h2>
-The <code>dbCreate</code> property of the <code>DataSource</code> definition is important as it dictates what Grails should do at runtime with regards to automatically generating the database tables from <a href="../guide/single.html#GORM" class="guide">GORM</a> classes. The options are described in the <a href="../guide/single.html#dataSource" class="guide">DataSource</a> section:
+<div class="hidden-block">The <code>dbCreate</code> property of the <code>DataSource</code> definition is important as it dictates what Grails should do at runtime with regards to automatically generating the database tables from <a href="../guide/single.html#GORM" class="guide">GORM</a> classes. The options are described in the <a href="../guide/single.html#dataSource" class="guide">DataSource</a> section:</div>
+<code>DataSource</code>定義の<code>dbCreate</code>プロパティは、Grailsが実行時に<a href="../guide/single.html#GORM" class="guide">GORM</a>のクラスから自動的にデータベーステーブルを生成すべきかを指示する重要なプロパティです。以下のオプションは<a href="../guide/single.html#dataSource" class="guide">DataSource</a>のセクションで説明しています。
 <ul class="star">
 <li><code>create</code></li>
 <li><code>create-drop</code></li>
 <li><code>update</code></li>
 <li><code>validate</code></li>
 <li>no value</li>
-</ul><p class="paragraph"/>In <a href="../guide/single.html#environments" class="guide">development</a> mode <code>dbCreate</code> is by default set to "create-drop", but at some point in development (and certainly once you go to production) you'll need to stop dropping and re-creating the database every time you start up your server.<p class="paragraph"/>It's tempting to switch to <code>update</code> so you retain existing data and only update the schema when your code changes, but Hibernate's update support is very conservative. It won't make any changes that could result in data loss, and doesn't detect renamed columns or tables, so you'll be left with the old one and will also have the new one.<p class="paragraph"/>Grails supports migrations via the <a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> plugin which can be installed by declaring the plugin in <code>grails-app/conf/BuildConfig.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+</ul><p class="paragraph"/><div class="hidden-block">In <a href="../guide/single.html#environments" class="guide">development</a> mode <code>dbCreate</code> is by default set to "create-drop", but at some point in development (and certainly once you go to production) you'll need to stop dropping and re-creating the database every time you start up your server.</div>
+<a href="../guide/single.html#environments" class="guide">development</a>モードでは、<code>dbCreate</code>はデフォルト値が"create-drop"で設定されていますが、開発中（もしくは本番以前）では、サーバの起動ごとにデータベースが削除、再作成されることが不都合な場合があります。<p class="paragraph"/><div class="hidden-block">It's tempting to switch to <code>update</code> so you retain existing data and only update the schema when your code changes, but Hibernate's update support is very conservative. It won't make any changes that could result in data loss, and doesn't detect renamed columns or tables, so you'll be left with the old one and will also have the new one.</div>
+コードを変更したときに、既存データを維持したままスキーマだけを更新するため<code>update</code>に切り替えたくなりますが、Hibernateの更新サポートはあまりパッとしません。データの損失につながる可能性のある変更をすることはありませんが、テーブルやカラム名の変更を見つけることができないので、古いテーブルやカラムは残されて新しいものも持つことになります。<p class="paragraph"/><div class="hidden-block">Grails supports migrations via the <a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> plugin which can be installed by declaring the plugin in <code>grails-app/conf/BuildConfig.groovy</code>:</div>
+Grailsは<a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> を介してマイグレーションをサポートしています。それは<code>grails-app/conf/BuildConfig.groovy</code>に宣言することでプラグインとしてインストールすることができます。:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     &#8230;
     plugins &#123;
-        runtime <span class="java&#45;quote<a href="database&#45;migration:1.3.1"</span>">></a>
+        runtime <span class="java&#45;quote">"&#58;database&#45;migration:1.3.1"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>The plugin uses <a href="http://www.liquibase.org/" target="blank">Liquibase</a> and and provides access to all of its functionality, and also has support for GORM (for example generating a change set by comparing your domain classes to a database).
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The plugin uses <a href="http://www.liquibase.org/" target="blank">Liquibase</a> and and provides access to all of its functionality, and also has support for GORM (for example generating a change set by comparing your domain classes to a database).</div>
+このプラグインは<a href="http://www.liquibase.org/" target="blank">Liquibase</a> を使用しており、Liquibaseすべての機能へのアクセスを提供しています。また、GORMのサポートも提供しています（例えばドメインクラスとデータベースを比較しチェンジセットを生成します）。
 
 
 <a name="3.3.4 Transaction-aware DataSource Proxy"><!-- Legacy link --></a>
 <h2 id="transactionAwareDataSourceProxy">4.3.4 Transaction-awareデータソースプロキシ</h2>
-The actual <code>dataSource</code> bean is wrapped in a transaction-aware proxy so you will be given the connection that's being used by the current transaction or Hibernate <code>Session</code> if one is active.<p class="paragraph"/>If this were not the case, then retrieving a connection from the <code>dataSource</code> would be a new connection, and you wouldn't be able to see changes that haven't been committed yet (assuming you have a sensible transaction isolation setting, e.g. <code>READ_COMMITTED</code> or better).<p class="paragraph"/>The "real" unproxied <code>dataSource</code> is still available to you if you need access to it; its bean name is <code>dataSourceUnproxied</code>.<p class="paragraph"/>You can access this bean like any other Spring bean, i.e. using dependency injection:<p class="paragraph"/><div class="code"><pre>class MyService &#123;<p class="paragraph"/>   def dataSourceUnproxied
+<div class="hidden-block">The actual <code>dataSource</code> bean is wrapped in a transaction-aware proxy so you will be given the connection that's being used by the current transaction or Hibernate <code>Session</code> if one is active.</div>
+実際の<code>dataSource</code>ビーンはトランザクション対応のプロキシでラップされているため、それらが開始されているのであれば、現在のトランザクションやHibernateセッションで使われているコネクションが得られます。<p class="paragraph"/><div class="hidden-block">If this were not the case, then retrieving a connection from the <code>dataSource</code> would be a new connection, and you wouldn't be able to see changes that haven't been committed yet (assuming you have a sensible transaction isolation setting, e.g. <code>READ_COMMITTED</code> or better).</div>
+もし<code>dataSource</code>としてトランザクション対応のプロキシを使っていなかったとしたら、その<code>dataSource</code>から取得したコネクションは新規コネクションであり、(<code>READ_COMMITTED</code>やより上位の適切なトランザクション分離が設定されていると仮定すれば)まだコミットされていない変更はみえないことでしょう。<p class="paragraph"/>　<div class="hidden-block">The "real" unproxied <code>dataSource</code> is still available to you if you need access to it; its bean name is <code>dataSourceUnproxied</code>.</div>
+もしプロキシではない「素」の<code>dataSource</code>にアクセスする必要があるなら、<code>dataSourceUnproxied</code>というビーン名を使って利用できます。<p class="paragraph"/><div class="hidden-block">You can access this bean like any other Spring bean, i.e. using dependency injection:</div>
+他のSpringビーンのように依存性注入を利用するなどして、ビーンにアクセスできます。<p class="paragraph"/><div class="code"><pre>class MyService &#123;<p class="paragraph"/>   def dataSourceUnproxied
    &#8230;
-&#125;</pre></div><p class="paragraph"/>or by pulling it from the <code>ApplicationContext</code>:<p class="paragraph"/><div class="code"><pre>def dataSourceUnproxied = ctx.dataSourceUnproxied</pre></div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">or by pulling it from the <code>ApplicationContext</code>:</div>
+または<code>ApplicationContext</code>から取得できます。<p class="paragraph"/><div class="code"><pre>def dataSourceUnproxied = ctx.dataSourceUnproxied</pre></div>
 
 
 <a name="3.3.5 Database Console"><!-- Legacy link --></a>
 <h2 id="databaseConsole">4.3.5 データベースコンソール</h2>
-The <a href="http://h2database.com/html/quickstart.html#h2_console" target="blank">H2 database console</a> is a convenient feature of H2 that provides a web-based interface to any database that you have a JDBC driver for, and it's very useful to view the database you're developing against. It's especially useful when running against an in-memory database.<p class="paragraph"/>You can access the console by navigating to <strong class="bold">http://localhost:8080/appname/dbconsole</strong> in a browser. The URI can be configured using the <code>grails.dbconsole.urlRoot</code> attribute in Config.groovy and defaults to <code>'/dbconsole'</code>.<p class="paragraph"/>The console is enabled by default in development mode and can be disabled or enabled in other environments by using the <code>grails.dbconsole.enabled</code> attribute in Config.groovy. For example you could enable the console in production using<p class="paragraph"/><div class="code"><pre>environments &#123;
+<div class="hidden-block">The <a href="http://h2database.com/html/quickstart.html#h2_console" target="blank">H2 database console</a> is a convenient feature of H2 that provides a web-based interface to any database that you have a JDBC driver for, and it's very useful to view the database you're developing against. It's especially useful when running against an in-memory database.</div>
+<a href="http://h2database.com/html/quickstart.html#h2_console" target="blank">H2 database console</a>はJDBCドライバを持つデータベースにWebベースのインタフェースを与えるH2の便利な機能であり、開発中のデータベースの表示に非常に便利です。インメモリデータベースに対して実行している場合には特に便利です。<p class="paragraph"/><div class="hidden-block">You can access the console by navigating to <strong class="bold">http://localhost:8080/appname/dbconsole</strong> in a browser. The URI can be configured using the <code>grails.dbconsole.urlRoot</code> attribute in Config.groovy and defaults to <code>'/dbconsole'</code>.</div>
+ブラウザで<strong class="bold">http://localhost:8080/appname/dbconsole</strong>にアクセスすることで、コンソールを表示することが出来ます。そのURIは、Config.groovy内の<code>grails.dbconsole.urlRoot</code>属性を使って設定することが可能で、デフォルト値は<code>'/dbconsole'</code>になっています。<p class="paragraph"/><div class="hidden-block">The console is enabled by default in development mode and can be disabled or enabled in other environments by using the <code>grails.dbconsole.enabled</code> attribute in Config.groovy. For example you could enable the console in production using</div>
+コンソールは開発環境ではデフォルトで有効になっていて、Config.groovy内の<code>grails.dbconsole.enabled</code>属性を使って無効にしたり、他のモードで有効にすることができます。例えば、本番環境(production)でコンソールを有効にするには、次のように記述します。<p class="paragraph"/><div class="code"><pre>environments &#123;
     production &#123;
         grails.serverURL = <span class="java&#45;quote">"http://www.changeme.com"</span>
         grails.dbconsole.enabled = <span class="java&#45;keyword">true</span>
@@ -316,14 +364,21 @@ The <a href="http://h2database.com/html/quickstart.html#h2_console" target="blan
     test &#123;
         grails.serverURL = <span class="java&#45;quote">"http://localhost:8080/&#36;&#123;appName&#125;"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/><blockquote class="warning">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block"><blockquote class="warning">
 If you enable the console in production be sure to guard access to it using a trusted security framework.
-</blockquote><p class="paragraph"/><h4>Configuration</h4><p class="paragraph"/>By default the console is configured for an H2 database which will work with the default settings if you haven't configured an external database - you just need to change the JDBC URL to <code>jdbc:h2:mem:devDB</code>. If you've configured an external database (e.g. MySQL, Oracle, etc.) then you can use the Saved Settings dropdown to choose a settings template and fill in the url and username/password information from your DataSource.groovy.
+</blockquote></div><p class="paragraph"/><blockquote class="warning">
+本番環境でコンソールを有効にする場合は、信頼されるセキュリティフレームワークを使用して、コンソールへのアクセスを保護するようにしてください。
+</blockquote><p class="paragraph"/><div class="hidden-block">h4. Configuration</div>
+<h4>設定</h4><p class="paragraph"/><div class="hidden-block">By default the console is configured for an H2 database which will work with the default settings if you haven't configured an external database - you just need to change the JDBC URL to <code>jdbc:h2:mem:devDB</code>. If you've configured an external database (e.g. MySQL, Oracle, etc.) then you can use the Saved Settings dropdown to choose a settings template and fill in the url and username/password information from your DataSource.groovy.</div>
+デフォルトのコンソールは、デフォルト設定のH2データベースに対して動作するよう設定されています。もし外部データベースの設定をしていた場合は、JDBCのURLを<code>jdbc:h2:mem:devDB</code>に変更してください。外部データベース（例えば、MySQL,Oracleなど）を設定する場合には、ドロップダウンのリストから設定テンプレートを選択し、DataSource.groovyからurlやユーザ名/パスワードを設定します。
 
 
 <a name="3.3.6 Multiple Datasources"><!-- Legacy link --></a>
 <h2 id="multipleDatasources">4.3.6 複数データソース</h2>
-By default all domain classes share a single <code>DataSource</code> and a single database, but you have the option to partition your domain classes into two or more <code>DataSource</code>s.<p class="paragraph"/><h4>Configuring Additional DataSources</h4><p class="paragraph"/>The default <code>DataSource</code> configuration in <code>grails-app/conf/DataSource.groovy</code> looks something like this:<p class="paragraph"/><div class="code"><pre>dataSource &#123;
+<div class="hidden-block">By default all domain classes share a single <code>DataSource</code> and a single database, but you have the option to partition your domain classes into two or more <code>DataSource</code>s.</div>
+デフォルトではすべてのドメインクラスは単一のデータソースと単一のデータベースを共有していますが、ドメインクラスが共有するデータソースを複数に分割するオプションがあります。<p class="paragraph"/><div class="hidden-block">h4. Configuring Additional DataSources</div>
+追加するデータソースの設定<p class="paragraph"/><div class="hidden-block">The default <code>DataSource</code> configuration in <code>grails-app/conf/DataSource.groovy</code> looks something like this:</div>
+デフォルトの<code>DataSource</code>は<code>grails-app/conf/DataSource.groovy</code>で設定されており、次のようになっています。<p class="paragraph"/><div class="code"><pre>dataSource &#123;
     pooled = <span class="java&#45;keyword">true</span>
     driverClassName = <span class="java&#45;quote">"org.h2.Driver"</span>
     username = <span class="java&#45;quote">"sa"</span>
@@ -352,7 +407,8 @@ hibernate &#123;
             url = <span class="java&#45;quote">"jdbc:h2:prodDb"</span>
         &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/>This configures a single <code>DataSource</code> with the Spring bean named <code>dataSource</code>. To configure extra <code>DataSource</code>s, add another <code>dataSource</code> block (at the top level, in an environment block, or both, just like the standard <code>DataSource</code> definition) with a custom name, separated by an underscore. For example, this configuration adds a second <code>DataSource</code>, using MySQL in the development environment and Oracle in production:<p class="paragraph"/><div class="code"><pre>environments &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This configures a single <code>DataSource</code> with the Spring bean named <code>dataSource</code>. To configure extra <code>DataSource</code>s, add another <code>dataSource</code> block (at the top level, in an environment block, or both, just like the standard <code>DataSource</code> definition) with a custom name, separated by an underscore. For example, this configuration adds a second <code>DataSource</code>, using MySQL in the development environment and Oracle in production:</div>
+<code>dataSource</code>と命名されたSpringビーンとして、単一の<code>DataSource</code>を設定しています。複数の<code>DataSource</code>を設定するには、アンダースコア(_)で区切られたカスタム名を持つ、別の<code>dataSource</code>ブロックを（トップレベルかenvironmentブロック、または両方へ標準の<code>DataSource</code>定義と同様に）追加します。例えば、以下の設定では開発環境にMySQLを、本番環境にOracleを2番目の<code>DataSource</code>として追加しています。<p class="paragraph"/><div class="code"><pre>environments &#123;
     development &#123;
         dataSource &#123;
             dbCreate = <span class="java&#45;quote">"create&#45;drop"</span>
@@ -387,24 +443,37 @@ hibernate &#123;
             dbCreate = 'update'
         &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/>You can use the same or different databases as long as they're supported by Hibernate.<p class="paragraph"/><h4>Configuring Domain Classes</h4><p class="paragraph"/>If a domain class has no <code>DataSource</code> configuration, it defaults to the standard <code>'dataSource'</code>. Set the <code>datasource</code> property in the <code>mapping</code> block to configure a non-default <code>DataSource</code>. For example, if you want to use the <code>ZipCode</code> domain to use the <code>'lookup'</code> <code>DataSource</code>, configure it like this;<p class="paragraph"/><div class="code"><pre>class ZipCode &#123;<p class="paragraph"/>   <span class="java&#45;object">String</span> code<p class="paragraph"/>   <span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can use the same or different databases as long as they're supported by Hibernate.</div>
+Hibernateによるサポートがある限り、同じデータベースでも異なるデータベースでも使用することができます。<p class="paragraph"/><div class="hidden-block">h4. Configuring Domain Classes</div>
+<h4>ドメインクラスの設定</h4><p class="paragraph"/><div class="hidden-block">If a domain class has no <code>DataSource</code> configuration, it defaults to the standard <code>'dataSource'</code>. Set the <code>datasource</code> property in the <code>mapping</code> block to configure a non-default <code>DataSource</code>. For example, if you want to use the <code>ZipCode</code> domain to use the <code>'lookup'</code> <code>DataSource</code>, configure it like this;</div>
+ドメインクラスで<code>DataSource</code>の設定をしていない場合、デフォルトで標準の<code>'dataSource'</code>が設定されます。デフォルトでない<code>DataSource</code>を設定をするには、<code>mapping</code>ブロック内で<code>datasource</code>プロパティを使用します。例えば、<code>ZipCode</code>ドメインで<code>'lookup'</code> <code>DataSource</code>を利用したい場合、以下のように設定します。<p class="paragraph"/><div class="code"><pre>class ZipCode &#123;<p class="paragraph"/>   <span class="java&#45;object">String</span> code<p class="paragraph"/>   <span class="java&#45;keyword">static</span> mapping = &#123;
       datasource 'lookup'
    &#125;
-&#125;</pre></div><p class="paragraph"/>A domain class can also use two or more <code>DataSource</code>s. Use the <code>datasources</code> property with a list of names to configure more than one, for example:<p class="paragraph"/><div class="code"><pre>class ZipCode &#123;<p class="paragraph"/>   <span class="java&#45;object">String</span> code<p class="paragraph"/>   <span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">A domain class can also use two or more <code>DataSource</code>s. Use the <code>datasources</code> property with a list of names to configure more than one, for example:</div>
+ドメインクラスは複数の<code>DataSource</code>を使用することもできます。複数の設定をするためには、<code>datasources</code>プロパティにデータソース名のリストを設定します。例えば：<p class="paragraph"/><div class="code"><pre>class ZipCode &#123;<p class="paragraph"/>   <span class="java&#45;object">String</span> code<p class="paragraph"/>   <span class="java&#45;keyword">static</span> mapping = &#123;
       datasources(&#91;'lookup', 'auditing'&#93;)
    &#125;
-&#125;</pre></div><p class="paragraph"/>If a domain class uses the default <code>DataSource</code> and one or more others, use the special name <code>'DEFAULT'</code> to indicate the default <code>DataSource</code>:<p class="paragraph"/><div class="code"><pre>class ZipCode &#123;<p class="paragraph"/>   <span class="java&#45;object">String</span> code<p class="paragraph"/>   <span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If a domain class uses the default <code>DataSource</code> and one or more others, use the special name <code>'DEFAULT'</code> to indicate the default <code>DataSource</code>:</div>
+複数の<code>DataSource</code>を持ち、デフォルトの<code>DataSource</code>を使う場合はデフォルトの<code>DataSource</code>を指す特別な名前として<code>'DEFAULT'</code>を使うことができます。<p class="paragraph"/><div class="code"><pre>class ZipCode &#123;<p class="paragraph"/>   <span class="java&#45;object">String</span> code<p class="paragraph"/>   <span class="java&#45;keyword">static</span> mapping = &#123;
       datasources(&#91;'lookup', 'DEFAULT'&#93;)
    &#125;
-&#125;</pre></div><p class="paragraph"/>If a domain class uses all configured <code>DataSource</code>s use the special value <code>'ALL'</code>:<p class="paragraph"/><div class="code"><pre>class ZipCode &#123;<p class="paragraph"/>   <span class="java&#45;object">String</span> code<p class="paragraph"/>   <span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If a domain class uses all configured <code>DataSource</code>s use the special value <code>'ALL'</code>:</div>
+設定されたすべての<code>DataSource</code>を使う場合、特別な値として<code>'ALL'</code>を使います。<p class="paragraph"/><div class="code"><pre>class ZipCode &#123;<p class="paragraph"/>   <span class="java&#45;object">String</span> code<p class="paragraph"/>   <span class="java&#45;keyword">static</span> mapping = &#123;
       datasource 'ALL'
    &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Namespaces and GORM Methods</h4><p class="paragraph"/>If a domain class uses more than one <code>DataSource</code> then you can use the namespace implied by each <code>DataSource</code> name to make GORM calls for a particular <code>DataSource</code>. For example, consider this class which uses two <code>DataSource</code>s:<p class="paragraph"/><div class="code"><pre>class ZipCode &#123;<p class="paragraph"/>   <span class="java&#45;object">String</span> code<p class="paragraph"/>   <span class="java&#45;keyword">static</span> mapping = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Namespaces and GORM Methods</div>
+<h4>名前空間とGORMメソッド</h4><p class="paragraph"/><div class="hidden-block">If a domain class uses more than one <code>DataSource</code> then you can use the namespace implied by each <code>DataSource</code> name to make GORM calls for a particular <code>DataSource</code>. For example, consider this class which uses two <code>DataSource</code>s:</div>
+ドメインクラスが複数の<code>DataSource</code>を使用している場合、特定の<code>DataSource</code>へGORMの呼び出しを行うために、<code>DataSource</code>名ごとに暗黙で定義された名前空間を使うことが出来ます。例えば、2つの<code>DataSource</code>が使われているこのクラスを考えます。<p class="paragraph"/><div class="code"><pre>class ZipCode &#123;<p class="paragraph"/>   <span class="java&#45;object">String</span> code<p class="paragraph"/>   <span class="java&#45;keyword">static</span> mapping = &#123;
       datasources(&#91;'lookup', 'auditing'&#93;)
    &#125;
-&#125;</pre></div><p class="paragraph"/>The first <code>DataSource</code> specified is the default when not using an explicit namespace, so in this case we default to 'lookup'. But you can call GORM methods on the 'auditing' <code>DataSource</code> with the <code>DataSource</code> name, for example:<p class="paragraph"/><div class="code"><pre>def zipCode = ZipCode.auditing.get(42)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The first <code>DataSource</code> specified is the default when not using an explicit namespace, so in this case we default to 'lookup'. But you can call GORM methods on the 'auditing' <code>DataSource</code> with the <code>DataSource</code> name, for example:</div>
+明示的に名前空間を使用しない場合、先頭の<code>DataSource</code>がデフォルトとして使用されます。この場合デフォルトは'lookup'となります。また、以下のように'auditing' <code>DataSource</code>上でGORMメソッドを呼ぶことができます。<p class="paragraph"/><div class="code"><pre>def zipCode = ZipCode.auditing.get(42)
 &#8230;
-zipCode.auditing.save()</pre></div><p class="paragraph"/>As you can see, you add the <code>DataSource</code> to the method call in both the static case and the instance case.<p class="paragraph"/><h4>Hibernate Mapped Domain Classes</h4><p class="paragraph"/>You can also partition annotated Java classes into separate datasources. Classes using the default datasource are registered in <code>grails-app/conf/hibernate/hibernate.cfg.xml</code>. To specify that an annotated class uses a non-default datasource, create a <code>hibernate.cfg.xml</code> file for that datasource with the file name prefixed with the datasource name.<p class="paragraph"/>For example if the <code>Book</code> class is in the default datasource, you would register that in <code>grails-app/conf/hibernate/hibernate.cfg.xml</code>:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;?xml version='1.0' encoding='UTF&#45;8'?&#62;</span>
+zipCode.auditing.save()</pre></div><p class="paragraph"/><div class="hidden-block">As you can see, you add the <code>DataSource</code> to the method call in both the static case and the instance case.</div>
+ご覧のように、メソッド呼び出しが静的呼び出しの場合とインスタンス呼び出しの場合どちらでも<code>DataSource</code>を追加します。<p class="paragraph"/><div class="hidden-block">h4. Hibernate Mapped Domain Classes</div>
+<h4>ドメインクラスのHibernateマップ</h4><p class="paragraph"/><div class="hidden-block">You can also partition annotated Java classes into separate datasources. Classes using the default datasource are registered in <code>grails-app/conf/hibernate/hibernate.cfg.xml</code>. To specify that an annotated class uses a non-default datasource, create a <code>hibernate.cfg.xml</code> file for that datasource with the file name prefixed with the datasource name.</div>
+アノテーションの付いたJavaクラスを別々のデータソースに分割することもできます。デフォルトのデータソースを使用しているクラスは<code>grails-app/conf/hibernate/hibernate.cfg.xml</code>に登録されます。デフォルトでないデータソースを使う注釈されたクラスを明示するためには、ファイル名の先頭にデータソース名をつけた<code>hibernate.cfg.xml</code>を作成します。<p class="paragraph"/><div class="hidden-block">For example if the <code>Book</code> class is in the default datasource, you would register that in <code>grails-app/conf/hibernate/hibernate.cfg.xml</code>:</div>
+例えば、<code>Book</code>クラスがデフォルトのデータソースを使う場合、<code>grails-app/conf/hibernate/hibernate.cfg.xml</code>に登録します。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;?xml version='1.0' encoding='UTF&#45;8'?&#62;</span>
 &#60;!DOCTYPE hibernate&#45;configuration PUBLIC
           '&#45;//Hibernate/Hibernate Configuration DTD 3.0//EN'
           'http://hibernate.sourceforge.net/hibernate&#45;configuration&#45;3.0.dtd'&#62;
@@ -412,7 +481,8 @@ zipCode.auditing.save()</pre></div><p class="paragraph"/>As you can see, you add
    <span class="xml&#45;tag">&#60;session&#45;factory&#62;</span>
       <span class="xml&#45;tag">&#60;mapping class='org.example.Book'/&#62;</span>
    <span class="xml&#45;tag">&#60;/session&#45;factory&#62;</span>
-<span class="xml&#45;tag">&#60;/hibernate&#45;configuration&#62;</span></pre></div><p class="paragraph"/>and if the <code>Library</code> class is in the "ds2" datasource, you would register that in <code>grails-app/conf/hibernate/ds2_hibernate.cfg.xml</code>:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;?xml version='1.0' encoding='UTF&#45;8'?&#62;</span>
+<span class="xml&#45;tag">&#60;/hibernate&#45;configuration&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">and if the <code>Library</code> class is in the "ds2" datasource, you would register that in <code>grails-app/conf/hibernate/ds2_hibernate.cfg.xml</code>:</div>
+<code>Library</code>クラスが"ds2"データソースを使う場合、<code>grails-app/conf/hibernate/ds2_hibernate.cfg.xml</code>に登録します。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;?xml version='1.0' encoding='UTF&#45;8'?&#62;</span>
 &#60;!DOCTYPE hibernate&#45;configuration PUBLIC
           '&#45;//Hibernate/Hibernate Configuration DTD 3.0//EN'
           'http://hibernate.sourceforge.net/hibernate&#45;configuration&#45;3.0.dtd'&#62;
@@ -420,10 +490,18 @@ zipCode.auditing.save()</pre></div><p class="paragraph"/>As you can see, you add
    <span class="xml&#45;tag">&#60;session&#45;factory&#62;</span>
       <span class="xml&#45;tag">&#60;mapping class='org.example.Library'/&#62;</span>
    <span class="xml&#45;tag">&#60;/session&#45;factory&#62;</span>
-<span class="xml&#45;tag">&#60;/hibernate&#45;configuration&#62;</span></pre></div><p class="paragraph"/>The process is the same for classes mapped with hbm.xml files - just list them in the appropriate hibernate.cfg.xml file.<p class="paragraph"/><h4>Services</h4><p class="paragraph"/>Like Domain classes, by default Services use the default <code>DataSource</code> and <code>PlatformTransactionManager</code>. To configure a Service to use a different <code>DataSource</code>, use the static <code>datasource</code> property, for example:<p class="paragraph"/><div class="code"><pre>class DataService &#123;<p class="paragraph"/>   <span class="java&#45;keyword">static</span> datasource = 'lookup'<p class="paragraph"/>   void someMethod(...) &#123;
+<span class="xml&#45;tag">&#60;/hibernate&#45;configuration&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">The process is the same for classes mapped with hbm.xml files - just list them in the appropriate hibernate.cfg.xml file.</div>
+hbm.xmlファイルでマッピングされたクラスについても方法は同じです。適切なhibernate.cfg.xmlファイルにリスト化するだけです。<p class="paragraph"/><div class="hidden-block">h4. Services</div>
+<h4>サービス</h4><p class="paragraph"/><div class="hidden-block">Like Domain classes, by default Services use the default <code>DataSource</code> and <code>PlatformTransactionManager</code>. To configure a Service to use a different <code>DataSource</code>, use the static <code>datasource</code> property, for example:</div>
+ドメインクラスと同様に、デフォルトのサービスによってデフォルト<code>DataSource</code>と<code>PlatformTransactionManager</code>が使用されます。サービスの設定で異なる<code>DataSource</code>を使用する場合は、staticな<code>datasource</code>プロパティを使用します。例えば：<p class="paragraph"/><div class="code"><pre>class DataService &#123;<p class="paragraph"/>   <span class="java&#45;keyword">static</span> datasource = 'lookup'<p class="paragraph"/>   void someMethod(...) &#123;
       &#8230;
    &#125;
-&#125;</pre></div><p class="paragraph"/>A transactional service can only use a single <code>DataSource</code>, so be sure to only make changes for domain classes whose <code>DataSource</code> is the same as the Service.<p class="paragraph"/>Note that the datasource specified in a service has no bearing on which datasources are used for domain classes; that's determined by their declared datasources in the domain classes themselves. It's used to declare which transaction manager to use.<p class="paragraph"/>What you'll see is that if you have a Foo domain class in dataSource1 and a Bar domain class in dataSource2, and WahooService uses dataSource1, a service method that saves a new Foo and a new Bar will only be transactional for Foo since they share the datasource. The transaction won't affect the Bar instance. If you want both to be transactional you'd need to use two services and XA datasources for two-phase commit, e.g. with the Atomikos plugin.<p class="paragraph"/><h4>XA and Two-phase Commit</h4><p class="paragraph"/>Grails has no native support for <a href="https://secure.wikimedia.org/wikipedia/en/wiki/X/Open_XA" target="blank">XA</a> <code>DataSource</code>s or <a href="https://secure.wikimedia.org/wikipedia/en/wiki/Two-phase_commit" target="blank">two-phase commit</a>, but the <a href="http://grails.org/plugin/atomikos" target="blank">Atomikos plugin</a> makes it easy. See the plugin documentation for the simple changes needed in your <code>DataSource</code> definitions to reconfigure them as XA <code>DataSource</code>s.<p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">A transactional service can only use a single <code>DataSource</code>, so be sure to only make changes for domain classes whose <code>DataSource</code> is the same as the Service.</div>
+トランザクション管理されたサービスでは単一のデータソースしか扱えないため、<code>DataSource</code>がサービスと同じドメインクラスだけ値を変更できることに注意してください。<p class="paragraph"/><div class="hidden-block">Note that the datasource specified in a service has no bearing on which datasources are used for domain classes; that's determined by their declared datasources in the domain classes themselves. It's used to declare which transaction manager to use.</div>
+サービスで指定されたデータソースがドメインクラスで利用されるかは、データソースがドメインクラスで利用されるかとは関係ないため注意してください。ドメインクラス自体に宣言されたデータソースによって決定されます。<p class="paragraph"/><div class="hidden-block">What you'll see is that if you have a Foo domain class in dataSource1 and a Bar domain class in dataSource2, and WahooService uses dataSource1, a service method that saves a new Foo and a new Bar will only be transactional for Foo since they share the datasource. The transaction won't affect the Bar instance. If you want both to be transactional you'd need to use two services and XA datasources for two-phase commit, e.g. with the Atomikos plugin.</div>
+つまり、データソース1にFooドメインクラスを、データソース2にBarドメインクラスを持ち、WahooServiceがデータソース1を使うならば、FooとBarをnewするサービスのメソッドはデータソースを共有しているFooのためだけにトランザクション管理ができるということです。トランザクションはBarのインスタンスに影響を与えません。両方ともトランザクション管理をしたい場合は、2相コミットのために2つのサービスとXAデータソースを用いる必要があります。(例: Atomikosプラグイン)<p class="paragraph"/><div class="hidden-block">h4. XA and Two-phase Commit</div>
+<h4>XAと2相コミット</h4><p class="paragraph"/><div class="hidden-block">Grails has no native support for <a href="https://secure.wikimedia.org/wikipedia/en/wiki/X/Open_XA" target="blank">XA</a> <code>DataSource</code>s or <a href="https://secure.wikimedia.org/wikipedia/en/wiki/Two-phase_commit" target="blank">two-phase commit</a>, but the <a href="http://grails.org/plugin/atomikos" target="blank">Atomikos plugin</a> makes it easy. See the plugin documentation for the simple changes needed in your <code>DataSource</code> definitions to reconfigure them as XA <code>DataSource</code>s.</div>
+Grailsはネイティブで<a href="https://ja.wikipedia.org/wiki/X/Open_XA" target="blank">XA</a> <code>DataSource</code>や<a href="https://ja.wikipedia.org/wiki/2%E7%9B%B8%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88" target="blank">2相コミット</a>に対応していませんが、<a href="http://grails.org/plugin/atomikos" target="blank">Atomikosプラグイン</a>で簡単に行うことができます。<code>DataSource</code>定義をXA <code>DataSource</code>として再設定するのには簡単な変更が必要となるため、プラグインのドキュメントを参照してください。<p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>
