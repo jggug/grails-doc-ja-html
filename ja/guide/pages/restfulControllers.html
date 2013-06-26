@@ -159,7 +159,7 @@ The <code>Resource</code> transformation is a quick way to get started, but typi
 
 
 <h2 id="extendingRestfulController">8.1.5.1 RestfulControllerスーパークラスの拡張</h2>
-The easiest way to get started doing so is to create a new controller for your resource that extends the <code>grails.rest.RestfulController</code> suepr class. For example:<p class="paragraph"/><div class="code"><pre>class BookController <span class="java&#45;keyword">extends</span> RestfulController &#123;
+The easiest way to get started doing so is to create a new controller for your resource that extends the <code>grails.rest.RestfulController</code> super class. For example:<p class="paragraph"/><div class="code"><pre>class BookController <span class="java&#45;keyword">extends</span> RestfulController &#123;
     <span class="java&#45;keyword">static</span> responseFormats = &#91;'json', 'xml'&#93;
     BookController() &#123;
         <span class="java&#45;keyword">super</span>(Book)

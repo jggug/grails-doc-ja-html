@@ -170,6 +170,24 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:10px"><a href="#renderers"><strong>8.1.6</strong><span>&#12524;&#12473;&#12509;&#12531;&#12473;&#12524;&#12531;&#12480;&#12522;&#12531;&#12464;&#12398;&#12459;&#12473;&#12479;&#12510;&#12452;&#12474;</span></a>
                     </div>
                     
+                    <div class="toc-item" style="margin-left:20px"><a href="#defaultRenderers"><strong>8.1.6.1</strong><span>&#12487;&#12501;&#12457;&#12523;&#12488;&#12524;&#12531;&#12480;&#12521;&#12540;&#12398;&#12459;&#12473;&#12479;&#12510;&#12452;&#12474;</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:20px"><a href="#objectMarshallers"><strong>8.1.6.2</strong><span>&#12459;&#12473;&#12479;&#12512;&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12510;&#12540;&#12471;&#12515;&#12521;&#12398;&#30331;&#37682;</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:20px"><a href="#namedObjectMarshallers"><strong>8.1.6.3</strong><span>&#12458;&#12502;&#12472;&#12455;&#12463;&#12488;&#12539;&#12510;&#12540;&#12471;&#12515;&#12521;&#12398;&#21517;&#21069;&#20184;&#12365;&#23450;&#32681;</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:20px"><a href="#objectMarshallerInterface"><strong>8.1.6.4</strong><span>ObjectMarshaller&#12452;&#12531;&#12479;&#12540;&#12501;&#12455;&#12452;&#12473;&#12408;&#12398;&#23455;&#35013;</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:20px"><a href="#customRenderers"><strong>8.1.6.5</strong><span>&#12459;&#12473;&#12479;&#12512;&#12524;&#12531;&#12480;&#12521;&#12540;&#12398;&#23455;&#35013;</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:20px"><a href="#gspRenderers"><strong>8.1.6.6</strong><span>GSP&#12434;&#20351;&#29992;&#12375;&#12383;&#12459;&#12473;&#12479;&#12512;&#12524;&#12531;&#12480;&#12522;&#12531;&#12464;</span></a>
+                    </div>
+                    
                     <div class="toc-item" style="margin-left:10px"><a href="#hypermedia"><strong>8.1.7</strong><span>Hypermedia&#12434;&#12450;&#12503;&#12522;&#12465;&#12540;&#12471;&#12519;&#12531;&#12473;&#12486;&#12540;&#12488;&#12398;&#12456;&#12531;&#12472;&#12531;&#12395;&#12377;&#12427;</span></a>
                     </div>
                     
@@ -279,17 +297,17 @@ RESTful Webサービス用のJava APIをベースとしたRESTを、<a href="htt
 
 
 <h2 id="domainResources">8.1.1 RESTリソースとしてドメインクラスを使用する</h2>
-The easiest way to create a RESTful API is Grails is to expose a domain classes as a REST resource. This can be done by adding the <code>grails.rest.Resource</code> transformation to any domain class:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books')
+The easiest way to create a RESTful API in Grails is to expose a domain class as a REST resource. This can be done by adding the <code>grails.rest.Resource</code> transformation to any domain class:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books')
 class Book &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> title<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
         title blank:<span class="java&#45;keyword">false</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>Simply by adding the <code>Resource</code> transformation and specifying a URI your domain class will automatically be available as a REST resource in either XML or JSON formats. The transformation will automatically register the necessary <a href="../guide/single.html#restfulMappings" class="guide">RESTful URL mapping</a> and create a controller called <code>BookController</code>.<p class="paragraph"/>You can try it out by adding some test data to <code>BootStrap.groovy</code>:<p class="paragraph"/><div class="code"><pre>def init = &#123; servletContext &#45;&#62;<p class="paragraph"/>        <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Stand"</span>).save()
+&#125;</pre></div><p class="paragraph"/>Simply by adding the <code>Resource</code> transformation and specifying a URI, your domain class will automatically be available as a REST resource in either XML or JSON formats. The transformation will automatically register the necessary <a href="../guide/single.html#restfulMappings" class="guide">RESTful URL mapping</a> and create a controller called <code>BookController</code>.<p class="paragraph"/>You can try it out by adding some test data to <code>BootStrap.groovy</code>:<p class="paragraph"/><div class="code"><pre>def init = &#123; servletContext &#45;&#62;<p class="paragraph"/>        <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Stand"</span>).save()
         <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Shining"</span>).save()
     &#125;</pre></div><p class="paragraph"/>And then hitting the URL http://localhost:8080/myapp/books/1, which will render response like:<p class="paragraph"/><div class="code"><pre>&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;
 &#60;book id=<span class="java&#45;quote">"1"</span>&#62;
     &#60;title&#62;The Stand&#60;/title&#62;
 &#60;/book&#62;</pre></div><p class="paragraph"/>If you change the URL to <code>http://localhost:8080/myapp/books/1.json</code> you will get a JSON response such as:<p class="paragraph"/>
-<div class="code"><pre>&#123;<span class="java&#45;quote">"id"</span>:1,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;</pre></div><p class="paragraph"/>If you wish to change the default to return JSON instead of XML then can you do by setting the <code>formats</code> attribute of the <code>Resource</code> transformation:<p class="paragraph"/> <div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books', formats=&#91;'json', 'xml'&#93;)
+<div class="code"><pre>&#123;<span class="java&#45;quote">"id"</span>:1,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;</pre></div><p class="paragraph"/>If you wish to change the default to return JSON instead of XML, you can do this by setting the <code>formats</code> attribute of the <code>Resource</code> transformation:<p class="paragraph"/> <div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books', formats=&#91;'json', 'xml'&#93;)
 class Book &#123;
     &#8230;
 &#125;</pre></div><p class="paragraph"/>With the above example JSON will be prioritized. The list that is passed should contain the names of the formats that the resource should expose. The names of formats are defined in the <code>grails.mime.types</code> setting of <code>Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.mime.types = &#91;
@@ -297,7 +315,7 @@ class Book &#123;
     json:          &#91;'application/json', 'text/json'&#93;,
     &#8230;
     xml:           &#91;'text/xml', 'application/xml'&#93;
-&#93;</pre></div><p class="paragraph"/>See the section on <a href="../guide/single.html#contentNegotiation" class="guide">Configuring Mime Types</a> in the user guide for more information.<p class="paragraph"/>Instead of using the file extension in the URI, you can also obtain a JSON response using the ACCEPT header. For example using the Unix <code>curl</code> tool:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/json"</span> localhost:8080/myapp/books/1
+&#93;</pre></div><p class="paragraph"/>See the section on <a href="../guide/single.html#contentNegotiation" class="guide">Configuring Mime Types</a> in the user guide for more information.<p class="paragraph"/>Instead of using the file extension in the URI, you can also obtain a JSON response using the ACCEPT header. Here's an example using the Unix <code>curl</code> tool:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/json"</span> localhost:8080/myapp/books/1
 &#123;<span class="java&#45;quote">"id"</span>:1,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;</pre></div><p class="paragraph"/>This works thanks to Grails' <a href="../guide/single.html#contentNegotiation" class="guide">Content Negotiation</a> features.<p class="paragraph"/>You can create a new resource by issuing a <code>POST</code> request:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;X POST &#45;H <span class="java&#45;quote">"Content&#45;Type: application/json"</span> &#45;d '&#123;<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"Along Came A Spider"</span>&#125;' localhost:8080/myapp/books
 HTTP/1.1 201 Created
 Server: Apache&#45;Coyote/1.1
@@ -307,10 +325,11 @@ Server: Apache&#45;Coyote/1.1
 ...</pre></div><p class="paragraph"/>Finally a resource can be deleted with <code>DELETE</code> request:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;X DELETE localhost:8080/myapp/books/1
 HTTP/1.1 204 No Content
 Server: Apache&#45;Coyote/1.1
-...</pre></div><p class="paragraph"/>As you can see the <code>Resource</code> transformation enables all of the HTTP method verbs on the resource. You can enable only read-only capability by setting the <code>readOnly</code> attribute to true:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books', readOnly=<span class="java&#45;keyword">true</span>)
+...</pre></div><p class="paragraph"/>As you can see the <code>Resource</code> transformation enables all of the HTTP method verbs on the resource. You can enable only read-only capabilities by setting the <code>readOnly</code> attribute to true:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books', readOnly=<span class="java&#45;keyword">true</span>)
 class Book &#123;
     &#8230;
 &#125;</pre></div><p class="paragraph"/>In this case POST, PUT and DELETE requests will be forbidden.
+
 
 
 <h2 id="urlMappings">8.1.2 RESTリソースへのマッピング</h2>
@@ -324,8 +343,8 @@ Grails' <code>link</code> tag offers an easy way to link to any domain class res
 
 
 <h2 id="versioningResources">8.1.4 RESTリソースのバージョニング</h2>
-A common requirement with a REST API is to expose different versions of the REST API. There are a few of ways this can be achieved in Grails.<p class="paragraph"/><h4>Versioning using the URI</h4><p class="paragraph"/>A common approach is to use the URI to version APIs (although this approach is discouraged in favour of Hypermedia). For example you can define the following URL mappings:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books/v1"</span>(resources:<span class="java&#45;quote">"book"</span>, namespace:'v1')
-<span class="java&#45;quote">"/books/v2"</span>(resources:<span class="java&#45;quote">"book"</span>, namespace:'v2')</pre></div><p class="paragraph"/>That match the following controllers:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> myapp.v1<p class="paragraph"/>class BookController &#123;
+A common requirement with a REST API is to expose different versions of the REST API. There are a few ways this can be achieved in Grails.<p class="paragraph"/><h4>Versioning using the URI</h4><p class="paragraph"/>A common approach is to use the URI to version APIs (although this approach is discouraged in favour of Hypermedia). For example, you can define the following URL mappings:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books/v1"</span>(resources:<span class="java&#45;quote">"book"</span>, namespace:'v1')
+<span class="java&#45;quote">"/books/v2"</span>(resources:<span class="java&#45;quote">"book"</span>, namespace:'v2')</pre></div><p class="paragraph"/>That will match the following controllers:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> myapp.v1<p class="paragraph"/>class BookController &#123;
     <span class="java&#45;keyword">static</span> namespace = 'v1'
 &#125;<p class="paragraph"/><span class="java&#45;keyword">package</span> myapp.v2<p class="paragraph"/>class BookController &#123;
     <span class="java&#45;keyword">static</span> namespace = 'v2'
@@ -350,7 +369,7 @@ The <code>Resource</code> transformation is a quick way to get started, but typi
 
 
 <h2 id="extendingRestfulController">8.1.5.1 RestfulControllerスーパークラスの拡張</h2>
-The easiest way to get started doing so is to create a new controller for your resource that extends the <code>grails.rest.RestfulController</code> suepr class. For example:<p class="paragraph"/><div class="code"><pre>class BookController <span class="java&#45;keyword">extends</span> RestfulController &#123;
+The easiest way to get started doing so is to create a new controller for your resource that extends the <code>grails.rest.RestfulController</code> super class. For example:<p class="paragraph"/><div class="code"><pre>class BookController <span class="java&#45;keyword">extends</span> RestfulController &#123;
     <span class="java&#45;keyword">static</span> responseFormats = &#91;'json', 'xml'&#93;
     BookController() &#123;
         <span class="java&#45;keyword">super</span>(Book)
@@ -458,7 +477,108 @@ The bean name is not important (Grails will scan the application context for all
     bookRenderer(XmlRenderer, Book) &#123;
         excludes = &#91;'isbn'&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Implementing a Custom Renderer</h4><p class="paragraph"/>If you want even more control of the rendering then you can implement your own <code>Renderer</code> instance. For example below is a simple implementation that customizes the rendering of the <code>Book</code> class:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> myapp
+&#125;</pre></div><p class="paragraph"/>
+
+
+
+<h2 id="defaultRenderers">8.1.6.1 デフォルトレンダラーのカスタマイズ</h2>
+The default renderers for XML and JSON can be found in the <code>grails.rest.renderer.xml</code> and <code>grails.rest.renderer.json</code> packages respectively. These use the Grails converters (<code>grails.converters.XML</code> and <code>grails.converters.JSON</code>) by default for response rendering.<p class="paragraph"/>You can easily customize response rendering using this default renderers. A common change you may want to make is to include or exclude certain properties from rendering.<p class="paragraph"/><h4>Including or Excluding Properties from Rendering</h4><p class="paragraph"/>As mentioned previously, Grails maintains a registry of <code>grails.rest.render.Renderer</code> instances. There are some default configured renderers and the ability to register or override renderers for a given domain class or even for a collection of domain classes. To include a particular property from rendering you need to register a custom renderer by defining a bean in <code>grails-app/conf/spring/resources.groovy</code>:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.renderer.xml.&#42;<p class="paragraph"/>beans = &#123;
+    bookRenderer(XmlRenderer, Book) &#123;
+        includes = &#91;'title'&#93;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>
+<blockquote class="note">
+The bean name is not important (Grails will scan the application context for all registered renderer beans), but for organizational and readability purposes it is recommended you name it something meaningful.
+</blockquote><p class="paragraph"/>To exclude a property the <code>exclude</code> property of the <code>XmlRenderer</code> class can be used:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.renderer.xml.&#42;<p class="paragraph"/>beans = &#123;
+    bookRenderer(XmlRenderer, Book) &#123;
+        excludes = &#91;'isbn'&#93;
+    &#125;
+&#125;</pre></div><p class="paragraph"/><h4>Customizing the Converters</h4><p class="paragraph"/>As mentioned previously, the default renders use the <code>grails.converters</code> package under the covers. In other word, under the covers they essentially do the following:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.converters.&#42;<p class="paragraph"/>&#8230;
+render book as XML<p class="paragraph"/>// or render book as JSON</pre></div><p class="paragraph"/>Why the separation between converters and renderers? Well a renderer has more flexibility to use whatever rendering technology you chose. When implementing a custom renderer you could use <a href="http://wiki.fasterxml.com/JacksonHome" target="blank">Jackson</a>, <a href="http://code.google.com/p/google-gson/" target="blank">Gson</a> or any Java library to implement the renderer. Converters on the other hand are very much tied to Grails' own marshalling implementation.
+
+
+<h2 id="objectMarshallers">8.1.6.2 カスタムオブジェクトマーシャラの登録</h2>
+Grails' Converters feature the notion of an <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">ObjectMarshaller</a>, and each type can have a registered <code>ObjectMarshaller</code>. You can register custom <code>ObjectMarshaller</code> instances to completely customize response rendering. For example you can define the following in <code>BootStrap.init</code>:<p class="paragraph"/><div class="code"><pre>XML.registerObjectMarshaller Book, &#123; Book book, XML xml &#45;&#62;
+  xml.attribute 'id', book.id
+  xml.build &#123;
+    title(book.title)
+  &#125;
+&#125;</pre></div><p class="paragraph"/>You can customize the formatting of an indvidual value this way too. For example the <a href="http://grails.org/plugin/jodatime" target="blank">JodaTime plugin</a> does the following to support rendering of JodaTime dates in JSON output:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(DateTime) &#123;
+    <span class="java&#45;keyword">return</span> it?.toString(<span class="java&#45;quote">"yyyy&#45;MM&#45;dd'T'HH:mm:ss'Z'"</span>)
+&#125;</pre></div><p class="paragraph"/>In the case of JSON it often simple to use a map to customize output:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(Book) &#123;
+  def map= &#91;:&#93;
+  map&#91;'titl'&#93; = it.title
+  map&#91;'auth'&#93; = it.author
+  <span class="java&#45;keyword">return</span> map 
+&#125;</pre></div><p class="paragraph"/><h4>Registering Custom Marshallers via Spring</h4><p class="paragraph"/>Note that if you have many custom marshallers it is recommended you split the registration of these into a separate class:<p class="paragraph"/><div class="code"><pre>class CustomMarshallerRegistrar &#123;<p class="paragraph"/>    @javax.annotation.PostConstruct
+    void registerMarshallers() &#123;
+        JSON.registerObjectMarshaller(DateTime) &#123;
+            <span class="java&#45;keyword">return</span> it?.toString(<span class="java&#45;quote">"yyyy&#45;MM&#45;dd'T'HH:mm:ss'Z'"</span>)
+        &#125;        
+    &#125;
+&#125;</pre></div><p class="paragraph"/>Then define this class as Spring bean in <code>grails-app/conf/spring/resources.groovy</code>:<p class="paragraph"/><div class="code"><pre>beans = &#123;
+    myCustomMarshallerRegistrar(CustomMarshallerRegistrar)
+&#125;</pre></div><p class="paragraph"/>The <code>PostConstruct</code> annotation will get triggered on startup of your application.
+
+
+<h2 id="namedObjectMarshallers">8.1.6.3 オブジェクト・マーシャラの名前付き定義</h2>
+It is also possible to register named configurations. For example:<p class="paragraph"/><div class="code"><pre>XML.createNamedConfig('publicApi') &#123;
+  it.registerObjectMarshaller(Book) &#123; Book book, XML xml &#45;&#62;
+    // <span class="java&#45;keyword">do</span> <span class="java&#45;keyword">public</span> API
+  &#125;
+&#125;
+XML.createNamedConfig('adminApi') &#123;
+  it.registerObjectMarshaller(Book) &#123; Book book, XML xml &#45;&#62;
+    // <span class="java&#45;keyword">do</span> admin API
+  &#125;
+&#125;</pre></div><p class="paragraph"/>Then when you use either the render or response methods you can wrap the call in a named configuration if necessary to customize rendering per request:<p class="paragraph"/><div class="code"><pre>XML.use( isAdmin ? 'adminApi' : 'publicApi') &#123;
+    render book as XML
+&#125;</pre></div><p class="paragraph"/>or<p class="paragraph"/><div class="code"><pre>XML.use( isAdmin ? 'adminApi' : 'publicApi') &#123;
+    respond book 
+&#125;</pre></div>
+
+
+<h2 id="objectMarshallerInterface">8.1.6.4 ObjectMarshallerインターフェイスへの実装</h2>
+For more complex marshallers it is recommended you implement the <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">ObjectMarshaller</a> interface. For example given a domain class:<p class="paragraph"/><div class="code"><pre>class Book &#123;
+    <span class="java&#45;object">String</span> title
+&#125;</pre></div><p class="paragraph"/>By default the output when using:<p class="paragraph"/><div class="code"><pre>render book as XML</pre></div><p class="paragraph"/>Would look like:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;book id=<span class="xml&#45;quote">"1"</span>&#62;</span>
+   <span class="xml&#45;tag">&#60;title&#62;</span>The Stand<span class="xml&#45;tag">&#60;/title&#62;</span>
+<span class="xml&#45;tag">&#60;/book&#62;</span></pre></div><p class="paragraph"/>To write a custom marshaller you can do the following:<p class="paragraph"/><div class="code"><pre>class BookMarshaller <span class="java&#45;keyword">implements</span> ObjectMarshaller&#60;XML&#62; &#123;<p class="paragraph"/>  <span class="java&#45;keyword">public</span> <span class="java&#45;object">boolean</span> supports(<span class="java&#45;object">Object</span> object) &#123;
+    <span class="java&#45;keyword">return</span> object <span class="java&#45;keyword">instanceof</span> Book
+  &#125;<p class="paragraph"/>  <span class="java&#45;keyword">public</span> void marshalObject(<span class="java&#45;object">Object</span> object, XML converter) &#123;
+    Book book  = (Book)object 
+    converter.chars book.title
+  &#125;
+&#125;</pre></div><p class="paragraph"/>And then register the marshaller with:<p class="paragraph"/><div class="code"><pre>XML.registerObjectMarshaller(<span class="java&#45;keyword">new</span> BookMarshaller())</pre></div><p class="paragraph"/>With the custom <code>ObjectMarshaller</code> in place, the output is now:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;book&#62;</span>The Stand<span class="xml&#45;tag">&#60;/book&#62;</span></pre></div><p class="paragraph"/><h4>Customizing the Name of the Root Element</h4><p class="paragraph"/>If you wish the customize the name of the surrounding element, you can implement <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/NameAwareMarshaller.html" class="api">NameAwareMarshaller</a>:<p class="paragraph"/><div class="code"><pre>class BookMarshaller <span class="java&#45;keyword">implements</span> ObjectMarshaller&#60;XML&#62;,NameAwareMarshaller &#123;<p class="paragraph"/>  ...<p class="paragraph"/>  <span class="java&#45;object">String</span> getElementName(<span class="java&#45;object">Object</span> o) &#123;
+    <span class="java&#45;keyword">return</span> 'custom&#45;book'
+  &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>With the above change the output would now be:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;custom&#45;book&#62;</span>The Stand<span class="xml&#45;tag">&#60;/custom&#45;book&#62;</span></pre></div><p class="paragraph"/><h4>Outputing Markup Using the Converters API or Builder</h4><p class="paragraph"/>With the passed Converter object you can explicitly code to the Converters API to stream markup to the response:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">public</span> void marshalObject(<span class="java&#45;object">Object</span> object, XML converter) &#123;
+  Book book = (Book)object<p class="paragraph"/>  converter.attribute 'id', book.id.toString()
+  converter.attribute 'date&#45;released', book.dateReleased.toString()<p class="paragraph"/>  converter.startNode 'title'
+  converter.chars book.title
+  converter.end()<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>The above code results in:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;book id=<span class="xml&#45;quote">"1"</span> date&#45;released=<span class="xml&#45;quote">"..."</span>&#62;</span>
+   <span class="xml&#45;tag">&#60;title&#62;</span>The Stand<span class="xml&#45;tag">&#60;/title&#62;</span>
+<span class="xml&#45;tag">&#60;/book&#62;</span></pre></div><p class="paragraph"/>You can also use a builder notation to achieve a similar result (although the builder notation does not work for <code>CompileStatic</code>):<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">public</span> void marshalObject(<span class="java&#45;object">Object</span> object, XML converter) &#123;
+  Book b = (Book)object<p class="paragraph"/>  converter.build &#123;
+     book(id: b.id) &#123;
+        title b.title
+     &#125;
+  &#125; 
+&#125;</pre></div><p class="paragraph"/><h4>Using the convertAnother Method to Recursively Convert Objects</h4><p class="paragraph"/>To create more complex responses you can use the <code>convertAnother</code> method to convert associations and other objects:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">public</span> void marshalObject(<span class="java&#45;object">Object</span> object, XML converter) &#123;
+  Book book = (Book)object<p class="paragraph"/>  converter.startNode 'title'
+  converter.chars book.title
+  converter.end()<p class="paragraph"/>  <span class="java&#45;keyword">if</span> (book.authors) &#123;
+    converter.startNode 'authors'
+    <span class="java&#45;keyword">for</span>(author in book.authors) &#123;
+      converter.convertAnother author
+    &#125;    
+    converter.end()
+  &#125;
+&#125;</pre></div>
+
+
+
+<h2 id="customRenderers">8.1.6.5 カスタムレンダラーの実装</h2>
+If you want even more control of the rendering or prefer to use your own marshalling techniques then you can implement your own <code>Renderer</code> instance. For example below is a simple implementation that customizes the rendering of the <code>Book</code> class:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> myapp
 <span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.&#42;
 <span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.mime.MimeType<p class="paragraph"/>class BookXmlRenderer <span class="java&#45;keyword">extends</span> AbstractRenderer&#60;Book&#62; &#123;
     BookXmlRenderer() &#123;
@@ -469,18 +589,24 @@ The bean name is not important (Grails will scan the application context for all
     &#125;
 &#125;</pre></div><p class="paragraph"/>The <code>AbstractRenderer</code> super class has a constructor that takes the class that it renders and the <code>MimeType</code>(s) that are accepted (via the ACCEPT header or file extension) for the renderer.<p class="paragraph"/>To configure this renderer, simply add it is a bean to <code>grails-app/conf/spring/resources.groovy</code>:<p class="paragraph"/><div class="code"><pre>beans = &#123;
     bookRenderer(myapp.BookXmlRenderer)
-&#125;</pre></div><p class="paragraph"/>The result will be that all <code>Book</code> instances will be rendered in the following format:<p class="paragraph"/><div class="code"><pre>&#60;book id=<span class="java&#45;quote">"1"</span> title=<span class="java&#45;quote">"The Stand"</span>/&#62;</pre></div><p class="paragraph"/>TODO: Link rendering to binding!!!!!!<p class="paragraph"/><h4>Container Renderers</h4><p class="paragraph"/>A <code>grails.rest.render.ContainerRenderer</code> is a renderer that renders responses for containers of objects (lists, maps, collections etc.). The interface is largely the same as the <code>Renderer</code> interface except for the addition of the <code>getComponentType()</code> method, which should return the "contained" type. For example:<p class="paragraph"/><div class="code"><pre>class BookListRenderer <span class="java&#45;keyword">implements</span> ContainerRenderer&#60;List, Book&#62; &#123;
+&#125;</pre></div><p class="paragraph"/>The result will be that all <code>Book</code> instances will be rendered in the following format:<p class="paragraph"/><div class="code"><pre>&#60;book id=<span class="java&#45;quote">"1"</span> title=<span class="java&#45;quote">"The Stand"</span>/&#62;</pre></div><p class="paragraph"/><blockquote class="note">
+Note that if you change the rendering to a completely different format like the above, then you also need to change the binding if you plan to support POST and PUT requests. Grails will not automatically know how to bind data from a custom XML format to a domain class otherwise. See the section on "Customizing Binding of Resources" for further information.
+</blockquote><p class="paragraph"/><h4>Container Renderers</h4><p class="paragraph"/>A <code>grails.rest.render.ContainerRenderer</code> is a renderer that renders responses for containers of objects (lists, maps, collections etc.). The interface is largely the same as the <code>Renderer</code> interface except for the addition of the <code>getComponentType()</code> method, which should return the "contained" type. For example:<p class="paragraph"/><div class="code"><pre>class BookListRenderer <span class="java&#45;keyword">implements</span> ContainerRenderer&#60;List, Book&#62; &#123;
     <span class="java&#45;object">Class</span>&#60;List&#62; getTargetType() &#123; List &#125;
     <span class="java&#45;object">Class</span>&#60;Book&#62; getComponentType() &#123; Book &#125;
     MimeType&#91;&#93; getMimeTypes() &#123; &#91; MimeType.XML&#93; as MimeType&#91;&#93; &#125;
     void render(List object, RenderContext context) &#123;
         ....
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Using GSP to customize rendering</h4><p class="paragraph"/>You can also customize rendering on a per action basis. For example given the <code>show</code> action mentioned previously:<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
-    respond book
-&#125;</pre></div><p class="paragraph"/>You could supply a <code>show.xml.gsp</code> file to customize the rendering:<p class="paragraph"/><div class="code"><pre>&#60;%@page contentType=<span class="java&#45;quote">"application/xml"</span>%&#62;
-&#60;book id=<span class="java&#45;quote">"$&#123;book.id&#125;"</span> title=<span class="java&#45;quote">"$&#123;book.title&#125;"</span>/&#62;</pre></div><p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/>
 
+
+
+<h2 id="gspRenderers">8.1.6.6 GSPを使用したカスタムレンダリング</h2>
+You can also customize rendering on a per action basis using Groovy Server Pages (GSP). For example given the <code>show</code> action mentioned previously:<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
+    respond book
+&#125;</pre></div><p class="paragraph"/>You could supply a <code>show.xml.gsp</code> file to customize the rendering of the XML:<p class="paragraph"/><div class="code"><pre>&#60;%@page contentType=<span class="java&#45;quote">"application/xml"</span>%&#62;
+&#60;book id=<span class="java&#45;quote">"$&#123;book.id&#125;"</span> title=<span class="java&#45;quote">"$&#123;book.title&#125;"</span>/&#62;</pre></div><p class="paragraph"/>
 
 
 <h2 id="hypermedia">8.1.7 Hypermediaをアプリケーションステートのエンジンにする</h2>
@@ -634,7 +760,111 @@ Content&#45;Type: application/vnd.error+json;charset=ISO&#45;8859&#45;1<p class=
 
 
 <h2 id="binding">8.1.8 リソースバインディングのカスタマイズ</h2>
-TODO: Jeff?
+The framework provides a sophisticated but simple mechanism for binding REST requests to domain objects and command objects.  One way to take advantage of this is to bind the <code>request</code> property in a controller the <code>properties</code> of a domain class.  Given the following XML as the body of the request, the <code>createBook</code> action will create a new <code>Book</code> and assign "The Stand" to the <code>title</code> property and "Stephen King" to the <code>authorName</code> property.<p class="paragraph"/><div class="code"><pre>&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;
+&#60;book"&#62;
+    &#60;title&#62;The Stand&#60;/title&#62;
+    &#60;authorName&#62;Stephen King&#60;/authorName&#62;
+&#60;/book&#62;</pre></div><p class="paragraph"/><div class="code"><pre>class BookController &#123;<p class="paragraph"/>    def createBook() &#123;
+        def book = <span class="java&#45;keyword">new</span> Book()
+        book.properties = request<p class="paragraph"/>        // &#8230;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>If the root element of the XML document contains an <code>id</code> attribute, the <code>id</code> value will be used to retrieve the corresponding persistent instance from the database and then the rest of the document will be bound to the instance.  If no corresponding record is found in the database, the command object reference will be null.<p class="paragraph"/><div class="code"><pre>&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;
+&#60;book&#62;
+    &#60;title&#62;The Stand&#60;/title&#62;
+    &#60;authorName&#62;Stephen King&#60;/authorName&#62;
+&#60;/book&#62;</pre></div><p class="paragraph"/>Command objects will automatically be bound with the body of the request:<p class="paragraph"/><div class="code"><pre>class BookController &#123;
+    def createBook(BookCommand book) &#123;<p class="paragraph"/>        // &#8230;
+    &#125;
+&#125;<p class="paragraph"/>class BookCommand &#123;
+    <span class="java&#45;object">String</span> title
+    <span class="java&#45;object">String</span> authorName
+&#125;</pre></div><p class="paragraph"/>If the command object type is a domain class and the root element of the XML document contains an <code>id</code> attribute, the <code>id</code> value will be used to retrieve the corresponding persistent instance from the database and then the rest of the document will be bound to the instance.  If no corresponding record is found in the database, the command object reference will be null.<p class="paragraph"/><div class="code"><pre>&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;
+&#60;book id=<span class="java&#45;quote">"42"</span>&#62;
+    &#60;title&#62;Walden&#60;/title&#62;
+    &#60;authorName&#62;Henry David Thoreau&#60;/authorName&#62;
+&#60;/book&#62;</pre></div><p class="paragraph"/><div class="code"><pre>class BookController &#123;
+    def updateBook(Book book) &#123;
+        // The book will have been retrieved from the database and updated
+        // by doing something like <span class="java&#45;keyword">this</span>:
+        //
+        // book == Book.get('42')
+        // <span class="java&#45;keyword">if</span>(book != <span class="java&#45;keyword">null</span>) &#123;
+        //    book.properties = request
+        // &#125;
+        //
+        // the code above represents what the framework will
+        // have done. There is no need to write that code.<p class="paragraph"/>        // ...<p class="paragraph"/>    &#125;
+&#125;</pre></div><p class="paragraph"/>The data binding depends on an instance of the <a href="http://grails.org/doc/latest/api/org/grails/databinding/DataBindingSource.html" class="api">DataBindingSource</a> interface created by an
+instance of the <a href="http://grails.org/doc/latest/api/org/grails/databinding/bindingsource/DataBindingSourceCreator.html" class="api">DataBindingSourceCreator</a> interface.  The specific
+implementation of <code>DataBindingSourceCreator</code> will be selected based on the <code>contentType</code> of the request.  Several implementations 
+are provided to handle common content types.  The default implementations will be fine for most use cases.  The following table 
+lists the content types which are supported by the core framework and which <code>DataBindingSourceCreator</code> implementations are used for each.<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>Content Type(s)</th><th>Bean Name</th><th>DataBindingSourceCreator Impl.</th></tr><tr class="table-odd"><td>application/xml, text/xml</td><td>xmlDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.XmlDataBindingSourceCreator</td></tr><tr class="table-even"><td>application/json, text/json</td><td>jsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.JsonDataBindingSourceCreator</td></tr><tr class="table-odd"><td>application/hal+json</td><td>halJsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.HalJsonDataBindingSourceCreator</td></tr></table><p class="paragraph"/>In order provide your own <code>DataBindingSourceCreator</code> for any of those content types, write a class which implements
+<code>DataBindingSourceCreator</code> and register an instance of that class in the Spring application context.  If you
+are replacing one of the existing helpers, use the corresponding bean name from above.  If you are providing a
+helper for a content type other than those accounted for by the core framework, the bean name may be anything that
+you like but you should take care not to conflict with one of the bean names above.<p class="paragraph"/>The <code>DataBindingSourceCreator</code> interface defines just 2 methods:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> org.grails.databinding.bindingsource<p class="paragraph"/><span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.mime.MimeType
+<span class="java&#45;keyword">import</span> org.grails.databinding.DataBindingSource<p class="paragraph"/>/&#42;&#42;
+ &#42; A factory <span class="java&#45;keyword">for</span> DataBindingSource instances
+ &#42; 
+ &#42; @since 2.3
+ &#42; @see DataBindingSourceRegistry
+ &#42; @see DataBindingSource
+ &#42;
+ &#42;/
+<span class="java&#45;keyword">interface</span> DataBindingSourceCreator &#123;<p class="paragraph"/>    /&#42;&#42;
+     &#42; <code><span class="java&#45;keyword">return</span> All of the &#123;</code>link MimeType&#125; supported by <span class="java&#45;keyword">this</span> helper
+     &#42;/
+    MimeType&#91;&#93; getMimeTypes()<p class="paragraph"/>    /&#42;&#42;
+     &#42; Creates a DataBindingSource suitable <span class="java&#45;keyword">for</span> binding bindingSource to bindingTarget
+     &#42; 
+     &#42; @param mimeType a mime type
+     &#42; @param bindingTarget the target of the data binding
+     &#42; @param bindingSource the value being bound
+     &#42; @<span class="java&#45;keyword">return</span> a DataBindingSource
+     &#42;/
+    DataBindingSource createDataBindingSource(MimeType mimeType, <span class="java&#45;object">Object</span> bindingTarget, <span class="java&#45;object">Object</span> bindingSource)
+&#125;</pre></div><p class="paragraph"/><a href="http://grails.org/doc/latest/api/org/grails/databinding/bindingsource/AbstractRequestbodyDataBindingSourceCreator.html" class="api">AbstractRequestBodyDataBindingSourceCreator</a>
+is an abstract class designed to be extended to simplify writing custom <code>DataBindingSourceCreator</code> classes.  Classes which
+extend <code>AbstractRequestbodyDatabindingSourceCreator</code> need to implement a method named <code>createBindingSource</code>
+which accepts an <code>InputStream</code> as an argument and returns a <code>DataBindingSource</code> as well as implementing the <code>getMimeTypes</code>
+method described in the <code>DataBindingSourceCreator</code> interface above.  The <code>InputStream</code> argument to <code>createBindingSource</code>
+provides access to the body of the request.<p class="paragraph"/>The code below shows a simple implementation.<p class="paragraph"/>
+<div class="code"><pre>// src/groovy/com/demo/myapp/databinding/MyCustomDataBindingSourceCreator.groovy
+<span class="java&#45;keyword">package</span> com.demo.myapp.databinding<p class="paragraph"/><span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.mime.MimeType
+<span class="java&#45;keyword">import</span> org.grails.databinding.DataBindingSource
+<span class="java&#45;keyword">import</span> org.grails.databinding.SimpleMapDataBindingSource
+<span class="java&#45;keyword">import</span> org.grails.databinding.bindingsource.AbstractRequestBodyDataBindingSourceCreator<p class="paragraph"/>/&#42;&#42;
+ &#42; A custom DataBindingSourceCreator capable of parsing key value pairs out of
+ &#42; a request body containing a comma separated list of key:value pairs like:
+ &#42;
+ &#42; name:Herman,age:99,town:STL
+ &#42;
+ &#42;/
+class MyCustomDataBindingSourceCreator <span class="java&#45;keyword">extends</span> AbstractRequestBodyDataBindingSourceCreator &#123;<p class="paragraph"/>    @Override
+    <span class="java&#45;keyword">public</span> MimeType&#91;&#93; getMimeTypes() &#123;
+        &#91;<span class="java&#45;keyword">new</span> MimeType('text/custom+demo+csv')&#93; as MimeType&#91;&#93;
+    &#125;<p class="paragraph"/>    @Override
+    <span class="java&#45;keyword">protected</span> DataBindingSource createBindingSource(InputStream inputStream) &#123;
+        def map = &#91;:&#93;<p class="paragraph"/>        def reader = <span class="java&#45;keyword">new</span> InputStreamReader(inputStream)<p class="paragraph"/>        // <span class="java&#45;keyword">this</span> is an obviously naive parser and is intended
+        // <span class="java&#45;keyword">for</span> demonstration purposes only.<p class="paragraph"/>        reader.eachLine &#123; line &#45;&#62;
+            def keyValuePairs = line.split(',')
+            keyValuePairs.each &#123; keyValuePair &#45;&#62;
+                <span class="java&#45;keyword">if</span>(keyValuePair?.trim()) &#123;
+                    def keyValuePieces = keyValuePair.split(':')
+                    def key = keyValuePieces&#91;0&#93;.trim()
+                    def value = keyValuePieces&#91;1&#93;.trim()
+                    map&#91;key&#93; = value
+                &#125;
+            &#125;
+        &#125;<p class="paragraph"/>        // create and <span class="java&#45;keyword">return</span> a DataBindingSource which contains the parsed data
+        <span class="java&#45;keyword">new</span> SimpleMapDataBindingSource(map)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>An instance of <code>MyCustomDataSourceCreator</code> needs to be registered in the spring application context.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/spring/resources.groovy
+beans = &#123;<p class="paragraph"/>    myCustomCreator com.demo.myapp.databinding.MyCustomDataBindingSourceCreator<p class="paragraph"/>    // &#8230;
+&#125;</pre></div><p class="paragraph"/>
+With that in place the framework will use the <code>myCustomCreator</code> bean any time a <code>DataBindingSourceCreator</code> is needed
+to deal with a request which has a <code>contentType</code> of "text/custom+demo+csv".
+
 
 <a name="8.2 SOAP"><!-- Legacy link --></a>
 <h2 id="SOAP">8.2 SOAP</h2>

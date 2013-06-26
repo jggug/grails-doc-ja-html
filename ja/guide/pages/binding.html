@@ -141,7 +141,111 @@ function addJsClass() {
                 
 
 <h2 id="binding">8.1.8 リソースバインディングのカスタマイズ</h2>
-TODO: Jeff?
+The framework provides a sophisticated but simple mechanism for binding REST requests to domain objects and command objects.  One way to take advantage of this is to bind the <code>request</code> property in a controller the <code>properties</code> of a domain class.  Given the following XML as the body of the request, the <code>createBook</code> action will create a new <code>Book</code> and assign "The Stand" to the <code>title</code> property and "Stephen King" to the <code>authorName</code> property.<p class="paragraph"/><div class="code"><pre>&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;
+&#60;book"&#62;
+    &#60;title&#62;The Stand&#60;/title&#62;
+    &#60;authorName&#62;Stephen King&#60;/authorName&#62;
+&#60;/book&#62;</pre></div><p class="paragraph"/><div class="code"><pre>class BookController &#123;<p class="paragraph"/>    def createBook() &#123;
+        def book = <span class="java&#45;keyword">new</span> Book()
+        book.properties = request<p class="paragraph"/>        // &#8230;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>If the root element of the XML document contains an <code>id</code> attribute, the <code>id</code> value will be used to retrieve the corresponding persistent instance from the database and then the rest of the document will be bound to the instance.  If no corresponding record is found in the database, the command object reference will be null.<p class="paragraph"/><div class="code"><pre>&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;
+&#60;book&#62;
+    &#60;title&#62;The Stand&#60;/title&#62;
+    &#60;authorName&#62;Stephen King&#60;/authorName&#62;
+&#60;/book&#62;</pre></div><p class="paragraph"/>Command objects will automatically be bound with the body of the request:<p class="paragraph"/><div class="code"><pre>class BookController &#123;
+    def createBook(BookCommand book) &#123;<p class="paragraph"/>        // &#8230;
+    &#125;
+&#125;<p class="paragraph"/>class BookCommand &#123;
+    <span class="java&#45;object">String</span> title
+    <span class="java&#45;object">String</span> authorName
+&#125;</pre></div><p class="paragraph"/>If the command object type is a domain class and the root element of the XML document contains an <code>id</code> attribute, the <code>id</code> value will be used to retrieve the corresponding persistent instance from the database and then the rest of the document will be bound to the instance.  If no corresponding record is found in the database, the command object reference will be null.<p class="paragraph"/><div class="code"><pre>&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;
+&#60;book id=<span class="java&#45;quote">"42"</span>&#62;
+    &#60;title&#62;Walden&#60;/title&#62;
+    &#60;authorName&#62;Henry David Thoreau&#60;/authorName&#62;
+&#60;/book&#62;</pre></div><p class="paragraph"/><div class="code"><pre>class BookController &#123;
+    def updateBook(Book book) &#123;
+        // The book will have been retrieved from the database and updated
+        // by doing something like <span class="java&#45;keyword">this</span>:
+        //
+        // book == Book.get('42')
+        // <span class="java&#45;keyword">if</span>(book != <span class="java&#45;keyword">null</span>) &#123;
+        //    book.properties = request
+        // &#125;
+        //
+        // the code above represents what the framework will
+        // have done. There is no need to write that code.<p class="paragraph"/>        // ...<p class="paragraph"/>    &#125;
+&#125;</pre></div><p class="paragraph"/>The data binding depends on an instance of the <a href="http://grails.org/doc/latest/api/org/grails/databinding/DataBindingSource.html" class="api">DataBindingSource</a> interface created by an
+instance of the <a href="http://grails.org/doc/latest/api/org/grails/databinding/bindingsource/DataBindingSourceCreator.html" class="api">DataBindingSourceCreator</a> interface.  The specific
+implementation of <code>DataBindingSourceCreator</code> will be selected based on the <code>contentType</code> of the request.  Several implementations 
+are provided to handle common content types.  The default implementations will be fine for most use cases.  The following table 
+lists the content types which are supported by the core framework and which <code>DataBindingSourceCreator</code> implementations are used for each.<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>Content Type(s)</th><th>Bean Name</th><th>DataBindingSourceCreator Impl.</th></tr><tr class="table-odd"><td>application/xml, text/xml</td><td>xmlDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.XmlDataBindingSourceCreator</td></tr><tr class="table-even"><td>application/json, text/json</td><td>jsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.JsonDataBindingSourceCreator</td></tr><tr class="table-odd"><td>application/hal+json</td><td>halJsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.HalJsonDataBindingSourceCreator</td></tr></table><p class="paragraph"/>In order provide your own <code>DataBindingSourceCreator</code> for any of those content types, write a class which implements
+<code>DataBindingSourceCreator</code> and register an instance of that class in the Spring application context.  If you
+are replacing one of the existing helpers, use the corresponding bean name from above.  If you are providing a
+helper for a content type other than those accounted for by the core framework, the bean name may be anything that
+you like but you should take care not to conflict with one of the bean names above.<p class="paragraph"/>The <code>DataBindingSourceCreator</code> interface defines just 2 methods:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> org.grails.databinding.bindingsource<p class="paragraph"/><span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.mime.MimeType
+<span class="java&#45;keyword">import</span> org.grails.databinding.DataBindingSource<p class="paragraph"/>/&#42;&#42;
+ &#42; A factory <span class="java&#45;keyword">for</span> DataBindingSource instances
+ &#42; 
+ &#42; @since 2.3
+ &#42; @see DataBindingSourceRegistry
+ &#42; @see DataBindingSource
+ &#42;
+ &#42;/
+<span class="java&#45;keyword">interface</span> DataBindingSourceCreator &#123;<p class="paragraph"/>    /&#42;&#42;
+     &#42; <code><span class="java&#45;keyword">return</span> All of the &#123;</code>link MimeType&#125; supported by <span class="java&#45;keyword">this</span> helper
+     &#42;/
+    MimeType&#91;&#93; getMimeTypes()<p class="paragraph"/>    /&#42;&#42;
+     &#42; Creates a DataBindingSource suitable <span class="java&#45;keyword">for</span> binding bindingSource to bindingTarget
+     &#42; 
+     &#42; @param mimeType a mime type
+     &#42; @param bindingTarget the target of the data binding
+     &#42; @param bindingSource the value being bound
+     &#42; @<span class="java&#45;keyword">return</span> a DataBindingSource
+     &#42;/
+    DataBindingSource createDataBindingSource(MimeType mimeType, <span class="java&#45;object">Object</span> bindingTarget, <span class="java&#45;object">Object</span> bindingSource)
+&#125;</pre></div><p class="paragraph"/><a href="http://grails.org/doc/latest/api/org/grails/databinding/bindingsource/AbstractRequestbodyDataBindingSourceCreator.html" class="api">AbstractRequestBodyDataBindingSourceCreator</a>
+is an abstract class designed to be extended to simplify writing custom <code>DataBindingSourceCreator</code> classes.  Classes which
+extend <code>AbstractRequestbodyDatabindingSourceCreator</code> need to implement a method named <code>createBindingSource</code>
+which accepts an <code>InputStream</code> as an argument and returns a <code>DataBindingSource</code> as well as implementing the <code>getMimeTypes</code>
+method described in the <code>DataBindingSourceCreator</code> interface above.  The <code>InputStream</code> argument to <code>createBindingSource</code>
+provides access to the body of the request.<p class="paragraph"/>The code below shows a simple implementation.<p class="paragraph"/>
+<div class="code"><pre>// src/groovy/com/demo/myapp/databinding/MyCustomDataBindingSourceCreator.groovy
+<span class="java&#45;keyword">package</span> com.demo.myapp.databinding<p class="paragraph"/><span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.mime.MimeType
+<span class="java&#45;keyword">import</span> org.grails.databinding.DataBindingSource
+<span class="java&#45;keyword">import</span> org.grails.databinding.SimpleMapDataBindingSource
+<span class="java&#45;keyword">import</span> org.grails.databinding.bindingsource.AbstractRequestBodyDataBindingSourceCreator<p class="paragraph"/>/&#42;&#42;
+ &#42; A custom DataBindingSourceCreator capable of parsing key value pairs out of
+ &#42; a request body containing a comma separated list of key:value pairs like:
+ &#42;
+ &#42; name:Herman,age:99,town:STL
+ &#42;
+ &#42;/
+class MyCustomDataBindingSourceCreator <span class="java&#45;keyword">extends</span> AbstractRequestBodyDataBindingSourceCreator &#123;<p class="paragraph"/>    @Override
+    <span class="java&#45;keyword">public</span> MimeType&#91;&#93; getMimeTypes() &#123;
+        &#91;<span class="java&#45;keyword">new</span> MimeType('text/custom+demo+csv')&#93; as MimeType&#91;&#93;
+    &#125;<p class="paragraph"/>    @Override
+    <span class="java&#45;keyword">protected</span> DataBindingSource createBindingSource(InputStream inputStream) &#123;
+        def map = &#91;:&#93;<p class="paragraph"/>        def reader = <span class="java&#45;keyword">new</span> InputStreamReader(inputStream)<p class="paragraph"/>        // <span class="java&#45;keyword">this</span> is an obviously naive parser and is intended
+        // <span class="java&#45;keyword">for</span> demonstration purposes only.<p class="paragraph"/>        reader.eachLine &#123; line &#45;&#62;
+            def keyValuePairs = line.split(',')
+            keyValuePairs.each &#123; keyValuePair &#45;&#62;
+                <span class="java&#45;keyword">if</span>(keyValuePair?.trim()) &#123;
+                    def keyValuePieces = keyValuePair.split(':')
+                    def key = keyValuePieces&#91;0&#93;.trim()
+                    def value = keyValuePieces&#91;1&#93;.trim()
+                    map&#91;key&#93; = value
+                &#125;
+            &#125;
+        &#125;<p class="paragraph"/>        // create and <span class="java&#45;keyword">return</span> a DataBindingSource which contains the parsed data
+        <span class="java&#45;keyword">new</span> SimpleMapDataBindingSource(map)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>An instance of <code>MyCustomDataSourceCreator</code> needs to be registered in the spring application context.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/spring/resources.groovy
+beans = &#123;<p class="paragraph"/>    myCustomCreator com.demo.myapp.databinding.MyCustomDataBindingSourceCreator<p class="paragraph"/>    // &#8230;
+&#125;</pre></div><p class="paragraph"/>
+With that in place the framework will use the <code>myCustomCreator</code> bean any time a <code>DataBindingSourceCreator</code> is needed
+to deal with a request which has a <code>contentType</code> of "text/custom+demo+csv".
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>

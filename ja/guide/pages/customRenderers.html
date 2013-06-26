@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>1.1 Grails 2.3&#12398;&#26032;&#27231;&#33021; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>8.1.6.5 &#12459;&#12473;&#12479;&#12512;&#12524;&#12531;&#12480;&#12521;&#12540;&#12398;&#23455;&#35013; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -114,16 +114,18 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
+                    <div class="toc-item prev-left"><a href="../../guide/theWebLayer.html">&lt;&lt; <strong>7</strong><span>Web&#12524;&#12452;&#12516;</span></a></div>
+                
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/gettingStarted.html"><strong>2</strong><span>&#12473;&#12479;&#12540;&#12488;&#12460;&#12452;&#12489;</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/async.html"><strong>9</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>1.1 Grails 2.3&#12398;&#26032;&#27231;&#33021; - Reference Documentation</h1>
+                    <h1>8.1.6.5 &#12459;&#12473;&#12479;&#12512;&#12524;&#12531;&#12480;&#12521;&#12540;&#12398;&#23455;&#35013; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -138,106 +140,36 @@ function addJsClass() {
 
                 
 
-<h2 id="whatsNew23">1.1 Grails 2.3の新機能</h2>
-<div class="hidden-block">h4. Improved Dependency Management</div>
-<h4>依存管理の向上</h4><p class="paragraph"/><div class="hidden-block">The default dependency resolution engine used by Grails has been changed to <a href="http://eclipse.org/aether" target="blank">Aether</a>, the dependency resolution engine used by Maven. Which engine you use can be configured in <code>BuildConfig</code>:</div>
-Grailsでデフォルトで使用されている依存管理エンジンが、Mavenで使用されているエンジンの <a href="http://eclipse.org/aether" target="blank">Aether</a> に変更されました。 <code>BuildConfig</code> で設定をすることでどちらのエンジンを使用するか変更可能です。<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolver = <span class="java&#45;quote">"maven"</span> // or ivy</pre></div><p class="paragraph"/><div class="hidden-block">Using Aether dependency resolution in Grails results in the same behavior as when using the Maven build tool, meaning improved snapshot handling, understanding of custom packaging types and so on.</div>
-Aether依存管理を使用するとGrailsではMavenビルドツールと同じ振る舞いをします。これは、前と比べてスナップショットハンドリングの向上やカスタムパッケージング等の機能向上を意味します。<p class="paragraph"/><div class="hidden-block">In addition, the <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> command has been updated to print the dependency graph of the console, which helps in diagnosing dependency resolution failures. See the chapter on <a href="../guide/single.html#dependencyResolution" class="guide">Dependency Resolution</a> for more information.</div>
-そしてさらに、 <a href="../ref/Command Line/dependency-report.html" class="commandLine">dependency-report</a> コマンドも改良され、依存問題の解決を手助けするために、依存関係のグラフがコンソールに表示されるようになりました。 詳しくは <a href="../guide/single.html#dependencyResolution" class="guide">依存性解決</a> のドキュメントを参照してください。<p class="paragraph"/><div class="hidden-block">h4. Data Binder</div>
-<h4>データバインダー</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 includes a new data binding mechanism which is more flexible and easier to maintain than the data binder used in previous versions.  The new data binder includes numerous enhancements including:</div>
-Grails 2.3では、依存のバージョンよりもフレキシブルで保守性の高く簡単な新データバインダーを実装しています。<p class="paragraph"/><div class="hidden-block">
-<ul class="star">
-<li>Custom date formats on a per field basis using <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingFormat.html" class="api">BindingFormat</a></li>
-<li>User defined data converters using <a href="http://grails.org/doc/latest/api/org/grails/databinding/converters/ValueConverter.html" class="api">ValueConverter</a></li>
-<li>User defined formatted data converters using <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingFormat.html" class="api">BindingFormat</a> and <a href="http://grails.org/doc/latest/api/org/grails/databinding/converters/FormattedValueConverter.html" class="api">FormattedValueConverter</a></li>
-<li>Custom binding on a per class basis using <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindUsing.html" class="api">BindUsing</a></li>
-<li>Custom binding on a per field basis using <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindUsing.html" class="api">BindUsing</a></li>
-<li>By default all blank and empty Strings will be converted to null during data binding (configurable)</li>
-</ul><p class="paragraph"/></div>
-<ul class="star">
-<li>フィールドごとのカスタムデータフォーマット - <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingFormat.html" class="api">BindingFormat</a></li>
-<li>ユーザ定義可能なデータコンバーター - <a href="http://grails.org/doc/latest/api/org/grails/databinding/converters/ValueConverter.html" class="api">ValueConverter</a></li>
-<li>ユーザ定義フォーマットデータコンバーター - <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingFormat.html" class="api">BindingFormat</a>  <a href="http://grails.org/doc/latest/api/org/grails/databinding/converters/FormattedValueConverter.html" class="api">FormattedValueConverter</a></li>
-<li>クラスごとのカスタムバインディング - <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindUsing.html" class="api">BindUsing</a></li>
-<li>フィールドごとのカスタムバインディング - <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindUsing.html" class="api">BindUsing</a></li>
-<li>デフォルトで全ての空文字列とブランクはデータバインディングでnullに変換されます。(設定可能)</li>
-</ul><p class="paragraph"/><div class="hidden-block">See the <a href="../guide/single.html#dataBinding" class="guide">Data Binding</a> section for details.</div>
-詳細は <a href="../guide/single.html#dataBinding" class="guide">データバインディング</a> のセクションを参照してください。<p class="paragraph"/><div class="hidden-block">The legacy data binder may be used by assigning <code>true</code> to the <code>grails.databinding.useSpringBinder</code> property in <code>grails-app/conf/Config.groovy</code>.  Note that the legacy binder does not support any of the new features provided by the new data binder.</div>
-<code>grails-app/conf/Config.groovy</code> の <code>grails.databinding.useSpringBinder</code> プロパティを <code>true</code> にすることで以前のデータバインダーに変更することができます。 以前のバインダーは今回実装された新機能には対応していません。<p class="paragraph"/><h4>Domain Classes As Command Objects</h4><p class="paragraph"/>When a domain class is used as a command object and there is an <code>id</code> request parameter, the framework will retrieve the instance of the domain class from the database using the <code>id</code> request parameter.  See the <a href="../guide/single.html#commandObjects" class="guide">Command Objects</a> documentation for more details.<p class="paragraph"/><div class="hidden-block">h4. Forked Execution</div>
-<h4>フォーク実行 </h4><p class="paragraph"/><div class="hidden-block">All major commands can now be forked into a separate JVM, thus isolating the build path from the runtime / test paths. Forked execution can be controlled via the <code>BuildConfig</code>:</div>
-全てのメジャーなコマンドが別々のJVMへフォークされるようになり、ビルドパスをランタイム/テストから分離します。 フォーク実行のパラメータは <code>BuildConfig</code> に定義できます:<p class="paragraph"/><div class="hidden-block">
-<div class="code"><pre>grails.project.fork = &#91;
-   test: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, daemon:<span class="java&#45;keyword">true</span>&#93;, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
-   run: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // configure settings <span class="java&#45;keyword">for</span> the run&#45;app JVM
-   war: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // configure settings <span class="java&#45;keyword">for</span> the run&#45;war JVM
-   console: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;// configure settings <span class="java&#45;keyword">for</span> the Console UI JVM
-&#93;</pre></div>
-</div>
-<div class="code"><pre>grails.project.fork = &#91;
-   test: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, daemon:<span class="java&#45;keyword">true</span>&#93;, // test&#45;app用JVMへの設定
-   run: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // run&#45;app用JVMへの設定
-   war: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // run&#45;war用JVMへの設定
-   console: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;// console用JVMへの設定
-&#93;</pre></div><p class="paragraph"/><div class="hidden-block">See the documentation on <a href="../guide/single.html#forkedMode" class="guide">Forked Mode</a> for more information.</div>
-詳しくは <a href="../guide/single.html#forkedMode" class="guide">フォームモード</a> のドキュメントを参照してください。<p class="paragraph"/><h4>Test Runner Daemon</h4><p class="paragraph"/>To speed up testing when using forked execution a new daemon will start-up in the background to run tests when using interactive mode. You can restart the daemon with the <code>restart-daemon</code> command from interactive mode:<p class="paragraph"/><div class="code"><pre>$ grails&#62; restart&#45;daemon</pre></div><p class="paragraph"/><h4>Server-Side REST Improvements</h4><p class="paragraph"/>Grails' <a href="../guide/single.html#REST" class="guide">REST support</a> has been significantly improved with the addition of the following features:
-<ul class="star">
-<li>Rich <a href="../guide/single.html#restfulMappings" class="guide">REST URL Mapping support</a> with supports for resource mappings, singular resource mappings, nested resources, versioning and more</li>
-<li>New extensible response rendering and binding APIs</li>
-<li>Support for HAL, Atom and Hypermedia (HATEAOS)</li>
-<li>Scaffolding for REST controllers</li>
-</ul><p class="paragraph"/>See the <a href="../guide/single.html#REST" class="guide">user guide</a> for more information.<p class="paragraph"/><div class="hidden-block">h4. Async support </div>
-<h4>非同期サポート</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 features new <a href="../guide/single.html#async" class="guide">Asynchronous Programming APIs</a> that allow for asynchronous processing of requests and integrate seamlessly with GORM. Example:</div>
-Grails 2.3では、リクエストの非同期処理と、GORMとシームレスに統合した新たな<a href="../guide/single.html#async" class="guide">非同期プログラミングAPI</a>を提供しています。 例:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> grails.async.Promises.&#42;
-&#8230;
-def index() &#123;
-   tasks books: Book.async.list(),
-         totalBooks: Book.async.count(),
-         otherValue: &#123;
-           // <span class="java&#45;keyword">do</span> hard work
-         &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">See <a href="../guide/single.html#async" class="guide">the documentation</a> for further information.</div>
-詳しくは、 <a href="../guide/single.html#async" class="guide">ドキュメント</a> を参照してください。<p class="paragraph"/><div class="hidden-block">h4. Encoding / Escaping Improvements </div>
-<h4>エンコーディング / エスケーピングの向上</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 features dedicated support for <a href="../guide/single.html#xssPrevention" class="guide">Cross Site Scripting (XSS) prevention</a>, including :</div>
-Grails 2.3では専用の <a href="../guide/single.html#xssPrevention" class="guide">クロスサイトスクリプティング(XSS)防御</a>を実装しています。<p class="paragraph"/><div class="hidden-block">
-<ul class="star">
-<li>Defaulting to HTML escaping all GSP expressions and scriptlets</li>
-<li>Context sensitive encoding switching for tags</li>
-<li>Double encoding prevention</li>
-<li>Optional automatic encoding of all data in a GSP page not considered safe</li>
-</ul><p class="paragraph"/></div>
-<ul class="star">
-<li>デフォルトでGSPエクスプレッションとスクリプトレットをHTMLエスケーピング</li>
-<li>タグでの状況依存エンコーディング切替</li>
-<li>多重エンコーディング防止</li>
-<li>GSPページ内の全てのデータに対して安全と判断しない場合の自動エンコーディング</li>
-</ul><p class="paragraph"/><div class="hidden-block">See the documentation on <a href="../guide/single.html#xssPrevention" class="guide">Cross Site Scripting (XSS) prevention</a> for more information.</div>
-詳しくは、 <a href="../guide/single.html#xssPrevention" class="guide">クロスサイトスクリプティング(XSS)防御</a> のドキュメントを参照してください。<p class="paragraph"/><div class="hidden-block">h4. Hibernate 3 and 4 support </div>
-<h4>Hibernate 3と4をサポート</h4><p class="paragraph"/><div class="hidden-block">The GORM for Hibernate 3 support for Grails has been extracted into a separate project, allowing new support for Hibernate 4 as a separate plugin.</div>
-新たにHibernate 4をプラグインでサポートするために、Hibernate 3用のGORMは、本体から別のプラグインプロジェクトとなりました。<p class="paragraph"/><h4>Namespaced Controllers</h4><p class="paragraph"/>Controllers may now be defined in a namespace which allows for multiple controllers to be defined with the same name in different packages.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/com/app/reporting/AdminController.groovy
-<span class="java&#45;keyword">package</span> com.app.reporting<p class="paragraph"/>class AdminController &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> namespace = 'reports'<p class="paragraph"/>    // &#8230;
-&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/com/app/security/AdminController.groovy
-<span class="java&#45;keyword">package</span> com.app.security<p class="paragraph"/>class AdminController &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> namespace = 'users'<p class="paragraph"/>    // &#8230;
-&#125;</pre></div><p class="paragraph"/>
-<div class="code"><pre>// grails&#45;app/conf/UrlMappings.groovy
-class UrlMappings &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mappings = &#123;
-        '/userAdmin' &#123;
-            controller = 'admin'
-            namespace = 'users'
-        &#125;<p class="paragraph"/>        '/reportAdmin' &#123;
-            controller = 'admin'
-            namespace = 'reports'
-        &#125;<p class="paragraph"/>        <span class="java&#45;quote">"/$namespace/$controller/$action?"</span>()
+<h2 id="customRenderers">8.1.6.5 カスタムレンダラーの実装</h2>
+If you want even more control of the rendering or prefer to use your own marshalling techniques then you can implement your own <code>Renderer</code> instance. For example below is a simple implementation that customizes the rendering of the <code>Book</code> class:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> myapp
+<span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.&#42;
+<span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.mime.MimeType<p class="paragraph"/>class BookXmlRenderer <span class="java&#45;keyword">extends</span> AbstractRenderer&#60;Book&#62; &#123;
+    BookXmlRenderer() &#123;
+        <span class="java&#45;keyword">super</span>(Book, &#91;MimeType.XML,MimeType.TEXT_XML&#93; as MimeType&#91;&#93;)
+    &#125;<p class="paragraph"/>    void render(Book object, RenderContext context) &#123;
+        context.contentType = MimeType.XML.name<p class="paragraph"/>        def xml = <span class="java&#45;keyword">new</span> groovy.xml.MarkupBuilder(context.writer)
+        xml.book(id: object.id, title:object.title)
     &#125;
-&#125;</pre></div><p class="paragraph"/><div class="code"><pre>&#60;g:link controller=<span class="java&#45;quote">"admin"</span> namespace=<span class="java&#45;quote">"reports"</span>&#62;Click For Report Admin&#60;/g:link&#62;
-&#60;g:link controller=<span class="java&#45;quote">"admin"</span> namespace=<span class="java&#45;quote">"users"</span>&#62;Click For User Admin&#60;/g:link&#62;</pre></div><p class="paragraph"/>See the <a href="../guide/single.html#namespacedControllers" class="guide">namespaced controllers</a> docs for more information.<p class="paragraph"/><div class="hidden-block">h4. Command Line </div>
-<h4>コマンドライン</h4><p class="paragraph"/><div class="hidden-block">The <code>create-app</code> command will now by default generate the command line grailsw wrapper for newly created applications.  The <code>&#45;&#45;skip-wrapper</code> switch may be used to prevent the wrapper from being generated.</div>
-<code>create&#45;app</code> コマンドがデフォルトでgrailswラッパーを生成するようになりました。ラッパーを生成しない場合は <code>&#45;&#45;skip&#45;wrapper</code> オプションを指定してください。<p class="paragraph"/><div class="code"><pre>grails create&#45;app appname &#45;&#45;skip&#45;wrapper</pre></div>
+&#125;</pre></div><p class="paragraph"/>The <code>AbstractRenderer</code> super class has a constructor that takes the class that it renders and the <code>MimeType</code>(s) that are accepted (via the ACCEPT header or file extension) for the renderer.<p class="paragraph"/>To configure this renderer, simply add it is a bean to <code>grails-app/conf/spring/resources.groovy</code>:<p class="paragraph"/><div class="code"><pre>beans = &#123;
+    bookRenderer(myapp.BookXmlRenderer)
+&#125;</pre></div><p class="paragraph"/>The result will be that all <code>Book</code> instances will be rendered in the following format:<p class="paragraph"/><div class="code"><pre>&#60;book id=<span class="java&#45;quote">"1"</span> title=<span class="java&#45;quote">"The Stand"</span>/&#62;</pre></div><p class="paragraph"/><blockquote class="note">
+Note that if you change the rendering to a completely different format like the above, then you also need to change the binding if you plan to support POST and PUT requests. Grails will not automatically know how to bind data from a custom XML format to a domain class otherwise. See the section on "Customizing Binding of Resources" for further information.
+</blockquote><p class="paragraph"/><h4>Container Renderers</h4><p class="paragraph"/>A <code>grails.rest.render.ContainerRenderer</code> is a renderer that renders responses for containers of objects (lists, maps, collections etc.). The interface is largely the same as the <code>Renderer</code> interface except for the addition of the <code>getComponentType()</code> method, which should return the "contained" type. For example:<p class="paragraph"/><div class="code"><pre>class BookListRenderer <span class="java&#45;keyword">implements</span> ContainerRenderer&#60;List, Book&#62; &#123;
+    <span class="java&#45;object">Class</span>&#60;List&#62; getTargetType() &#123; List &#125;
+    <span class="java&#45;object">Class</span>&#60;Book&#62; getComponentType() &#123; Book &#125;
+    MimeType&#91;&#93; getMimeTypes() &#123; &#91; MimeType.XML&#93; as MimeType&#91;&#93; &#125;
+    void render(List object, RenderContext context) &#123;
+        ....
+    &#125;
+&#125;</pre></div><p class="paragraph"/>
 
 
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/gettingStarted.html"><strong>2</strong><span>&#12473;&#12479;&#12540;&#12488;&#12460;&#12452;&#12489;</span> >></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/theWebLayer.html">&lt;&lt; <strong>7</strong><span>Web&#12524;&#12452;&#12516;</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../../guide/async.html"><strong>9</strong><span>&#38750;&#21516;&#26399;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>

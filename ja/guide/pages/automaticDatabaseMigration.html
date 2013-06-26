@@ -155,7 +155,7 @@ function addJsClass() {
 Grailsは<a href="http://grails.org/plugin/database-migration" target="blank">Database Migration</a> を介してマイグレーションをサポートしています。それは<code>grails-app/conf/BuildConfig.groovy</code>に宣言することでプラグインとしてインストールすることができます。:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     &#8230;
     plugins &#123;
-        runtime <span class="java&#45;quote">"&#58;database&#45;migration:1.3.1"</span>
+        runtime ':database&#45;migration:1.3.1'
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The plugin uses <a href="http://www.liquibase.org/" target="blank">Liquibase</a> and and provides access to all of its functionality, and also has support for GORM (for example generating a change set by comparing your domain classes to a database).</div>
 このプラグインは<a href="http://www.liquibase.org/" target="blank">Liquibase</a> を使用しており、Liquibaseすべての機能へのアクセスを提供しています。また、GORMのサポートも提供しています（例えばドメインクラスとデータベースを比較しチェンジセットを生成します）。

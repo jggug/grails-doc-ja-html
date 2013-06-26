@@ -227,22 +227,26 @@ Grails 2.3では、依存のバージョンよりもフレキシブルで保守�
 <code>grails-app/conf/Config.groovy</code> の <code>grails.databinding.useSpringBinder</code> プロパティを <code>true</code> にすることで以前のデータバインダーに変更することができます。 以前のバインダーは今回実装された新機能には対応していません。<p class="paragraph"/><h4>Domain Classes As Command Objects</h4><p class="paragraph"/>When a domain class is used as a command object and there is an <code>id</code> request parameter, the framework will retrieve the instance of the domain class from the database using the <code>id</code> request parameter.  See the <a href="../guide/single.html#commandObjects" class="guide">Command Objects</a> documentation for more details.<p class="paragraph"/><div class="hidden-block">h4. Forked Execution</div>
 <h4>フォーク実行 </h4><p class="paragraph"/><div class="hidden-block">All major commands can now be forked into a separate JVM, thus isolating the build path from the runtime / test paths. Forked execution can be controlled via the <code>BuildConfig</code>:</div>
 全てのメジャーなコマンドが別々のJVMへフォークされるようになり、ビルドパスをランタイム/テストから分離します。 フォーク実行のパラメータは <code>BuildConfig</code> に定義できます:<p class="paragraph"/><div class="hidden-block">
-<div class="code"><pre>forkConfig = &#91;maxMemory: 1024, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
-grails.project.fork = &#91;
-   test: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
-   run: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;app JVM
-   war: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;war JVM
-   console: forkConfig // configure settings <span class="java&#45;keyword">for</span> the Swing console JVM
+<div class="code"><pre>grails.project.fork = &#91;
+   test: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, daemon:<span class="java&#45;keyword">true</span>&#93;, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
+   run: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // configure settings <span class="java&#45;keyword">for</span> the run&#45;app JVM
+   war: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // configure settings <span class="java&#45;keyword">for</span> the run&#45;war JVM
+   console: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;// configure settings <span class="java&#45;keyword">for</span> the Console UI JVM
 &#93;</pre></div>
 </div>
-<div class="code"><pre>forkConfig = &#91;maxMemory: 1024, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
-grails.project.fork = &#91;
-   test: forkConfig, // test&#45;app用JVMへの設定
-   run: forkConfig, // run&#45;app用JVMへの設定
-   war: forkConfig, // run&#45;war用JVMへの設定
-   console: forkConfig // console用JVMへの設定
+<div class="code"><pre>grails.project.fork = &#91;
+   test: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, daemon:<span class="java&#45;keyword">true</span>&#93;, // test&#45;app用JVMへの設定
+   run: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // run&#45;app用JVMへの設定
+   war: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // run&#45;war用JVMへの設定
+   console: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;// console用JVMへの設定
 &#93;</pre></div><p class="paragraph"/><div class="hidden-block">See the documentation on <a href="../guide/single.html#forkedMode" class="guide">Forked Mode</a> for more information.</div>
-詳しくは <a href="../guide/single.html#forkedMode" class="guide">フォームモード</a> のドキュメントを参照してください。<p class="paragraph"/><div class="hidden-block">h4. Async support </div>
+詳しくは <a href="../guide/single.html#forkedMode" class="guide">フォームモード</a> のドキュメントを参照してください。<p class="paragraph"/><h4>Test Runner Daemon</h4><p class="paragraph"/>To speed up testing when using forked execution a new daemon will start-up in the background to run tests when using interactive mode. You can restart the daemon with the <code>restart-daemon</code> command from interactive mode:<p class="paragraph"/><div class="code"><pre>$ grails&#62; restart&#45;daemon</pre></div><p class="paragraph"/><h4>Server-Side REST Improvements</h4><p class="paragraph"/>Grails' <a href="../guide/single.html#REST" class="guide">REST support</a> has been significantly improved with the addition of the following features:
+<ul class="star">
+<li>Rich <a href="../guide/single.html#restfulMappings" class="guide">REST URL Mapping support</a> with supports for resource mappings, singular resource mappings, nested resources, versioning and more</li>
+<li>New extensible response rendering and binding APIs</li>
+<li>Support for HAL, Atom and Hypermedia (HATEAOS)</li>
+<li>Scaffolding for REST controllers</li>
+</ul><p class="paragraph"/>See the <a href="../guide/single.html#REST" class="guide">user guide</a> for more information.<p class="paragraph"/><div class="hidden-block">h4. Async support </div>
 <h4>非同期サポート</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 features new <a href="../guide/single.html#async" class="guide">Asynchronous Programming APIs</a> that allow for asynchronous processing of requests and integrate seamlessly with GORM. Example:</div>
 Grails 2.3では、リクエストの非同期処理と、GORMとシームレスに統合した新たな<a href="../guide/single.html#async" class="guide">非同期プログラミングAPI</a>を提供しています。 例:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> grails.async.Promises.&#42;
 &#8230;
