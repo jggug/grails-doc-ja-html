@@ -1692,36 +1692,110 @@ grailsHome = Ant.antProject.properties.<span class="java&#45;quote">"env.GRAILS_
 
 <a name="3.1 Basic Configuration"><!-- Legacy link --></a>
 <h2 id="config">4.1 基本設定</h2>
+<div class="hidden-block">
 For general configuration Grails provides two files:
+</div>
+Grailsでは一般的な設定を行うために2つのファイルを提供しています:
 <ul class="star">
 <li><code>grails-app/conf/BuildConfig.groovy</code></li>
 <li><code>grails-app/conf/Config.groovy</code></li>
-</ul><p class="paragraph"/>Both of them use Groovy's <a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a> syntax. The first, <code>BuildConfig.groovy</code>, is for settings that are used when running Grails commands, such as <code>compile</code>, <code>doc</code>, etc. The second file, <code>Config.groovy</code>, is for settings that are used when your application is running. This means that <code>Config.groovy</code> is packaged with your application, but <code>BuildConfig.groovy</code> is not. Don't worry if you're not clear on the distinction: the guide will tell you which file to put a particular setting in.<p class="paragraph"/>The most basic syntax is similar to that of Java properties files with dot notation on the left-hand side:<p class="paragraph"/><div class="code"><pre>foo.bar.hello = <span class="java&#45;quote">"world"</span></pre></div><p class="paragraph"/>Note that the value is a Groovy string literal! Those quotes around 'world' are important. In fact, this highlights one of the advantages of the ConfigSlurper syntax over properties files: the property values can be any valid Groovy type, such as strings, integers, or arbitrary objects!<p class="paragraph"/>Things become more interesting when you have multiple settings with the same base. For example, you could have the two settings<p class="paragraph"/><div class="code"><pre>foo.bar.hello = <span class="java&#45;quote">"world"</span>
-foo.bar.good = <span class="java&#45;quote">"bye"</span></pre></div><p class="paragraph"/>both of which have the same base: <code>foo.bar</code>. The above syntax works but it's quite repetitive and verbose. You can remove some of that verbosity by nesting properties at the dots:<p class="paragraph"/><div class="code"><pre>foo &#123;
+</ul><p class="paragraph"/><div class="hidden-block">
+Both of them use Groovy's <a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a> syntax. The first, <code>BuildConfig.groovy</code>, is for settings that are used when running Grails commands, such as <code>compile</code>, <code>doc</code>, etc. The second file, <code>Config.groovy</code>, is for settings that are used when your application is running. This means that <code>Config.groovy</code> is packaged with your application, but <code>BuildConfig.groovy</code> is not. Don't worry if you're not clear on the distinction: the guide will tell you which file to put a particular setting in.
+</div>
+両方ともGroovyの<a href="http://groovy.codehaus.org/ConfigSlurper" target="blank">ConfigSlurper</a>の構文を使用しています。
+1つめの<code>BuildConfig.groovy</code>は<code>compile</code>や<code>doc</code>等のようなGrailsコマンドを実行するときに使われる設定です。
+2つめの<code>Config.groovy</code>はアプリケーションを実行するときに使われる設定です。
+つまり、<code>Config.groovy</code>はアプリケーションにパッケージされますが、<code>BuildConfig.groovy</code>はされません。
+違いがよく分からなくても心配する必要はありません。
+どの設定をどのファイルに書くべきかはこのガイドで示していきます。<p class="paragraph"/><div class="hidden-block">
+The most basic syntax is similar to that of Java properties files with dot notation on the left-hand side:
+</div>
+左辺にJavaのプロパティファイルのような、ドット区切りの文があるものが最も基本的な構文となります:<p class="paragraph"/><div class="code"><pre>foo.bar.hello = <span class="java&#45;quote">"world"</span></pre></div><p class="paragraph"/><div class="hidden-block">
+Note that the value is a Groovy string literal! Those quotes around 'world' are important. In fact, this highlights one of the advantages of the ConfigSlurper syntax over properties files: the property values can be any valid Groovy type, such as strings, integers, or arbitrary objects!
+</div>
+この値がGroovyの文字列リテラルであることに注意してください！
+'world'を囲んでいる引用符が重要です。
+実際に、これがプロパティファイルに対するConfigSlurperのシンタックスの有利な点の1つを際立たせています。
+プロパティの値は文字列や整数、任意のオブジェクトのような、Groovyとして有効な型を取ることができるのです！<p class="paragraph"/><div class="hidden-block">
+Things become more interesting when you have multiple settings with the same base. For example, you could have the two settings
+</div>
+同じベースで複数の設定をすると、もっとおもしろいことになります。
+例えば、2つの設定を持つことができます。<p class="paragraph"/><div class="code"><pre>foo.bar.hello = <span class="java&#45;quote">"world"</span>
+foo.bar.good = <span class="java&#45;quote">"bye"</span></pre></div><p class="paragraph"/><div class="hidden-block">
+both of which have the same base: <code>foo.bar</code>. The above syntax works but it's quite repetitive and verbose. You can remove some of that verbosity by nesting properties at the dots:
+</div>
+両方とも<code>foo.bar</code>という同じベースを持っています。
+上記の構文は動作しますが、繰り返しがかなり冗長です。
+プロパティのドットの箇所でネストして、冗長さを無くすことができます:<p class="paragraph"/><div class="code"><pre>foo &#123;
     bar &#123;
         hello = <span class="java&#45;quote">"world"</span>
         good = <span class="java&#45;quote">"bye"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>or by only partially nesting them:<p class="paragraph"/><div class="code"><pre>foo &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+or by only partially nesting them:
+</div>
+または、それらを一部だけネストできます:<p class="paragraph"/><div class="code"><pre>foo &#123;
     bar.hello = <span class="java&#45;quote">"world"</span>
     bar.good = <span class="java&#45;quote">"bye"</span>
-&#125;</pre></div><p class="paragraph"/>However, you can't nest after using the dot notation. In other words, this <strong class="bold">won't</strong> work:<p class="paragraph"/><div class="code"><pre>// Won't work!
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+However, you can't nest after using the dot notation. In other words, this <strong class="bold">won't</strong> work:
+</div>
+しかしながら、ドット区切りの後にネストを使うことはできません。
+つまり、これは動作<strong class="bold">しません</strong>:<p class="paragraph"/><div class="code"><pre>// Won't work!
 foo.bar &#123;
     hello = <span class="java&#45;quote">"world"</span>
     good = <span class="java&#45;quote">"bye"</span>
-&#125;</pre></div><p class="paragraph"/>Within both <code>BuildConfig.groovy</code> and <code>Config.groovy</code> you can access several implicit variables from configuration values:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Variable</strong></th><th><strong class="bold">Description</strong></th></tr><tr class="table-odd"><td>userHome</td><td>Location of the home directory for the account that is running the Grails application.</td></tr><tr class="table-even"><td>grailsHome</td><td>Location of the home directory for the account that is running the Grails application.</td></tr><tr class="table-odd"><td>appName</td><td>The application name as it appears in application.properties.</td></tr><tr class="table-even"><td>appVersion</td><td>The application version as it appears in application.properties.</td></tr></table><p class="paragraph"/>For example:<p class="paragraph"/><div class="code"><pre>my.tmp.dir = <span class="java&#45;quote">"&#36;&#123;userHome&#125;/.grails/tmp"</span></pre></div><p class="paragraph"/>In addition, <code>BuildConfig.groovy</code> has<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Variable</strong></th><th><strong class="bold">Description</strong></th></tr><tr class="table-odd"><td>grailsVersion</td><td>The version of Grails used to build the project.</td></tr><tr class="table-even"><td>grailsSettings</td><td>An object containing various build related settings, such as <code>baseDir</code>. It's of type <a href="http://grails.org/doc/latest/api/grails/util/BuildSettings.html" class="api"><code>BuildSettings</code></a>.</td></tr></table><p class="paragraph"/>and <code>Config.groovy</code> has<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Variable</strong></th><th><strong class="bold">Description</strong></th></tr><tr class="table-odd"><td>grailsApplication</td><td>The <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api"><code>GrailsApplication</code></a> instance.</td></tr></table><p class="paragraph"/>Those are the basics of adding settings to the configuration file, but how do you access those settings from your own application? That depends on which config you want to read.<p class="paragraph"/>The settings in <code>BuildConfig.groovy</code> are only available from <a href="../guide/single.html#creatingGantScripts" class="guide">command scripts</a> and can be accessed via the <code>grailsSettings.config</code> property like so:<p class="paragraph"/><div class="code"><pre>target(<span class="java&#45;keyword">default</span>: <span class="java&#45;quote">"Example command"</span>) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Within both <code>BuildConfig.groovy</code> and <code>Config.groovy</code> you can access several implicit variables from configuration values:
+</div>
+<code>BuildConfig.groovy</code>と<code>Config.groovy</code>内では、設定値からいくつかの暗黙の変数にアクセスできます:<p class="paragraph"/><div class="hidden-block">
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Variable</strong></th><th><strong class="bold">Description</strong></th></tr><tr class="table-odd"><td>userHome</td><td>Location of the home directory for the account that is running the Grails application.</td></tr><tr class="table-even"><td>grailsHome</td><td>Location of the home directory for the account that is running the Grails application.</td></tr><tr class="table-odd"><td>appName</td><td>The application name as it appears in application.properties.</td></tr><tr class="table-even"><td>appVersion</td><td>The application version as it appears in application.properties.</td></tr></table>
+</div>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">変数</strong></th><th><strong class="bold">説明</strong></th></tr><tr class="table-odd"><td>userHome</td><td>Grailsアプリケーションを実行しているアカウントのホームディレクトリの場所です。</td></tr><tr class="table-even"><td>grailsHome</td><td>Grailsがインストールされているディレクトリの場所です。環境変数<code>GRAILS_HOME</code>が設定されているときはその値が格納されます。</td></tr><tr class="table-odd"><td>appName</td><td>application.properties内に表記しているアプリケーション名です。</td></tr><tr class="table-even"><td>appVersion</td><td>application.properties内に表記しているアプリケーションバージョンです。</td></tr></table><p class="paragraph"/><div class="hidden-block">
+For example:
+</div>
+例:<p class="paragraph"/><div class="code"><pre>my.tmp.dir = <span class="java&#45;quote">"&#36;&#123;userHome&#125;/.grails/tmp"</span></pre></div><p class="paragraph"/><div class="hidden-block">
+In addition, <code>BuildConfig.groovy</code> has
+</div>
+加えて、<code>BuildConfig.groovy</code>は以下の変数を持っています。<p class="paragraph"/><div class="hidden-block">
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Variable</strong></th><th><strong class="bold">Description</strong></th></tr><tr class="table-odd"><td>grailsVersion</td><td>The version of Grails used to build the project.</td></tr><tr class="table-even"><td>grailsSettings</td><td>An object containing various build related settings, such as <code>baseDir</code>. It's of type <a href="http://grails.org/doc/latest/api/grails/util/BuildSettings.html" class="api"><code>BuildSettings</code></a>.</td></tr></table>
+</div>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">変数</strong></th><th><strong class="bold">説明</strong></th></tr><tr class="table-odd"><td>grailsVersion</td><td>プロジェクトをビルドするために使われたGrailsのバージョンです。</td></tr><tr class="table-even"><td>grailsSettings</td><td><code>baseDir</code>のような、ビルドに関連する様々な設定を格納したオブジェクトです。型は<a href="http://grails.org/doc/latest/api/grails/util/BuildSettings.html" class="api"><code>BuildSettings</code></a>です。</td></tr></table><p class="paragraph"/><div class="hidden-block">
+and <code>Config.groovy</code> has
+</div>
+また、<code>Config.groovy</code>は以下の変数を持っています。<p class="paragraph"/><div class="hidden-block">
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Variable</strong></th><th><strong class="bold">Description</strong></th></tr><tr class="table-odd"><td>grailsApplication</td><td>The <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api"><code>GrailsApplication</code></a> instance.</td></tr></table>
+</div>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">変数</strong></th><th><strong class="bold">説明</strong></th></tr><tr class="table-odd"><td>grailsApplication</td><td><a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api"><code>GrailsApplication</code></a>のインスタンスです。</td></tr></table><p class="paragraph"/><div class="hidden-block">
+Those are the basics of adding settings to the configuration file, but how do you access those settings from your own application? That depends on which config you want to read.
+</div>
+ここまでは設定ファイルに設定を追加するための基本についてでしたが、アプリケーション自身からどのようにそれらの設定にアクセスするのでしょうか？
+それはどの設定を読みたいかによります。<p class="paragraph"/><div class="hidden-block">
+The settings in <code>BuildConfig.groovy</code> are only available from <a href="../guide/single.html#creatingGantScripts" class="guide">command scripts</a> and can be accessed via the <code>grailsSettings.config</code> property like so:
+</div>
+<code>BuildConfig.groovy</code>内の設定は<a href="../guide/single.html#creatingGantScripts" class="guide">コマンドスクリプト</a>からしか取得できません。
+以下のように<code>grailsSettings.config</code>プロパティを経由してアクセスできます:<p class="paragraph"/><div class="code"><pre>target(<span class="java&#45;keyword">default</span>: <span class="java&#45;quote">"Example command"</span>) &#123;
     def maxIterations = grailsSettings.config.myapp.iterations.max
     &#8230;
-&#125;</pre></div><p class="paragraph"/>If you want to read runtime configuration settings, i.e. those defined in <code>Config.groovy</code>, use the <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api"><code>grailsApplication</code></a> object, which is available as a variable in controllers and tag libraries:<p class="paragraph"/><div class="code"><pre>class MyController &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+If you want to read runtime configuration settings, i.e. those defined in <code>Config.groovy</code>, use the <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api"><code>grailsApplication</code></a> object, which is available as a variable in controllers and tag libraries:
+</div>
+実行時の設定、すなわち<code>Config.groovy</code>に定義されたものを読みたい場合は、<a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/commons/GrailsApplication.html" class="api"><code>grailsApplication</code></a>オブジェクトを使って、コントローラやタグライブラリから変数として取得できます:<p class="paragraph"/><div class="code"><pre>class MyController &#123;
     def hello() &#123;
         def recipient = grailsApplication.config.foo.bar.hello<p class="paragraph"/>        render <span class="java&#45;quote">"Hello $&#123;recipient&#125;"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>and can be easily injected into services and other Grails artifacts:<p class="paragraph"/><div class="code"><pre>class MyService &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+and can be easily injected into services and other Grails artifacts:
+</div>
+また、サービスやその他のGrailsアーティファクトへ簡単に注入することができます:<p class="paragraph"/><div class="code"><pre>class MyService &#123;
     def grailsApplication<p class="paragraph"/>    <span class="java&#45;object">String</span> greeting() &#123;
         def recipient = grailsApplication.config.foo.bar.hello
         <span class="java&#45;keyword">return</span> <span class="java&#45;quote">"Hello $&#123;recipient&#125;"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>As you can see, when accessing configuration settings you use the same dot notation as when you define them.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+As you can see, when accessing configuration settings you use the same dot notation as when you define them.
+</div>
+ご覧の通り、設定を取得するときは、それらを定義したときと同じようにドット区切り表記を用います。
 
 
 <a name="3.1.1 Built in options"><!-- Legacy link --></a>
