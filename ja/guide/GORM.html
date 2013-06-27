@@ -552,7 +552,11 @@ If you define the <code>Address</code> class in a separate Groovy file in the <c
 
 <a name="5.2.3 Inheritance in GORM"><!-- Legacy link --></a>
 <h2 id="inheritanceInGORM">6.2.3 GORMでの継承</h2>
-GORM supports inheritance both from abstract base classes and concrete persistent GORM entities. For example:<p class="paragraph"/><div class="code"><pre>class Content &#123;
+<div class="hidden-block">
+GORM supports inheritance both from abstract base classes and concrete persistent GORM entities. For example:
+</div>
+GORMは抽象クラス、または他のGORMエンティティクラスからの継承をサポートしています。
+例えば:<p class="paragraph"/><div class="code"><pre>class Content &#123;
      <span class="java&#45;object">String</span> author
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class BlogEntry <span class="java&#45;keyword">extends</span> Content &#123;
     URL url
@@ -560,8 +564,35 @@ GORM supports inheritance both from abstract base classes and concrete persisten
     <span class="java&#45;object">String</span> ISBN
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>class PodCast <span class="java&#45;keyword">extends</span> Content &#123;
     <span class="java&#45;object">byte</span>&#91;&#93; audioStream
-&#125;</pre></div><p class="paragraph"/>In the above example we have a parent <code>Content</code> class and then various child classes with more specific behaviour.<p class="paragraph"/><h4>Considerations</h4><p class="paragraph"/>At the database level Grails by default uses table-per-hierarchy mapping with a discriminator column called <code>class</code> so the parent class (<code>Content</code>) and its subclasses (<code>BlogEntry</code>, <code>Book</code> etc.), share the <strong class="bold">same</strong> table.<p class="paragraph"/>Table-per-hierarchy mapping has a down side in that you <strong class="bold">cannot</strong> have non-nullable properties with inheritance mapping. An alternative is to use table-per-subclass which can be enabled with the <a href="../guide/single.html#ormdsl" class="guide">ORM DSL</a><p class="paragraph"/>However, excessive use of inheritance and table-per-subclass can result in poor query performance due to the use of outer join queries. In general our advice is if you're going to use inheritance, don't abuse it and don't make your inheritance hierarchy too deep.<p class="paragraph"/><h4>Polymorphic Queries</h4><p class="paragraph"/>The upshot of inheritance is that you get the ability to polymorphically query. For example using the <a href="../ref/Domain Classes/list.html" class="domainClasses">list</a> method on the <code>Content</code> super class will return all subclasses of <code>Content</code>:<p class="paragraph"/><div class="code"><pre>def content = Content.list() // list all blog entries, books and podcasts
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In the above example we have a parent <code>Content</code> class and then various child classes with more specific behaviour.
+</div>
+上の例では、親の<code>Content</code>クラスと個別の振る舞いを持ったさまざまな子クラスを定義しています。<p class="paragraph"/><div class="hidden-block">
+<h4>Considerations</h4>
+</div>
+<h4>考慮すべきこと</h4><p class="paragraph"/><div class="hidden-block">
+At the database level Grails by default uses table-per-hierarchy mapping with a discriminator column called <code>class</code> so the parent class (<code>Content</code>) and its subclasses (<code>BlogEntry</code>, <code>Book</code> etc.), share the <strong class="bold">same</strong> table.
+</div>
+データベースレベルでは、Grailsはデフォルトで<code>class</code>という名前の識別カラムと共にtable-per-hierarchyマッピングを使います。
+これは親クラス（<code>Content</code>）と、その子クラス（<code>BlogEntry</code>や<code>Book</code>など）が同じテーブル上に格納されます。<p class="paragraph"/><div class="hidden-block">
+Table-per-hierarchy mapping has a down side in that you <strong class="bold">cannot</strong> have non-nullable properties with inheritance mapping. An alternative is to use table-per-subclass which can be enabled with the <a href="../guide/single.html#ormdsl" class="guide">ORM DSL</a>
+</div>
+table-per-hierarchyマッピングは継承先のマッピングで非nullableプロパティを持てないという難点があります。
+代替手段はtable-per-subclassを使うことです。
+これは<a href="../guide/single.html#ormdsl" class="guide">ORM DSL</a>で有効にできます。<p class="paragraph"/><div class="hidden-block">
+However, excessive use of inheritance and table-per-subclass can result in poor query performance due to the use of outer join queries. In general our advice is if you're going to use inheritance, don't abuse it and don't make your inheritance hierarchy too deep.
+</div>
+しかし、過度の継承とtable-per-subclassの使用は、外部結合（OUTER JOIN）のせいでクエリ性能が劣化する可能性があります。
+一般的なアドバイスとして、もし継承を使うなら、継承を乱用せず、継承階層が深くならないようにしてください。<p class="paragraph"/><div class="hidden-block">
+<h4>Polymorphic Queries</h4>
+</div>
+<h4>ポリモーフィズムなクエリ</h4><p class="paragraph"/><div class="hidden-block">
+The upshot of inheritance is that you get the ability to polymorphically query. For example using the <a href="../ref/Domain Classes/list.html" class="domainClasses">list</a> method on the <code>Content</code> super class will return all subclasses of <code>Content</code>:
+</div>
+継承の結果としてポリモーフィズムを使ったクエリが可能になります。
+例えば、親の<code>Content</code>クラス上で<a href="../ref/Domain Classes/list.html" class="domainClasses">list</a>メソッドを使うと、<code>Content</code>のすべてのサブクラスが返されます:<p class="paragraph"/><div class="code"><pre>def content = Content.list() // list all blog entries, books and podcasts
 content = Content.findAllByAuthor('Joe Bloggs') // find all by author<p class="paragraph"/>def podCasts = PodCast.list() // list only podcasts</pre></div>
+
 
 <a name="5.2.4 Sets, Lists and Maps"><!-- Legacy link --></a>
 <h2 id="sets,ListsAndMaps">6.2.4 セット、リスト、マップ</h2>
