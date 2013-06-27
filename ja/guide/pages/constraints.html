@@ -141,42 +141,58 @@ function addJsClass() {
                 
 <a name="10.1 Declaring Constraints"><!-- Legacy link --></a>
 <h2 id="constraints">10.1 制約を宣言</h2>
-Within a domain class <a href="../ref/Domain Classes/constraints.html" class="domainClasses">constraints</a> are defined with the constraints property that is assigned a code block:<p class="paragraph"/><div class="code"><pre>class User &#123;
+<div class="hidden-block">Within a domain class <a href="../ref/Domain Classes/constraints.html" class="domainClasses">constraints</a> are defined with the constraints property that is assigned a code block:</div>
+ドメインクラスの制約は、次のような<a href="../ref/Domain Classes/constraints.html" class="domainClasses">constraints</a>プロパティによって指定します。<p class="paragraph"/><div class="code"><pre>class User &#123;
     <span class="java&#45;object">String</span> login
     <span class="java&#45;object">String</span> password
     <span class="java&#45;object">String</span> email
     <span class="java&#45;object">Integer</span> age<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
       &#8230;
     &#125;
-&#125;</pre></div><p class="paragraph"/>You then use method calls that match the property name for which the constraint applies in combination with named parameters to specify constraints:<p class="paragraph"/><div class="code"><pre>class User &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You then use method calls that match the property name for which the constraint applies in combination with named parameters to specify constraints:</div>
+次に、プロパティ名と同じ名前のメソッド呼び出しで、適用したい制約とパラメータの組み合わせを与えます。<p class="paragraph"/><div class="code"><pre>class User &#123;
     ...<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
         login size: 5..15, blank: <span class="java&#45;keyword">false</span>, unique: <span class="java&#45;keyword">true</span>
         password size: 5..15, blank: <span class="java&#45;keyword">false</span>
         email email: <span class="java&#45;keyword">true</span>, blank: <span class="java&#45;keyword">false</span>
         age min: 18
     &#125;
-&#125;</pre></div><p class="paragraph"/>In this example we've declared that the <code>login</code> property must be between 5 and 15 characters long, it cannot be blank and must be unique. We've also applied other constraints to the <code>password</code>, <code>email</code> and <code>age</code> properties.<p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this example we've declared that the <code>login</code> property must be between 5 and 15 characters long, it cannot be blank and must be unique. We've also applied other constraints to the <code>password</code>, <code>email</code> and <code>age</code> properties.</div>
+この例では、<code>login</code>プロパティに対して5～15文字の長さとし(<code>size</code>)、空白(<code>blank</code>)を許可せず、一意となる(<code>unique</code>)よう制約を与えています。<code>password</code>、<code>email</code>、<code>age</code>の各プロパティについても同様に制約を宣言しています。<p class="paragraph"/><div class="hidden-block"><blockquote class="note">
 By default, all domain class properties are not nullable (i.e. they have an implicit <code>nullable: false</code> constraint).
-</blockquote><p class="paragraph"/>A complete reference for the available constraints can be found in the Quick Reference section under the Constraints heading.<p class="paragraph"/>Note that constraints are only evaluated once which may be relevant for a constraint that relies on a value like an instance of <code>java.util.Date</code>.<p class="paragraph"/><div class="code"><pre>class User &#123;
+</blockquote></div><p class="paragraph"/><blockquote class="note">
+デフォルトでは、すべてのドメインクラスのプロパティはnull値を許容しません(暗黙に<code>nullable: false</code>制約を持っています)。
+</blockquote><p class="paragraph"/><div class="hidden-block">A complete reference for the available constraints can be found in the Quick Reference section under the Constraints heading.</div>
+利用可能な制約のリファレンスは、クイックリファレンスの見出し constraints で見ることができます。<p class="paragraph"/><div class="hidden-block">Note that constraints are only evaluated once which may be relevant for a constraint that relies on a value like an instance of <code>java.util.Date</code>.</div>
+<code>java.util.Date</code>のインスタンスのような値を必要とするかもしれないため、制約が評価されるのは一度だけであることに注意してください。<p class="paragraph"/><div class="hidden-block"><div class="code"><pre>class User &#123;
     ...<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
         // <span class="java&#45;keyword">this</span> Date object is created when the constraints are evaluated, not
         // each time an instance of the User class is validated.
         birthDate max: <span class="java&#45;keyword">new</span> Date()
     &#125;
-&#125;</pre></div><p class="paragraph"/><h3>A word of warning - referencing domain class properties from constraints</h3><p class="paragraph"/>It's very easy to attempt to reference instance variables from the static constraints block, but this isn't legal in Groovy (or Java). If you do so, you will get a <code>MissingPropertyException</code> for your trouble. For example, you may try
-<div class="code"><pre>class Response &#123;
+&#125;</pre></div></div><p class="paragraph"/><div class="code"><pre>class User &#123;
+    ...<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
+        // この Date 型オブジェクトは制約が評価されるときに作られます。
+        // User クラスのインスタンスがバリデーションされる度に作られるわけではありません。
+        birthDate max: <span class="java&#45;keyword">new</span> Date()
+    &#125;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h3. A word of warning - referencing domain class properties from constraints</div>
+<h3>忠告 - 制約からドメインクラスのプロパティを参照するとき</h3><p class="paragraph"/><div class="hidden-block">It's very easy to attempt to reference instance variables from the static constraints block, but this isn't legal in Groovy (or Java). If you do so, you will get a <code>MissingPropertyException</code> for your trouble. For example, you may try</div>
+静的な制約の宣言からインスタンス変数を参照するのは非常に簡単ですが、これはGroovy(やJava)において適切ではありません。この場合、困ったことに<code>MissingPropertyException</code>が発生します。たとえば、以下のようなコードを試してみると…<p class="paragraph"/><div class="code"><pre>class Response &#123;
     Survey survey
     Answer answer<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
         survey blank: <span class="java&#45;keyword">false</span>
         answer blank: <span class="java&#45;keyword">false</span>, inList: survey.answers
     &#125;
-&#125;</pre></div><p class="paragraph"/>See how the <code>inList</code> constraint references the instance property <code>survey</code>? That won't work. Instead, use a custom <a href="../ref/Constraints/validator.html" class="constraints">validator</a>:<p class="paragraph"/><div class="code"><pre>class Response &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">See how the <code>inList</code> constraint references the instance property <code>survey</code>? That won't work. Instead, use a custom <a href="../ref/Constraints/validator.html" class="constraints">validator</a>:</div>
+このように、<code>inList</code>制約においてインスタンスプロパティである<code>survey</code>を参照すると、これは動作しません。代わりに、カスタム<a href="../ref/Constraints/validator.html" class="constraints">validator</a>を使いましょう:<p class="paragraph"/><div class="code"><pre>class Response &#123;
     &#8230;
     <span class="java&#45;keyword">static</span> constraints = &#123;
         survey blank: <span class="java&#45;keyword">false</span>
         answer blank: <span class="java&#45;keyword">false</span>, validator: &#123; val, obj &#45;&#62; val in obj.survey.answers &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/>In this example, the <code>obj</code> argument to the custom validator is the domain  <em class="italic">instance</em>  that is being validated, so we can access its <code>survey</code> property and return a boolean to indicate whether the new value for the <code>answer</code> property, <code>val</code>, is valid.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this example, the <code>obj</code> argument to the custom validator is the domain  <em class="italic">instance</em>  that is being validated, so we can access its <code>survey</code> property and return a boolean to indicate whether the new value for the <code>answer</code> property, <code>val</code>, is valid.</div>
+この例では、カスタムバリデータの引数<code>obj</code>は、バリデーションされるドメインクラスの  <em class="italic">インスタンス</em>  です。こうすることで<code>survey</code>プロパティにアクセスし、<code>answer</code>プロパティの新しい値として<code>val</code>が<code>survey.answers</code>に含まれるかどうかを示す真偽値を得ることができます。
 
 
 
