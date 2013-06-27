@@ -281,38 +281,89 @@ RESTful Webサービス用のJava APIをベースとしたRESTを、<a href="htt
 
 
 <h2 id="domainResources">8.1.1 RESTリソースとしてドメインクラスを使用する</h2>
-The easiest way to create a RESTful API in Grails is to expose a domain class as a REST resource. This can be done by adding the <code>grails.rest.Resource</code> transformation to any domain class:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books')
+<div class="hidden-block">
+The easiest way to create a RESTful API in Grails is to expose a domain class as a REST resource. This can be done by adding the <code>grails.rest.Resource</code> transformation to any domain class:
+</div>
+GrailsでRESTFul APIを簡単に作成する方法は、ドメインクラスをRESTリソースとして公開することです。
+これは、任意のドメインクラスに<code>grails.rest.Resource</code>変換を追加するだけです:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books')
 class Book &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> title<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
         title blank:<span class="java&#45;keyword">false</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>Simply by adding the <code>Resource</code> transformation and specifying a URI, your domain class will automatically be available as a REST resource in either XML or JSON formats. The transformation will automatically register the necessary <a href="../guide/single.html#restfulMappings" class="guide">RESTful URL mapping</a> and create a controller called <code>BookController</code>.<p class="paragraph"/>You can try it out by adding some test data to <code>BootStrap.groovy</code>:<p class="paragraph"/><div class="code"><pre>def init = &#123; servletContext &#45;&#62;<p class="paragraph"/>        <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Stand"</span>).save()
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Simply by adding the <code>Resource</code> transformation and specifying a URI, your domain class will automatically be available as a REST resource in either XML or JSON formats. The transformation will automatically register the necessary <a href="../guide/single.html#restfulMappings" class="guide">RESTful URL mapping</a> and create a controller called <code>BookController</code>.
+</div>
+単に<code>Resource</code>変換を追加してURIを指定することで、ドメインクラスは自動的にXML、JSONフォーマットをサポートするRESTリソースとして使用可能になります。
+この変換は、必要な<a href="../guide/single.html#restfulMappings" class="guide">RESTful URL マッピング</a>を自動的に登録し、<code>BookController</code>と呼ばれるコントローラを作成します。<p class="paragraph"/><div class="hidden-block">
+You can try it out by adding some test data to <code>BootStrap.groovy</code>:
+</div>
+いくつかのテストデータを<code>BootStrap.groovy</code>に追加することで動作確認ができます。<p class="paragraph"/><div class="code"><pre>def init = &#123; servletContext &#45;&#62;<p class="paragraph"/>        <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Stand"</span>).save()
         <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Shining"</span>).save()
-    &#125;</pre></div><p class="paragraph"/>And then hitting the URL http://localhost:8080/myapp/books/1, which will render response like:<p class="paragraph"/><div class="code"><pre>&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;
+    &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+And then hitting the URL http://localhost:8080/myapp/books/1, which will render response like:
+</div>
+そして、<code>http://localhost:8080/myapp/books/1</code>のURLをたたいてみると、以下のようなレスポンスが表示されます:<p class="paragraph"/><div class="code"><pre>&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;
 &#60;book id=<span class="java&#45;quote">"1"</span>&#62;
     &#60;title&#62;The Stand&#60;/title&#62;
-&#60;/book&#62;</pre></div><p class="paragraph"/>If you change the URL to <code>http://localhost:8080/myapp/books/1.json</code> you will get a JSON response such as:<p class="paragraph"/>
-<div class="code"><pre>&#123;<span class="java&#45;quote">"id"</span>:1,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;</pre></div><p class="paragraph"/>If you wish to change the default to return JSON instead of XML, you can do this by setting the <code>formats</code> attribute of the <code>Resource</code> transformation:<p class="paragraph"/> <div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books', formats=&#91;'json', 'xml'&#93;)
+&#60;/book&#62;</pre></div><p class="paragraph"/><div class="hidden-block">
+If you change the URL to <code>http://localhost:8080/myapp/books/1.json</code> you will get a JSON response such as:
+</div>
+URLを<code>http://localhost:8080/myapp/books/1.json</code>に変更すると、以下のようなJSONレスポンスが得られます:<p class="paragraph"/>
+<div class="code"><pre>&#123;<span class="java&#45;quote">"id"</span>:1,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+If you wish to change the default to return JSON instead of XML, you can do this by setting the <code>formats</code> attribute of the <code>Resource</code> transformation:
+</div>
+XMLの代わりにデフォルトでJSONを返したい場合は、<code>Resource</code>変換の<code>formats</code>属性を設定します。<p class="paragraph"/> <div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books', formats=&#91;'json', 'xml'&#93;)
 class Book &#123;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>With the above example JSON will be prioritized. The list that is passed should contain the names of the formats that the resource should expose. The names of formats are defined in the <code>grails.mime.types</code> setting of <code>Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.mime.types = &#91;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+With the above example JSON will be prioritized. The list that is passed should contain the names of the formats that the resource should expose. The names of formats are defined in the <code>grails.mime.types</code> setting of <code>Config.groovy</code>:
+</div>
+上記の例ではJSONを優先するように設定しています。
+この一覧には公開するフォーマットの名前を含む必要があります。
+フォーマットの名前は<code>Config.groovy</code>の<code>grails.mime.types</code>設定の中で定義されます:<p class="paragraph"/><div class="code"><pre>grails.mime.types = &#91;
     &#8230;
     json:          &#91;'application/json', 'text/json'&#93;,
     &#8230;
     xml:           &#91;'text/xml', 'application/xml'&#93;
-&#93;</pre></div><p class="paragraph"/>See the section on <a href="../guide/single.html#contentNegotiation" class="guide">Configuring Mime Types</a> in the user guide for more information.<p class="paragraph"/>Instead of using the file extension in the URI, you can also obtain a JSON response using the ACCEPT header. Here's an example using the Unix <code>curl</code> tool:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/json"</span> localhost:8080/myapp/books/1
-&#123;<span class="java&#45;quote">"id"</span>:1,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;</pre></div><p class="paragraph"/>This works thanks to Grails' <a href="../guide/single.html#contentNegotiation" class="guide">Content Negotiation</a> features.<p class="paragraph"/>You can create a new resource by issuing a <code>POST</code> request:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;X POST &#45;H <span class="java&#45;quote">"Content&#45;Type: application/json"</span> &#45;d '&#123;<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"Along Came A Spider"</span>&#125;' localhost:8080/myapp/books
+&#93;</pre></div><p class="paragraph"/><div class="hidden-block">
+See the section on <a href="../guide/single.html#contentNegotiation" class="guide">Configuring Mime Types</a> in the user guide for more information.
+</div>
+さらなる情報はユーザガイド内の<a href="../guide/single.html#contentNegotiation" class="guide">MIMEタイプの設定</a>を参照してください。<p class="paragraph"/><div class="hidden-block">
+Instead of using the file extension in the URI, you can also obtain a JSON response using the ACCEPT header. Here's an example using the Unix <code>curl</code> tool:
+</div>
+URIでファイル拡張子を使う代わりに、ACCEPTヘッダを使ってJSONレスポンスを得ることもできます。
+これはUnixの<code>curl</code>コマンドを使用した例です:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/json"</span> localhost:8080/myapp/books/1
+&#123;<span class="java&#45;quote">"id"</span>:1,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This works thanks to Grails' <a href="../guide/single.html#contentNegotiation" class="guide">Content Negotiation</a> features.
+</div>
+これはGrailsの<a href="../guide/single.html#contentNegotiation" class="guide">コンテントネゴシエーション</a>機能のおかげで動作しています。<p class="paragraph"/><div class="hidden-block">
+You can create a new resource by issuing a <code>POST</code> request:
+</div>
+<code>POST</code>リクエスを発行することで新たなリソースを作成できます:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;X POST &#45;H <span class="java&#45;quote">"Content&#45;Type: application/json"</span> &#45;d '&#123;<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"Along Came A Spider"</span>&#125;' localhost:8080/myapp/books
 HTTP/1.1 201 Created
 Server: Apache&#45;Coyote/1.1
-...</pre></div><p class="paragraph"/>Updating can be done with a <code>PUT</code> request:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;X PUT &#45;H <span class="java&#45;quote">"Content&#45;Type: application/json"</span> &#45;d '&#123;<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"Along Came A Spider"</span>&#125;' localhost:8080/myapp/books/1
+...</pre></div><p class="paragraph"/><div class="hidden-block">
+Updating can be done with a <code>PUT</code> request:
+</div>
+更新には<code>PUT</code>リクエストを使用します:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;X PUT &#45;H <span class="java&#45;quote">"Content&#45;Type: application/json"</span> &#45;d '&#123;<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"Along Came A Spider"</span>&#125;' localhost:8080/myapp/books/1
 HTTP/1.1 200 OK
 Server: Apache&#45;Coyote/1.1
-...</pre></div><p class="paragraph"/>Finally a resource can be deleted with <code>DELETE</code> request:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;X DELETE localhost:8080/myapp/books/1
+...</pre></div><p class="paragraph"/><div class="hidden-block">
+Finally a resource can be deleted with <code>DELETE</code> request:
+</div>
+最後に、<code>DELETE</code>リクエストでリソースが削除されます:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;X DELETE localhost:8080/myapp/books/1
 HTTP/1.1 204 No Content
 Server: Apache&#45;Coyote/1.1
-...</pre></div><p class="paragraph"/>As you can see the <code>Resource</code> transformation enables all of the HTTP method verbs on the resource. You can enable only read-only capabilities by setting the <code>readOnly</code> attribute to true:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books', readOnly=<span class="java&#45;keyword">true</span>)
+...</pre></div><p class="paragraph"/><div class="hidden-block">
+As you can see the <code>Resource</code> transformation enables all of the HTTP method verbs on the resource. You can enable only read-only capabilities by setting the <code>readOnly</code> attribute to true:
+</div>
+ここまで見てきたように、<code>Resource</code>変換はリソースに対してHTTPメソッドに対応する動作のすべてを有効にします。
+<code>readOnly</code>属性をtrueに設定することで読み取り専用にできます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books', readOnly=<span class="java&#45;keyword">true</span>)
 class Book &#123;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>In this case POST, PUT and DELETE requests will be forbidden.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In this case POST, PUT and DELETE requests will be forbidden.
+</div>
+この場合は、POST、PUT、そしてDELETEリクエストを受付けません。
 
 
 
