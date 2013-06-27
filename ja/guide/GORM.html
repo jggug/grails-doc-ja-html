@@ -248,13 +248,13 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:20px"><a href="#customCascadeBehaviour"><strong>6.5.2.9</strong><span>&#12459;&#12473;&#12465;&#12540;&#12489;&#12398;&#25391;&#12427;&#33310;&#12356;&#12434;&#22793;&#12360;&#12427;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:20px"><a href="#customHibernateTypes"><strong>6.5.2.10</strong><span>Hibernate&#12518;&#12540;&#12470;&#23450;&#32681;&#22411;</span></a>
+                    <div class="toc-item" style="margin-left:20px"><a href="#customHibernateTypes"><strong>6.5.2.10</strong><span>Hibernate&#12398;&#12459;&#12473;&#12479;&#12512;&#22411;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:20px"><a href="#derivedProperties"><strong>6.5.2.11</strong><span>&#27966;&#29983;&#12503;&#12525;&#12497;&#12486;&#12451;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:20px"><a href="#customNamingStrategy"><strong>6.5.2.12</strong><span>&#21629;&#21517;&#27161;&#28310;&#12398;&#12459;&#12473;&#12479;&#12510;&#12452;&#12474;</span></a>
+                    <div class="toc-item" style="margin-left:20px"><a href="#customNamingStrategy"><strong>6.5.2.12</strong><span>&#21629;&#21517;&#35215;&#21063;&#12398;&#12459;&#12473;&#12479;&#12510;&#12452;&#12474;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:10px"><a href="#defaultSortOrder"><strong>6.5.3</strong><span>&#12487;&#12501;&#12457;&#12523;&#12488;&#12477;&#12540;&#12488;&#38918;</span></a>
@@ -1924,13 +1924,24 @@ It is advisable to read the section in the Hibernate documentation on <a href="h
 
 
 <a name="5.5.2.10 Custom Hibernate Types"><!-- Legacy link --></a>
-<h2 id="customHibernateTypes">6.5.2.10 Hibernateユーザ定義型</h2>
-You saw in an earlier section that you can use composition (with the <code>embedded</code> property) to break a table into multiple objects. You can achieve a similar effect with Hibernate's custom user types. These are not domain classes themselves, but plain Java or Groovy classes. Each of these types also has a corresponding "meta-type" class that implements <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/usertype/UserType.html" class="api">org.hibernate.usertype.UserType</a>.<p class="paragraph"/>The <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/mapping.html#mapping-types-custom" target="blank">Hibernate reference manual</a> has some information on custom types, but here we will focus on how to map them in Grails. Let's start by taking a look at a simple domain class that uses an old-fashioned (pre-Java 1.5) type-safe enum class:<p class="paragraph"/><div class="code"><pre>class Book &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> title
+<h2 id="customHibernateTypes">6.5.2.10 Hibernateのカスタム型</h2>
+<div class="hidden-block">You saw in an earlier section that you can use composition (with the <code>embedded</code> property) to break a table into multiple objects. You can achieve a similar effect with Hibernate's custom user types. These are not domain classes themselves, but plain Java or Groovy classes. Each of these types also has a corresponding "meta-type" class that implements <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/usertype/UserType.html" class="api">org.hibernate.usertype.UserType</a>.</div>
+以前のセクションで、1つのテーブルに対して複数のオブジェクトを対応付けるために、<code>embedded</code>プロパティによるコンポジションが使えることを説明しました。
+Hibernateのカスタム型を利用すると同じようなことができます。
+カスタム型自体はドメインクラスではなく、普通のJavaやGroovyクラスです。
+また、それぞれのカスタム型には対応する「メタ型(meta-type)」クラスがあります。メタ型クラスは<a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/usertype/UserType.html" class="api">org.hibernate.usertype.UserType</a>インタフェースを実装します。<p class="paragraph"/><div class="hidden-block">The <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/mapping.html#mapping-types-custom" target="blank">Hibernate reference manual</a> has some information on custom types, but here we will focus on how to map them in Grails. Let's start by taking a look at a simple domain class that uses an old-fashioned (pre-Java 1.5) type-safe enum class:</div>
+カスタム型についての情報は<a href="http://docs.jboss.org/hibernate/core/3.6/reference/ja-JP/html/mapping.html#mapping-types-custom" target="blank">Hibernateリファレンスマニュアル</a>にあります。
+ここではそれをGrails上でどのようにマッピングするかに焦点を絞ります。
+(Java1.5以前の)昔ながらのタイプセーフenumクラスを使ったシンプルなドメインクラスをみてみましょう:<p class="paragraph"/><div class="code"><pre>class Book &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> title
     <span class="java&#45;object">String</span> author
     Rating rating<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         rating type: RatingUserType
     &#125;
-&#125;</pre></div><p class="paragraph"/>All we have done is declare the <code>rating</code> field the enum type and set the property's type in the custom mapping to the corresponding <code>UserType</code> implementation. That's all you have to do to start using your custom type. If you want, you can also use the other column settings such as "column" to change the column name and "index" to add it to an index.<p class="paragraph"/>Custom types aren't limited to just a single column - they can be mapped to as many columns as you want. In such cases you explicitly define in the mapping what columns to use, since Hibernate can only use the property name for a single column. Fortunately, Grails lets you map multiple columns to a property using this syntax:<p class="paragraph"/><div class="code"><pre>class Book &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> title
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">All we have done is declare the <code>rating</code> field the enum type and set the property's type in the custom mapping to the corresponding <code>UserType</code> implementation. That's all you have to do to start using your custom type. If you want, you can also use the other column settings such as "column" to change the column name and "index" to add it to an index.</div>
+<code>rating</code>フィールドをenum型として宣言し、カスタムマッピングでそのプロパティの型を<code>UserType</code>実装型にマッピングしています。
+カスタム型に必要な設定はこれだけですが、必要であれば、カラム名を変更する「column」やインデックスを追加する「index」のような他のカラムの設定を使うこともできます。<p class="paragraph"/><div class="hidden-block">Custom types aren't limited to just a single column - they can be mapped to as many columns as you want. In such cases you explicitly define in the mapping what columns to use, since Hibernate can only use the property name for a single column. Fortunately, Grails lets you map multiple columns to a property using this syntax:</div>
+カスタム型は単一カラム用に制限されているわけではありません。必要な分の複数カラムに対してマッピングできます。
+単一カラムの場合はHibernateはプロパティ名を利用できますが、複数カラムの場合はどのカラムを使うのか<code>mapping</code>で明示的に定義する必要があります:<p class="paragraph"/><div class="code"><pre>class Book &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> title
     Name author
     Rating rating<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         author type: NameUserType, &#123;
@@ -1939,7 +1950,14 @@ You saw in an earlier section that you can use composition (with the <code>embed
         &#125;
         rating type: RatingUserType
     &#125;
-&#125;</pre></div><p class="paragraph"/>The above example will create "first_name" and "last_name" columns for the <code>author</code> property. You'll be pleased to know that you can also use some of the normal column/property mapping attributes in the column definitions. For example:<p class="paragraph"/><div class="code"><pre>column name: <span class="java&#45;quote">"first_name"</span>, index: <span class="java&#45;quote">"my_idx"</span>, unique: <span class="java&#45;keyword">true</span></pre></div><p class="paragraph"/>The column definitions do  <em class="italic">not</em>  support the following attributes: <code>type</code>, <code>cascade</code>, <code>lazy</code>, <code>cache</code>, and <code>joinTable</code>.<p class="paragraph"/>One thing to bear in mind with custom types is that they define the  <em class="italic">SQL types</em>  for the corresponding database columns. That helps take the burden of configuring them yourself, but what happens if you have a legacy database that uses a different SQL type for one of the columns? In that case, override the column's SQL type using the <code>sqlType</code> attribute:<p class="paragraph"/><div class="code"><pre>class Book &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> title
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The above example will create "first_name" and "last_name" columns for the <code>author</code> property. You'll be pleased to know that you can also use some of the normal column/property mapping attributes in the column definitions. For example:</div>
+上の例では、<code>author</code>プロパティに対して、「first_name」と「last_name」という2つのカラムが作成されます。
+嬉しいことに、このカラム定義において、通常のカラム/プロパティのマッピング属性がいくつか使えます。
+例えば:<p class="paragraph"/><div class="code"><pre>column name: <span class="java&#45;quote">"first_name"</span>, index: <span class="java&#45;quote">"my_idx"</span>, unique: <span class="java&#45;keyword">true</span></pre></div><p class="paragraph"/><div class="hidden-block">The column definitions do  <em class="italic">not</em>  support the following attributes: <code>type</code>, <code>cascade</code>, <code>lazy</code>, <code>cache</code>, and <code>joinTable</code>.</div>
+このカラム定義では次の属性はサポートされていません: <code>type</code>, <code>cascade</code>, <code>lazy</code>, <code>cache</code>, <code>joinTable</code><p class="paragraph"/><div class="hidden-block">One thing to bear in mind with custom types is that they define the  <em class="italic">SQL types</em>  for the corresponding database columns. That helps take the burden of configuring them yourself, but what happens if you have a legacy database that uses a different SQL type for one of the columns? In that case, override the column's SQL type using the <code>sqlType</code> attribute:</div>
+カスタム型について覚えておくべきことの1つは、対応するデータベースのカラムの  <em class="italic">SQLデータ型</em>  があらかじめ決められていることです。
+これによって自分で設定する負担が低減されます。しかし、カスタム型の想定とは異なるSQLデータ型が使われているレガシーデータベース上では、どうなってしまうのでしょうか？
+そのような場合は、<code>sqlType</code>属性を使ってそのカラムのSQLデータ型を上書きしてください:<p class="paragraph"/><div class="code"><pre>class Book &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> title
     Name author
     Rating rating<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         author type: NameUserType, &#123;
@@ -1948,7 +1966,9 @@ You saw in an earlier section that you can use composition (with the <code>embed
         &#125;
         rating type: RatingUserType, sqlType: <span class="java&#45;quote">"text"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>Mind you, the SQL type you specify needs to still work with the custom type. So overriding a default of "varchar" with "text" is fine, but overriding "text" with "yes_no" isn't going to work.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Mind you, the SQL type you specify needs to still work with the custom type. So overriding a default of "varchar" with "text" is fine, but overriding "text" with "yes_no" isn't going to work.</div>
+指定したSQLデータ型とカスタム型に整合性が必要なことに注意してください。
+デフォルトの「varchar」を「text」に上書きするのは良いですが、「text」を「yes_no」に上書きしてもうまく動きません。
 
 
 <a name="5.5.2.11 Derived Properties"><!-- Legacy link --></a>
@@ -1989,7 +2009,7 @@ Because the value of a derived property is generated in the database and depends
 
 
 <a name="5.5.2.12 Custom Naming Strategy"><!-- Legacy link --></a>
-<h2 id="customNamingStrategy">6.5.2.12 命名標準のカスタマイズ</h2>
+<h2 id="customNamingStrategy">6.5.2.12 命名規則のカスタマイズ</h2>
 By default Grails uses Hibernate's <code>ImprovedNamingStrategy</code> to convert domain class Class and field names to SQL table and column names by converting from camel-cased Strings to ones that use underscores as word separators. You can customize these on a per-class basis in the <code>mapping</code> closure but if there's a consistent pattern you can specify a different <code>NamingStrategy</code> class to use.<p class="paragraph"/>Configure the class name to be used in <code>grails-app/conf/DataSource.groovy</code> in the <code>hibernate</code> section, e.g.<p class="paragraph"/><div class="code"><pre>dataSource &#123;
     pooled = <span class="java&#45;keyword">true</span>
     dbCreate = <span class="java&#45;quote">"create&#45;drop"</span>

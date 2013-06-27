@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>6.5.2.12 &#21629;&#21517;&#27161;&#28310;&#12398;&#12459;&#12473;&#12479;&#12510;&#12452;&#12474; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>6.5.2.12 &#21629;&#21517;&#35215;&#21063;&#12398;&#12459;&#12473;&#12479;&#12510;&#12452;&#12474; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -125,7 +125,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>6.5.2.12 &#21629;&#21517;&#27161;&#28310;&#12398;&#12459;&#12473;&#12479;&#12510;&#12452;&#12474; - Reference Documentation</h1>
+                    <h1>6.5.2.12 &#21629;&#21517;&#35215;&#21063;&#12398;&#12459;&#12473;&#12479;&#12510;&#12452;&#12474; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -140,7 +140,7 @@ function addJsClass() {
 
                 
 <a name="5.5.2.12 Custom Naming Strategy"><!-- Legacy link --></a>
-<h2 id="customNamingStrategy">6.5.2.12 命名標準のカスタマイズ</h2>
+<h2 id="customNamingStrategy">6.5.2.12 命名規則のカスタマイズ</h2>
 By default Grails uses Hibernate's <code>ImprovedNamingStrategy</code> to convert domain class Class and field names to SQL table and column names by converting from camel-cased Strings to ones that use underscores as word separators. You can customize these on a per-class basis in the <code>mapping</code> closure but if there's a consistent pattern you can specify a different <code>NamingStrategy</code> class to use.<p class="paragraph"/>Configure the class name to be used in <code>grails-app/conf/DataSource.groovy</code> in the <code>hibernate</code> section, e.g.<p class="paragraph"/><div class="code"><pre>dataSource &#123;
     pooled = <span class="java&#45;keyword">true</span>
     dbCreate = <span class="java&#45;quote">"create&#45;drop"</span>
