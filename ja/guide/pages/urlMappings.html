@@ -141,9 +141,22 @@ function addJsClass() {
                 
 
 <h2 id="urlMappings">8.1.2 RESTリソースへのマッピング</h2>
-If you prefer to keep the declaration of the URL mapping in your <code>UrlMappings.groovy</code> file then simply removing the <code>uri</code> attribute of the <code>Resource</code> transformation and adding the following line to <code>UrlMappings.groovy</code> will suffice:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:<span class="java&#45;quote">"book"</span>)</pre></div><p class="paragraph"/>Extending your API to include more end points then becomes trivial:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:<span class="java&#45;quote">"book"</span>) &#123;
+<div class="hidden-block">
+If you prefer to keep the declaration of the URL mapping in your <code>UrlMappings.groovy</code> file then simply removing the <code>uri</code> attribute of the <code>Resource</code> transformation and adding the following line to <code>UrlMappings.groovy</code> will suffice:
+</div>
+もし<code>UrlMappings.groovy</code>内にURLマッピングの宣言を保持したい場合は、単に<code>Resource</code>変換から<code>uri</code>属性を削除して、<code>UrlMappings.groovy</code>へ以下の行を追加するだけです:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:<span class="java&#45;quote">"book"</span>)</pre></div><p class="paragraph"/><div class="hidden-block">
+Extending your API to include more end points then becomes trivial:
+</div>
+APIを拡張して、さらにエンドポイントを追加したい場合は以下のようにします:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:<span class="java&#45;quote">"book"</span>) &#123;
     <span class="java&#45;quote">"/publisher"</span>(controller:<span class="java&#45;quote">"publisher"</span>, method:<span class="java&#45;quote">"GET"</span>)
-&#125;</pre></div><p class="paragraph"/>The above example will expose the URI <code>/books/1/publisher</code>.<p class="paragraph"/>A more detailed explanation on <a href="../guide/single.html#restfulMappings" class="guide">creating RESTful URL mappings</a> can be found in the <a href="../guide/single.html#urlMappings" class="guide">URL Mappings section</a> of the user guide.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The above example will expose the URI <code>/books/1/publisher</code>.
+</div>
+上記の例は<code>/books/1/publisher</code>というURIで公開されます。<p class="paragraph"/><div class="hidden-block">
+A more detailed explanation on <a href="../guide/single.html#restfulMappings" class="guide">creating RESTful URL mappings</a> can be found in the <a href="../guide/single.html#urlMappings" class="guide">URL Mappings section</a> of the user guide.
+</div>
+<a href="../guide/single.html#restfulMappings" class="guide">RESTful URLマッピングの作成</a>についてのより詳細な説明は、ユーザガイドの<a href="../guide/single.html#urlMappings" class="guide">URLマッピング</a>内にあります。
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>
