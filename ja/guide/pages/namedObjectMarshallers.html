@@ -141,7 +141,8 @@ function addJsClass() {
                 
 
 <h2 id="namedObjectMarshallers">8.1.6.3 オブジェクト・マーシャラの名前付き定義</h2>
-It is also possible to register named configurations. For example:<p class="paragraph"/><div class="code"><pre>XML.createNamedConfig('publicApi') &#123;
+<div class="hidden-block">It is also possible to register named configurations. For example:</div>
+名前付きの設定で登録することもできます。例えば:<p class="paragraph"/><div class="code"><pre>XML.createNamedConfig('publicApi') &#123;
   it.registerObjectMarshaller(Book) &#123; Book book, XML xml &#45;&#62;
     // <span class="java&#45;keyword">do</span> <span class="java&#45;keyword">public</span> API
   &#125;
@@ -150,11 +151,14 @@ XML.createNamedConfig('adminApi') &#123;
   it.registerObjectMarshaller(Book) &#123; Book book, XML xml &#45;&#62;
     // <span class="java&#45;keyword">do</span> admin API
   &#125;
-&#125;</pre></div><p class="paragraph"/>Then when you use either the render or response methods you can wrap the call in a named configuration if necessary to customize rendering per request:<p class="paragraph"/><div class="code"><pre>XML.use( isAdmin ? 'adminApi' : 'publicApi') &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Then when you use either the <code>render</code> or <code>respond</code> methods you can wrap the call in a named configuration if necessary to customize rendering per request:</div>
+そして、もしリクエストごとのレンダリングのカスタマイズが必要な場合に、<code>render</code>または<code>respond</code>メソッドのどちらかを使い、名前付き設定でそのメソッド呼び出しをラップできます。<p class="paragraph"/><div class="code"><pre>XML.use( isAdmin ? 'adminApi' : 'publicApi') &#123;
     render book as XML
-&#125;</pre></div><p class="paragraph"/>or<p class="paragraph"/><div class="code"><pre>XML.use( isAdmin ? 'adminApi' : 'publicApi') &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">or</div>
+または<p class="paragraph"/><div class="code"><pre>XML.use( isAdmin ? 'adminApi' : 'publicApi') &#123;
     respond book 
 &#125;</pre></div>
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>

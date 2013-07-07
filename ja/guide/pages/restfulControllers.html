@@ -155,20 +155,33 @@ function addJsClass() {
                 
 
 <h2 id="restfulControllers">8.1.5 RESTコントローラの実装</h2>
-The <code>Resource</code> transformation is a quick way to get started, but typically you'll want to customize the controller logic, the rendering of the response or extend the API to include additional actions.
+<div class="hidden-block">The <code>Resource</code> transformation is a quick way to get started, but typically you'll want to customize the controller logic, the rendering of the response or extend the API to include additional actions.</div>
+<code>Resource</code>変換はREST APIを構築する手っ取り早い方法です。
+しかし大抵の場合、レスポンスのレンダリングを変更したり、APIを拡張するなど、コントローラのロジックをカスタマイズしたくなります。
+
 
 
 <h2 id="extendingRestfulController">8.1.5.1 RestfulControllerスーパークラスの拡張</h2>
-The easiest way to get started doing so is to create a new controller for your resource that extends the <code>grails.rest.RestfulController</code> super class. For example:<p class="paragraph"/><div class="code"><pre>class BookController <span class="java&#45;keyword">extends</span> RestfulController &#123;
+<div class="hidden-block">The easiest way to get started doing so is to create a new controller for your resource that extends the <code>grails.rest.RestfulController</code> super class. For example:</div>
+まず始めの簡単な方法は、<code>grails.rest.RestfulController</code>をスーパークラスとして、リソースに対して新たなコントローラを作成する方法です。
+例えば:<p class="paragraph"/><div class="code"><pre>class BookController <span class="java&#45;keyword">extends</span> RestfulController &#123;
     <span class="java&#45;keyword">static</span> responseFormats = &#91;'json', 'xml'&#93;
     BookController() &#123;
         <span class="java&#45;keyword">super</span>(Book)
     &#125;
-&#125;</pre></div><p class="paragraph"/>To customize any logic you can just override the appropriate action. The following table provides the names of the action names and the URIs they map to:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Controller Action</th></tr><tr class="table-odd"><td>GET</td><td>/books</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${id}/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${id}</td><td>delete</td></tr></table><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">To customize any logic you can just override the appropriate action. The following table provides the names of the action names and the URIs they map to:</div>
+ロジックをカスタマイズするには、カスタマイズが必要なアクションを上書きします。
+以下のテーブルは、アクションの名前と、それに対応するURIです:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Controller Action</th></tr><tr class="table-odd"><td>GET</td><td>/books</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${id}/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${id}</td><td>delete</td></tr></table><p class="paragraph"/><div class="hidden-block"><blockquote class="note">
 Note that the <code>create</code> and <code>edit</code> actions are only needed if the controller exposes an HTML interface. 
-</blockquote><p class="paragraph"/>As an example if you have a <a href="../guide/single.html#restfulMappings" class="guide">nested resource</a> then you would typically want to query both the parent and the child identifiers. For example given the following URL mapping:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/authors"</span>(resources:'author') &#123;
+</blockquote></div>
+<blockquote class="note">
+<code>create</code>と<code>edit</code>アクションは、コントローラがHTMLインタフェースを公開する場合にのみ必要です。
+</blockquote><p class="paragraph"/><div class="hidden-block">As an example if you have a <a href="../guide/single.html#restfulMappings" class="guide">nested resource</a> then you would typically want to query both the parent and the child identifiers. For example given the following URL mapping:</div>
+例のように<a href="../guide/single.html#restfulMappings" class="guide">ネストしたリソース</a>の場合、大抵は親と子供の識別子が必要になります。
+例えば以下のようなURLマッピングの場合:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/authors"</span>(resources:'author') &#123;
     <span class="java&#45;quote">"/books"</span>(resources:'book')
-&#125;</pre></div><p class="paragraph"/>You could implement the nested controller as follows:<p class="paragraph"/><div class="code"><pre>class BookController <span class="java&#45;keyword">extends</span> RestfulController &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You could implement the nested controller as follows:</div>
+次のように、ネストに対応したコントローラを実装できます:<p class="paragraph"/><div class="code"><pre>class BookController <span class="java&#45;keyword">extends</span> RestfulController &#123;
     <span class="java&#45;keyword">static</span> responseFormats = &#91;'json', 'xml'&#93;
     BookController() &#123;
         <span class="java&#45;keyword">super</span>(Book)
@@ -177,82 +190,148 @@ Note that the <code>create</code> and <code>edit</code> actions are only needed 
         Book.where &#123;
             id == id &#38;&#38; author.id = params.authorId
         &#125;.find()
-    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>The example above subclasses <code>RestfulController</code> and overrides the <code>queryForResource</code> method to customize the query for the resource to take into account the parent resource.<p class="paragraph"/>
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The example above subclasses <code>RestfulController</code> and overrides the <code>queryForResource</code> method to customize the query for the resource to take into account the parent resource.</div>
+上記の例では、<code>RestfulController</code>のサブクラスで親リソースに対応するため、<code>queryForResource</code>メソッドをオーバーライドしてリソースのクエリをカスタマイズしています。<p class="paragraph"/>
 
 
 
 <h2 id="restControllersStepByStep">8.1.5.2 RESTコントローラの実装ステップバイステップ</h2>
-If you don't want to take advantage of the features provided by the <code>RestfulController</code> super class, then you can implement each HTTP verb yourself manually. The first step is to create a controller:<p class="paragraph"/><div class="code"><pre>$ grails create&#45;controller book</pre></div><p class="paragraph"/>Then add some useful imports and enable readOnly by default:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.transaction.&#42;
+<div class="hidden-block">If you don't want to take advantage of the features provided by the <code>RestfulController</code> super class, then you can implement each HTTP verb yourself manually. The first step is to create a controller:</div>
+もし、スーパークラスの<code>RestfulController</code>から提供される機能を使用しない場合は、それぞれHTTPメソッドに対応するアクションを自身で実装できます。
+最初のステップはコントローラの作成です:<p class="paragraph"/><div class="code"><pre>$ grails create&#45;controller book</pre></div><p class="paragraph"/><div class="hidden-block">Then add some useful imports and enable readOnly by default:</div>
+そして、いくつかの便利なインポートを追加し、デフォルトで読み取り専用にします:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.transaction.&#42;
 <span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> org.springframework.http.HttpStatus.&#42;
 <span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> org.springframework.http.HttpMethod.&#42;<p class="paragraph"/>@Transactional(readOnly = <span class="java&#45;keyword">true</span>)
 class BookController &#123;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>Recall that each HTTP verb matches a particular Grails action according to the following conventions:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Controller Action</th></tr><tr class="table-odd"><td>GET</td><td>/books</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/create</td><td>create</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}/edit</td><td>edit</td></tr><tr class="table-odd"><td>POST</td><td>/books</td><td>save</td></tr><tr class="table-even"><td>PUT</td><td>/books/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${id}</td><td>delete</td></tr></table><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Recall that each HTTP verb matches a particular Grails action according to the following conventions:</div>
+HTTPメソッドのアクションは、以下の規約に従って、それぞれGrailsのアクションに対応付くことを思い出してください:<p class="paragraph"/>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Controller Action</th></tr><tr class="table-odd"><td>GET</td><td>/books</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/create</td><td>create</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}/edit</td><td>edit</td></tr><tr class="table-odd"><td>POST</td><td>/books</td><td>save</td></tr><tr class="table-even"><td>PUT</td><td>/books/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${id}</td><td>delete</td></tr></table><p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 The 'create' and 'edit' actions are already required if you plan to implement an HTML interface for the REST resource. They are there in order to render appropriate HTML forms to create and edit a resource. If this is not a requirement they can be discarded.
-</blockquote><p class="paragraph"/>The key to implementing REST actions is the <a href="../ref/Controllers/respond.html" class="controllers">respond</a> method introduced in Grails 2.3. The <code>respond</code> method tries to produce the most appropriate response for the requested content type (JSON, XML, HTML etc.)<p class="paragraph"/><h4>Implementing the 'index' action</h4><p class="paragraph"/>For example to implement the <code>index</code> action, simply call the <code>respond</code> method passing the list of objects to respond with:<p class="paragraph"/><div class="code"><pre>def index(<span class="java&#45;object">Integer</span> max) &#123;
+</blockquote>
+</div>
+<blockquote class="note">
+'create'と'edit'アクションはRESTリソースに対して、HTMLインタフェースを実装する予定がある場合は必要です。
+これらはリソースの追加、編集のHTMLフォームを表示するためにあります。
+これが必要ない場合は無効にできます。
+</blockquote><p class="paragraph"/><div class="hidden-block">The key to implementing REST actions is the <a href="../ref/Controllers/respond.html" class="controllers">respond</a> method introduced in Grails 2.3. The <code>respond</code> method tries to produce the most appropriate response for the requested content type (JSON, XML, HTML etc.)</div>
+RESTアクションの実装の鍵は、Grails 2.3で導入された<a href="../ref/Controllers/respond.html" class="controllers">respond</a>メソッドです。
+<code>respond</code>メソッドは、リクエストのCotent Type(JSON、XML、XMLなど)に対して、もっとも適切なレスポンスを生成しようとします。<p class="paragraph"/><div class="hidden-block">h4. Implementing the 'index' action</div>
+<h4>'index'アクションの実装</h4><p class="paragraph"/><div class="hidden-block">For example to implement the <code>index</code> action, simply call the <code>respond</code> method passing the list of objects to respond with: </div>
+例えば<code>index</code>アクションを実装するには、単にオブジェクトのリストと共に<code>respond</code>メソッドを呼びます:<p class="paragraph"/><div class="code"><pre>def index(<span class="java&#45;object">Integer</span> max) &#123;
     params.max = <span class="java&#45;object">Math</span>.min(max ?: 10, 100)
     respond Book.list(params), model:&#91;bookCount: Book.count()&#93;
-&#125;</pre></div><p class="paragraph"/>Note that in the above example we also use the <code>model</code> argument of the <code>respond</code> method to supply the total count. This is only required if you plan to support pagination via some user interface.<p class="paragraph"/>The <code>respond</code> method will, using <a href="../guide/single.html#contentNegotiation" class="guide">Content Negotiation</a>, attempt to reply with the most appropriate response given the content type requested by the client (via the ACCEPT header or file extension).<p class="paragraph"/>If the content type is established to be HTML then a model will be produced such that the action above would be the equivalent of writing:<p class="paragraph"/><div class="code"><pre>def index(<span class="java&#45;object">Integer</span> max) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Note that in the above example we also use the <code>model</code> argument of the <code>respond</code> method to supply the total count. This is only required if you plan to support pagination via some user interface.</div>
+上記の例では、オブジェクトのリストに加えて、合計値を設定するために<code>respond</code>メソッドに<code>model</code>引数を渡しています。
+これは、ユーザインタフェースでページングをサポートする場合にのみ必要です。<p class="paragraph"/><div class="hidden-block">The <code>respond</code> method will, using <a href="../guide/single.html#contentNegotiation" class="guide">Content Negotiation</a>, attempt to reply with the most appropriate response given the content type requested by the client (via the ACCEPT header or file extension).</div>
+<code>respond</code>メソッドは、<a href="../guide/single.html#contentNegotiation" class="guide">コンテントネゴシエーション</a>を使って、クライントからリクエストされたコンテンツタイプから(ACCEPTヘッダまたはファイル拡張子から)、もっとも適切なレスポンスを返そうとします。<p class="paragraph"/><div class="hidden-block">If the content type is established to be HTML then a model will be produced such that the action above would be the equivalent of writing:</div>
+もしコンテンツタイプがHTMLである場合は、上記のアクションは次のように書いた場合と同じような<code>model</code>を生成します:<p class="paragraph"/><div class="code"><pre>def index(<span class="java&#45;object">Integer</span> max) &#123;
     params.max = <span class="java&#45;object">Math</span>.min(max ?: 10, 100)
     &#91;bookList: Book.list(params), bookCount: Book.count()&#93;
-&#125;</pre></div><p class="paragraph"/>By providing an <code>index.gsp</code> file you can render an appropriate view for the given model. If the content type is something other than HTML then the <code>respond</code> method will attempt to lookup an appropriate <code>grails.rest.render.Renderer</code> instance that is capable of rendering the passed object. This is done by inspecting the <code>grails.rest.render.RendererRegistry</code>.<p class="paragraph"/>By default there are already renderers configured for JSON and XML, to find out how to register a custom renderer see the section on "Customizing Response Rendering".<p class="paragraph"/><h4>Implementing the 'show' action</h4><p class="paragraph"/>The <code>show</code> action, which is used to display and individual resource by id, can be implemented in one line of Groovy code (excluding the method signature):<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">By providing an <code>index.gsp</code> file you can render an appropriate view for the given model. If the content type is something other than HTML then the <code>respond</code> method will attempt to lookup an appropriate <code>grails.rest.render.Renderer</code> instance that is capable of rendering the passed object. This is done by inspecting the <code>grails.rest.render.RendererRegistry</code>.</div>
+そして、<code>index.gsp</code>ファイルを提供することで、与えられた<code>model</code>に対するビューが表示できます。
+もし、コンテンツタイプがHTMLではない場合、<code>respond</code>メソッドは渡されたオブジェクトをレンダリングできる適切な<code>grails.rest.render.Renderer</code>のインスタンスを探します。
+これは<code>grails.rest.render.RendererRegistry</code>から検索されます。<p class="paragraph"/><div class="hidden-block">By default there are already renderers configured for JSON and XML, to find out how to register a custom renderer see the section on "Customizing Response Rendering".</div>
+デフォルトではJSONとXMLのレンダラーが設定されています。
+カスタムレンダラーの登録の仕方は「レスポンスレンダリングのカスタマイズ」を参照してください。<p class="paragraph"/><div class="hidden-block">h4. Implementing the 'show' action</div>
+<h4>'show'アクションの実装</h4><p class="paragraph"/><div class="hidden-block">The <code>show</code> action, which is used to display and individual resource by id, can be implemented in one line of Groovy code (excluding the method signature):</div>
+<code>show</code>アクションはidによって個々のリソースを表示するためのものです。
+これはGroovyコード1行で実装できます(メソッドのシグネチャを除く):<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
     respond book
-&#125;</pre></div><p class="paragraph"/>By specifying the domain instance as a parameter to the action Grails will automatically attempt to lookup the domain instance using the <code>id</code> parameter of the request. If domain instance doesn't exist then <code>null</code> will be passed into the action. The <code>respond</code> method will return a 404 error if null is passed otherwise once again it will attempt to render an appropriate response. If the format is HTML then an appropriate model will produced. The following action is functionally equivalent to the above action:<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">By specifying the domain instance as a parameter to the action Grails will automatically attempt to lookup the domain instance using the <code>id</code> parameter of the request. If domain instance doesn't exist then <code>null</code> will be passed into the action. The <code>respond</code> method will return a 404 error if null is passed otherwise once again it will attempt to render an appropriate response. If the format is HTML then an appropriate model will produced. The following action is functionally equivalent to the above action:</div>
+アクションパラメータとして特定のドメインインスタンスを指定すると、Grailsは自動的にリクエストの<code>id</code>パラメータからドメインインスタンスを検索しようとします。
+もし、ドメインインスタンスが存在しない場合は、アクションへ<code>null</code>が渡されます。
+<code>respond</code>メソッドはnullが渡された場合は404エラーを返します。
+nullではない場合は、前と同じように適切なレスポンスを表示しようとします。
+もし、フォーマットがHTMLの場合は適切な<code>model</code>を生成します。
+以下のアクションは、上記のアクションと機能的に同じです:<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
     <span class="java&#45;keyword">if</span>(book == <span class="java&#45;keyword">null</span>) &#123;
         render status:404
     &#125;
     <span class="java&#45;keyword">else</span> &#123;
         <span class="java&#45;keyword">return</span> &#91;book: book&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Implementing the 'save' action</h4><p class="paragraph"/>The <code>save</code> action saves new resource representations. To start off with simply define a an action that accepts a resource as the first argument and mark it as <code>Transactional</code> with the <code>grails.transaction.Transactional</code> transform:<p class="paragraph"/><div class="code"><pre>@Transactional
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Implementing the 'save' action</div>
+<h4>'save'アクションの実装</h4><p class="paragraph"/><div class="hidden-block">The <code>save</code> action saves new resource representations. To start off with simply define a an action that accepts a resource as the first argument and mark it as <code>Transactional</code> with the <code>grails.transaction.Transactional</code> transform:</div>
+<code>save</code>アクションは新たなリソースを保存します。
+<code>save</code>アクションを簡単に実装するには、最初の引数にリソースをとるアクションを定義し、そのアクションに<code>grails.transaction.Transactional</code>変換を使って<code>Transactional</code>としてマークします:<p class="paragraph"/><div class="code"><pre>@Transactional
 def save(Book book) &#123;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>Then the first thing to do is check whether the resource has any <a href="../guide/single.html#validation" class="guide">validation errors</a> and if so respond with the errors:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">if</span>(book.hasErrors()) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Then the first thing to do is check whether the resource has any <a href="../guide/single.html#validation" class="guide">validation errors</a> and if so respond with the errors:</div>
+そして、最初にすべきことはリソースに<a href="../guide/single.html#validation" class="guide">バリデーションエラー</a>がないかチェックすることです。
+エラーがある場合は<code>errors</code>を応答します:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">if</span>(book.hasErrors()) &#123;
     respond book.errors, view:'create' 
 &#125;
 <span class="java&#45;keyword">else</span> &#123;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>In the case of HTML the 'create' view will be rendered again so the user can correct the invalid input. In the case of other formats (JSON, XML etc.) the errors object itself will be rendered in the appropriate format and a status code of 422 (UNPROCESSABLE_ENTITY) returned.<p class="paragraph"/>If there are no errors then the resource can be saved and an appropriate response sent:<p class="paragraph"/><div class="code"><pre>book.save flush:<span class="java&#45;keyword">true</span>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the case of HTML the 'create' view will be rendered again so the user can correct the invalid input. In the case of other formats (JSON, XML etc.) the errors object itself will be rendered in the appropriate format and a status code of 422 (UNPROCESSABLE_ENTITY) returned.</div>
+HTMLの場合は'create'ビューが再度表示されます。
+そして、ユーザは誤った入力を修正できます。
+それ以外のフォーマット(JSON、XMLなど)の場合は、エラーオブジェクト自身が適切なフォーマットで表示され、422(UNPROCESSABLE_ENTITY)のステータスコードが返されます。<p class="paragraph"/><div class="hidden-block">If there are no errors then the resource can be saved and an appropriate response sent:</div>
+もし、エラーがない場合は、リソースが保存され、適切なレスポンスが返されます:<p class="paragraph"/><div class="code"><pre>book.save flush:<span class="java&#45;keyword">true</span>
     withFormat &#123;
         html &#123; 
             flash.message = message(code: '<span class="java&#45;keyword">default</span>.created.message', args: &#91;message(code: 'book.label', <span class="java&#45;keyword">default</span>: 'Book'), book.id&#93;)
             redirect book 
         &#125;
         '&#42;' &#123; render status: CREATED &#125;
-    &#125;</pre></div><p class="paragraph"/>In the case of HTML a redirect is issued to the originating resource and for other formats a status code of 201 (CREATED) is returned.<p class="paragraph"/><h4>Implementing the 'update' action</h4><p class="paragraph"/>
-The <code>update</code> action updates an existing resource representations and is largely similar to the <code>save</code> action, first define the method signature:<p class="paragraph"/><div class="code"><pre>@Transactional
+    &#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the case of HTML a redirect is issued to the originating resource and for other formats a status code of 201 (CREATED) is returned.</div>
+HTMLの場合は、オリジナルのリソースへリダイレクトされます。
+そして、他のフォーマットでは201(CREATED)のステータスコードが返されます。<p class="paragraph"/><div class="hidden-block">h4. Implementing the 'update' action</div>
+<h4>'update'アクションの実装</h4><p class="paragraph"/>
+<div class="hidden-block">The <code>update</code> action updates an existing resource representations and is largely similar to the <code>save</code> action, first define the method signature:</div>
+<code>update</code>アクションは既存のリソースを更新します。
+そして、<code>update</code>アクションは<code>save</code>アクションとほとんど同じです。
+はじめにメソッドのシグネチャを定義します:<p class="paragraph"/><div class="code"><pre>@Transactional
 def update(Book book) &#123;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>If the resource exists then Grails will load the resource, otherwise null we passed. In the case of null, you should return a 404:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">if</span>(book == <span class="java&#45;keyword">null</span>) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If the resource exists then Grails will load the resource, otherwise null we passed. In the case of null, you should return a 404:</div>
+もしリソースが存在する場合は、Grailsはリソースを読み込み、そうでない場合はnullを渡します。
+nullの場合は、404を返すべきです:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">if</span>(book == <span class="java&#45;keyword">null</span>) &#123;
         render status: NOT_FOUND
     &#125;
     <span class="java&#45;keyword">else</span> &#123;
         &#8230;
-    &#125;</pre></div><p class="paragraph"/>Then once again check for errors <a href="../guide/single.html#validation" class="guide">validation errors</a> and if so respond with the errors:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">if</span>(book.hasErrors()) &#123;
+    &#125;</pre></div><p class="paragraph"/><div class="hidden-block">Then once again check for errors <a href="../guide/single.html#validation" class="guide">validation errors</a> and if so respond with the errors:</div>
+そして、前と同じようにerrorsに対して<a href="../guide/single.html#validation" class="guide">バリデーションエラー</a>をチェックして、エラーがある場合は<code>errors</code>を応答します:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">if</span>(book.hasErrors()) &#123;
     respond book.errors, view:'edit' 
 &#125;
 <span class="java&#45;keyword">else</span> &#123;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>In the case of HTML the 'edit' view will be rendered again so the user can correct the invalid input. In the case of other formats (JSON, XML etc.) the errors object itself will be rendered in the appropriate format and a status code of 422 (UNPROCESSABLE_ENTITY) returned.<p class="paragraph"/>If there are no errors then the resource can be saved and an appropriate response sent:<p class="paragraph"/><div class="code"><pre>book.save flush:<span class="java&#45;keyword">true</span>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the case of HTML the 'edit' view will be rendered again so the user can correct the invalid input. In the case of other formats (JSON, XML etc.) the errors object itself will be rendered in the appropriate format and a status code of 422 (UNPROCESSABLE_ENTITY) returned.</div>
+HTMLの場合は'edit'ビューが再度表示されます。
+そして、ユーザは誤った入力を修正できます。
+それ以外のフォーマット(JSON、XMLなど)の場合は、エラーオブジェクト自身が適切なフォーマットで表示され、422(UNPROCESSABLE_ENTITY)のステータスコードが返されます。<p class="paragraph"/><div class="hidden-block">If there are no errors then the resource can be saved and an appropriate response sent:</div>
+もし、エラーがない場合は、リソースが保存され、適切なレスポンスが返されます:<p class="paragraph"/><div class="code"><pre>book.save flush:<span class="java&#45;keyword">true</span>
 withFormat &#123;
     html &#123; 
         flash.message = message(code: '<span class="java&#45;keyword">default</span>.updated.message', args: &#91;message(code: 'book.label', <span class="java&#45;keyword">default</span>: 'Book'), book.id&#93;)
         redirect book 
     &#125;
     '&#42;' &#123; render status: OK &#125;
-&#125;</pre></div><p class="paragraph"/>In the case of HTML a redirect is issued to the originating resource and for other formats a status code of 200 (OK) is returned.<p class="paragraph"/><h4>Implementing the 'delete' action</h4><p class="paragraph"/>The <code>delete</code> action deletes an existing resource. The implementation is largely similar to the <code>update</code> action, expect the <code>delete()</code> method is called instead:<p class="paragraph"/><div class="code"><pre>book.delete flush:<span class="java&#45;keyword">true</span>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the case of HTML a redirect is issued to the originating resource and for other formats a status code of 200 (OK) is returned.</div>
+HTMLの場合は、オリジナルのリソースへリダイレクトされ、他のフォーマットでは200(OK)のステータスコードが返されます。<p class="paragraph"/><div class="hidden-block">h4. Implementing the 'delete' action</div>
+<h4>'delete'アクションの実装</h4><p class="paragraph"/><div class="hidden-block">The <code>delete</code> action deletes an existing resource. The implementation is largely similar to the <code>update</code> action, expect the <code>delete()</code> method is called instead:</div>
+<code>delete</code>アクションは既存のリソースを削除します。
+実装は、<code>update</code>アクションとほとんど同じで<code>delete()</code>メソッドを代わりに呼びます:<p class="paragraph"/><div class="code"><pre>book.delete flush:<span class="java&#45;keyword">true</span>
 withFormat &#123;
     html &#123; 
         flash.message = message(code: '<span class="java&#45;keyword">default</span>.deleted.message', args: &#91;message(code: 'Book.label', <span class="java&#45;keyword">default</span>: 'Book'), book.id&#93;)
         redirect action:<span class="java&#45;quote">"index"</span>, method:<span class="java&#45;quote">"GET"</span> 
     &#125;
     '&#42;'&#123; render status: NO_CONTENT &#125; 
-&#125;</pre></div><p class="paragraph"/>Notice that for an HTML response a redirect is issued back to the <code>index</code> action, whilst for other content types a response code 204 (NO_CONTENT) is returned.<p class="paragraph"/>
-
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Notice that for an HTML response a redirect is issued back to the <code>index</code> action, whilst for other content types a response code 204 (NO_CONTENT) is returned.</div>
+HTMLレスポンスでは<code>index</code>アクションへリダイレクトされます。
+他のコンテンツタイプに対しては、レスポンスコード204(NO_CONTENT)が返されます。<p class="paragraph"/>
 
 
 <h2 id="generatingRestControllers">8.1.5.3 スカッフォルドを使用してRESTコントローラを生成</h2>
-To see some of these concepts in action and help you get going the <a href="http://grails.org/plugin/scaffolding" target="blank">Scaffolding plugin</a>, version 2.0 and above, can generate a REST ready controller for you, simply run the command:<p class="paragraph"/><div class="code"><pre>$ grails generate&#45;controller &#91;Domain <span class="java&#45;object">Class</span> Name&#93;</pre></div>
+<div class="hidden-block">To see some of these concepts in action and help you get going the <a href="http://grails.org/plugin/scaffolding" target="blank">Scaffolding plugin</a>, version 2.0 and above, can generate a REST ready controller for you, simply run the command:</div>
+アクション内でここまで見てきたコンセプトを得るには、バージョン2.0以上の<a href="http://grails.org/plugin/scaffolding" target="blank">スカッフォルドプラグイン</a>が役に立ちます。
+このプラグインは、REST機能が組み込まれたコントローラを生成できます。
+これは単にコマンドを実行するだけです:<p class="paragraph"/><div class="code"><pre>$ grails generate&#45;controller &#91;Domain <span class="java&#45;object">Class</span> Name&#93;</pre></div>
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>

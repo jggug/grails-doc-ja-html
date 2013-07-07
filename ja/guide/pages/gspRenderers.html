@@ -141,9 +141,11 @@ function addJsClass() {
                 
 
 <h2 id="gspRenderers">8.1.6.6 GSPを使用したカスタムレンダリング</h2>
-You can also customize rendering on a per action basis using Groovy Server Pages (GSP). For example given the <code>show</code> action mentioned previously:<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
+<div class="hidden-block">You can also customize rendering on a per action basis using Groovy Server Pages (GSP). For example given the <code>show</code> action mentioned previously:</div>
+Groovy Server Pages(GSP)を使ってアクションごとに、レンダリングをカスタマイズすることもできます:<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
     respond book
-&#125;</pre></div><p class="paragraph"/>You could supply a <code>show.xml.gsp</code> file to customize the rendering of the XML:<p class="paragraph"/><div class="code"><pre>&#60;%@page contentType=<span class="java&#45;quote">"application/xml"</span>%&#62;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You could supply a <code>show.xml.gsp</code> file to customize the rendering of the XML:</div>
+そして、XMLのレンダリングをカスタマイズするための<code>show.xml.gsp</code>ファイルを用意します:<p class="paragraph"/><div class="code"><pre>&#60;%@page contentType=<span class="java&#45;quote">"application/xml"</span>%&#62;
 &#60;book id=<span class="java&#45;quote">"$&#123;book.id&#125;"</span> title=<span class="java&#45;quote">"$&#123;book.title&#125;"</span>/&#62;</pre></div><p class="paragraph"/>
 
 

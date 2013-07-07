@@ -141,27 +141,38 @@ function addJsClass() {
                 
 
 <h2 id="objectMarshallers">8.1.6.2 カスタムオブジェクトマーシャラの登録</h2>
-Grails' Converters feature the notion of an <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">ObjectMarshaller</a>, and each type can have a registered <code>ObjectMarshaller</code>. You can register custom <code>ObjectMarshaller</code> instances to completely customize response rendering. For example you can define the following in <code>BootStrap.init</code>:<p class="paragraph"/><div class="code"><pre>XML.registerObjectMarshaller Book, &#123; Book book, XML xml &#45;&#62;
+<div class="hidden-block">Grails' Converters feature the notion of an <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">ObjectMarshaller</a>, and each type can have a registered <code>ObjectMarshaller</code>. You can register custom <code>ObjectMarshaller</code> instances to completely customize response rendering. For example you can define the following in <code>BootStrap.init</code>:</div>
+Grailsのコンバーターは、<a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">オブジェクトマーシャラ</a>の概念を特徴としており、それぞれの型に対して<code>ObjectMarshaller</code>を登録できます。
+そして、レスポンスのレンダリングをカスタマイズするためにカスタム<code>ObjectMarshaller</code>インタンスを登録できます。
+例えば、<code>BootStrap.init</code>の中で以下のように定義できます:<p class="paragraph"/><div class="code"><pre>XML.registerObjectMarshaller Book, &#123; Book book, XML xml &#45;&#62;
   xml.attribute 'id', book.id
   xml.build &#123;
     title(book.title)
   &#125;
-&#125;</pre></div><p class="paragraph"/>You can customize the formatting of an indvidual value this way too. For example the <a href="http://grails.org/plugin/jodatime" target="blank">JodaTime plugin</a> does the following to support rendering of JodaTime dates in JSON output:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(DateTime) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can customize the formatting of an indvidual value this way too. For example the <a href="http://grails.org/plugin/jodatime" target="blank">JodaTime plugin</a> does the following to support rendering of JodaTime dates in JSON output:</div>
+個々の値のフォーマットをカスタマイズする場合もこの方法で可能です。
+例えば、<a href="http://grails.org/plugin/jodatime" target="blank">JodaTime plugin</a>は、JSON出力でJadaTime日付のレンダリングをサポートするために次のようにしています:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(DateTime) &#123;
     <span class="java&#45;keyword">return</span> it?.toString(<span class="java&#45;quote">"yyyy&#45;MM&#45;dd'T'HH:mm:ss'Z'"</span>)
-&#125;</pre></div><p class="paragraph"/>In the case of JSON it often simple to use a map to customize output:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(Book) &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the case of JSON it often simple to use a map to customize output:</div>
+JSONの場合は、マップを使って簡単に出力をカスタマイズできます:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(Book) &#123;
   def map= &#91;:&#93;
   map&#91;'titl'&#93; = it.title
   map&#91;'auth'&#93; = it.author
   <span class="java&#45;keyword">return</span> map 
-&#125;</pre></div><p class="paragraph"/><h4>Registering Custom Marshallers via Spring</h4><p class="paragraph"/>Note that if you have many custom marshallers it is recommended you split the registration of these into a separate class:<p class="paragraph"/><div class="code"><pre>class CustomMarshallerRegistrar &#123;<p class="paragraph"/>    @javax.annotation.PostConstruct
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Registering Custom Marshallers via Spring</div>
+<h4>Spring経由でカスタムマーシャラを登録する</h4><p class="paragraph"/><div class="hidden-block">Note that if you have many custom marshallers it is recommended you split the registration of these into a separate class:</div>
+もし多くのカスタムマーシャラがある場合は、マーシャラの登録をそれぞれ別々のクラスへ分けることがお勧めです:<p class="paragraph"/><div class="code"><pre>class CustomMarshallerRegistrar &#123;<p class="paragraph"/>    @javax.annotation.PostConstruct
     void registerMarshallers() &#123;
         JSON.registerObjectMarshaller(DateTime) &#123;
             <span class="java&#45;keyword">return</span> it?.toString(<span class="java&#45;quote">"yyyy&#45;MM&#45;dd'T'HH:mm:ss'Z'"</span>)
         &#125;        
     &#125;
-&#125;</pre></div><p class="paragraph"/>Then define this class as Spring bean in <code>grails-app/conf/spring/resources.groovy</code>:<p class="paragraph"/><div class="code"><pre>beans = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Then define this class as Spring bean in <code>grails-app/conf/spring/resources.groovy</code>:</div>
+そして、このクラスを<code>grails-app/conf/spring/resources.groovy</code>内でSpringビーンとして定義します:<p class="paragraph"/><div class="code"><pre>beans = &#123;
     myCustomMarshallerRegistrar(CustomMarshallerRegistrar)
-&#125;</pre></div><p class="paragraph"/>The <code>PostConstruct</code> annotation will get triggered on startup of your application.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The <code>PostConstruct</code> annotation will get triggered on startup of your application.</div>
+<code>PostConstruct</code>アノテーションはアプリケーション起動時に処理を起動するトリガーになります。
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>

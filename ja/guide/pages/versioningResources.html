@@ -141,25 +141,45 @@ function addJsClass() {
                 
 
 <h2 id="versioningResources">8.1.4 RESTリソースのバージョニング</h2>
-A common requirement with a REST API is to expose different versions of the REST API. There are a few ways this can be achieved in Grails.<p class="paragraph"/><h4>Versioning using the URI</h4><p class="paragraph"/>A common approach is to use the URI to version APIs (although this approach is discouraged in favour of Hypermedia). For example, you can define the following URL mappings:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books/v1"</span>(resources:<span class="java&#45;quote">"book"</span>, namespace:'v1')
-<span class="java&#45;quote">"/books/v2"</span>(resources:<span class="java&#45;quote">"book"</span>, namespace:'v2')</pre></div><p class="paragraph"/>That will match the following controllers:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> myapp.v1<p class="paragraph"/>class BookController &#123;
+<div class="hidden-block">A common requirement with a REST API is to expose different versions of the REST API. There are a few ways this can be achieved in Grails.</div>
+REST APIの一般的な要件として、REST APIの異なるバージョンの公開があります。
+Grailsでこれを実現するにはいくつかの方法があります。<p class="paragraph"/><div class="hidden-block">h4. Versioning using the URI</div>
+<h4>URIを使ったバージョンニング</h4><p class="paragraph"/><div class="hidden-block">A common approach is to use the URI to version APIs (although this approach is discouraged in favour of Hypermedia). For example, you can define the following URL mappings:</div>
+一般的な方法は、各バージョンのAPIへのURIを使うことです(しかし、この方法よりはハイパーメディアを使った方法をお勧めします)。
+例えば、以下のようにURLマッピングを定義できます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books/v1"</span>(resources:<span class="java&#45;quote">"book"</span>, namespace:'v1')
+<span class="java&#45;quote">"/books/v2"</span>(resources:<span class="java&#45;quote">"book"</span>, namespace:'v2')</pre></div><p class="paragraph"/><div class="hidden-block">That will match the following controllers:</div>
+これは以下のコントローラに対応付きます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> myapp.v1<p class="paragraph"/>class BookController &#123;
     <span class="java&#45;keyword">static</span> namespace = 'v1'
 &#125;<p class="paragraph"/><span class="java&#45;keyword">package</span> myapp.v2<p class="paragraph"/>class BookController &#123;
     <span class="java&#45;keyword">static</span> namespace = 'v2'
-&#125;</pre></div><p class="paragraph"/>This approach has the disadvantage of requiring two different URI namespaces for your API.<p class="paragraph"/><h4>Versioning with the Accept-Version header</h4><p class="paragraph"/>As an alternative Grails supports the passing of an <code>Accept-Version</code> header from clients. For example you can define the following URL mappings:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(version:'1.0', resources:<span class="java&#45;quote">"book"</span>, namespace:'v1')
-<span class="java&#45;quote">"/books"</span>(version:'2.0', resources:<span class="java&#45;quote">"book"</span>, namespace:'v2')</pre></div><p class="paragraph"/>
-Then in the client simply pass which version you need using the <code>Accept-Version</code> header:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept&#45;Version: 1.0"</span> &#45;X GET http://localhost:8080/myapp/books</pre></div><p class="paragraph"/><h4>Versioning using Hypermedia / Mime Types</h4><p class="paragraph"/>Another approach to versioning is to use Mime Type definitions to declare the version of your custom media types (see the section on "Hypermedia as the Engine of Application State" for more information about Hypermedia concepts). For example in <code>Config.groovy</code> you can declare a custom Mime Type for your resource that includes a version parameter (the 'v' parameter):<p class="paragraph"/><div class="code"><pre>grails.mime.types = &#91;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This approach has the disadvantage of requiring two different URI namespaces for your API.</div>
+この方法は、APIに対して異なる2つのURIのネームスペースが必要となるという欠点があります。<p class="paragraph"/><div class="hidden-block">h4. Versioning with the Accept-Version header</div>
+<h4>Accept-Versionヘッダを使ったバージョンニング</h4><p class="paragraph"/><div class="hidden-block">As an alternative Grails supports the passing of an <code>Accept-Version</code> header from clients. For example you can define the following URL mappings:</div>
+代わりに、Grailsはクライアントからの<code>Accept-Version</code>ヘッダによる制御をサポートしています。
+例えば以下のようにURLマッピングを定義できます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(version:'1.0', resources:<span class="java&#45;quote">"book"</span>, namespace:'v1')
+<span class="java&#45;quote">"/books"</span>(version:'2.0', resources:<span class="java&#45;quote">"book"</span>, namespace:'v2')</pre></div><p class="paragraph"/><div class="hidden-block">Then in the client simply pass which version you need using the <code>Accept-Version</code> header:</div>
+そして、クライアントからは<code>Accept-Version</code>ヘッダを使ってバージョンを渡すだけです:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept&#45;Version: 1.0"</span> &#45;X GET http://localhost:8080/myapp/books</pre></div><p class="paragraph"/><div class="hidden-block">h4. Versioning using Hypermedia / Mime Types</div>
+<h4>ハイパーメディア/MIMEタイプを使ったバージョニング</h4><p class="paragraph"/><div class="hidden-block">Another approach to versioning is to use Mime Type definitions to declare the version of your custom media types (see the section on "Hypermedia as the Engine of Application State" for more information about Hypermedia concepts). For example in <code>Config.groovy</code> you can declare a custom Mime Type for your resource that includes a version parameter (the 'v' parameter):</div>
+他のバージョニング方法は、MIMEタイプ定義を使い、カスタムメディアタイプとしてバージョンを宣言する方法です(ハイパーメディアのコンセプトについての、より詳しい情報は「アプリケーション状態エンジンとしてのハイパーメディア」を参照してください)。
+例えば<code>Config.groovy</code>内に、リソースに対してバージョンパラメータ('v'のパラメータ)を含んだカスタムMIMEタイプを宣言できます:<p class="paragraph"/><div class="code"><pre>grails.mime.types = &#91;
     all: '&#42;/&#42;',
     book: <span class="java&#45;quote">"application/vnd.books.org.book+json;v=1.0"</span>,
     bookv2: <span class="java&#45;quote">"application/vnd.books.org.book+json;v=2.0"</span>,
     &#8230;
-&#125;</pre></div><p class="paragraph"/><blockquote class="warning">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block"><blockquote class="warning">
 It is critical that place your new mime types after the 'all' Mime Type because if the Content Type of the request cannot be established then the first entry in the map is used for the response. If you have your new Mime Type at the top then Grails will always try and send back your new Mime Type if the requested Mime Type cannot be established.
-</blockquote><p class="paragraph"/>Then override the renderer (see the section on "Customizing Response Rendering" for more information on custom renderers) to send back the custom Mime Type in <code>grails-app/conf/spring/resourses.groovy</code>:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.renderer.json.&#42;
+</blockquote></div>
+<blockquote class="warning">
+'all'のMIMEタイプの後に、新たなMIMEタイプを宣言しているのには重要な意味があります。
+なぜなら、リクエストのコンテンツタイプが不明な場合は、マップ内の最初のエントリがレスポンスのコンテンツタイプとして使われるためです。
+もし、新たなMIMEタイプが先頭にあるとすると、リクエストのコンテンツタイプが不明な場合に、Grailsは新たなMIMEタイプを常に送り返すことになります。
+</blockquote><p class="paragraph"/><div class="hidden-block">Then override the renderer (see the section on "Customizing Response Rendering" for more information on custom renderers) to send back the custom Mime Type in <code>grails-app/conf/spring/resourses.groovy</code>:</div>
+次に、<code>grails-app/conf/spring/resourses.groovy</code>内でカスタムMIMEタイプを返すようにレンダリング設定(カスタムレンダリングのより詳しい情報は「レスポンスレンダリングのカスタマイズ」を参照してください)を上書きします:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.renderer.json.&#42;
 <span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.mime.&#42;<p class="paragraph"/>beans = &#123;
     bookRendererV1(JsonRenderer, myapp.v1.Book, <span class="java&#45;keyword">new</span> MimeType(<span class="java&#45;quote">"application/vnd.books.org.book+json"</span>, &#91;v:<span class="java&#45;quote">"1.0"</span>&#93;)) 
     bookRendererV2(JsonRenderer, myapp.v2.Book, <span class="java&#45;keyword">new</span> MimeType(<span class="java&#45;quote">"application/vnd.books.org.book+json"</span>, &#91;v:<span class="java&#45;quote">"2.0"</span>&#93;)) 
-&#125;</pre></div><p class="paragraph"/>Then using the <code>Accept</code> header you can specify which version you need using the Mime Type:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/vnd.books.org.book+json;v=1.0"</span> &#45;X GET http://localhost:8080/myapp/books</pre></div><p class="paragraph"/><p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Then using the <code>Accept</code> header you can specify which version you need using the Mime Type:</div>
+これで、<code>Accept</code>ヘッダでMIMEタイプを使いバージョンを指定できます。<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/vnd.books.org.book+json;v=1.0"</span> &#45;X GET http://localhost:8080/myapp/books</pre></div><p class="paragraph"/><p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>

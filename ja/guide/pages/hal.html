@@ -141,7 +141,9 @@ function addJsClass() {
                 
 
 <h2 id="hal">8.1.7.1 HALサポート</h2>
-<a href="http://stateless.co/hal_specification.html" target="blank">HAL</a> is a standard exchange format commonly used when developing REST APIs that follow HATEOAS principals. An example HAL document representing a list of orders can be seen below:<p class="paragraph"/><div class="code"><pre>&#123;
+<div class="hidden-block"><a href="http://stateless.co/hal_specification.html" target="blank">HAL</a> is a standard exchange format commonly used when developing REST APIs that follow HATEOAS principals. An example HAL document representing a list of orders can be seen below:</div>
+<a href="http://stateless.co/hal_specification.html" target="blank">HAL</a>は、HATEOASに沿ったREST APIを開発する際の標準な交換フォーマットとして知られています。
+例えば、注文の一覧をHALを使って表現すると、以下のようになります:<p class="paragraph"/><div class="code"><pre>&#123;
     <span class="java&#45;quote">"_links"</span>: &#123;
         <span class="java&#45;quote">"self"</span>: &#123; <span class="java&#45;quote">"href"</span>: <span class="java&#45;quote">"/orders"</span> &#125;,
         <span class="java&#45;quote">"next"</span>: &#123; <span class="java&#45;quote">"href"</span>: <span class="java&#45;quote">"/orders?page=2"</span> &#125;,
@@ -180,10 +182,13 @@ function addJsClass() {
             <span class="java&#45;quote">"status"</span>: <span class="java&#45;quote">"processing"</span>
         &#125;&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Exposing Resources Using HAL </h4><p class="paragraph"/>To return HAL instead of regular JSON for a resource you can simply override the renderer in <code>grails-app/conf/spring/resources.groovy</code> with an instance of <code>grails.rest.render.hal.HalJsonRenderer</code> (or <code>HalXmlRenderer</code> for the XML variation):<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.hal.&#42;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Exposing Resources Using HAL </div>
+<h4>HALを使ったリソースの公開</h4><p class="paragraph"/><div class="hidden-block">To return HAL instead of regular JSON for a resource you can simply override the renderer in <code>grails-app/conf/spring/resources.groovy</code> with an instance of <code>grails.rest.render.hal.HalJsonRenderer</code> (or <code>HalXmlRenderer</code> for the XML variation):</div>
+リソースに対して、いつものJSONの代わりにHALを返すには、<code>grails.rest.render.hal.HalJsonRenderer</code>(XMLの場合は<code>HalXmlRenderer</code>)のインスタンスを使い、<code>grails-app/conf/spring/resources.groovy</code>の中でレンダラーを単に上書きします:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.hal.&#42;
 beans = &#123;
     halBookRenderer(HalJsonRenderer, <span class="java&#45;keyword">rest</span>.test.Book)
-&#125;</pre></div><p class="paragraph"/>With the bean in place requesting the HAL content type will return HAL:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/hal+json"</span> http://localhost:8080/myapp/books/1<p class="paragraph"/>HTTP/1.1 200 OK
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">With the bean in place requesting the HAL content type will return HAL:</div>
+コンテンツタイプがHALのリクエストでは、このビーンがHALを返します:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/hal+json"</span> http://localhost:8080/myapp/books/1<p class="paragraph"/>HTTP/1.1 200 OK
 Server: Apache&#45;Coyote/1.1
 Content&#45;Type: application/hal+json;charset=ISO&#45;8859&#45;1<p class="paragraph"/>&#123;
   <span class="java&#45;quote">"_links"</span>: &#123;
@@ -194,22 +199,34 @@ Content&#45;Type: application/hal+json;charset=ISO&#45;8859&#45;1<p class="parag
     &#125;
   &#125;,
   <span class="java&#45;quote">"title"</span>: <span class="java&#45;quote">"&#34;The Stand&#34;"</span>
-&#125;</pre></div><p class="paragraph"/>To use HAL XML format simply change the renderer:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.hal.&#42;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">To use HAL XML format simply change the renderer:</div>
+XMLフォーマットのHALを使うには単にレンダラーを変更します:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.hal.&#42;
 beans = &#123;
     halBookRenderer(HalXmlRenderer, <span class="java&#45;keyword">rest</span>.test.Book)
 &#125;</pre></div><p class="paragraph"/>
-<h4>Using Custom Media / Mime Types</h4><p class="paragraph"/>If you wish to use a custom Mime Type then you first need to declare the Mime Types in <code>grails-app/conf/Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.mime.types = &#91;
+<div class="hidden-block">h4. Using Custom Media / Mime Types</div>
+<h4>カスタムMIME(メディア)タイプの使用</h4><p class="paragraph"/><div class="hidden-block">If you wish to use a custom Mime Type then you first need to declare the Mime Types in <code>grails-app/conf/Config.groovy</code>:</div>
+もし、カスタムMIMEタイプを使いたい場合は、はじめに<code>grails-app/conf/Config.groovy</code>の中でMIMEタイプを宣言する必要があります:<p class="paragraph"/><div class="code"><pre>grails.mime.types = &#91;
     all:      <span class="java&#45;quote">"&#42;/&#42;"</span>,
     book:     <span class="java&#45;quote">"application/vnd.books.org.book+json"</span>,
     bookList: <span class="java&#45;quote">"application/vnd.books.org.booklist+json"</span>,
     &#8230;
-&#93;</pre></div><p class="paragraph"/><blockquote class="warning">
+&#93;</pre></div><p class="paragraph"/><div class="hidden-block"><blockquote class="warning">
 It is critical that place your new mime types after the 'all' Mime Type because if the Content Type of the request cannot be established then the first entry in the map is used for the response. If you have your new Mime Type at the top then Grails will always try and send back your new Mime Type if the requested Mime Type cannot be established.
-</blockquote><p class="paragraph"/>Then override the renderer to return HAL using the custom Mime Types:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.hal.&#42;
+</blockquote></div>
+<blockquote class="warning">
+'all'のMIMEタイプの後に、新たなMIMEタイプを宣言しているのには重要な意味があります。
+なぜなら、リクエストのコンテンツタイプが不明な場合は、マップ内の最初のエントリがレスポンスのコンテンツタイプとして使われるためです。
+もし、新たなMIMEタイプが先頭にあるとすると、リクエストのコンテンツタイプが不明な場合に、Grailsは新たなMIMEタイプを常に送り返すことになります。
+</blockquote><p class="paragraph"/><div class="hidden-block">Then override the renderer to return HAL using the custom Mime Types:</div>
+そして、カスタムMIMEタイプを使ってHALを返すためにレンダラーを上書きします:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.hal.&#42;
 <span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.mime.&#42;<p class="paragraph"/>beans = &#123;
     halBookRenderer(HalJsonRenderer, <span class="java&#45;keyword">rest</span>.test.Book, <span class="java&#45;keyword">new</span> MimeType(<span class="java&#45;quote">"application/vnd.books.org.book+json"</span>, &#91;v:<span class="java&#45;quote">"1.0"</span>&#93;))
     halBookListRenderer(HalJsonCollectionRenderer, <span class="java&#45;keyword">rest</span>.test.Book, <span class="java&#45;keyword">new</span> MimeType(<span class="java&#45;quote">"application/vnd.books.org.booklist+json"</span>, &#91;v:<span class="java&#45;quote">"1.0"</span>&#93;))
-&#125;</pre></div><p class="paragraph"/>In the above example the first bean defines a HAL renderer for a single book instance that returns a Mime Type of <code>application/vnd.books.org.book+json</code>. The second bean defines the Mime Type used to render a collection of books (in this case <code>application/vnd.books.org.booklist+json</code>).<p class="paragraph"/>With this in place issuing a request for the new Mime Type returns the necessary HAL:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/vnd.books.org.book+json"</span> http://localhost:8080/myapp/books/1<p class="paragraph"/>HTTP/1.1 200 OK
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the above example the first bean defines a HAL renderer for a single book instance that returns a Mime Type of <code>application/vnd.books.org.book+json</code>. The second bean defines the Mime Type used to render a collection of books (in this case <code>application/vnd.books.org.booklist+json</code>).</div>
+上記の例で、初めのビーンは単一のbookインスタンスに対して、<code>application/vnd.books.org.book+json</code>のMIMEタイプを返すHALのレンダラーを定義しています。
+2つ目のビーンはbookのコレクションを表示するために使われるMIMEタイプを定義しています(この場合は<code>application/vnd.books.org.booklist+json</code>)。<p class="paragraph"/><div class="hidden-block">With this in place issuing a request for the new Mime Type returns the necessary HAL:</div>
+この新たなMIMEタイプに対してリクエストが投げられると必要なHALを返します:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/vnd.books.org.book+json"</span> http://localhost:8080/myapp/books/1<p class="paragraph"/>HTTP/1.1 200 OK
 Server: Apache&#45;Coyote/1.1
 Content&#45;Type: application/vnd.books.org.book+json;charset=ISO&#45;8859&#45;1<p class="paragraph"/>
 &#123;
@@ -222,10 +239,17 @@ Content&#45;Type: application/vnd.books.org.book+json;charset=ISO&#45;8859&#45;1
   &#125;,
   <span class="java&#45;quote">"title"</span>: <span class="java&#45;quote">"&#34;The Stand&#34;"</span>
 &#125;</pre></div><p class="paragraph"/>
-<h4>Customizing Link Rendering</h4><p class="paragraph"/>An important aspect of HATEOAS is the usage of links that describe the transitions the client can use to interact with the REST API. By default the <code>HalJsonRendere</code> will automatically create links for you for associations and to the resource itself (using the "self" relationship).<p class="paragraph"/>However you can customize link rendering using the <code>link</code> method that is added to all domain classes annotated with <code>grails.rest.Resource</code> or any class annotated with <code>grails.rest.Linkdable</code>. For example, the <code>show</code> action can be modified as follows to provide a new link in the resulting output:<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
+<div class="hidden-block">h4. Customizing Link Rendering</div>
+<h4>リンクレンダリングのカスタマイズ</h4><p class="paragraph"/><div class="hidden-block">An important aspect of HATEOAS is the usage of links that describe the transitions the client can use to interact with the REST API. By default the <code>HalJsonRenderer</code> will automatically create links for you for associations and to the resource itself (using the "self" relationship).</div>
+HATEOASの重要な側面は、遷移を表現したリンクの使い方です。
+クライアントはREST APIでのやり取りにこれを使えます。
+デフォルトで<code>HalJsonRenderer</code>は、関連と("self"関連を使って)自身のリソースへのリンクを自動的に作成します。<p class="paragraph"/><div class="hidden-block">However you can customize link rendering using the <code>link</code> method that is added to all domain classes annotated with <code>grails.rest.Resource</code> or any class annotated with <code>grails.rest.Linkdable</code>. For example, the <code>show</code> action can be modified as follows to provide a new link in the resulting output:</div>
+リンクのレンダリングを、<code>grails.rest.Resource</code>が付与されたドメインクラス、または<code>grails.rest.Linkdable</code>が付与されたクラスに追加された<code>link</code>メソッドを使って、カスタマイズすることもできます。
+例えば、<code>show</code>アクションで結果を出力する際に新たなリンクを追加するには、以下のように変更します:<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
     book.link rel:'publisher', href: g.link(resource:<span class="java&#45;quote">"publisher"</span>, params:&#91;bookId: book.id&#93;)
     respond book
-&#125;</pre></div><p class="paragraph"/>Which will result in output such as:<p class="paragraph"/><div class="code"><pre>&#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Which will result in output such as: </div>
+この出力結果は次のようになります:<p class="paragraph"/><div class="code"><pre>&#123;
   <span class="java&#45;quote">"_links"</span>: &#123;
     <span class="java&#45;quote">"self"</span>: &#123;
       <span class="java&#45;quote">"href"</span>: <span class="java&#45;quote">"http://localhost:8080/myapp/books/1"</span>,
@@ -238,7 +262,9 @@ Content&#45;Type: application/vnd.books.org.book+json;charset=ISO&#45;8859&#45;1
     &#125;
   &#125;,
   <span class="java&#45;quote">"title"</span>: <span class="java&#45;quote">"&#34;The Stand&#34;"</span>
-&#125;</pre></div><p class="paragraph"/>The <code>link</code> method can be passed named arguments that match the properties of the <code>grails.rest.Link</code> class.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The <code>link</code> method can be passed named arguments that match the properties of the <code>grails.rest.Link</code> class.</div>
+この<code>link</code>メソッドは<code>grails.rest.Link</code>クラスのプロパティに一致する名前付き引数を渡せます。
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>

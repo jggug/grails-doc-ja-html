@@ -141,7 +141,9 @@ function addJsClass() {
                 
 
 <h2 id="customRenderers">8.1.6.5 カスタムレンダラーの実装</h2>
-If you want even more control of the rendering or prefer to use your own marshalling techniques then you can implement your own <code>Renderer</code> instance. For example below is a simple implementation that customizes the rendering of the <code>Book</code> class:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> myapp
+<div class="hidden-block">If you want even more control of the rendering or prefer to use your own marshalling techniques then you can implement your own <code>Renderer</code> instance. For example below is a simple implementation that customizes the rendering of the <code>Book</code> class:</div>
+もし、さらにレンダリングをコントロールしたい、または独自のマーシャリング技術を使いたいといった場合、自身の<code>Renderer</code>インスタンスを実装できます。
+例えば、以下は<code>Book</code>クラスのレンダリングをカスタマイズする簡単な実装例です:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> myapp
 <span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.&#42;
 <span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.mime.MimeType<p class="paragraph"/>class BookXmlRenderer <span class="java&#45;keyword">extends</span> AbstractRenderer&#60;Book&#62; &#123;
     BookXmlRenderer() &#123;
@@ -150,11 +152,23 @@ If you want even more control of the rendering or prefer to use your own marshal
         context.contentType = MimeType.XML.name<p class="paragraph"/>        def xml = <span class="java&#45;keyword">new</span> groovy.xml.MarkupBuilder(context.writer)
         xml.book(id: object.id, title:object.title)
     &#125;
-&#125;</pre></div><p class="paragraph"/>The <code>AbstractRenderer</code> super class has a constructor that takes the class that it renders and the <code>MimeType</code>(s) that are accepted (via the ACCEPT header or file extension) for the renderer.<p class="paragraph"/>To configure this renderer, simply add it is a bean to <code>grails-app/conf/spring/resources.groovy</code>:<p class="paragraph"/><div class="code"><pre>beans = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The <code>AbstractRenderer</code> super class has a constructor that takes the class that it renders and the <code>MimeType</code>(s) that are accepted (via the ACCEPT header or file extension) for the renderer.</div>
+スーパークラス<code>AbstractRenderer</code>は、表示するクラスと、レンダラーが受け入れる(<code>ACCEPT</code>ヘッダまたはファイル拡張子から取得した)<code>MimeType</code>を(複数)取るコンストラクタを持っています。<p class="paragraph"/><div class="hidden-block">To configure this renderer, simply add it is a bean to <code>grails-app/conf/spring/resources.groovy</code>:</div>
+このレンダラーを設定するには、<code>grails-app/conf/spring/resources.groovy</code>へビーンを単に追加します:<p class="paragraph"/><div class="code"><pre>beans = &#123;
     bookRenderer(myapp.BookXmlRenderer)
-&#125;</pre></div><p class="paragraph"/>The result will be that all <code>Book</code> instances will be rendered in the following format:<p class="paragraph"/><div class="code"><pre>&#60;book id=<span class="java&#45;quote">"1"</span> title=<span class="java&#45;quote">"The Stand"</span>/&#62;</pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The result will be that all <code>Book</code> instances will be rendered in the following format:</div>
+その結果、すべての<code>Book</code>インスタンスは以下のフォーマットで表示されます:<p class="paragraph"/><div class="code"><pre>&#60;book id=<span class="java&#45;quote">"1"</span> title=<span class="java&#45;quote">"The Stand"</span>/&#62;</pre></div><p class="paragraph"/><div class="hidden-block"><blockquote class="note">
 Note that if you change the rendering to a completely different format like the above, then you also need to change the binding if you plan to support POST and PUT requests. Grails will not automatically know how to bind data from a custom XML format to a domain class otherwise. See the section on "Customizing Binding of Resources" for further information.
-</blockquote><p class="paragraph"/><h4>Container Renderers</h4><p class="paragraph"/>A <code>grails.rest.render.ContainerRenderer</code> is a renderer that renders responses for containers of objects (lists, maps, collections etc.). The interface is largely the same as the <code>Renderer</code> interface except for the addition of the <code>getComponentType()</code> method, which should return the "contained" type. For example:<p class="paragraph"/><div class="code"><pre>class BookListRenderer <span class="java&#45;keyword">implements</span> ContainerRenderer&#60;List, Book&#62; &#123;
+</blockquote></div>
+<blockquote class="note">
+もし、POST・PUTリクエストをサポートする予定があり、上記のように完全に異なるフォーマットへレンダリングを変えたい場合は、バインディングもあわせて変更する必要があります。
+Grailsは、カスタムXMLフォーマットから他のドメインクラスへ、どうのようにデータをバインドるするかを自動的に知ることはできません。
+さらなる情報は「リソースバインディングのカスタマイズ」を参照してください。
+</blockquote><p class="paragraph"/><div class="hidden-block">h4. Container Renderers</div>
+<h4>コンテナレンダラー</h4><p class="paragraph"/><div class="hidden-block">A <code>grails.rest.render.ContainerRenderer</code> is a renderer that renders responses for containers of objects (lists, maps, collections etc.). The interface is largely the same as the <code>Renderer</code> interface except for the addition of the <code>getComponentType()</code> method, which should return the "contained" type. For example:</div>
+<code>grails.rest.render.ContainerRenderer</code>は、オブジェクトのコンテナ(リスト、マップ、コレクションなど)に対してレスポンスを表示するレンダラーです。
+このインタフェースは、型パラメータが付与されたコンテナの型を返す<code>getComponentType()</code>メソッドが加えられている以外は<code>Renderer</code>インタフェースとほとんど同じです。
+例えば:<p class="paragraph"/><div class="code"><pre>class BookListRenderer <span class="java&#45;keyword">implements</span> ContainerRenderer&#60;List, Book&#62; &#123;
     <span class="java&#45;object">Class</span>&#60;List&#62; getTargetType() &#123; List &#125;
     <span class="java&#45;object">Class</span>&#60;Book&#62; getComponentType() &#123; Book &#125;
     MimeType&#91;&#93; getMimeTypes() &#123; &#91; MimeType.XML&#93; as MimeType&#91;&#93; &#125;

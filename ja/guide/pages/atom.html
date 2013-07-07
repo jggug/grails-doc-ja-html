@@ -141,7 +141,9 @@ function addJsClass() {
                 
 
 <h2 id="atom">8.1.7.2 Atomサポート</h2>
-<a href="http://tools.ietf.org/html/rfc4287" target="blank">Atom</a> is another standard interchange format used to implement REST APIs. An example of Atom output can be seen below:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;?xml version=<span class="xml&#45;quote">"1.0"</span> encoding=<span class="xml&#45;quote">"utf&#45;8"</span>?&#62;</span>
+<div class="hidden-block"><a href="http://tools.ietf.org/html/rfc4287" target="blank">Atom</a> is another standard interchange format used to implement REST APIs. An example of Atom output can be seen below:</div>
+<a href="http://tools.ietf.org/html/rfc4287" target="blank">Atom</a>はREST APIを実装するために使われる、もう1つの標準的な変換フォーマットです。
+Atomの出力例は次のようになります:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;?xml version=<span class="xml&#45;quote">"1.0"</span> encoding=<span class="xml&#45;quote">"utf&#45;8"</span>?&#62;</span>
 <span class="xml&#45;tag">&#60;feed xmlns=<span class="xml&#45;quote">"http://www.w3.org/2005/Atom"</span>&#62;</span><p class="paragraph"/> <span class="xml&#45;tag">&#60;title&#62;</span>Example Feed<span class="xml&#45;tag">&#60;/title&#62;</span>
  <span class="xml&#45;tag">&#60;link href=<span class="xml&#45;quote">"http://example.org/"</span>/&#62;</span>
  <span class="xml&#45;tag">&#60;updated&#62;</span>2003&#45;12&#45;13T18:30:02Z<span class="xml&#45;tag">&#60;/updated&#62;</span>
@@ -154,11 +156,13 @@ function addJsClass() {
    <span class="xml&#45;tag">&#60;id&#62;</span>urn:uuid:1225c695&#45;cfb8&#45;4ebb&#45;aaaa&#45;80da344efa6a<span class="xml&#45;tag">&#60;/id&#62;</span>
    <span class="xml&#45;tag">&#60;updated&#62;</span>2003&#45;12&#45;13T18:30:02Z<span class="xml&#45;tag">&#60;/updated&#62;</span>
    <span class="xml&#45;tag">&#60;summary&#62;</span>Some text.<span class="xml&#45;tag">&#60;/summary&#62;</span>
- <span class="xml&#45;tag">&#60;/entry&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;/feed&#62;</span></pre></div><p class="paragraph"/>To use Atom rendering again simply define a custom renderer:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.atom.&#42;
+ <span class="xml&#45;tag">&#60;/entry&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;/feed&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">To use Atom rendering again simply define a custom renderer:</div>
+Atomのレンダリングを使うには、これまでと同じようにカスタムレンダラーを登録します:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.atom.&#42;
 beans = &#123;
     halBookRenderer(AtomRenderer, <span class="java&#45;keyword">rest</span>.test.Book)
     halBookListRenderer(AtomCollectionRenderer, <span class="java&#45;keyword">rest</span>.test.Book)
 &#125;</pre></div>
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>
