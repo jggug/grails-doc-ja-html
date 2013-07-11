@@ -141,24 +141,62 @@ function addJsClass() {
                 
 <a name="5.2.4 Sets, Lists and Maps"><!-- Legacy link --></a>
 <h2 id="sets,ListsAndMaps">6.2.4 セット、リスト、マップ</h2>
-<h4>Set オブジェクトのセット <div class="hidden-block">Sets of Objects</div></h4><p class="paragraph"/>By default when you define a relationship with GORM it is a <code>java.util.Set</code> which is an unordered collection that cannot contain duplicates. In other words when you have:<p class="paragraph"/><div class="code"><pre>class Author &#123;
+<div class="hidden-block">h4. Sets of Objects</div>
+<h4>オブジェクトのセット</h4><p class="paragraph"/><div class="hidden-block">
+By default when you define a relationship with GORM it is a <code>java.util.Set</code> which is an unordered collection that cannot contain duplicates. In other words when you have:
+</div>
+デフォルトでは、GORMを使って関連を定義した場合、<code>java.util.Set</code>になります。
+これは、順序を持たないコレクションで、重複要素を含めません。
+言い換えると、次のようなドメインクラスがあるとき:<p class="paragraph"/><div class="code"><pre>class Author &#123;
     <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;
-&#125;</pre></div><p class="paragraph"/>The books property that GORM injects is a <code>java.util.Set</code>. Sets guarantee uniquenes but not order, which may not be what you want. To have custom ordering you configure the Set as a <code>SortedSet</code>:<p class="paragraph"/><div class="code"><pre>class Author &#123;<p class="paragraph"/>    SortedSet books<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;
-&#125;</pre></div><p class="paragraph"/>In this case a <code>java.util.SortedSet</code> implementation is used which means you must implement <code>java.lang.Comparable</code> in your Book class:<p class="paragraph"/><div class="code"><pre>class Book <span class="java&#45;keyword">implements</span> Comparable &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> title
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The books property that GORM injects is a <code>java.util.Set</code>. Sets guarantee uniquenes but not order, which may not be what you want. To have custom ordering you configure the Set as a <code>SortedSet</code>:
+</div>
+GORMが注入する<code>books</code>プロパティは<code>java.util.Set</code>になる、ということです。
+セットはユニーク性を保証しますが、順序は保証しません。
+これでは都合が悪い場合もあるかもしれません。
+独自の順序を持つにはセットを<code>SortedSet</code>に設定します:<p class="paragraph"/><div class="code"><pre>class Author &#123;<p class="paragraph"/>    SortedSet books<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In this case a <code>java.util.SortedSet</code> implementation is used which means you must implement <code>java.lang.Comparable</code> in your Book class:
+</div>
+この場合は、<code>java.util.SortedSet</code>の実装が使われます。
+これは、Bookクラスで<code>java.lang.Comparable</code>を実装しなければならないことを意味します:<p class="paragraph"/><div class="code"><pre>class Book <span class="java&#45;keyword">implements</span> Comparable &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> title
     Date releaseDate = <span class="java&#45;keyword">new</span> Date()<p class="paragraph"/>    <span class="java&#45;object">int</span> compareTo(obj) &#123;
         releaseDate.compareTo(obj.releaseDate)
     &#125;
-&#125;</pre></div><p class="paragraph"/>The result of the above class is that the Book instances in the books collection of the Author class will be ordered by their release date.<p class="paragraph"/><h4>List オブジェクトのリスト <div class="hidden-block">Lists of Objects</div></h4><p class="paragraph"/>To keep objects in the order which they were added and to be able to reference them by index like an array you can define your collection type as a <code>List</code>:<p class="paragraph"/><div class="code"><pre>class Author &#123;<p class="paragraph"/>    List books<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;
-&#125;</pre></div><p class="paragraph"/>In this case when you add new elements to the books collection the order is retained in a sequential list indexed from 0 so you can do:<p class="paragraph"/><div class="code"><pre>author.books&#91;0&#93; // get the first book</pre></div><p class="paragraph"/>The way this works at the database level is Hibernate creates a <code>books_idx</code> column where it saves the index of the elements in the collection to retain this order at the database level.<p class="paragraph"/>When using a <code>List</code>, elements must be added to the collection before being saved, otherwise Hibernate will throw an exception (<code>org.hibernate.HibernateException</code>: null index column for collection):<p class="paragraph"/><div class="code"><pre>// This won't work!
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The result of the above class is that the Book instances in the books collection of the Author class will be ordered by their release date.
+</div>
+上記のようにクラスを変更することで、Authorクラスのbooksコレクションのインスタンスがリリース日時順になります。<p class="paragraph"/><div class="hidden-block">
+<h4>Lists of Objects</h4>
+</div>
+<h4>オブジェクトのリスト</h4><p class="paragraph"/><div class="hidden-block">
+To keep objects in the order which they were added and to be able to reference them by index like an array you can define your collection type as a <code>List</code>:
+</div>
+追加された順にオブジェクトを保ち、配列のようにインデックスで参照できるようにするには、コレクション型をListで定義します:<p class="paragraph"/><div class="code"><pre>class Author &#123;<p class="paragraph"/>    List books<p class="paragraph"/>    <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In this case when you add new elements to the books collection the order is retained in a sequential list indexed from 0 so you can do:
+</div>
+この場合は、新しい要素をbooksコレクションへ追加したときに、0からインデックスが付与された一連のリストとして、順序が保持されます。
+そして、次のようにアクセスできます:<p class="paragraph"/><div class="code"><pre>author.books&#91;0&#93; // get the first book</pre></div><p class="paragraph"/><div class="hidden-block">
+The way this works at the database level is Hibernate creates a <code>books_idx</code> column where it saves the index of the elements in the collection to retain this order at the database level.
+</div>
+データベースレベルにおいて、Hibernateはデータベース上に順序を保持するために、<code>books_idx</code>カラムを作成して、コレクション内の要素のインデックスを保存します。<p class="paragraph"/><div class="hidden-block">
+When using a <code>List</code>, elements must be added to the collection before being saved, otherwise Hibernate will throw an exception (<code>org.hibernate.HibernateException</code>: null index column for collection):
+</div>
+<code>List</code>を使った場合、要素は保存前にコレクションへ追加されなければなりません。
+コレクション追加前に単体で保存されてしまっていると、Hibernateが例外をスローします（<code>org.hibernate.HibernateException</code>: コレクションのインデックスカラムがnull）。<p class="paragraph"/><div class="code"><pre>// This won't work!
 def book = <span class="java&#45;keyword">new</span> Book(title: 'The Shining')
 book.save()
 author.addToBooks(book)<p class="paragraph"/>// Do it <span class="java&#45;keyword">this</span> way instead.
 def book = <span class="java&#45;keyword">new</span> Book(title: 'Misery')
 author.addToBooks(book)
-author.save()</pre></div><p class="paragraph"/><h4>Bagオブジェクトのコレクション <div class="hidden-block">Bags of Objects</div></h4><p class="paragraph"/><div class="hidden-block">If ordering and uniqueness aren't a concern (or if you manage these explicitly) then you can use the Hibernate <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/collections.html" target="blank">Bag</a> type to represent mapped collections.</div><p class="paragraph"/>ユニークや順序が必要の無い場合は(また明示的に自分で管理する場合)、Hibernateの<a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/collections.html" target="blank">Bag</a>型をコレクションマップとして使用できます。<p class="paragraph"/><div class="hidden-block">The only change required for this is to define the collection type as a <code>Collection</code>:</div>
+author.save()</pre></div><p class="paragraph"/><div class="hidden-block">h4. Bags of Objects</div>
+<h4>オブジェクトのバッグ(Bag)</h4><p class="paragraph"/><div class="hidden-block">If ordering and uniqueness aren't a concern (or if you manage these explicitly) then you can use the Hibernate <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/collections.html" target="blank">Bag</a> type to represent mapped collections.</div><p class="paragraph"/>ユニークや順序が必要の無い場合は(また明示的に自分で管理する場合)、Hibernateの<a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/collections.html" target="blank">Bag</a>型をコレクションマップとして使用できます。<p class="paragraph"/><div class="hidden-block">The only change required for this is to define the collection type as a <code>Collection</code>:</div>
 この場合はコレクションの型を<code>Collection</code>型として定義します。<p class="paragraph"/><div class="code"><pre>class Author &#123;<p class="paragraph"/>   Collection books<p class="paragraph"/>   <span class="java&#45;keyword">static</span> hasMany = &#91;books: Book&#93;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">Since uniqueness and order aren't managed by Hibernate, adding to or removing from collections mapped as a Bag don't trigger a load of all existing instances from the database, so this approach will perform better and require less memory than using a <code>Set</code> or a <code>List</code>.</div>
-Hibernateでユニークとオーダーが管理されないので、Bagにマップされたコレクションは、追加削除時に既存のインスタンスをデータベースからロードしません。このため<code>Set</code>または@Listよりメモリ使用量が少なくパフォーマンスが良くなります。<p class="paragraph"/><h4>Mapオブジェクトのマップ <div class="hidden-block">Maps of Objects</div></h4><p class="paragraph"/><div class="hidden-block">If you want a simple map of string/value pairs GORM can map this with the following:</div>
+Hibernateでユニークとオーダーが管理されないので、Bagにマップされたコレクションは、追加削除時に既存のインスタンスをデータベースからロードしません。このため<code>Set</code>または@Listよりメモリ使用量が少なくパフォーマンスが良くなります。<p class="paragraph"/><div class="hidden-block">h4. Maps of Objects</div>
+<h4>オブジェクトのマップ</h4><p class="paragraph"/><div class="hidden-block">If you want a simple map of string/value pairs GORM can map this with the following:</div>
 文字列/値のような、単純なマップを使用する場合、GORMでは次のように定義します。<p class="paragraph"/><div class="code"><pre>class Author &#123;
     Map books // map of ISBN:book names
 &#125;<p class="paragraph"/>def a = <span class="java&#45;keyword">new</span> Author()
@@ -170,13 +208,35 @@ a.save()</pre></div>
 &#125;<p class="paragraph"/>def a = <span class="java&#45;keyword">new</span> Author(name:<span class="java&#45;quote">"Stephen King"</span>)<p class="paragraph"/>def book = <span class="java&#45;keyword">new</span> Book()
 book.authors = &#91;stephen:a&#93;
 book.save()</pre></div><p class="paragraph"/><div class="hidden-block">The static <code>hasMany</code> property defines the type of the elements within the Map. The keys for the map <strong class="bold">must</strong> be strings.</div>
-<code>hasMany</code>プロパティで、Mapのエレメントの型を定義します。マップのキーは<strong class="bold">必ず</strong>文字列にしてください。<p class="paragraph"/><h4>コレクション型とパフォーマンスについて <div class="hidden-block">A Note on Collection Types and Performance</div></h4><p class="paragraph"/>The Java <code>Set</code> type doesn't allow duplicates. To ensure uniqueness when adding an entry to a <code>Set</code> association Hibernate has to load the entire associations from the database. If you have a large numbers of entries in the association this can be costly in terms of performance.<p class="paragraph"/>The same behavior is required for <code>List</code> types, since Hibernate needs to load the entire association to maintain order. Therefore it is recommended that if you anticipate a large numbers of records in the association that you make the association bidirectional so that the link can be created on the inverse side. For example consider the following code:<p class="paragraph"/><div class="code"><pre>def book = <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"New Grails Book"</span>)
+<code>hasMany</code>プロパティで、Mapのエレメントの型を定義します。マップのキーは<strong class="bold">必ず</strong>文字列にしてください。<p class="paragraph"/><div class="hidden-block">
+<h4>A Note on Collection Types and Performance</h4>
+</div>
+<h4>コレクション型とパフォーマンスについて</h4><p class="paragraph"/><div class="hidden-block">
+The Java <code>Set</code> type doesn't allow duplicates. To ensure uniqueness when adding an entry to a <code>Set</code> association Hibernate has to load the entire associations from the database. If you have a large numbers of entries in the association this can be costly in terms of performance.
+</div>
+Javaの<code>Set</code>型は重複を許容しません。
+<code>Set</code>の関連へエントリを追加するときに、ユニーク性を保証するため、Hibernateはデータベースからすべての関連を読み込まなければなりません。
+もし関連のエントリの数が大量の場合、パフォーマンスの点でコストがかかりすぎる可能性があります。<p class="paragraph"/><div class="hidden-block">
+The same behavior is required for <code>List</code> types, since Hibernate needs to load the entire association to maintain order. Therefore it is recommended that if you anticipate a large numbers of records in the association that you make the association bidirectional so that the link can be created on the inverse side. For example consider the following code:
+</div>
+同じ振る舞いが<code>List</code>型でも必要になります。
+これは、Hibernateがすべての関連の順序を保持するため、事前にすべての関連を読み込む必要があるからです。
+そのため、事前に関連エントリが大量になることがわかっている場合は、双方向関連にして、反対側から関連を作成することをお勧めします。
+たとえば、以下のコードを考えてみます:<p class="paragraph"/><div class="code"><pre>def book = <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"New Grails Book"</span>)
 def author = Author.get(1)
 book.author = author
-book.save()</pre></div><p class="paragraph"/>In this example the association link is being created by the child (Book) and hence it is not necessary to manipulate the collection directly resulting in fewer queries and more efficient code. Given an <code>Author</code> with a large number of associated <code>Book</code> instances if you were to write code like the following you would see an impact on performance:<p class="paragraph"/><div class="code"><pre>def book = <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"New Grails Book"</span>)
+book.save()</pre></div><p class="paragraph"/><div class="hidden-block">
+In this example the association link is being created by the child (Book) and hence it is not necessary to manipulate the collection directly resulting in fewer queries and more efficient code. Given an <code>Author</code> with a large number of associated <code>Book</code> instances if you were to write code like the following you would see an impact on performance:
+</div>
+この例では、関連は子（Book）によって作成されます。
+このようにすることで、直接コレクションを操作する必要がなくなるため、より少ないクエリで効率的なコードとなります。
+<code>Author</code>と関連する大量の<code>Book</code>インスタンスが与えられたとき、下のようなコードを書いてしまうとパフォーマンスに重大な影響があります:<p class="paragraph"/><div class="code"><pre>def book = <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"New Grails Book"</span>)
 def author = Author.get(1)
 author.addToBooks(book)
-author.save()</pre></div><p class="paragraph"/>You could also model the collection as a Hibernate Bag as described above.
+author.save()</pre></div><p class="paragraph"/><div class="hidden-block">
+You could also model the collection as a Hibernate Bag as described above.
+</div>
+また、上記で説明したように、HibernateのBagとしてコレクションを作ることもできます。
 
 
 
