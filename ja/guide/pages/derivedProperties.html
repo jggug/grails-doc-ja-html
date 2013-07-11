@@ -141,17 +141,25 @@ function addJsClass() {
                 
 <a name="5.5.2.11 Derived Properties"><!-- Legacy link --></a>
 <h2 id="derivedProperties">6.5.2.11 派生プロパティ</h2>
-A derived property is one that takes its value from a SQL expression, often but not necessarily based on the value of one or more other persistent properties.  Consider a Product class like this:<p class="paragraph"/><div class="code"><pre>class Product &#123;
+<div class="hidden-block">A derived property is one that takes its value from a SQL expression, often but not necessarily based on the value of one or more other persistent properties.  Consider a Product class like this:</div>
+派生プロパティはSQL式によって値が定まるプロパティです。
+しかし、必ずしも他の1つ以上の永続化プロパティの値に基づいている必要はありません。
+次のようなProductクラスを考えます:<p class="paragraph"/><div class="code"><pre>class Product &#123;
     <span class="java&#45;object">Float</span> price
     <span class="java&#45;object">Float</span> taxRate
     <span class="java&#45;object">Float</span> tax
-&#125;</pre></div><p class="paragraph"/>If the <code>tax</code> property is derived based on the value of <code>price</code> and <code>taxRate</code> properties then is probably no need to persist the <code>tax</code> property.  The SQL used to derive the value of a derived property may be expressed in the ORM DSL like this:<p class="paragraph"/><div class="code"><pre>class Product &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If the <code>tax</code> property is derived based on the value of <code>price</code> and <code>taxRate</code> properties then is probably no need to persist the <code>tax</code> property.  The SQL used to derive the value of a derived property may be expressed in the ORM DSL like this:</div>
+もし<code>tax</code>プロパティが<code>price</code>と<code>taxRate</code>プロパティの値に基づいて算出されているなら、おそらく<code>tax</code>プロパティを永続化する必要はないでしょう。
+派生プロパティの算出に使われるSQLは、ORM DSLで次のように表すことができます:<p class="paragraph"/><div class="code"><pre>class Product &#123;
     <span class="java&#45;object">Float</span> price
     <span class="java&#45;object">Float</span> taxRate
     <span class="java&#45;object">Float</span> tax<p class="paragraph"/>    <span class="java&#45;keyword">static</span> mapping = &#123;
         tax formula: 'PRICE &#42; TAX_RATE'
     &#125;
-&#125;</pre></div><p class="paragraph"/>Note that the formula expressed in the ORM DSL is SQL so references to other properties should relate to the persistence model not the object model, which is why the example refers to <code>PRICE</code> and <code>TAX_RATE</code> instead of <code>price</code> and <code>taxRate</code>.<p class="paragraph"/>With that in place, when a Product is retrieved with something like <code>Product.get(42)</code>, the SQL that is generated to support that will look something like this:<p class="paragraph"/><div class="code"><pre>select
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Note that the formula expressed in the ORM DSL is SQL so references to other properties should relate to the persistence model not the object model, which is why the example refers to <code>PRICE</code> and <code>TAX_RATE</code> instead of <code>price</code> and <code>taxRate</code>.</div>
+ORM DSLで表された式はSQLであるため、他のプロパティへの参照はオブジェクトモデルではなくデータベース上の永続化モデルの方に合わせることに注意してください。
+サンプルコード上で<code>price</code>と<code>taxRate</code>ではなく、<code>PRICE</code>と<code>TAX_RATE</code>となっているのはそのためです。<p class="paragraph"/><div class="hidden-block">With that in place, when a Product is retrieved with something like <code>Product.get(42)</code>, the SQL that is generated to support that will look something like this:</div>
+このような設定で、Productが<code>Product.get(42)</code>のように取得されたとき、生成されるSQLは次のようになります:<p class="paragraph"/><div class="code"><pre>select
     product0_.id as id1_0_,
     product0_.version as version1_0_,
     product0_.price as price1_0_,
@@ -160,9 +168,16 @@ A derived property is one that takes its value from a SQL expression, often but 
 from
     product product0_
 where
-    product0_.id=?</pre></div><p class="paragraph"/>Since the <code>tax</code> property is derived at runtime and not stored in the database it might seem that the same effect could be achieved by adding a method like <code>getTax()</code> to the <code>Product</code> class that simply returns the product of the <code>taxRate</code> and <code>price</code> properties.  With an approach like that you would give up the ability query the database based on the value of the <code>tax</code> property.  Using a derived property allows exactly that.  To retrieve all <code>Product</code> objects that have a <code>tax</code> value greater than 21.12 you could execute a query like this:<p class="paragraph"/><div class="code"><pre>Product.findAllByTaxGreaterThan(21.12)</pre></div><p class="paragraph"/>Derived properties may be referenced in the Criteria API:<p class="paragraph"/><div class="code"><pre>Product.withCriteria &#123;
+    product0_.id=?</pre></div><p class="paragraph"/><div class="hidden-block">Since the <code>tax</code> property is derived at runtime and not stored in the database it might seem that the same effect could be achieved by adding a method like <code>getTax()</code> to the <code>Product</code> class that simply returns the product of the <code>taxRate</code> and <code>price</code> properties.  With an approach like that you would give up the ability query the database based on the value of the <code>tax</code> property.  Using a derived property allows exactly that.  To retrieve all <code>Product</code> objects that have a <code>tax</code> value greater than 21.12 you could execute a query like this:</div>
+<code>tax</code>プロパティは実行時に算出されデータベース上には格納されないため、<code>Product</code>クラスに<code>getTax()</code>のようなメソッドを追加して、単純に<code>taxRate</code>と<code>price</code>プロパティの積を返すようにすることで、同じ結果を達成できるようにみえるかもしれません。
+しかし、そのようなアプローチでは、<code>tax</code>プロパティの値に基づいてデータベースを検索する能力を放棄することになります。
+派生プロパティを使えばそれが可能です。
+たとえば、<code>tax</code>の値が21.12以上のすべての<code>Product</code>オブジェクトを取得するために、
+次のようなクエリを実行できます:<p class="paragraph"/><div class="code"><pre>Product.findAllByTaxGreaterThan(21.12)</pre></div><p class="paragraph"/><div class="hidden-block">Derived properties may be referenced in the Criteria API:</div>
+派生プロパティはクライテリアAPIでも使えます:<p class="paragraph"/><div class="code"><pre>Product.withCriteria &#123;
     gt 'tax', 21.12f
-&#125;</pre></div><p class="paragraph"/>The SQL that is generated to support either of those would look something like this:<p class="paragraph"/><div class="code"><pre>select
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The SQL that is generated to support either of those would look something like this:</div>
+これらを実行するために生成されたSQLは次のようになります:<p class="paragraph"/><div class="code"><pre>select
     this_.id as id1_0_,
     this_.version as version1_0_,
     this_.price as price1_0_,
@@ -172,7 +187,9 @@ from
     product this_
 where
     this_.PRICE &#42; this_.TAX_RATE&#62;?</pre></div><p class="paragraph"/><blockquote class="note">
-Because the value of a derived property is generated in the database and depends on the execution of SQL code, derived properties may not have GORM constraints applied to them.  If constraints are specified for a derived property, they will be ignored.
+<div class="hidden-block">Because the value of a derived property is generated in the database and depends on the execution of SQL code, derived properties may not have GORM constraints applied to them.  If constraints are specified for a derived property, they will be ignored.</div>
+派生プロパティの値はデータベース上で生成されたものでSQLコードの実行に依存するため、派生プロパティにはGORMの制約を適用できません。
+もし派生プロパティに対して制約が指定されても無視されます。
 </blockquote>
 
 
