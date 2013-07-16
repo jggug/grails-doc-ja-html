@@ -141,22 +141,38 @@ function addJsClass() {
                 
 <a name="5.3.6 Modification Checking"><!-- Legacy link --></a>
 <h2 id="modificationChecking">6.3.6 変更確認</h2>
-Once you have loaded and possibly modified a persistent domain class instance, it isn't straightforward to retrieve the original values. If you try to reload the instance using <a href="../ref/Domain Classes/get.html" class="domainClasses">get</a> Hibernate will return the current modified instance from its Session cache. Reloading using another query would trigger a flush which could cause problems if your data isn't ready to be flushed yet. So GORM provides some methods to retrieve the original values that Hibernate caches when it loads the instance (which it uses for dirty checking).<p class="paragraph"/><h4>isDirty</h4><p class="paragraph"/>You can use the <a href="../ref/Domain Classes/isDirty.html" class="domainClasses">isDirty</a> method to check if any field has been modified:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)
+<div class="hidden-block">Once you have loaded and possibly modified a persistent domain class instance, it isn't straightforward to retrieve the original values. If you try to reload the instance using <a href="../ref/Domain Classes/get.html" class="domainClasses">get</a> Hibernate will return the current modified instance from its Session cache. Reloading using another query would trigger a flush which could cause problems if your data isn't ready to be flushed yet. So GORM provides some methods to retrieve the original values that Hibernate caches when it loads the instance (which it uses for dirty checking).</div>
+永続化されたドメインクラスのインスタンスを読み込み、いったん変更を加えると、簡単に元の値を取り出すことはできません。
+もし、<a href="../ref/Domain Classes/get.html" class="domainClasses">get</a>を使ってインスタンスを再読み込みしようとすると、Hibernateはセッションのキャッシュから現在変更を加えたインスタンスを返します。
+まだデータがフラッシュできる状態でない場合、他のクエリを使って再読み込みをしようとすると、データがフラッシュできる状態でないにもかかわらずフラッシュが行われ問題を引き起こします。
+GORMは、Hibernateがインスタンスの読み込み時にキャッシュする値(このインスタンスはdirtyチェックに使われる)を取り出すいくつかのメソッドを提供します。<p class="paragraph"/><div class="hidden-block">h4. isDirty</div>
+<h4>isDirty</h4><p class="paragraph"/><div class="hidden-block">You can use the <a href="../ref/Domain Classes/isDirty.html" class="domainClasses">isDirty</a> method to check if any field has been modified:</div>
+フィールドに変更が加えられているかどうかのチェックに、<a href="../ref/Domain Classes/isDirty.html" class="domainClasses">isDirty</a>メソッドが使えます:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)
 assert !airport.isDirty()<p class="paragraph"/>airport.properties = params
 <span class="java&#45;keyword">if</span> (airport.isDirty()) &#123;
    // <span class="java&#45;keyword">do</span> something based on changed state
-&#125;</pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block"><blockquote class="note">
 <code>isDirty()</code> does not currently check collection associations, but it does check all other persistent properties and associations.
-</blockquote><p class="paragraph"/>You can also check if individual fields have been modified:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)
+</blockquote></div>
+<blockquote class="note">
+<code>isDirty()</code>は、今のところ関連のコレクションをチェックしません。
+しかし、他のすべての永続化プロパティと関連をチェックします。
+</blockquote><p class="paragraph"/><div class="hidden-block">You can also check if individual fields have been modified:</div>
+個々のフィールドが変更されいているかチェックすることもできます:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)
 assert !airport.isDirty()<p class="paragraph"/>airport.properties = params
 <span class="java&#45;keyword">if</span> (airport.isDirty('name')) &#123;
    // <span class="java&#45;keyword">do</span> something based on changed name
-&#125;</pre></div><p class="paragraph"/><h4>getDirtyPropertyNames</h4><p class="paragraph"/>You can use the <a href="../ref/Domain Classes/getDirtyPropertyNames.html" class="domainClasses">getDirtyPropertyNames</a> method to retrieve the names of modified fields; this may be empty but will not be null:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. getDirtyPropertyNames</div>
+<h4>getDirtyPropertyNames</h4><p class="paragraph"/><div class="hidden-block">You can use the <a href="../ref/Domain Classes/getDirtyPropertyNames.html" class="domainClasses">getDirtyPropertyNames</a> method to retrieve the names of modified fields; this may be empty but will not be null:</div>
+変更されたフィールドの名前を取得するには<a href="../ref/Domain Classes/getDirtyPropertyNames.html" class="domainClasses">getDirtyPropertyNames</a>メソッドを使います。
+このメソッドは空リストを返すかもしれませんが、nullを返すことはありません:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)
 assert !airport.isDirty()<p class="paragraph"/>airport.properties = params
 def modifiedFieldNames = airport.getDirtyPropertyNames()
 <span class="java&#45;keyword">for</span> (fieldName in modifiedFieldNames) &#123;
    // <span class="java&#45;keyword">do</span> something based on changed value
-&#125;</pre></div><p class="paragraph"/><h4>getPersistentValue</h4><p class="paragraph"/>You can use the <a href="../ref/Domain Classes/getPersistentValue.html" class="domainClasses">getPersistentValue</a> method to retrieve the value of a modified field:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. getPersistentValue</div>
+<h4>getPersistentValue</h4><p class="paragraph"/><div class="hidden-block">You can use the <a href="../ref/Domain Classes/getPersistentValue.html" class="domainClasses">getPersistentValue</a> method to retrieve the value of a modified field:</div>
+変更されたフィールドの元の値を取得するには<a href="../ref/Domain Classes/getPersistentValue.html" class="domainClasses">getPersistentValue</a>メソッドを使います:<p class="paragraph"/><div class="code"><pre>def airport = Airport.get(10)
 assert !airport.isDirty()<p class="paragraph"/>airport.properties = params
 def modifiedFieldNames = airport.getDirtyPropertyNames()
 <span class="java&#45;keyword">for</span> (fieldName in modifiedFieldNames) &#123;
