@@ -1383,21 +1383,36 @@ Note that one limitation with regards to batch operations is that join queries (
 
 <a name="5.4.3 Hibernate Query Language (HQL)"><!-- Legacy link --></a>
 <h2 id="hql">6.4.5 Hibernateクエリー言語 (HQL)</h2>
-GORM classes also support Hibernate's query language HQL, a very complete reference for which can be found <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/queryhql.html" target="blank">in the Hibernate documentation</a> of the Hibernate documentation.<p class="paragraph"/>GORM provides a number of methods that work with HQL including <a href="../ref/Domain Classes/find.html" class="domainClasses">find</a>, <a href="../ref/Domain Classes/findAll.html" class="domainClasses">findAll</a> and <a href="../ref/Domain Classes/executeQuery.html" class="domainClasses">executeQuery</a>. An example of a query can be seen below:<p class="paragraph"/><div class="code"><pre>def results =
-      Book.findAll(<span class="java&#45;quote">"from Book as b where b.title like 'Lord of the%'"</span>)</pre></div><p class="paragraph"/><h4>Positional and Named Parameters</h4><p class="paragraph"/>In this case the value passed to the query is hard coded, however you can equally use positional parameters:<p class="paragraph"/><div class="code"><pre>def results =
+<div class="hidden-block">GORM classes also support Hibernate's query language HQL, a very complete reference for which can be found <a href="http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/queryhql.html" target="blank">in the Hibernate documentation</a> of the Hibernate documentation.</div>
+GORMのドメインクラスはHibernateのクエリ言語であるHQLもサポートしています。
+HQLに関するとても充実したリファレンスが<a href="http://docs.jboss.org/hibernate/core/3.6/reference/ja-JP/html/queryhql.html" target="blank">Hibernateのドキュメント</a>にあります。<p class="paragraph"/><div class="hidden-block">GORM provides a number of methods that work with HQL including <a href="../ref/Domain Classes/find.html" class="domainClasses">find</a>, <a href="../ref/Domain Classes/findAll.html" class="domainClasses">findAll</a> and <a href="../ref/Domain Classes/executeQuery.html" class="domainClasses">executeQuery</a>. An example of a query can be seen below:</div>
+GORMは、<a href="../ref/Domain Classes/find.html" class="domainClasses">find</a>、<a href="../ref/Domain Classes/findAll.html" class="domainClasses">findAll</a>、そして<a href="../ref/Domain Classes/executeQuery.html" class="domainClasses">executeQuery</a>といった、HQLと連携するいくつかのメソッドを提供しています。
+以下はクエリの使用例です:<p class="paragraph"/><div class="code"><pre>def results =
+      Book.findAll(<span class="java&#45;quote">"from Book as b where b.title like 'Lord of the%'"</span>)</pre></div><p class="paragraph"/><div class="hidden-block">h4. Positional and Named Parameters</div>
+<h4>位置パラメータと名前付きパラメータ</h4><p class="paragraph"/><div class="hidden-block">In this case the value passed to the query is hard coded, however you can equally use positional parameters:</div>
+クエリへ値を渡す場合はハードコードになりますが位置パラメータが使えます:<p class="paragraph"/><div class="code"><pre>def results =
       Book.findAll(<span class="java&#45;quote">"from Book as b where b.title like ?"</span>, &#91;<span class="java&#45;quote">"The Shi%"</span>&#93;)</pre></div><p class="paragraph"/><div class="code"><pre>def author = Author.findByName(<span class="java&#45;quote">"Stephen King"</span>)
 def books = Book.findAll(<span class="java&#45;quote">"from Book as book where book.author = ?"</span>,
-                         &#91;author&#93;)</pre></div><p class="paragraph"/>Or even named parameters:<p class="paragraph"/><div class="code"><pre>def results =
+                         &#91;author&#93;)</pre></div><p class="paragraph"/><div class="hidden-block">Or even named parameters:</div>
+または、名前付きパラメータが使えます:<p class="paragraph"/><div class="code"><pre>def results =
       Book.findAll(<span class="java&#45;quote">"from Book as b "</span> +
                    <span class="java&#45;quote">"where b.title like :search or b.author like :search"</span>,
                    &#91;search: <span class="java&#45;quote">"The Shi%"</span>&#93;)</pre></div><p class="paragraph"/><div class="code"><pre>def author = Author.findByName(<span class="java&#45;quote">"Stephen King"</span>)
 def books = Book.findAll(<span class="java&#45;quote">"from Book as book where book.author = :author"</span>,
-                         &#91;author: author&#93;)</pre></div><p class="paragraph"/><h4>Multiline Queries</h4><p class="paragraph"/>Use the line continuation character to separate the query across multiple lines:<p class="paragraph"/><div class="code"><pre>def results = Book.findAll(<span class="java&#45;quote">"&#92;
+                         &#91;author: author&#93;)</pre></div><p class="paragraph"/><div class="hidden-block">h4. Multiline Queries</div>
+<h4>複数行のクエリ</h4><p class="paragraph"/><div class="hidden-block">Use the line continuation character to separate the query across multiple lines:</div>
+クエリを複数行に分割する場合は、行継続文字を使ってください:<p class="paragraph"/><div class="code"><pre>def results = Book.findAll(<span class="java&#45;quote">"&#92;
 from Book as b, &#92;
      Author as a &#92;
-where b.author = a and a.surname = ?"</span>, &#91;'Smith'&#93;)</pre></div><p class="paragraph"/><blockquote class="note">
+where b.author = a and a.surname = ?"</span>, &#91;'Smith'&#93;)</pre></div><p class="paragraph"/><div class="hidden-block"><blockquote class="note">
 Triple-quoted Groovy multiline Strings will NOT work with HQL queries.
-</blockquote><p class="paragraph"/><h4>Pagination and Sorting</h4><p class="paragraph"/>You can also perform pagination and sorting whilst using HQL queries. To do so simply specify the pagination options as a Map at the end of the method call and include an "ORDER BY" clause in the HQL:<p class="paragraph"/><div class="code"><pre>def results =
+</blockquote></div>
+<blockquote class="note">
+トリプルクォートを使ったGroovyの複数行文字列はHQLクエリではうまく動作しません。
+</blockquote><p class="paragraph"/><div class="hidden-block">h4. Pagination and Sorting</div>
+<h4>ページングとソート</h4><p class="paragraph"/><div class="hidden-block">You can also perform pagination and sorting whilst using HQL queries. To do so simply specify the pagination options as a Map at the end of the method call and include an "ORDER BY" clause in the HQL:</div>
+HQLクエリを使いながら、ページングとソートを行うこともできます。
+これには、メソッドの最後の引数にMapとしてページングオプションを指定し、HQLの中に<code>ORDER BY</code>節を追加します:<p class="paragraph"/><div class="code"><pre>def results =
       Book.findAll(<span class="java&#45;quote">"from Book as b where "</span> +
                    <span class="java&#45;quote">"b.title like 'Lord of the%' "</span> +
                    <span class="java&#45;quote">"order by b.title asc"</span>,
