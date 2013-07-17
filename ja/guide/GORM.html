@@ -1187,7 +1187,17 @@ Note that one limitation with regards to batch operations is that join queries (
 
 <a name="5.4.2 Criteria"><!-- Legacy link --></a>
 <h2 id="criteria">6.4.3 クライテリア</h2>
-Criteria is an advanced way to query that uses a Groovy builder to construct potentially complex queries. It is a much better approach than building up query strings using a <code>StringBuffer</code>.<p class="paragraph"/>Criteria can be used either with the <a href="../ref/Domain Classes/createCriteria.html" class="domainClasses">createCriteria</a> or <a href="../ref/Domain Classes/withCriteria.html" class="domainClasses">withCriteria</a> methods. The builder uses Hibernate's Criteria API. The nodes on this builder map the static methods found in the <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/criterion/Restrictions.html" class="api">Restrictions</a> class of the Hibernate Criteria API. For example:<p class="paragraph"/><div class="code"><pre>def c = Account.createCriteria()
+<div class="hidden-block">
+Criteria is an advanced way to query that uses a Groovy builder to construct potentially complex queries. It is a much better approach than building up query strings using a <code>StringBuffer</code>.
+</div>
+クライテリアは、潜在的に複雑なクエリを構築するためにGroovyのビルダを利用するという、クエリのためのより進んだ方法です。
+これは<code>StringBuffer</code>を使ってクエリ文字列を構築するより優れたやり方です。<p class="paragraph"/><div class="hidden-block">
+Criteria can be used either with the <a href="../ref/Domain Classes/createCriteria.html" class="domainClasses">createCriteria</a> or <a href="../ref/Domain Classes/withCriteria.html" class="domainClasses">withCriteria</a> methods. The builder uses Hibernate's Criteria API. The nodes on this builder map the static methods found in the <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/criterion/Restrictions.html" class="api">Restrictions</a> class of the Hibernate Criteria API. For example:
+</div>
+クライテリアは<a href="../ref/Domain Classes/createCriteria.html" class="domainClasses">createCriteria</a>メソッド、または<a href="../ref/Domain Classes/withCriteria.html" class="domainClasses">withCriteria</a>メソッドのいずれかで使用できます。
+このビルダーはHibernateのクライテリアAPIを使用します。
+ビルダー上のノードはHibernateのクライテリアAPIの<a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/criterion/Restrictions.html" class="api">Restrictions</a>クラス内の静的メソッドにマッピングされます。
+以下はその例です:<p class="paragraph"/><div class="code"><pre>def c = Account.createCriteria()
 def results = c &#123;
     between(<span class="java&#45;quote">"balance"</span>, 500, 1000)
     eq(<span class="java&#45;quote">"branch"</span>, <span class="java&#45;quote">"London"</span>)
@@ -1197,32 +1207,75 @@ def results = c &#123;
     &#125;
     maxResults(10)
     order(<span class="java&#45;quote">"holderLastName"</span>, <span class="java&#45;quote">"desc"</span>)
-&#125;</pre></div><p class="paragraph"/>This criteria will select up to 10 <code>Account</code> objects in a List matching the following criteria:
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This criteria will select up to 10 <code>Account</code> objects in a List matching the following criteria:
+</div>
+このクライテリアは以下の条件に一致する<code>Account</code>オブジェクトを最大10件検索します:<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li><code>balance</code> is between 500 and 1000</li>
 <li><code>branch</code> is 'London'</li>
 <li><code>holderFirstName</code> starts with 'Fred' or 'Barney'</li>
-</ul><p class="paragraph"/>The results will be sorted in descending order by <code>holderLastName</code>.<p class="paragraph"/>If no records are found with the above criteria, an empty List is returned.<p class="paragraph"/><h4>Conjunctions and Disjunctions</h4><p class="paragraph"/>As demonstrated in the previous example you can group criteria in a logical OR using an <code>or { }</code> block:<p class="paragraph"/><div class="code"><pre>or &#123;
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>balance</code>が<code>500</code>から<code>1000</code>の間である</li>
+<li><code>branch</code>が<code>London</code>である</li>
+<li><code>holderFirstName</code>が<code>Fred</code>か<code>Barney</code>で始まっている</li>
+</ul><p class="paragraph"/><div class="hidden-block">
+The results will be sorted in descending order by <code>holderLastName</code>.
+</div>
+結果は<code>holderLastName</code>の降順でソートされます。<p class="paragraph"/><div class="hidden-block">
+If no records are found with the above criteria, an empty List is returned.
+</div>
+もし上記のクライテリアでレコードが1件も見つからない場合、空のリストが返却されます。<p class="paragraph"/><div class="hidden-block">
+<h4>Conjunctions and Disjunctions</h4>
+</div>
+<h4>論理積と論理和</h4><p class="paragraph"/><div class="hidden-block">
+As demonstrated in the previous example you can group criteria in a logical OR using an <code>or { }</code> block:
+</div>
+前の例で提示したように、<code>or { }</code>ブロックを使用し、クライテリアを論理和でグループ化できます。<p class="paragraph"/><div class="code"><pre>or &#123;
     between(<span class="java&#45;quote">"balance"</span>, 500, 1000)
     eq(<span class="java&#45;quote">"branch"</span>, <span class="java&#45;quote">"London"</span>)
-&#125;</pre></div><p class="paragraph"/>This also works with logical AND:<p class="paragraph"/><div class="code"><pre>and &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This also works with logical AND:
+</div>
+論理積でも同様です:<p class="paragraph"/><div class="code"><pre>and &#123;
     between(<span class="java&#45;quote">"balance"</span>, 500, 1000)
     eq(<span class="java&#45;quote">"branch"</span>, <span class="java&#45;quote">"London"</span>)
-&#125;</pre></div><p class="paragraph"/>And you can also negate using logical NOT:<p class="paragraph"/><div class="code"><pre>not &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+And you can also negate using logical NOT:
+</div>
+さらに否定を使うこともできます:<p class="paragraph"/><div class="code"><pre>not &#123;
     between(<span class="java&#45;quote">"balance"</span>, 500, 1000)
     eq(<span class="java&#45;quote">"branch"</span>, <span class="java&#45;quote">"London"</span>)
-&#125;</pre></div><p class="paragraph"/>All top level conditions are implied to be AND'd together.<p class="paragraph"/><h4>Querying Associations</h4><p class="paragraph"/>Associations can be queried by having a node that matches the property name. For example say the <code>Account</code> class had many <code>Transaction</code> objects:<p class="paragraph"/><div class="code"><pre>class Account &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+All top level conditions are implied to be AND'd together.
+</div>
+なお、すべてのトップレベルの条件は暗黙的にANDになります。<p class="paragraph"/><div class="hidden-block">
+<h4>Querying Associations</h4>
+</div>
+<h4>関連のクエリ</h4><p class="paragraph"/><div class="hidden-block">
+Associations can be queried by having a node that matches the property name. For example say the <code>Account</code> class had many <code>Transaction</code> objects:
+</div>
+関連はプロパティ名と一致するノードを持つことで問い合わせができます。
+例えば、<code>Account</code>クラスが1対多の関連として<code>Transaction</code>オブジェクトを持っているとします:<p class="paragraph"/><div class="code"><pre>class Account &#123;
     &#8230;
     <span class="java&#45;keyword">static</span> hasMany = &#91;transactions: Transaction&#93;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>We can query this association by using the property name <code>transaction</code> as a builder node:<p class="paragraph"/><div class="code"><pre>def c = Account.createCriteria()
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+We can query this association by using the property name <code>transactions</code> as a builder node:
+</div>
+この場合、ビルダーノードとしてプロパティ名<code>transactions</code>を使いこの関連を問い合わせできます:<p class="paragraph"/><div class="code"><pre>def c = Account.createCriteria()
 def now = <span class="java&#45;keyword">new</span> Date()
 def results = c.list &#123;
     transactions &#123;
         between('date', now &#45; 10, now)
     &#125;
-&#125;</pre></div><p class="paragraph"/>The above code will find all the <code>Account</code> instances that have performed <code>transactions</code> within the last 10 days.
-You can also nest such association queries within logical blocks:<p class="paragraph"/><div class="code"><pre>def c = Account.createCriteria()
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The above code will find all the <code>Account</code> instances that have performed <code>transactions</code> within the last 10 days.
+You can also nest such association queries within logical blocks:
+</div>
+上記のコードは最近10日以内の<code>transactions</code>を持つ全ての<code>Account</code>インスタンスを検索できます。
+また、論理ブロック内に関連のクエリをネストすることもできます:<p class="paragraph"/><div class="code"><pre>def c = Account.createCriteria()
 def now = <span class="java&#45;keyword">new</span> Date()
 def results = c.list &#123;
     or &#123;
@@ -1231,89 +1284,243 @@ def results = c.list &#123;
             between('date', now &#45; 10, now)
         &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/>Here we find all accounts that have either performed transactions in the last 10 days OR have been recently created in the last 10 days.<p class="paragraph"/><h4>Querying with Projections</h4><p class="paragraph"/>Projections may be used to customise the results. Define a "projections" node within the criteria builder tree to use projections. There are equivalent methods within the projections node to the methods found in the Hibernate <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/criterion/Projections.html" class="api">Projections</a> class:<p class="paragraph"/><div class="code"><pre>def c = Account.createCriteria()<p class="paragraph"/>def numberOfBranches = c.get &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Here we find all accounts that have either performed transactions in the last 10 days OR have been recently created in the last 10 days.
+</div>
+これは、最近10日以内に取引があり、最近10日以内に作成された口座をすべて取得します。<p class="paragraph"/><div class="hidden-block">
+<h4>Querying with Projections</h4>
+</div>
+<h4>プロジェクション(射影)を利用したクエリ</h4><p class="paragraph"/><div class="hidden-block">
+Projections may be used to customise the results. Define a "projections" node within the criteria builder tree to use projections. There are equivalent methods within the projections node to the methods found in the Hibernate <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/criterion/Projections.html" class="api">Projections</a> class:
+</div>
+プロジェクションは取得した結果をカスタマイズするために使われます。
+プロジェクションを使うには、クライテリアビルダーのツリーの中で<code>projections</code>ノードを定義します。
+プロジェクションノードのメソッドは、Hibernateの<a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/criterion/Projections.html" class="api">Projections</a>クラスのメソッドに相当します。<p class="paragraph"/><div class="code"><pre>def c = Account.createCriteria()<p class="paragraph"/>def numberOfBranches = c.get &#123;
     projections &#123;
         countDistinct('branch')
     &#125;
-&#125;</pre></div><p class="paragraph"/>When multiple fields are specified in the projection, a List of values will be returned. A single value will be returned otherwise.<p class="paragraph"/><h4>SQL Projections</h4><p class="paragraph"/>The criteria DSL provides access to Hibernate's SQL projection API.<p class="paragraph"/><div class="code"><pre>// Box is a domain class&#8230;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+When multiple fields are specified in the projection, a List of values will be returned. A single value will be returned otherwise.
+</div>
+プロジェクション内に複数のフィールドが指定された場合、値のリストが返却されます。
+そうでなければ、単一の値が返却されます。<p class="paragraph"/><div class="hidden-block">
+<h4>SQL Projections</h4>
+</div>
+<h4>SQLプロジェクション</h4><p class="paragraph"/><div class="hidden-block">
+The criteria DSL provides access to Hibernate's SQL projection API.
+</div>
+クライテリアDSLはHibernateのSQLプロジェクションAPIへのアクセスを提供します。<p class="paragraph"/><div class="code"><pre>// Box is a domain class&#8230;
 class Box &#123;
     <span class="java&#45;object">int</span> width
     <span class="java&#45;object">int</span> height
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>// Use SQL projections to retrieve the perimeter and area of all of the Box instances&#8230;
 def c = Box.createCriteria()<p class="paragraph"/>def results = c.list &#123;
     projections &#123;
-      sqlProjection '(2 &#42; (width + height)) as perimiter, (width &#42; height) as area', &#91;'perimeter', 'area'&#93;, &#91;INTEGER, INTEGER&#93;
+      sqlProjection '(2 &#42; (width + height)) as perimeter, (width &#42; height) as area', &#91;'perimeter', 'area'&#93;, &#91;INTEGER, INTEGER&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/>The first argument to the <code>sqlProjection</code> method is the SQL which defines the projections.  The second argument is a list of
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The first argument to the <code>sqlProjection</code> method is the SQL which defines the projections.  The second argument is a list of
 Strings which represent column aliases corresponding to the projected values expressed in the SQL.  The third argument
 is a list of <code>org.hibernate.type.Type</code> instances which correspond to the projected values expressed in the SQL.  The API
 supports all <code>org.hibernate.type.Type</code> objects but constants like INTEGER, LONG, FLOAT etc. are provided by the DSL which
-correspond to all of the types defined in <code>org.hibernate.type.StandardBasicTypes</code>.<p class="paragraph"/>Consider that the following table represents the data in the
+correspond to all of the types defined in <code>org.hibernate.type.StandardBasicTypes</code>.
+</div>
+<code>sqlProjection</code>メソッドの最初の引数は、プロジェクションを定義するSQLです。
+第2引数は、SQLで表現されたプロジェクションの値に対応するカラムのエイリアスの文字列リストです。
+第3引数は、SQLで表現されたプロジェクションの値に対応する<code>org.hibernate.type.Type</code>インスタンスのリストです。
+このAPIはすべての<code>org.hibernate.type.Type</code>オブジェクトをサポートしています。
+しかし、INTEGER・LONG・FLOATなどの定数については、<code>org.hibernate.type.StandardBasicTypes</code>で定義されたすべての型に対応付けられているDSLによって提供されています。<p class="paragraph"/><div class="hidden-block">
+Consider that the following table represents the data in the
 <code>BOX</code> table.
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>width</th><th>height</th></tr><tr class="table-odd"><td>2</td><td>7</td></tr><tr class="table-even"><td>2</td><td>8</td></tr><tr class="table-odd"><td>2</td><td>9</td></tr><tr class="table-even"><td>4</td><td>9</td></tr></table><p class="paragraph"/>The query above would return results like this:<p class="paragraph"/><div class="code"><pre>&#91;&#91;18, 14&#93;, &#91;20, 16&#93;, &#91;22, 18&#93;, &#91;26, 36&#93;&#93;</pre></div><p class="paragraph"/>Each of the inner lists contains the 2 projected values for each <code>Box</code>, perimiter and area.<p class="paragraph"/><blockquote class="note">
+</div>
+以下の表は<code>BOX</code>テーブル内のデータを表すと考えてください。<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>width</th><th>height</th></tr><tr class="table-odd"><td>2</td><td>7</td></tr><tr class="table-even"><td>2</td><td>8</td></tr><tr class="table-odd"><td>2</td><td>9</td></tr><tr class="table-even"><td>4</td><td>9</td></tr></table><p class="paragraph"/><div class="hidden-block">
+The query above would return results like this:
+</div>
+上記のクエリは以下のような結果を返します:<p class="paragraph"/><div class="code"><pre>&#91;&#91;18, 14&#93;, &#91;20, 16&#93;, &#91;22, 18&#93;, &#91;26, 36&#93;&#93;</pre></div><p class="paragraph"/><div class="hidden-block">
+Each of the inner lists contains the 2 projected values for each <code>Box</code>, perimeter and area.
+</div>
+内側のリストは、それぞれの<code>Box</code>に対する全周と面積を表す、2つのプロジェクションされた値を含んでいます。<p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 Note that if there are other references in scope wherever your criteria query is expressed that have names that conflict 
 with any of the type constants described above, the code in your criteria will refer to those references, not the type
 constants provided by the DSL.  In the unlikely event of that happening you can disambiguate the conflict by referring
 to the fully qualified Hibernate type.  For example <code>StandardBasicTypes.INTEGER</code> instead of <code>INTEGER</code>.
-</blockquote><p class="paragraph"/>If only 1 value is being projected, the alias and the type do not need to be included in a list.<p class="paragraph"/><div class="code"><pre>def results = c.list &#123;
+</blockquote>
+</div>
+<blockquote class="note">
+もしクライテリアクエリ内から参照できるスコープ内に前述の型定数と重複する名前の変数が宣言されている場合は、クライテリア中のコードは、DSLが提供する型定数ではなく、その変数を利用してしまうことに注意してください。
+そのような場合は、完全修飾されたHibernateの型を指定することであいまいさを無くし衝突を回避できます。
+例えば、<code>INTEGER</code>の代わりに<code>StandardBasicTypes.INTEGER</code>を指定します。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+If only 1 value is being projected, the alias and the type do not need to be included in a list.
+</div>
+1つの値だけをプロジェクションする場合は、エイリアスと型はリストとして指定する必要はありません。<p class="paragraph"/><div class="code"><pre>def results = c.list &#123;
     projections &#123;
       sqlProjection 'sum(width &#42; height) as totalArea', 'totalArea', INTEGER
     &#125;
-&#125;</pre></div><p class="paragraph"/>That query would return a single result with the value of 84 as the total area of all of the <code>Box</code> instances.<p class="paragraph"/>The DSL supports grouped projections with the <code>sqlGroupProjection</code> method.<p class="paragraph"/><div class="code"><pre>def results = c.list &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+That query would return a single result with the value of 84 as the total area of all of the <code>Box</code> instances.
+</div>
+上記のクエリは全<code>Box</code>インスタンスの面積の合計である84という単一の結果を返します。<p class="paragraph"/><div class="hidden-block">
+The DSL supports grouped projections with the <code>sqlGroupProjection</code> method.
+</div>
+DSLは<code>sqlGroupProjection</code>メソッドでグループ化されたプロジェクションをサポートしています。<p class="paragraph"/><div class="code"><pre>def results = c.list &#123;
     projections &#123;
         sqlGroupProjection 'width, sum(height) as combinedHeightsForThisWidth', 'width', &#91;'width', 'combinedHeightsForThisWidth'&#93;, &#91;INTEGER, INTEGER&#93;
     &#125;
-&#125;</pre></div><p class="paragraph"/>The first argument to the <code>sqlProjection</code> method is the SQL which defines the projections.  The second argument represents the
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The first argument to the <code>sqlProjection</code> method is the SQL which defines the projections.  The second argument represents the
 group by clause that should be part of the query.  That string may be single column name or a comma separated list of column
 names.  The third argument is a list of
 Strings which represent column aliases corresponding to the projected values expressed in the SQL.  The fourth argument
-is a list of <code>org.hibernate.type.Type</code> instances which correspond to the projected values expressed in the SQL.<p class="paragraph"/>The query above is projecting the combined heights of boxes grouped by width and would return results that look like this:<p class="paragraph"/><div class="code"><pre>&#91;&#91;2, 24&#93;, &#91;4, 9&#93;&#93;</pre></div><p class="paragraph"/>Each of the inner lists contains 2 values.  The first value is a box width and the second value is the sum of the heights
-of all of the boxes which have that width.<p class="paragraph"/><h4>Using SQL Restrictions</h4><p class="paragraph"/>You can access Hibernate's SQL Restrictions capabilities.<p class="paragraph"/><div class="code"><pre>def c = Person.createCriteria()<p class="paragraph"/>def peopleWithShortFirstNames = c.list &#123;
+is a list of <code>org.hibernate.type.Type</code> instances which correspond to the projected values expressed in the SQL.
+</div>
+<code>sqlGroupProjection</code>への最初の引数は、プロジェクションを定義するSQLです。
+第2引数は、クエリの一部となるGROUP BY句を表しています。単一のカラム名または複数のカラム名のカンマ区切り文字列を指定します。
+第3引数は、SQLで表現されたプロジェクションの値に対応するカラムのエイリアスの文字列リストです。
+第4引数は、SQLで表現されたプロジェクションの値に対応する<code>org.hibernate.type.Type</code>インスタンスのリストです。<p class="paragraph"/><div class="hidden-block">
+The query above is projecting the combined heights of boxes grouped by width and would return results that look like this:
+</div>
+上記のクエリは<code>width</code>によってグループ化した上で<code>heights</code>を合計した値をプロジェクションしています。
+これは以下のような結果を返します:<p class="paragraph"/><div class="code"><pre>&#91;&#91;2, 24&#93;, &#91;4, 9&#93;&#93;</pre></div><p class="paragraph"/><div class="hidden-block">
+Each of the inner lists contains 2 values.  The first value is a box width and the second value is the sum of the heights
+of all of the boxes which have that width.
+</div>
+それぞれの内側のリストには2つの値が格納されています。
+最初の値は<code>width</code>の値、次の値は<code>width</code>によってグループ化した上で<code>height</code>を合計した値となります。<p class="paragraph"/><div class="hidden-block">
+<h4>Using SQL Restrictions</h4>
+</div>
+<h4>SQL Restrictionsの使用</h4><p class="paragraph"/><div class="hidden-block">
+You can access Hibernate's SQL Restrictions capabilities.
+</div>
+HibernateのSQL Restrictions機能を使用できます。<p class="paragraph"/><div class="code"><pre>def c = Person.createCriteria()<p class="paragraph"/>def peopleWithShortFirstNames = c.list &#123;
     sqlRestriction <span class="java&#45;quote">"char_length(first_name) &#60;= 4"</span>
-&#125;</pre></div><p class="paragraph"/>SQL Restrictions may be parameterized to deal with SQL injection vulnerabilities related to dynamic restrictions.<p class="paragraph"/>
-<div class="code"><pre>def c = Person.createCriteria()<p class="paragraph"/>def peopleWithShortFirstNames = c.list &#123;
+&#125;</pre></div><p class="paragraph"/>
+<div class="hidden-block">
+SQL Restrictions may be parameterized to deal with SQL injection vulnerabilities related to dynamic restrictions.
+</div>
+SQL Restrictionsは、動的な条件に関連するSQLインジェクションの脆弱性に対処するために、条件に埋め込む値をパラメータ化できます。<p class="paragraph"/><div class="code"><pre>def c = Person.createCriteria()<p class="paragraph"/>def peopleWithShortFirstNames = c.list &#123;
     sqlRestriction <span class="java&#45;quote">"char_length(first_name) &#60; ? AND char_length(first_name) &#62; ?"</span>, &#91;maxValue, minValue&#93;
 &#125;</pre></div><p class="paragraph"/>
+<div class="hidden-block">
 <blockquote class="note">
 Note that the parameter there is SQL. The <code>first_name</code> attribute referenced in the example refers to the persistence model, not the object model like in HQL queries. The <code>Person</code> property named <code>firstName</code> is mapped to the <code>first_name</code> column in the database and you must refer to that in the <code>sqlRestriction</code> string.<p class="paragraph"/>Also note that the SQL used here is not necessarily portable across databases.
-</blockquote><p class="paragraph"/><h4>Using Scrollable Results</h4><p class="paragraph"/>You can use Hibernate's <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/ScrollableResults.html" class="api">ScrollableResults</a> feature by calling the scroll method:<p class="paragraph"/><div class="code"><pre>def results = crit.scroll &#123;
+</blockquote>
+</div>
+<blockquote class="note">
+パラメータがSQLであることに注意してください。
+上記の例で参照している<code>first_name</code>属性はHQLクエリのようにオブジェクトモデルではなく、永続化モデルを示します。
+<code>Person</code>の<code>firstName</code>プロパティはデータベース内の<code>first_name</code>列にマッピングされており、<code>sqlRestriction</code>文字列内では<code>first_name</code>を指定する必要があります。<p class="paragraph"/>また、ここで使われるSQLは必ずしもデータベース間で移植可能ではありません。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+<h4>Using Scrollable Results</h4>
+</div>
+<h4>スクロール可能な検索結果の使用</h4><p class="paragraph"/><div class="hidden-block">
+You can use Hibernate's <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/ScrollableResults.html" class="api">ScrollableResults</a> feature by calling the scroll method:
+</div>
+<code>scroll</code>メソッドを呼び出すことで、Hibernateの<a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/ScrollableResults.html" class="api">ScrollableResults</a>機能を使用できます:<p class="paragraph"/><div class="code"><pre>def results = crit.scroll &#123;
     maxResults(10)
 &#125;
 def f = results.first()
 def l = results.last()
 def n = results.next()
 def p = results.previous()<p class="paragraph"/>def <span class="java&#45;keyword">future</span> = results.scroll(10)
-def accountNumber = results.getLong('number')</pre></div><p class="paragraph"/>To quote the documentation of Hibernate ScrollableResults:<p class="paragraph"/><blockquote class="quote">
+def accountNumber = results.getLong('number')</pre></div><p class="paragraph"/><div class="hidden-block">
+To quote the documentation of Hibernate ScrollableResults:
+</div>
+以下はHibernateの<code>ScrollableResults</code>のドキュメントからの引用です:<p class="paragraph"/><div class="hidden-block">
+<blockquote class="quote">
 A result iterator that allows moving around within the results by arbitrary increments. The Query / ScrollableResults pattern is very similar to the JDBC PreparedStatement/ ResultSet pattern and the semantics of methods of this interface are similar to the similarly named methods on ResultSet.
-</blockquote><p class="paragraph"/>Contrary to JDBC, columns of results are numbered from zero.<p class="paragraph"/><h4>Setting properties in the Criteria instance</h4><p class="paragraph"/>If a node within the builder tree doesn't match a particular criterion it will attempt to set a property on the Criteria object itself. This allows full access to all the properties in this class. This example calls <code>setMaxResults</code> and <code>setFirstResult</code> on the <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/Criteria.html" class="api">Criteria</a> instance:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.hibernate.FetchMode as FM
+</blockquote>
+</div>
+<blockquote class="quote">
+任意の増分を指定して結果内を自由に移動できる結果イテレータです。
+このQuery/ScrollableResultsのパターンは、JDBCのPreparedStatement/ResultSetパターンに非常に似ています。
+そして、インタフェースのメソッドの意味も、ResultSet上の似た名前のメソッドと同じような意味になります。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+Contrary to JDBC, columns of results are numbered from zero.
+</div>
+JDBCとは異なり結果のカラムは0から採番されます。<p class="paragraph"/><div class="hidden-block">
+<h4>Setting properties in the Criteria instance</h4>
+</div>
+<h4>クライテリアインスタンス内でのプロパティの設定</h4><p class="paragraph"/><div class="hidden-block">
+If a node within the builder tree doesn't match a particular criterion it will attempt to set a property on the Criteria object itself. This allows full access to all the properties in this class. This example calls <code>setMaxResults</code> and <code>setFirstResult</code> on the <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/Criteria.html" class="api">Criteria</a> instance:
+</div>
+もしこのビルダツリー内のノードが特定のクライテリアにマッチしない場合は、クライテリアオブジェクト自身のプロパティを設定しようとします。
+これは、このクラス内のすべてのプロパティへのフルアクセスを許可します。
+この例では、<a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/Criteria.html" class="api">Criteria</a>インスタンス上の<code>setMaxResults</code>と<code>setFirstResult</code>を呼んでいます。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.hibernate.FetchMode as FM
 &#8230;
 def results = c.list &#123;
     maxResults(10)
     firstResult(50)
     fetchMode(<span class="java&#45;quote">"aRelationship"</span>, FM.JOIN)
-&#125;</pre></div><p class="paragraph"/><h4>Querying with Eager Fetching</h4><p class="paragraph"/>In the section on <a href="../guide/single.html#fetching" class="guide">Eager and Lazy Fetching</a> we discussed how to declaratively specify fetching to avoid the N+1 SELECT problem. However, this can also be achieved using a criteria query:<p class="paragraph"/><div class="code"><pre>def criteria = Task.createCriteria()
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Querying with Eager Fetching</h4>
+</div>
+<h4>Eagerフェッチによるクエリ</h4><p class="paragraph"/><div class="hidden-block">
+In the section on <a href="../guide/single.html#fetching" class="guide">Eager and Lazy Fetching</a> we discussed how to declaratively specify fetching to avoid the N+1 SELECT problem. However, this can also be achieved using a criteria query:
+</div>
+<a href="../guide/single.html#fetching" class="guide">EagerフェッチとLazyフェッチ</a>のセクションでは、N+1 SELECT問題を避けるためにフェッチ方法を宣言的に指定する方法について説明しました。
+しかし、このクライテリアを使っても同じことを実現できます。<p class="paragraph"/><div class="code"><pre>def criteria = Task.createCriteria()
 def tasks = criteria.list&#123;
     eq <span class="java&#45;quote">"assignee.id"</span>, task.assignee.id
     join 'assignee'
     join 'project'
     order 'priority', 'asc'
-&#125;</pre></div><p class="paragraph"/>Notice the usage of the <code>join</code> method: it tells the criteria API to use a <code>JOIN</code> to fetch the named associations with the <code>Task</code> instances. It's probably best not to use this for one-to-many associations though, because you will most likely end up with duplicate results. Instead, use the 'select' fetch mode:
-<div class="code"><pre><span class="java&#45;keyword">import</span> org.hibernate.FetchMode as FM
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Notice the usage of the <code>join</code> method: it tells the criteria API to use a <code>JOIN</code> to fetch the named associations with the <code>Task</code> instances. It's probably best not to use this for one-to-many associations though, because you will most likely end up with duplicate results. Instead, use the 'select' fetch mode:
+</div>
+<code>join</code>メソッドの使い方に注意してください。
+これは、<code>Task</code>インスタンスと指定された関連をフェッチするために、<code>JOIN</code>を利用するようにクライテリアAPIに指示します。
+とはいえ、最終的に重複した結果が得られることになる可能性が非常に高いため、<code>join</code>は1対多関連に対して使わないのがおそらくベストです。
+代わりに<code>select</code>フェッチモードを使用しましょう:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.hibernate.FetchMode as FM
 &#8230;
 def results = Airport.withCriteria &#123;
     eq <span class="java&#45;quote">"region"</span>, <span class="java&#45;quote">"EMEA"</span>
     fetchMode <span class="java&#45;quote">"flights"</span>, FM.SELECT
 &#125;</pre></div>
-Although this approach triggers a second query to get the <code>flights</code> association, you will get reliable results  - even with the <code>maxResults</code> option.<p class="paragraph"/><blockquote class="note">
+<div class="hidden-block">
+Although this approach triggers a second query to get the <code>flights</code> association, you will get reliable results  - even with the <code>maxResults</code> option.
+</div>
+このアプローチは<code>flights</code>関連を取得するために2次クエリを発行しますが、<code>maxResults</code>オプションを使いさえすれば、正しい結果が得られます。<p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 <code>fetchMode</code> and <code>join</code> are general settings of the query and can only be specified at the top-level, i.e. you cannot use them inside projections or association constraints.
-</blockquote><p class="paragraph"/>An important point to bear in mind is that if you include associations in the query constraints, those associations will automatically be eagerly loaded. For example, in this query:
-<div class="code"><pre>def results = Airport.withCriteria &#123;
+</blockquote>
+</div>
+<blockquote class="note">
+<code>FetchMode</code>と<code>join</code>はそのクエリ全体に対する設定のため、トップレベルでのみ指定できます。
+つまり、プロジェクションや関連のブロック内では使用できません。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+An important point to bear in mind is that if you include associations in the query constraints, those associations will automatically be eagerly loaded. For example, in this query:
+</div>
+覚えておくべき重要なこととして、クエリ条件に関連を含んでいる場合は、その関連は自動的にEagerフェッチされるということです。
+例えば、次のクエリでは:<p class="paragraph"/><div class="code"><pre>def results = Airport.withCriteria &#123;
     eq <span class="java&#45;quote">"region"</span>, <span class="java&#45;quote">"EMEA"</span>
     flights &#123;
         like <span class="java&#45;quote">"number"</span>, <span class="java&#45;quote">"BA%"</span>
     &#125;
-&#125;</pre></div>
-the <code>flights</code> collection would be loaded eagerly via a join even though the fetch mode has not been explicitly set.<p class="paragraph"/><h4>Method Reference</h4><p class="paragraph"/>If you invoke the builder with no method name such as:<p class="paragraph"/><div class="code"><pre>c &#123; &#8230; &#125;</pre></div><p class="paragraph"/>The build defaults to listing all the results and hence the above is equivalent to:<p class="paragraph"/><div class="code"><pre>c.list &#123; &#8230; &#125;</pre></div><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>Method</th><th>Description</th></tr><tr class="table-odd"><td><strong class="bold">list</strong></td><td>This is the default method. It returns all matching rows.</td></tr><tr class="table-even"><td><strong class="bold">get</strong></td><td>Returns a unique result set, i.e. just one row. The criteria has to be formed that way, that it only queries one row. This method is not to be confused with a limit to just the first row.</td></tr><tr class="table-odd"><td><strong class="bold">scroll</strong></td><td>Returns a scrollable result set.</td></tr><tr class="table-even"><td><strong class="bold">listDistinct</strong></td><td>If subqueries or associations are used, one may end up with the same row multiple times in the result set, this allows listing only distinct entities and is equivalent to <code>DISTINCT_ROOT_ENTITY</code> of the <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/criterion/CriteriaSpecification.html" class="api">CriteriaSpecification</a> class.</td></tr><tr class="table-odd"><td><strong class="bold">count</strong></td><td>Returns the number of matching rows.</td></tr></table><p class="paragraph"/><h4>Combining Criteria</h4><p class="paragraph"/>You can combine multiple criteria closures in the following way:<p class="paragraph"/><div class="code"><pre>def emeaCriteria = &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+the <code>flights</code> collection would be loaded eagerly via a join even though the fetch mode has not been explicitly set.
+</div>
+フェッチモードを明示的に設定していないにもかかわらず、この<code>flights</code>コレクションはJOINによってEagerフェッチされます。<p class="paragraph"/><div class="hidden-block">
+<h4>Method Reference</h4>
+</div>
+<h4>メソッドの参照</h4><p class="paragraph"/><div class="hidden-block">
+If you invoke the builder with no method name such as:
+</div>
+もし、ビルダーをメソッド名を指定せずに実行すると:<p class="paragraph"/><div class="code"><pre>c &#123; &#8230; &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The build defaults to listing all the results and hence the above is equivalent to:
+</div>
+ビルダーのデフォルト動作は全件の一覧取得です。
+そのため上記は以下のように書いた場合と同等です:<p class="paragraph"/><div class="code"><pre>c.list &#123; &#8230; &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>Method</th><th>Description</th></tr><tr class="table-odd"><td><strong class="bold">list</strong></td><td>This is the default method. It returns all matching rows.</td></tr><tr class="table-even"><td><strong class="bold">get</strong></td><td>Returns a unique result set, i.e. just one row. The criteria has to be formed that way, that it only queries one row. This method is not to be confused with a limit to just the first row.</td></tr><tr class="table-odd"><td><strong class="bold">scroll</strong></td><td>Returns a scrollable result set.</td></tr><tr class="table-even"><td><strong class="bold">listDistinct</strong></td><td>If subqueries or associations are used, one may end up with the same row multiple times in the result set, this allows listing only distinct entities and is equivalent to <code>DISTINCT_ROOT_ENTITY</code> of the <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/criterion/CriteriaSpecification.html" class="api">CriteriaSpecification</a> class.</td></tr><tr class="table-odd"><td><strong class="bold">count</strong></td><td>Returns the number of matching rows.</td></tr></table>
+</div>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>メソッド</th><th>概要</th></tr><tr class="table-odd"><td><strong class="bold">list</strong></td><td>これがデフォルトのメソッドです。条件に一致するすべての行を返します。</td></tr><tr class="table-even"><td><strong class="bold">get</strong></td><td>1つのユニークな結果セット、つまり、1行だけを返します。クライテリアは1行だけを検索するように書かれていなければなりません。このメソッドが最初の行だけに限定して返すと勘違いしないようにしてください。</td></tr><tr class="table-odd"><td><strong class="bold">scroll</strong></td><td>スクロール可能な結果セットを返します。</td></tr><tr class="table-even"><td><strong class="bold">listDistinct</strong></td><td>サブクエリや関連を使うと、結果セット中に同じ行が複数回現れる可能性がありますが、このメソッドは重複したエンティティを取り除いたリストを返します。<a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/criterion/CriteriaSpecification.html" class="api">CriteriaSpecification</a>クラスの<code>DISTINCT_ROOT_ENTITY</code>を使用するのと同じです。</td></tr><tr class="table-odd"><td><strong class="bold">count</strong></td><td>一致する行の数を返します。</td></tr></table><p class="paragraph"/><div class="hidden-block">
+<h4>Combining Criteria</h4>
+</div>
+<h4>クライテリアの結合</h4><p class="paragraph"/><div class="hidden-block">
+You can combine multiple criteria closures in the following way:
+</div>
+複数のクライテリアのクロージャを以下のように結合できます:<p class="paragraph"/><div class="code"><pre>def emeaCriteria = &#123;
     eq <span class="java&#45;quote">"region"</span>, <span class="java&#45;quote">"EMEA"</span>
 &#125;<p class="paragraph"/>def results = Airport.withCriteria &#123;
     emeaCriteria.delegate = delegate
@@ -1321,8 +1528,13 @@ the <code>flights</code> collection would be loaded eagerly via a join even thou
     flights &#123;
         like <span class="java&#45;quote">"number"</span>, <span class="java&#45;quote">"BA%"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>This technique requires that each criteria must refer to the same domain class (i.e. <code>Airport</code>).
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This technique requires that each criteria must refer to the same domain class (i.e. <code>Airport</code>).
 A more flexible approach is to use Detached Criteria, as described in the following section.
+</div>
+このテクニックでは、それぞれのクライテリアが同じドメインクラス(ここでは<code>Airport</code>)に対するものでなければなりません。
+より柔軟なアプローチとして、この後のセクションで説明するDetachedクライテリアの使用があります。
+
 
 
 <h2 id="detachedCriteria">6.4.4 Detachedクライテリア</h2>
