@@ -140,10 +140,10 @@ function addJsClass() {
                 <div id="table-of-content">
                     <h2>Table of Contents</h2>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#issues"><strong>20.1</strong><span>JIRA&#12395;&#35506;&#38988;&#12434;&#12522;&#12509;&#12540;&#12488;(&#12496;&#12464;&#22577;&#21578;)</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#issues"><strong>20.1</strong><span>JIRA&#12391;&#35506;&#38988;&#12434;&#22577;&#21578;&#12377;&#12427;&#65288;&#12496;&#12464;&#22577;&#21578;&#65289;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#build"><strong>20.2</strong><span>&#12477;&#12540;&#12473;&#12363;&#12425;&#12499;&#12523;&#12489;&#12375;&#12390;&#12486;&#12473;&#12488;&#12434;&#36208;&#12425;&#12379;&#12427;</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#build"><strong>20.2</strong><span>&#12477;&#12540;&#12473;&#12363;&#12425;&#12499;&#12523;&#12489;&#12375;&#12390;&#12486;&#12473;&#12488;&#12434;&#23455;&#34892;&#12377;&#12427;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0px"><a href="#patchesCore"><strong>20.3</strong><span>Grails&#12467;&#12450;&#12395;&#12497;&#12483;&#12481;&#12434;&#36865;&#12427;</span></a>
@@ -158,27 +158,86 @@ function addJsClass() {
                 
 
 <h1 id="contributing">20 Grailsに貢献する</h1>
-Grails is an open source project with an active community and we rely heavily on that community to help make Grails better. As such, there are various ways in which people can contribute to Grails. One of these is by <a href="../guide/single.html#plugins" class="guide">writing useful plugins</a> and making them publicly available. In this chapter, we'll look at some fo the other options.
+<div class="hidden-block">Grails is an open source project with an active community and we rely heavily on that community to help make Grails better. As such, there are various ways in which people can contribute to Grails. One of these is by <a href="../guide/single.html#plugins" class="guide">writing useful plugins</a> and making them publicly available. In this chapter, we'll look at some fo the other options.</div>
+Grailsはオープンソースプロジェクトにより開発が進められており、Grailsをより良くしようとする活発なコミュニティ活動がその多くを支えています。
+そのため、Grails開発に貢献するための様々な手段が用意されています。
+その1つの手段が<a href="../guide/single.html#plugins" class="guide">有益なプラグインを作成し</a>世の中で使ってもらうことです。
+この章では、それ以外にどんな貢献ができるのかを見ていきます。
 
 
 
-<h2 id="issues">20.1 JIRAに課題をリポート(バグ報告)</h2>
-Grails uses <a href="http://jira.grails.org" target="blank">JIRA</a> to track issues in the core framework, its documentation, its website, and many of the public plugins. If you've found a bug or wish to see a particular feature added, this is the place to start. You'll need to create a (free) JIRA account in order to either submit an issue or comment on an existing one.<p class="paragraph"/>When submitting issues, please provide as much information as possible and in the case of bugs, make sure you explain which versions of Grails and various plugins you are using. Also, an issue is much more likely to be dealt with if you attach a reproducible sample application (which can be packaged up using the <code>grails bug-report</code> command).<p class="paragraph"/><h3>Reviewing issues</h3><p class="paragraph"/>There are quite a few old issues in JIRA, some of which may no longer be valid. The core team can't track down these alone, so a very simple contribution that you can make is to verify one or two issues occasionally.<p class="paragraph"/>Which issues need verification? A shared <a href="http://jira.grails.org/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=project+%3D+GRAILS+AND+resolution+%3D+Unresolved+AND+%28cf%5B10310%5D+%3C%3D+%27-180d%27+OR+cf%5B10310%5D+is+EMPTY%29+AND+createdDate+%3C%3D+%27-180d%27" target="blank">JIRA filter</a> will display all issues that haven't been resolved and haven't been reviewed by someone else in the last 6 months. Just pick one or two of them and check whether they are still relevant.<p class="paragraph"/>Once you've verified an issue, simply edit it and set the "Last Reviewed" field to today. If you think the issue can be closed, then also check the "Flagged" field and add a short comment explaining why. Once those changes are saved, the issue will disappear from the results of the above filter. If you've flagged it, the core team will review and close if it really is no longer relevant.<p class="paragraph"/>One last thing: you can easily set the above filter as a favourite on <a href="http://jira.grails.org/secure/ManageFilters.jspa#filterView=popular" target="blank">this JIRA screen</a> so that it appears in the "Issues" drop down. Just click on the star next to a filter to make it a favourite.
+<h2 id="issues">20.1 JIRAで課題を報告する（バグ報告）</h2>
+<div class="hidden-block">Grails uses <a href="http://jira.grails.org" target="blank">JIRA</a> to track issues in the core framework, its documentation, its website, and many of the public plugins. If you've found a bug or wish to see a particular feature added, this is the place to start. You'll need to create a (free) JIRA account in order to either submit an issue or comment on an existing one.</div>
+Grails開発では、コアフレームワークやドキュメント、ウェブサイトや多くの公開プラグインの課題管理に<a href="http://jira.grails.org" target="blank">JIRA</a>を利用しています。
+バグを見つけたり、追加機能の要望がある場合には、ここで課題を作成します。
+課題を新規に作成したり、既存の課題にコメントしたりするには、JIRAの無料のアカウントが必要です。<p class="paragraph"/><div class="hidden-block">When submitting issues, please provide as much information as possible and in the case of bugs, make sure you explain which versions of Grails and various plugins you are using. Also, an issue is much more likely to be dealt with if you attach a reproducible sample application (which can be packaged up using the <code>grails bug-report</code> command).</div>
+課題を作成する場合には、できるだけ多くの情報を記述するようにしてください。
+バグの場合、利用しているGrailsのバージョンやプラグインが説明されているか確認してください。
+また、事象が再現可能なサンプルアプリケーションを添付すると課題への対応がやりやすくなります。
+（<code>grails bug-report</code>コマンドを使ってアプリケーションをパッケージングできます。）<p class="paragraph"/><div class="hidden-block">h3. Reviewing issues</div>
+<h3>課題をレビューする</h3><p class="paragraph"/><div class="hidden-block">There are quite a few old issues in JIRA, some of which may no longer be valid. The core team can't track down these alone, so a very simple contribution that you can make is to verify one or two issues occasionally.</div>
+JIRAの中には古い課題がかなりの数存在し、その中には既に調べる意味がないものも含まれています。
+コアチームだけでこれだけ多くのものを解決に導くことはできません。
+というわけで、あなたが実施できるとてもシンプルな貢献は、ときどき課題の1つか2つを検証することです。<p class="paragraph"/><div class="hidden-block">Which issues need verification? A shared <a href="http://jira.grails.org/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=project+%3D+GRAILS+AND+resolution+%3D+Unresolved+AND+%28cf%5B10310%5D+%3C%3D+%27-180d%27+OR+cf%5B10310%5D+is+EMPTY%29+AND+createdDate+%3C%3D+%27-180d%27" target="blank">JIRA filter</a> will display all issues that haven't been resolved and haven't been reviewed by someone else in the last 6 months. Just pick one or two of them and check whether they are still relevant.</div>
+では、どの課題を検証すればよいのでしょうか？
+共有の<a href="http://jira.grails.org/secure/IssueNavigator.jspa?reset=true&jqlQuery=project+%3D+GRAILS+AND+resolution+%3D+Unresolved+AND+%28cf%5B10310%5D+%3C%3D+%27-180d%27+OR+cf%5B10310%5D+is+EMPTY%29+AND+createdDate+%3C%3D+%27-180d%27" target="blank">JIRAフィルタ</a>により、未解決のまま過去6ヶ月間誰も見直ししていない課題がすべて表示されます。
+このうちから1つか2つを選んで、それが今でも対応する価値があるかどうかを調べてください。<p class="paragraph"/><div class="hidden-block">Once you've verified an issue, simply edit it and set the "Last Reviewed" field to today. If you think the issue can be closed, then also check the "Flagged" field and add a short comment explaining why. Once those changes are saved, the issue will disappear from the results of the above filter. If you've flagged it, the core team will review and close if it really is no longer relevant.</div>
+課題が検証できたら、その課題を単に編集して「Last Reviewed」フィールドを今日の日付に更新してください。
+もしその課題をクローズしてもよいと考えるなら、「Flagged」フィールドにもチェックを付けて、その理由を短いコメントとして追加してください。
+変更を保存すれば、この課題は上記のフィルタの表示結果から消えます。
+あなたがフラグをつけた課題は、コアチームがレビューして、本当にもう価値がない場合は課題をクローズします。<p class="paragraph"/><div class="hidden-block">One last thing: you can easily set the above filter as a favourite on <a href="http://jira.grails.org/secure/ManageFilters.jspa#filterView=popular" target="blank">this JIRA screen</a> so that it appears in the "Issues" drop down. Just click on the star next to a filter to make it a favourite.</div>
+最後にもうひとつ:
+|http://jira.grails.org/secure/ManageFilters.jspa
+で上記のフィルタを簡単にお気に入りとしてセットできます。
+こうするとメニューバーの「Issues」ドロップダウンリストにこのフィルタが表示されるようになります。
+お気に入りにするには、フィルタの隣にある星印をクリックするだけです。
 
 
 
-<h2 id="build">20.2 ソースからビルドしてテストを走らせる</h2>
-If you're interested in contributing fixes and features to the core framework, you will have to learn how to get hold of the project's source, build it and test it with your own applications. Before you start, make sure you have:
+<h2 id="build">20.2 ソースからビルドしてテストを実行する</h2>
+<div class="hidden-block">If you're interested in contributing fixes and features to the core framework, you will have to learn how to get hold of the project's source, build it and test it with your own applications. Before you start, make sure you have:</div>
+もしバグフィックスやコアフレームワークへの機能追加に興味があるなら、プロジェクトのソースコードを手に入れ、ビルドし、それを自分で作ったアプリケーションでテストする方法を身につけることが必要です。
+まずはじめに、以下がインストールされていることを確認してください:<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li>A JDK (1.6 or above)</li>
 <li>A git client</li>
-</ul><p class="paragraph"/>Once you have all the pre-requisite packages installed, the next step is to download the Grails source code, which is hosted at <a href="http://github.com" target="blank">GitHub</a> in several repositories owned by the <a href="http://github.com/grails" target="blank">&#34;grails&#34; GitHub user</a>. This is a simple case of cloning the repository you're interested in. For example, to getthe core framework run:<p class="paragraph"/><div class="code"><pre>git clone http://github.com/grails/grails&#45;core.git</pre></div><p class="paragraph"/>This will create a "grails-core" directory in your current working directory containing all the project source files. The next step is to get a Grails installation from the source.<p class="paragraph"/><h3>Creating a Grails installation</h3><p class="paragraph"/>If you look at the project structure, you'll see that it doesn't look much like a standard <code>GRAILS_HOME</code> installation. But, it's very simple to turn it into one. Just run this from the root directory of the project:<p class="paragraph"/><div class="code"><pre>./gradlew install</pre></div><p class="paragraph"/>This will fetch all the standard dependencies required by Grails and then build a <code>GRAILS_HOME</code> installation. Note that this target skips the extensive collection of Grails test classes, which can take some time to complete.<p class="paragraph"/>Once the above command has finished, simply set the <code>GRAILS_HOME</code> environment variable to the checkout directory and add the "bin" directory to your path. When you next type run the <code>grails</code> command, you'll be using the version you just built.<p class="paragraph"/><h3>Running the test suite</h3><p class="paragraph"/>All you have to do to run the full suite of tests is:<p class="paragraph"/><div class="code"><pre>./gradlew test</pre></div><p class="paragraph"/>These will take a while (15-30 mins), so consider running individual tests using the command line. For example, to run the test case <code>MappingDslTests</code> simply execute the following command:
-<div class="code"><pre>./gradlew &#45;Dtest.single=MappingDslTest :grails&#45;test&#45;suite&#45;persistence:test</pre></div><p class="paragraph"/>Note that you need to specify the sub-project that the test case resides in, because the top-level "test" target won't work....<p class="paragraph"/><h3>Developing in IntelliJ IDEA</h3><p class="paragraph"/>You need to run the following gradle task:
-<div class="code"><pre>./gradlew idea</pre></div><p class="paragraph"/>Then open the project file which is generated in IDEA. Simple!<p class="paragraph"/><h3>Developing in STS / Eclipse</h3><p class="paragraph"/>You need to run the following gradle task:
-<div class="code"><pre>./gradlew cleanEclipse eclipse</pre></div><p class="paragraph"/>Before importing projects to STS do the following action:
+</ul><p class="paragraph"/></div>
 <ul class="star">
-<li>Edit grails-scripts/.classpath and remove the line "&#60;classpathentry kind="src" path="../scripts"/&#62;".</li>
-</ul><p class="paragraph"/>Use "Import-&#62;General-&#62;Existing Projects into Workspace" to import all projects to STS. There will be a few build errors. To fix them do the following:
+<li>JDK (1.6以降)</li>
+<li>gitクライアント</li>
+</ul><p class="paragraph"/><div class="hidden-block">Once you have all the pre-requisite packages installed, the next step is to download the Grails source code, which is hosted at <a href="http://github.com" target="blank">GitHub</a> in several repositories owned by the <a href="http://github.com/grails" target="blank">&#34;grails&#34; GitHub user</a>. This is a simple case of cloning the repository you're interested in. For example, to getthe core framework run:</div>
+必要なパッケージをすべてインストールしたら、次にGrailsのソースコードをダウンロードします。
+ソースコードは、<a href="http://github.com" target="blank">GitHub</a>上の<a href="http://github.com/grails" target="blank">grailsユーザーが所有するいくつかのリポジトリ</a>にホストされています。
+これは欲しいリポジトリをクローンする簡単な例です。
+たとえば、コアフレームワークを取得するには、以下を実行します:<p class="paragraph"/><div class="code"><pre>git clone http://github.com/grails/grails&#45;core.git</pre></div><p class="paragraph"/><div class="hidden-block">This will create a "grails-core" directory in your current working directory containing all the project source files. The next step is to get a Grails installation from the source.</div>
+これにより現在の作業ディレクトリに、プロジェクトのすべてのソースコードを含む「grails-core」ディレクトリが作成されます。
+次のステップでは、このソースからGrailsの一式を入手します。<p class="paragraph"/><div class="hidden-block">h3. Creating a Grails installation</div>
+<h3>Grails一式を作成する</h3><p class="paragraph"/><div class="hidden-block">If you look at the project structure, you'll see that it doesn't look much like a standard <code>GRAILS_HOME</code> installation. But, it's very simple to turn it into one. Just run this from the root directory of the project:</div>
+このプロジェクト構造をみると、標準の<code>GRAILS_HOME</code>とはあまり似ていないことに気づくでしょう。
+しかし、これを標準的なものに変換するのはとても簡単です。
+プロジェクトのルートディレクトリで以下のコマンドを実行します:<p class="paragraph"/><div class="code"><pre>./gradlew install</pre></div><p class="paragraph"/><div class="hidden-block">This will fetch all the standard dependencies required by Grails and then build a <code>GRAILS_HOME</code> installation. Note that this target skips the extensive collection of Grails test classes, which can take some time to complete.</div>
+これによりGrailsが必要とする標準的な依存関係がすべて解決され、<code>GRAILS_HOME</code>の一式がビルドされます。
+このコマンドでは、完了に時間がかかるGrailsの大量のテストクラスはスキップされることに注意してください。<p class="paragraph"/><div class="hidden-block">Once the above command has finished, simply set the <code>GRAILS_HOME</code> environment variable to the checkout directory and add the "bin" directory to your path. When you next type run the <code>grails</code> command, you'll be using the version you just built.</div>
+上記のコマンドが完了したら、<code>GRAILS_HOME</code>環境変数を今回チェックアウトしたディレクトリにセットし、「bin」ディレクトリにパスを通してください。
+これで次に<code>grails</code>コマンドを実行したときには、自分でビルドしたバージョンが使われるようになります。<p class="paragraph"/><div class="hidden-block">h3. Running the test suite</div>
+<h3>テストスイートを実行する</h3><p class="paragraph"/><div class="hidden-block">All you have to do to run the full suite of tests is:</div>
+すべてのテストスイートを実行するには、以下のコマンドを実行します:<p class="paragraph"/><div class="code"><pre>./gradlew test</pre></div><p class="paragraph"/><div class="hidden-block">These will take a while (15-30 mins), so consider running individual tests using the command line. For example, to run the test case <code>MappingDslTests</code> simply execute the following command:</div>
+すべてのテストを実行するにはかなりの時間（15-30分）がかかります。
+そのため、コマンドラインから個別にテストを指定して実行することを検討してください。
+たとえば、<code>MappingDslTests</code>というテストケースを実行するには、単純に以下のコマンドを実行します:<p class="paragraph"/><div class="code"><pre>./gradlew &#45;Dtest.single=MappingDslTest :grails&#45;test&#45;suite&#45;persistence:test</pre></div><p class="paragraph"/><div class="hidden-block">Note that you need to specify the sub-project that the test case resides in, because the top-level "test" target won't work....</div>
+トップレベルの「test」ターゲットではうまく動かないため、対象のテストケースが存在するサブプロジェクトを指定する必要があることに注意してください。<p class="paragraph"/><div class="hidden-block">h3. Developing in IntelliJ IDEA</div>
+<h3>IntelliJ IDEAで開発する</h3><p class="paragraph"/><div class="hidden-block">You need to run the following gradle task:</div>
+次のGradleタスクを実行する必要があります:<p class="paragraph"/><div class="code"><pre>./gradlew idea</pre></div><p class="paragraph"/><div class="hidden-block">Then open the project file which is generated in IDEA. Simple!</div>
+次に、生成したプロジェクトファイルをIDEAで開いてください。
+簡単ですね！<p class="paragraph"/><div class="hidden-block">h3. Developing in STS / Eclipse</div>
+<h3>STS/Eclipseで開発する</h3><p class="paragraph"/><div class="hidden-block">You need to run the following gradle task:</div>
+次のGradleタスクを実行する必要があります:<p class="paragraph"/><div class="code"><pre>./gradlew cleanEclipse eclipse</pre></div><p class="paragraph"/><div class="hidden-block">Before importing projects to STS do the following action:</div>
+STSにプロジェクトをインポートする前に、以下の作業を実施してください:<p class="paragraph"/><div class="hidden-block">* Edit grails-scripts/.classpath and remove the line "&#60;classpathentry kind="src" path="../scripts"/&#62;".</div>
+<ul class="star">
+<li><code>grails-scripts/.classpath</code>を編集して、<code>&#60;classpathentry kind="src" path="../scripts"/&#62;</code>の行を削除します。</li>
+</ul><p class="paragraph"/><div class="hidden-block">Use "Import-&#62;General-&#62;Existing Projects into Workspace" to import all projects to STS. There will be a few build errors. To fix them do the following:</div>
+メニューの「Import -&#62; General -&#62; Existing Projects into Workspace」から、すべてのプロジェクトをSTSにインポートします。
+いくつかのビルドエラーが出ますが、エラーを解消するため以下の手順を実施してください:<p class="paragraph"/><div class="hidden-block">
 <ul class="star">
 <li>Add the springloaded-core JAR file in $GRAILS_HOME/lib/com.springsource.springloaded/springloaded-core/jars to grails-core's classpath.</li>
 <li>Remove "src/test/groovy" from grails-plugin-testing's source path GRECLIPSE-1067</li>
@@ -187,46 +246,157 @@ If you're interested in contributing fixes and features to the core framework, y
 <li>Do a clean build for the whole workspace.</li>
 <li>To use Eclipse GIT scm team provider: Select all projects (except "Servers") in the navigation and right click -&#62; Team -&#62; Share project (not "Share projects"). Choose "Git". Then check "Use or create repository in parent folder of project" and click "Finish".</li>
 <li>Get the recommended code style settings from the <a href="http://grails.1312388.n4.nabble.com/Grails-development-code-style-IDE-formatting-settings-tp3854216p3854216.html" target="blank">mailing list thread</a> (final style not decided yet, currently <a href="http://grails.1312388.n4.nabble.com/attachment/3854262/0/profile.xml" target="blank">profile.xml</a>). Import the code style xml file to STS in Window-&#62;Preferences-&#62;Java-&#62;Code Style-&#62;Formatter-&#62;Import . Grails code uses spaces instead of tabs for indenting.</li>
-</ul><p class="paragraph"/><h3>Debugging Grails or a Grails application</h3><p class="paragraph"/>To enable debugging, run:
-<div class="code"><pre>grails &#45;debug &#60;command&#62;</pre></div><p class="paragraph"/>and then connect to the JVM remotely via the IDE ("remote debugging") using the port 5005. Of course, if you have modified the <code>startGrails</code> script to use a different port number, connect using that one.<p class="paragraph"/><blockquote class="note">
+</ul><p class="paragraph"/></div>
+<ul class="star">
+<li><code>$GRAILS_HOME/lib/com.springsource.springloaded/springloaded-core/jars</code>にあるspringloaded-coreのJARファイルをgrails-coreのクラスパスに追加します。</li>
+<li>grails-plugin-testingのソースパスから<code>src/test/groovy</code>を削除します(GRECLIPSE-1067)。</li>
+<li><code>$GRAILS_HOME/lib/javax.servlet.jsp/jsp-api/jars</code>にあるjsp-apiのJARファイルをgrails-webのクラスパスに追加します。</li>
+<li>grails-scriptsのソースパスを修正します。<code>../scripts</code>にリンクされたソースの「linked folder」を追加します。もしgrails-scriptsでビルドエラーが出るようなら、grails-scriptsディレクトリで<code>../gradlew cleanEclipse eclipse</code>を実行し、<code>.classpath</code>ファイルを再度編集します（<code>&#60;classpathentry kind="src" path="../scripts"/&#62;</code>という行を削除します）。「linked folder」を追加できない場合、grails-scriptsにある（おそらく空である）<code>scripts</code>ディレクトリを削除します。</li>
+<li>ワークスペース全体に対しクリーンビルドを実行します。</li>
+<li>「Eclipse GIT scm team provider」を利用する場合は、ナビゲーションビューで「Servers」以外のすべてのプロジェクトを選択し、右クリックから「Team -&#62; Share project」(複数形ではありませんが)を実行します。「Git」を選び、「Use or create repository in parent folder of project」にチェックを入れ、「Finish」をクリックします。</li>
+<li>推奨されるコードスタイルの設定は<a href="http://grails.1312388.n4.nabble.com/Grails-development-code-style-IDE-formatting-settings-tp3854216p3854216.html" target="blank">メーリングリストのスレッド</a>から入手してください。（最終的なスタイルはまだ確定されていません。現状版は<a href="http://grails.1312388.n4.nabble.com/attachment/3854262/0/profile.xml" target="blank">profile.xml</a>です。）メニューの「Window -&#62; Preferences -&#62; Java -&#62; Code Style -&#62; Formatter -&#62; Import」から、コードスタイルのXMLファイルをSTSにインポートします。Grailsコードでは、インデントにはタブではなくスペースを使用します。</li>
+</ul><p class="paragraph"/><div class="hidden-block">h3. Debugging Grails or a Grails application</div>
+<h3>GrailsやGrailsアプリケーションをデバッグする</h3><p class="paragraph"/><div class="hidden-block">To enable debugging, run:</div>
+デバッグモードを有効にするには、以下のように実行します:<p class="paragraph"/><div class="code"><pre>grails &#45;debug &#60;command&#62;</pre></div><p class="paragraph"/><div class="hidden-block">and then connect to the JVM remotely via the IDE ("remote debugging") using the port 5005. Of course, if you have modified the <code>startGrails</code> script to use a different port number, connect using that one.</div>
+そして、IDEのリモートデバッグで、5005ポートを使ってそのJVMにリモート接続します。
+もちろん、 <code>startGrails</code>スクリプトを修正して別のポート番号を使うようにしていた場合、その番号を使ってください。<p class="paragraph"/><blockquote class="note">
+<div class="hidden-block">
 In previous versions of Grails there was a <code>grails-debug</code> command.  The command is still included in the distribution and is deprecated in favor of the <code>-debug</code> switch to the standard <code>grails</code> command.
-</blockquote><p class="paragraph"/>If you need to debug stuff that happens during application startup, then you should modify the "grails-debug" script and change the "suspend" option from 'n' to 'y'. You can read more about the JPDA connection settings TODO here: <a href="http://java.sun.com/j2se/1.5.0/docs/guide/jpda/conninv.html#Invocation" target="blank">http://java.sun.com/j2se/1.5.0/docs/guide/jpda/conninv.html#Invocation</a>.<p class="paragraph"/>It's also possible to get Eclipse to wait for incoming debugger connections and instead of using "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005" you could use this "-Xrunjdwp:transport=dt_socket,server=n,address=8000" (which assumes the Eclipse default port for remote java applications) Inside eclipse you create a new "Remote Java Application" launch configuration and change the connection type to "Standard (Socket Listen)" and click debug. This allows you to start a debugger session in eclipse and just leave it running and you're free to debug anything without having to keep remembering to relaunch a "Socket Attach" launch configuration. You might find it handy to have 2 scripts, one called "grails-debug", and another called "grails-debug-attach"
+</div>
+以前のバージョンのGrailsには<code>grails-debug</code>コマンドがありました。
+このコマンドはまだディストリビューションに含まれていますが、将来は廃止予定です。
+標準の<code>grails</code>コマンドに対する<code>-debug</code>スイッチが推奨されています。
+</blockquote><p class="paragraph"/><div class="hidden-block">If you need to debug stuff that happens during application startup, then you should modify the "grails-debug" script and change the "suspend" option from 'n' to 'y'. You can read more about the JPDA connection settings TODO here: <a href="http://java.sun.com/j2se/1.5.0/docs/guide/jpda/conninv.html#Invocation" target="blank">http://java.sun.com/j2se/1.5.0/docs/guide/jpda/conninv.html#Invocation</a>.</div>
+もしアプリケーション起動時に起こる事象をデバッグしたい場合は、<code>grails-debug</code>スクリプトを修正し、<code>suspend</code>オプションを<code>n</code>から<code>y</code>に変更します。
+なお、JPDA(Java Platform Debugger Architecture)の接続設定については、<a href="http://java.sun.com/j2se/1.5.0/docs/guide/jpda/conninv.html#Invocation" target="blank">http://java.sun.com/j2se/1.5.0/docs/guide/jpda/conninv.html#Invocation</a>でより詳細を知ることができます。<p class="paragraph"/><div class="hidden-block">It's also possible to get Eclipse to wait for incoming debugger connections and instead of using "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005" you could use this "-Xrunjdwp:transport=dt_socket,server=n,address=8000" (which assumes the Eclipse default port for remote java applications) Inside eclipse you create a new "Remote Java Application" launch configuration and change the connection type to "Standard (Socket Listen)" and click debug. This allows you to start a debugger session in eclipse and just leave it running and you're free to debug anything without having to keep remembering to relaunch a "Socket Attach" launch configuration. You might find it handy to have 2 scripts, one called "grails-debug", and another called "grails-debug-attach"</div>
+また、Eclipseにデバッグ用の接続が来るのを待ち受けさせることもできます。
+その場合、<code>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</code>の代わりに、<code>-Xrunjdwp:transport=dt_socket,server=n,address=8000</code>が必要です。
+（これはEclipseのリモートJavaアプリケーションに対するデフォルトポートを想定しています。）
+Eclipseで新規に「Remote Java Application」を実行し、接続タイプを「Standard (Socket Listen)」として、「Debug」をクリックします。
+これにより、Eclipseでデバッグセッションを起動したままにできるので、「Socket Attach」の再実行を忘れないように気を遣わずとも、自由にデバッグできます。
+この場合、<code>grails-debug</code>と<code>grails-debug-attach</code>という2つのスクリプトが便利に使えます。
 
 
 
 <h2 id="patchesCore">20.3 Grailsコアにパッチを送る</h2>
-If you want to submit patches to the project, you simply need to fork the repository on GitHub rather than clone it directly. Then you will commit your changes to your fork and send a pull request for a core team member to review.<p class="paragraph"/><h3>Forking and Pull Requests</h3>
-One of the benefits of <a href="http://github.com" target="blank">GitHub</a> is the way that you can easily contribute to a project by <a href="http://help.github.com/fork-a-repo/" target="blank">forking the repository</a> and <a href="http://help.github.com/send-pull-requests/" target="blank">sending pull requests</a> with your changes.<p class="paragraph"/>What follows are some guidelines to help ensure that your pull requests are speedily dealt with and provide the information we need. They will also make your life easier!<p class="paragraph"/><h4>Create a local branch for your changes</h4><p class="paragraph"/>Your life will be greatly simplified if you create a local branch to make your changes on. For example, as soon as you fork a repository and clone the fork locally, execute
-<div class="code"><pre>git checkout &#45;b mine</pre></div><p class="paragraph"/>This will create a new local branch called "mine" based off the "master" branch. Of course, you can name the branch whatever you like - you don't have to use "mine".<p class="paragraph"/><h4>Create JIRAs for non-trivial changes</h4><p class="paragraph"/>For any non-trivial changes, raise a JIRA issue if one doesn't already exist. That helps us keep track of what changes go into each new version of Grails.<p class="paragraph"/><h4>Include JIRA issue ID in commit messages</h4><p class="paragraph"/>This may not seem particularly important, but having a JIRA issue ID in a commit message means that we can find out at a later date why a change was made. Include the ID in any and all commits that relate to that issue. If a commit isn't related to an issue, then there's no need to include an issue ID.<p class="paragraph"/><h4>Make sure your fork is up to date</h4><p class="paragraph"/>Since the core developers must merge your commits into the main repository, it makes life much easier if your fork on GitHub is up to date before you send a pull request.<p class="paragraph"/>Let's say you have the main repository set up as a remote called "upstream" and you want to submit a pull request. Also, all your changes are currently on the local "mine" branch but not on "master". The first step involves pulling any changes from the main repository that have been added since you last fetched and merged:
-<div class="code"><pre>git checkout master
-git pull upstream</pre></div><p class="paragraph"/>This should complete without any problems or conflicts. Next, rebase your local branch against the now up-to-date master:
-<div class="code"><pre>git checkout mine
-git rebase master</pre></div><p class="paragraph"/>What this does is rearrange the commits such that all of your changes come after the most recent one in master. Think adding some cards to the top of a deck rather than shuffling them into the pack.<p class="paragraph"/>You'll now be able to do a clean merge from your local branch to master:
-<div class="code"><pre>git checkout master
-git merge mine</pre></div><p class="paragraph"/>Finally, you must push your changes to your remote repository on GitHub, otherwise the core developers won't be able to pick them up:
-<div class="code"><pre>git push</pre></div><p class="paragraph"/>You're now ready to send the pull request from the GitHub user interface.<p class="paragraph"/><h4>Say what your pull request is for</h4><p class="paragraph"/>A pull request can contain any number of commits and it may be related to any number of issues. In the pull request message, please specify the IDs of all issues that the request relates to. Also give a brief description of the work you have done, such as: "I refactored the data binder and added support for custom number editors (GRAILS-xxxx)".
+<div class="hidden-block">If you want to submit patches to the project, you simply need to fork the repository on GitHub rather than clone it directly. Then you will commit your changes to your fork and send a pull request for a core team member to review.</div>
+もしプロジェクトにパッチを送りたいなら、GitHubのリポジトリを直接クローンするのではなく、フォークする必要があります。
+それから変更を自分のフォークにコミットして、コアチームのメンバーがレビューできるようにプルリクエストを送ります。<p class="paragraph"/><div class="hidden-block">h3. Forking and Pull Requests</div>
+<h3>フォークとプルリクエスト</h3><p class="paragraph"/><div class="hidden-block">One of the benefits of <a href="http://github.com" target="blank">GitHub</a> is the way that you can easily contribute to a project by <a href="http://help.github.com/fork-a-repo/" target="blank">forking the repository</a> and <a href="http://help.github.com/send-pull-requests/" target="blank">sending pull requests</a> with your changes.</div>
+<a href="http://github.com" target="blank">GitHub</a>を利用するメリットの1つはプロジェクトへの貢献が容易になることです。
+<a href="http://help.github.com/fork-a-repo/" target="blank">リポジトリをフォークして</a>、自分の加えた変更に対する<a href="http://help.github.com/send-pull-requests/" target="blank">プルリクエストを送れば</a>よいからです。<p class="paragraph"/><div class="hidden-block">What follows are some guidelines to help ensure that your pull requests are speedily dealt with and provide the information we need. They will also make your life easier!</div>
+以下に挙げるのはガイドラインであり、あなたのプルリクエストが素早く処理されるように手助けし、我々に必要な情報を提供してくれます。
+あなたの作業も楽になるでしょう！<p class="paragraph"/><div class="hidden-block">h4. Create a local branch for your changes</div>
+<h4>変更用ローカルブランチを作成する</h4><p class="paragraph"/><div class="hidden-block">Your life will be greatly simplified if you create a local branch to make your changes on. For example, as soon as you fork a repository and clone the fork locally, execute</div>
+変更を行っていくためのローカルブランチを作ることで、作業も大幅にシンプルになります。
+たとえば、リポジトリをフォークして、そのフォークをローカルにクローンしたら、以下を実行します:<p class="paragraph"/><div class="code"><pre>git checkout &#45;b mine</pre></div><p class="paragraph"/><div class="hidden-block">This will create a new local branch called "mine" based off the "master" branch. Of course, you can name the branch whatever you like - you don't have to use "mine".</div>
+これで<code>master</code>ブランチから<code>mine</code>という名前の新しいローカルブランチが作られます。
+もちろん、ブランチの名前は好きなように付けてください。
+<code>mine</code>という名前を使う必要はありません。<p class="paragraph"/><div class="hidden-block">h4. Create JIRAs for non-trivial changes</div>
+<h4>重要な変更についてはJIRAで課題を作成する</h4><p class="paragraph"/><div class="hidden-block">For any non-trivial changes, raise a JIRA issue if one doesn't already exist. That helps us keep track of what changes go into each new version of Grails.</div>
+重要な変更については、まだ存在していなければ、JIRAで新たに課題を作成してください。
+それにより、新しいバージョンのGrailsにどのような変更が入ったか追いかけやすくなるからです。<p class="paragraph"/><div class="hidden-block">h4. Include JIRA issue ID in commit messages</div>
+<h4>コミットログにJIRAの課題IDを含める</h4><p class="paragraph"/><div class="hidden-block">This may not seem particularly important, but having a JIRA issue ID in a commit message means that we can find out at a later date why a change was made. Include the ID in any and all commits that relate to that issue. If a commit isn't related to an issue, then there's no need to include an issue ID.</div>
+これはあまり重要ではないと思われるかもしれません。
+しかし、JIRAの課題IDをコミットログに含めることで、後々その変更の理由が分かるようになります。
+関連するすべてのコミットで、課題IDを記録するようにしてください。
+もちろん、課題に関連がなければ、課題IDを含める必要はありません。<p class="paragraph"/><div class="hidden-block">h4. Make sure your fork is up to date</div>
+<h4>自分のフォークが最新であることを確認する</h4><p class="paragraph"/><div class="hidden-block">Since the core developers must merge your commits into the main repository, it makes life much easier if your fork on GitHub is up to date before you send a pull request.</div>
+コア開発者があなたのコミットをメインリポジトリにマージしやすいように、プルリクエストを送る前に、GitHubの自分のフォークが最新になっているか確認してください。<p class="paragraph"/><div class="hidden-block">Let's say you have the main repository set up as a remote called "upstream" and you want to submit a pull request. Also, all your changes are currently on the local "mine" branch but not on "master". The first step involves pulling any changes from the main repository that have been added since you last fetched and merged:</div>
+たとえば、<code>upstream</code>という名前でリモートに登録されたメインリポジトリがあり、そこに対してプルリクエストを送りたいとします。
+また、すべての変更は現在、<code>master</code>ブランチではなく、ローカルの<code>mine</code>ブランチにあるとします。
+まず最初に、前回フェッチしてマージした以降に追加されているすべての変更をメインリポジトリからプルする必要があります:<p class="paragraph"/><div class="code"><pre>git checkout master
+git pull upstream</pre></div><p class="paragraph"/><div class="hidden-block">This should complete without any problems or conflicts. Next, rebase your local branch against the now up-to-date master:</div>
+これは何の問題もコンフリクトもなく終了するでしょう。
+次に、今最新化した<code>master</code>に対して、ローカルブランチをリベースします:<p class="paragraph"/><div class="code"><pre>git checkout mine
+git rebase master</pre></div><p class="paragraph"/><div class="hidden-block">What this does is rearrange the commits such that all of your changes come after the most recent one in master. Think adding some cards to the top of a deck rather than shuffling them into the pack.</div>
+このコマンドが行ったのはコミットの並び替えです。
+つまり、あなたのすべての変更は<code>master</code>上の最新の変更の後に並んでいます。
+いくつかのカードを、中に混ぜ込むのではなく、デッキの一番上に追加したイメージです。<p class="paragraph"/><div class="hidden-block">You'll now be able to do a clean merge from your local branch to master:</div>
+さてこれでローカルブランチへから<code>master</code>にきれいにマージすることができます:<p class="paragraph"/><div class="code"><pre>git checkout master
+git merge mine</pre></div><p class="paragraph"/><div class="hidden-block">Finally, you must push your changes to your remote repository on GitHub, otherwise the core developers won't be able to pick them up:</div>
+最後に今回の変更をGitHub上のあなたのリモートリポジトリにプッシュします。
+そうしないとコア開発者に見えないからです:<p class="paragraph"/><div class="code"><pre>git push</pre></div><p class="paragraph"/><div class="hidden-block">You're now ready to send the pull request from the GitHub user interface.</div>
+これでGitHubのユーザインタフェースからプルリクエストを送る準備ができました。<p class="paragraph"/><div class="hidden-block">h4. Say what your pull request is for</div>
+<h4>プルリクエストの理由を伝える</h4><p class="paragraph"/><div class="hidden-block">A pull request can contain any number of commits and it may be related to any number of issues. In the pull request message, please specify the IDs of all issues that the request relates to. Also give a brief description of the work you have done, such as: "I refactored the data binder and added support for custom number editors (GRAILS-xxxx)".</div>
+1つのプルリクエストには、複数のコミットを含めることができますし、また複数の課題に関連していても構いません。
+プルリクエストのメッセージには、関連するすべての課題IDを記述してください。
+また、今回の変更についての簡単な説明も記述してください。
+たとえば、「I refactored the data binder and added support for custom number editors (GRAILS-xxxx)」のようにです。
+
 
 
 <h2 id="patchesDoc">20.4 Grailsドキュメントにパッチを送る</h2>
-Contributing to the documentation is simpler for the core framework because there is a public fork of the <a href="http://github.com/grails/grails-doc" target="blank">http://github.com/grails/grails-doc</a> project that anyone can request commit access to. So, if you want to submit patches to the documentation, simply request commit access to the following repository <a href="http://github.com/pledbrook/grails-doc" target="blank">http://github.com/pledbrook/grails-doc</a> by sending a GitHub message to 'pledbrook' and then commit your patches just as you would to any other GitHub repository.<p class="paragraph"/><h3>Building the Guide</h3><p class="paragraph"/>To build the documentation, simply type:
-<div class="code"><pre>./gradlew docs</pre></div><p class="paragraph"/>Be warned: this command can take a while to complete and you should probably increase your Gradle memory settings by giving the <code>GRADLE_OPTS</code> environment variable a value like
-<div class="code"><pre>export GRADLE_OPTS=<span class="java&#45;quote">"&#45;Xmx512m &#45;XX:MaxPermSize=384m"</span></pre></div><p class="paragraph"/>Fortunately, you can reduce the overall build time with a couple of useful options. The first allows you to specify the location of the Grails source to use:<p class="paragraph"/><div class="code"><pre>./gradlew &#45;Dgrails.home=/home/user/projects/grails&#45;core docs</pre></div><p class="paragraph"/>The Grails source is required because the guide links to its API documentation and the build needs to ensure it's generated. If you don't specify a <code>grails.home</code> property, then the build will fetch the Grails source - a download of 10s of megabytes. It must then compile the Grails source which can take a while too.<p class="paragraph"/>Additionally you can create a local.properties file with this variable set:
-<div class="code"><pre>grails.home=/home/user/projects/grails&#45;core</pre></div>
-or
-<div class="code"><pre>grails.home=../grails&#45;core</pre></div><p class="paragraph"/>The other useful option allows you to disable the generation of the API documentation, since you only need to do it once:
-<div class="code"><pre>./gradlew &#45;Ddisable.groovydocs=<span class="java&#45;keyword">true</span> docs</pre></div><p class="paragraph"/>Again, this can save a significant amount of time and memory.<p class="paragraph"/>The main English user guide is generated in the <code>build/docs</code> directory, with the <code>guide</code> sub-directory containing the user guide part and the <code>ref</code> folder containing the reference material. To view the user guide, simply open <code>build/docs/index.html</code>.<p class="paragraph"/><h3>Publishing</h3><p class="paragraph"/>The publishing system for the user guide is the same as <a href="http://grails.org/doc/2.0.0.M1/guide/conf.html#docengine" target="blank">the one for Grails projects</a>. You write your chapters and sections in the gdoc wiki format which is then converted to HTML for the final guide. Each chapter is a top-level gdoc file in the <code>src/&#60;lang&#62;/guide</code> directory. Sections and sub-sections then go into directories with the same name as the chapter gdoc but without the suffix.<p class="paragraph"/>The structure of the user guide is defined in the <code>src/&#60;lang&#62;/guide/toc.yml</code> file, which is a YAML file. This file also defines the (language-specific) section titles. If you add or remove a gdoc file, you must update the TOC as well!<p class="paragraph"/>The <code>src/&#60;lang&#62;/ref</code> directory contains the source for the reference sidebar. Each directory is the name of a category, which also appears in the docs. Hence the directories need different names for the different languages. Inside the directories go the gdoc files, whose names match the names of the methods, commands, properties or whatever that the files describe.<p class="paragraph"/><h3>Translations</h3><p class="paragraph"/>This project can host multiple translations of the user guide, with <code>src/en</code> being the main one. To add another one, simply create a new language directory under <code>src</code> and copy into it all the files under <code>src/en</code>. The build will take care of the rest.<p class="paragraph"/>Once you have a copy of the original guide, you can use the <code>&#123;hidden&#125;</code> macro to wrap the English text that you have replaced, rather than remove it. This makes it easier to compare changes to the English guide against your translation. For example:
-<div class="code"><pre>&#123;hidden&#125;
+<div class="hidden-block">Contributing to the documentation is simpler for the core framework because there is a public fork of the <a href="http://github.com/grails/grails-doc" target="blank">http://github.com/grails/grails-doc</a> project that anyone can request commit access to. So, if you want to submit patches to the documentation, simply request commit access to the following repository <a href="http://github.com/pledbrook/grails-doc" target="blank">http://github.com/pledbrook/grails-doc</a> by sending a GitHub message to 'pledbrook' and then commit your patches just as you would to any other GitHub repository.</div>
+ドキュメントについての貢献はコアフレームワークへの貢献よりも簡単です。
+なぜなら、<a href="http://github.com/grails/grails-doc" target="blank">http://github.com/grails/grails-doc</a>プロジェクトの公開フォークがあり、誰でもコミット権をリクエストできるからです。
+ドキュメントへのパッチを送りたい場合、GitHubの「pledbrook」にメッセージを送って、次のリポジトリ<a href="http://github.com/pledbrook/grails-doc" target="blank">http://github.com/pledbrook/grails-doc</a>に対するコミット権をリクエストしてください。
+それから、あなたのパッチを他のGitHubリポジトリで普通に行っているようにコミットすればよいのです。<p class="paragraph"/><div class="hidden-block">h3. Building the Guide</div>
+<h3>ガイドをビルドする</h3><p class="paragraph"/><div class="hidden-block">To build the documentation, simply type:</div>
+ドキュメントをビルドするには、単純に以下を実行します:<p class="paragraph"/><div class="code"><pre>./gradlew docs</pre></div><p class="paragraph"/><div class="hidden-block">Be warned: this command can take a while to complete and you should probably increase your Gradle memory settings by giving the <code>GRADLE_OPTS</code> environment variable a value like</div>
+注意点:
+このコマンドは実行するのに時間がかかります。
+また、次のように<code>GRADLE_OPTS</code>環境変数を設定して、Gradleのメモリ使用量を増やした方が良いです。<p class="paragraph"/><div class="code"><pre>export GRADLE_OPTS=<span class="java&#45;quote">"&#45;Xmx512m &#45;XX:MaxPermSize=384m"</span></pre></div><p class="paragraph"/><div class="hidden-block">Fortunately, you can reduce the overall build time with a couple of useful options. The first allows you to specify the location of the Grails source to use:</div>
+幸いなことに、いくつかのオプションを使うことで、全体のビルド時間を減らすことができます。
+まず、利用するGrailsのソースがどこにあるかを指定するオプションがあります:<p class="paragraph"/><div class="code"><pre>./gradlew &#45;Dgrails.home=/home/user/projects/grails&#45;core docs</pre></div><p class="paragraph"/><div class="hidden-block">The Grails source is required because the guide links to its API documentation and the build needs to ensure it's generated. If you don't specify a <code>grails.home</code> property, then the build will fetch the Grails source - a download of 10s of megabytes. It must then compile the Grails source which can take a while too.</div>
+Grailsのソースが必要なのは、ガイドがAPIドキュメントへのリンクを持っており、ビルド時にそれが生成されることを保証する必要があるからです。
+もし、<code>grails.home</code>プロパティを指定しないと、ビルド時にGrailsのソースファイル（10数MBあります）をダウンロードします。
+そしてそのGrailsソースコードをコンパイルするため、より時間がかかるのです。<p class="paragraph"/><div class="hidden-block">Additionally you can create a local.properties file with this variable set:</div>
+さらに、以下の変数を設定しておく<code>local.properties</code>ファイルを作成できます:<p class="paragraph"/><div class="code"><pre>grails.home=/home/user/projects/grails&#45;core</pre></div><p class="paragraph"/><div class="hidden-block">or</div>
+または<p class="paragraph"/><div class="code"><pre>grails.home=../grails&#45;core</pre></div><p class="paragraph"/><div class="hidden-block">The other useful option allows you to disable the generation of the API documentation, since you only need to do it once:</div>
+他には、毎回生成する必要がなければ、APIドキュメントの生成を無効化するという便利なオプションもあります:<p class="paragraph"/><div class="code"><pre>./gradlew &#45;Ddisable.groovydocs=<span class="java&#45;keyword">true</span> docs</pre></div><p class="paragraph"/><div class="hidden-block">Again, this can save a significant amount of time and memory.</div>
+これでさらに、大幅に時間とメモリを削減できます。<p class="paragraph"/><div class="hidden-block">The main English user guide is generated in the <code>build/docs</code> directory, with the <code>guide</code> sub-directory containing the user guide part and the <code>ref</code> folder containing the reference material. To view the user guide, simply open <code>build/docs/index.html</code>.</div>
+主となる英語のユーザーガイドは<code>build/docs</code>ディレクトリに作られます。
+<code>guide</code>サブディレクトリにはユーザーガイドが、<code>ref</code>フォルダにはリファレンスが入ります。
+ユーザーガイドを表示するためには、単に<code>build/docs/index.html</code>を開きます。<p class="paragraph"/><div class="hidden-block">h3. Publishing</div>
+<h3>出力する</h3><p class="paragraph"/><div class="hidden-block">The publishing system for the user guide is the same as <a href="http://grails.org/doc/2.0.0.M1/guide/conf.html#docengine" target="blank">the one for Grails projects</a>. You write your chapters and sections in the gdoc wiki format which is then converted to HTML for the final guide. Each chapter is a top-level gdoc file in the <code>src/&#60;lang&#62;/guide</code> directory. Sections and sub-sections then go into directories with the same name as the chapter gdoc but without the suffix.</div>
+ユーザーガイドの出力システムは<a href="http://grails.org/doc/2.0.0.M1/guide/conf.html#docengine" target="blank">Grailsプロジェクトのもの</a>と同じです。
+章やセクションをgdoc wikiフォーマットで記述すれば、ガイドの最終版ではHTMLに変換されます。
+それぞれの章は<code>src/&#60;lang&#62;/guide</code>ディレクトリ直下のgdocファイルです。
+セクションやサブセクションは、各章のgdocファイル名からサフィックスを除いた名前のサブフォルダに格納します。<p class="paragraph"/><div class="hidden-block">The structure of the user guide is defined in the <code>src/&#60;lang&#62;/guide/toc.yml</code> file, which is a YAML file. This file also defines the (language-specific) section titles. If you add or remove a gdoc file, you must update the TOC as well!</div>
+ユーザーガイドの構造は、YAML形式の<code>src/&#60;lang&#62;/guide/toc.yml</code>ファイルで定義されています。
+このファイルは同時に各セクションの（各言語ごとの）タイトルも定義しています。
+gdocファイルを追加・削除した場合、このTOCファイルも合わせて更新する必要があります！<p class="paragraph"/><div class="hidden-block">The <code>src/&#60;lang&#62;/ref</code> directory contains the source for the reference sidebar. Each directory is the name of a category, which also appears in the docs. Hence the directories need different names for the different languages. Inside the directories go the gdoc files, whose names match the names of the methods, commands, properties or whatever that the files describe.</div>
+<code>src/&#60;lang&#62;/ref</code>ディレクトリには「Quick Reference」というサイドバーのソースが格納されています。
+各ディレクトリ名はカテゴリ名になっていて、カテゴリ名は本文にも現れます。
+そのため、ディレクトリには言語ごとに違う名前が必要です。
+そのディレクトリ内にgdocファイルが格納されます。gdocファイルの名前はメソッド名・コマンド名・プロパティ名やそのファイルが説明している何かに一致します。<p class="paragraph"/><div class="hidden-block">h3. Translations</div>
+<h3>翻訳</h3><p class="paragraph"/><div class="hidden-block">This project can host multiple translations of the user guide, with <code>src/en</code> being the main one. To add another one, simply create a new language directory under <code>src</code> and copy into it all the files under <code>src/en</code>. The build will take care of the rest.</div>
+このプロジェクトでは、<code>src/en</code>をオリジナルとして、さまざまな言語に翻訳されたユーザーガイドを提供しています。
+新しい言語の翻訳を追加するには、単に<code>src</code>ディレクトリに新しい言語のフォルダを作成し、<code>src/en</code>にあるすべてのファイルをコピーします。
+ビルドすることで必要な作業が行われます。<p class="paragraph"/><div class="hidden-block">Once you have a copy of the original guide, you can use the <code>&#123;hidden&#125;</code> macro to wrap the English text that you have replaced, rather than remove it. This makes it easier to compare changes to the English guide against your translation. For example:</div>
+オリジナルのガイドをコピーしたら、置き換えようとしている英語の原文は削除せず、<code>&#123;hidden&#125;</code>マクロで英語の原文を囲んでください。
+これにより容易に英語の原文と今回の翻訳の比較ができます。たとえば:<p class="paragraph"/><div class="code"><pre>&#123;hidden&#125;
 When you create a Grails application with the &#91;create&#45;app|commandLine&#93; command,
 Grails doesn't automatically create an Ant <code>build.xml</code> file but you can generate
 one with the &#91;integrate&#45;with|commandLine&#93; command:
 &#123;hidden&#125;<p class="paragraph"/>Quando crias uma aplicação Grails com o comando &#91;create&#45;app|commandLine&#93;, Grails
 não cria automaticamente um ficheiro de construção Ant <code>build.xml</code> mas podes gerar
-um com o comando &#91;integrate&#45;with|commandLine&#93;:</pre></div><p class="paragraph"/>Because the English text remains in your gdoc files, <code>diff</code> will show differences on the English lines. You can then use the output of <code>diff</code> to see which bits of your translation need updating. On top of that, the <code>&#123;hidden&#125;</code> macro ensures that the text inside it is not displayed in the browser, although you can display it by adding this URL as a bookmark: <code>javascript:toggleHidden();</code> (requires you to build the user guide with Grails 2.0 M2 or later).<p class="paragraph"/>Even better, you can use the <code>left_to_do.groovy</code> script in the root of the project to see what still needs translating. You run it like so:
-<div class="code"><pre>./left_to_do.groovy es</pre></div><p class="paragraph"/>This will then print out a recursive diff of the given translation against the reference English user guide. Anything in <code>&#123;hidden&#125;</code> blocks that hasn't changed since being translated will  <em class="italic">not</em>  appear in the diff output. In other words, all you will see is content that hasn't been translated yet and content that has changed since it was translated. Note that <code>&#123;code&#125;</code> blocks are ignored, so you  <em class="italic">don't</em>  need to include them inside <code>&#123;hidden&#125;</code> macros.<p class="paragraph"/>To provide translations for the headers, such as the user guide title and subtitle, just add language specific entries in the 'resources/doc.properties' file like so:
-<div class="code"><pre>es.title=El Grails Framework
-es.subtitle=...</pre></div><p class="paragraph"/>For each language translation, properties beginning <code>&#60;lang&#62;</code>. will override the standard ones. In the above example, the user guide title will be El Grails Framework for the Spanish translation. Also, translators can be credited by adding a '&#60;lang&#62;.translators' property:
-<div class="code"><pre>fr.translators=Stéphane Maldini</pre></div><p class="paragraph"/>This should be a comma-separated list of names (or the native language equivalent) and it will be displayed as a "Translated by" header in the user guide itself.<p class="paragraph"/>You can build specific translations very easily using the <code>publishGuide_&#42;</code> and <code>publishPdf_&#42;</code> tasks. For example, to build both the French HTML and PDF user guides, simply execute
-<div class="code"><pre>./gradlew publishPdf_fr</pre></div><p class="paragraph"/>Each translation is generated in its own directory, so for example the French guide will end up in <code>build/docs/fr</code>. You can then view the translated guide by opening <code>build/docs/&#60;lang&#62;/index.html</code>.<p class="paragraph"/>All translations are created as part of the <a href="http://hudson.grails.org/job/grails_docs_2.0.x/lastSuccessfulBuild/artifact/build/docs/" target="blank">Hudson CI build for the grails-doc</a> project, so you can easily see what the current state is without having to build the docs yourself.
+um com o comando &#91;integrate&#45;with|commandLine&#93;:</pre></div><p class="paragraph"/><div class="hidden-block">Because the English text remains in your gdoc files, <code>diff</code> will show differences on the English lines. You can then use the output of <code>diff</code> to see which bits of your translation need updating. On top of that, the <code>&#123;hidden&#125;</code> macro ensures that the text inside it is not displayed in the browser, although you can display it by adding this URL as a bookmark: <code>javascript:toggleHidden();</code> (requires you to build the user guide with Grails 2.0 M2 or later).</div>
+英語の原文がgdocファイルに残っていることで、<code>diff</code>で英語の行についての変更を表示することができます。
+つまり、翻訳のどこをアップデートすればいいかを知るために<code>diff</code>の出力を使えるのです。
+ブラウザで見るとき、<code>&#123;hidden&#125;</code>に囲まれた部分は表示されません。
+ただし、ブックマークとして<code>javascript:toggleHidden();</code>を追加することで、<code>&#123;hidden&#125;</code>に囲まれた部分を表示できるようになります。
+（これにはGrails 2.0以降でユーザーガイドがビルドされている必要があります。）<p class="paragraph"/><div class="hidden-block">Even better, you can use the <code>left_to_do.groovy</code> script in the root of the project to see what still needs translating. You run it like so:</div>
+もっと便利に、<code>left_to_do.groovy</code>スクリプトをプロジェクトのルートで実行すれば、まだ翻訳が必要な箇所をしることができます。
+このように実行します:<p class="paragraph"/><div class="code"><pre>./left_to_do.groovy es</pre></div><p class="paragraph"/><div class="hidden-block">This will then print out a recursive diff of the given translation against the reference English user guide. Anything in <code>&#123;hidden&#125;</code> blocks that hasn't changed since being translated will  <em class="italic">not</em>  appear in the diff output. In other words, all you will see is content that hasn't been translated yet and content that has changed since it was translated. Note that <code>&#123;code&#125;</code> blocks are ignored, so you  <em class="italic">don't</em>  need to include them inside <code>&#123;hidden&#125;</code> macros.</div>
+このコマンドは、オリジナルの英語のユーザーガイドと対象となる翻訳との差分を再帰的に実行し、結果を出力します。
+<code>&#123;hidden&#125;</code>ブロックに含まれていて、翻訳されたあと変更されていない部分は差分として出力されません。
+言い換えれば、翻訳されたあと原文が修正されたのに、まだ再翻訳されていない部分が表示されます。
+<code>&#123;code&#125;</code>ブロックは無視されるため、<code>&#123;code&#125;</code>ブロックを<code>&#123;hidden&#125;</code>で囲む必要は  <em class="italic">ありません</em> 。<p class="paragraph"/><div class="hidden-block">To provide translations for the headers, such as the user guide title and subtitle, just add language specific entries in the 'resources/doc.properties' file like so:</div>
+ユーザーガイドのタイトルやサブタイトルなど、ヘッダ部分の翻訳をするには、<code>resources/doc.properties</code>ファイルに、次のように各言語に固有のエントリを追加します:<p class="paragraph"/><div class="code"><pre>es.title=El Grails Framework
+es.subtitle=...</pre></div><p class="paragraph"/><div class="hidden-block">For each language translation, properties beginning <code>&#60;lang&#62;</code>. will override the standard ones. In the above example, the user guide title will be El Grails Framework for the Spanish translation. Also, translators can be credited by adding a '&#60;lang&#62;.translators' property:</div>
+それぞれの言語の翻訳において、<code>&#60;lang&#62;.</code>で始まるプロパティは標準のプロパティを上書きします。
+上記の例で言えば、スペイン語の翻訳ではユーザーガイドのタイトルが「El Grails Framework」となります。
+同様に、翻訳者も<code>&#60;lang&#62;.translators</code>プロパティを追加することでクレジットに名前を載せることができます:<p class="paragraph"/><div class="code"><pre>fr.translators=Stéphane Maldini</pre></div><p class="paragraph"/><div class="hidden-block">This should be a comma-separated list of names (or the native language equivalent) and it will be displayed as a "Translated by" header in the user guide itself.</div>
+このプロパティはカンマ区切りの名前のリストになり、ユーザーガイドに「Translated by」ヘッダとして表示されます。<p class="paragraph"/><div class="hidden-block">You can build specific translations very easily using the <code>publishGuide_&#42;</code> and <code>publishPdf_&#42;</code> tasks. For example, to build both the French HTML and PDF user guides, simply execute</div>
+特定の言語の翻訳は、<code>publishGuide_&#42;</code>や<code>publishPdf_&#42;</code>を使えば簡単にビルドできます。
+たとえば、フランス語のHTMLとPDFのユーザーガイドをビルドするには、単純に以下を実行します:<p class="paragraph"/><div class="code"><pre>./gradlew publishPdf_fr</pre></div><p class="paragraph"/><div class="hidden-block">Each translation is generated in its own directory, so for example the French guide will end up in <code>build/docs/fr</code>. You can then view the translated guide by opening <code>build/docs/&#60;lang&#62;/index.html</code>.</div>
+それぞれの翻訳は、言語別のディレクトリに作成されます。
+たとえば、フランス語のガイドは<code>build/docs/fr</code>に作られます。
+翻訳されたガイドは、<code>build/docs/&#60;lang&#62;/index.html</code>を開けば見られます。<p class="paragraph"/><div class="hidden-block">All translations are created as part of the <a href="http://hudson.grails.org/job/grails_docs_2.0.x/lastSuccessfulBuild/artifact/build/docs/" target="blank">Hudson CI build for the grails-doc</a> project, so you can easily see what the current state is without having to build the docs yourself.</div>
+すべての翻訳結果は<a href="http://hudson.grails.org/job/grails_docs_2.0.x/lastSuccessfulBuild/artifact/build/docs/" target="blank">grails-docのHudson CIビルド</a>プロジェクトの一部として作成されています。
+そのため、現状の最新ドキュメントは自分でビルドしなくても見ることができます。
 
 
 

@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>20.1 JIRA&#12395;&#35506;&#38988;&#12434;&#12522;&#12509;&#12540;&#12488;(&#12496;&#12464;&#22577;&#21578;) 2.3.0.BUILD-SNAPSHOT</title>
+    <title>20.1 JIRA&#12391;&#35506;&#38988;&#12434;&#22577;&#21578;&#12377;&#12427;&#65288;&#12496;&#12464;&#22577;&#21578;&#65289; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -125,7 +125,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>20.1 JIRA&#12395;&#35506;&#38988;&#12434;&#12522;&#12509;&#12540;&#12488;(&#12496;&#12464;&#22577;&#21578;) - Reference Documentation</h1>
+                    <h1>20.1 JIRA&#12391;&#35506;&#38988;&#12434;&#22577;&#21578;&#12377;&#12427;&#65288;&#12496;&#12464;&#22577;&#21578;&#65289; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -140,8 +140,31 @@ function addJsClass() {
 
                 
 
-<h2 id="issues">20.1 JIRAに課題をリポート(バグ報告)</h2>
-Grails uses <a href="http://jira.grails.org" target="blank">JIRA</a> to track issues in the core framework, its documentation, its website, and many of the public plugins. If you've found a bug or wish to see a particular feature added, this is the place to start. You'll need to create a (free) JIRA account in order to either submit an issue or comment on an existing one.<p class="paragraph"/>When submitting issues, please provide as much information as possible and in the case of bugs, make sure you explain which versions of Grails and various plugins you are using. Also, an issue is much more likely to be dealt with if you attach a reproducible sample application (which can be packaged up using the <code>grails bug-report</code> command).<p class="paragraph"/><h3>Reviewing issues</h3><p class="paragraph"/>There are quite a few old issues in JIRA, some of which may no longer be valid. The core team can't track down these alone, so a very simple contribution that you can make is to verify one or two issues occasionally.<p class="paragraph"/>Which issues need verification? A shared <a href="http://jira.grails.org/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=project+%3D+GRAILS+AND+resolution+%3D+Unresolved+AND+%28cf%5B10310%5D+%3C%3D+%27-180d%27+OR+cf%5B10310%5D+is+EMPTY%29+AND+createdDate+%3C%3D+%27-180d%27" target="blank">JIRA filter</a> will display all issues that haven't been resolved and haven't been reviewed by someone else in the last 6 months. Just pick one or two of them and check whether they are still relevant.<p class="paragraph"/>Once you've verified an issue, simply edit it and set the "Last Reviewed" field to today. If you think the issue can be closed, then also check the "Flagged" field and add a short comment explaining why. Once those changes are saved, the issue will disappear from the results of the above filter. If you've flagged it, the core team will review and close if it really is no longer relevant.<p class="paragraph"/>One last thing: you can easily set the above filter as a favourite on <a href="http://jira.grails.org/secure/ManageFilters.jspa#filterView=popular" target="blank">this JIRA screen</a> so that it appears in the "Issues" drop down. Just click on the star next to a filter to make it a favourite.
+<h2 id="issues">20.1 JIRAで課題を報告する（バグ報告）</h2>
+<div class="hidden-block">Grails uses <a href="http://jira.grails.org" target="blank">JIRA</a> to track issues in the core framework, its documentation, its website, and many of the public plugins. If you've found a bug or wish to see a particular feature added, this is the place to start. You'll need to create a (free) JIRA account in order to either submit an issue or comment on an existing one.</div>
+Grails開発では、コアフレームワークやドキュメント、ウェブサイトや多くの公開プラグインの課題管理に<a href="http://jira.grails.org" target="blank">JIRA</a>を利用しています。
+バグを見つけたり、追加機能の要望がある場合には、ここで課題を作成します。
+課題を新規に作成したり、既存の課題にコメントしたりするには、JIRAの無料のアカウントが必要です。<p class="paragraph"/><div class="hidden-block">When submitting issues, please provide as much information as possible and in the case of bugs, make sure you explain which versions of Grails and various plugins you are using. Also, an issue is much more likely to be dealt with if you attach a reproducible sample application (which can be packaged up using the <code>grails bug-report</code> command).</div>
+課題を作成する場合には、できるだけ多くの情報を記述するようにしてください。
+バグの場合、利用しているGrailsのバージョンやプラグインが説明されているか確認してください。
+また、事象が再現可能なサンプルアプリケーションを添付すると課題への対応がやりやすくなります。
+（<code>grails bug-report</code>コマンドを使ってアプリケーションをパッケージングできます。）<p class="paragraph"/><div class="hidden-block">h3. Reviewing issues</div>
+<h3>課題をレビューする</h3><p class="paragraph"/><div class="hidden-block">There are quite a few old issues in JIRA, some of which may no longer be valid. The core team can't track down these alone, so a very simple contribution that you can make is to verify one or two issues occasionally.</div>
+JIRAの中には古い課題がかなりの数存在し、その中には既に調べる意味がないものも含まれています。
+コアチームだけでこれだけ多くのものを解決に導くことはできません。
+というわけで、あなたが実施できるとてもシンプルな貢献は、ときどき課題の1つか2つを検証することです。<p class="paragraph"/><div class="hidden-block">Which issues need verification? A shared <a href="http://jira.grails.org/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=project+%3D+GRAILS+AND+resolution+%3D+Unresolved+AND+%28cf%5B10310%5D+%3C%3D+%27-180d%27+OR+cf%5B10310%5D+is+EMPTY%29+AND+createdDate+%3C%3D+%27-180d%27" target="blank">JIRA filter</a> will display all issues that haven't been resolved and haven't been reviewed by someone else in the last 6 months. Just pick one or two of them and check whether they are still relevant.</div>
+では、どの課題を検証すればよいのでしょうか？
+共有の<a href="http://jira.grails.org/secure/IssueNavigator.jspa?reset=true&jqlQuery=project+%3D+GRAILS+AND+resolution+%3D+Unresolved+AND+%28cf%5B10310%5D+%3C%3D+%27-180d%27+OR+cf%5B10310%5D+is+EMPTY%29+AND+createdDate+%3C%3D+%27-180d%27" target="blank">JIRAフィルタ</a>により、未解決のまま過去6ヶ月間誰も見直ししていない課題がすべて表示されます。
+このうちから1つか2つを選んで、それが今でも対応する価値があるかどうかを調べてください。<p class="paragraph"/><div class="hidden-block">Once you've verified an issue, simply edit it and set the "Last Reviewed" field to today. If you think the issue can be closed, then also check the "Flagged" field and add a short comment explaining why. Once those changes are saved, the issue will disappear from the results of the above filter. If you've flagged it, the core team will review and close if it really is no longer relevant.</div>
+課題が検証できたら、その課題を単に編集して「Last Reviewed」フィールドを今日の日付に更新してください。
+もしその課題をクローズしてもよいと考えるなら、「Flagged」フィールドにもチェックを付けて、その理由を短いコメントとして追加してください。
+変更を保存すれば、この課題は上記のフィルタの表示結果から消えます。
+あなたがフラグをつけた課題は、コアチームがレビューして、本当にもう価値がない場合は課題をクローズします。<p class="paragraph"/><div class="hidden-block">One last thing: you can easily set the above filter as a favourite on <a href="http://jira.grails.org/secure/ManageFilters.jspa#filterView=popular" target="blank">this JIRA screen</a> so that it appears in the "Issues" drop down. Just click on the star next to a filter to make it a favourite.</div>
+最後にもうひとつ:
+|http://jira.grails.org/secure/ManageFilters.jspa
+で上記のフィルタを簡単にお気に入りとしてセットできます。
+こうするとメニューバーの「Issues」ドロップダウンリストにこのフィルタが表示されるようになります。
+お気に入りにするには、フィルタの隣にある星印をクリックするだけです。
 
 
 
