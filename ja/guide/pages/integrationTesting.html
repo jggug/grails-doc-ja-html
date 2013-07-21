@@ -141,21 +141,31 @@ function addJsClass() {
                 
 <a name="12.2 Integration Testing"><!-- Legacy link --></a>
 <h2 id="integrationTesting">12.2 インテグレーションテスト</h2>
-Integration tests differ from unit tests in that you have full access to the Grails environment within the test. Grails uses an in-memory H2 database for integration tests and clears out all the data from the database between tests.<p class="paragraph"/>One thing to bear in mind is that logging is enabled for your application classes, but it is different from logging in tests. So if you have something like this:<p class="paragraph"/><div class="code"><pre>class MyServiceTests <span class="java&#45;keyword">extends</span> GroovyTestCase &#123;
+<div class="hidden-block">Integration tests differ from unit tests in that you have full access to the Grails environment within the test. Grails uses an in-memory H2 database for integration tests and clears out all the data from the database between tests.</div>
+インテグレーションテストはGrails実行環境にフルアクセス可能なところが、ユニットテストとは異なっています。GrailsはインテグレーションテストのためにインメモリのH2データベースを使用するので、テスト毎にデータベースの全てのデータは消去されます。<p class="paragraph"/><div class="hidden-block">One thing to bear in mind is that logging is enabled for your application classes, but it is different from logging in tests. So if you have something like this:</div>
+一つ心にとめておいて欲しいことは、テスト対象のアプリケーションクラスのロギングを有効にしたとしても、アプリケーション内で有効なロギングは、テスト内で有効なロギングとは異なります。もし、テスト中にログを取りたいならば以下のように記述します:<p class="paragraph"/><div class="code"><pre>class MyServiceTests <span class="java&#45;keyword">extends</span> GroovyTestCase &#123;
     void testSomething() &#123;
         log.info <span class="java&#45;quote">"Starting tests"</span>
         &#8230;
     &#125;
-&#125;</pre></div><p class="paragraph"/>the "starting tests" message is logged using a different system than the one used by the application. The <code>log</code> property in the example above is an instance of <code>java.util.logging.Logger</code> (inherited from the base class, not injected by Grails), which doesn't have the same methods as the <code>log</code> property injected into your application artifacts. For example, it doesn't have <code>debug()</code> or <code>trace()</code> methods, and the equivalent of <code>warn()</code> is in fact <code>warning()</code>.<p class="paragraph"/><h4>Transactions</h4><p class="paragraph"/>Integration tests run inside a database transaction by default, which is rolled back at the end of the each test. This means that data saved during a test is not persisted to the database. Add a <code>transactional</code> property to your test class to check transactional behaviour:<p class="paragraph"/><div class="code"><pre>class MyServiceTests <span class="java&#45;keyword">extends</span> GroovyTestCase &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">the "starting tests" message is logged using a different system than the one used by the application. The <code>log</code> property in the example above is an instance of <code>java.util.logging.Logger</code> (inherited from the base class, not injected by Grails), which doesn't have the same methods as the <code>log</code> property injected into your application artifacts. For example, it doesn't have <code>debug()</code> or <code>trace()</code> methods, and the equivalent of <code>warn()</code> is in fact <code>warning()</code>.</div>
+"starting tests"のメッセージはアプリケーションが使っているのとは異なるロガーによりログが記録されます。上の例における<code>log</code>のプロパティには<code>java.util.logging.Logger</code>のインスタンスが設定され(Grailsによって注入されるのではなく、ベースクラスから継承される)、アプリケーション側で注入される<code>log</code>プロパティと同じメソッドは持っていません。例えば、<code>debug()</code>や<code>trace()</code>メソッドがなく、<code>warn()</code>(と同じ意味を持つもの)が<code>warning()</code>になります。<p class="paragraph"/><div class="hidden-block">h4. Transactions</div>
+<h4>トランザクション</h4><p class="paragraph"/><div class="hidden-block">Integration tests run inside a database transaction by default, which is rolled back at the end of the each test. This means that data saved during a test is not persisted to the database. Add a <code>transactional</code> property to your test class to check transactional behaviour:</div>
+インテグレーションテストはデフォルトでデータベーストランザクションの中で実行され、テスト毎にテストの最後でロールバックされます。つまり、テスト中に保存したデータはデータベースには永続化されないことを意味します。また、<code>transactional</code>プロパティをテストクラスに追加することで、トランザクション制御を抑止することができます:<p class="paragraph"/><div class="code"><pre>class MyServiceTests <span class="java&#45;keyword">extends</span> GroovyTestCase &#123;
     <span class="java&#45;keyword">static</span> transactional = <span class="java&#45;keyword">false</span><p class="paragraph"/>    void testMyTransactionalServiceMethod() &#123;
         &#8230;
     &#125;
-&#125;</pre></div><p class="paragraph"/>Be sure to remove any persisted data from a non-transactional test, for example in the <code>tearDown</code> method, so these tests don't interfere with standard transactional tests that expect a clean database.<p class="paragraph"/><h4>Testing Controllers</h4><p class="paragraph"/>To test controllers you first have to understand the Spring Mock Library.<p class="paragraph"/>Grails automatically configures each test with a <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpServletRequest.html" class="api">MockHttpServletRequest</a>, <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpServletResponse.html" class="api">MockHttpServletResponse</a>, and <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpSession.html" class="api">MockHttpSession</a> that you can use in your tests. For example consider the following controller:<p class="paragraph"/><div class="code"><pre>class FooController &#123;<p class="paragraph"/>    def text() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Be sure to remove any persisted data from a non-transactional test, for example in the <code>tearDown</code> method, so these tests don't interfere with standard transactional tests that expect a clean database.</div>
+トランザクション管理されていないテストでは、クリーンなデータベースを期待している通常のテストに影響を与えないよう、<code>tearDown</code>メソッドなどで、永続化されたすべてのデータを削除するようにしてください。<p class="paragraph"/><div class="hidden-block">h4. Testing Controllers</div>
+<h4>コントローラのテスト</h4><p class="paragraph"/><div class="hidden-block">To test controllers you first have to understand the Spring Mock Library.</div>
+コントローラをテストするためには、まずSpringモックライブラリを理解する必要があります。<p class="paragraph"/><div class="hidden-block">Grails automatically configures each test with a <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpServletRequest.html" class="api">MockHttpServletRequest</a>, <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpServletResponse.html" class="api">MockHttpServletResponse</a>, and <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpSession.html" class="api">MockHttpSession</a> that you can use in your tests. For example consider the following controller:</div>
+Grailsは<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpServletRequest.html" class="api">MockHttpServletRequest</a>、<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpServletResponse.html" class="api">MockHttpServletResponse</a>、<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpSession.html" class="api">MockHttpSession</a>をテストで使えるように自動的に設定します。例えば、以下のコントローラを考えてみましょう:<p class="paragraph"/><div class="code"><pre>class FooController &#123;<p class="paragraph"/>    def text() &#123;
         render <span class="java&#45;quote">"bar"</span>
     &#125;<p class="paragraph"/>    def someRedirect() &#123;
         redirect(action:<span class="java&#45;quote">"bar"</span>)
     &#125;
-&#125;</pre></div><p class="paragraph"/>The tests for this would be:<p class="paragraph"/><div class="code"><pre>class FooControllerTests <span class="java&#45;keyword">extends</span> GroovyTestCase &#123;<p class="paragraph"/>    void testText() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The tests for this would be:</div>
+このテストは次のようになるでしょう:<p class="paragraph"/><div class="code"><pre>class FooControllerTests <span class="java&#45;keyword">extends</span> GroovyTestCase &#123;<p class="paragraph"/>    void testText() &#123;
         def fc = <span class="java&#45;keyword">new</span> FooController()
         fc.text()
         assertEquals <span class="java&#45;quote">"bar"</span>, fc.response.contentAsString
@@ -164,25 +174,38 @@ Integration tests differ from unit tests in that you have full access to the Gra
         fc.someRedirect()
         assertEquals <span class="java&#45;quote">"/foo/bar"</span>, fc.response.redirectedUrl
     &#125;
-&#125;</pre></div><p class="paragraph"/>In the above case <code>response</code> is an instance of <code>MockHttpServletResponse</code> which we can use to obtain the generated content with <code>contentAsString</code> (when writing to the response) or the redirected URL. These mocked versions of the Servlet API are completely mutable (unlike the real versions) and hence you can set properties on the request such as the <code>contextPath</code> and so on.<p class="paragraph"/>Grails <strong class="bold">does not</strong> invoke <a href="../guide/single.html#interceptors" class="guide">interceptors</a> or servlet filters when calling actions during integration testing. You should test interceptors and filters in isolation, using <a href="../guide/single.html#functionalTesting" class="guide">functional testing</a> if necessary.<p class="paragraph"/><h4>Testing Controllers with Services</h4><p class="paragraph"/>If your controller references a service (or other Spring beans), you have to explicitly initialise the service from your test.<p class="paragraph"/>Given a controller using a service:<p class="paragraph"/><div class="code"><pre>class FilmStarsController &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the above case <code>response</code> is an instance of <code>MockHttpServletResponse</code> which we can use to obtain the generated content with <code>contentAsString</code> (when writing to the response) or the redirected URL. These mocked versions of the Servlet API are completely mutable (unlike the real versions) and hence you can set properties on the request such as the <code>contextPath</code> and so on.</div>
+上記の<code>response</code>は<code>MockHttpServletResponse</code>のインスタンスです。このインスタンスでは、レスポンスを書き出すときであれば<code>contentAsString</code>により生成されたコンテンツが取得でき、リダイレクトの場合はリダイレクトされたURLが取得できます。これらのServlet APIのモックバージョンは(実際のAPIとは異なり)何でも変更可能で、<code>contextPath</code>などリクエストのプロパティについても設定可能です。<p class="paragraph"/><div class="hidden-block">Grails <strong class="bold">does not</strong> invoke <a href="../guide/single.html#interceptors" class="guide">interceptors</a> or servlet filters when calling actions during integration testing. You should test interceptors and filters in isolation, using <a href="../guide/single.html#functionalTesting" class="guide">functional testing</a> if necessary.</div>
+Grailsはインテグレーションテスト実行中にアクションを呼ぶ際、<strong class="bold">決して</strong><a href="../guide/single.html#interceptors" class="guide">インターセプター</a>やサーブレットフィルターを実行しません。もしテストが必要なら、<a href="../guide/single.html#functionalTesting" class="guide">ファンクショナルテスト</a>を使ってインターセプターやフィルターを個別にテストする必要があります。<p class="paragraph"/><div class="hidden-block">h4. Testing Controllers with Services</div>
+<h4>サービスを伴うコントローラのテスト</h4><p class="paragraph"/><div class="hidden-block">If your controller references a service (or other Spring beans), you have to explicitly initialise the service from your test.</div>
+もしコントローラがサービス(もしくは他のSpringビーン)を参照しているなら、テストにおいて明示的にサービスを初期化する必要があります。<p class="paragraph"/><div class="hidden-block">Given a controller using a service:</div>
+サービスを使うコントローラがあるとします:<p class="paragraph"/><div class="code"><pre>class FilmStarsController &#123;
     def popularityService<p class="paragraph"/>    def update() &#123;
         // <span class="java&#45;keyword">do</span> something with popularityService
     &#125;
-&#125;</pre></div><p class="paragraph"/>The test for this would be:<p class="paragraph"/><div class="code"><pre>class FilmStarsTests <span class="java&#45;keyword">extends</span> GroovyTestCase &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The test for this would be:</div>
+このテストは次のようになるでしょう:<p class="paragraph"/><div class="code"><pre>class FilmStarsTests <span class="java&#45;keyword">extends</span> GroovyTestCase &#123;
     def popularityService<p class="paragraph"/>    void testInjectedServiceInController () &#123;
         def fsc = <span class="java&#45;keyword">new</span> FilmStarsController()
         fsc.popularityService = popularityService
         fsc.update()
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Testing Controller Command Objects</h4><p class="paragraph"/>With command objects you just supply parameters to the request and it will automatically do the command object work for you when you call your action with no parameters:<p class="paragraph"/>Given a controller using a command object:<p class="paragraph"/><div class="code"><pre>class AuthenticationController &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Testing Controller Command Objects</div>
+<h4>コマンドオブジェクトを使っているコントローラのテスト</h4><p class="paragraph"/><div class="hidden-block">With command objects you just supply parameters to the request and it will automatically do the command object work for you when you call your action with no parameters:</div>
+コマンドオブジェクトを使っていて引数を指定せずアクションを呼び出す場合でも、リクエストにただパラメータを設定するだけで、自動的にコマンドオブジェクトは動作し設定されます:<p class="paragraph"/><div class="hidden-block">Given a controller using a command object:</div>
+コマンドオブジェクトを使っているコントローラがあるとします:<p class="paragraph"/><div class="code"><pre>class AuthenticationController &#123;
     def signup(SignupForm form) &#123;
         &#8230;
     &#125;
-&#125;</pre></div><p class="paragraph"/>You can then test it like this:<p class="paragraph"/><div class="code"><pre>def controller = <span class="java&#45;keyword">new</span> AuthenticationController()
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can then test it like this:</div>
+この場合このようにテストできます:<p class="paragraph"/><div class="code"><pre>def controller = <span class="java&#45;keyword">new</span> AuthenticationController()
 controller.params.login = <span class="java&#45;quote">"marcpalmer"</span>
 controller.params.password = <span class="java&#45;quote">"secret"</span>
 controller.params.passwordConfirm = <span class="java&#45;quote">"secret"</span>
-controller.signup()</pre></div><p class="paragraph"/>Grails auto-magically sees your call to <code>signup()</code> as a call to the action and populates the command object from the mocked request parameters. During controller testing, the <code>params</code> are mutable with a mocked request supplied by Grails.<p class="paragraph"/><h4>Testing Controllers and the render Method</h4><p class="paragraph"/>The <a href="../ref/Controllers/render.html" class="controllers">render</a> method lets you render a custom view at any point within the body of an action. For instance, consider the example below:<p class="paragraph"/><div class="code"><pre>def save() &#123;
+controller.signup()</pre></div><p class="paragraph"/><div class="hidden-block">Grails auto-magically sees your call to <code>signup()</code> as a call to the action and populates the command object from the mocked request parameters. During controller testing, the <code>params</code> are mutable with a mocked request supplied by Grails.</div>
+Grailsはアクション呼び出しの<code>signup()</code>を呼び出しているのを見て、モック化されたリクエストパラメータからなんと自動的にコマンドオブジェクトに値を渡してくれます。ちなみに、コントローラのテストにおいて、Grailsが用意したモック化されたリクエストの<code>params</code>は変更可能です。<p class="paragraph"/><div class="hidden-block">h4. Testing Controllers and the render Method</div>
+<h4>コントローラとレンダーメソッドのテスト</h4><p class="paragraph"/><div class="hidden-block">The <a href="../ref/Controllers/render.html" class="controllers">render</a> method lets you render a custom view at any point within the body of an action. For instance, consider the example below:</div>
+controllersメソッドはアクション定義のあらゆる場所においてカスタムビューをレンダリングできます。例えば、下記の例を考えてみましょう:<p class="paragraph"/><div class="code"><pre>def save() &#123;
     def book = Book(params)
     <span class="java&#45;keyword">if</span> (book.save()) &#123;
         // handle
@@ -190,11 +213,15 @@ controller.signup()</pre></div><p class="paragraph"/>Grails auto-magically sees 
     <span class="java&#45;keyword">else</span> &#123;
         render(view:<span class="java&#45;quote">"create"</span>, model:&#91;book:book&#93;)
     &#125;
-&#125;</pre></div><p class="paragraph"/>In the above example the result of the model of the action is not available as the return value, but instead is stored within the <code>modelAndView</code> property of the controller. The <code>modelAndView</code> property is an instance of Spring MVC's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/servlet/ModelAndView.html" target="blank">ModelAndView</a> class and you can use it to the test the result of an action:<p class="paragraph"/><div class="code"><pre>def bookController = <span class="java&#45;keyword">new</span> BookController()
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the above example the result of the model of the action is not available as the return value, but instead is stored within the <code>modelAndView</code> property of the controller. The <code>modelAndView</code> property is an instance of Spring MVC's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/servlet/ModelAndView.html" target="blank">ModelAndView</a> class and you can use it to the test the result of an action:</div>
+上記の例ではアクションにおけるモデルの結果は戻り値としては得られませんが、コントローラの<code>modelAndView</code>プロパティの中には保存されています。<code>modelAndView</code>プロパティはSpring MVCの<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/servlet/ModelAndView.html" target="blank">ModelAndView</a>クラスで、アクションの結果をテストするのに利用できます:<p class="paragraph"/><div class="code"><pre>def bookController = <span class="java&#45;keyword">new</span> BookController()
 bookController.save()
-def model = bookController.modelAndView.model.book</pre></div><p class="paragraph"/><h4>Simulating Request Data</h4><p class="paragraph"/>You can use the Spring <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpServletRequest.html" class="api">MockHttpServletRequest</a> to test an action that requires request data, for example a REST web service. For example consider this action which performs data binding from an incoming request:<p class="paragraph"/><div class="code"><pre>def create() &#123;
+def model = bookController.modelAndView.model.book</pre></div><p class="paragraph"/><div class="hidden-block">h4. Simulating Request Data</div>
+<h4>リクエストデータをシミュレートする</h4><p class="paragraph"/><div class="hidden-block">You can use the Spring <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpServletRequest.html" class="api">MockHttpServletRequest</a> to test an action that requires request data, for example a REST web service. For example consider this action which performs data binding from an incoming request:</div>
+例えば、REST Webサービスのようなリクエストデータが必要なアクションをテストする場合、Spring <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/mock/web/MockHttpServletRequest.html" class="api">MockHttpServletRequest</a>を使うことができます。例として、入力されたリクエストからデータバインディングを実行するこのアクションを考えてみましょう:<p class="paragraph"/><div class="code"><pre>def create() &#123;
     &#91;book: <span class="java&#45;keyword">new</span> Book(params.book)&#93;
-&#125;</pre></div><p class="paragraph"/>To simulate the 'book' parameter as an XML request you could do something like the following:<p class="paragraph"/><div class="code"><pre>void testCreateWithXML() &#123;<p class="paragraph"/>    def controller = <span class="java&#45;keyword">new</span> BookController()<p class="paragraph"/>    controller.request.contentType = 'text/xml'
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">To simulate the 'book' parameter as an XML request you could do something like the following:</div>
+XMLリクエストとしての'book'引数をシミュレートするには、次のように実行できるでしょう:<p class="paragraph"/><div class="code"><pre>void testCreateWithXML() &#123;<p class="paragraph"/>    def controller = <span class="java&#45;keyword">new</span> BookController()<p class="paragraph"/>    controller.request.contentType = 'text/xml'
     controller.request.content = '''&#92;&#10;            &#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"ISO&#45;8859&#45;1"</span>?&#62;
             &#60;book&#62;
                 &#60;title&#62;The Stand&#60;/title&#62;
@@ -203,16 +230,27 @@ def model = bookController.modelAndView.model.book</pre></div><p class="paragrap
             '''.stripIndent().getBytes() // note we need the bytes<p class="paragraph"/>    def model = controller.create()
     assert model.book
     assertEquals <span class="java&#45;quote">"The Stand"</span>, model.book.title
-&#125;</pre></div><p class="paragraph"/>The same can be achieved with a JSON request:<p class="paragraph"/><div class="code"><pre>void testCreateWithJSON() &#123;<p class="paragraph"/>    def controller = <span class="java&#45;keyword">new</span> BookController()<p class="paragraph"/>    controller.request.contentType = <span class="java&#45;quote">"text/json"</span>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The same can be achieved with a JSON request:</div>
+JSONリクエストについても同じように実現できます:<p class="paragraph"/><div class="code"><pre>void testCreateWithJSON() &#123;<p class="paragraph"/>    def controller = <span class="java&#45;keyword">new</span> BookController()<p class="paragraph"/>    controller.request.contentType = <span class="java&#45;quote">"text/json"</span>
     controller.request.content =
             '&#123;<span class="java&#45;quote">"id"</span>:1,<span class="java&#45;quote">"class"</span>:<span class="java&#45;quote">"Book"</span>,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;'.getBytes()<p class="paragraph"/>    def model = controller.create()
     assert model.book
     assertEquals <span class="java&#45;quote">"The Stand"</span>, model.book.title
-&#125;</pre></div><p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block"><blockquote class="note">
 With JSON don't forget the <code>class</code> property to specify the name the target type to bind to. In XML this is implicit within the name of the <code>&#60;book&#62;</code> node, but this property is required as part of the JSON packet.
-</blockquote><p class="paragraph"/>For more information on the subject of REST web services see the section on <a href="../guide/single.html#REST" class="guide">REST</a>.<p class="paragraph"/><h4>Testing Web Flows</h4><p class="paragraph"/>Testing <a href="../guide/single.html#webflow" class="guide">Web Flows</a> requires a special test harness called <code>grails.test.WebFlowTestCase</code> which subclasses Spring Web Flow's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/webflow/test/execution/AbstractFlowExecutionTests.html" class="api">AbstractFlowExecutionTests</a> class.<p class="paragraph"/><blockquote class="note">
+</blockquote></div>
+<blockquote class="note">
+JSONを用いる場合、<code>class</code>プロパティにて結びつけるターゲットの型の名前を指定することを忘れてはいけません。XMLでは暗黙的に<code>&#60;book&#62;</code>ノードの名前が使われますが、JSONではこのプロパティがJSONパケットの一部として必要になります。
+</blockquote><p class="paragraph"/><div class="hidden-block">For more information on the subject of REST web services see the section on <a href="../guide/single.html#REST" class="guide">REST</a>.</div>
+RESTウェブサービスについてのさらなる情報については、<a href="../guide/single.html#REST" class="guide">REST</a>のセクションを参照してください。<p class="paragraph"/><div class="hidden-block">h4. Testing Web Flows</div>
+<h4>Webフローのテスト</h4><p class="paragraph"/><div class="hidden-block">Testing <a href="../guide/single.html#webflow" class="guide">Web Flows</a> requires a special test harness called <code>grails.test.WebFlowTestCase</code> which subclasses Spring Web Flow's <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/webflow/test/execution/AbstractFlowExecutionTests.html" class="api">AbstractFlowExecutionTests</a> class.</div>
+<a href="../guide/single.html#webflow" class="guide">Webフロー</a>のテストは Spring Web Flowの <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/webflow/test/execution/AbstractFlowExecutionTests.html" class="api">AbstractFlowExecutionTests</a>クラスのサブクラスである<code>grails.test.WebFlowTestCase</code>と呼ばれる特別なテストハーネスが必要になります。<p class="paragraph"/><div class="hidden-block"><blockquote class="note">
 Subclasses of <code>WebFlowTestCase</code> <strong class="bold">must</strong> be integration tests
-</blockquote><p class="paragraph"/>For example given this simple flow:<p class="paragraph"/><div class="code"><pre>class ExampleController &#123;<p class="paragraph"/>    def exampleFlow() &#123;
+</blockquote></div>
+<blockquote class="note">
+<code>WebFlowTestCase</code>のサブクラスは、<strong class="bold">必ず</strong>インテグレーションテストでなければなりません。
+</blockquote><p class="paragraph"/><div class="hidden-block">For example given this simple flow:</div>
+例えばこのようなシンプルなフローがあるとします:<p class="paragraph"/><div class="code"><pre>class ExampleController &#123;<p class="paragraph"/>    def exampleFlow() &#123;
         start &#123;
             on(<span class="java&#45;quote">"go"</span>) &#123;
                 flow.hello = <span class="java&#45;quote">"world"</span>
@@ -234,15 +272,18 @@ Subclasses of <code>WebFlowTestCase</code> <strong class="bold">must</strong> be
         &#125;
         &#8230;
     &#125;
-&#125;</pre></div><p class="paragraph"/>You need to tell the test harness what to use for the "flow definition". This is done via overriding the abstract <code>getFlow</code>
- method:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.test.WebFlowTestCase<p class="paragraph"/>class ExampleFlowTests <span class="java&#45;keyword">extends</span> WebFlowTestCase &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You need to tell the test harness what to use for the "flow definition". This is done via overriding the abstract <code>getFlow</code>
+ method:</div>
+抽象メソッド<code>getFlow</code>をオーバライドすることにより、"フロー定義"を使っていることをテストハーネスに知らせる必要があります:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.test.WebFlowTestCase<p class="paragraph"/>class ExampleFlowTests <span class="java&#45;keyword">extends</span> WebFlowTestCase &#123;
     def getFlow() &#123; <span class="java&#45;keyword">new</span> ExampleController().exampleFlow &#125;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>You can specify the flow id by overriding the <code>getFlowId</code> method, otherwise the default is <code>test</code>:
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can specify the flow id by overriding the <code>getFlowId</code> method, otherwise the default is <code>test</code>:</div>
+<code>getFlowId</code>メソッドをオーバライドして、フローIDを指定することができます。指定しないならデフォルトとして<code>test</code>が使われます:
 <div class="code"><pre><span class="java&#45;keyword">import</span> grails.test.WebFlowTestCase<p class="paragraph"/>class ExampleFlowTests <span class="java&#45;keyword">extends</span> WebFlowTestCase &#123;
     <span class="java&#45;object">String</span> getFlowId() &#123; <span class="java&#45;quote">"example"</span> &#125;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>If the flow under test calls any subflows, these (or mocks) must be registered before the calling the flow:
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If the flow under test calls any subflows, these (or mocks) must be registered before the calling the flow:</div>
+テストするフローがサブフローを呼び出す場合は、フローを呼び出す前にこれらフロー(もしくはモック)が登録済みでなければなりません:
 <div class="code"><pre><span class="java&#45;keyword">protected</span> void setUp() &#123;
     <span class="java&#45;keyword">super</span>.setUp()<p class="paragraph"/>    registerFlow(<span class="java&#45;quote">"other/otherSub"</span>) &#123; // register a simplified mock
         start &#123;
@@ -251,22 +292,28 @@ Subclasses of <code>WebFlowTestCase</code> <strong class="bold">must</strong> be
         end()
     &#125;<p class="paragraph"/>    // register the original subflow
     registerFlow(<span class="java&#45;quote">"example/sub"</span>, <span class="java&#45;keyword">new</span> ExampleController().subFlow)
-&#125;</pre></div><p class="paragraph"/>Then you kick off the flow with the <code>startFlow</code> method:<p class="paragraph"/><div class="code"><pre>void testExampleFlow() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Then you kick off the flow with the <code>startFlow</code> method:</div>
+次に<code>startFlow</code>メソッドによりフローを開始します:<p class="paragraph"/><div class="code"><pre>void testExampleFlow() &#123;
     def viewSelection = startFlow()
     &#8230;
-&#125;</pre></div><p class="paragraph"/>Use the <code>signalEvent</code> method to trigger an event:<p class="paragraph"/><div class="code"><pre>void testExampleFlow() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Use the <code>signalEvent</code> method to trigger an event:</div>
+イベントのトリガーを引くために<code>signalEvent</code>を使います:<p class="paragraph"/><div class="code"><pre>void testExampleFlow() &#123;
     &#8230;
     signalEvent(<span class="java&#45;quote">"go"</span>)
     assert <span class="java&#45;quote">"next"</span> == flowExecution.activeSession.state.id
     assert <span class="java&#45;quote">"world"</span> == flowScope.hello
-&#125;</pre></div><p class="paragraph"/>Here we have signaled to the flow to execute the event "go" which causes a transition to the "next" state. In the example a transition action placed a <code>hello</code> variable into the flow scope.<p class="paragraph"/><h4>Testing Tag Libraries</h4><p class="paragraph"/>Testing tag libraries is simple because when a tag is invoked as a method it returns its result as a string (technically a <code>StreamCharBuffer</code> but this class implements all of the methods of <code>String</code>). So for example if you have a tag library like this:<p class="paragraph"/><div class="code"><pre>class FooTagLib &#123;<p class="paragraph"/>    def bar = &#123; attrs, body &#45;&#62;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Here we have signaled to the flow to execute the event "go" which causes a transition to the "next" state. In the example a transition action placed a <code>hello</code> variable into the flow scope.</div>
+ここで、"next"の状態への遷移を引き起こす"go"イベントを実行するためにフローにシグナルを送ります。この例では、遷移アクションが<code>hello</code>変数をフローのスコープに設定します。<p class="paragraph"/><div class="hidden-block">h4. Testing Tag Libraries</div>
+<h4>タグライブラリのテスト</h4><p class="paragraph"/><div class="hidden-block">Testing tag libraries is simple because when a tag is invoked as a method it returns its result as a string (technically a <code>StreamCharBuffer</code> but this class implements all of the methods of <code>String</code>). So for example if you have a tag library like this:</div>
+タグライブラリのテストはタグがメソッドとして実行された結果として文字列(技術的には<code>String</code>の全てのメソッドを実装した<code>StreamCharBuffer</code>となります)が返されるので単純です。例えば、タグライブラリのテストはこのようになります:<p class="paragraph"/><div class="code"><pre>class FooTagLib &#123;<p class="paragraph"/>    def bar = &#123; attrs, body &#45;&#62;
         out &#60;&#60; <span class="java&#45;quote">"&#60;p&#62;Hello World!&#60;/p&#62;"</span>
     &#125;<p class="paragraph"/>    def bodyTag = &#123; attrs, body &#45;&#62;
         out &#60;&#60; <span class="java&#45;quote">"&#60;&#36;&#123;attrs.name&#125;&#62;"</span>
         out &#60;&#60; body()
         out &#60;&#60; <span class="java&#45;quote">"&#60;/&#36;&#123;attrs.name&#125;&#62;"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>The tests would look like:<p class="paragraph"/><div class="code"><pre>class FooTagLibTests <span class="java&#45;keyword">extends</span> GroovyTestCase &#123;<p class="paragraph"/>    void testBarTag() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The tests would look like:</div>
+テストはこのようになるでしょう:<p class="paragraph"/><div class="code"><pre>class FooTagLibTests <span class="java&#45;keyword">extends</span> GroovyTestCase &#123;<p class="paragraph"/>    void testBarTag() &#123;
         assertEquals <span class="java&#45;quote">"&#60;p&#62;Hello World!&#60;/p&#62;"</span>,
                      <span class="java&#45;keyword">new</span> FooTagLib().bar(<span class="java&#45;keyword">null</span>, <span class="java&#45;keyword">null</span>).toString()
     &#125;<p class="paragraph"/>    void testBodyTag() &#123;
@@ -275,35 +322,49 @@ Subclasses of <code>WebFlowTestCase</code> <strong class="bold">must</strong> be
                          <span class="java&#45;quote">"Hello World!"</span>
                      &#125;.toString()
     &#125;
-&#125;</pre></div><p class="paragraph"/>Notice that for the second example, <code>testBodyTag</code>, we pass a block that returns the body of the tag. This is convenient to representing the body as a String.<p class="paragraph"/><h4>Testing Tag Libraries with GroovyPagesTestCase</h4><p class="paragraph"/>In addition to doing simple testing of tag libraries like in the above examples, you can also use the <code>grails.test.GroovyPagesTestCase</code> class to test tag libraries with integration tests.<p class="paragraph"/>The <code>GroovyPagesTestCase</code> class is a subclass of the standard <code>GroovyTestCase</code> class and adds utility methods for testing the output of GSP rendering.<p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">Notice that for the second example, <code>testBodyTag</code>, we pass a block that returns the body of the tag. This is convenient to representing the body as a String.</div>
+2番目の<code>testBodyTag</code>の例を見てください。この例ではタグのボディを返すブロックを渡しています。これはタグ本体を文字列として表現するのに便利です。<p class="paragraph"/><div class="hidden-block">h4. Testing Tag Libraries with GroovyPagesTestCase</div>
+<h4>GroovyPagesTestCaseを用いたタグライブラリのテスト</h4><p class="paragraph"/><div class="hidden-block">In addition to doing simple testing of tag libraries like in the above examples, you can also use the <code>grails.test.GroovyPagesTestCase</code> class to test tag libraries with integration tests.</div>
+上記例のように単純なタグライブラリのテストに加えて、インテグレーションテストで<code>grails.test.GroovyPagesTestCase</code>クラスを用いたタグライブラリのテストが可能です。<p class="paragraph"/><div class="hidden-block">The <code>GroovyPagesTestCase</code> class is a subclass of the standard <code>GroovyTestCase</code> class and adds utility methods for testing the output of GSP rendering.</div>
+<code>GroovyPagesTestCase</code>クラスは標準的な<code>GroovyTestCase</code>クラスのサブクラスであり、GSPレンダリングの出力をテストするためのユーティリティメソッドが追加されています。<p class="paragraph"/><div class="hidden-block"><blockquote class="note">
 <code>GroovyPagesTestCase</code> can only be used in an integration test.
-</blockquote><p class="paragraph"/>For example, consider this date formatting tag library:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> java.text.SimpleDateFormat<p class="paragraph"/>class FormatTagLib &#123;
+</blockquote></div>
+<blockquote class="note">
+<code>GroovyPagesTestCase</code>はインテグレーションテストの中だけで使えます。
+</blockquote><p class="paragraph"/><div class="hidden-block">For example, consider this date formatting tag library:</div>
+例えば、この日付フォーマットに関するタグライブラリを考えてみましょう:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> java.text.SimpleDateFormat<p class="paragraph"/>class FormatTagLib &#123;
     def dateFormat = &#123; attrs, body &#45;&#62;
         out &#60;&#60; <span class="java&#45;keyword">new</span> SimpleDateFormat(attrs.format) &#60;&#60; attrs.date
     &#125;
-&#125;</pre></div><p class="paragraph"/>This can be easily tested as follows:<p class="paragraph"/><div class="code"><pre>class FormatTagLibTests <span class="java&#45;keyword">extends</span> GroovyPagesTestCase &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This can be easily tested as follows:</div>
+次のように簡単にテストできます:<p class="paragraph"/><div class="code"><pre>class FormatTagLibTests <span class="java&#45;keyword">extends</span> GroovyPagesTestCase &#123;
     void testDateFormat() &#123;
         def template =
                 '&#60;g:dateFormat format=<span class="java&#45;quote">"dd&#45;MM&#45;yyyy"</span> date=<span class="java&#45;quote">"&#36;&#123;myDate&#125;"</span> /&#62;'<p class="paragraph"/>        def testDate = &#8230; // create the date
         assertOutputEquals('01&#45;01&#45;2008', template, &#91;myDate:testDate&#93;)
     &#125;
-&#125;</pre></div><p class="paragraph"/>You can also obtain the result of a GSP using the <code>applyTemplate</code> method of the <code>GroovyPagesTestCase</code> class:<p class="paragraph"/><div class="code"><pre>class FormatTagLibTests <span class="java&#45;keyword">extends</span> GroovyPagesTestCase &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can also obtain the result of a GSP using the <code>applyTemplate</code> method of the <code>GroovyPagesTestCase</code> class:</div>
+<code>GroovyPagesTestCase</code>クラスの<code>applyTemplate</code>メソッドを使ったGSPの結果も得ることもできます:<p class="paragraph"/><div class="code"><pre>class FormatTagLibTests <span class="java&#45;keyword">extends</span> GroovyPagesTestCase &#123;
     void testDateFormat() &#123;
         def template =
                 '&#60;g:dateFormat format=<span class="java&#45;quote">"dd&#45;MM&#45;yyyy"</span> date=<span class="java&#45;quote">"&#36;&#123;myDate&#125;"</span> /&#62;'<p class="paragraph"/>        def testDate = &#8230; // create the date
         def result = applyTemplate(template, &#91;myDate:testDate&#93;)<p class="paragraph"/>        assertEquals '01&#45;01&#45;2008', result
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Testing Domain Classes</h4><p class="paragraph"/>Testing domain classes is typically a simple matter of using the <a href="../guide/single.html#GORM" class="guide">GORM API</a>, but there are a few things to be aware of. Firstly, when testing queries you often need to "flush" to ensure the correct state has been persisted to the database. For example take the following example:<p class="paragraph"/><div class="code"><pre>void testQuery() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Testing Domain Classes</div>
+<h4>ドメインクラスのテスト</h4><p class="paragraph"/><div class="hidden-block">Testing domain classes is typically a simple matter of using the <a href="../guide/single.html#GORM" class="guide">GORM API</a>, but there are a few things to be aware of. Firstly, when testing queries you often need to "flush" to ensure the correct state has been persisted to the database. For example take the following example:</div>
+ドメインクラスのテストは一般的には<a href="../guide/single.html#GORM" class="guide">GORM API</a>を使った簡単なやり方で可能ですが、いくつか注意すべきことがあります。まず最初に、クエリをテストするときにはデータベースに正しい状態で確実に保存されるように、頻繁に"フラッシュ"をする必要があります。例えば、次の例を見てみましょう:<p class="paragraph"/><div class="code"><pre>void testQuery() &#123;
     def books = &#91;
             <span class="java&#45;keyword">new</span> Book(title: <span class="java&#45;quote">"The Stand"</span>),
             <span class="java&#45;keyword">new</span> Book(title: <span class="java&#45;quote">"The Shining"</span>)&#93;
     books&#42;.save()<p class="paragraph"/>    assertEquals 2, Book.list().size()
-&#125;</pre></div><p class="paragraph"/>This test will fail because calling <a href="../ref/Domain Classes/save.html" class="domainClasses">save</a> does not actually persist the <code>Book</code> instances when called. Calling <code>save</code> only indicates to Hibernate that at some point in the future these instances should be persisted. To commit changes immediately you "flush" them:<p class="paragraph"/><div class="code"><pre>void testQuery() &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This test will fail because calling <a href="../ref/Domain Classes/save.html" class="domainClasses">save</a> does not actually persist the <code>Book</code> instances when called. Calling <code>save</code> only indicates to Hibernate that at some point in the future these instances should be persisted. To commit changes immediately you "flush" them:</div>
+このテストは<a href="../ref/Domain Classes/save.html" class="domainClasses">save</a>を呼び出していても、<code>Book</code>インスタンスが呼び出されたときには実際には保存されていないので失敗するでしょう。<code>save</code>を呼び出しても単にHibernateに未来のある時点でインスタンスが保存されるべきであることを示唆するだけです。ただちに変更をコミットするためには"フラッシュ"をします:<p class="paragraph"/><div class="code"><pre>void testQuery() &#123;
     def books = &#91;
             <span class="java&#45;keyword">new</span> Book(title: <span class="java&#45;quote">"The Stand"</span>),
             <span class="java&#45;keyword">new</span> Book(title: <span class="java&#45;quote">"The Shining"</span>)&#93;
     books&#42;.save(flush: <span class="java&#45;keyword">true</span>)<p class="paragraph"/>    assertEquals 2, Book.list().size()
-&#125;</pre></div><p class="paragraph"/>In this case since we're passing the argument <code>flush</code> with a value of <code>true</code> the updates will be persisted immediately and hence will be available to the query later on.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this case since we're passing the argument <code>flush</code> with a value of <code>true</code> the updates will be persisted immediately and hence will be available to the query later on.</div>
+このケースでは引数<code>flush</code>に<code>true</code>を渡しているので、データの更新はただちに保存され、後のクエリでも利用可能になります。
 
 
 
