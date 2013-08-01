@@ -205,8 +205,17 @@ grails compile
 ...</pre></div><p class="paragraph"/><blockquote class="note">
 <div class="hidden-block">Refer to the Command Line reference in the Quick Reference menu of the reference guide for more information about individual commands </div>
 左メニューにある個別のコマンドラインリファレンス情報も参照して下さい。
-</blockquote><p class="paragraph"/>It's often useful to provide custom arguments to the JVM when running Grails commands, in particular with <code>run-app</code> where you may for example want to set a higher maximum heap size. The Grails command will use any JVM options provided in the general <code>JAVA_OPTS</code> environment variable, but you can also specify a Grails-specific environment variable too:<p class="paragraph"/><div class="code"><pre>export GRAILS_OPTS=<span class="java&#45;quote">"&#45;Xmx1G &#45;Xms256m &#45;XX:MaxPermSize=256m"</span>
-grails run&#45;app</pre></div><p class="paragraph"/><h4>non-interactive mode</h4><p class="paragraph"/>When you run a script manually and it prompts you for information, you can answer the questions and continue running the script. But when you run a script as part of an automated process, for example a continuous integration build server, there's no way to "answer" the questions. So you can pass the <code>&#45;&#45;non-interactive</code> switch to the script command to tell Grails to accept the default answer for any questions, for example whether to install a missing plugin.<p class="paragraph"/>For example:<p class="paragraph"/><div class="code"><pre>grails war &#45;&#45;non&#45;interactive</pre></div>
+</blockquote><p class="paragraph"/><div class="hidden-block">It's often useful to provide custom arguments to the JVM when running Grails commands, in particular with <code>run-app</code> where you may for example want to set a higher maximum heap size. The Grails command will use any JVM options provided in the general <code>JAVA_OPTS</code> environment variable, but you can also specify a Grails-specific environment variable too:</div>
+Grailsコマンドを実行する際に、JVMへ独自の引数を提供できると便利な場合があります。
+例えば、<code>run-app</code>をする際にヒープサイズにより大きな値を設定したいといった場合です。
+Grailsコマンドは一般的な<code>JAVA_OPTS</code>の環境変数内で提供されているJVMオプションを使用しますが、Grails固有の環境変数を指定することもできます:<p class="paragraph"/><div class="code"><pre>export GRAILS_OPTS=<span class="java&#45;quote">"&#45;Xmx1G &#45;Xms256m &#45;XX:MaxPermSize=256m"</span>
+grails run&#45;app</pre></div><p class="paragraph"/><div class="hidden-block">h4. non-interactive mode</div>
+<h4>非インタラクティブモード</h4><p class="paragraph"/><div class="hidden-block">When you run a script manually and it prompts you for information, you can answer the questions and continue running the script. But when you run a script as part of an automated process, for example a continuous integration build server, there's no way to "answer" the questions. So you can pass the <code>&#45;&#45;non-interactive</code> switch to the script command to tell Grails to accept the default answer for any questions, for example whether to install a missing plugin.</div>
+手動でスクリプト実行する際にユーザ入力を求める場合があります。
+そのような場合は質問に応答することでスクリプトの実行が継続されます。
+しかし、継続的インテグレーションのビルドサーバといったように、自動化されたプロセスとしてスクリプトを実行する場合は質問に応答する方法がありません。
+例えば、未インストールのプラグインをインストールするかどうかといったような質問に対し、デフォルトの値で応答するようGrailsに伝えるには、そのスクリプトコマンドへ<code>&#45;&#45;non-interactive</code>を渡します。<p class="paragraph"/><div class="hidden-block">For example:</div>
+例えば:<p class="paragraph"/><div class="code"><pre>grails war &#45;&#45;non&#45;interactive</pre></div>
 
 
 
