@@ -149,7 +149,7 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0px"><a href="#creatingAnApplication"><strong>2.3</strong><span>&#12450;&#12503;&#12522;&#12465;&#12540;&#12471;&#12519;&#12531;&#20316;&#25104;</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#aHelloWorldExample"><strong>2.4</strong><span>&#12495;&#12525;&#12540;&#12527;&#12540;&#12523;&#12489;&#20363;</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#aHelloWorldExample"><strong>2.4</strong><span>Hello World&#12398;&#20363;</span></a>
                     </div>
                     
                     <div class="toc-item" style="margin-left:0px"><a href="#usingInteractiveMode"><strong>2.5</strong><span>&#12452;&#12531;&#12479;&#12521;&#12463;&#12486;&#12451;&#12502;&#12514;&#12540;&#12489;&#12398;&#21033;&#29992;</span></a>
@@ -250,17 +250,81 @@ grails create-app helloworld</code></pre><p class="paragraph"/><div class="hidde
 cd helloworld</code></pre><p class="paragraph"/>
 
 <a name="2.4 A Hello World Example"><!-- Legacy link --></a>
-<h2 id="aHelloWorldExample">2.4 ハローワールド例</h2>
-Let's now take the new project and turn it into the classic "Hello world!" example. First, change into the "helloworld" directory you just created and start the Grails interactive console:<p class="paragraph"/><pre class="bq"><code>
+<h2 id="aHelloWorldExample">2.4 Hello Worldの例</h2>
+<div class="hidden-block">
+Let's now take the new project and turn it into the classic "Hello world!" example. First, change into the "helloworld" directory you just created and start the Grails interactive console:
+</div>
+それではさっそく、この新たなプロジェクトで、おなじみの「Hello World!」を構築していきましょう。
+はじめに、作成した<code>helloworld</code>ディレクトリへ移動し、Grailsのインタラクティブコンソールを起動します:<p class="paragraph"/><pre class="bq"><code>
 $ cd helloworld
-$ grails</code></pre><p class="paragraph"/>You should see a prompt that looks like this:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-helloworld.png"></img><p class="paragraph"/>What we want is a simple page that just prints the message "Hello World!" to the browser. In Grails, whenever you want a new page you just create a new controller action for it. Since we don't yet have a controller, let's create one now with the <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> command:<p class="paragraph"/><pre class="bq"><code>
-grails&#62; create-controller hello</code></pre><p class="paragraph"/>Don't forget that in the interactive console, we have auto-completion on command names. So you can type "cre" and then press &#60;tab&#62; to get a list of all <code>create&#45;&#42;</code> commands. Type a few more letters of the command name and then &#60;tab&#62; again to finish.<p class="paragraph"/>The above command will create a new <a href="../guide/single.html#controllers" class="guide">controller</a> in the <code>grails-app/controllers/helloworld</code> directory called <code>HelloController.groovy</code>. Why the extra <code>helloworld</code> directory? Because in Java land, it's strongly recommended that all classes are placed into packages, so Grails defaults to the application name if you don't provide one. The reference page for <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> provides more detail on this.<p class="paragraph"/>We now have a controller so let's add an action to generate the "Hello World!" page. The code looks like this:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> helloworld<p class="paragraph"/>class HelloController &#123;<p class="paragraph"/>    def index() &#123;
+$ grails</code></pre><p class="paragraph"/><div class="hidden-block">
+You should see a prompt that looks like this:
+</div>
+次のようなプロンプトが表示されます:<p class="paragraph"/><img border="0" class="center" src="../../img/interactive-helloworld.png"></img><p class="paragraph"/><div class="hidden-block">
+What we want is a simple page that just prints the message "Hello World!" to the browser. In Grails, whenever you want a new page you just create a new controller action for it. Since we don't yet have a controller, let's create one now with the <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> command:
+</div>
+はじめに作るのはブラウザへ「Hello World!」というメッセージを表示するシンプルなページです。
+Grailsで新しいページが必要な場合は、新たにコントローラのアクションを作成します。
+まだコントローラが存在しない場合は、<a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a>コマンドで新たに作成しましょう:<p class="paragraph"/><pre class="bq"><code>
+grails&#62; create-controller hello</code></pre><p class="paragraph"/><div class="hidden-block">
+Don't forget that in the interactive console, we have auto-completion on command names. So you can type "cre" and then press &#60;tab&#62; to get a list of all <code>create&#45;&#42;</code> commands. Type a few more letters of the command name and then &#60;tab&#62; again to finish.
+</div>
+インタラクティブコンソールではコマンド名の自動補完が効きます。
+そのため<code>cre</code>と入力し、そしてすべての<code>create&#45;&#42;</code>コマンド一覧を表示するために<code>&#60;tab&#62;</code>を押します。
+さらにいくつかのコマンド名を入力し、そして補完を完了するために<code>&#60;tab&#62;</code>をもう1度押します。<p class="paragraph"/><div class="hidden-block">
+The above command will create a new <a href="../guide/single.html#controllers" class="guide">controller</a> in the <code>grails-app/controllers/helloworld</code> directory called <code>HelloController.groovy</code>. Why the extra <code>helloworld</code> directory? Because in Java land, it's strongly recommended that all classes are placed into packages, so Grails defaults to the application name if you don't provide one. The reference page for <a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a> provides more detail on this.
+</div>
+上記のコマンドは<code>grails-app/controllers/helloworld</code>ディレクトリに<code>HelloController.groovy</code>という名前で新たな<a href="../guide/single.html#controllers" class="guide">コントローラ</a>を作成します。
+なぜ<code>helloworld</code>ディレクトリに作成されるのでしょうか？
+これはJavaの世界では、すべてのクラスはパッケージに所属することが推奨されているためです。
+もしパッケージが明示的に指定されなかった場合、Grailsはパッケージ名のデフォルトにアプリケーション名を使用します。
+<a href="../ref/Command Line/create-controller.html" class="commandLine">create-controller</a>のリファレンスページではより詳細な情報を提供しています。<p class="paragraph"/><div class="hidden-block">
+We now have a controller so let's add an action to generate the "Hello World!" page. The code looks like this: 
+</div>
+さてコントローラが作成できたので、「Hello World!」ページを生成するアクションを追加しましょう。
+次のようなコードになります:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> helloworld<p class="paragraph"/>class HelloController &#123;<p class="paragraph"/>    def index() &#123;
         render <span class="java&#45;quote">"Hello World!"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>The action is simply a method. In this particular case, it calls a special method provided by Grails to <a href="../ref/Tags/render.html" class="tags">render</a> the page.<p class="paragraph"/>Job done. To see your application in action, you just need to start up a server with another command called <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>:<p class="paragraph"/><pre class="bq"><code>
-grails&#62; run-app</code></pre><p class="paragraph"/>This will start an embedded server on port 8080 that hosts your application. You should now be able to access your application at the URL <a href="http://localhost:8080/helloworld/" target="blank">http://localhost:8080/helloworld/</a> - try it!<p class="paragraph"/><blockquote class="note">
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The action is simply a method. In this particular case, it calls a special method provided by Grails to <a href="../ref/Tags/render.html" class="tags">render</a> the page.
+</div>
+このアクションはシンプルなメソッドになっています。
+ここでは、Grailsによって提供されているページを表示する<a href="../ref/Tags/render.html" class="tags">render</a>メソッドを呼んでいます。<p class="paragraph"/><div class="hidden-block">
+Job done. To see your application in action, you just need to start up a server with another command called <a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>:
+</div>
+これで準備は完了です。
+アプリケーションの動作を確認するには、<a href="../ref/Command Line/run-app.html" class="commandLine">run-app</a>と呼ばれる他のコマンドを使いサーバを起動する必要があります:<p class="paragraph"/><pre class="bq"><code>
+grails&#62; run-app</code></pre><p class="paragraph"/><div class="hidden-block">
+This will start an embedded server on port 8080 that hosts your application. You should now be able to access your application at the URL <a href="http://localhost:8080/helloworld/" target="blank">http://localhost:8080/helloworld/</a> - try it!
+</div>
+これはアプリケーションが動作する組み込みサーバを8080ポートで起動します。
+これにより<a href="http://localhost:8080/helloworld/" target="blank">http://localhost:8080/helloworld/</a>というURLからアプリケーションにアクセス可能になっています。さっそくアクセスしてみましょう！<p class="paragraph"/><div class="hidden-block">
+<blockquote class="note">
 If you see the error "Server failed to start for port 8080: Address already in use", then it means another server is running on that port. You can easily work around this by running your server on a different port using <code>-Dserver.port=9090 run-app</code>. '9090' is just an example: you can pretty much choose anything within the range 1024 to 49151.
-</blockquote><p class="paragraph"/>The result will look something like this:<p class="paragraph"/><img border="0" class="center" src="../../img/intropage.png"></img><p class="paragraph"/>This is the Grails intro page which is rendered by the <code>grails-app/view/index.gsp</code> file. It detects the presence of your controllers and provides links to them. You can click on the "HelloController" link to see our custom page containing the text "Hello World!". Voila! You have your first working Grails application.<p class="paragraph"/>One final thing: a controller can contain many actions, each of which corresponds to a different page (ignoring AJAX at this point). Each page is accessible via a unique URL that is composed from the controller name and the action name: /&#60;appname&#62;/&#60;controller&#62;/&#60;action&#62;. This means you can access the Hello World page via <a href="http://localhost:8080/helloworld/hello/index" target="blank">/helloworld/hello/index</a>, where 'hello' is the controller name (remove the 'Controller' suffix from the class name and lower-case the first letter) and 'index' is the action name. But you can also access the page via the same URL without the action name: this is because 'index' is the  <em class="italic">default action</em> . See the end of the <a href="../guide/single.html#understandingControllersAndActions" class="guide">controllers and actions</a> section of the user guide to find out more on default actions.<p class="paragraph"/>
+</blockquote>
+</div>
+<blockquote class="note">
+もし「Server failed to start for port 8080: Address already in use」というエラーが表示された場合は、他のサーバがそのポートで起動していることを意味します。
+これは<code>-Dserver.port=9090 run-app</code>のように異なるポートを使ってサーバを起動することで簡単に回避できます。
+この<code>9090</code>は単なる例で、<code>1024</code>から<code>49151</code>の間で任意のポートを指定できます。
+</blockquote><p class="paragraph"/><div class="hidden-block">
+The result will look something like this:
+</div>
+ブラウザでは次のように表示されます:<p class="paragraph"/><img border="0" class="center" src="../../img/intropage.png"></img><p class="paragraph"/><div class="hidden-block">
+This is the Grails intro page which is rendered by the <code>grails-app/view/index.gsp</code> file. It detects the presence of your controllers and provides links to them. You can click on the "HelloController" link to see our custom page containing the text "Hello World!". Voila! You have your first working Grails application.
+</div>
+これは<code>grails-app/view/index.gsp</code>ファイルによって表示されるGrailsのイントロページです。
+このページ内に作成したコントローラが表示され、そのコントローラへのリンクが提供されていることに気が付いたでしょうか？
+「Hello World!」というテキストを含むカスタムページを表示するために、「HelloController」リンクをクリックします。
+じゃじゃーん！これで初めてのGrailsアプリケーションが完成です。<p class="paragraph"/><div class="hidden-block">
+One final thing: a controller can contain many actions, each of which corresponds to a different page (ignoring AJAX at this point). Each page is accessible via a unique URL that is composed from the controller name and the action name: /&#60;appname&#62;/&#60;controller&#62;/&#60;action&#62;. This means you can access the Hello World page via <a href="http://localhost:8080/helloworld/hello/index" target="blank">/helloworld/hello/index</a>, where 'hello' is the controller name (remove the 'Controller' suffix from the class name and lower-case the first letter) and 'index' is the action name. But you can also access the page via the same URL without the action name: this is because 'index' is the  <em class="italic">default action</em> . See the end of the <a href="../guide/single.html#understandingControllersAndActions" class="guide">controllers and actions</a> section of the user guide to find out more on default actions.
+</div>
+最後にもうひとつ。
+コントローラは異なるページ(ここではAJAXは置いといて)を表示する複数のアクションを含むことができます。
+これらのページは、それぞれ固有のURLを通じてアクセスできます。このURLは<code>/&#60;appname&#62;/&#60;controller&#62;/&#60;action&#62;</code>の形式でコントローラ名、アクション名から構成されます。
+<a href="http://localhost:8080/helloworld/hello/index" target="blank">/helloworld/hello/index</a>を通してHello Worldページにアクセスできますが、これは<code>hello</code>がコントローラ名(クラス名からサフィックスの<code>Controller</code>を削除して、最初の文字を小文字する)、<code>index</code>がアクション名になります。
+ですが、ここではアクション名を削除したURLでも同じページにアクセスできます。これは<code>index</code>が  <em class="italic">デフォルトアクション</em>  であるためです。
+このデフォルトアクションの詳細はユーザガイドの<a href="../guide/single.html#understandingControllersAndActions" class="guide">コントローラとアクション</a>セクションの最後を参照してください。<p class="paragraph"/>
 
 
 <h2 id="usingInteractiveMode">2.5 インタラクティブモードの利用</h2>
