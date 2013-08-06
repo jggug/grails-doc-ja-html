@@ -141,14 +141,46 @@ function addJsClass() {
                 
 
 <h2 id="sharingConstraints">10.3 制約をクラス間で共有する</h2>
-A common pattern in Grails is to use <a href="../guide/single.html#commandObjects" class="guide">command objects</a> for validating user-submitted data and then copy the properties of the command object to the relevant domain classes. This often means that your command objects and domain classes share properties and their constraints. You could manually copy and paste the constraints between the two, but that's a very error-prone approach. Instead, make use of Grails' global constraints and import mechanism.<p class="paragraph"/><h3>Global Constraints</h3><p class="paragraph"/>In addition to defining constraints in domain classes, command objects and <a href="../guide/single.html#validationNonDomainAndCommandObjectClasses" class="guide">other validateable classes</a>, you can also define them in <code>grails-app/conf/Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.gorm.<span class="java&#45;keyword">default</span>.constraints = &#123;
+<div class="hidden-block">
+A common pattern in Grails is to use <a href="../guide/single.html#commandObjects" class="guide">command objects</a> for validating user-submitted data and then copy the properties of the command object to the relevant domain classes. This often means that your command objects and domain classes share properties and their constraints. You could manually copy and paste the constraints between the two, but that's a very error-prone approach. Instead, make use of Grails' global constraints and import mechanism.
+</div>
+ユーザが送信したデータのバリデーションにおいて、Grailsにおける一般的なパターンは、<a href="../guide/single.html#commandObjects" class="guide">コマンドオブジェクト</a>使い、コマンドオブジェクトのプロパティを該当のドメインクラスへコピーすることです。
+これはしばしばコマンドオブジェクトとドメインクラスの間で、プロパティとそのプロパティに対する制約を共有することになります。
+それぞれの制約を手動でコピー・アンド・ペーストすることもできますが、これは間違いを起こしやすいアプローチです。
+代わりに、Grailsのグローバル制約とインポート機構を使用しましょう。<p class="paragraph"/><div class="hidden-block">
+<h3>Global Constraints</h3>
+</div>
+<h3>グローバル制約</h3><p class="paragraph"/><div class="hidden-block">
+In addition to defining constraints in domain classes, command objects and <a href="../guide/single.html#validationNonDomainAndCommandObjectClasses" class="guide">other validateable classes</a>, you can also define them in <code>grails-app/conf/Config.groovy</code>:
+</div>
+ドメインクラスやコマンドオブジェクト、<a href="../guide/single.html#validationNonDomainAndCommandObjectClasses" class="guide">他のバリデーション可能なクラス</a>内で制約を定義するほかに、<code>grails-app/conf/Config.groovy</code>内でも制約を定義できます。<p class="paragraph"/><div class="code"><pre>grails.gorm.<span class="java&#45;keyword">default</span>.constraints = &#123;
     '&#42;'(nullable: <span class="java&#45;keyword">true</span>, size: 1..20)
     myShared(nullable: <span class="java&#45;keyword">false</span>, blank: <span class="java&#45;keyword">false</span>)
-&#125;</pre></div><p class="paragraph"/>These constraints are not attached to any particular classes, but they can be easily referenced from any validateable class:<p class="paragraph"/><div class="code"><pre>class User &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+These constraints are not attached to any particular classes, but they can be easily referenced from any validateable class:
+</div>
+これらの制約は特定のクラスへ関連付けられていませんが、バリデーション可能なクラスから簡単に参照できます:<p class="paragraph"/><div class="code"><pre>class User &#123;
     ...<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
         login shared: <span class="java&#45;quote">"myShared"</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>Note the use of the <code>shared</code> argument, whose value is the name of one of the constraints defined in <code>grails.gorm.default.constraints</code>. Despite the name of the configuration setting, you can reference these shared constraints from any validateable class, such as command objects.<p class="paragraph"/>The '*' constraint is a special case: it means that the associated constraints ('nullable' and 'size' in the above example) will be applied to all properties in all validateable classes. These defaults can be overridden by the constraints declared in a validateable class.<p class="paragraph"/><h3>Importing Constraints</h3><p class="paragraph"/>Grails 2 introduced an alternative approach to sharing constraints that allows you to import a set of constraints from one class into another.<p class="paragraph"/>Let's say you have a domain class like so:<p class="paragraph"/><div class="code"><pre>class User &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Note the use of the <code>shared</code> argument, whose value is the name of one of the constraints defined in <code>grails.gorm.default.constraints</code>. Despite the name of the configuration setting, you can reference these shared constraints from any validateable class, such as command objects.
+</div>
+<code>shared</code>引数には<code>grails.gorm.default.constraints</code>内に定義した制約の名前の1つを指定していることに注目してください。
+このように設定ファイル内の名前であるにもかかわらず、コマンドオブジェクトのようなバリデーション可能なクラスから共有された制約を参照できます。<p class="paragraph"/><div class="hidden-block">
+The '*' constraint is a special case: it means that the associated constraints ('nullable' and 'size' in the above example) will be applied to all properties in all validateable classes. These defaults can be overridden by the constraints declared in a validateable class.
+</div>
+「*」制約は特別な意味があります。この<code>'&#42;'</code>に関連した制約(上記の例では<code>nullable</code>と<code>size</code>)はバリデーション可能なクラス内のすべてのプロパティへ適用されます。
+これらのデフォルト設定はバリデーション可能なクラス内で宣言する制約によって上書き可能です。<p class="paragraph"/><div class="hidden-block">
+<h3>Importing Constraints</h3>
+</div>
+<h3>制約をインポートする</h3><p class="paragraph"/><div class="hidden-block">
+Grails 2 introduced an alternative approach to sharing constraints that allows you to import a set of constraints from one class into another.
+</div>
+Grails 2では共有制約に代わる、あるクラスから他のクラスへ制約のセットをインポートするというアプローチを導入しました。<p class="paragraph"/><div class="hidden-block">
+Let's say you have a domain class like so:
+</div>
+以下のようなドメインクラスがあるとしましょう:<p class="paragraph"/><div class="code"><pre>class User &#123;
     <span class="java&#45;object">String</span> firstName
     <span class="java&#45;object">String</span> lastName
     <span class="java&#45;object">String</span> passwordHash<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
@@ -156,7 +188,11 @@ A common pattern in Grails is to use <a href="../guide/single.html#commandObject
         lastName blank: <span class="java&#45;keyword">false</span>, nullable: <span class="java&#45;keyword">false</span>
         passwordHash blank: <span class="java&#45;keyword">false</span>, nullable: <span class="java&#45;keyword">false</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>You then want to create a command object, <code>UserCommand</code>, that shares some of the properties of the domain class and the corresponding constraints. You do this with the <code>importFrom()</code> method:<p class="paragraph"/><div class="code"><pre>class UserCommand &#123;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+You then want to create a command object, <code>UserCommand</code>, that shares some of the properties of the domain class and the corresponding constraints. You do this with the <code>importFrom()</code> method:
+</div>
+このとき、ドメインクラスのプロパティと同じプロパティを持ち、そのプロパティに付随する制約が定義された、コマンドオブエクトを作りたいとします。
+これは<code>importFrom()</code>メソッドで実現できます:<p class="paragraph"/><div class="code"><pre>class UserCommand &#123;
     <span class="java&#45;object">String</span> firstName
     <span class="java&#45;object">String</span> lastName
     <span class="java&#45;object">String</span> password
@@ -164,15 +200,31 @@ A common pattern in Grails is to use <a href="../guide/single.html#commandObject
         importFrom User<p class="paragraph"/>        password blank: <span class="java&#45;keyword">false</span>, nullable: <span class="java&#45;keyword">false</span>
         confirmPassword blank: <span class="java&#45;keyword">false</span>, nullable: <span class="java&#45;keyword">false</span>
     &#125;
-&#125;</pre></div><p class="paragraph"/>This will import all the constraints from the <code>User</code> domain class and apply them to <code>UserCommand</code>. The import will ignore any constraints in the source class (<code>User</code>) that don't have corresponding properties in the importing class (<code>UserCommand</code>). In the above example, only the 'firstName' and 'lastName' constraints will be imported into <code>UserCommand</code> because those are the only properties shared by the two classes.<p class="paragraph"/>If you want more control over which constraints are imported, use the <code>include</code> and <code>exclude</code> arguments. Both of these accept a list of simple or regular expression strings that are matched against the property names in the source constraints. So for example, if you only wanted to import the 'lastName' constraint you would use:<p class="paragraph"/><div class="code"><pre>&#8230;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+This will import all the constraints from the <code>User</code> domain class and apply them to <code>UserCommand</code>. The import will ignore any constraints in the source class (<code>User</code>) that don't have corresponding properties in the importing class (<code>UserCommand</code>). In the above example, only the 'firstName' and 'lastName' constraints will be imported into <code>UserCommand</code> because those are the only properties shared by the two classes.
+</div>
+これは<code>User</code>ドメインクラスからすべての制約をインポートし、<code>UserCommand</code>へこれらの制約を適用します。
+このインポートは、インポート先のクラス(<code>UserCommand</code>)に関係がないプロパティの場合、インポート元のクラス(<code>User</code>)内のそのプロパティの制約を無視します。
+上記の例では、<code>firstName</code>と<code>lastName</code>のみが両方のクラスで共有されてるため、これらの制約のみが<code>UserCommand</code>へインポートされます。<p class="paragraph"/><div class="hidden-block">
+If you want more control over which constraints are imported, use the <code>include</code> and <code>exclude</code> arguments. Both of these accept a list of simple or regular expression strings that are matched against the property names in the source constraints. So for example, if you only wanted to import the 'lastName' constraint you would use:
+</div>
+もし、インポートする制約をより細かく制御したい場合、<code>include</code>と<code>exclude</code>の引数が使えます。
+両者ともに、インポート元の制約のプロパティ名に一致する単なる文字列、または正規表現文字列のリストを受け取ります。
+例えば、<code>lastName</code>制約だけをインポートしたい場合は以下のように使います:<p class="paragraph"/><div class="code"><pre>&#8230;
 <span class="java&#45;keyword">static</span> constraints = &#123;
     importFrom User, include: &#91;<span class="java&#45;quote">"lastName"</span>&#93;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>or if you wanted all constraints that ended with 'Name':<p class="paragraph"/><div class="code"><pre>&#8230;
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+or if you wanted all constraints that ended with 'Name':
+</div>
+または<code>Name</code>で終わるすべての制約をインポートしたい場合:<p class="paragraph"/><div class="code"><pre>&#8230;
 <span class="java&#45;keyword">static</span> constraints = &#123;
     importFrom User, include: &#91;/.&#42;Name/&#93;
     &#8230;
-&#125;</pre></div><p class="paragraph"/>Of course, <code>exclude</code> does the reverse, specifying which constraints should  <em class="italic">not</em>  be imported.
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+Of course, <code>exclude</code> does the reverse, specifying which constraints should  <em class="italic">not</em>  be imported.
+</div>
+もちろん<code>exclude</code>はこの逆で、インポートすべきでない制約を指定します。
 
 
 

@@ -141,15 +141,48 @@ function addJsClass() {
                 
 <a name="10.3 Validation on the Client"><!-- Legacy link --></a>
 <h2 id="validationOnTheClient">10.4 クライアントサイドバリデーション</h2>
-<h4>Displaying Errors</h4><p class="paragraph"/>Typically if you get a validation error you redirect back to the view for rendering. Once there you need some way of displaying errors. Grails supports a rich set of tags for dealing with errors. To render the errors as a list you can use <a href="../ref/Tags/renderErrors.html" class="tags">renderErrors</a>:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:renderErrors bean=<span class="xml&#45;quote">"$&#123;user&#125;"</span> /&#62;</span></pre></div><p class="paragraph"/>If you need more control you can use <a href="../ref/Tags/hasErrors.html" class="tags">hasErrors</a> and <a href="../ref/Tags/eachError.html" class="tags">eachError</a>:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:hasErrors bean=<span class="xml&#45;quote">"$&#123;user&#125;"</span>&#62;</span>
+<div class="hidden-block">
+<h4>Displaying Errors</h4>
+</div>
+<h4>エラーを表示する</h4><p class="paragraph"/><div class="hidden-block">
+Typically if you get a validation error you redirect back to the view for rendering. Once there you need some way of displaying errors. Grails supports a rich set of tags for dealing with errors. To render the errors as a list you can use <a href="../ref/Tags/renderErrors.html" class="tags">renderErrors</a>:
+</div>
+一般的にバリデーションエラーが発生した場合は、レンダリングをするために元のビューへリダイレクトします。
+このとき、何らかのエラー表示の手段が必要になります。
+Grailsではエラーを扱うためのリッチなタグセットを提供しています。
+エラーを一覧表示するには<a href="../ref/Tags/renderErrors.html" class="tags">renderErrors</a>を使います:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:renderErrors bean=<span class="xml&#45;quote">"$&#123;user&#125;"</span> /&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">
+If you need more control you can use <a href="../ref/Tags/hasErrors.html" class="tags">hasErrors</a> and <a href="../ref/Tags/eachError.html" class="tags">eachError</a>:
+</div>
+もし、より詳細な制御が必要な場合は<a href="../ref/Tags/hasErrors.html" class="tags">hasErrors</a>と<a href="../ref/Tags/eachError.html" class="tags">eachError</a>を使います:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:hasErrors bean=<span class="xml&#45;quote">"$&#123;user&#125;"</span>&#62;</span>
   <span class="xml&#45;tag">&#60;ul&#62;</span>
    <span class="xml&#45;tag">&#60;g:eachError var=<span class="xml&#45;quote">"err"</span> bean=<span class="xml&#45;quote">"$&#123;user&#125;"</span>&#62;</span>
        <span class="xml&#45;tag">&#60;li&#62;</span>$&#123;err&#125;<span class="xml&#45;tag">&#60;/li&#62;</span>
    <span class="xml&#45;tag">&#60;/g:eachError&#62;</span>
   <span class="xml&#45;tag">&#60;/ul&#62;</span>
-<span class="xml&#45;tag">&#60;/g:hasErrors&#62;</span></pre></div><p class="paragraph"/><h4>Highlighting Errors</h4><p class="paragraph"/>It is often useful to highlight using a red box or some indicator when a field has been incorrectly input. This can also be done with the <a href="../ref/Tags/hasErrors.html" class="tags">hasErrors</a> by invoking it as a method. For example:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;div class='value $&#123;hasErrors(bean:user,field:'login','errors')&#125;'&#62;</span>
+<span class="xml&#45;tag">&#60;/g:hasErrors&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Highlighting Errors</h4>
+</div>
+<h4>エラーをハイライトする</h4><p class="paragraph"/><div class="hidden-block">
+It is often useful to highlight using a red box or some indicator when a field has been incorrectly input. This can also be done with the <a href="../ref/Tags/hasErrors.html" class="tags">hasErrors</a> by invoking it as a method. For example:
+</div>
+多くの場合、フィールドが不正入力されたとき、ボックスを赤くしたり、何らかの印を使ってハイライトをすると便利です。
+これも<a href="../ref/Tags/hasErrors.html" class="tags">hasErrors</a>をメソッドとして実行することで実現できます。
+例えば:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;div class='value $&#123;hasErrors(bean:user,field:'login','errors')&#125;'&#62;</span>
    <span class="xml&#45;tag">&#60;input type=<span class="xml&#45;quote">"text"</span> name=<span class="xml&#45;quote">"login"</span> value=<span class="xml&#45;quote">"$&#123;fieldValue(bean:user,field:'login')&#125;"</span>/&#62;</span>
-<span class="xml&#45;tag">&#60;/div&#62;</span></pre></div><p class="paragraph"/>This code checks if the <code>login</code> field of the <code>user</code> bean has any errors and if so it adds an <code>errors</code> CSS class to the <code>div</code>, allowing you to use CSS rules to highlight the <code>div</code>.<p class="paragraph"/><h4>Retrieving Input Values</h4><p class="paragraph"/>Each error is actually an instance of the <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/validation/FieldError.html" class="api">FieldError</a> class in Spring, which retains the original input value within it. This is useful as you can use the error object to restore the value input by the user using the <a href="../ref/Tags/fieldValue.html" class="tags">fieldValue</a> tag:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;input type=<span class="xml&#45;quote">"text"</span> name=<span class="xml&#45;quote">"login"</span> value=<span class="xml&#45;quote">"$&#123;fieldValue(bean:user,field:'login')&#125;"</span>/&#62;</span></pre></div><p class="paragraph"/>This code will check for an existing <code>FieldError</code> in the <code>User</code> bean and if there is obtain the originally input value for the <code>login</code> field.
+<span class="xml&#45;tag">&#60;/div&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">
+This code checks if the <code>login</code> field of the <code>user</code> bean has any errors and if so it adds an <code>errors</code> CSS class to the <code>div</code>, allowing you to use CSS rules to highlight the <code>div</code>.
+</div>
+このコードは<code>user</code>ビーンの<code>login</code>フィールドにエラーがあるかどうかをチェックし、エラーがある場合には<code>div</code>に<code>erros</code>というCSSのクラスを追加するので、<code>dev</code>をハイライトするCSSルールが使えるようになります。<p class="paragraph"/><div class="hidden-block">
+<h4>Retrieving Input Values</h4>
+</div>
+<h4>入力値を取得する</h4><p class="paragraph"/><div class="hidden-block">
+Each error is actually an instance of the <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/validation/FieldError.html" class="api">FieldError</a> class in Spring, which retains the original input value within it. This is useful as you can use the error object to restore the value input by the user using the <a href="../ref/Tags/fieldValue.html" class="tags">fieldValue</a> tag:
+</div>
+それぞれのエラーは実際にはSpringの<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/validation/FieldError.html" class="api">FieldError</a>クラスのインスタンスで、インスタンス内にオリジナルの入力値を保持しています。
+これは<a href="../ref/Tags/fieldValue.html" class="tags">fieldValue</a>タグを使いエラーオブジェクトから入力値を復元するときに役立ちます:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;input type=<span class="xml&#45;quote">"text"</span> name=<span class="xml&#45;quote">"login"</span> value=<span class="xml&#45;quote">"$&#123;fieldValue(bean:user,field:'login')&#125;"</span>/&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">
+This code will check for an existing <code>FieldError</code> in the <code>User</code> bean and if there is obtain the originally input value for the <code>login</code> field.
+</div>
+このコードは<code>User</code>ビーン内に<code>FieldError</code>が存在するかチェックし、もし存在する場合は<code>login</code>フィールドに対する元の入力値を取得します。
 
 
 

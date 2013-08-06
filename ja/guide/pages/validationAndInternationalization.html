@@ -141,20 +141,55 @@ function addJsClass() {
                 
 <a name="10.4 Validation and Internationalization"><!-- Legacy link --></a>
 <h2 id="validationAndInternationalization">10.5 バリデーションの国際化</h2>
-Another important thing to note about errors in Grails is that error messages are not hard coded anywhere. The <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/validation/FieldError.html" class="api">FieldError</a> class in Spring resolves messages from message bundles using Grails' <a href="../guide/single.html#i18n" class="guide">i18n</a> support.<p class="paragraph"/><h4>Constraints and Message Codes</h4><p class="paragraph"/>The codes themselves are dictated by a convention. For example consider the constraints we looked at earlier:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> com.mycompany.myapp<p class="paragraph"/>class User &#123;
+<div class="hidden-block">
+Another important thing to note about errors in Grails is that error messages are not hard coded anywhere. The <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/validation/FieldError.html" class="api">FieldError</a> class in Spring resolves messages from message bundles using Grails' <a href="../guide/single.html#i18n" class="guide">i18n</a> support.
+</div>
+このほかに、Grailsのエラーに関して重要なことは、エラーメッセージがどこにもハードコードされていないということです。
+Springの<a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/validation/FieldError.html" class="api">FieldError</a>クラスは、Grailsの<a href="../guide/single.html#i18n" class="guide">i18n</a>サポートを使いメッセージバンドルからメッセージを解決します。<p class="paragraph"/><div class="hidden-block">
+<h4>Constraints and Message Codes</h4>
+</div>
+<h4>制約とメッセージコード</h4><p class="paragraph"/><div class="hidden-block">
+The codes themselves are dictated by a convention. For example consider the constraints we looked at earlier:
+</div>
+このコード自体は規約によって決められています。
+例えば、以下のような制約について考えてみます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> com.mycompany.myapp<p class="paragraph"/>class User &#123;
     ...<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
         login size: 5..15, blank: <span class="java&#45;keyword">false</span>, unique: <span class="java&#45;keyword">true</span>
         password size: 5..15, blank: <span class="java&#45;keyword">false</span>
         email email: <span class="java&#45;keyword">true</span>, blank: <span class="java&#45;keyword">false</span>
         age min: 18
     &#125;
-&#125;</pre></div><p class="paragraph"/>If a constraint is violated Grails will by convention look for a message code of the form:<p class="paragraph"/><div class="code"><pre>&#91;<span class="java&#45;object">Class</span> Name&#93;.&#91;Property Name&#93;.&#91;Constraint Code&#93;</pre></div><p class="paragraph"/>In the case of the <code>blank</code> constraint this would be <code>user.login.blank</code> so you would need a message such as the following in your <code>grails-app/i18n/messages.properties</code> file:<p class="paragraph"/><div class="code"><pre>user.login.blank=Your login name must be specified!</pre></div><p class="paragraph"/>The class name is looked for both with and without a package, with the packaged version taking precedence. So for example, com.mycompany.myapp.User.login.blank will be used before user.login.blank. This allows for cases where your domain class message codes clash with a plugin's.<p class="paragraph"/>For a reference on what codes are for which constraints refer to the reference guide for each constraint.<p class="paragraph"/><h4>Displaying Messages</h4><p class="paragraph"/>The <a href="../ref/Tags/renderErrors.html" class="tags">renderErrors</a> tag will automatically look up messages for you using the <a href="../ref/Tags/message.html" class="tags">message</a> tag. If you need more control of rendering you can handle this yourself:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:hasErrors bean=<span class="xml&#45;quote">"$&#123;user&#125;"</span>&#62;</span>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+If a constraint is violated Grails will by convention look for a message code of the form:
+</div>
+もし制約に違反している場合、Grailsは規約により以下の形式に従いメッセージコードを探します:<p class="paragraph"/><div class="code"><pre>&#91;<span class="java&#45;object">Class</span> Name&#93;.&#91;Property Name&#93;.&#91;Constraint Code&#93;</pre></div><p class="paragraph"/><div class="hidden-block">
+In the case of the <code>blank</code> constraint this would be <code>user.login.blank</code> so you would need a message such as the following in your <code>grails-app/i18n/messages.properties</code> file:
+</div>
+<code>blank</code>制約の場合は<code>user.login.blank</code>となり、<code>grails-app/i18n/messages.properties</code>ファイル内に以下のようなメッセージが必要です:<p class="paragraph"/><div class="code"><pre>user.login.blank=Your login name must be specified!</pre></div><p class="paragraph"/><div class="hidden-block">
+The class name is looked for both with and without a package, with the packaged version taking precedence. So for example, com.mycompany.myapp.User.login.blank will be used before user.login.blank. This allows for cases where your domain class message codes clash with a plugin's.
+</div>
+このクラス名はパッケージ名有りとパッケージ名無しの両方で検索され、両方存在する場合はパッケージ名有りのバージョンが優先されます。
+例えば、<code>com.mycompany.myapp.User.login.blank</code>は<code>user.login.blank</code>よりも先に使われます。
+これによりドメインクラスのメッセージコードがプラグインと競合した場合でも競合を回避できます。<p class="paragraph"/><div class="hidden-block">
+For a reference on what codes are for which constraints refer to the reference guide for each constraint.
+</div>
+どの制約にどんなコードが対応しているかを調べるには、それぞれの制約に対するリファレンスガイドを参照してください。<p class="paragraph"/><div class="hidden-block">
+<h4>Displaying Messages</h4>
+</div>
+<h4>メッセージを表示する</h4><p class="paragraph"/><div class="hidden-block">
+The <a href="../ref/Tags/renderErrors.html" class="tags">renderErrors</a> tag will automatically look up messages for you using the <a href="../ref/Tags/message.html" class="tags">message</a> tag. If you need more control of rendering you can handle this yourself:
+</div>
+<a href="../ref/Tags/renderErrors.html" class="tags">renderErrors</a>タグは<a href="../ref/Tags/message.html" class="tags">message</a>タグを使って自動的にメッセージを探します。
+もし、より詳細な表示の制御が必要な場合は自分で制御できます:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:hasErrors bean=<span class="xml&#45;quote">"$&#123;user&#125;"</span>&#62;</span>
   <span class="xml&#45;tag">&#60;ul&#62;</span>
    <span class="xml&#45;tag">&#60;g:eachError var=<span class="xml&#45;quote">"err"</span> bean=<span class="xml&#45;quote">"$&#123;user&#125;"</span>&#62;</span>
        <span class="xml&#45;tag">&#60;li&#62;</span><span class="xml&#45;tag">&#60;g:message error=<span class="xml&#45;quote">"$&#123;err&#125;"</span> /&#62;</span><span class="xml&#45;tag">&#60;/li&#62;</span>
    <span class="xml&#45;tag">&#60;/g:eachError&#62;</span>
   <span class="xml&#45;tag">&#60;/ul&#62;</span>
-<span class="xml&#45;tag">&#60;/g:hasErrors&#62;</span></pre></div><p class="paragraph"/>In this example within the body of the <a href="../ref/Tags/eachError.html" class="tags">eachError</a> tag we use the <a href="../ref/Tags/message.html" class="tags">message</a> tag in combination with its <code>error</code> argument to read the message for the given error.<p class="paragraph"/>
+<span class="xml&#45;tag">&#60;/g:hasErrors&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">
+In this example within the body of the <a href="../ref/Tags/eachError.html" class="tags">eachError</a> tag we use the <a href="../ref/Tags/message.html" class="tags">message</a> tag in combination with its <code>error</code> argument to read the message for the given error.
+</div>
+この例では<a href="../ref/Tags/eachError.html" class="tags">eachError</a>タグのボディの中で、エラーに対するメッセージを取得するため<a href="../ref/Tags/message.html" class="tags">message</a>タグに<code>error</code>引数を組み合わせて使用しています。<p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>

@@ -141,7 +141,20 @@ function addJsClass() {
                 
 <a name="10.5 Validation Non Domain and Command Object Classes"><!-- Legacy link --></a>
 <h2 id="validationNonDomainAndCommandObjectClasses">10.6 コマンドオブジェクト、ドメインクラス以外のバリデーション</h2>
-<a href="../guide/single.html#domainClasses" class="guide">Domain classes</a> and <a href="../guide/single.html#commandObjects" class="guide">command objects</a> support validation by default.  Other classes may be made validateable by defining the static <code>constraints</code> property in the class (as described above) and then telling the framework about them.  It is important that the application register the validateable classes with the framework.  Simply defining the <code>constraints</code> property is not sufficient.<p class="paragraph"/><h4>The Validateable Annotation</h4><p class="paragraph"/>Classes which define the static <code>constraints</code> property and are annotated with @Validateable can be made validateable by the framework. Consider this example:<p class="paragraph"/><div class="code"><pre>// src/groovy/com/mycompany/myapp/User.groovy
+<div class="hidden-block">
+<a href="../guide/single.html#domainClasses" class="guide">Domain classes</a> and <a href="../guide/single.html#commandObjects" class="guide">command objects</a> support validation by default.  Other classes may be made validateable by defining the static <code>constraints</code> property in the class (as described above) and then telling the framework about them.  It is important that the application register the validateable classes with the framework.  Simply defining the <code>constraints</code> property is not sufficient.
+</div>
+<a href="../guide/single.html#domainClasses" class="guide">ドメインクラス</a>と<a href="../guide/single.html#commandObjects" class="guide">コマンドオブジェクト</a>はデフォルトでバリデーションをサポートしています。
+他のクラスについては、(前述したように)そのクラス内で静的な<code>constraints</code>プロパティを定義し、それからフレームワークにこのクラスを教えてあげることで、バリデーション可能にすることができます。
+アプリケーション側からバリデーション可能なクラスをフレームワークに登録するということが重要です。
+単に<code>constraints</code>プロパティを定義しただけでは十分ではありません。<p class="paragraph"/><div class="hidden-block">
+<h4>The Validateable Annotation</h4>
+</div>
+<h4>Validateableアノテーション</h4><p class="paragraph"/><div class="hidden-block">
+Classes which define the static <code>constraints</code> property and are annotated with @Validateable can be made validateable by the framework. Consider this example:
+</div>
+クラスに静的な<code>constraints</code>プロパティを定義し、<code>&#64;Validateable</code>を付与することでフレームワークによってバリデーション可能となります。
+例えば:<p class="paragraph"/><div class="code"><pre>// src/groovy/com/mycompany/myapp/User.groovy
 <span class="java&#45;keyword">package</span> com.mycompany.myapp<p class="paragraph"/><span class="java&#45;keyword">import</span> grails.validation.Validateable<p class="paragraph"/>@Validateable
 class User &#123;
     ...<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
@@ -150,7 +163,14 @@ class User &#123;
         email email: <span class="java&#45;keyword">true</span>, blank: <span class="java&#45;keyword">false</span>
         age min: 18
     &#125;
-&#125;</pre></div><p class="paragraph"/><h4>Registering Validateable Classes</h4><p class="paragraph"/>If a class is not marked with <code>Validateable, it may still be made validateable by the framework. The steps required to do this are to define the static </code>constraints<code> property in the class (as described above) and then telling the framework about the class by assigning a value to the </code>grails.validateable.classes<code> property in </code>Config.groovy@:<p class="paragraph"/><div class="code"><pre>grails.validateable.classes = &#91;com.mycompany.myapp.User, com.mycompany.dto.Account&#93;</pre></div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+<h4>Registering Validateable Classes</h4>
+</div>
+<h4>バリデーション可能なクラスの登録</h4><p class="paragraph"/><div class="hidden-block">
+If a class is not marked with <code>Validateable, it may still be made validateable by the framework. The steps required to do this are to define the static </code>constraints<code> property in the class (as described above) and then telling the framework about the class by assigning a value to the </code>grails.validateable.classes<code> property in </code>Config.groovy@:
+</div>
+クラスに<code>&#64;Validateable</code>が付与されていなくても、フレームワークによってバリデーション可能になっている場合があります。
+アノテーションなしでバリデーション可能にするには、(前述したように)そのクラス内で静的な<code>constraints</code>プロパティを定義し、それから<code>Config.groovy</code>内の<code>grails.validateable.classes</code>プロパティに値を設定してフレームワークにこのクラスを教えてあげる必要があります:<p class="paragraph"/><div class="code"><pre>grails.validateable.classes = &#91;com.mycompany.myapp.User, com.mycompany.dto.Account&#93;</pre></div>
 
 
 
