@@ -141,7 +141,9 @@ function addJsClass() {
                 
 
 <h2 id="objectMarshallers">8.1.6.2 カスタムオブジェクトマーシャラの登録</h2>
-<div class="hidden-block">Grails' Converters feature the notion of an <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">ObjectMarshaller</a>, and each type can have a registered <code>ObjectMarshaller</code>. You can register custom <code>ObjectMarshaller</code> instances to completely customize response rendering. For example you can define the following in <code>BootStrap.init</code>:</div>
+<div class="hidden-block">
+Grails' Converters feature the notion of an <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">ObjectMarshaller</a> and each type can have a registered <code>ObjectMarshaller</code>. You can register custom <code>ObjectMarshaller</code> instances to completely customize response rendering. For example, you can define the following in <code>BootStrap.init</code>:
+</div>
 Grailsのコンバーターは、<a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">オブジェクトマーシャラ</a>の概念を特徴としており、それぞれの型に対して<code>ObjectMarshaller</code>を登録できます。
 そして、レスポンスのレンダリングをカスタマイズするためにカスタム<code>ObjectMarshaller</code>インタンスを登録できます。
 例えば、<code>BootStrap.init</code>の中で以下のように定義できます:<p class="paragraph"/><div class="code"><pre>XML.registerObjectMarshaller Book, &#123; Book book, XML xml &#45;&#62;
@@ -153,7 +155,9 @@ Grailsのコンバーターは、<a href="http://grails.org/doc/latest/api/org/c
 個々の値のフォーマットをカスタマイズする場合もこの方法で可能です。
 例えば、<a href="http://grails.org/plugin/jodatime" target="blank">JodaTime plugin</a>は、JSON出力でJadaTime日付のレンダリングをサポートするために次のようにしています:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(DateTime) &#123;
     <span class="java&#45;keyword">return</span> it?.toString(<span class="java&#45;quote">"yyyy&#45;MM&#45;dd'T'HH:mm:ss'Z'"</span>)
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the case of JSON it often simple to use a map to customize output:</div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In the case of JSON it's often simple to use a map to customize output:
+</div>
 JSONの場合は、マップを使って簡単に出力をカスタマイズできます:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(Book) &#123;
   def map= &#91;:&#93;
   map&#91;'titl'&#93; = it.title

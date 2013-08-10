@@ -503,9 +503,9 @@ Grailsは、今回のリクエストと次のリクエストのみで値を一�
     &#8230; // remaining code
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">When the <code>list</code> action is requested, the <code>message</code> value will be in scope and can be used to display an information message. It will be removed from the <code>flash</code> scope after this second request.</div>
 この例では、<code>delete</code>アクションに対してリクエストをすると、リダイレクトされて<code>list</code>アクションが実行された際に、flashスコープの<code>message</code>に代入した内容がメッセージ表示等に使用可能になります。このリダイレクトされた<code>list</code>アクション(<code>delete</code>の次のアクション)の処理が終了したら、<code>flash</code>スコープの内容が削除されます。<p class="paragraph"/><div class="hidden-block">Note that the attribute name can be anything you want, and the values are often strings used to display messages, but can be any object type.</div>
-メッセージ表示などで文字列型が頻繁に使用されますが、flashスコープに一時的に保持する値は、どのようなオブジェクトでもかまいません。<p class="paragraph"/><h4>コントローラのスコープ設定</h4><p class="paragraph"/><div class="hidden-block">By default, a new controller instance is created for each request. In fact, because the controller is <code>prototype</code> scoped, it is thread-safe since each request happens on its own thread.</div>
-デフォルトでは、コントローラはリクエスト毎にインスタンスが生成されます。コントローラのスコープは<code>prototype</code>になっているため、リクエストがそれぞれのスレッドを持っているので、スレッドセーフになります。<p class="paragraph"/><div class="hidden-block">You can change this behaviour by placing a controller in a particular scope. The supported scopes are:</div>
-コントローラにスコープを指定することで振る舞いを変更できます。サポートされているスコープは:
+メッセージ表示などで文字列型が頻繁に使用されますが、flashスコープに一時的に保持する値は、どのようなオブジェクトでもかまいません。<p class="paragraph"/><div class="hidden-block">h4. Scoped Controllers</div>
+<h4>コントローラのスコープ</h4><p class="paragraph"/><div class="hidden-block">Supported controller scopes are:</div>
+サポートされているコントローラスコープは:
 <div class="hidden-block">
 <ul class="star">
 <li><code>prototype</code> (default) - A new controller will be created for each request (recommended for actions as Closure properties)</li>
@@ -518,7 +518,8 @@ Grailsは、今回のリクエストと次のリクエストのみで値を一�
 <li><code>singleton</code> -  1個のコントローラのみが存在する状態です。(メソッドでのアクションをお勧めします)</li>
 </ul><p class="paragraph"/><div class="hidden-block">To enable one of the scopes, add a static <code>scope</code> property to your class with one of the valid scope values listed above, for example</div>
 スコープを定義するには、コントローラクラスに、static scope 変数で指定したいスコープを定義します。以下が例になります。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> scope = <span class="java&#45;quote">"singleton"</span></pre></div><p class="paragraph"/><div class="hidden-block">You can define the default strategy under in <code>Config.groovy</code> with the <code>grails.controllers.defaultScope</code> key, for example:</div>
-デフォルトスコープは、<code>Config.groovy</code>に<code>grails.controllers.defaultScope</code>を指定する事で変更できます。<p class="paragraph"/><div class="code"><pre>grails.controllers.defaultScope = <span class="java&#45;quote">"singleton"</span></pre></div>
+デフォルトスコープは、<code>Config.groovy</code>に<code>grails.controllers.defaultScope</code>を指定する事で変更できます。<p class="paragraph"/><div class="code"><pre>grails.controllers.defaultScope = <span class="java&#45;quote">"singleton"</span></pre></div><p class="paragraph"/>Newly created applications have the <code>grails.controllers.defaultScope</code> property set in <code>grails-app/conf/Config.groovy</code> with a value of "singleton".  You may change this value to any
+of the supported scopes listed above.  If the property is not assigned a value at all, controllers will default to "prototype" scope.<p class="paragraph"/>
 <div class="hidden-block">
 <blockquote class="note">
 Use scoped controllers wisely. For instance, we don't recommend having any properties in a singleton-scoped controller since they will be shared for  <em class="italic">all</em>  requests. Setting a default scope other than <code>prototype</code> may also lead to unexpected behaviors if you have controllers provided by installed plugins that expect that the scope is <code>prototype</code>.
@@ -746,8 +747,8 @@ assert person.homeAddress.country == 'England'</pre></div><p class="paragraph"/>
 &#125;<p class="paragraph"/>class Album &#123;
     <span class="java&#45;object">String</span> title
     <span class="java&#45;object">Integer</span> numberOfTracks
-&#125;</pre></div><p class="paragraph"/><div class="code"><pre>def bindingMap = &#91;name: 'Genesis',
-                  'albums&#91;0&#93;': &#91;title: 'Foxtrot', numberOfTracks: 6&#93;,
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>def bindingMap = &#91;name: 'Genesis', 
+                  'albums&#91;0&#93;': &#91;title: 'Foxtrot', numberOfTracks: 6&#93;, 
                   'albums&#91;1&#93;': &#91;title: 'Nursery Cryme', numberOfTracks: 7&#93;&#93;<p class="paragraph"/>def band = <span class="java&#45;keyword">new</span> Band(bindingMap)<p class="paragraph"/>assert band.name == 'Genesis'
 assert band.albums.size() == 2
 assert band.albums&#91;0&#93;.title == 'Foxtrot'
@@ -767,9 +768,9 @@ def bindingMap = &#91;'albums&#91;0&#93;': &#91;id: 9, title: 'The Lamb Lies Dow
                   'albums&#91;1&#93;': &#91;id: 4, title: 'Selling England By The Pound'&#93;&#93;<p class="paragraph"/>def band = Band.get(someBandId)<p class="paragraph"/>/&#42;
  &#42; This will find the Album in albums that has an id of 9 and will set its title
  &#42; to 'The Lamb Lies Down On Broadway' and will find the Album in albums that has
- &#42; an id of 4 and set its title to 'Selling England By The Pound'.  In both
+ &#42; an id of 4 and set its title to 'Selling England By The Pound'.  In both 
  &#42; cases <span class="java&#45;keyword">if</span> the Album cannot be found in albums then the album will be retrieved
- &#42; from the database by id, the Album will be added to albums and will be updated
+ &#42; from the database by id, the Album will be added to albums and will be updated 
  &#42; with the values described above.  If a Album with the specified id cannot be
  &#42; found in the database, then a binding error will be created and associated
  &#42; with the band object.  More on binding errors later.
@@ -819,10 +820,7 @@ assert album.players.drums == 'Phil Collins'</pre></div><p class="paragraph"/><d
     b.properties = params
     b.save()
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This has the same effect as using the implicit constructor.</div>
-これは先ほどのコンストラクタを利用したのと同じ結果になります。<p class="paragraph"/><div class="hidden-block">When binding an empty String (a String with no characters in it, not even spaces) to a constrained property which has been configured as nullable, the data binder will convert the empty String to null.  This simplifies the most common case where the intent is to treat an empty form field as having the value null since there isn't a way to actually submit a null as a request parameter.  When this behavior is not desireable the application may assign the value directly.</div>
-空文字(スペースすら含まない文字数0のString)をnullable制約を付与されたプロパティにバインディングするとき、データバインダはその空文字をnullに変換します。
-これによって、リクエストパラメータとしてnullをサブミットする方法が実際には存在しないため空文字として送信せざるを得ないが、フォームの空フィールドについて値がnullであるとみなしたい、というよくあるケースを簡単に扱えるようになります。
-この振る舞いが望ましくないときは、アプリケーションは値を直接代入することもできます。<p class="paragraph"/><div class="hidden-block">The mass property binding mechanism will by default automatically trim all Strings at binding time.  To disable this behavior set the <code>grails.databinding.trimStrings</code> property to false in <code>grails-app/conf/Config.groovy</code>.</div>
+これは先ほどのコンストラクタを利用したのと同じ結果になります。<p class="paragraph"/>When binding an empty String (a String with no characters in it, not even spaces), the data binder will convert the empty String to null.  This simplifies the most common case where the intent is to treat an empty form field as having the value null since there isn't a way to actually submit a null as a request parameter.  When this behavior is not desireable the application may assign the value directly.<p class="paragraph"/><div class="hidden-block">The mass property binding mechanism will by default automatically trim all Strings at binding time.  To disable this behavior set the <code>grails.databinding.trimStrings</code> property to false in <code>grails-app/conf/Config.groovy</code>.</div>
 大量プロパティバインディング機構は、デフォルトでバインディング時にすべての文字列を自動的にトリムします。
 この挙動を無効化するには、<code>grails-app/conf/Config.groovy</code>の<code>grails.databinding.trimStrings</code> プロパティにfalseをセットしてください。<p class="paragraph"/><div class="code"><pre>// the <span class="java&#45;keyword">default</span> value is <span class="java&#45;keyword">true</span>
 grails.databinding.trimStrings = <span class="java&#45;keyword">false</span><p class="paragraph"/>// ...</pre></div><p class="paragraph"/><div class="hidden-block">The mass property binding mechanism will by default automatically convert all empty Strings to null at binding time.  To disable this behavior set the <code>grails.databinding.convertEmptyStringsToNull</code> property to false in <code>grials-app/conf/Config.groovy</code>.</div>
@@ -935,7 +933,9 @@ grails.databinding.autoGrowCollectionLimit = 128<p class="paragraph"/>// ...</pr
         obj, source &#45;&#62; source&#91;'name'&#93;?.toUpperCase()
     &#125;)
     <span class="java&#45;object">String</span> name
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindUsing.html" class="api">BindUsing</a> annotation may be used to define a custom binding mechanism for all of the fields on a particular class. When the annotation is applied to a class, the value assigned to the annotation should be a class which implements the <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingHelper.html" class="api">BindingHelper</a> interface.  An instance of that class will be used any time a value is bound to a property in the class that this annotation has been applied to.</div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+The <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindUsing.html" class="api">BindUsing</a> annotation may be used to define a custom binding mechanism for all of the fields on a particular class. When the annotation is applied to a class, the value assigned to the annotation should be a class which implements the <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingHelper.html" class="api">BindingHelper</a> interface.  An instance of that class will be used any time a value is bound to a property in the class that this annotation has been applied to. 
+</div>
 <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindUsing.html" class="api">BindUsing</a>アノテーションは特定のクラス上のすべてのフィールドに対する独自のバインディング方法を定義するためにも使えます。
 このアノテーションをクラスに指定するときは、アノテーションに指定する値は <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingHelper.html" class="api">BindingHelper</a>インターフェイスを実装したクラスにしなくてはいけません。
 このクラスのインスタンスは、アノテーションが指定されたクラス内のプロパティに値がバインドされるときに毎回使われます。<p class="paragraph"/><div class="code"><pre>@BindUsing(SomeClassWhichImplementsBindingHelper)
@@ -976,7 +976,7 @@ assert person.homeAddress.state = 'Missouri'</pre></div><p class="paragraph"/><d
 文字列を<code>Date</code>の値にバインドするとき、<a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingFormat.html" class="api">BindingFormat</a>アノテーションをデータフィールドに付与することで、カスタムデータフォーマットを指定できます。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat<p class="paragraph"/>class Person &#123;
     @BindingFormat('MMddyyyy')
     Date birthDate
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Custom Formatted Converters</div>
+&#125;</pre></div><p class="paragraph"/>A global setting may be configured in <code>Config.groovy</code> to define date formats which will be used application wide when binding to Date.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/Config.groovy<p class="paragraph"/>grails.databinding.dateFormats = &#91;'MMddyyyy', 'yyyy&#45;MM&#45;dd HH:mm:ss.S', <span class="java&#45;quote">"yyyy&#45;MM&#45;dd'T'hh:mm:ss'Z'"</span>&#93;</pre></div><p class="paragraph"/>The formats specified in <code>grails.databinding.dateFormats</code> will be attempted in the order in which they are included in the List.  If a property is marked with &#64;BindingFormat, the &#64;BindingFormat will take precedence over the values specified in <code>grails.databinding.dateFormats</code>.<p class="paragraph"/>The default formats that are used are "yyyy-MM-dd HH:mm:ss.S" and "yyyy-MM-dd'T'hh:mm:ss'Z'".<p class="paragraph"/><div class="hidden-block">h4. Custom Formatted Converters</div>
 <h4>カスタムフォーマットコンバータ</h4><p class="paragraph"/><div class="hidden-block">You may supply your own handler for the <a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingFormat.html" class="api">BindingFormat</a> annotation by writing a class which implements the <a href="http://grails.org/doc/latest/api/org/grails/databinding/converters/FormattedValueConverter.html" class="api">FormattedValueConverter</a> interface and regiserting an instance of that class as a bean in the Spring application context.  Below is an example of a trivial custom String formatter that might convert the case of a String based on the value assigned to the BindingFormat annotation.</div>
 <a href="http://grails.org/doc/latest/api/org/grails/databinding/converters/FormattedValueConverter.html" class="api">FormattedValueConverter</a>インターフェイスを実装したクラスを書いて、そのクラスのインスタンスをビーンとしてSpringのアプリケーションコンテキストに登録することで、<a href="http://grails.org/doc/latest/api/org/grails/databinding/BindingFormat.html" class="api">BindingFormat</a>アノテーションに対して独自のハンドラを提供できます。
 以下は、<code>BindingFormat</code>アノテーションが指定された値の文字列の大文字/小文字を変換するという、ちょっとした文字列のカスタムフォーマッタの例です。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> com.myapp.converters<p class="paragraph"/><span class="java&#45;keyword">import</span> org.grails.databinding.converters.FormattedValueConverter<p class="paragraph"/>class FormattedStringValueConverter <span class="java&#45;keyword">implements</span> FormattedValueConverter &#123;
@@ -999,8 +999,13 @@ assert person.homeAddress.state = 'Missouri'</pre></div><p class="paragraph"/><d
     @BindingFormat('UPPERCASE')
     <span class="java&#45;object">String</span> someUpperCaseString<p class="paragraph"/>    @BindingFormat('LOWERCASE')
     <span class="java&#45;object">String</span> someLowerCaseString<p class="paragraph"/>    <span class="java&#45;object">String</span> someOtherString
+&#125;</pre></div><p class="paragraph"/><h4>Localized Binding Formats</h4><p class="paragraph"/>The <code>BindingFormat</code> annotation supports localized format strings by using the optional <code>code</code> attribute.  If a value is assigned to the code attribute that value will be used as the message code to retrieve the binding format string from the <code>messageSource</code> bean in the Spring application context and that lookup will be localized.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.databinding.BindingFormat<p class="paragraph"/>class Person &#123;
+    @BindingFormat(code='date.formats.birthdays')
+    Date birthDate
 &#125;</pre></div><p class="paragraph"/>
-<div class="hidden-block">h4. Data Binding and Security concerns </div>
+<div class="code"><pre>&#35; grails&#45;app/conf/i18n/messages.properties
+date.formats.birthdays=MMddyyyy</pre></div><p class="paragraph"/><div class="code"><pre>&#35; grails&#45;app/conf/i18n/messages_es.properties
+date.formats.birthdays=ddMMyyyy</pre></div><p class="paragraph"/><div class="hidden-block">h4. Data Binding and Security concerns </div>
 <h4>データバインディングとセキュリティ考慮</h4><p class="paragraph"/><div class="hidden-block">When batch updating properties from request parameters you need to be careful not to allow clients to bind malicious data to domain classes and be persisted in the database. You can limit what properties are bound to a given domain class using the subscript operator:</div>
 リクエストパラメータからの一括プロパティ更新をする際は、クライアントからの悪意のあるデータをドメインクラスにバインドし、データベースに永続化してしまわないように注意が必要です。
 添字演算子を使用してドメインクラスにバインドするプロパティを制限することができます:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)<p class="paragraph"/>p.properties&#91;'firstName','lastName'&#93; = params</pre></div><p class="paragraph"/><div class="hidden-block">In this case only the <code>firstName</code> and <code>lastName</code> properties will be bound.</div>
@@ -2154,7 +2159,7 @@ URIを明示的なURIへ(コントローラ・アクションを指定するの�
 特定のURIへの書き換えは、他のフレームワークと統合する場合に便利です。
 
 
-<a name="7.4.2 Mapping to REST resources"><!-- Legacy link --></a>
+<a name="7.4.3 Mapping to REST resources"><!-- Legacy link --></a>
 <h2 id="restfulMappings">7.4.2 RESTリソースへのマッピング</h2>
 Since Grails 2.3, it possible to create RESTful URL mappings that map onto controllers by convention. The syntax to do so is as follows:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book')</pre></div><p class="paragraph"/>You define a base URI and the name of the controller to map to using the <code>resources</code> parameter. The above mapping will result in the following URLs:<p class="paragraph"/>
 <table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${id}/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${id}</td><td>delete</td></tr></table><p class="paragraph"/>If you wish to include or exclude any of the generated URL mappings you can do so with the <code>include</code> or <code>exclude</code> parameter, which accepts the name of the Grails action to include or exclude:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book', exclude:&#91;'delete', 'update'&#93;)<p class="paragraph"/>or<p class="paragraph"/><span class="java&#45;quote">"/books"</span>(resources:'book', include:&#91;'index', 'show'&#93;)</pre></div><p class="paragraph"/><h4>Single resources</h4><p class="paragraph"/>A single resource is a resource for which there is only one (possibly per user) in the system. You can create a single resource using the <code>resource</code> parameter (as oppose to <code>resources</code>):<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/book"</span>(resource:'book')</pre></div><p class="paragraph"/>This results in the following URL mappings:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/book</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/book/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/book</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/book</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/book/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/book</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/book</td><td>delete</td></tr></table><p class="paragraph"/>The main difference is that the id is not included in the URL mapping.<p class="paragraph"/><h4>Nested Resources</h4><p class="paragraph"/>You can nest resource mappings to generate child resources. For example:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
@@ -2168,7 +2173,7 @@ The case of nested resources is a little different as they typically required tw
 &#60;g:link controller=<span class="java&#45;quote">"author"</span> action=<span class="java&#45;quote">"show"</span> method=<span class="java&#45;quote">"GET"</span> params=<span class="java&#45;quote">"&#91;bookId:1&#93;"</span> id=<span class="java&#45;quote">"2"</span>&#62;The Author&#60;/g:link&#62;</pre></div><p class="paragraph"/>However, to make this more concise there is a <code>resource</code> attribute to the link tag which can be used instead:<p class="paragraph"/><div class="code"><pre>// Results in /books/1/authors/2
 &#60;g:link resource=<span class="java&#45;quote">"book/author"</span> action=<span class="java&#45;quote">"show"</span> bookId=<span class="java&#45;quote">"1"</span> id=<span class="java&#45;quote">"2"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>The resource attribute accepts a path to the resource separated by a slash (in this case "book/author"). The attributes of the tag can be used to specify the necessary <code>bookId</code> parameter.
 
-<a name="7.4.3 Embedded Variables"><!-- Legacy link --></a>
+<a name="7.4.4 Embedded Variables"><!-- Legacy link --></a>
 <h2 id="embeddedVariables">7.4.3 埋込変数</h2>
 <h4>簡単な変数 <div class="hidden-block">Simple Variables </div></h4><p class="paragraph"/><div class="hidden-block">The previous section demonstrated how to map simple URLs with concrete "tokens". In URL mapping speak tokens are the sequence of characters between each slash, '/'. A concrete token is one which is well defined such as as <code>/product</code>. However, in many circumstances you don't know what the value of a particular token will be until runtime. In this case you can use variable placeholders within the URL for example:</div>
 前セクションでは、具体トークンURLを簡単にマップする方法を紹介しました。URLマッピングでのトークンとは"/"スラッシュの間にある文字列の事を指します。具体トークンは<code>/product</code>のように適切に指定できますが、状況によっては、ランタイム時にしか一部のトークンが予測できない場合があります。その場合は以下の例のように変数を指定できます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -2214,7 +2219,7 @@ URLマッピングからコントローラへ、コードブロック内で設�
 URLが実際にマッチした時にコードブロックのロジックが実行されて変数の内容が解決されます。
 
 
-<a name="7.4.4 Mapping to Views"><!-- Legacy link --></a>
+<a name="7.4.5 Mapping to Views"><!-- Legacy link --></a>
 <h2 id="mappingToViews">7.4.4 ビューへマッピング</h2>
 <div class="hidden-block">You can resolve a URL to a view without a controller or action involved. For example to map the root URL <code>/</code> to a GSP at the location <code>grails-app/views/index.gsp</code> you could use:</div>
 コントローラまたはアクションを含まずにビューへURLをマップできます。例としてルートURL <code>/</code> を、<code>grails-app/views/index.gsp</code>にマッピングするには:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -2225,7 +2230,7 @@ URLが実際にマッチした時にコードブロックのロジックが実�
 &#125;</pre></div>
 
 
-<a name="7.4.5 Mapping to Response Codes"><!-- Legacy link --></a>
+<a name="7.4.6 Mapping to Response Codes"><!-- Legacy link --></a>
 <h2 id="mappingToResponseCodes">7.4.5 レスポンスコードへマッピング</h2>
 <div class="hidden-block">Grails also lets you map HTTP response codes to controllers, actions or views. Just use a method name that matches the response code you are interested in:</div>
 GrailsではHTTPレスポンスコードをコントローラ、アクション、ビューにマッピングすることができます。使用したいレスポンスコードをメソッド名に指定するだけです:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -2261,7 +2266,7 @@ GrailsではHTTPレスポンスコードをコントローラ、アクション�
 </blockquote>
 
 
-<a name="7.4.6 Mapping to HTTP methods"><!-- Legacy link --></a>
+<a name="7.4.7 Mapping to HTTP methods"><!-- Legacy link --></a>
 <h2 id="mappingHTTP">7.4.6 HTTPメソッドへマッピング</h2>
 <div class="hidden-block">URL mappings can also be configured to map based on the HTTP method (GET, POST, PUT or DELETE). This is very useful for RESTful APIs and for restricting mappings based on HTTP method.</div>
 URLマッピングでは、HTTPメソッド(GET, POST, PUT, DELETE)へのマップを定義することができます。HTTPメソッドをベースに制限したり、RESTful API等に便利です。<p class="paragraph"/><div class="hidden-block">As an example the following mappings provide a RESTful API URL mappings for the <code>ProductController</code>:</div>
@@ -2271,7 +2276,7 @@ URLマッピングでは、HTTPメソッド(GET, POST, PUT, DELETE)へのマッ�
    &#125;
 &#125;</pre></div>
 
-<a name="7.4.7 Mapping Wildcards"><!-- Legacy link --></a>
+<a name="7.4.8 Mapping Wildcards"><!-- Legacy link --></a>
 <h2 id="mappingWildcards">7.4.7 マッピングワイルドカード</h2>
 <div class="hidden-block">Grails' URL mappings mechanism also supports wildcard mappings. For example consider the following mapping:</div>
 GrailsのURLマッピング機能ではワイルドカードもサポートしています。例として次ぎのマッピングに注目してください:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -2298,7 +2303,7 @@ println name // prints <span class="java&#45;quote">"logo"</span> or <span class
 この例では、 <code>/images</code>また<code>/css</code>で始まるURIはURLマッピングから除外されます.
 
 
-<a name="7.4.8 Automatic Link Re-Writing"><!-- Legacy link --></a>
+<a name="7.4.9 Automatic Link Re-Writing"><!-- Legacy link --></a>
 <h2 id="automaticLinkRewriting">7.4.8 自動リンクリライト</h2>
 <div class="hidden-block">Another great feature of URL mappings is that they automatically customize the behaviour of the <a href="../ref/Tags/link.html" class="tags">link</a> tag so that changing the mappings don't require you to go and change all of your links.</div>
 URLマッピングには、<a href="../ref/Tags/link.html" class="tags">link</a>タグの振る舞いを自動的にカスタマイズ するという優れた機能が存在します。その機能のおかげでURLマッピングを変更しても、その都度リンクを変更しなくても良くなります。<p class="paragraph"/><div class="hidden-block">This is done through a URL re-writing technique that reverse engineers the links from the URL mappings. So given a mapping such as the blog one from an earlier section:</div>
@@ -2316,7 +2321,7 @@ GrailsがURLを自動的にリライトします:<p class="paragraph"/><div clas
 <span class="xml&#45;tag">&#60;a href=<span class="xml&#45;quote">"/fred/2007/10"</span>&#62;</span>My Blog &#45; October 2007 Posts<span class="xml&#45;tag">&#60;/a&#62;</span></pre></div>
 
 
-<a name="7.4.9 Applying Constraints"><!-- Legacy link --></a>
+<a name="7.4.10 Applying Constraints"><!-- Legacy link --></a>
 <h2 id="applyingConstraints">7.4.9 制約の適用</h2>
 <div class="hidden-block">URL Mappings also support Grails' unified <a href="../guide/single.html#constraints" class="guide">validation constraints</a> mechanism, which lets you further "constrain" how a URL is matched. For example, if we revisit the blog sample code from earlier, the mapping currently looks like this:</div>
 URLマッピングでは、URLがマッチしてるか確認するために、<a href="../guide/single.html#constraints" class="guide">バリデーション制約</a>が使用できます。例として、前と同じブログのサンプルを使用します:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -2336,7 +2341,7 @@ URLマッピングでは、URLがマッチしてるか確認するために、<a
 この例では、<code>year</code>,<code>month</code>,<code>day</code>パラメータが特定のパターンにマッチするように制約を定義しています。
 
 
-<a name="7.4.10 Named URL Mappings"><!-- Legacy link --></a>
+<a name="7.4.11 Named URL Mappings"><!-- Legacy link --></a>
 <h2 id="namedMappings">7.4.10 名前付きURLマッピング</h2>
 <div class="hidden-block">URL Mappings also support named mappings, that is mappings which have a name associated with them. The name may be used to refer to a specific mapping when links are generated.</div>
 URLマッピングでは、名前で連携ができるように、名前付きマッピングに対応しています。<p class="paragraph"/><div class="hidden-block">The syntax for defining a named mapping is as follows:</div>
@@ -3235,18 +3240,24 @@ AjaxとAjaxではないリクエストを同じコントローラアクション
 <h2 id="contentNegotiation">7.8 コンテントネゴシエーション</h2>
 <div class="hidden-block">Grails has built in support for <a href="http://en.wikipedia.org/wiki/Content_negotiation" target="blank">Content negotiation</a> using either the HTTP <code>Accept</code> header, an explicit format request parameter or the extension of a mapped URI.</div>
 Grailsには、明示的なフォーマットに対するリクエストのHTTP <code>Accept</code>ヘッダーまたはマップされたURIの拡張子での<a href="http://en.wikipedia.org/wiki/Content_negotiation" target="blank">コンテントネゴシエーション</a>に対応しています。<p class="paragraph"/><h4>Mimeタイプの定義 <div class="hidden-block">Configuring Mime Types</div></h4><p class="paragraph"/><div class="hidden-block">Before you can start dealing with content negotiation you need to tell Grails what content types you wish to support. By default Grails comes configured with a number of different content types within <code>grails-app/conf/Config.groovy</code> using the <code>grails.mime.types</code> setting: </div>
-コンテントネゴシエーションの処理を行うには、どのコンテントタイプをサポートするかをGrailsに教える必要があります。<code>grails-app/conf/Config.groovy</code>の<code>grails.mime.types</code>設定に幾つかのコンテントタイプがデフォルトで定義されています:<p class="paragraph"/><div class="code"><pre>grails.mime.types = &#91; xml: &#91;'text/xml', 'application/xml'&#93;,
-                      text: 'text&#45;plain',
-                      js: 'text/javascript',
-                      rss: 'application/rss+xml',
-                      atom: 'application/atom+xml',
-                      css: 'text/css',
-                      csv: 'text/csv',
-                      all: '&#42;/&#42;',
-                      json: 'text/json',
-                      html: &#91;'text/html','application/xhtml+xml'&#93;
-                    &#93;</pre></div><p class="paragraph"/><div class="hidden-block">The above bit of configuration allows Grails to detect to format of a request containing either the 'text/xml' or 'application/xml' media types as simply 'xml'. You can add your own types by simply adding new entries into the map.</div>
-この設定の一部を説明すると、'text/xml'または'application/xml'を含むリクエストは単純にコンテントタイプ'xml'としてGrailsが検出するのを可能にします。独自のタイプを追加するには単純にマップにタイプを追加するだけです。<p class="paragraph"/><h4>Content Negotiation using the format parameter</h4><p class="paragraph"/>Let's say a controller action can return a resource in a variety of formats: HTML, XML, and JSON. What format will the client get? The easiest and most reliable way for the client to control this is through a <code>format</code> URL parameter.<p class="paragraph"/>So if you, as a browser or some other client, want a resource as XML, you can use a URL like this:<p class="paragraph"/><div class="code"><pre>http://my.domain.org/books?format=xml</pre></div><p class="paragraph"/>The result of this on the server side is a <code>format</code> property on the <code>response</code> object with the value <code>xml</code> . You could code your controller action to return XML based on this property, but you can also make use of the controller-specific <code>withFormat()</code> method:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.converters.JSON
+コンテントネゴシエーションの処理を行うには、どのコンテントタイプをサポートするかをGrailsに教える必要があります。<code>grails-app/conf/Config.groovy</code>の<code>grails.mime.types</code>設定に幾つかのコンテントタイプがデフォルトで定義されています:<p class="paragraph"/><div class="code"><pre>grails.mime.types = &#91;
+    all:           '&#42;/&#42;',
+    atom:          'application/atom+xml',
+    css:           'text/css',
+    csv:           'text/csv',
+    form:          'application/x&#45;www&#45;form&#45;urlencoded',
+    html:          &#91;'text/html','application/xhtml+xml'&#93;,
+    js:            'text/javascript',
+    json:          &#91;'application/json', 'text/json'&#93;,
+    multipartForm: 'multipart/form&#45;data',
+    rss:           'application/rss+xml',
+    text:          'text/plain',
+    hal:           &#91;'application/hal+json','application/hal+xml'&#93;,
+    xml:           &#91;'text/xml', 'application/xml'&#93;
+&#93;</pre></div>
+<div class="code"><pre><div class=<span class="java&#45;quote">"hidden&#45;block"</span>>The above bit of configuration allows Grails to detect to format of a request containing either the 'text/xml' or 'application/xml' media types as simply 'xml'. You can add your own types by simply adding <span class="java&#45;keyword">new</span> entries into the map.</div>
+この設定の一部を説明すると、'text/xml'または'application/xml'を含むリクエストは単純にコンテントタイプ'xml'としてGrailsが検出するのを可能にします。独自のタイプを追加するには単純にマップにタイプを追加するだけです。<p class="paragraph"/><h4>Content Negotiation using the format parameter</h4><p class="paragraph"/>Let's say a controller action can <span class="java&#45;keyword">return</span> a resource in a variety of formats: HTML, XML, and JSON. What format will the client get? The easiest and most reliable way <span class="java&#45;keyword">for</span> the client to control <span class="java&#45;keyword">this</span> is through a <code>format</code> URL parameter.<p class="paragraph"/>So <span class="java&#45;keyword">if</span> you, as a browser or some other client, want a resource as XML, you can use a URL like <span class="java&#45;keyword">this</span>:<p class="paragraph"/><div class=<span class="java&#45;quote">"code"</span>><pre><div class=<span class="java&#45;quote">"error"</span>>code: <span class="java&#45;keyword">null</span></div>
+http://my.domain.org/books?format=xml</pre></div><p class="paragraph"/>The result of this on the server side is a <code>format</code> property on the <code>response</code> object with the value <code>xml</code> . You could code your controller action to return XML based on this property, but you can also make use of the controller-specific <code>withFormat()</code> method:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.converters.JSON
 <span class="java&#45;keyword">import</span> grails.converters.XML<p class="paragraph"/>class BookController &#123;<p class="paragraph"/>    def list() &#123;
         def books = Book.list()<p class="paragraph"/>        withFormat &#123;
             html bookList: books

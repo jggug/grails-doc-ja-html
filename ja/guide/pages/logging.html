@@ -165,7 +165,7 @@ This says that for loggers whose name starts with 'org.codehaus.groovy.grails.we
 <h4>Logging levels</h4>
 </div>
 <h4>ログレベル</h4><p class="paragraph"/><div class="hidden-block">
-The are several standard logging levels, which are listed here in order of descending priority:
+There are several standard logging levels, which are listed here in order of descending priority:
 </div>
 標準のロギングレベルにはいくつかの種類があり、優先順位の高い順に挙げます:
 <ol>
@@ -253,7 +253,7 @@ You have already seen how to configure loggers in Grails:
 Grailsでロガーをどのように設定するか既に見たことがあるはずです:<p class="paragraph"/><div class="code"><pre>log4j = &#123;
     error  'org.codehaus.groovy.grails.web.servlet'
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
-This example configures loggers with names starting with 'org.codehaus.groovy.grails.web.servlet' to ignore any messages sent to them at a level of 'warn' or lower. But is there a logger with this name in the application? No. So why have a configuration for it? Because the above rule applies to any logger whose name  <em class="italic">begins with</em>  'org.codehaus.groovy.grails.servlet.' as well. For example, the rule applies to both the <code>org.codehaus.groovy.grails.web.servlet.GrailsDispatcherServlet</code> class and the <code>org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest</code> one.
+This example configures loggers with names starting with 'org.codehaus.groovy.grails.web.servlet' to ignore any messages sent to them at a level of 'warn' or lower. But is there a logger with this name in the application? No. So why have a configuration for it? Because the above rule applies to any logger whose name  <em class="italic">begins with</em>  'org.codehaus.groovy.grails.web.servlet.' as well. For example, the rule applies to both the <code>org.codehaus.groovy.grails.web.servlet.GrailsDispatcherServlet</code> class and the <code>org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest</code> one.
 </div>
 この例では、「org.codehaus.groovy.grails.web.servlet」で始まる名前のロガーに送られてくる、「warn」レベル以下のメッセージは無視するように設定しています。
 しかし、アプリケーション上にこの名前のロガーは存在しているのでしょうか？答えはNoです。

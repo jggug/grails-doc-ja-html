@@ -315,7 +315,7 @@ You can try it out by adding some test data to <code>BootStrap.groovy</code>:
 いくつかのテストデータを<code>BootStrap.groovy</code>に追加することで動作確認ができます。<p class="paragraph"/><div class="code"><pre>def init = &#123; servletContext &#45;&#62;<p class="paragraph"/>        <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Stand"</span>).save()
         <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Shining"</span>).save()
     &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
-And then hitting the URL http://localhost:8080/myapp/books/1, which will render response like:
+And then hitting the URL http://localhost:8080/myapp/books/1, which will render the response like:
 </div>
 そして、<code>http://localhost:8080/myapp/books/1</code>のURLをたたいてみると、以下のようなレスポンスが表示されます:<p class="paragraph"/><div class="code"><pre>&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;
 &#60;book id=<span class="java&#45;quote">"1"</span>&#62;
@@ -370,7 +370,7 @@ Finally a resource can be deleted with <code>DELETE</code> request:
 HTTP/1.1 204 No Content
 Server: Apache&#45;Coyote/1.1
 ...</pre></div><p class="paragraph"/><div class="hidden-block">
-As you can see the <code>Resource</code> transformation enables all of the HTTP method verbs on the resource. You can enable only read-only capabilities by setting the <code>readOnly</code> attribute to true:
+As you can see, the <code>Resource</code> transformation enables all of the HTTP method verbs on the resource. You can enable only read-only capabilities by setting the <code>readOnly</code> attribute to true:
 </div>
 ここまで見てきたように、<code>Resource</code>変換はリソースに対してHTTPメソッドに対応する動作のすべてを有効にします。
 <code>readOnly</code>属性をtrueに設定することで読み取り専用にできます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books', readOnly=<span class="java&#45;keyword">true</span>)
@@ -404,14 +404,16 @@ A more detailed explanation on <a href="../guide/single.html#restfulMappings" cl
 
 <h2 id="linkingToResources">8.1.3 RESTリソースへのリンク</h2>
 <div class="hidden-block">
-Grails' <code>link</code> tag offers an easy way to link to any domain class resource:
+The <code>link</code> tag offers an easy way to link to any domain class resource:
 </div>
-Grailsの<code>link</code>タグは、任意のドメインクラスリソースへリンクする簡単な方法を提供します:<p class="paragraph"/><div class="code"><pre>&#60;g:link resource=<span class="java&#45;quote">"$&#123;book&#125;"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>
+<code>link</code>タグは、任意のドメインクラスリソースへリンクする簡単な方法を提供します:<p class="paragraph"/><div class="code"><pre>&#60;g:link resource=<span class="java&#45;quote">"$&#123;book&#125;"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>
 
 
 <h2 id="versioningResources">8.1.4 RESTリソースのバージョニング</h2>
-<div class="hidden-block">A common requirement with a REST API is to expose different versions of the REST API. There are a few ways this can be achieved in Grails.</div>
-REST APIの一般的な要件として、REST APIの異なるバージョンの公開があります。
+<div class="hidden-block">
+A common requirement with a REST API is to expose different versions at the same time. There are a few ways this can be achieved in Grails.
+</div>
+REST APIの一般的な要件として、同時に異なるバージョンの公開があります。
 Grailsでこれを実現するにはいくつかの方法があります。<p class="paragraph"/><div class="hidden-block">h4. Versioning using the URI</div>
 <h4>URIを使ったバージョンニング</h4><p class="paragraph"/><div class="hidden-block">A common approach is to use the URI to version APIs (although this approach is discouraged in favour of Hypermedia). For example, you can define the following URL mappings:</div>
 一般的な方法は、各バージョンのAPIへのURIを使うことです(しかし、この方法よりはハイパーメディアを使った方法をお勧めします)。
@@ -428,7 +430,9 @@ Grailsでこれを実現するにはいくつかの方法があります。<p cl
 例えば以下のようにURLマッピングを定義できます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(version:'1.0', resources:<span class="java&#45;quote">"book"</span>, namespace:'v1')
 <span class="java&#45;quote">"/books"</span>(version:'2.0', resources:<span class="java&#45;quote">"book"</span>, namespace:'v2')</pre></div><p class="paragraph"/><div class="hidden-block">Then in the client simply pass which version you need using the <code>Accept-Version</code> header:</div>
 そして、クライアントからは<code>Accept-Version</code>ヘッダを使ってバージョンを渡すだけです:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept&#45;Version: 1.0"</span> &#45;X GET http://localhost:8080/myapp/books</pre></div><p class="paragraph"/><div class="hidden-block">h4. Versioning using Hypermedia / Mime Types</div>
-<h4>ハイパーメディア/MIMEタイプを使ったバージョニング</h4><p class="paragraph"/><div class="hidden-block">Another approach to versioning is to use Mime Type definitions to declare the version of your custom media types (see the section on "Hypermedia as the Engine of Application State" for more information about Hypermedia concepts). For example in <code>Config.groovy</code> you can declare a custom Mime Type for your resource that includes a version parameter (the 'v' parameter):</div>
+<h4>ハイパーメディア/MIMEタイプを使ったバージョニング</h4><p class="paragraph"/><div class="hidden-block">
+Another approach to versioning is to use Mime Type definitions to declare the version of your custom media types (see the section on "Hypermedia as the Engine of Application State" for more information about Hypermedia concepts). For example, in <code>Config.groovy</code> you can declare a custom Mime Type for your resource that includes a version parameter (the 'v' parameter):
+</div>
 他のバージョニング方法は、MIMEタイプ定義を使い、カスタムメディアタイプとしてバージョンを宣言する方法です(ハイパーメディアのコンセプトについての、より詳しい情報は「アプリケーション状態エンジンとしてのハイパーメディア」を参照してください)。
 例えば<code>Config.groovy</code>内に、リソースに対してバージョンパラメータ('v'のパラメータ)を含んだカスタムMIMEタイプを宣言できます:<p class="paragraph"/><div class="code"><pre>grails.mime.types = &#91;
     all: '&#42;/&#42;',
@@ -473,7 +477,9 @@ Note that the <code>create</code> and <code>edit</code> actions are only needed 
 </blockquote></div>
 <blockquote class="note">
 <code>create</code>と<code>edit</code>アクションは、コントローラがHTMLインタフェースを公開する場合にのみ必要です。
-</blockquote><p class="paragraph"/><div class="hidden-block">As an example if you have a <a href="../guide/single.html#restfulMappings" class="guide">nested resource</a> then you would typically want to query both the parent and the child identifiers. For example given the following URL mapping:</div>
+</blockquote><p class="paragraph"/><div class="hidden-block">
+As an example, if you have a <a href="../guide/single.html#restfulMappings" class="guide">nested resource</a> then you would typically want to query both the parent and the child identifiers. For example, given the following URL mapping:
+</div>
 例のように<a href="../guide/single.html#restfulMappings" class="guide">ネストしたリソース</a>の場合、大抵は親と子供の識別子が必要になります。
 例えば以下のようなURLマッピングの場合:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/authors"</span>(resources:'author') &#123;
     <span class="java&#45;quote">"/books"</span>(resources:'book')
@@ -515,7 +521,9 @@ The 'create' and 'edit' actions are already required if you plan to implement an
 </blockquote><p class="paragraph"/><div class="hidden-block">The key to implementing REST actions is the <a href="../ref/Controllers/respond.html" class="controllers">respond</a> method introduced in Grails 2.3. The <code>respond</code> method tries to produce the most appropriate response for the requested content type (JSON, XML, HTML etc.)</div>
 RESTアクションの実装の鍵は、Grails 2.3で導入された<a href="../ref/Controllers/respond.html" class="controllers">respond</a>メソッドです。
 <code>respond</code>メソッドは、リクエストのCotent Type(JSON、XML、XMLなど)に対して、もっとも適切なレスポンスを生成しようとします。<p class="paragraph"/><div class="hidden-block">h4. Implementing the 'index' action</div>
-<h4>'index'アクションの実装</h4><p class="paragraph"/><div class="hidden-block">For example to implement the <code>index</code> action, simply call the <code>respond</code> method passing the list of objects to respond with: </div>
+<h4>'index'アクションの実装</h4><p class="paragraph"/><div class="hidden-block">
+For example, to implement the <code>index</code> action, simply call the <code>respond</code> method passing the list of objects to respond with: 
+</div>
 例えば<code>index</code>アクションを実装するには、単にオブジェクトのリストと共に<code>respond</code>メソッドを呼びます:<p class="paragraph"/><div class="code"><pre>def index(<span class="java&#45;object">Integer</span> max) &#123;
     params.max = <span class="java&#45;object">Math</span>.min(max ?: 10, 100)
     respond Book.list(params), model:&#91;bookCount: Book.count()&#93;
@@ -536,7 +544,9 @@ RESTアクションの実装の鍵は、Grails 2.3で導入された<a href="../
 <code>show</code>アクションはidによって個々のリソースを表示するためのものです。
 これはGroovyコード1行で実装できます(メソッドのシグネチャを除く):<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
     respond book
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">By specifying the domain instance as a parameter to the action Grails will automatically attempt to lookup the domain instance using the <code>id</code> parameter of the request. If domain instance doesn't exist then <code>null</code> will be passed into the action. The <code>respond</code> method will return a 404 error if null is passed otherwise once again it will attempt to render an appropriate response. If the format is HTML then an appropriate model will produced. The following action is functionally equivalent to the above action:</div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+By specifying the domain instance as a parameter to the action Grails will automatically attempt to lookup the domain instance using the <code>id</code> parameter of the request. If the domain instance doesn't exist, then <code>null</code> will be passed into the action. The <code>respond</code> method will return a 404 error if null is passed otherwise once again it will attempt to render an appropriate response. If the format is HTML then an appropriate model will produced. The following action is functionally equivalent to the above action:
+</div>
 アクションパラメータとして特定のドメインインスタンスを指定すると、Grailsは自動的にリクエストの<code>id</code>パラメータからドメインインスタンスを検索しようとします。
 もし、ドメインインスタンスが存在しない場合は、アクションへ<code>null</code>が渡されます。
 <code>respond</code>メソッドはnullが渡された場合は404エラーを返します。
@@ -550,7 +560,9 @@ nullではない場合は、前と同じように適切なレスポンスを表�
         <span class="java&#45;keyword">return</span> &#91;book: book&#93;
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Implementing the 'save' action</div>
-<h4>'save'アクションの実装</h4><p class="paragraph"/><div class="hidden-block">The <code>save</code> action saves new resource representations. To start off with simply define a an action that accepts a resource as the first argument and mark it as <code>Transactional</code> with the <code>grails.transaction.Transactional</code> transform:</div>
+<h4>'save'アクションの実装</h4><p class="paragraph"/><div class="hidden-block">
+The <code>save</code> action creates new resource representations. To start off, simply define an action that accepts a resource as the first argument and mark it as <code>Transactional</code> with the <code>grails.transaction.Transactional</code> transform:
+</div>
 <code>save</code>アクションは新たなリソースを保存します。
 <code>save</code>アクションを簡単に実装するには、最初の引数にリソースをとるアクションを定義し、そのアクションに<code>grails.transaction.Transactional</code>変換を使って<code>Transactional</code>としてマークします:<p class="paragraph"/><div class="code"><pre>@Transactional
 def save(Book book) &#123;
@@ -562,7 +574,9 @@ def save(Book book) &#123;
 &#125;
 <span class="java&#45;keyword">else</span> &#123;
     &#8230;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the case of HTML the 'create' view will be rendered again so the user can correct the invalid input. In the case of other formats (JSON, XML etc.) the errors object itself will be rendered in the appropriate format and a status code of 422 (UNPROCESSABLE_ENTITY) returned.</div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In the case of HTML the 'create' view will be rendered again so the user can correct the invalid input. In the case of other formats (JSON, XML etc.), the errors object itself will be rendered in the appropriate format and a status code of 422 (UNPROCESSABLE_ENTITY) returned.
+</div>
 HTMLの場合は'create'ビューが再度表示されます。
 そして、ユーザは誤った入力を修正できます。
 それ以外のフォーマット(JSON、XMLなど)の場合は、エラーオブジェクト自身が適切なフォーマットで表示され、422(UNPROCESSABLE_ENTITY)のステータスコードが返されます。<p class="paragraph"/><div class="hidden-block">If there are no errors then the resource can be saved and an appropriate response sent:</div>
@@ -577,7 +591,9 @@ HTMLの場合は'create'ビューが再度表示されます。
 HTMLの場合は、オリジナルのリソースへリダイレクトされます。
 そして、他のフォーマットでは201(CREATED)のステータスコードが返されます。<p class="paragraph"/><div class="hidden-block">h4. Implementing the 'update' action</div>
 <h4>'update'アクションの実装</h4><p class="paragraph"/>
-<div class="hidden-block">The <code>update</code> action updates an existing resource representations and is largely similar to the <code>save</code> action, first define the method signature:</div>
+<div class="hidden-block">
+The <code>update</code> action updates an existing resource representations and is largely similar to the <code>save</code> action. First define the method signature:
+</div>
 <code>update</code>アクションは既存のリソースを更新します。
 そして、<code>update</code>アクションは<code>save</code>アクションとほとんど同じです。
 はじめにメソッドのシグネチャを定義します:<p class="paragraph"/><div class="code"><pre>@Transactional
@@ -632,21 +648,25 @@ HTMLレスポンスでは<code>index</code>アクションへリダイレクト�
 
 
 <h2 id="renderers">8.1.6 レスポンスレンダリングのカスタマイズ</h2>
-<div class="hidden-block">There are several ways to customize response rendering in Grails</div>
+<div class="hidden-block">There are several ways to customize response rendering in Grails.</div>
 Grailsではレスポンスのレンダリングをカスタマイズする方法がいくつかあります。
 
 
 
 <h2 id="defaultRenderers">8.1.6.1 デフォルトレンダラーのカスタマイズ</h2>
-<div class="hidden-block">The default renderers for XML and JSON can be found in the <code>grails.rest.renderer.xml</code> and <code>grails.rest.renderer.json</code> packages respectively. These use the Grails converters (<code>grails.converters.XML</code> and <code>grails.converters.JSON</code>) by default for response rendering. </div>
-XMLとJSONに対するデフォルトのレンダラーは、それぞれ<code>grails.rest.renderer.xml</code>、<code>grails.rest.renderer.json</code>パッケージ内にあります。
-これらはレスポンスのレンダリングにGrailsのコンバータ(<code>grails.converters.XML</code>と<code>grails.converters.JSON</code>)を使います。<p class="paragraph"/><div class="hidden-block">You can easily customize response rendering using this default renderers. A common change you may want to make is to include or exclude certain properties from rendering. </div>
-このデフォルトレンダラーを使って簡単にレスポンスのレンダリングをカスタマイズできます。
+<div class="hidden-block">
+The default renderers for XML and JSON can be found in the <code>grails.rest.render.xml</code> and <code>grails.rest.render.json</code> packages respectively. These use the Grails converters (<code>grails.converters.XML</code> and <code>grails.converters.JSON</code>) by default for response rendering. 
+</div>
+XMLとJSONに対するデフォルトのレンダラーは、それぞれ<code>grails.rest.render.xml</code>、<code>grails.rest.render.json</code>パッケージ内にあります。
+これらはレスポンスのレンダリングにGrailsのコンバータ(<code>grails.converters.XML</code>と<code>grails.converters.JSON</code>)を使います。<p class="paragraph"/><div class="hidden-block">
+You can easily customize response rendering using these default renderers. A common change you may want to make is to include or exclude certain properties from rendering. 
+</div>
+これらのデフォルトレンダラーを使って簡単にレスポンスのレンダリングをカスタマイズできます。
 よく必要となる変更は、レンダリング時に特定のプロパティをインクルード、またはエクスクルードすることです。<p class="paragraph"/><div class="hidden-block">h4. Including or Excluding Properties from Rendering</div>
 <h4>レンダリング時のプロパティのインクルードとエクスクルード</h4><p class="paragraph"/><div class="hidden-block">As mentioned previously, Grails maintains a registry of <code>grails.rest.render.Renderer</code> instances. There are some default configured renderers and the ability to register or override renderers for a given domain class or even for a collection of domain classes. To include a particular property from rendering you need to register a custom renderer by defining a bean in <code>grails-app/conf/spring/resources.groovy</code>:</div>
 前に説明したように、Grailsは<code>grails.rest.render.Renderer</code>インスタンスをレジストリで管理しています。
 デフォルトで設定されているレンダラーがいくつかありますが、与えられたドメインクラス、またはドメインクラスのコレクションに対し、レンダラーの登録や上書きが可能です。
-レンダリングで特定のプロパティをインクルードするには、<code>grails-app/conf/spring/resources.groovy</code>内のビーン定義によって、カスタムレンダラーを登録する必要があります:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.renderer.xml.&#42;<p class="paragraph"/>beans = &#123;
+レンダリングで特定のプロパティをインクルードするには、<code>grails-app/conf/spring/resources.groovy</code>内のビーン定義によって、カスタムレンダラーを登録する必要があります:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.xml.&#42;<p class="paragraph"/>beans = &#123;
     bookRenderer(XmlRenderer, Book) &#123;
         includes = &#91;'title'&#93;
     &#125;
@@ -657,13 +677,17 @@ The bean name is not important (Grails will scan the application context for all
 <blockquote class="note">
 ビーンの名前は重要ではありません(Grailsは登録されたすべてのレンダラーのビーンを見つけるために、アプリケーションコンテキストをスキャンします)。
 しかし、構造と可読性の理由から、分かりやすい名前を付けておくことをお勧めします。
-</blockquote><p class="paragraph"/><div class="hidden-block">To exclude a property the <code>exclude</code> property of the <code>XmlRenderer</code> class can be used:</div>
-プロパティをエクスクルードするには、<code>XmlRenderer</code>クラスの<code>exclude</code>プロパティを使います:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.renderer.xml.&#42;<p class="paragraph"/>beans = &#123;
+</blockquote><p class="paragraph"/><div class="hidden-block">
+To exclude a property, the <code>excludes</code> property of the <code>XmlRenderer</code> class can be used:
+</div>
+プロパティをエクスクルードするには、<code>XmlRenderer</code>クラスの<code>exclude</code>プロパティを使います:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.xml.&#42;<p class="paragraph"/>beans = &#123;
     bookRenderer(XmlRenderer, Book) &#123;
         excludes = &#91;'isbn'&#93;
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Customizing the Converters</div>
-<h4>コンバーターのカスタマイズ</h4><p class="paragraph"/><div class="hidden-block">As mentioned previously, the default renders use the <code>grails.converters</code> package under the covers. In other word, under the covers they essentially do the following:</div>
+<h4>コンバーターのカスタマイズ</h4><p class="paragraph"/><div class="hidden-block">
+As mentioned previously, the default renders use the <code>grails.converters</code> package under the covers. In other words, under the covers they essentially do the following:
+</div>
 前に説明したように、デフォルトのレンダラーは<code>grails.converters</code>パッケージ配下のクラスを使っています。
 これは、パッケージ配下のクラスを使って以下のようにした場合と本質的には同じです:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.converters.&#42;<p class="paragraph"/>&#8230;
 render book as XML<p class="paragraph"/>// or render book as JSON</pre></div><p class="paragraph"/><div class="hidden-block">Why the separation between converters and renderers? Well a renderer has more flexibility to use whatever rendering technology you chose. When implementing a custom renderer you could use <a href="http://wiki.fasterxml.com/JacksonHome" target="blank">Jackson</a>, <a href="http://code.google.com/p/google-gson/" target="blank">Gson</a> or any Java library to implement the renderer. Converters on the other hand are very much tied to Grails' own marshalling implementation.</div>
@@ -674,7 +698,9 @@ render book as XML<p class="paragraph"/>// or render book as JSON</pre></div><p 
 
 
 <h2 id="objectMarshallers">8.1.6.2 カスタムオブジェクトマーシャラの登録</h2>
-<div class="hidden-block">Grails' Converters feature the notion of an <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">ObjectMarshaller</a>, and each type can have a registered <code>ObjectMarshaller</code>. You can register custom <code>ObjectMarshaller</code> instances to completely customize response rendering. For example you can define the following in <code>BootStrap.init</code>:</div>
+<div class="hidden-block">
+Grails' Converters feature the notion of an <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">ObjectMarshaller</a> and each type can have a registered <code>ObjectMarshaller</code>. You can register custom <code>ObjectMarshaller</code> instances to completely customize response rendering. For example, you can define the following in <code>BootStrap.init</code>:
+</div>
 Grailsのコンバーターは、<a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">オブジェクトマーシャラ</a>の概念を特徴としており、それぞれの型に対して<code>ObjectMarshaller</code>を登録できます。
 そして、レスポンスのレンダリングをカスタマイズするためにカスタム<code>ObjectMarshaller</code>インタンスを登録できます。
 例えば、<code>BootStrap.init</code>の中で以下のように定義できます:<p class="paragraph"/><div class="code"><pre>XML.registerObjectMarshaller Book, &#123; Book book, XML xml &#45;&#62;
@@ -686,7 +712,9 @@ Grailsのコンバーターは、<a href="http://grails.org/doc/latest/api/org/c
 個々の値のフォーマットをカスタマイズする場合もこの方法で可能です。
 例えば、<a href="http://grails.org/plugin/jodatime" target="blank">JodaTime plugin</a>は、JSON出力でJadaTime日付のレンダリングをサポートするために次のようにしています:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(DateTime) &#123;
     <span class="java&#45;keyword">return</span> it?.toString(<span class="java&#45;quote">"yyyy&#45;MM&#45;dd'T'HH:mm:ss'Z'"</span>)
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the case of JSON it often simple to use a map to customize output:</div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In the case of JSON it's often simple to use a map to customize output:
+</div>
 JSONの場合は、マップを使って簡単に出力をカスタマイズできます:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(Book) &#123;
   def map= &#91;:&#93;
   map&#91;'titl'&#93; = it.title

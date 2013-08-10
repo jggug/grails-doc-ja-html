@@ -141,8 +141,10 @@ function addJsClass() {
                 
 
 <h2 id="versioningResources">8.1.4 RESTリソースのバージョニング</h2>
-<div class="hidden-block">A common requirement with a REST API is to expose different versions of the REST API. There are a few ways this can be achieved in Grails.</div>
-REST APIの一般的な要件として、REST APIの異なるバージョンの公開があります。
+<div class="hidden-block">
+A common requirement with a REST API is to expose different versions at the same time. There are a few ways this can be achieved in Grails.
+</div>
+REST APIの一般的な要件として、同時に異なるバージョンの公開があります。
 Grailsでこれを実現するにはいくつかの方法があります。<p class="paragraph"/><div class="hidden-block">h4. Versioning using the URI</div>
 <h4>URIを使ったバージョンニング</h4><p class="paragraph"/><div class="hidden-block">A common approach is to use the URI to version APIs (although this approach is discouraged in favour of Hypermedia). For example, you can define the following URL mappings:</div>
 一般的な方法は、各バージョンのAPIへのURIを使うことです(しかし、この方法よりはハイパーメディアを使った方法をお勧めします)。
@@ -159,7 +161,9 @@ Grailsでこれを実現するにはいくつかの方法があります。<p cl
 例えば以下のようにURLマッピングを定義できます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(version:'1.0', resources:<span class="java&#45;quote">"book"</span>, namespace:'v1')
 <span class="java&#45;quote">"/books"</span>(version:'2.0', resources:<span class="java&#45;quote">"book"</span>, namespace:'v2')</pre></div><p class="paragraph"/><div class="hidden-block">Then in the client simply pass which version you need using the <code>Accept-Version</code> header:</div>
 そして、クライアントからは<code>Accept-Version</code>ヘッダを使ってバージョンを渡すだけです:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept&#45;Version: 1.0"</span> &#45;X GET http://localhost:8080/myapp/books</pre></div><p class="paragraph"/><div class="hidden-block">h4. Versioning using Hypermedia / Mime Types</div>
-<h4>ハイパーメディア/MIMEタイプを使ったバージョニング</h4><p class="paragraph"/><div class="hidden-block">Another approach to versioning is to use Mime Type definitions to declare the version of your custom media types (see the section on "Hypermedia as the Engine of Application State" for more information about Hypermedia concepts). For example in <code>Config.groovy</code> you can declare a custom Mime Type for your resource that includes a version parameter (the 'v' parameter):</div>
+<h4>ハイパーメディア/MIMEタイプを使ったバージョニング</h4><p class="paragraph"/><div class="hidden-block">
+Another approach to versioning is to use Mime Type definitions to declare the version of your custom media types (see the section on "Hypermedia as the Engine of Application State" for more information about Hypermedia concepts). For example, in <code>Config.groovy</code> you can declare a custom Mime Type for your resource that includes a version parameter (the 'v' parameter):
+</div>
 他のバージョニング方法は、MIMEタイプ定義を使い、カスタムメディアタイプとしてバージョンを宣言する方法です(ハイパーメディアのコンセプトについての、より詳しい情報は「アプリケーション状態エンジンとしてのハイパーメディア」を参照してください)。
 例えば<code>Config.groovy</code>内に、リソースに対してバージョンパラメータ('v'のパラメータ)を含んだカスタムMIMEタイプを宣言できます:<p class="paragraph"/><div class="code"><pre>grails.mime.types = &#91;
     all: '&#42;/&#42;',

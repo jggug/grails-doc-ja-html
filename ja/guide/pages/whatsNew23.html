@@ -185,7 +185,13 @@ Grails 2.3では、依存のバージョンよりもフレキシブルで保守�
 <li>New extensible response rendering and binding APIs</li>
 <li>Support for HAL, Atom and Hypermedia (HATEAOS)</li>
 <li>Scaffolding for REST controllers</li>
-</ul><p class="paragraph"/>See the <a href="../guide/single.html#REST" class="guide">user guide</a> for more information.<p class="paragraph"/><div class="hidden-block">h4. Async support </div>
+</ul><p class="paragraph"/>See the <a href="../guide/single.html#REST" class="guide">user guide</a> for more information.<p class="paragraph"/><h4>New Scaffolding 2.0 Plugin</h4><p class="paragraph"/>Grails' Scaffolding feature has been split into a <a href="http://grails.org/plugin/scaffolding" target="blank">separate plugin</a>. Version 2.0 of the plugin includes support for generating REST controllers, Async controllers, and Spock unit tests.<p class="paragraph"/><h4>URL Mappings May Specify A Redirect</h4><p class="paragraph"/>URL Mappings may now specify that a redirect should be triggered when the mapping matches an incoming request:<p class="paragraph"/><div class="code"><pre>class UrlMappings &#123;
+    <span class="java&#45;keyword">static</span> mappings = &#123;
+        <span class="java&#45;quote">"/viewBooks"</span>(redirect: '/books/list')
+        <span class="java&#45;quote">"/viewAuthors"</span>(redirect: &#91;controller: 'author', action: 'list'&#93;)
+        <span class="java&#45;quote">"/viewPublishers"</span>(redirect: &#91;controller: 'publisher', action: 'list', permanent: <span class="java&#45;keyword">true</span>&#93;)<p class="paragraph"/>        // &#8230;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>See the guide:redirectMappings for more information.<p class="paragraph"/><div class="hidden-block">h4. Async support </div>
 <h4>非同期サポート</h4><p class="paragraph"/><div class="hidden-block">Grails 2.3 features new <a href="../guide/single.html#async" class="guide">Asynchronous Programming APIs</a> that allow for asynchronous processing of requests and integrate seamlessly with GORM. Example:</div>
 Grails 2.3では、リクエストの非同期処理と、GORMとシームレスに統合した新たな<a href="../guide/single.html#async" class="guide">非同期プログラミングAPI</a>を提供しています。 例:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> grails.async.Promises.&#42;
 &#8230;
@@ -230,7 +236,9 @@ class UrlMappings &#123;<p class="paragraph"/>    <span class="java&#45;keyword"
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>&#60;g:link controller=<span class="java&#45;quote">"admin"</span> namespace=<span class="java&#45;quote">"reports"</span>&#62;Click For Report Admin&#60;/g:link&#62;
 &#60;g:link controller=<span class="java&#45;quote">"admin"</span> namespace=<span class="java&#45;quote">"users"</span>&#62;Click For User Admin&#60;/g:link&#62;</pre></div><p class="paragraph"/>See the <a href="../guide/single.html#namespacedControllers" class="guide">namespaced controllers</a> docs for more information.<p class="paragraph"/><div class="hidden-block">h4. Command Line </div>
-<h4>コマンドライン</h4><p class="paragraph"/><div class="hidden-block">The <code>create-app</code> command will now by default generate the command line grailsw wrapper for newly created applications.  The <code>&#45;&#45;skip-wrapper</code> switch may be used to prevent the wrapper from being generated.</div>
+<h4>コマンドライン</h4><p class="paragraph"/><div class="hidden-block">
+The <code>create-app</code> command will now by default generate the command line grailsw wrapper for newly created applications.  The <code>--skip-wrapper</code> switch may be used to prevent the wrapper from being generated.
+</div>
 <code>create&#45;app</code> コマンドがデフォルトでgrailswラッパーを生成するようになりました。ラッパーを生成しない場合は <code>&#45;&#45;skip&#45;wrapper</code> オプションを指定してください。<p class="paragraph"/><div class="code"><pre>grails create&#45;app appname &#45;&#45;skip&#45;wrapper</pre></div>
 
 

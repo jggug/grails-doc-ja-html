@@ -730,39 +730,132 @@ The <code>mockDomain</code> method also includes an additional parameter that le
             &#91;title: <span class="java&#45;quote">"Along Came a Spider"</span>, pages: 300&#93; &#93;)
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
 <h4>Testing Constraints</h4>
-</div><p class="paragraph"/><h4>制約のテスト</h4><p class="paragraph"/><div class="hidden-block">
-Your constraints contain logic and that logic is highly susceptible to bugs - the kind of bugs that can be tricky to track down (particularly as by default <code>save()</code> doesn't throw an exception when it fails). If your answer is that it's too hard or fiddly, that is no longer an excuse. Enter the <code>mockForConstraintsTests()</code> method.
-</div><p class="paragraph"/>制約にロジックが含まれている場合は、そのロジックは非常にバグを生みやすく、またそのバグの追跡は簡単なものではありません(特にデフォルトで<code>save()</code>が処理が失敗した場合でも例外をスローしないということもあります)。もしそのような面倒な解析に時間を取られたくない場合は、<code>mockForConstraintsTests()</code>メソッドを使用してください。<p class="paragraph"/><div class="hidden-block">
-This method is like a much reduced version of the <code>mockDomain()</code> method that simply adds a <code>validate()</code> method to a given domain class. All you have to do is mock the class, create an instance with populated data, and then call <code>validate()</code>. You can then access the <code>errors</code> property to determine if validation failed. So if all we are doing is mocking the <code>validate()</code> method, why the optional list of test instances? That is so that we can test the <code>unique</code> constraint as you will soon see.
-</div><p class="paragraph"/>このメソッドは<code>mockDoman()</code>メソッドの縮小版のようなもので、単に与えられたドメインクラスに対して<code>validate()</code>メソッドを追加します。やるべきことはクラスをモック化し、必要なデータと共にインスタンスを生成して、<code>validate()</code>を呼び出すだけです。<code>errors</code>プロパティを参照することで、検証が失敗したかどうかを確かめられます。<p class="paragraph"/>また、なぜ<code>mockForConstraintsTests()</code>に追加でテスト用のインスタンスが指定できるようになっているのでしょうか？モック化された<code>validate</code>メソッドを呼ぶだけならば必要なさそうですが、これは<code>unique</code>制約のテストを行えるようにするためです。<p class="paragraph"/><div class="hidden-block">
-So, suppose we have a simple domain class:
-</div><p class="paragraph"/>次のようなドメインクラスがあったとします。<p class="paragraph"/><div class="code"><pre>class Book &#123;<p class="paragraph"/>    <span class="java&#45;object">String</span> title
+</div>
+<h4>制約のテスト</h4><p class="paragraph"/>There are 4 types of validateable classes:
+<ol>
+<li>Domain Classes</li>
+<li>Classes Marked With The &#64;Validateable Annotation</li>
+<li>Command Objects Which Have Been Made Valdiateable Automatically</li>
+<li>Classes Configured To Be Validateable via The <code>grails.validateable.classes</code> Config.groovy Property</li>
+</ol><p class="paragraph"/>The first 3 are easily testable in a unit test with no special configuration necessary as long as the test method is marked with &#64;TestFor or explicitly applies the <code>GrailsUnitTestMixin</code> using &#64;TestMixin.  See the examples below.<p class="paragraph"/><div class="code"><pre>// src/groovy/com/demo/MyValidateable.groovy
+<span class="java&#45;keyword">package</span> com.demo<p class="paragraph"/>@grails.validation.Validateable
+class MyValidateable &#123;
+    <span class="java&#45;object">String</span> name
+    <span class="java&#45;object">Integer</span> age<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
+        name matches: /&#91;A&#45;Z&#93;.&#42;/
+        age range: 1..99
+    &#125;
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// grails&#45;app/domain/com/demo/Person.groovy
+<span class="java&#45;keyword">package</span> com.demo<p class="paragraph"/>class Person &#123;
+    <span class="java&#45;object">String</span> name<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
+        name matches: /&#91;A&#45;Z&#93;.&#42;/
+    &#125;
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/com/demo/DemoController.groovy
+<span class="java&#45;keyword">package</span> com.demo<p class="paragraph"/>class DemoController &#123;<p class="paragraph"/>    def addItems(MyCommandObject co) &#123;
+        <span class="java&#45;keyword">if</span>(co.hasErrors()) &#123;
+            render 'something went wrong'
+        &#125; <span class="java&#45;keyword">else</span> &#123;
+            render 'items have been added'
+        &#125;
+    &#125;
+&#125;<p class="paragraph"/>class MyCommandObject &#123;
+    <span class="java&#45;object">Integer</span> numberOfItems<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
+        numberOfItems range: 1..10
+    &#125;
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// test/unit/com/demo/PersonSpec.groovy
+<span class="java&#45;keyword">package</span> com.demo<p class="paragraph"/><span class="java&#45;keyword">import</span> grails.test.mixin.TestFor
+<span class="java&#45;keyword">import</span> spock.lang.Specification<p class="paragraph"/>@TestFor(Person)
+class PersonSpec <span class="java&#45;keyword">extends</span> Specification &#123;<p class="paragraph"/>    void <span class="java&#45;quote">"Test that name must begin with an upper <span class="java&#45;keyword">case</span> letter"</span>() &#123;
+        when: 'the name begins with a lower letter'
+        def p = <span class="java&#45;keyword">new</span> Person(name: 'jeff')<p class="paragraph"/>        then: 'validation should fail'
+        !p.validate()<p class="paragraph"/>        when: 'the name begins with an upper <span class="java&#45;keyword">case</span> letter'
+        p = <span class="java&#45;keyword">new</span> Person(name: 'Jeff')<p class="paragraph"/>        then: 'validation should pass'
+        p.validate()
+    &#125;
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// test/unit/com/demo/DemoControllerSpec.groovy
+<span class="java&#45;keyword">package</span> com.demo<p class="paragraph"/><span class="java&#45;keyword">import</span> grails.test.mixin.TestFor
+<span class="java&#45;keyword">import</span> spock.lang.Specification<p class="paragraph"/>@TestFor(DemoController)
+class DemoControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;<p class="paragraph"/>    void 'Test an invalid number of items'() &#123;
+        when:
+        params.numberOfItems = 42
+        controller.addItems()<p class="paragraph"/>        then:
+        response.text == 'something went wrong'
+    &#125;<p class="paragraph"/>    void 'Test a valid number of items'() &#123;
+        when:
+        params.numberOfItems = 8
+        controller.addItems()<p class="paragraph"/>        then:
+        response.text == 'items have been added'
+    &#125;
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// test/unit/com/demo/MyValidateableSpec.groovy
+<span class="java&#45;keyword">package</span> com.demo<p class="paragraph"/><span class="java&#45;keyword">import</span> grails.test.mixin.TestMixin
+<span class="java&#45;keyword">import</span> grails.test.mixin.support.GrailsUnitTestMixin
+<span class="java&#45;keyword">import</span> spock.lang.Specification<p class="paragraph"/>
+@TestMixin(GrailsUnitTestMixin)
+class MyValidateableSpec <span class="java&#45;keyword">extends</span> Specification &#123;<p class="paragraph"/>    void 'Test validate can be invoked in a unit test with no special configuration'() &#123;
+        when: 'an object is valid'
+        def validateable = <span class="java&#45;keyword">new</span> MyValidateable(name: 'Kirk', age: 47)<p class="paragraph"/>        then: 'validate() returns <span class="java&#45;keyword">true</span> and there are no errors'
+        validateable.validate()
+        !validateable.hasErrors()
+        validateable.errors.errorCount == 0<p class="paragraph"/>        when: 'an object is invalid'
+        validateable.name = 'kirk'<p class="paragraph"/>        then: 'validate() returns <span class="java&#45;keyword">false</span> and the appropriate error is created'
+        !validateable.validate()
+        validateable.hasErrors()
+        validateable.errors.errorCount == 1
+        validateable.errors&#91;'name'&#93;.code == 'matches.invalid'<p class="paragraph"/>        when: 'the clearErrors() is called'
+        validateable.clearErrors()<p class="paragraph"/>        then: 'the errors are gone'
+        !validateable.hasErrors()
+        validateable.errors.errorCount == 0<p class="paragraph"/>        when: 'the object is put back in a valid state'
+        validateable.name = 'Kirk'<p class="paragraph"/>        then: 'validate() returns <span class="java&#45;keyword">true</span> and there are no errors'
+        validateable.validate()
+        !validateable.hasErrors()
+        validateable.errors.errorCount == 0
+    &#125;
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// test/unit/com/demo/MyCommandObjectSpec.groovy
+<span class="java&#45;keyword">package</span> com.demo<p class="paragraph"/><span class="java&#45;keyword">import</span> grails.test.mixin.TestMixin
+<span class="java&#45;keyword">import</span> grails.test.mixin.support.GrailsUnitTestMixin
+<span class="java&#45;keyword">import</span> spock.lang.Specification<p class="paragraph"/>@TestMixin(GrailsUnitTestMixin)
+class MyCommandObjectSpec <span class="java&#45;keyword">extends</span> Specification &#123;<p class="paragraph"/>    void 'Test that numberOfItems must be between 1 and 10'() &#123;
+        when: 'numberOfItems is less than 1'
+        def co = <span class="java&#45;keyword">new</span> MyCommandObject()
+        co.numberOfItems = 0<p class="paragraph"/>        then: 'validation fails'
+        !co.validate()
+        co.hasErrors()
+        co.errors&#91;'numberOfItems'&#93;.code == 'range.toosmall'<p class="paragraph"/>        when: 'numberOfItems is greater than 10'
+        co.numberOfItems = 11<p class="paragraph"/>        then: 'validation fails'
+        !co.validate()
+        co.hasErrors()
+        co.errors&#91;'numberOfItems'&#93;.code == 'range.toobig'<p class="paragraph"/>        when: 'numberOfItems is greater than 1'
+        co.numberOfItems = 1<p class="paragraph"/>        then: 'validation succeeds'
+        co.validate()
+        !co.hasErrors()<p class="paragraph"/>        when: 'numberOfItems is greater than 10'
+        co.numberOfItems = 10<p class="paragraph"/>        then: 'validation succeeds'
+        co.validate()
+        !co.hasErrors()
+    &#125;
+&#125;</pre></div><p class="paragraph"/>For validateable classes which are not one of the first 3 types listed above but are configured with the <code>grails.validateable.classes</code> property in <code>Config.groovy</code>, one additional step is required to test validation.  <code>GrailsUnitTestMixin</code> provides a method named <code>mockForConstraintsTests</code> that will mock validation support for these classes.  See the example below.<p class="paragraph"/><div class="code"><pre>// src/groovy/com/demo/Book.groovy
+<span class="java&#45;keyword">package</span> com.demo<p class="paragraph"/>class Book &#123;
+    <span class="java&#45;object">String</span> title
     <span class="java&#45;object">String</span> author<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
-        title blank: <span class="java&#45;keyword">false</span>, unique: <span class="java&#45;keyword">true</span>
-        author blank: <span class="java&#45;keyword">false</span>, minSize: 5
+        author minSize: 5
     &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
-Don't worry about whether the constraints are sensible (they're not!), they are for demonstration only. To test these constraints we can do the following:
-</div><p class="paragraph"/>この制約は単なる例で、本来この制約が正しいかどうかは気にしないでください。この制約のテストは次のように行えます。<p class="paragraph"/><div class="code"><pre>@TestFor(Book)
-class BookTests &#123;
-    void testConstraints() &#123;<p class="paragraph"/>        def existingBook = <span class="java&#45;keyword">new</span> Book(
-                title: <span class="java&#45;quote">"Misery"</span>,
-                author: <span class="java&#45;quote">"Stephen King"</span>)<p class="paragraph"/>        mockForConstraintsTests(Book, &#91;existingBook&#93;)<p class="paragraph"/>        // validation should fail <span class="java&#45;keyword">if</span> both properties are <span class="java&#45;keyword">null</span>
-        def book = <span class="java&#45;keyword">new</span> Book()<p class="paragraph"/>        assert !book.validate()
-        assert <span class="java&#45;quote">"nullable"</span> == book.errors&#91;<span class="java&#45;quote">"title"</span>&#93;.code
-        assert <span class="java&#45;quote">"nullable"</span> == book.errors&#91;<span class="java&#45;quote">"author"</span>&#93;.code<p class="paragraph"/>        // So let's demonstrate the unique and minSize constraints<p class="paragraph"/>        book = <span class="java&#45;keyword">new</span> Book(title: <span class="java&#45;quote">"Misery"</span>, author: <span class="java&#45;quote">"JK"</span>)
-        assert !book.validate()
-        assert <span class="java&#45;quote">"unique"</span> == book.errors&#91;<span class="java&#45;quote">"title"</span>&#93;.code
-        assert <span class="java&#45;quote">"minSize"</span> == book.errors&#91;<span class="java&#45;quote">"author"</span>&#93;.code<p class="paragraph"/>        // Validation should pass!
-        book = <span class="java&#45;keyword">new</span> Book(title: <span class="java&#45;quote">"The Shining"</span>, author: <span class="java&#45;quote">"Stephen King"</span>)
-        assert book.validate()
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// grails&#45;app/conf/Config.groovy
+grails.validateable.classes = &#91;com.demo.Book&#93;<p class="paragraph"/>// ...</pre></div><p class="paragraph"/><div class="code"><pre>// test/unit/com/demo/BookSpec.groovy
+<span class="java&#45;keyword">package</span> com.demo<p class="paragraph"/><span class="java&#45;keyword">import</span> grails.test.mixin.TestMixin
+<span class="java&#45;keyword">import</span> grails.test.mixin.support.GrailsUnitTestMixin
+<span class="java&#45;keyword">import</span> spock.lang.Specification<p class="paragraph"/>@TestMixin(GrailsUnitTestMixin)
+class BookSpec <span class="java&#45;keyword">extends</span> Specification &#123;<p class="paragraph"/>    void 'Test validation'() &#123;
+        given:
+        mockForConstraintsTests Book<p class="paragraph"/>        when: 'the author name has only 4 characters'
+        def book = <span class="java&#45;keyword">new</span> Book()
+        book.author = 'Jeff'<p class="paragraph"/>        then: 'validation should fail'
+        !book.validate()
+        book.hasErrors()
+        book.errors&#91;'author'&#93; == 'minSize'<p class="paragraph"/>        when: 'the author name has 5 characters'
+        book.author = 'Jacob'<p class="paragraph"/>        then: 'validation should pass'
+        book.validate()
+        !book.hasErrors()
     &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
-You can probably look at that code and work out what's happening without any further explanation. The one thing we will explain is the way the <code>errors</code> property is used. First, is a real Spring <code>Errors</code> instance, so you can access all the properties and methods you would normally expect. Second, this particular <code>Errors</code> object also has map/property access as shown. Simply specify the name of the field you are interested in and the map/property access will return the name of the constraint that was violated. Note that it is the constraint name, not the message code (as you might expect).
-</div><p class="paragraph"/>おそらくコードを見れば、特に説明しなくても何が起きているのが想像できると思います。そのひとつは<code>errors</code>プロパティの使用方法です。これは本物のSpringの<code>Errors</code>インスタンスで、既存のプロパティとメソッドにアクセス可能かつ、マップ/プロパティ形式でアクセスすることができる特別な<code>Errors</code>オブジェクトです。この機能は単に確認したいフィールドの名前をマップ/プロパティ形式で指定すると制約違反のあった名前を返します。返す値は制約の名前で、メッセージコードの値ではないことに注意してください。<p class="paragraph"/><div class="hidden-block">
-That's it for testing constraints. One final thing we would like to say is that testing the constraints in this way catches a common error: typos in the "constraints" property name! It is currently one of the hardest bugs to track down normally, and yet a unit test for your constraints will highlight the problem straight away.
-</div><p class="paragraph"/>制約に関してはここまでです。最後に言いたいことは"constraints"という名前のタイプミスを見つけられるということです！これは通常発見するのが非常に難しいバグですが、制約のテストを行うことですぐに問題を明らかにできます。
-
+&#125;</pre></div><p class="paragraph"/>That's it for testing constraints. One final thing we would like to say is that testing the constraints in this way catches a common error: typos in the "constraints" property name which is a mistake that is easy to make and equally easy to overlook. A unit test for your constraints will highlight the problem straight away.<p class="paragraph"/>
 
 <a name="12.1.4 Unit Testing Filters"><!-- Legacy link --></a>
 <h2 id="unitTestingFilters">12.1.4 フィルタのユニットテスト</h2>
@@ -992,7 +1085,7 @@ controller.params.passwordConfirm = <span class="java&#45;quote">"secret"</span>
 controller.signup()</pre></div><p class="paragraph"/><div class="hidden-block">Grails auto-magically sees your call to <code>signup()</code> as a call to the action and populates the command object from the mocked request parameters. During controller testing, the <code>params</code> are mutable with a mocked request supplied by Grails.</div>
 Grailsはアクション呼び出しの<code>signup()</code>を呼び出しているのを見て、モック化されたリクエストパラメータからなんと自動的にコマンドオブジェクトに値を渡してくれます。ちなみに、コントローラのテストにおいて、Grailsが用意したモック化されたリクエストの<code>params</code>は変更可能です。<p class="paragraph"/><div class="hidden-block">h4. Testing Controllers and the render Method</div>
 <h4>コントローラとレンダーメソッドのテスト</h4><p class="paragraph"/><div class="hidden-block">The <a href="../ref/Controllers/render.html" class="controllers">render</a> method lets you render a custom view at any point within the body of an action. For instance, consider the example below:</div>
-controllersメソッドはアクション定義のあらゆる場所においてカスタムビューをレンダリングできます。例えば、下記の例を考えてみましょう:<p class="paragraph"/><div class="code"><pre>def save() &#123;
+<a href="../ref/Controllers/render.html" class="controllers">render</a>メソッドはアクション定義のあらゆる場所においてカスタムビューをレンダリングできます。例えば、下記の例を考えてみましょう:<p class="paragraph"/><div class="code"><pre>def save() &#123;
     def book = Book(params)
     <span class="java&#45;keyword">if</span> (book.save()) &#123;
         // handle

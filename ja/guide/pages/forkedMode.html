@@ -147,10 +147,10 @@ function addJsClass() {
 フォーク実行は<code>grails-app/conf/BuildConfig.groovy</code>ファイルで設定します。
 以下はデフォルト設定です:<p class="paragraph"/><div class="code"><pre>forkConfig = &#91;maxMemory: 1024, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
 grails.project.fork = &#91;
-   test: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
-   run: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;app JVM
-   war: forkConfig, // configure settings <span class="java&#45;keyword">for</span> the run&#45;war JVM
-   console: forkConfig // configure settings <span class="java&#45;keyword">for</span> the Swing console JVM
+   test: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, daemon:<span class="java&#45;keyword">true</span>&#93;, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
+   run: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // configure settings <span class="java&#45;keyword">for</span> the run&#45;app JVM
+   war: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // configure settings <span class="java&#45;keyword">for</span> the run&#45;war JVM
+   console: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;// configure settings <span class="java&#45;keyword">for</span> the Console UI JVM
 &#93;</pre></div><p class="paragraph"/><div class="hidden-block">The memory requirements of the forked JVM can be tweaked as per the requirements of the application.</div>
 フォークされたJVM用のメモリ容量は、アプリケーション要件に従って調整してください。<p class="paragraph"/><div class="hidden-block">h4. Forked Test Execution</div>
 <h4>フォークされたテスト実行</h4><p class="paragraph"/><div class="hidden-block">When running the <a href="../ref/Command Line/test-app.html" class="commandLine">test-app</a> command, a separate JVM is launched to execute this tests. This will have a notable impact on the speed of execution of the tests when running the command directly:</div>
@@ -164,7 +164,11 @@ $ grails&#62; test&#45;app</pre></div><p class="paragraph"/><div class="hidden-b
 grails.project.fork = &#91;
    test: <span class="java&#45;keyword">false</span>,
    &#8230;
-&#93;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Forked Tomcat Execution</div>
+&#93;</pre></div><p class="paragraph"/><h4>Using the Test Runnner Deamon to Speed-up Test Execution</h4><p class="paragraph"/>The defaut configuration for the testing is to activate a daemon to run tests using the <code>daemon</code> argument:<p class="paragraph"/><div class="code"><pre>grails.project.fork = &#91;
+   test: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, daemon:<span class="java&#45;keyword">true</span>&#93;, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
+   ...</pre></div><p class="paragraph"/>This only works in interactive mode, so if you start Grails with the 'grails' command and then using <code>test-app</code> the daemon will be used:<p class="paragraph"/><div class="code"><pre>$ grails
+$ grails&#62; test&#45;app</pre></div><p class="paragraph"/>This has the effect of speeding-up test executions times. You can disable the daemon by setting <code>daemon</code> to <code>false</code>. If the <code>daemon</code> becomes unresponsive you can restart it with <code>restart-daemon</code>:<p class="paragraph"/><div class="code"><pre>$ grails&#62; restart&#45;daemon</pre></div><p class="paragraph"/>
+<h4>Debugging and Forked Execution (<strike class="strike">debug vs </strike>debug-fork)</h4><p class="paragraph"/>An important consideration when using forked execution is that the <code>debug</code> argument will allow a remote debugger to be attached to the build JVM but not the JVM that your application is running in. To debug your application you should use the <code>debug-fork</code> argument:<p class="paragraph"/><div class="code"><pre>grails test&#45;app &#45;&#45;debug&#45;fork</pre></div><p class="paragraph"/>Or for run-app:<p class="paragraph"/><div class="code"><pre>grails run&#45;app &#45;&#45;debug&#45;fork</pre></div><p class="paragraph"/><div class="hidden-block">h4. Forked Tomcat Execution</div>
 <h4>フォークされたTomcat実行</h4><p class="paragraph"/><div class="hidden-block">Grails 2.2 and above support forked JVM execution of the Tomcat container in development mode. This has several benefits including:</div>
 Grails 2.2以上では、開発モードにおけるTomcatコンテナのフォーク実行をサポートしています。
 これにはいくつかのメリットがあります:<p class="paragraph"/><div class="hidden-block">

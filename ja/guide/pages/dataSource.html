@@ -195,6 +195,7 @@ JARが解決できたら、<code>grails-app/conf/DataSource.groovy</code>ファ�
 <li><code>formatSql</code> - Format logged SQL</li>
 <li><code>dialect</code> - A String or Class that represents the Hibernate dialect used to communicate with the database. See the <a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/dialect/package-summary.html" target="blank">org.hibernate.dialect</a> package for available dialects.</li>
 <li><code>readOnly</code> - If <code>true</code> makes the DataSource read-only, which results in the connection pool calling <code>setReadOnly(true)</code> on each <code>Connection</code></li>
+<li><code>persistenceInterceptor</code> - The default datasource is automatically wired up to the persistence interceptor, other datasources are not wired up automatically unless this is set to <code>true</code></li>
 <li><code>properties</code> - Extra properties to set on the DataSource bean. See the <a href="http://commons.apache.org/dbcp/api-1.2.2/org/apache/commons/dbcp/BasicDataSource.html" target="blank">Commons DBCP BasicDataSource</a> documentation.</div></li>
 <li><code>driverClassName</code> - JDBCドライバのクラス名</li>
 <li><code>username</code> - JDBCコネクションの接続に使用するユーザ名</li>
@@ -206,6 +207,7 @@ JARが解決できたら、<code>grails-app/conf/DataSource.groovy</code>ファ�
 <li><code>formatSql</code> - SQLログをフォーマットするか</li>
 <li><code>dialect</code> - データベースの通信に使用されるHibernateの方言を表す文字型かクラス。利用できる方言は<a href="http://docs.jboss.org/hibernate/core/3.6/javadocs/org/hibernate/dialect/package-summary.html" target="blank">org.hibernate.dialect</a>パッケージを参照</li>
 <li><code>readOnly</code> - <code>true</code>にした場合は読み取り専用のデータソースとなり、各<code>Connection</code>で<code>setReadOnly(true)</code>がコネクションプールより呼ばれる</li>
+<li><code>persistenceInterceptor</code> - The default datasource is automatically wired up to the persistence interceptor, other datasources are not wired up automatically unless this is set to <code>true</code></li>
 <li><code>properties</code> - DataSourceビーンを設定するための追加プロパティ。<a href="http://commons.apache.org/dbcp/api-1.2.2/org/apache/commons/dbcp/BasicDataSource.html" target="blank">Commons DBCP BasicDataSource</a>ドキュメント参照</li>
 </ul><p class="paragraph"/><div class="hidden-block">A typical configuration for MySQL may be something like:</div>
 MySQLの一般的な構成はおおむね以下のようになります。<p class="paragraph"/><div class="code"><pre>dataSource &#123;

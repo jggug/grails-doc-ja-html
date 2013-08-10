@@ -577,7 +577,7 @@ DSLは<code>sqlGroupProjection</code>メソッドでグループ化されたプ�
         sqlGroupProjection 'width, sum(height) as combinedHeightsForThisWidth', 'width', &#91;'width', 'combinedHeightsForThisWidth'&#93;, &#91;INTEGER, INTEGER&#93;
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
-The first argument to the <code>sqlProjection</code> method is the SQL which defines the projections.  The second argument represents the
+The first argument to the <code>sqlGroupProjection</code> method is the SQL which defines the projections.  The second argument represents the
 group by clause that should be part of the query.  That string may be single column name or a comma separated list of column
 names.  The third argument is a list of
 Strings which represent column aliases corresponding to the projected values expressed in the SQL.  The fourth argument

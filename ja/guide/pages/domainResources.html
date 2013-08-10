@@ -159,7 +159,7 @@ You can try it out by adding some test data to <code>BootStrap.groovy</code>:
 いくつかのテストデータを<code>BootStrap.groovy</code>に追加することで動作確認ができます。<p class="paragraph"/><div class="code"><pre>def init = &#123; servletContext &#45;&#62;<p class="paragraph"/>        <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Stand"</span>).save()
         <span class="java&#45;keyword">new</span> Book(title:<span class="java&#45;quote">"The Shining"</span>).save()
     &#125;</pre></div><p class="paragraph"/><div class="hidden-block">
-And then hitting the URL http://localhost:8080/myapp/books/1, which will render response like:
+And then hitting the URL http://localhost:8080/myapp/books/1, which will render the response like:
 </div>
 そして、<code>http://localhost:8080/myapp/books/1</code>のURLをたたいてみると、以下のようなレスポンスが表示されます:<p class="paragraph"/><div class="code"><pre>&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;
 &#60;book id=<span class="java&#45;quote">"1"</span>&#62;
@@ -214,7 +214,7 @@ Finally a resource can be deleted with <code>DELETE</code> request:
 HTTP/1.1 204 No Content
 Server: Apache&#45;Coyote/1.1
 ...</pre></div><p class="paragraph"/><div class="hidden-block">
-As you can see the <code>Resource</code> transformation enables all of the HTTP method verbs on the resource. You can enable only read-only capabilities by setting the <code>readOnly</code> attribute to true:
+As you can see, the <code>Resource</code> transformation enables all of the HTTP method verbs on the resource. You can enable only read-only capabilities by setting the <code>readOnly</code> attribute to true:
 </div>
 ここまで見てきたように、<code>Resource</code>変換はリソースに対してHTTPメソッドに対応する動作のすべてを有効にします。
 <code>readOnly</code>属性をtrueに設定することで読み取り専用にできます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.&#42;<p class="paragraph"/>@Resource(uri='/books', readOnly=<span class="java&#45;keyword">true</span>)

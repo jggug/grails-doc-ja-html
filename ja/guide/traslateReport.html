@@ -143,92 +143,21 @@ function addJsClass() {
 <h1>Document Translation Report.</h1>
 <ul class="star">
 <li><strong class="bold">File Count</strong> - 294</li>
-<li><strong class="bold">Done</strong> - 231</li>
-<li><strong class="bold">TODO</strong> - 61</li>
+<li><strong class="bold">Done</strong> - 281</li>
+<li><strong class="bold">TODO</strong> - 11</li>
 <li><strong class="bold">Not found or new</strong> - 2</li>
-</ul><p class="paragraph"/><h2>Original document updated after translation.:</h2><p class="paragraph"/><strong class="bold">./guide/theWebLayer/controllers/dataBinding.gdoc</strong><p class="paragraph"/><div class="code"><pre>85 : def bindingMap = &#91;name: 'Genesis', 
-86 :                   'albums&#91;0&#93;': &#91;title: 'Foxtrot', numberOfTracks: 6&#93;, 
-118:  &#42; an id of 4 and set its title to 'Selling England By The Pound'.  In both 
-120:  &#42; from the database by id, the Album will be added to albums and will be updated 
-222: When binding an empty <span class="java&#45;object">String</span> (a <span class="java&#45;object">String</span> with no characters in it, not even spaces), the data binder will convert the empty <span class="java&#45;object">String</span> to <span class="java&#45;keyword">null</span>.  This simplifies the most common <span class="java&#45;keyword">case</span> where the intent is to treat an empty form field as having the value <span class="java&#45;keyword">null</span> since there isn't a way to actually submit a <span class="java&#45;keyword">null</span> as a request parameter.  When <span class="java&#45;keyword">this</span> behavior is not desireable the application may assign the value directly.
-479: The &#91;BindUsing|api:org.grails.databinding.BindUsing&#93; annotation may be used to define a custom binding mechanism <span class="java&#45;keyword">for</span> all of the fields on a particular class. When the annotation is applied to a class, the value assigned to the annotation should be a class which <span class="java&#45;keyword">implements</span> the &#91;BindingHelper|api:org.grails.databinding.BindingHelper&#93; <span class="java&#45;keyword">interface</span>.  An instance of that class will be used any time a value is bound to a property in the class that <span class="java&#45;keyword">this</span> annotation has been applied to. 
-564: A global setting may be configured in <code>Config.groovy</code> to define date formats which will be used application wide when binding to Date.
-569: grails.databinding.dateFormats = &#91;'MMddyyyy', 'yyyy&#45;MM&#45;dd HH:mm:ss.S', <span class="java&#45;quote">"yyyy&#45;MM&#45;dd'T'hh:mm:ss'Z'"</span>&#93;
-573: The formats specified in <code>grails.databinding.dateFormats</code> will be attempted in the order in which they are included in the List.  If a property is marked with &#64;BindingFormat, the &#64;BindingFormat will take precedence over the values specified in <code>grails.databinding.dateFormats</code>.
-575: The <span class="java&#45;keyword">default</span> formats that are used are <span class="java&#45;quote">"yyyy&#45;MM&#45;dd HH:mm:ss.S"</span> and <span class="java&#45;quote">"yyyy&#45;MM&#45;dd'T'hh:mm:ss'Z'"</span>.</pre></div><p class="paragraph"/><strong class="bold">./guide/introduction/whatsNew23.gdoc</strong><p class="paragraph"/><div class="code"><pre>158: The <code>create&#45;app</code> command will now by <span class="java&#45;keyword">default</span> generate the command line grailsw wrapper <span class="java&#45;keyword">for</span> newly created applications.  The <code>&#45;&#45;skip&#45;wrapper</code> <span class="java&#45;keyword">switch</span> may be used to prevent the wrapper from being generated.</pre></div><p class="paragraph"/><strong class="bold">./guide/commandLine/forkedMode.gdoc</strong><p class="paragraph"/><div class="code"><pre>9  :    test: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, daemon:<span class="java&#45;keyword">true</span>&#93;, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
-10 :    run: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // configure settings <span class="java&#45;keyword">for</span> the run&#45;app JVM
-11 :    war: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // configure settings <span class="java&#45;keyword">for</span> the run&#45;war JVM
-12 :    console: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;// configure settings <span class="java&#45;keyword">for</span> the Console UI JVM
-45 : The defaut configuration <span class="java&#45;keyword">for</span> the testing is to activate a daemon to run tests using the <code>daemon</code> argument:
-49 :    test: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, daemon:<span class="java&#45;keyword">true</span>&#93;, // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM
-53 : This only works in interactive mode, so <span class="java&#45;keyword">if</span> you start Grails with the 'grails' command and then using <code>test&#45;app</code> the daemon will be used:
-60 : This has the effect of speeding&#45;up test executions times. You can disable the daemon by setting <code>daemon</code> to <code><span class="java&#45;keyword">false</span></code>. If the <code>daemon</code> becomes unresponsive you can restart it with <code>restart&#45;daemon</code>:
-63 : $ grails&#62; restart&#45;daemon
-69 : An important consideration when using forked execution is that the <code>debug</code> argument will allow a remote debugger to be attached to the build JVM but not the JVM that your application is running in. To debug your application you should use the <code>debug&#45;fork</code> argument:
-72 : grails test&#45;app &#45;&#45;debug&#45;fork
-75 : Or <span class="java&#45;keyword">for</span> run&#45;app:
-78 : grails run&#45;app &#45;&#45;debug&#45;fork</pre></div><p class="paragraph"/><h2>Not done.</h2>
+</ul><p class="paragraph"/><h2>Original document updated after translation.:</h2><p class="paragraph"/><h2>Not done.</h2>
 <ul class="star">
-<li>../en/guide/GORM/advancedGORMFeatures/defaultSortOrder.gdoc</li>
-<li>../en/guide/GORM/advancedGORMFeatures/eventsAutoTimestamping.gdoc</li>
-<li>../en/guide/GORM/advancedGORMFeatures/ormdsl/customHibernateTypes.gdoc</li>
-<li>../en/guide/GORM/advancedGORMFeatures/ormdsl/customNamingStrategy.gdoc</li>
-<li>../en/guide/GORM/advancedGORMFeatures/ormdsl/derivedProperties.gdoc</li>
-<li>../en/guide/GORM/domainClasses/gormAssociation/manyToOneAndOneToOne.gdoc</li>
-<li>../en/guide/GORM/domainClasses/inheritanceInGORM.gdoc</li>
-<li>../en/guide/GORM/persistenceBasics/modificationChecking.gdoc</li>
-<li>../en/guide/GORM/querying/criteria.gdoc</li>
-<li>../en/guide/GORM/querying/detachedCriteria.gdoc</li>
-<li>../en/guide/GORM/querying/hql.gdoc</li>
-<li>../en/guide/async/grailsEvents.gdoc</li>
 <li>../en/guide/commandLine/interactiveMode.gdoc</li>
 <li>../en/guide/commandLine/wrapper.gdoc</li>
-<li>../en/guide/conf.gdoc</li>
-<li>../en/guide/conf/config.gdoc</li>
-<li>../en/guide/conf/config/builtInOptions.gdoc</li>
-<li>../en/guide/conf/config/configGORM.gdoc</li>
-<li>../en/guide/conf/config/logging.gdoc</li>
-<li>../en/guide/contributing.gdoc</li>
-<li>../en/guide/contributing/build.gdoc</li>
-<li>../en/guide/contributing/issues.gdoc</li>
-<li>../en/guide/contributing/patchesCore.gdoc</li>
-<li>../en/guide/contributing/patchesDoc.gdoc</li>
-<li>../en/guide/gettingStarted/aHelloWorldExample.gdoc</li>
 <li>../en/guide/links.yml</li>
 <li>../en/guide/rewriteRules.txt</li>
 <li>../en/guide/security/xssPrevention.gdoc</li>
 <li>../en/guide/services/declarativeTransactions/transactionsRollbackAndTheSession.gdoc</li>
-<li>../en/guide/testing/integrationTesting.gdoc</li>
 <li>../en/guide/theWebLayer/urlmappings/namespacedControllers.gdoc</li>
+<li>../en/guide/theWebLayer/urlmappings/redirectMappings.gdoc</li>
 <li>../en/guide/theWebLayer/urlmappings/restfulMappings.gdoc</li>
 <li> <strong class="bold">(original file updated)</strong> ../en/guide/toc.yml</li>
-<li>../en/guide/validation.gdoc</li>
-<li>../en/guide/validation/constraints.gdoc</li>
-<li>../en/guide/validation/sharingConstraints.gdoc</li>
-<li>../en/guide/validation/validatingConstraints.gdoc</li>
-<li>../en/guide/validation/validationAndInternationalization.gdoc</li>
-<li>../en/guide/validation/validationNonDomainAndCommandObjectClasses.gdoc</li>
-<li>../en/guide/validation/validationOnTheClient.gdoc</li>
-<li>../en/guide/webServices/REST/binding.gdoc</li>
-<li>../en/guide/webServices/REST/domainResources.gdoc</li>
-<li>../en/guide/webServices/REST/hypermedia.gdoc</li>
-<li>../en/guide/webServices/REST/hypermedia/atom.gdoc</li>
-<li>../en/guide/webServices/REST/hypermedia/hal.gdoc</li>
-<li>../en/guide/webServices/REST/hypermedia/vndError.gdoc</li>
-<li>../en/guide/webServices/REST/linkingToResources.gdoc</li>
-<li>../en/guide/webServices/REST/renderers.gdoc</li>
-<li>../en/guide/webServices/REST/renderers/customRenderers.gdoc</li>
-<li>../en/guide/webServices/REST/renderers/defaultRenderers.gdoc</li>
-<li>../en/guide/webServices/REST/renderers/gspRenderers.gdoc</li>
-<li>../en/guide/webServices/REST/renderers/namedObjectMarshallers.gdoc</li>
-<li>../en/guide/webServices/REST/renderers/objectMarshallerInterface.gdoc</li>
-<li>../en/guide/webServices/REST/renderers/objectMarshallers.gdoc</li>
-<li>../en/guide/webServices/REST/restfulControllers.gdoc</li>
-<li>../en/guide/webServices/REST/restfulControllers/extendingRestfulController.gdoc</li>
-<li>../en/guide/webServices/REST/restfulControllers/generatingRestControllers.gdoc</li>
-<li>../en/guide/webServices/REST/restfulControllers/restControllersStepByStep.gdoc</li>
-<li>../en/guide/webServices/REST/urlMappings.gdoc</li>
-<li>../en/guide/webServices/REST/versioningResources.gdoc</li>
 <li>../en/guide/webServices/SOAP.gdoc</li>
 </ul><p class="paragraph"/><h2>File not found (new file added) or empty file</h2>
 <ul class="star">

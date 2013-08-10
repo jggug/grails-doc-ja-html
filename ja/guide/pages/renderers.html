@@ -164,21 +164,25 @@ function addJsClass() {
                 
 
 <h2 id="renderers">8.1.6 レスポンスレンダリングのカスタマイズ</h2>
-<div class="hidden-block">There are several ways to customize response rendering in Grails</div>
+<div class="hidden-block">There are several ways to customize response rendering in Grails.</div>
 Grailsではレスポンスのレンダリングをカスタマイズする方法がいくつかあります。
 
 
 
 <h2 id="defaultRenderers">8.1.6.1 デフォルトレンダラーのカスタマイズ</h2>
-<div class="hidden-block">The default renderers for XML and JSON can be found in the <code>grails.rest.renderer.xml</code> and <code>grails.rest.renderer.json</code> packages respectively. These use the Grails converters (<code>grails.converters.XML</code> and <code>grails.converters.JSON</code>) by default for response rendering. </div>
-XMLとJSONに対するデフォルトのレンダラーは、それぞれ<code>grails.rest.renderer.xml</code>、<code>grails.rest.renderer.json</code>パッケージ内にあります。
-これらはレスポンスのレンダリングにGrailsのコンバータ(<code>grails.converters.XML</code>と<code>grails.converters.JSON</code>)を使います。<p class="paragraph"/><div class="hidden-block">You can easily customize response rendering using this default renderers. A common change you may want to make is to include or exclude certain properties from rendering. </div>
-このデフォルトレンダラーを使って簡単にレスポンスのレンダリングをカスタマイズできます。
+<div class="hidden-block">
+The default renderers for XML and JSON can be found in the <code>grails.rest.render.xml</code> and <code>grails.rest.render.json</code> packages respectively. These use the Grails converters (<code>grails.converters.XML</code> and <code>grails.converters.JSON</code>) by default for response rendering. 
+</div>
+XMLとJSONに対するデフォルトのレンダラーは、それぞれ<code>grails.rest.render.xml</code>、<code>grails.rest.render.json</code>パッケージ内にあります。
+これらはレスポンスのレンダリングにGrailsのコンバータ(<code>grails.converters.XML</code>と<code>grails.converters.JSON</code>)を使います。<p class="paragraph"/><div class="hidden-block">
+You can easily customize response rendering using these default renderers. A common change you may want to make is to include or exclude certain properties from rendering. 
+</div>
+これらのデフォルトレンダラーを使って簡単にレスポンスのレンダリングをカスタマイズできます。
 よく必要となる変更は、レンダリング時に特定のプロパティをインクルード、またはエクスクルードすることです。<p class="paragraph"/><div class="hidden-block">h4. Including or Excluding Properties from Rendering</div>
 <h4>レンダリング時のプロパティのインクルードとエクスクルード</h4><p class="paragraph"/><div class="hidden-block">As mentioned previously, Grails maintains a registry of <code>grails.rest.render.Renderer</code> instances. There are some default configured renderers and the ability to register or override renderers for a given domain class or even for a collection of domain classes. To include a particular property from rendering you need to register a custom renderer by defining a bean in <code>grails-app/conf/spring/resources.groovy</code>:</div>
 前に説明したように、Grailsは<code>grails.rest.render.Renderer</code>インスタンスをレジストリで管理しています。
 デフォルトで設定されているレンダラーがいくつかありますが、与えられたドメインクラス、またはドメインクラスのコレクションに対し、レンダラーの登録や上書きが可能です。
-レンダリングで特定のプロパティをインクルードするには、<code>grails-app/conf/spring/resources.groovy</code>内のビーン定義によって、カスタムレンダラーを登録する必要があります:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.renderer.xml.&#42;<p class="paragraph"/>beans = &#123;
+レンダリングで特定のプロパティをインクルードするには、<code>grails-app/conf/spring/resources.groovy</code>内のビーン定義によって、カスタムレンダラーを登録する必要があります:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.xml.&#42;<p class="paragraph"/>beans = &#123;
     bookRenderer(XmlRenderer, Book) &#123;
         includes = &#91;'title'&#93;
     &#125;
@@ -189,13 +193,17 @@ The bean name is not important (Grails will scan the application context for all
 <blockquote class="note">
 ビーンの名前は重要ではありません(Grailsは登録されたすべてのレンダラーのビーンを見つけるために、アプリケーションコンテキストをスキャンします)。
 しかし、構造と可読性の理由から、分かりやすい名前を付けておくことをお勧めします。
-</blockquote><p class="paragraph"/><div class="hidden-block">To exclude a property the <code>exclude</code> property of the <code>XmlRenderer</code> class can be used:</div>
-プロパティをエクスクルードするには、<code>XmlRenderer</code>クラスの<code>exclude</code>プロパティを使います:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.renderer.xml.&#42;<p class="paragraph"/>beans = &#123;
+</blockquote><p class="paragraph"/><div class="hidden-block">
+To exclude a property, the <code>excludes</code> property of the <code>XmlRenderer</code> class can be used:
+</div>
+プロパティをエクスクルードするには、<code>XmlRenderer</code>クラスの<code>exclude</code>プロパティを使います:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.xml.&#42;<p class="paragraph"/>beans = &#123;
     bookRenderer(XmlRenderer, Book) &#123;
         excludes = &#91;'isbn'&#93;
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">h4. Customizing the Converters</div>
-<h4>コンバーターのカスタマイズ</h4><p class="paragraph"/><div class="hidden-block">As mentioned previously, the default renders use the <code>grails.converters</code> package under the covers. In other word, under the covers they essentially do the following:</div>
+<h4>コンバーターのカスタマイズ</h4><p class="paragraph"/><div class="hidden-block">
+As mentioned previously, the default renders use the <code>grails.converters</code> package under the covers. In other words, under the covers they essentially do the following:
+</div>
 前に説明したように、デフォルトのレンダラーは<code>grails.converters</code>パッケージ配下のクラスを使っています。
 これは、パッケージ配下のクラスを使って以下のようにした場合と本質的には同じです:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.converters.&#42;<p class="paragraph"/>&#8230;
 render book as XML<p class="paragraph"/>// or render book as JSON</pre></div><p class="paragraph"/><div class="hidden-block">Why the separation between converters and renderers? Well a renderer has more flexibility to use whatever rendering technology you chose. When implementing a custom renderer you could use <a href="http://wiki.fasterxml.com/JacksonHome" target="blank">Jackson</a>, <a href="http://code.google.com/p/google-gson/" target="blank">Gson</a> or any Java library to implement the renderer. Converters on the other hand are very much tied to Grails' own marshalling implementation.</div>
@@ -206,7 +214,9 @@ render book as XML<p class="paragraph"/>// or render book as JSON</pre></div><p 
 
 
 <h2 id="objectMarshallers">8.1.6.2 カスタムオブジェクトマーシャラの登録</h2>
-<div class="hidden-block">Grails' Converters feature the notion of an <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">ObjectMarshaller</a>, and each type can have a registered <code>ObjectMarshaller</code>. You can register custom <code>ObjectMarshaller</code> instances to completely customize response rendering. For example you can define the following in <code>BootStrap.init</code>:</div>
+<div class="hidden-block">
+Grails' Converters feature the notion of an <a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">ObjectMarshaller</a> and each type can have a registered <code>ObjectMarshaller</code>. You can register custom <code>ObjectMarshaller</code> instances to completely customize response rendering. For example, you can define the following in <code>BootStrap.init</code>:
+</div>
 Grailsのコンバーターは、<a href="http://grails.org/doc/latest/api/org/codehaus/groovy/grails/web/converters/marshaller/ObjectMarshaller.html" class="api">オブジェクトマーシャラ</a>の概念を特徴としており、それぞれの型に対して<code>ObjectMarshaller</code>を登録できます。
 そして、レスポンスのレンダリングをカスタマイズするためにカスタム<code>ObjectMarshaller</code>インタンスを登録できます。
 例えば、<code>BootStrap.init</code>の中で以下のように定義できます:<p class="paragraph"/><div class="code"><pre>XML.registerObjectMarshaller Book, &#123; Book book, XML xml &#45;&#62;
@@ -218,7 +228,9 @@ Grailsのコンバーターは、<a href="http://grails.org/doc/latest/api/org/c
 個々の値のフォーマットをカスタマイズする場合もこの方法で可能です。
 例えば、<a href="http://grails.org/plugin/jodatime" target="blank">JodaTime plugin</a>は、JSON出力でJadaTime日付のレンダリングをサポートするために次のようにしています:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(DateTime) &#123;
     <span class="java&#45;keyword">return</span> it?.toString(<span class="java&#45;quote">"yyyy&#45;MM&#45;dd'T'HH:mm:ss'Z'"</span>)
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In the case of JSON it often simple to use a map to customize output:</div>
+&#125;</pre></div><p class="paragraph"/><div class="hidden-block">
+In the case of JSON it's often simple to use a map to customize output:
+</div>
 JSONの場合は、マップを使って簡単に出力をカスタマイズできます:<p class="paragraph"/><div class="code"><pre>JSON.registerObjectMarshaller(Book) &#123;
   def map= &#91;:&#93;
   map&#91;'titl'&#93; = it.title

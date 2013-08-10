@@ -206,7 +206,7 @@ URIを明示的なURIへ(コントローラ・アクションを指定するの�
 特定のURIへの書き換えは、他のフレームワークと統合する場合に便利です。
 
 
-<a name="7.4.2 Mapping to REST resources"><!-- Legacy link --></a>
+<a name="7.4.3 Mapping to REST resources"><!-- Legacy link --></a>
 <h2 id="restfulMappings">7.4.2 RESTリソースへのマッピング</h2>
 Since Grails 2.3, it possible to create RESTful URL mappings that map onto controllers by convention. The syntax to do so is as follows:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book')</pre></div><p class="paragraph"/>You define a base URI and the name of the controller to map to using the <code>resources</code> parameter. The above mapping will result in the following URLs:<p class="paragraph"/>
 <table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${id}/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${id}</td><td>delete</td></tr></table><p class="paragraph"/>If you wish to include or exclude any of the generated URL mappings you can do so with the <code>include</code> or <code>exclude</code> parameter, which accepts the name of the Grails action to include or exclude:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book', exclude:&#91;'delete', 'update'&#93;)<p class="paragraph"/>or<p class="paragraph"/><span class="java&#45;quote">"/books"</span>(resources:'book', include:&#91;'index', 'show'&#93;)</pre></div><p class="paragraph"/><h4>Single resources</h4><p class="paragraph"/>A single resource is a resource for which there is only one (possibly per user) in the system. You can create a single resource using the <code>resource</code> parameter (as oppose to <code>resources</code>):<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/book"</span>(resource:'book')</pre></div><p class="paragraph"/>This results in the following URL mappings:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/book</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/book/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/book</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/book</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/book/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/book</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/book</td><td>delete</td></tr></table><p class="paragraph"/>The main difference is that the id is not included in the URL mapping.<p class="paragraph"/><h4>Nested Resources</h4><p class="paragraph"/>You can nest resource mappings to generate child resources. For example:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
@@ -220,7 +220,7 @@ The case of nested resources is a little different as they typically required tw
 &#60;g:link controller=<span class="java&#45;quote">"author"</span> action=<span class="java&#45;quote">"show"</span> method=<span class="java&#45;quote">"GET"</span> params=<span class="java&#45;quote">"&#91;bookId:1&#93;"</span> id=<span class="java&#45;quote">"2"</span>&#62;The Author&#60;/g:link&#62;</pre></div><p class="paragraph"/>However, to make this more concise there is a <code>resource</code> attribute to the link tag which can be used instead:<p class="paragraph"/><div class="code"><pre>// Results in /books/1/authors/2
 &#60;g:link resource=<span class="java&#45;quote">"book/author"</span> action=<span class="java&#45;quote">"show"</span> bookId=<span class="java&#45;quote">"1"</span> id=<span class="java&#45;quote">"2"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>The resource attribute accepts a path to the resource separated by a slash (in this case "book/author"). The attributes of the tag can be used to specify the necessary <code>bookId</code> parameter.
 
-<a name="7.4.3 Embedded Variables"><!-- Legacy link --></a>
+<a name="7.4.4 Embedded Variables"><!-- Legacy link --></a>
 <h2 id="embeddedVariables">7.4.3 埋込変数</h2>
 <h4>簡単な変数 <div class="hidden-block">Simple Variables </div></h4><p class="paragraph"/><div class="hidden-block">The previous section demonstrated how to map simple URLs with concrete "tokens". In URL mapping speak tokens are the sequence of characters between each slash, '/'. A concrete token is one which is well defined such as as <code>/product</code>. However, in many circumstances you don't know what the value of a particular token will be until runtime. In this case you can use variable placeholders within the URL for example:</div>
 前セクションでは、具体トークンURLを簡単にマップする方法を紹介しました。URLマッピングでのトークンとは"/"スラッシュの間にある文字列の事を指します。具体トークンは<code>/product</code>のように適切に指定できますが、状況によっては、ランタイム時にしか一部のトークンが予測できない場合があります。その場合は以下の例のように変数を指定できます:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -266,7 +266,7 @@ URLマッピングからコントローラへ、コードブロック内で設�
 URLが実際にマッチした時にコードブロックのロジックが実行されて変数の内容が解決されます。
 
 
-<a name="7.4.4 Mapping to Views"><!-- Legacy link --></a>
+<a name="7.4.5 Mapping to Views"><!-- Legacy link --></a>
 <h2 id="mappingToViews">7.4.4 ビューへマッピング</h2>
 <div class="hidden-block">You can resolve a URL to a view without a controller or action involved. For example to map the root URL <code>/</code> to a GSP at the location <code>grails-app/views/index.gsp</code> you could use:</div>
 コントローラまたはアクションを含まずにビューへURLをマップできます。例としてルートURL <code>/</code> を、<code>grails-app/views/index.gsp</code>にマッピングするには:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -277,7 +277,7 @@ URLが実際にマッチした時にコードブロックのロジックが実�
 &#125;</pre></div>
 
 
-<a name="7.4.5 Mapping to Response Codes"><!-- Legacy link --></a>
+<a name="7.4.6 Mapping to Response Codes"><!-- Legacy link --></a>
 <h2 id="mappingToResponseCodes">7.4.5 レスポンスコードへマッピング</h2>
 <div class="hidden-block">Grails also lets you map HTTP response codes to controllers, actions or views. Just use a method name that matches the response code you are interested in:</div>
 GrailsではHTTPレスポンスコードをコントローラ、アクション、ビューにマッピングすることができます。使用したいレスポンスコードをメソッド名に指定するだけです:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -313,7 +313,7 @@ GrailsではHTTPレスポンスコードをコントローラ、アクション�
 </blockquote>
 
 
-<a name="7.4.6 Mapping to HTTP methods"><!-- Legacy link --></a>
+<a name="7.4.7 Mapping to HTTP methods"><!-- Legacy link --></a>
 <h2 id="mappingHTTP">7.4.6 HTTPメソッドへマッピング</h2>
 <div class="hidden-block">URL mappings can also be configured to map based on the HTTP method (GET, POST, PUT or DELETE). This is very useful for RESTful APIs and for restricting mappings based on HTTP method.</div>
 URLマッピングでは、HTTPメソッド(GET, POST, PUT, DELETE)へのマップを定義することができます。HTTPメソッドをベースに制限したり、RESTful API等に便利です。<p class="paragraph"/><div class="hidden-block">As an example the following mappings provide a RESTful API URL mappings for the <code>ProductController</code>:</div>
@@ -323,7 +323,7 @@ URLマッピングでは、HTTPメソッド(GET, POST, PUT, DELETE)へのマッ�
    &#125;
 &#125;</pre></div>
 
-<a name="7.4.7 Mapping Wildcards"><!-- Legacy link --></a>
+<a name="7.4.8 Mapping Wildcards"><!-- Legacy link --></a>
 <h2 id="mappingWildcards">7.4.7 マッピングワイルドカード</h2>
 <div class="hidden-block">Grails' URL mappings mechanism also supports wildcard mappings. For example consider the following mapping:</div>
 GrailsのURLマッピング機能ではワイルドカードもサポートしています。例として次ぎのマッピングに注目してください:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -350,7 +350,7 @@ println name // prints <span class="java&#45;quote">"logo"</span> or <span class
 この例では、 <code>/images</code>また<code>/css</code>で始まるURIはURLマッピングから除外されます.
 
 
-<a name="7.4.8 Automatic Link Re-Writing"><!-- Legacy link --></a>
+<a name="7.4.9 Automatic Link Re-Writing"><!-- Legacy link --></a>
 <h2 id="automaticLinkRewriting">7.4.8 自動リンクリライト</h2>
 <div class="hidden-block">Another great feature of URL mappings is that they automatically customize the behaviour of the <a href="../ref/Tags/link.html" class="tags">link</a> tag so that changing the mappings don't require you to go and change all of your links.</div>
 URLマッピングには、<a href="../ref/Tags/link.html" class="tags">link</a>タグの振る舞いを自動的にカスタマイズ するという優れた機能が存在します。その機能のおかげでURLマッピングを変更しても、その都度リンクを変更しなくても良くなります。<p class="paragraph"/><div class="hidden-block">This is done through a URL re-writing technique that reverse engineers the links from the URL mappings. So given a mapping such as the blog one from an earlier section:</div>
@@ -368,7 +368,7 @@ GrailsがURLを自動的にリライトします:<p class="paragraph"/><div clas
 <span class="xml&#45;tag">&#60;a href=<span class="xml&#45;quote">"/fred/2007/10"</span>&#62;</span>My Blog &#45; October 2007 Posts<span class="xml&#45;tag">&#60;/a&#62;</span></pre></div>
 
 
-<a name="7.4.9 Applying Constraints"><!-- Legacy link --></a>
+<a name="7.4.10 Applying Constraints"><!-- Legacy link --></a>
 <h2 id="applyingConstraints">7.4.9 制約の適用</h2>
 <div class="hidden-block">URL Mappings also support Grails' unified <a href="../guide/single.html#constraints" class="guide">validation constraints</a> mechanism, which lets you further "constrain" how a URL is matched. For example, if we revisit the blog sample code from earlier, the mapping currently looks like this:</div>
 URLマッピングでは、URLがマッチしてるか確認するために、<a href="../guide/single.html#constraints" class="guide">バリデーション制約</a>が使用できます。例として、前と同じブログのサンプルを使用します:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
@@ -388,7 +388,7 @@ URLマッピングでは、URLがマッチしてるか確認するために、<a
 この例では、<code>year</code>,<code>month</code>,<code>day</code>パラメータが特定のパターンにマッチするように制約を定義しています。
 
 
-<a name="7.4.10 Named URL Mappings"><!-- Legacy link --></a>
+<a name="7.4.11 Named URL Mappings"><!-- Legacy link --></a>
 <h2 id="namedMappings">7.4.10 名前付きURLマッピング</h2>
 <div class="hidden-block">URL Mappings also support named mappings, that is mappings which have a name associated with them. The name may be used to refer to a specific mapping when links are generated.</div>
 URLマッピングでは、名前で連携ができるように、名前付きマッピングに対応しています。<p class="paragraph"/><div class="hidden-block">The syntax for defining a named mapping is as follows:</div>

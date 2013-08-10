@@ -205,7 +205,7 @@ controller.params.passwordConfirm = <span class="java&#45;quote">"secret"</span>
 controller.signup()</pre></div><p class="paragraph"/><div class="hidden-block">Grails auto-magically sees your call to <code>signup()</code> as a call to the action and populates the command object from the mocked request parameters. During controller testing, the <code>params</code> are mutable with a mocked request supplied by Grails.</div>
 Grailsはアクション呼び出しの<code>signup()</code>を呼び出しているのを見て、モック化されたリクエストパラメータからなんと自動的にコマンドオブジェクトに値を渡してくれます。ちなみに、コントローラのテストにおいて、Grailsが用意したモック化されたリクエストの<code>params</code>は変更可能です。<p class="paragraph"/><div class="hidden-block">h4. Testing Controllers and the render Method</div>
 <h4>コントローラとレンダーメソッドのテスト</h4><p class="paragraph"/><div class="hidden-block">The <a href="../ref/Controllers/render.html" class="controllers">render</a> method lets you render a custom view at any point within the body of an action. For instance, consider the example below:</div>
-controllersメソッドはアクション定義のあらゆる場所においてカスタムビューをレンダリングできます。例えば、下記の例を考えてみましょう:<p class="paragraph"/><div class="code"><pre>def save() &#123;
+<a href="../ref/Controllers/render.html" class="controllers">render</a>メソッドはアクション定義のあらゆる場所においてカスタムビューをレンダリングできます。例えば、下記の例を考えてみましょう:<p class="paragraph"/><div class="code"><pre>def save() &#123;
     def book = Book(params)
     <span class="java&#45;keyword">if</span> (book.save()) &#123;
         // handle

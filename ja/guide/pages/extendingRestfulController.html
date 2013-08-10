@@ -155,7 +155,9 @@ Note that the <code>create</code> and <code>edit</code> actions are only needed 
 </blockquote></div>
 <blockquote class="note">
 <code>create</code>と<code>edit</code>アクションは、コントローラがHTMLインタフェースを公開する場合にのみ必要です。
-</blockquote><p class="paragraph"/><div class="hidden-block">As an example if you have a <a href="../guide/single.html#restfulMappings" class="guide">nested resource</a> then you would typically want to query both the parent and the child identifiers. For example given the following URL mapping:</div>
+</blockquote><p class="paragraph"/><div class="hidden-block">
+As an example, if you have a <a href="../guide/single.html#restfulMappings" class="guide">nested resource</a> then you would typically want to query both the parent and the child identifiers. For example, given the following URL mapping:
+</div>
 例のように<a href="../guide/single.html#restfulMappings" class="guide">ネストしたリソース</a>の場合、大抵は親と子供の識別子が必要になります。
 例えば以下のようなURLマッピングの場合:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/authors"</span>(resources:'author') &#123;
     <span class="java&#45;quote">"/books"</span>(resources:'book')
