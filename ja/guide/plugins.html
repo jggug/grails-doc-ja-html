@@ -340,7 +340,7 @@ If you have created a Grails plugin and want it to be hosted in the central repo
 </blockquote><p class="paragraph"/><div class="hidden-block">When you have access to the Grails Plugin repository, install the <a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">Release Plugin</a> by declaring it as a 'build' scoped dependency in <code>grails-app/conf/BuildConfig.groovy</code> file:</div><p class="paragraph"/>Grailsプラグインリポジトリにアクセス権を持っていれば、<a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">リリースプラグイン</a>を <code>grails-app/conf/BuildConfig.groovy</code> ファイルの依存管理'build'スコープに定義してインストールします。<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     &#8230;
     plugins &#123;
-        build <span class="java&#45;quote<a href="release:3.0.0"</span>">></a>
+        build ':release:3.0.0'
     &#125;
 &#125;</pre></div><p class="paragraph"/>And execute the <code>publish-plugin</code> command to release your plugin:<p class="paragraph"/><div class="code"><pre>grails publish&#45;plugin</pre></div><p class="paragraph"/>This will automatically publish the plugin to the central repository. If the command is successful, it will immediately be available on the plugin portal at http://grails.org/plugin/&#60;pluginName&#62;. You can find out more about the Release plugin and its other features in <a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">its user guide</a>.<p class="paragraph"/><div class="hidden-block">h4. Configuring Additional Repositories</div><p class="paragraph"/><h4>追加リポジトリの設定</h4><p class="paragraph"/><div class="hidden-block">The process for configuring repositories in Grails differs between versions. For version of Grails 1.2 and earlier please refer to the <a href="http://grails.org/doc/1.2.x/guide/12.%20Plug-ins.html#12.2%20Plugin%20Repositories" target="blank">Grails 1.2 documentation</a> on the subject. The following sections cover Grails 1.3 and above.</div><p class="paragraph"/>Grailsにおけるリポジトリの設定手順は、Grailsのバージョンによって異なっています。Grails 1.2以前の情報については<a href="http://grails.org/doc/1.2.x/guide/12.%20Plug-ins.html#12.2%20Plugin%20Repositories" target="blank">Grails 1.2のドキュメンテーション</a>を参照ください。以降の節は、Grails 1.3以降について記述しています。<p class="paragraph"/><div class="hidden-block">Grails 1.3 and above use Ivy under the hood to resolve plugin dependencies. The mechanism for defining additional plugin repositories is largely the same as <a href="../guide/single.html#dependencyResolution" class="guide">defining repositories for JAR dependencies</a>. For example you can define a remote Maven repository that contains Grails plugins using the following syntax in <code>grails-app/conf/BuildConfig.groovy</code>:</div><p class="paragraph"/>Grails 1.3以上では、下位層に隠されているIvyがプラグインの依存性を解決します。プラグインリポジトリを追加定義する仕組みは、 <a href="../guide/single.html#dependencyResolution" class="guide">JAR依存性を定義</a>する方法とほぼ同じです。例えば、Grailsプラグインを含むリモートMavenリポジトリを定義するには、 <code>grails-app/conf/BuildConfig.groovy</code>中で以下のように記述します:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenRepo <span class="java&#45;quote">"http://repository.codehaus.org"</span><p class="paragraph"/>    // ...or with a name
@@ -384,19 +384,28 @@ sshResolver.setCheckmodified(<span class="java&#45;keyword">true</span>)</pre></
 
 <a name="15.4 Providing Basic Artefacts"><!-- Legacy link --></a>
 <h2 id="providingBasicArtefacts">15.4 基本アーティファクトの提供</h2>
-<div class="hidden-block">h4. Adding a new Script</div><p class="paragraph"/><div class="hidden-block">A plugin can add a new script simply by providing the relevant Gant script in its scripts directory:</div><p class="paragraph"/>プラグインのscriptディレクトリ配下に関連するGantスクリプトを置くことで、プラグインは新しいスクリプトを追加することができます:
-<div class="hidden-block">   + scripts     &#60;<strike class="strike"> additional scripts here</div>
+<div class="hidden-block">h4. Adding a new Script</div>
+<h4>新たにスクリプトを追加する</h4><p class="paragraph"/><div class="hidden-block">A plugin can add a new script simply by providing the relevant Gant script in its scripts directory:</div><p class="paragraph"/>プラグインのscriptディレクトリ配下に関連するGantスクリプトを置くことで、プラグインは新しいスクリプトを追加することができます:
+<div class="hidden-block">
 <div class="code"><pre>+ MyPlugin.groovy
+   + scripts     &#60;&#45;&#45; additional scripts here
+   + grails&#45;app
+        + controllers
+        + services
+        + etc.
+    + lib</pre></div>
+</div><p class="paragraph"/><div class="code"><pre>+ MyPlugin.groovy
    + scripts     &#60;&#45;&#45; ここにスクリプトを追加する
    + grails&#45;app
         + controllers
         + services
         + etc.
-    + lib</pre></div><p class="paragraph"/><div class="hidden-block">h4. Adding a new grails-app artifact (Controller, Tag Library, Service, etc.)</div><p class="paragraph"/><h4>Grails-appアーテファクト(Controller, Tag Library, Service, 他)の追加</h4><p class="paragraph"/>
+    + lib</pre></div><p class="paragraph"/>
+<div class="hidden-block">h4. Adding a new grails-app artifact (Controller, Tag Library, Service, etc.)</div><p class="paragraph"/><h4>Grails-appアーテファクト(Controller, Tag Library, Service, 他)の追加</h4><p class="paragraph"/>
 <div class="hidden-block">A plugin can add new artifacts by creating the relevant file within the <code>grails-app</code> tree. Note that the plugin is loaded from where it is installed and not copied into the main application tree.</div><p class="paragraph"/><code>grails-app</code>配下のツリーに関連するファイルを置いておくことで、プラグインは新しいアーテファクトを追加することができます。プラグインはインストールされた場所から読み込まれるのであって、メインアプリのツリー中にコピーされるわけではないことに留意して下さい。<p class="paragraph"/><div class="hidden-block">
-        + controllers  &#60;</strike> additional controllers here
-        + services &#60;<strike class="strike"> additional services here
-        + etc.  &#60;</strike> additional XXX here
+        + controllers  &#60;<strike class="strike"> additional controllers here
+        + services &#60;</strike> additional services here
+        + etc.  &#60;-- additional XXX here
 </div>
 <div class="code"><pre>+ ExamplePlugin.groovy
    + scripts

@@ -345,7 +345,7 @@ The <code>xml</code> property is a parsed result from Groovy's <a href="http://g
 Testing JSON responses is pretty similar, instead you use the <code>json</code> property:
 </div><p class="paragraph"/><code>json</code>プロパティを使うだけで、JSONレスポンスのテストもかなり似ています。<p class="paragraph"/><div class="code"><pre>// controller action
 def renderJson() &#123;
-    render(contentType:<span class="java&#45;quote">"text/json"</span>) &#123;
+    render(contentType:<span class="java&#45;quote">"application/json"</span>) &#123;
         book = <span class="java&#45;quote">"Great"</span>
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>// test
@@ -790,7 +790,8 @@ class BookSpec <span class="java&#45;keyword">extends</span> Specification &#123
         book.validate()
         !book.hasErrors()
     &#125;
-&#125;</pre></div><p class="paragraph"/>That's it for testing constraints. One final thing we would like to say is that testing the constraints in this way catches a common error: typos in the "constraints" property name which is a mistake that is easy to make and equally easy to overlook. A unit test for your constraints will highlight the problem straight away.<p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/>Note that the <code>mockForConstraintsTests</code> method changes the behavior of the errors object such that something like <code>book.errors'author'</code> will evaluate to the name of the failed constraint, not a <code>org.springframework.validation.FieldError</code> object.  This is convenient for unit tests.  If your unit test really does want a reference to the <code>org.springframework.validation.FieldError</code> object use something like <code>book.errors.getFieldError('author')</code>.<p class="paragraph"/>
+That's it for testing constraints. One final thing we would like to say is that testing the constraints in this way catches a common error: typos in the "constraints" property name which is a mistake that is easy to make and equally easy to overlook. A unit test for your constraints will highlight the problem straight away.<p class="paragraph"/>
 
 <a name="12.1.4 Unit Testing Filters"><!-- Legacy link --></a>
 <h2 id="unitTestingFilters">12.1.4 フィルタのユニットテスト</h2>

@@ -141,19 +141,28 @@ function addJsClass() {
                 
 <a name="15.4 Providing Basic Artefacts"><!-- Legacy link --></a>
 <h2 id="providingBasicArtefacts">15.4 基本アーティファクトの提供</h2>
-<div class="hidden-block">h4. Adding a new Script</div><p class="paragraph"/><div class="hidden-block">A plugin can add a new script simply by providing the relevant Gant script in its scripts directory:</div><p class="paragraph"/>プラグインのscriptディレクトリ配下に関連するGantスクリプトを置くことで、プラグインは新しいスクリプトを追加することができます:
-<div class="hidden-block">   + scripts     &#60;<strike class="strike"> additional scripts here</div>
+<div class="hidden-block">h4. Adding a new Script</div>
+<h4>新たにスクリプトを追加する</h4><p class="paragraph"/><div class="hidden-block">A plugin can add a new script simply by providing the relevant Gant script in its scripts directory:</div><p class="paragraph"/>プラグインのscriptディレクトリ配下に関連するGantスクリプトを置くことで、プラグインは新しいスクリプトを追加することができます:
+<div class="hidden-block">
 <div class="code"><pre>+ MyPlugin.groovy
+   + scripts     &#60;&#45;&#45; additional scripts here
+   + grails&#45;app
+        + controllers
+        + services
+        + etc.
+    + lib</pre></div>
+</div><p class="paragraph"/><div class="code"><pre>+ MyPlugin.groovy
    + scripts     &#60;&#45;&#45; ここにスクリプトを追加する
    + grails&#45;app
         + controllers
         + services
         + etc.
-    + lib</pre></div><p class="paragraph"/><div class="hidden-block">h4. Adding a new grails-app artifact (Controller, Tag Library, Service, etc.)</div><p class="paragraph"/><h4>Grails-appアーテファクト(Controller, Tag Library, Service, 他)の追加</h4><p class="paragraph"/>
+    + lib</pre></div><p class="paragraph"/>
+<div class="hidden-block">h4. Adding a new grails-app artifact (Controller, Tag Library, Service, etc.)</div><p class="paragraph"/><h4>Grails-appアーテファクト(Controller, Tag Library, Service, 他)の追加</h4><p class="paragraph"/>
 <div class="hidden-block">A plugin can add new artifacts by creating the relevant file within the <code>grails-app</code> tree. Note that the plugin is loaded from where it is installed and not copied into the main application tree.</div><p class="paragraph"/><code>grails-app</code>配下のツリーに関連するファイルを置いておくことで、プラグインは新しいアーテファクトを追加することができます。プラグインはインストールされた場所から読み込まれるのであって、メインアプリのツリー中にコピーされるわけではないことに留意して下さい。<p class="paragraph"/><div class="hidden-block">
-        + controllers  &#60;</strike> additional controllers here
-        + services &#60;<strike class="strike"> additional services here
-        + etc.  &#60;</strike> additional XXX here
+        + controllers  &#60;<strike class="strike"> additional controllers here
+        + services &#60;</strike> additional services here
+        + etc.  &#60;-- additional XXX here
 </div>
 <div class="code"><pre>+ ExamplePlugin.groovy
    + scripts

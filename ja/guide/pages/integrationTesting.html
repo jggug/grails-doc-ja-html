@@ -231,7 +231,7 @@ XMLリクエストとしての'book'引数をシミュレートするには、�
     assert model.book
     assertEquals <span class="java&#45;quote">"The Stand"</span>, model.book.title
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The same can be achieved with a JSON request:</div>
-JSONリクエストについても同じように実現できます:<p class="paragraph"/><div class="code"><pre>void testCreateWithJSON() &#123;<p class="paragraph"/>    def controller = <span class="java&#45;keyword">new</span> BookController()<p class="paragraph"/>    controller.request.contentType = <span class="java&#45;quote">"text/json"</span>
+JSONリクエストについても同じように実現できます:<p class="paragraph"/><div class="code"><pre>void testCreateWithJSON() &#123;<p class="paragraph"/>    def controller = <span class="java&#45;keyword">new</span> BookController()<p class="paragraph"/>    controller.request.contentType = <span class="java&#45;quote">"application/json"</span>
     controller.request.content =
             '&#123;<span class="java&#45;quote">"id"</span>:1,<span class="java&#45;quote">"class"</span>:<span class="java&#45;quote">"Book"</span>,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;'.getBytes()<p class="paragraph"/>    def model = controller.create()
     assert model.book

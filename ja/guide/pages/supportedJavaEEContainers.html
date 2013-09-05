@@ -167,8 +167,8 @@ GrailsはServlet 2.5をサポートする任意のWebコンテナで動作しま
 <li>IBM WebSphere 7.0</li>
 <li>IBM WebSphere 6.1</li>
 </ul><p class="paragraph"/><blockquote class="note">
-<div class="hidden-block">It's required to set "-Xverify:none" in "Application servers &#62; server &#62; Process Definition &#62; Java Virtual Machine &#62; Generic JVM arguments" for WebSphere.</div>
-WebSphereでは、"Application servers &#62; server &#62; Process Definition &#62; Java Virtual Machine &#62; Generic JVM arguments"に、"-Xverify:none"を設定する必要があります。
+<div class="hidden-block">It's required to set "-Xverify:none" in "Application servers &#62; server &#62; Process Definition &#62; Java Virtual Machine &#62; Generic JVM arguments" for older versions of WebSphere. This is no longer needed for WebSphere version 8 or newer.</div>
+古いバージョンのWebSphereでは、"Application servers &#62; server &#62; Process Definition &#62; Java Virtual Machine &#62; Generic JVM arguments"に、"-Xverify:none"を設定する必要があります。WebSphere 8 以降では不要です。
 </blockquote>
 <div class="hidden-block">Some containers have bugs however, which in most cases can be worked around. A <a href="http://grails.org/Deployment" target="blank">list of known deployment issues</a> can be found on the Grails wiki.</div>
 一部のWebコンテナにはバグがありますが、ほとんどの場合では回避することができます。<a href="http://grails.org/Deployment" target="blank">既知の開発時における課題の一覧</a>は、GrailsのWikiにあります。

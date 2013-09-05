@@ -1007,6 +1007,8 @@ GORMでは、<a href="../ref/Domain Classes/findBy.html" class="domainClasses">f
 <li><code>Like</code> - Equivalent to a SQL like expression</li>
 <li><code>Ilike</code> - Similar to a <code>Like</code>, except case insensitive</li>
 <li><code>NotEqual</code> - Negates equality</li>
+<li><code>InRange</code> - Between the <code>from</code> and <code>to</code> values of a Groovy Range</li>
+<li><code>Rlike</code> - Performs a Regexp LIKE in MySQL or Oracle otherwise falls back to <code>Like</code></li>
 <li><code>Between</code> - Between two values (requires two arguments)</li>
 <li><code>IsNotNull</code> - Not a null value (doesn't take an argument)</li>
 <li><code>IsNull</code> - Is a null value (doesn't take an argument)</li>
@@ -1020,6 +1022,8 @@ GORMでは、<a href="../ref/Domain Classes/findBy.html" class="domainClasses">f
 <li><code>Like</code> - SQL文の Like句と同様</li>
 <li><code>Ilike</code> - 上の<code>Like</code>の同類だが、アルファベットの大文字と小文字の差を無視する</li>
 <li><code>NotEqual</code> - パラメータの値と等しくない</li>
+<li><code>InRange</code> - Between the <code>from</code> and <code>to</code> values of a Groovy Range</li>
+<li><code>Rlike</code> - Performs a Regexp LIKE in MySQL or Oracle otherwise falls back to <code>Like</code></li>
 <li><code>Between</code> - 2つの値の範囲内である (2つのパラメータが必要)</li>
 <li><code>IsNotNull</code> - Nullではない (パラメータ不要)</li>
 <li><code>IsNull</code> - Nullである (パラメータ不要)</li>

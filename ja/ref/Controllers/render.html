@@ -137,7 +137,7 @@ render(contentType: <span class="java&#45;quote">"text/xml"</span>) &#123;
          &#125;
     &#125;
 &#125;<p class="paragraph"/>// render a JSON ( http://www.json.org ) response with the builder attribute:
-render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     book(title: b.title, author: b.author)
 &#125;<p class="paragraph"/>// render with status code
 render(status: 503, text: 'Failed to update book $&#123;b.id&#125;')<p class="paragraph"/>// Automatic marshalling of XML and JSON

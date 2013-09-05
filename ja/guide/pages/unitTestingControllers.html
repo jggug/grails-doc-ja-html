@@ -268,7 +268,7 @@ The <code>xml</code> property is a parsed result from Groovy's <a href="http://g
 Testing JSON responses is pretty similar, instead you use the <code>json</code> property:
 </div><p class="paragraph"/><code>json</code>プロパティを使うだけで、JSONレスポンスのテストもかなり似ています。<p class="paragraph"/><div class="code"><pre>// controller action
 def renderJson() &#123;
-    render(contentType:<span class="java&#45;quote">"text/json"</span>) &#123;
+    render(contentType:<span class="java&#45;quote">"application/json"</span>) &#123;
         book = <span class="java&#45;quote">"Great"</span>
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>// test

@@ -151,7 +151,9 @@ In addition, excludes may no longer work and may need adjusting when upgrading d
     ::::::::::::::::::::::::::::::::::::::::::::::
     ::          UNRESOLVED DEPENDENCIES         ::
     ::::::::::::::::::::::::::::::::::::::::::::::
-    :: org.springframework&#35;spring&#45;test;3.2.2.RELEASE: configuration not found in org.springframework&#35;spring&#45;test;3.2.2.RELEASE: 'compile'. It was required from org.grails&#35;grails&#45;plugin&#45;testing;2.3.0.BUILD&#45;SNAPSHOT compile
+    :: org.springframework&#35;spring&#45;test;3.2.2.RELEASE: configuration 
+    not found in org.springframework&#35;spring&#45;test;3.2.2.RELEASE: 'compile'. 
+    It was required from org.grails&#35;grails&#45;plugin&#45;testing;2.3.0.BUILD&#45;SNAPSHOT compile
     ::::::::::::::::::::::::::::::::::::::::::::::</pre></div><p class="paragraph"/>This is caused by a plugin that depends on an old version of <code>spring-test</code> (for example the <a href="http://grails.org/plugins/mail" target="blank">Mail plugin</a>). To correct this run <code>grails dependency-report</code> and search for plugins that have a transitive dependency on <code>spring-test</code> and exclude them. For example:<p class="paragraph"/><div class="code"><pre>plugins &#123;
   compile ':mail:1.0', &#123;
     excludes 'spring&#45;test'

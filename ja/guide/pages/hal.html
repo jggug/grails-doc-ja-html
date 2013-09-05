@@ -243,8 +243,10 @@ Content&#45;Type: application/vnd.books.org.book+json;charset=ISO&#45;8859&#45;1
 <h4>リンクレンダリングのカスタマイズ</h4><p class="paragraph"/><div class="hidden-block">An important aspect of HATEOAS is the usage of links that describe the transitions the client can use to interact with the REST API. By default the <code>HalJsonRenderer</code> will automatically create links for you for associations and to the resource itself (using the "self" relationship).</div>
 HATEOASの重要な側面は、遷移を表現したリンクの使い方です。
 クライアントはREST APIでのやり取りにこれを使えます。
-デフォルトで<code>HalJsonRenderer</code>は、関連と("self"関連を使って)自身のリソースへのリンクを自動的に作成します。<p class="paragraph"/><div class="hidden-block">However you can customize link rendering using the <code>link</code> method that is added to all domain classes annotated with <code>grails.rest.Resource</code> or any class annotated with <code>grails.rest.Linkdable</code>. For example, the <code>show</code> action can be modified as follows to provide a new link in the resulting output:</div>
-リンクのレンダリングを、<code>grails.rest.Resource</code>が付与されたドメインクラス、または<code>grails.rest.Linkdable</code>が付与されたクラスに追加された<code>link</code>メソッドを使って、カスタマイズすることもできます。
+デフォルトで<code>HalJsonRenderer</code>は、関連と("self"関連を使って)自身のリソースへのリンクを自動的に作成します。<p class="paragraph"/><div class="hidden-block">
+However you can customize link rendering using the <code>link</code> method that is added to all domain classes annotated with <code>grails.rest.Resource</code> or any class annotated with <code>grails.rest.Linkable</code>. For example, the <code>show</code> action can be modified as follows to provide a new link in the resulting output:
+</div>
+リンクのレンダリングを、<code>grails.rest.Resource</code>が付与されたドメインクラス、または<code>grails.rest.Linkable</code>が付与されたクラスに追加された<code>link</code>メソッドを使って、カスタマイズすることもできます。
 例えば、<code>show</code>アクションで結果を出力する際に新たなリンクを追加するには、以下のように変更します:<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
     book.link rel:'publisher', href: g.link(resource:<span class="java&#45;quote">"publisher"</span>, params:&#91;bookId: book.id&#93;)
     respond book

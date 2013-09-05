@@ -164,7 +164,7 @@ GrailsにはXMLとJSONを生成する複数の方法があります。はじめ�
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This is because there is local variable <code>books</code> which Groovy attempts to invoke as a method.</div>
 この例では、Groovyがローカル変数のbooksをメソッドとして実行してしまいます。<p class="paragraph"/><h4>renderメソッドでJSONを出力する <div class="hidden-block">Using the render method to output JSON </div></h4><p class="paragraph"/><div class="hidden-block">The <code>render</code> method can also be used to output JSON:</div>
-JSONを出力する場合も<code>render</code>メソッドが使用できます:<p class="paragraph"/><div class="code"><pre>def list() &#123;<p class="paragraph"/>    def results = Book.list()<p class="paragraph"/>    render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+JSONを出力する場合も<code>render</code>メソッドが使用できます:<p class="paragraph"/><div class="code"><pre>def list() &#123;<p class="paragraph"/>    def results = Book.list()<p class="paragraph"/>    render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
         books = array &#123;
             <span class="java&#45;keyword">for</span> (b in results) &#123;
                 book title: b.title

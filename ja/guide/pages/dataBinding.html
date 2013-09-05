@@ -438,7 +438,23 @@ assert person.homeAddress.state = 'Missouri'</pre></div><p class="paragraph"/><d
 &#125;</pre></div><p class="paragraph"/>
 <div class="code"><pre>&#35; grails&#45;app/conf/i18n/messages.properties
 date.formats.birthdays=MMddyyyy</pre></div><p class="paragraph"/><div class="code"><pre>&#35; grails&#45;app/conf/i18n/messages_es.properties
-date.formats.birthdays=ddMMyyyy</pre></div><p class="paragraph"/><div class="hidden-block">h4. Data Binding and Security concerns </div>
+date.formats.birthdays=ddMMyyyy</pre></div><p class="paragraph"/><h4>Using The Data Binder Directly</h4><p class="paragraph"/>There are situations where an application may want to use the data binder directly.  For example, to do binding in a Service on some arbitrary object which is not a domain class.  The following will not work because the <code>properties</code> property is read only.<p class="paragraph"/><div class="code"><pre>// src/groovy/bindingdemo/Widget.groovy
+<span class="java&#45;keyword">package</span> bindingdemo<p class="paragraph"/>class Widget &#123;
+    <span class="java&#45;object">String</span> name
+    <span class="java&#45;object">Integer</span> size
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// grails&#45;app/services/bindingdemo/WidgetService.groovy
+<span class="java&#45;keyword">package</span> bindingdemo<p class="paragraph"/>class WidgetService &#123;<p class="paragraph"/>    def updateWidget(Widget widget, Map data) &#123;
+        // <span class="java&#45;keyword">this</span> will <span class="java&#45;keyword">throw</span> an exception because
+        // properties is read&#45;only
+        widget.properties = data
+    &#125;
+&#125;</pre></div><p class="paragraph"/>An instance of the data binder is in the Spring application context with a bean name of <code>grailsWebDataBinder</code>.  That bean implements the <a href="http://grails.org/doc/latest/api/org/grails/databinding/DataBinder.html" class="api">DataBinder</a> interface.  The following code demonstrates using the data binder directly.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/services/bindingdmeo/WidgetService
+<span class="java&#45;keyword">package</span> bindingdemo<p class="paragraph"/><span class="java&#45;keyword">import</span> org.grails.databinding.SimpleMapDataBindingSource<p class="paragraph"/>class WidgetService &#123;<p class="paragraph"/>    // <span class="java&#45;keyword">this</span> bean will be autowired into the service
+    def grailsWebDataBinder<p class="paragraph"/>    def updateWidget(Widget widget, Map data) &#123;
+        grailsWebDataBinder.bind widget, data as SimpleMapDataBindingSource
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>See the <a href="http://grails.org/doc/latest/api/org/grails/databinding/DataBinder.html" class="api">DataBinder</a> documentation for more information about overloaded versions
+of the <code>bind</code> method.<p class="paragraph"/>
+<div class="hidden-block">h4. Data Binding and Security concerns </div>
 <h4>データバインディングとセキュリティ考慮</h4><p class="paragraph"/><div class="hidden-block">When batch updating properties from request parameters you need to be careful not to allow clients to bind malicious data to domain classes and be persisted in the database. You can limit what properties are bound to a given domain class using the subscript operator:</div>
 リクエストパラメータからの一括プロパティ更新をする際は、クライアントからの悪意のあるデータをドメインクラスにバインドし、データベースに永続化してしまわないように注意が必要です。
 添字演算子を使用してドメインクラスにバインドするプロパティを制限することができます:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)<p class="paragraph"/>p.properties&#91;'firstName','lastName'&#93; = params</pre></div><p class="paragraph"/><div class="hidden-block">In this case only the <code>firstName</code> and <code>lastName</code> properties will be bound.</div>

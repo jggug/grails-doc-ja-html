@@ -410,7 +410,7 @@ The <code>xml</code> property is a parsed result from Groovy's <a href="http://g
 Testing JSON responses is pretty similar, instead you use the <code>json</code> property:
 </div><p class="paragraph"/><code>json</code>プロパティを使うだけで、JSONレスポンスのテストもかなり似ています。<p class="paragraph"/><div class="code"><pre>// controller action
 def renderJson() &#123;
-    render(contentType:<span class="java&#45;quote">"text/json"</span>) &#123;
+    render(contentType:<span class="java&#45;quote">"application/json"</span>) &#123;
         book = <span class="java&#45;quote">"Great"</span>
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>// test
@@ -855,7 +855,8 @@ class BookSpec <span class="java&#45;keyword">extends</span> Specification &#123
         book.validate()
         !book.hasErrors()
     &#125;
-&#125;</pre></div><p class="paragraph"/>That's it for testing constraints. One final thing we would like to say is that testing the constraints in this way catches a common error: typos in the "constraints" property name which is a mistake that is easy to make and equally easy to overlook. A unit test for your constraints will highlight the problem straight away.<p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/>Note that the <code>mockForConstraintsTests</code> method changes the behavior of the errors object such that something like <code>book.errors'author'</code> will evaluate to the name of the failed constraint, not a <code>org.springframework.validation.FieldError</code> object.  This is convenient for unit tests.  If your unit test really does want a reference to the <code>org.springframework.validation.FieldError</code> object use something like <code>book.errors.getFieldError('author')</code>.<p class="paragraph"/>
+That's it for testing constraints. One final thing we would like to say is that testing the constraints in this way catches a common error: typos in the "constraints" property name which is a mistake that is easy to make and equally easy to overlook. A unit test for your constraints will highlight the problem straight away.<p class="paragraph"/>
 
 <a name="12.1.4 Unit Testing Filters"><!-- Legacy link --></a>
 <h2 id="unitTestingFilters">12.1.4 フィルタのユニットテスト</h2>
@@ -1111,7 +1112,7 @@ XMLリクエストとしての'book'引数をシミュレートするには、�
     assert model.book
     assertEquals <span class="java&#45;quote">"The Stand"</span>, model.book.title
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The same can be achieved with a JSON request:</div>
-JSONリクエストについても同じように実現できます:<p class="paragraph"/><div class="code"><pre>void testCreateWithJSON() &#123;<p class="paragraph"/>    def controller = <span class="java&#45;keyword">new</span> BookController()<p class="paragraph"/>    controller.request.contentType = <span class="java&#45;quote">"text/json"</span>
+JSONリクエストについても同じように実現できます:<p class="paragraph"/><div class="code"><pre>void testCreateWithJSON() &#123;<p class="paragraph"/>    def controller = <span class="java&#45;keyword">new</span> BookController()<p class="paragraph"/>    controller.request.contentType = <span class="java&#45;quote">"application/json"</span>
     controller.request.content =
             '&#123;<span class="java&#45;quote">"id"</span>:1,<span class="java&#45;quote">"class"</span>:<span class="java&#45;quote">"Book"</span>,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;'.getBytes()<p class="paragraph"/>    def model = controller.create()
     assert model.book

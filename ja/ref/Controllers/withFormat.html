@@ -134,7 +134,9 @@ function addJsClass(el) {
     form &#123; .. &#125;
     xml &#123; .. &#125;
     json &#123; .. &#125;
-&#125;</pre></div><p class="paragraph"/>If you require that the model be lazily executed you can pass a Closure instead of a Map:<p class="paragraph"/><div class="code"><pre>withFormat &#123;
+&#125;</pre></div><p class="paragraph"/><blockquote class="note">
+The request format of <code>form</code> is used for handling form submission in content negotiation as opposed to <code>html</code>.
+</blockquote><p class="paragraph"/>If you require that the model be lazily executed you can pass a Closure instead of a Map:<p class="paragraph"/><div class="code"><pre>withFormat &#123;
     html &#123; &#91;bookList: Book.list()&#93; &#125;
     &#8230;
 &#125;</pre></div><p class="paragraph"/>This way the <code>html</code> Closure will only be executed if the <code>html</code> format is matched.<p class="paragraph"/><blockquote class="note">

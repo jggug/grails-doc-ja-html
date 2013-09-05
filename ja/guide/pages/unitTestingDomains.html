@@ -368,7 +368,8 @@ class BookSpec <span class="java&#45;keyword">extends</span> Specification &#123
         book.validate()
         !book.hasErrors()
     &#125;
-&#125;</pre></div><p class="paragraph"/>That's it for testing constraints. One final thing we would like to say is that testing the constraints in this way catches a common error: typos in the "constraints" property name which is a mistake that is easy to make and equally easy to overlook. A unit test for your constraints will highlight the problem straight away.<p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/>Note that the <code>mockForConstraintsTests</code> method changes the behavior of the errors object such that something like <code>book.errors'author'</code> will evaluate to the name of the failed constraint, not a <code>org.springframework.validation.FieldError</code> object.  This is convenient for unit tests.  If your unit test really does want a reference to the <code>org.springframework.validation.FieldError</code> object use something like <code>book.errors.getFieldError('author')</code>.<p class="paragraph"/>
+That's it for testing constraints. One final thing we would like to say is that testing the constraints in this way catches a common error: typos in the "constraints" property name which is a mistake that is easy to make and equally easy to overlook. A unit test for your constraints will highlight the problem straight away.<p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>

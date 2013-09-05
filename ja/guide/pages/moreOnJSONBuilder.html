@@ -145,25 +145,25 @@ function addJsClass() {
 前のセクション「 XMLとJSONレスポンス」で単純なXMLとJSONのを描写してレスポンスする例を紹介しました。Grailsで使用してるXMLビルダーがGroovyの標準的な <a href="http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper" target="blank">XmlSlurper</a> に対して、JSONビルダーに関してはGrails特有の実装になっています。<p class="paragraph"/><h4>JSONBuilderとGrailsのバージョン <div class="hidden-block">JSONBuilder and Grails versions </div></h4><p class="paragraph"/><div class="hidden-block">JSONBuilder behaves different depending on the version of Grails you use. For version below 1.2 the deprecated <a href="http://grails.org/doc/latest/api/grails/web/JSONBuilder.html" class="api">grails.web.JSONBuilder</a> class is used. This section covers the usage of the Grails 1.2 JSONBuilder </div>
 JSONBuilderの振る舞いは使用するGrailsのバージョンに依存します。1.2以前では現在非推奨となる<a href="http://grails.org/doc/latest/api/grails/web/JSONBuilder.html" class="api">grails.web.JSONBuilder</a>が使用されます。このセクションでは、Grails 1.2のJSONBuilderの説明をします。<p class="paragraph"/><div class="hidden-block">For backwards compatibility the old <code>JSONBuilder</code> class is used with the <code>render</code> method for older applications; to use the newer/better <code>JSONBuilder</code> class set the following in <code>Config.groovy</code>:</div>
 下位互換として、古いバージョンからメンテナンスしているアプリケーションのために、<code>render</code>メソッドで古い<code>JSONBuilder</code>を使用するようになっています。新しい良くなった<code>JSONBuilder</code>を使用するには<code>Config.groovy</code>に、次のような設定をします:<p class="paragraph"/><div class="code"><pre>grails.json.legacy.builder = <span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><h4>単純なオブジェクトを描写 <div class="hidden-block">Rendering Simple Objects </div></h4><p class="paragraph"/><div class="hidden-block">To render a simple JSON object just set properties within the context of the Closure:</div>
-単純なJSONオブジェクトを生成するには、クロージャの中にプロパティをセットするだけです:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+単純なJSONオブジェクトを生成するには、クロージャの中にプロパティをセットするだけです:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     hello = <span class="java&#45;quote">"world"</span>
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The above will produce the JSON:</div>
 上記の例では、このような結果が得られます:<p class="paragraph"/><div class="code"><pre>&#123;<span class="java&#45;quote">"hello"</span>:<span class="java&#45;quote">"world"</span>&#125;</pre></div><p class="paragraph"/><h4>JSON配列描写 <div class="hidden-block">Rendering JSON Arrays </div></h4><p class="paragraph"/><div class="hidden-block">To render a list of objects simple assign a list:</div>
-オブジェクトのリストを描写するには、変数に配列を指定するだけです:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+オブジェクトのリストを描写するには、変数に配列を指定するだけです:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     categories = &#91;'a', 'b', 'c'&#93;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This will produce:</div>
 この例では以下を生成:<p class="paragraph"/><div class="code"><pre>&#123;<span class="java&#45;quote">"categories"</span>:&#91;<span class="java&#45;quote">"a"</span>,<span class="java&#45;quote">"b"</span>,<span class="java&#45;quote">"c"</span>&#93;&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can also render lists of complex objects, for example:</div>
-複雑なオブジェクトのリストも可能です。例として:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+複雑なオブジェクトのリストも可能です。例として:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     categories = &#91; &#123; a = <span class="java&#45;quote">"A"</span> &#125;, &#123; b = <span class="java&#45;quote">"B"</span> &#125; &#93;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This will produce:</div>
 この例では以下を生成:<p class="paragraph"/><div class="code"><pre>&#123;<span class="java&#45;quote">"categories"</span>:&#91; &#123;<span class="java&#45;quote">"a"</span>:<span class="java&#45;quote">"A"</span>&#125; , &#123;<span class="java&#45;quote">"b"</span>:<span class="java&#45;quote">"B"</span>&#125;&#93; &#125;</pre></div><p class="paragraph"/><div class="hidden-block">Use the special <code>element</code> method to return a list as the root:</div>
-<code>element</code>メソッドを使用することで、リストをルートとして返す事ができます:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+<code>element</code>メソッドを使用することで、リストをルートとして返す事ができます:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     element 1
     element 2
     element 3
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The above code produces:</div>
 この例では以下を生成:<p class="paragraph"/><div class="code"><pre>&#91;1,2,3&#93;</pre></div><p class="paragraph"/><h4>複雑なオブジェクトの描写 <div class="hidden-block">Rendering Complex Objects </div></h4><p class="paragraph"/><div class="hidden-block">Rendering complex objects can be done with Closures. For example:</div>
-より複雑なオブジェクトをクロージャで描写できます。例として:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+より複雑なオブジェクトをクロージャで描写できます。例として:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     categories = &#91;'a', 'b', 'c'&#93;
     title = <span class="java&#45;quote">"Hello JSON"</span>
     information = &#123;
@@ -171,11 +171,11 @@ JSONBuilderの振る舞いは使用するGrailsのバージョンに依存しま
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The above will produce the JSON:</div>
 この例では次のようなJSONを生成します:<p class="paragraph"/><div class="code"><pre>&#123;<span class="java&#45;quote">"categories"</span>:&#91;<span class="java&#45;quote">"a"</span>,<span class="java&#45;quote">"b"</span>,<span class="java&#45;quote">"c"</span>&#93;,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"Hello JSON"</span>,<span class="java&#45;quote">"information"</span>:&#123;<span class="java&#45;quote">"pages"</span>:10&#125;&#125;</pre></div><p class="paragraph"/><h4>複雑なオブジェクトの配列 <div class="hidden-block">Arrays of Complex Objects </div></h4><p class="paragraph"/><div class="hidden-block">As mentioned previously you can nest complex objects within arrays using Closures:</div>
-前述したように、クロージャを使用してオブジェクトを配列にネストすることも可能です:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+前述したように、クロージャを使用してオブジェクトを配列にネストすることも可能です:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     categories = &#91; &#123; a = <span class="java&#45;quote">"A"</span> &#125;, &#123; b = <span class="java&#45;quote">"B"</span> &#125; &#93;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can use the <code>array</code> method to build them up dynamically:</div>
 <code>array</code>メソッドを使用して動的に生成する事もできます:<p class="paragraph"/><div class="code"><pre>def results = Book.list()
-render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     books = array &#123;
         <span class="java&#45;keyword">for</span> (b in results) &#123;
             book title: b.title

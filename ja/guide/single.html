@@ -346,6 +346,8 @@ function addJsClass(el) {
                             
                             <div class="toc-item" style="margin-left:20px"><a href="#typeConverters"><strong>7.1.12</strong><span>&#12471;&#12531;&#12503;&#12523;&#12479;&#12452;&#12503;&#12467;&#12531;&#12496;&#12540;&#12479;</span></a></div>
                             
+                            <div class="toc-item" style="margin-left:20px"><a href="#controllerExceptionHandling"><strong>7.1.13</strong><span>&#12467;&#12531;&#12488;&#12525;&#12540;&#12521;&#20363;&#22806;&#12495;&#12531;&#12489;&#12522;&#12531;&#12464;&#23459;&#35328;</span></a></div>
+                            
                             <div class="toc-item" style="margin-left:10px"><a href="#gsp"><strong>7.2</strong><span>Groovy&#12469;&#12540;&#12496;&#12540;&#12506;&#12540;&#12472;</span></a></div>
                             
                             <div class="toc-item" style="margin-left:20px"><a href="#GSPBasics"><strong>7.2.1</strong><span>GSP&#12398;&#22522;&#26412;</span></a></div>
@@ -749,7 +751,8 @@ Grails 2.3では、依存のバージョンよりもフレキシブルで保守�
 <li>デフォルトで全ての空文字列とブランクはデータバインディングでnullに変換されます。(設定可能)</li>
 </ul><p class="paragraph"/><div class="hidden-block">See the <a href="../guide/single.html#dataBinding" class="guide">Data Binding</a> section for details.</div>
 詳細は <a href="../guide/single.html#dataBinding" class="guide">データバインディング</a> のセクションを参照してください。<p class="paragraph"/><div class="hidden-block">The legacy data binder may be used by assigning <code>true</code> to the <code>grails.databinding.useSpringBinder</code> property in <code>grails-app/conf/Config.groovy</code>.  Note that the legacy binder does not support any of the new features provided by the new data binder.</div>
-<code>grails-app/conf/Config.groovy</code> の <code>grails.databinding.useSpringBinder</code> プロパティを <code>true</code> にすることで以前のデータバインダーに変更することができます。 以前のバインダーは今回実装された新機能には対応していません。<p class="paragraph"/><h4>Domain Classes As Command Objects</h4><p class="paragraph"/>When a domain class is used as a command object and there is an <code>id</code> request parameter, the framework will retrieve the instance of the domain class from the database using the <code>id</code> request parameter.  See the <a href="../guide/single.html#commandObjects" class="guide">Command Objects</a> documentation for more details.<p class="paragraph"/><div class="hidden-block">h4. Forked Execution</div>
+<code>grails-app/conf/Config.groovy</code> の <code>grails.databinding.useSpringBinder</code> プロパティを <code>true</code> にすることで以前のデータバインダーに変更することができます。 以前のバインダーは今回実装された新機能には対応していません。<p class="paragraph"/><h4>リクエストボディをコマンドオブジェクトにバインド</h4><p class="paragraph"/>If a request is made to a controller action which accepts a command object and the request includes a body, the body will be parsed and used to do data binding to the command object.  This simplifies use cases where a request includes a JSON or XML body (for example) that can be bound to a command object.  See the <a href="../guide/single.html#commandObjects" class="guide">Command Objects</a> documentation for more details.<p class="paragraph"/>
+<h4>ドメインクラスをコマンドオブジェクトとして使用する際の振る舞い</h4><p class="paragraph"/>When a domain class is used as a command object and there is an <code>id</code> request parameter, the framework will retrieve the instance of the domain class from the database using the <code>id</code> request parameter.  See the <a href="../guide/single.html#commandObjects" class="guide">Command Objects</a> documentation for more details.<p class="paragraph"/><div class="hidden-block">h4. Forked Execution</div>
 <h4>フォーク実行 </h4><p class="paragraph"/><div class="hidden-block">All major commands can now be forked into a separate JVM, thus isolating the build path from the runtime / test paths. Forked execution can be controlled via the <code>BuildConfig</code>:</div>
 全てのメジャーなコマンドが別々のJVMへフォークされるようになり、ビルドパスをランタイム/テストから分離します。 フォーク実行のパラメータは <code>BuildConfig</code> に定義できます:<p class="paragraph"/><div class="hidden-block">
 <div class="code"><pre>grails.project.fork = &#91;
@@ -765,13 +768,17 @@ Grails 2.3では、依存のバージョンよりもフレキシブルで保守�
    war: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;, // run&#45;war用JVMへの設定
    console: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;// console用JVMへの設定
 &#93;</pre></div><p class="paragraph"/><div class="hidden-block">See the documentation on <a href="../guide/single.html#forkedMode" class="guide">Forked Mode</a> for more information.</div>
-詳しくは <a href="../guide/single.html#forkedMode" class="guide">フォームモード</a> のドキュメントを参照してください。<p class="paragraph"/><h4>Test Runner Daemon</h4><p class="paragraph"/>To speed up testing when using forked execution a new daemon will start-up in the background to run tests when using interactive mode. You can restart the daemon with the <code>restart-daemon</code> command from interactive mode:<p class="paragraph"/><div class="code"><pre>$ grails&#62; restart&#45;daemon</pre></div><p class="paragraph"/><h4>Server-Side REST Improvements</h4><p class="paragraph"/>Grails' <a href="../guide/single.html#REST" class="guide">REST support</a> has been significantly improved with the addition of the following features:
+詳しくは <a href="../guide/single.html#forkedMode" class="guide">フォームモード</a> のドキュメントを参照してください。<p class="paragraph"/><div class="hidden-block">h4. Test Runner Daemon</div>
+<h4>テストランナーデーモン</h4><p class="paragraph"/>To speed up testing when using forked execution a new daemon will start-up in the background to run tests when using interactive mode. You can restart the daemon with the <code>restart-daemon</code> command from interactive mode:<p class="paragraph"/><div class="code"><pre>$ grails&#62; restart&#45;daemon</pre></div><p class="paragraph"/><div class="hidden-block">h4. Server-Side REST Improvements</div>
+<h4>サーバサイドRESTの向上</h4><p class="paragraph"/>Grails' <a href="../guide/single.html#REST" class="guide">REST support</a> has been significantly improved with the addition of the following features:
 <ul class="star">
 <li>Rich <a href="../guide/single.html#restfulMappings" class="guide">REST URL Mapping support</a> with supports for resource mappings, singular resource mappings, nested resources, versioning and more</li>
 <li>New extensible response rendering and binding APIs</li>
 <li>Support for HAL, Atom and Hypermedia (HATEAOS)</li>
 <li>Scaffolding for REST controllers</li>
-</ul><p class="paragraph"/>See the <a href="../guide/single.html#REST" class="guide">user guide</a> for more information.<p class="paragraph"/><h4>New Scaffolding 2.0 Plugin</h4><p class="paragraph"/>Grails' Scaffolding feature has been split into a <a href="http://grails.org/plugin/scaffolding" target="blank">separate plugin</a>. Version 2.0 of the plugin includes support for generating REST controllers, Async controllers, and Spock unit tests.<p class="paragraph"/><h4>URL Mappings May Specify A Redirect</h4><p class="paragraph"/>URL Mappings may now specify that a redirect should be triggered when the mapping matches an incoming request:<p class="paragraph"/><div class="code"><pre>class UrlMappings &#123;
+</ul><p class="paragraph"/>See the <a href="../guide/single.html#REST" class="guide">user guide</a> for more information.<p class="paragraph"/><div class="hidden-block">h4. New Scaffolding 2.0 Plugin</div>
+<h4>スカッフォルディング2.0プラグイン</h4><p class="paragraph"/>Grails' Scaffolding feature has been split into a <a href="http://grails.org/plugin/scaffolding" target="blank">separate plugin</a>. Version 2.0 of the plugin includes support for generating REST controllers, Async controllers, and Spock unit tests.<p class="paragraph"/><div class="hidden-block">h4. URL Mappings May Specify A Redirect</div>
+<h4>URLマッピングのリダイレクト指定</h4><p class="paragraph"/>URL Mappings may now specify that a redirect should be triggered when the mapping matches an incoming request:<p class="paragraph"/><div class="code"><pre>class UrlMappings &#123;
     <span class="java&#45;keyword">static</span> mappings = &#123;
         <span class="java&#45;quote">"/viewBooks"</span>(redirect: '/books/list')
         <span class="java&#45;quote">"/viewAuthors"</span>(redirect: &#91;controller: 'author', action: 'list'&#93;)
@@ -805,7 +812,20 @@ Grails 2.3では専用の <a href="../guide/single.html#xssPrevention" class="gu
 </ul><p class="paragraph"/><div class="hidden-block">See the documentation on <a href="../guide/single.html#xssPrevention" class="guide">Cross Site Scripting (XSS) prevention</a> for more information.</div>
 詳しくは、 <a href="../guide/single.html#xssPrevention" class="guide">クロスサイトスクリプティング(XSS)防御</a> のドキュメントを参照してください。<p class="paragraph"/><div class="hidden-block">h4. Hibernate 3 and 4 support </div>
 <h4>Hibernate 3と4をサポート</h4><p class="paragraph"/><div class="hidden-block">The GORM for Hibernate 3 support for Grails has been extracted into a separate project, allowing new support for Hibernate 4 as a separate plugin.</div>
-新たにHibernate 4をプラグインでサポートするために、Hibernate 3用のGORMは、本体から別のプラグインプロジェクトとなりました。<p class="paragraph"/><h4>Namespaced Controllers</h4><p class="paragraph"/>Controllers may now be defined in a namespace which allows for multiple controllers to be defined with the same name in different packages.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/com/app/reporting/AdminController.groovy
+新たにHibernate 4をプラグインでサポートするために、Hibernate 3用のGORMは、本体から別のプラグインプロジェクトとなりました。<p class="paragraph"/><div class="hidden-block">h4. Controller Exception Handling</div>
+<h4>コントローラ例外ハンドリング</h4><p class="paragraph"/>Controllers may define exception handler methods which will automatically be invoked any time an action in that controller throws an exception.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/demo/DemoController.groovy
+<span class="java&#45;keyword">package</span> demo<p class="paragraph"/>class DemoController &#123;<p class="paragraph"/>    def someAction() &#123;
+        // <span class="java&#45;keyword">do</span> some work
+    &#125;<p class="paragraph"/>    def handleSQLException(SQLException e) &#123;
+        render 'A SQLException Was Handled'
+    &#125;<p class="paragraph"/>    def handleBatchUpdateException(BatchUpdateException e) &#123;
+        redirect controller: 'logging', action: 'batchProblem'
+    &#125;<p class="paragraph"/>    def handleNumberFormatException(NumberFormatException nfe) &#123;
+        &#91;problemDescription: 'A <span class="java&#45;object">Number</span> Was Invalid'&#93;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>See the <a href="../guide/single.html#controllerExceptionHandling" class="guide">controller exception handling</a> docs for more information.<p class="paragraph"/>
+<div class="hidden-block">h4. Namespaced Controllers</div>
+<h4>コントローラネームスペース</h4><p class="paragraph"/>Controllers may now be defined in a namespace which allows for multiple controllers to be defined with the same name in different packages.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/com/app/reporting/AdminController.groovy
 <span class="java&#45;keyword">package</span> com.app.reporting<p class="paragraph"/>class AdminController &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> namespace = 'reports'<p class="paragraph"/>    // &#8230;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/com/app/security/AdminController.groovy
 <span class="java&#45;keyword">package</span> com.app.security<p class="paragraph"/>class AdminController &#123;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> namespace = 'users'<p class="paragraph"/>    // &#8230;
@@ -825,8 +845,7 @@ class UrlMappings &#123;<p class="paragraph"/>    <span class="java&#45;keyword"
 <h4>コマンドライン</h4><p class="paragraph"/><div class="hidden-block">
 The <code>create-app</code> command will now by default generate the command line grailsw wrapper for newly created applications.  The <code>--skip-wrapper</code> switch may be used to prevent the wrapper from being generated.
 </div>
-<code>create&#45;app</code> コマンドがデフォルトでgrailswラッパーを生成するようになりました。ラッパーを生成しない場合は <code>&#45;&#45;skip&#45;wrapper</code> オプションを指定してください。<p class="paragraph"/><div class="code"><pre>grails create&#45;app appname &#45;&#45;skip&#45;wrapper</pre></div>
-
+<code>create&#45;app</code> コマンドがデフォルトでgrailswラッパーを生成するようになりました。ラッパーを生成しない場合は <code>&#45;&#45;skip&#45;wrapper</code> オプションを指定してください。<p class="paragraph"/><div class="code"><pre>grails create&#45;app appname &#45;&#45;skip&#45;wrapper</pre></div><p class="paragraph"/><p class="paragraph"/><p class="paragraph"/>
 
 
 <h2 id="whatsNew22">1.2 Grails 2.2の新機能</h2>
@@ -1384,8 +1403,8 @@ GrailsはServlet 2.5をサポートする任意のWebコンテナで動作しま
 <li>IBM WebSphere 7.0</li>
 <li>IBM WebSphere 6.1</li>
 </ul><p class="paragraph"/><blockquote class="note">
-<div class="hidden-block">It's required to set "-Xverify:none" in "Application servers &#62; server &#62; Process Definition &#62; Java Virtual Machine &#62; Generic JVM arguments" for WebSphere.</div>
-WebSphereでは、"Application servers &#62; server &#62; Process Definition &#62; Java Virtual Machine &#62; Generic JVM arguments"に、"-Xverify:none"を設定する必要があります。
+<div class="hidden-block">It's required to set "-Xverify:none" in "Application servers &#62; server &#62; Process Definition &#62; Java Virtual Machine &#62; Generic JVM arguments" for older versions of WebSphere. This is no longer needed for WebSphere version 8 or newer.</div>
+古いバージョンのWebSphereでは、"Application servers &#62; server &#62; Process Definition &#62; Java Virtual Machine &#62; Generic JVM arguments"に、"-Xverify:none"を設定する必要があります。WebSphere 8 以降では不要です。
 </blockquote>
 <div class="hidden-block">Some containers have bugs however, which in most cases can be worked around. A <a href="http://grails.org/Deployment" target="blank">list of known deployment issues</a> can be found on the Grails wiki.</div>
 一部のWebコンテナにはバグがありますが、ほとんどの場合では回避することができます。<a href="http://grails.org/Deployment" target="blank">既知の開発時における課題の一覧</a>は、GrailsのWikiにあります。
@@ -1425,7 +1444,9 @@ In addition, excludes may no longer work and may need adjusting when upgrading d
     ::::::::::::::::::::::::::::::::::::::::::::::
     ::          UNRESOLVED DEPENDENCIES         ::
     ::::::::::::::::::::::::::::::::::::::::::::::
-    :: org.springframework&#35;spring&#45;test;3.2.2.RELEASE: configuration not found in org.springframework&#35;spring&#45;test;3.2.2.RELEASE: 'compile'. It was required from org.grails&#35;grails&#45;plugin&#45;testing;2.3.0.BUILD&#45;SNAPSHOT compile
+    :: org.springframework&#35;spring&#45;test;3.2.2.RELEASE: configuration 
+    not found in org.springframework&#35;spring&#45;test;3.2.2.RELEASE: 'compile'. 
+    It was required from org.grails&#35;grails&#45;plugin&#45;testing;2.3.0.BUILD&#45;SNAPSHOT compile
     ::::::::::::::::::::::::::::::::::::::::::::::</pre></div><p class="paragraph"/>This is caused by a plugin that depends on an old version of <code>spring-test</code> (for example the <a href="http://grails.org/plugins/mail" target="blank">Mail plugin</a>). To correct this run <code>grails dependency-report</code> and search for plugins that have a transitive dependency on <code>spring-test</code> and exclude them. For example:<p class="paragraph"/><div class="code"><pre>plugins &#123;
   compile ':mail:1.0', &#123;
     excludes 'spring&#45;test'
@@ -4883,6 +4904,8 @@ GORMでは、<a href="../ref/Domain Classes/findBy.html" class="domainClasses">f
 <li><code>Like</code> - Equivalent to a SQL like expression</li>
 <li><code>Ilike</code> - Similar to a <code>Like</code>, except case insensitive</li>
 <li><code>NotEqual</code> - Negates equality</li>
+<li><code>InRange</code> - Between the <code>from</code> and <code>to</code> values of a Groovy Range</li>
+<li><code>Rlike</code> - Performs a Regexp LIKE in MySQL or Oracle otherwise falls back to <code>Like</code></li>
 <li><code>Between</code> - Between two values (requires two arguments)</li>
 <li><code>IsNotNull</code> - Not a null value (doesn't take an argument)</li>
 <li><code>IsNull</code> - Is a null value (doesn't take an argument)</li>
@@ -4896,6 +4919,8 @@ GORMでは、<a href="../ref/Domain Classes/findBy.html" class="domainClasses">f
 <li><code>Like</code> - SQL文の Like句と同様</li>
 <li><code>Ilike</code> - 上の<code>Like</code>の同類だが、アルファベットの大文字と小文字の差を無視する</li>
 <li><code>NotEqual</code> - パラメータの値と等しくない</li>
+<li><code>InRange</code> - Between the <code>from</code> and <code>to</code> values of a Groovy Range</li>
+<li><code>Rlike</code> - Performs a Regexp LIKE in MySQL or Oracle otherwise falls back to <code>Like</code></li>
 <li><code>Between</code> - 2つの値の範囲内である (2つのパラメータが必要)</li>
 <li><code>IsNotNull</code> - Nullではない (パラメータ不要)</li>
 <li><code>IsNull</code> - Nullである (パラメータ不要)</li>
@@ -7139,7 +7164,23 @@ assert person.homeAddress.state = 'Missouri'</pre></div><p class="paragraph"/><d
 &#125;</pre></div><p class="paragraph"/>
 <div class="code"><pre>&#35; grails&#45;app/conf/i18n/messages.properties
 date.formats.birthdays=MMddyyyy</pre></div><p class="paragraph"/><div class="code"><pre>&#35; grails&#45;app/conf/i18n/messages_es.properties
-date.formats.birthdays=ddMMyyyy</pre></div><p class="paragraph"/><div class="hidden-block">h4. Data Binding and Security concerns </div>
+date.formats.birthdays=ddMMyyyy</pre></div><p class="paragraph"/><h4>Using The Data Binder Directly</h4><p class="paragraph"/>There are situations where an application may want to use the data binder directly.  For example, to do binding in a Service on some arbitrary object which is not a domain class.  The following will not work because the <code>properties</code> property is read only.<p class="paragraph"/><div class="code"><pre>// src/groovy/bindingdemo/Widget.groovy
+<span class="java&#45;keyword">package</span> bindingdemo<p class="paragraph"/>class Widget &#123;
+    <span class="java&#45;object">String</span> name
+    <span class="java&#45;object">Integer</span> size
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>// grails&#45;app/services/bindingdemo/WidgetService.groovy
+<span class="java&#45;keyword">package</span> bindingdemo<p class="paragraph"/>class WidgetService &#123;<p class="paragraph"/>    def updateWidget(Widget widget, Map data) &#123;
+        // <span class="java&#45;keyword">this</span> will <span class="java&#45;keyword">throw</span> an exception because
+        // properties is read&#45;only
+        widget.properties = data
+    &#125;
+&#125;</pre></div><p class="paragraph"/>An instance of the data binder is in the Spring application context with a bean name of <code>grailsWebDataBinder</code>.  That bean implements the <a href="http://grails.org/doc/latest/api/org/grails/databinding/DataBinder.html" class="api">DataBinder</a> interface.  The following code demonstrates using the data binder directly.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/services/bindingdmeo/WidgetService
+<span class="java&#45;keyword">package</span> bindingdemo<p class="paragraph"/><span class="java&#45;keyword">import</span> org.grails.databinding.SimpleMapDataBindingSource<p class="paragraph"/>class WidgetService &#123;<p class="paragraph"/>    // <span class="java&#45;keyword">this</span> bean will be autowired into the service
+    def grailsWebDataBinder<p class="paragraph"/>    def updateWidget(Widget widget, Map data) &#123;
+        grailsWebDataBinder.bind widget, data as SimpleMapDataBindingSource
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>See the <a href="http://grails.org/doc/latest/api/org/grails/databinding/DataBinder.html" class="api">DataBinder</a> documentation for more information about overloaded versions
+of the <code>bind</code> method.<p class="paragraph"/>
+<div class="hidden-block">h4. Data Binding and Security concerns </div>
 <h4>データバインディングとセキュリティ考慮</h4><p class="paragraph"/><div class="hidden-block">When batch updating properties from request parameters you need to be careful not to allow clients to bind malicious data to domain classes and be persisted in the database. You can limit what properties are bound to a given domain class using the subscript operator:</div>
 リクエストパラメータからの一括プロパティ更新をする際は、クライアントからの悪意のあるデータをドメインクラスにバインドし、データベースに永続化してしまわないように注意が必要です。
 添字演算子を使用してドメインクラスにバインドするプロパティを制限することができます:<p class="paragraph"/><div class="code"><pre>def p = Person.get(1)<p class="paragraph"/>p.properties&#91;'firstName','lastName'&#93; = params</pre></div><p class="paragraph"/><div class="hidden-block">In this case only the <code>firstName</code> and <code>lastName</code> properties will be bound.</div>
@@ -7181,7 +7222,7 @@ GrailsにはXMLとJSONを生成する複数の方法があります。はじめ�
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This is because there is local variable <code>books</code> which Groovy attempts to invoke as a method.</div>
 この例では、Groovyがローカル変数のbooksをメソッドとして実行してしまいます。<p class="paragraph"/><h4>renderメソッドでJSONを出力する <div class="hidden-block">Using the render method to output JSON </div></h4><p class="paragraph"/><div class="hidden-block">The <code>render</code> method can also be used to output JSON:</div>
-JSONを出力する場合も<code>render</code>メソッドが使用できます:<p class="paragraph"/><div class="code"><pre>def list() &#123;<p class="paragraph"/>    def results = Book.list()<p class="paragraph"/>    render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+JSONを出力する場合も<code>render</code>メソッドが使用できます:<p class="paragraph"/><div class="code"><pre>def list() &#123;<p class="paragraph"/>    def results = Book.list()<p class="paragraph"/>    render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
         books = array &#123;
             <span class="java&#45;keyword">for</span> (b in results) &#123;
                 book title: b.title
@@ -7232,25 +7273,25 @@ Grailsでは<code>XML</code>と同じ仕組みで、<code>JSON</code>の自動�
 前のセクション「 XMLとJSONレスポンス」で単純なXMLとJSONのを描写してレスポンスする例を紹介しました。Grailsで使用してるXMLビルダーがGroovyの標準的な <a href="http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper" target="blank">XmlSlurper</a> に対して、JSONビルダーに関してはGrails特有の実装になっています。<p class="paragraph"/><h4>JSONBuilderとGrailsのバージョン <div class="hidden-block">JSONBuilder and Grails versions </div></h4><p class="paragraph"/><div class="hidden-block">JSONBuilder behaves different depending on the version of Grails you use. For version below 1.2 the deprecated <a href="http://grails.org/doc/latest/api/grails/web/JSONBuilder.html" class="api">grails.web.JSONBuilder</a> class is used. This section covers the usage of the Grails 1.2 JSONBuilder </div>
 JSONBuilderの振る舞いは使用するGrailsのバージョンに依存します。1.2以前では現在非推奨となる<a href="http://grails.org/doc/latest/api/grails/web/JSONBuilder.html" class="api">grails.web.JSONBuilder</a>が使用されます。このセクションでは、Grails 1.2のJSONBuilderの説明をします。<p class="paragraph"/><div class="hidden-block">For backwards compatibility the old <code>JSONBuilder</code> class is used with the <code>render</code> method for older applications; to use the newer/better <code>JSONBuilder</code> class set the following in <code>Config.groovy</code>:</div>
 下位互換として、古いバージョンからメンテナンスしているアプリケーションのために、<code>render</code>メソッドで古い<code>JSONBuilder</code>を使用するようになっています。新しい良くなった<code>JSONBuilder</code>を使用するには<code>Config.groovy</code>に、次のような設定をします:<p class="paragraph"/><div class="code"><pre>grails.json.legacy.builder = <span class="java&#45;keyword">false</span></pre></div><p class="paragraph"/><h4>単純なオブジェクトを描写 <div class="hidden-block">Rendering Simple Objects </div></h4><p class="paragraph"/><div class="hidden-block">To render a simple JSON object just set properties within the context of the Closure:</div>
-単純なJSONオブジェクトを生成するには、クロージャの中にプロパティをセットするだけです:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+単純なJSONオブジェクトを生成するには、クロージャの中にプロパティをセットするだけです:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     hello = <span class="java&#45;quote">"world"</span>
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The above will produce the JSON:</div>
 上記の例では、このような結果が得られます:<p class="paragraph"/><div class="code"><pre>&#123;<span class="java&#45;quote">"hello"</span>:<span class="java&#45;quote">"world"</span>&#125;</pre></div><p class="paragraph"/><h4>JSON配列描写 <div class="hidden-block">Rendering JSON Arrays </div></h4><p class="paragraph"/><div class="hidden-block">To render a list of objects simple assign a list:</div>
-オブジェクトのリストを描写するには、変数に配列を指定するだけです:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+オブジェクトのリストを描写するには、変数に配列を指定するだけです:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     categories = &#91;'a', 'b', 'c'&#93;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This will produce:</div>
 この例では以下を生成:<p class="paragraph"/><div class="code"><pre>&#123;<span class="java&#45;quote">"categories"</span>:&#91;<span class="java&#45;quote">"a"</span>,<span class="java&#45;quote">"b"</span>,<span class="java&#45;quote">"c"</span>&#93;&#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can also render lists of complex objects, for example:</div>
-複雑なオブジェクトのリストも可能です。例として:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+複雑なオブジェクトのリストも可能です。例として:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     categories = &#91; &#123; a = <span class="java&#45;quote">"A"</span> &#125;, &#123; b = <span class="java&#45;quote">"B"</span> &#125; &#93;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">This will produce:</div>
 この例では以下を生成:<p class="paragraph"/><div class="code"><pre>&#123;<span class="java&#45;quote">"categories"</span>:&#91; &#123;<span class="java&#45;quote">"a"</span>:<span class="java&#45;quote">"A"</span>&#125; , &#123;<span class="java&#45;quote">"b"</span>:<span class="java&#45;quote">"B"</span>&#125;&#93; &#125;</pre></div><p class="paragraph"/><div class="hidden-block">Use the special <code>element</code> method to return a list as the root:</div>
-<code>element</code>メソッドを使用することで、リストをルートとして返す事ができます:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+<code>element</code>メソッドを使用することで、リストをルートとして返す事ができます:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     element 1
     element 2
     element 3
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The above code produces:</div>
 この例では以下を生成:<p class="paragraph"/><div class="code"><pre>&#91;1,2,3&#93;</pre></div><p class="paragraph"/><h4>複雑なオブジェクトの描写 <div class="hidden-block">Rendering Complex Objects </div></h4><p class="paragraph"/><div class="hidden-block">Rendering complex objects can be done with Closures. For example:</div>
-より複雑なオブジェクトをクロージャで描写できます。例として:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+より複雑なオブジェクトをクロージャで描写できます。例として:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     categories = &#91;'a', 'b', 'c'&#93;
     title = <span class="java&#45;quote">"Hello JSON"</span>
     information = &#123;
@@ -7258,11 +7299,11 @@ JSONBuilderの振る舞いは使用するGrailsのバージョンに依存しま
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The above will produce the JSON:</div>
 この例では次のようなJSONを生成します:<p class="paragraph"/><div class="code"><pre>&#123;<span class="java&#45;quote">"categories"</span>:&#91;<span class="java&#45;quote">"a"</span>,<span class="java&#45;quote">"b"</span>,<span class="java&#45;quote">"c"</span>&#93;,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"Hello JSON"</span>,<span class="java&#45;quote">"information"</span>:&#123;<span class="java&#45;quote">"pages"</span>:10&#125;&#125;</pre></div><p class="paragraph"/><h4>複雑なオブジェクトの配列 <div class="hidden-block">Arrays of Complex Objects </div></h4><p class="paragraph"/><div class="hidden-block">As mentioned previously you can nest complex objects within arrays using Closures:</div>
-前述したように、クロージャを使用してオブジェクトを配列にネストすることも可能です:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+前述したように、クロージャを使用してオブジェクトを配列にネストすることも可能です:<p class="paragraph"/><div class="code"><pre>render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     categories = &#91; &#123; a = <span class="java&#45;quote">"A"</span> &#125;, &#123; b = <span class="java&#45;quote">"B"</span> &#125; &#93;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">You can use the <code>array</code> method to build them up dynamically:</div>
 <code>array</code>メソッドを使用して動的に生成する事もできます:<p class="paragraph"/><div class="code"><pre>def results = Book.list()
-render(contentType: <span class="java&#45;quote">"text/json"</span>) &#123;
+render(contentType: <span class="java&#45;quote">"application/json"</span>) &#123;
     books = array &#123;
         <span class="java&#45;keyword">for</span> (b in results) &#123;
             book title: b.title
@@ -7341,7 +7382,24 @@ class LoginCommand &#123;<p class="paragraph"/>    def loginService<p class="par
         &#125;
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this example the command object interacts with the <code>loginService</code> bean which is injected by name from the Spring <code>ApplicationContext</code>.</div>
-この例では、<code>loginService</code>をSpringの<code>ApplicatinContext</code>から名前解決でコマンドオブジェクトに注入しています。
+この例では、<code>loginService</code>をSpringの<code>ApplicatinContext</code>から名前解決でコマンドオブジェクトに注入しています。<p class="paragraph"/><h4>Binding The Request Body To Command Objects</h4><p class="paragraph"/>When a request is made to a controller action which accepts a command object and the request contains a body, Grails will attempt to parse the body of the request based on the request content type and use the body to do data binding on the command object.  See the following example.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/bindingdemo/DemoController.groovy
+<span class="java&#45;keyword">package</span> bindingdemo<p class="paragraph"/>class DemoController &#123;<p class="paragraph"/>    def createWidget(Widget w) &#123; 
+        render <span class="java&#45;quote">"Name: $&#123;w?.name&#125;, Size: $&#123;w?.size&#125;"</span>
+    &#125;
+&#125;<p class="paragraph"/>class Widget &#123;
+    <span class="java&#45;object">String</span> name
+    <span class="java&#45;object">Integer</span> size
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>$ curl &#45;H <span class="java&#45;quote">"Content&#45;Type: application/json"</span> &#45;d '&#123;<span class="java&#45;quote">"name"</span>:<span class="java&#45;quote">"Some Widget"</span>,<span class="java&#45;quote">"size"</span>:<span class="java&#45;quote">"42"</span>&#125;' localhost:8080/myapp/demo/createWidget
+ Name: Some Widget, Size: 42
+~ $ 
+$ curl &#45;H <span class="java&#45;quote">"Content&#45;Type: application/xml"</span> &#45;d '&#60;widget&#62;&#60;name&#62;Some Other Widget&#60;/name&#62;&#60;size&#62;2112&#60;/size&#62;&#60;/widget&#62;' localhost:8080/bodybind/demo/createWidget
+ Name: Some Other Widget, Size: 2112
+~ $</pre></div><p class="paragraph"/>Note that the body of the request is being parsed to make that work.  Any attempt to read the body of the request after that will fail since the corresponding input stream will be empty.  The controller action can either use a command object or it can parse the body of the request on its own (either directly, or by referring to something like request.JSON), but cannot do both.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/bindingdemo/DemoController.groovy
+<span class="java&#45;keyword">package</span> bindingdemo<p class="paragraph"/>class DemoController &#123;<p class="paragraph"/>    def createWidget(Widget w) &#123; 
+        // <span class="java&#45;keyword">this</span> will fail because it requires reading the body,
+        // which has already been read.
+        def json = request.JSON<p class="paragraph"/>        // ...<p class="paragraph"/>    &#125;
+&#125;</pre></div>
 
 
 <a name="7.1.11 Handling Duplicate Form Submissions"><!-- Legacy link --></a>
@@ -7374,6 +7432,41 @@ GSPタグの<code>attrs</code>パラメータでも、同じ仕組みの型変�
 パラメータに1つのみしか無い場合にイテレートしてしまうと、<code>String</code>の文字列が1文字ずつ参照されてしまいます。この問題を避けるために、<a href="../ref/Controllers/params.html" class="controllers">params</a>オブジェクトの<code>list</code>メソッドを使用することで毎回リストを返すことが可能です:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">for</span> (name in params.list('name')) &#123;
     println name
 &#125;</pre></div>
+
+
+
+<h2 id="controllerExceptionHandling">7.1.13 コントローラ例外ハンドリング宣言</h2>
+Grails controllers support a simple mechanism for declarative exception handling.  If a controller declares a method that accepts a single argument and the argument type is <code>java.lang.Exception</code> or some subclass of <code>java.lang.Exception</code>, that method will be invoked any time an action in that controller throws an exception of that type.  See the following example.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/demo/DemoController.groovy
+<span class="java&#45;keyword">package</span> demo<p class="paragraph"/>class DemoController &#123;<p class="paragraph"/>    def someAction() &#123;
+        // <span class="java&#45;keyword">do</span> some work
+    &#125;<p class="paragraph"/>    def handleSQLException(SQLException e) &#123;
+        render 'A SQLException Was Handled'
+    &#125;<p class="paragraph"/>    def handleBatchUpdateException(BatchUpdateException e) &#123;
+        redirect controller: 'logging', action: 'batchProblem'
+    &#125;<p class="paragraph"/>    def handleNumberFormatException(NumberFormatException nfe) &#123;
+        &#91;problemDescription: 'A <span class="java&#45;object">Number</span> Was Invalid'&#93;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>
+That controller will behave as if it were written something like this...<p class="paragraph"/>
+<div class="code"><pre>// grails&#45;app/controllers/demo/DemoController.groovy
+<span class="java&#45;keyword">package</span> demo<p class="paragraph"/>class DemoController &#123;<p class="paragraph"/>    def someAction() &#123;
+        <span class="java&#45;keyword">try</span> &#123;
+            // <span class="java&#45;keyword">do</span> some work
+        &#125; <span class="java&#45;keyword">catch</span> (BatchUpdateException e) &#123;
+            <span class="java&#45;keyword">return</span> handleBatchUpdateException(e)
+        &#125; <span class="java&#45;keyword">catch</span> (SQLException e) &#123;
+            <span class="java&#45;keyword">return</span> handleSQLException(e)
+        &#125; <span class="java&#45;keyword">catch</span> (NumberFormatException e) &#123;
+            <span class="java&#45;keyword">return</span> handleNumberFormatException(e)
+        &#125;
+    &#125;<p class="paragraph"/>    def handleSQLException(SQLException e) &#123;
+        render 'A SQLException Was Handled'
+    &#125;<p class="paragraph"/>    def handleBatchUpdateException(BatchUpdateException e) &#123;
+        redirect controller: 'logging', action: 'batchProblem'
+    &#125;<p class="paragraph"/>    def handleNumberFormatException(NumberFormatException nfe) &#123;
+        &#91;problemDescription: 'A <span class="java&#45;object">Number</span> Was Invalid'&#93;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>The exception handler method names can be any valid method name.  The name is not what makes the method an exception handler, the <code>Exception</code> argument type is the important part.<p class="paragraph"/>The exception handler methods can do anything that a controller action can do including invoking <code>render</code>, <code>redirect</code>, returning a model, etc.  The exception handler methods are inherited into sublcasses so an application could define the exception handlers in an abstract class that multiple controllers extend from.<p class="paragraph"/>Exception handler methods must be present at compile time.  Specifically, exception handler methods which are runtime metaprogrammed onto a controller class are not supported.
 
 
 <a name="7.2 Groovy Server Pages"><!-- Legacy link --></a>
@@ -7472,7 +7565,7 @@ GSPには、初期定義されたスコープ変数がいくつか存在しま�
 <div class="hidden-block">GSP also supports a few JSP-style page directives.</div>
 GSPはJSPのページディレクティブの一部をサポートしています。<p class="paragraph"/><div class="hidden-block">The import directive lets you import classes into the page. However, it is rarely needed due to Groovy's default imports and <a href="../guide/single.html#tags" class="guide">GSP Tags</a>:</div>
 importディレクティブは、ページにクラスをインポートします。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;%@ page import=<span class="xml&#45;quote">"java.awt.&#42;"</span> %&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">GSP also supports the contentType directive:</div>
-contentTypeディレクティブもサポートしています。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;%@ page contentType=<span class="xml&#45;quote">"text/json"</span> %&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">The contentType directive allows using GSP to render other formats.</div>
+contentTypeディレクティブもサポートしています。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;%@ page contentType=<span class="xml&#45;quote">"application/json"</span> %&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">The contentType directive allows using GSP to render other formats.</div>
 contentTypeディレクティブはGSPを別のフォーマットを可能にします。
 
 
@@ -8296,7 +8389,7 @@ URIを明示的なURIへ(コントローラ・アクションを指定するの�
 <a name="7.4.3 Mapping to REST resources"><!-- Legacy link --></a>
 <h2 id="restfulMappings">7.4.2 RESTリソースへのマッピング</h2>
 Since Grails 2.3, it possible to create RESTful URL mappings that map onto controllers by convention. The syntax to do so is as follows:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book')</pre></div><p class="paragraph"/>You define a base URI and the name of the controller to map to using the <code>resources</code> parameter. The above mapping will result in the following URLs:<p class="paragraph"/>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${id}/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${id}</td><td>delete</td></tr></table><p class="paragraph"/>If you wish to include or exclude any of the generated URL mappings you can do so with the <code>include</code> or <code>exclude</code> parameter, which accepts the name of the Grails action to include or exclude:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book', exclude:&#91;'delete', 'update'&#93;)<p class="paragraph"/>or<p class="paragraph"/><span class="java&#45;quote">"/books"</span>(resources:'book', include:&#91;'index', 'show'&#93;)</pre></div><p class="paragraph"/><h4>Single resources</h4><p class="paragraph"/>A single resource is a resource for which there is only one (possibly per user) in the system. You can create a single resource using the <code>resource</code> parameter (as oppose to <code>resources</code>):<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/book"</span>(resource:'book')</pre></div><p class="paragraph"/>This results in the following URL mappings:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/book</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/book/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/book</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/book</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/book/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/book</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/book</td><td>delete</td></tr></table><p class="paragraph"/>The main difference is that the id is not included in the URL mapping.<p class="paragraph"/><h4>Nested Resources</h4><p class="paragraph"/>You can nest resource mappings to generate child resources. For example:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${id}/edit</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${id}</td><td>delete</td></tr></table><p class="paragraph"/>If you wish to include or exclude any of the generated URL mappings you can do so with the <code>include</code> or <code>exclude</code> parameter, which accepts the name of the Grails action to include or exclude:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book', exclude:&#91;'delete', 'update'&#93;)<p class="paragraph"/>or<p class="paragraph"/><span class="java&#45;quote">"/books"</span>(resources:'book', include:&#91;'index', 'show'&#93;)</pre></div><p class="paragraph"/><h4>Single resources</h4><p class="paragraph"/>A single resource is a resource for which there is only one (possibly per user) in the system. You can create a single resource using the <code>resource</code> parameter (as oppose to <code>resources</code>):<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/book"</span>(resource:'book')</pre></div><p class="paragraph"/>This results in the following URL mappings:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URI</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/book/create</td><td>create</td></tr><tr class="table-even"><td>POST</td><td>/book</td><td>save</td></tr><tr class="table-odd"><td>GET</td><td>/book</td><td>show</td></tr><tr class="table-even"><td>GET</td><td>/book/edit</td><td>edit</td></tr><tr class="table-odd"><td>PUT</td><td>/book</td><td>update</td></tr><tr class="table-even"><td>DELETE</td><td>/book</td><td>delete</td></tr></table><p class="paragraph"/>The main difference is that the id is not included in the URL mapping.<p class="paragraph"/><h4>Nested Resources</h4><p class="paragraph"/>You can nest resource mappings to generate child resources. For example:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources:'book') &#123;
   <span class="java&#45;quote">"/authors"</span>(resources:<span class="java&#45;quote">"author"</span>)
 &#125;</pre></div><p class="paragraph"/>The above will result in the following URL mappings:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>HTTP Method</th><th>URL</th><th>Grails Action</th></tr><tr class="table-odd"><td>GET</td><td>/books/${bookId}/authors</td><td>index</td></tr><tr class="table-even"><td>GET</td><td>/books/${bookId}/authors/create</td><td>create</td></tr><tr class="table-odd"><td>POST</td><td>/books/${bookId}/authors</td><td>save</td></tr><tr class="table-even"><td>GET</td><td>/books/${bookId}/authors/${id}</td><td>show</td></tr><tr class="table-odd"><td>GET</td><td>/books/${bookId}/authors/edit/${id}</td><td>edit</td></tr><tr class="table-even"><td>PUT</td><td>/books/${bookId}/authors/${id}</td><td>update</td></tr><tr class="table-odd"><td>DELETE</td><td>/books/${bookId}/authors/${id}</td><td>delete</td></tr></table><p class="paragraph"/>You can also nest regular URL mappings within a resource mapping:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/books"</span>(resources: <span class="java&#45;quote">"book"</span>) &#123;
     <span class="java&#45;quote">"/publisher"</span>(controller:<span class="java&#45;quote">"publisher"</span>)
@@ -8306,6 +8399,7 @@ The case of nested resources is a little different as they typically required tw
 &#125;</pre></div><p class="paragraph"/>If you wished to link to the <code>show</code> action of the <code>author</code> controller, you would write:<p class="paragraph"/><div class="code"><pre>// Results in /books/1/authors/2
 &#60;g:link controller=<span class="java&#45;quote">"author"</span> action=<span class="java&#45;quote">"show"</span> method=<span class="java&#45;quote">"GET"</span> params=<span class="java&#45;quote">"&#91;bookId:1&#93;"</span> id=<span class="java&#45;quote">"2"</span>&#62;The Author&#60;/g:link&#62;</pre></div><p class="paragraph"/>However, to make this more concise there is a <code>resource</code> attribute to the link tag which can be used instead:<p class="paragraph"/><div class="code"><pre>// Results in /books/1/authors/2
 &#60;g:link resource=<span class="java&#45;quote">"book/author"</span> action=<span class="java&#45;quote">"show"</span> bookId=<span class="java&#45;quote">"1"</span> id=<span class="java&#45;quote">"2"</span>&#62;My Link&#60;/g:link&#62;</pre></div><p class="paragraph"/>The resource attribute accepts a path to the resource separated by a slash (in this case "book/author"). The attributes of the tag can be used to specify the necessary <code>bookId</code> parameter.
+
 
 <a name="7.4.4 Embedded Variables"><!-- Legacy link --></a>
 <h2 id="embeddedVariables">7.4.3 埋込変数</h2>
@@ -9388,10 +9482,9 @@ Grailsには、明示的なフォーマットに対するリクエストのHTTP 
     text:          'text/plain',
     hal:           &#91;'application/hal+json','application/hal+xml'&#93;,
     xml:           &#91;'text/xml', 'application/xml'&#93;
-&#93;</pre></div>
-<div class="code"><pre><div class=<span class="java&#45;quote">"hidden&#45;block"</span>>The above bit of configuration allows Grails to detect to format of a request containing either the 'text/xml' or 'application/xml' media types as simply 'xml'. You can add your own types by simply adding <span class="java&#45;keyword">new</span> entries into the map.</div>
-この設定の一部を説明すると、'text/xml'または'application/xml'を含むリクエストは単純にコンテントタイプ'xml'としてGrailsが検出するのを可能にします。独自のタイプを追加するには単純にマップにタイプを追加するだけです。<p class="paragraph"/><h4>Content Negotiation using the format parameter</h4><p class="paragraph"/>Let's say a controller action can <span class="java&#45;keyword">return</span> a resource in a variety of formats: HTML, XML, and JSON. What format will the client get? The easiest and most reliable way <span class="java&#45;keyword">for</span> the client to control <span class="java&#45;keyword">this</span> is through a <code>format</code> URL parameter.<p class="paragraph"/>So <span class="java&#45;keyword">if</span> you, as a browser or some other client, want a resource as XML, you can use a URL like <span class="java&#45;keyword">this</span>:<p class="paragraph"/><div class=<span class="java&#45;quote">"code"</span>><pre><div class=<span class="java&#45;quote">"error"</span>>code: <span class="java&#45;keyword">null</span></div>
-http://my.domain.org/books?format=xml</pre></div><p class="paragraph"/>The result of this on the server side is a <code>format</code> property on the <code>response</code> object with the value <code>xml</code> . You could code your controller action to return XML based on this property, but you can also make use of the controller-specific <code>withFormat()</code> method:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.converters.JSON
+&#93;</pre></div><p class="paragraph"/>
+<div class="hidden-block">The above bit of configuration allows Grails to detect to format of a request containing either the 'text/xml' or 'application/xml' media types as simply 'xml'. You can add your own types by simply adding new entries into the map.</div>
+この設定の一部を説明すると、'text/xml'または'application/xml'を含むリクエストは単純にコンテントタイプ'xml'としてGrailsが検出するのを可能にします。独自のタイプを追加するには単純にマップにタイプを追加するだけです。<p class="paragraph"/><h4>Content Negotiation using the format parameter</h4><p class="paragraph"/>Let's say a controller action can return a resource in a variety of formats: HTML, XML, and JSON. What format will the client get? The easiest and most reliable way for the client to control this is through a <code>format</code> URL parameter.<p class="paragraph"/>So if you, as a browser or some other client, want a resource as XML, you can use a URL like this:<p class="paragraph"/><div class="code"><pre>http://my.domain.org/books?format=xml</pre></div><p class="paragraph"/>The result of this on the server side is a <code>format</code> property on the <code>response</code> object with the value <code>xml</code> . You could code your controller action to return XML based on this property, but you can also make use of the controller-specific <code>withFormat()</code> method:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.converters.JSON
 <span class="java&#45;keyword">import</span> grails.converters.XML<p class="paragraph"/>class BookController &#123;<p class="paragraph"/>    def list() &#123;
         def books = Book.list()<p class="paragraph"/>        withFormat &#123;
             html bookList: books
@@ -10188,8 +10281,10 @@ Content&#45;Type: application/vnd.books.org.book+json;charset=ISO&#45;8859&#45;1
 <h4>リンクレンダリングのカスタマイズ</h4><p class="paragraph"/><div class="hidden-block">An important aspect of HATEOAS is the usage of links that describe the transitions the client can use to interact with the REST API. By default the <code>HalJsonRenderer</code> will automatically create links for you for associations and to the resource itself (using the "self" relationship).</div>
 HATEOASの重要な側面は、遷移を表現したリンクの使い方です。
 クライアントはREST APIでのやり取りにこれを使えます。
-デフォルトで<code>HalJsonRenderer</code>は、関連と("self"関連を使って)自身のリソースへのリンクを自動的に作成します。<p class="paragraph"/><div class="hidden-block">However you can customize link rendering using the <code>link</code> method that is added to all domain classes annotated with <code>grails.rest.Resource</code> or any class annotated with <code>grails.rest.Linkdable</code>. For example, the <code>show</code> action can be modified as follows to provide a new link in the resulting output:</div>
-リンクのレンダリングを、<code>grails.rest.Resource</code>が付与されたドメインクラス、または<code>grails.rest.Linkdable</code>が付与されたクラスに追加された<code>link</code>メソッドを使って、カスタマイズすることもできます。
+デフォルトで<code>HalJsonRenderer</code>は、関連と("self"関連を使って)自身のリソースへのリンクを自動的に作成します。<p class="paragraph"/><div class="hidden-block">
+However you can customize link rendering using the <code>link</code> method that is added to all domain classes annotated with <code>grails.rest.Resource</code> or any class annotated with <code>grails.rest.Linkable</code>. For example, the <code>show</code> action can be modified as follows to provide a new link in the resulting output:
+</div>
+リンクのレンダリングを、<code>grails.rest.Resource</code>が付与されたドメインクラス、または<code>grails.rest.Linkable</code>が付与されたクラスに追加された<code>link</code>メソッドを使って、カスタマイズすることもできます。
 例えば、<code>show</code>アクションで結果を出力する際に新たなリンクを追加するには、以下のように変更します:<p class="paragraph"/><div class="code"><pre>def show(Book book) &#123;
     book.link rel:'publisher', href: g.link(resource:<span class="java&#45;quote">"publisher"</span>, params:&#91;bookId: book.id&#93;)
     respond book
@@ -10240,16 +10335,16 @@ beans = &#123;
 <h2 id="vndError">8.1.7.3 Vnd.Errorサポート</h2>
 <div class="hidden-block"><a href="https://github.com/blongden/vnd.error" target="blank">Vnd.Error</a> is a standardised way of expressing an error response. </div>
 <a href="https://github.com/blongden/vnd.error" target="blank">Vnd.Error</a>はエラーレスポンスの表現方法を標準化したものです。<p class="paragraph"/><div class="hidden-block">By default when a validation error occurs when attempting to POST new resources then the errors object will be sent back allow with a 422 respond code:</div>
-デフォルトでは、新しいリソースをPOSTする際にバリデーションエラーが発生した場合、エラーオブジェクトが422のレスポンスコードで送り返されます:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: text/json"</span>  &#45;H <span class="java&#45;quote">"Content&#45;Type: text/json"</span> &#45;X POST &#45;d <span class="java&#45;quote">""</span> http://localhost:8080/myapp/books<p class="paragraph"/>HTTP/1.1 422 Unprocessable Entity
+デフォルトでは、新しいリソースをPOSTする際にバリデーションエラーが発生した場合、エラーオブジェクトが422のレスポンスコードで送り返されます:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/json"</span>  &#45;H <span class="java&#45;quote">"Content&#45;Type: application/json"</span> &#45;X POST &#45;d <span class="java&#45;quote">""</span> http://localhost:8080/myapp/books<p class="paragraph"/>HTTP/1.1 422 Unprocessable Entity
 Server: Apache&#45;Coyote/1.1
-Content&#45;Type: text/json;charset=ISO&#45;8859&#45;1<p class="paragraph"/>&#123;<span class="java&#45;quote">"errors"</span>:&#91;&#123;<span class="java&#45;quote">"object"</span>:<span class="java&#45;quote">"<span class="java&#45;keyword">rest</span>.test.Book"</span>,<span class="java&#45;quote">"field"</span>:<span class="java&#45;quote">"title"</span>,<span class="java&#45;quote">"rejected&#45;value"</span>:<span class="java&#45;keyword">null</span>,<span class="java&#45;quote">"message"</span>:<span class="java&#45;quote">"Property &#91;title&#93; of class &#91;class <span class="java&#45;keyword">rest</span>.test.Book&#93; cannot be <span class="java&#45;keyword">null</span>"</span>&#125;&#93;&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If you wish to change the format to Vnd.Error then simply register <code>grails.rest.render.errors.VndErrorJsonRenderer</code> bean in <code>grails-app/conf/spring/resources.groovy</code>:</div>
+Content&#45;Type: application/json;charset=ISO&#45;8859&#45;1<p class="paragraph"/>&#123;<span class="java&#45;quote">"errors"</span>:&#91;&#123;<span class="java&#45;quote">"object"</span>:<span class="java&#45;quote">"<span class="java&#45;keyword">rest</span>.test.Book"</span>,<span class="java&#45;quote">"field"</span>:<span class="java&#45;quote">"title"</span>,<span class="java&#45;quote">"rejected&#45;value"</span>:<span class="java&#45;keyword">null</span>,<span class="java&#45;quote">"message"</span>:<span class="java&#45;quote">"Property &#91;title&#93; of class &#91;class <span class="java&#45;keyword">rest</span>.test.Book&#93; cannot be <span class="java&#45;keyword">null</span>"</span>&#125;&#93;&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If you wish to change the format to Vnd.Error then simply register <code>grails.rest.render.errors.VndErrorJsonRenderer</code> bean in <code>grails-app/conf/spring/resources.groovy</code>:</div>
 もしフォーマットをVnd.Errorへ変更したい場合は、<code>grails-app/conf/spring/resources.groovy</code>の中に<code>grails.rest.render.errors.VndErrorJsonRenderer</code>ビーンを単に登録します:<p class="paragraph"/>
 <div class="code"><pre>beans = &#123;
     vndJsonErrorRenderer(grails.<span class="java&#45;keyword">rest</span>.render.errors.VndErrorJsonRenderer)
     // <span class="java&#45;keyword">for</span> Vnd.Error XML format
     vndXmlErrorRenderer(grails.<span class="java&#45;keyword">rest</span>.render.errors.VndErrorXmlRenderer)
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">Then if you alter the client request to accept Vnd.Error you get an appropriate response:</div>
-そして、Vnd.Errorを受け入れるようにクライアントのリクエストを変更すると、次のようにレスポンスを得られます:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/vnd.error+json,text/json"</span> &#45;H <span class="java&#45;quote">"Content&#45;Type: text/json"</span> &#45;X POST &#45;d <span class="java&#45;quote">""</span> http://localhost:8080/myapp/books
+そして、Vnd.Errorを受け入れるようにクライアントのリクエストを変更すると、次のようにレスポンスを得られます:<p class="paragraph"/><div class="code"><pre>$ curl &#45;i &#45;H <span class="java&#45;quote">"Accept: application/vnd.error+json,application/json"</span> &#45;H <span class="java&#45;quote">"Content&#45;Type: application/json"</span> &#45;X POST &#45;d <span class="java&#45;quote">""</span> http://localhost:8080/myapp/books
 HTTP/1.1 200 OK
 Server: Apache&#45;Coyote/1.1
 Content&#45;Type: application/vnd.error+json;charset=ISO&#45;8859&#45;1<p class="paragraph"/>&#91;
@@ -10320,8 +10415,8 @@ lists the content types which are supported by the core framework and which <cod
 <code>DataBindingSourceCreator</code>の具体的な実装はリクエストの<code>contentType</code>を元に選択されます。
 主要なコンテンツタイプをハンドリングするためにいくつかの実装が提供されています。
 大抵の場合にこのデフォルト実装で十分なはずです。
-以下のテーブルのコンテンツタイプ一覧がコアフレームワークによってサポートされており、それぞれ対応する<code>DataBindingSourceCreator</code>の実装が使われます。<p class="paragraph"/><div class="hidden-block"><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>Content Type(s)</th><th>Bean Name</th><th>DataBindingSourceCreator Impl.</th></tr><tr class="table-odd"><td>application/xml, text/xml</td><td>xmlDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.XmlDataBindingSourceCreator</td></tr><tr class="table-even"><td>application/json, text/json</td><td>jsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.JsonDataBindingSourceCreator</td></tr><tr class="table-odd"><td>application/hal+json</td><td>halJsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.HalJsonDataBindingSourceCreator</td></tr></table></div>
-<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>コンテンツタイプ</th><th>ビーン名</th><th>DataBindingSourceCreator実装</th></tr><tr class="table-odd"><td>application/xml, text/xml</td><td>xmlDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.XmlDataBindingSourceCreator</td></tr><tr class="table-even"><td>application/json, text/json</td><td>jsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.JsonDataBindingSourceCreator</td></tr><tr class="table-odd"><td>application/hal+json</td><td>halJsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.HalJsonDataBindingSourceCreator</td></tr></table><p class="paragraph"/><div class="hidden-block">In order provide your own <code>DataBindingSourceCreator</code> for any of those content types, write a class which implements
+以下のテーブルのコンテンツタイプ一覧がコアフレームワークによってサポートされており、それぞれ対応する<code>DataBindingSourceCreator</code>の実装が使われます。<p class="paragraph"/><div class="hidden-block"><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>Content Type(s)</th><th>Bean Name</th><th>DataBindingSourceCreator Impl.</th></tr><tr class="table-odd"><td>application/xml, text/xml</td><td>xmlDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.XmlDataBindingSourceCreator</td></tr><tr class="table-even"><td>application/json, text/json</td><td>jsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.JsonDataBindingSourceCreator</td></tr><tr class="table-odd"><td>application/hal+json</td><td>halJsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.HalJsonDataBindingSourceCreator</td></tr><tr class="table-even"><td>application/hal+xml</td><td>halXmlDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.HalXmlDataBindingSourceCreator</td></tr></table></div>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>コンテンツタイプ</th><th>ビーン名</th><th>DataBindingSourceCreator実装</th></tr><tr class="table-odd"><td>application/xml, text/xml</td><td>xmlDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.XmlDataBindingSourceCreator</td></tr><tr class="table-even"><td>application/json, text/json</td><td>jsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.JsonDataBindingSourceCreator</td></tr><tr class="table-odd"><td>application/hal+json</td><td>halJsonDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.HalJsonDataBindingSourceCreator</td></tr><tr class="table-even"><td>application/hal+xml</td><td>halXmlDataBindingSourceCreator</td><td>org.codehaus.groovy.grails.web.binding.bindingsource.HalXmlDataBindingSourceCreator</td></tr></table><p class="paragraph"/><div class="hidden-block">In order provide your own <code>DataBindingSourceCreator</code> for any of those content types, write a class which implements
 <code>DataBindingSourceCreator</code> and register an instance of that class in the Spring application context.  If you
 are replacing one of the existing helpers, use the corresponding bean name from above.  If you are providing a
 helper for a content type other than those accounted for by the core framework, the bean name may be anything that
@@ -11596,7 +11691,7 @@ The <code>xml</code> property is a parsed result from Groovy's <a href="http://g
 Testing JSON responses is pretty similar, instead you use the <code>json</code> property:
 </div><p class="paragraph"/><code>json</code>プロパティを使うだけで、JSONレスポンスのテストもかなり似ています。<p class="paragraph"/><div class="code"><pre>// controller action
 def renderJson() &#123;
-    render(contentType:<span class="java&#45;quote">"text/json"</span>) &#123;
+    render(contentType:<span class="java&#45;quote">"application/json"</span>) &#123;
         book = <span class="java&#45;quote">"Great"</span>
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="code"><pre>// test
@@ -12041,7 +12136,8 @@ class BookSpec <span class="java&#45;keyword">extends</span> Specification &#123
         book.validate()
         !book.hasErrors()
     &#125;
-&#125;</pre></div><p class="paragraph"/>That's it for testing constraints. One final thing we would like to say is that testing the constraints in this way catches a common error: typos in the "constraints" property name which is a mistake that is easy to make and equally easy to overlook. A unit test for your constraints will highlight the problem straight away.<p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/>Note that the <code>mockForConstraintsTests</code> method changes the behavior of the errors object such that something like <code>book.errors'author'</code> will evaluate to the name of the failed constraint, not a <code>org.springframework.validation.FieldError</code> object.  This is convenient for unit tests.  If your unit test really does want a reference to the <code>org.springframework.validation.FieldError</code> object use something like <code>book.errors.getFieldError('author')</code>.<p class="paragraph"/>
+That's it for testing constraints. One final thing we would like to say is that testing the constraints in this way catches a common error: typos in the "constraints" property name which is a mistake that is easy to make and equally easy to overlook. A unit test for your constraints will highlight the problem straight away.<p class="paragraph"/>
 
 <a name="12.1.4 Unit Testing Filters"><!-- Legacy link --></a>
 <h2 id="unitTestingFilters">12.1.4 フィルタのユニットテスト</h2>
@@ -12297,7 +12393,7 @@ XMLリクエストとしての'book'引数をシミュレートするには、�
     assert model.book
     assertEquals <span class="java&#45;quote">"The Stand"</span>, model.book.title
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">The same can be achieved with a JSON request:</div>
-JSONリクエストについても同じように実現できます:<p class="paragraph"/><div class="code"><pre>void testCreateWithJSON() &#123;<p class="paragraph"/>    def controller = <span class="java&#45;keyword">new</span> BookController()<p class="paragraph"/>    controller.request.contentType = <span class="java&#45;quote">"text/json"</span>
+JSONリクエストについても同じように実現できます:<p class="paragraph"/><div class="code"><pre>void testCreateWithJSON() &#123;<p class="paragraph"/>    def controller = <span class="java&#45;keyword">new</span> BookController()<p class="paragraph"/>    controller.request.contentType = <span class="java&#45;quote">"application/json"</span>
     controller.request.content =
             '&#123;<span class="java&#45;quote">"id"</span>:1,<span class="java&#45;quote">"class"</span>:<span class="java&#45;quote">"Book"</span>,<span class="java&#45;quote">"title"</span>:<span class="java&#45;quote">"The Stand"</span>&#125;'.getBytes()<p class="paragraph"/>    def model = controller.create()
     assert model.book
@@ -12889,7 +12985,7 @@ If you have created a Grails plugin and want it to be hosted in the central repo
 </blockquote><p class="paragraph"/><div class="hidden-block">When you have access to the Grails Plugin repository, install the <a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">Release Plugin</a> by declaring it as a 'build' scoped dependency in <code>grails-app/conf/BuildConfig.groovy</code> file:</div><p class="paragraph"/>Grailsプラグインリポジトリにアクセス権を持っていれば、<a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">リリースプラグイン</a>を <code>grails-app/conf/BuildConfig.groovy</code> ファイルの依存管理'build'スコープに定義してインストールします。<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
     &#8230;
     plugins &#123;
-        build <span class="java&#45;quote<a href="release:3.0.0"</span>">></a>
+        build ':release:3.0.0'
     &#125;
 &#125;</pre></div><p class="paragraph"/>And execute the <code>publish-plugin</code> command to release your plugin:<p class="paragraph"/><div class="code"><pre>grails publish&#45;plugin</pre></div><p class="paragraph"/>This will automatically publish the plugin to the central repository. If the command is successful, it will immediately be available on the plugin portal at http://grails.org/plugin/&#60;pluginName&#62;. You can find out more about the Release plugin and its other features in <a href="http://grails-plugins.github.com/grails-release/docs/index.html" target="blank">its user guide</a>.<p class="paragraph"/><div class="hidden-block">h4. Configuring Additional Repositories</div><p class="paragraph"/><h4>追加リポジトリの設定</h4><p class="paragraph"/><div class="hidden-block">The process for configuring repositories in Grails differs between versions. For version of Grails 1.2 and earlier please refer to the <a href="http://grails.org/doc/1.2.x/guide/12.%20Plug-ins.html#12.2%20Plugin%20Repositories" target="blank">Grails 1.2 documentation</a> on the subject. The following sections cover Grails 1.3 and above.</div><p class="paragraph"/>Grailsにおけるリポジトリの設定手順は、Grailsのバージョンによって異なっています。Grails 1.2以前の情報については<a href="http://grails.org/doc/1.2.x/guide/12.%20Plug-ins.html#12.2%20Plugin%20Repositories" target="blank">Grails 1.2のドキュメンテーション</a>を参照ください。以降の節は、Grails 1.3以降について記述しています。<p class="paragraph"/><div class="hidden-block">Grails 1.3 and above use Ivy under the hood to resolve plugin dependencies. The mechanism for defining additional plugin repositories is largely the same as <a href="../guide/single.html#dependencyResolution" class="guide">defining repositories for JAR dependencies</a>. For example you can define a remote Maven repository that contains Grails plugins using the following syntax in <code>grails-app/conf/BuildConfig.groovy</code>:</div><p class="paragraph"/>Grails 1.3以上では、下位層に隠されているIvyがプラグインの依存性を解決します。プラグインリポジトリを追加定義する仕組みは、 <a href="../guide/single.html#dependencyResolution" class="guide">JAR依存性を定義</a>する方法とほぼ同じです。例えば、Grailsプラグインを含むリモートMavenリポジトリを定義するには、 <code>grails-app/conf/BuildConfig.groovy</code>中で以下のように記述します:<p class="paragraph"/><div class="code"><pre>repositories &#123;
     mavenRepo <span class="java&#45;quote">"http://repository.codehaus.org"</span><p class="paragraph"/>    // ...or with a name
@@ -12933,19 +13029,28 @@ sshResolver.setCheckmodified(<span class="java&#45;keyword">true</span>)</pre></
 
 <a name="15.4 Providing Basic Artefacts"><!-- Legacy link --></a>
 <h2 id="providingBasicArtefacts">15.4 基本アーティファクトの提供</h2>
-<div class="hidden-block">h4. Adding a new Script</div><p class="paragraph"/><div class="hidden-block">A plugin can add a new script simply by providing the relevant Gant script in its scripts directory:</div><p class="paragraph"/>プラグインのscriptディレクトリ配下に関連するGantスクリプトを置くことで、プラグインは新しいスクリプトを追加することができます:
-<div class="hidden-block">   + scripts     &#60;<strike class="strike"> additional scripts here</div>
+<div class="hidden-block">h4. Adding a new Script</div>
+<h4>新たにスクリプトを追加する</h4><p class="paragraph"/><div class="hidden-block">A plugin can add a new script simply by providing the relevant Gant script in its scripts directory:</div><p class="paragraph"/>プラグインのscriptディレクトリ配下に関連するGantスクリプトを置くことで、プラグインは新しいスクリプトを追加することができます:
+<div class="hidden-block">
 <div class="code"><pre>+ MyPlugin.groovy
+   + scripts     &#60;&#45;&#45; additional scripts here
+   + grails&#45;app
+        + controllers
+        + services
+        + etc.
+    + lib</pre></div>
+</div><p class="paragraph"/><div class="code"><pre>+ MyPlugin.groovy
    + scripts     &#60;&#45;&#45; ここにスクリプトを追加する
    + grails&#45;app
         + controllers
         + services
         + etc.
-    + lib</pre></div><p class="paragraph"/><div class="hidden-block">h4. Adding a new grails-app artifact (Controller, Tag Library, Service, etc.)</div><p class="paragraph"/><h4>Grails-appアーテファクト(Controller, Tag Library, Service, 他)の追加</h4><p class="paragraph"/>
+    + lib</pre></div><p class="paragraph"/>
+<div class="hidden-block">h4. Adding a new grails-app artifact (Controller, Tag Library, Service, etc.)</div><p class="paragraph"/><h4>Grails-appアーテファクト(Controller, Tag Library, Service, 他)の追加</h4><p class="paragraph"/>
 <div class="hidden-block">A plugin can add new artifacts by creating the relevant file within the <code>grails-app</code> tree. Note that the plugin is loaded from where it is installed and not copied into the main application tree.</div><p class="paragraph"/><code>grails-app</code>配下のツリーに関連するファイルを置いておくことで、プラグインは新しいアーテファクトを追加することができます。プラグインはインストールされた場所から読み込まれるのであって、メインアプリのツリー中にコピーされるわけではないことに留意して下さい。<p class="paragraph"/><div class="hidden-block">
-        + controllers  &#60;</strike> additional controllers here
-        + services &#60;<strike class="strike"> additional services here
-        + etc.  &#60;</strike> additional XXX here
+        + controllers  &#60;<strike class="strike"> additional controllers here
+        + services &#60;</strike> additional services here
+        + etc.  &#60;-- additional XXX here
 </div>
 <div class="code"><pre>+ ExamplePlugin.groovy
    + scripts
@@ -14546,9 +14651,9 @@ es.subtitle=...</pre></div><p class="paragraph"/><div class="hidden-block">For e
 
 <h1>Document Translation Report.</h1>
 <ul class="star">
-<li><strong class="bold">File Count</strong> - 294</li>
+<li><strong class="bold">File Count</strong> - 295</li>
 <li><strong class="bold">Done</strong> - 281</li>
-<li><strong class="bold">TODO</strong> - 11</li>
+<li><strong class="bold">TODO</strong> - 12</li>
 <li><strong class="bold">Not found or new</strong> - 2</li>
 </ul><p class="paragraph"/><h2>Original document updated after translation.:</h2><p class="paragraph"/><h2>Not done.</h2>
 <ul class="star">
@@ -14558,6 +14663,7 @@ es.subtitle=...</pre></div><p class="paragraph"/><div class="hidden-block">For e
 <li>../en/guide/rewriteRules.txt</li>
 <li>../en/guide/security/xssPrevention.gdoc</li>
 <li>../en/guide/services/declarativeTransactions/transactionsRollbackAndTheSession.gdoc</li>
+<li>../en/guide/theWebLayer/controllers/controllerExceptionHandling.gdoc</li>
 <li>../en/guide/theWebLayer/urlmappings/namespacedControllers.gdoc</li>
 <li>../en/guide/theWebLayer/urlmappings/redirectMappings.gdoc</li>
 <li>../en/guide/theWebLayer/urlmappings/restfulMappings.gdoc</li>
