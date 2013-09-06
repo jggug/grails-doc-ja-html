@@ -202,9 +202,9 @@ Grails 2.3ではpromiseを使用して、非同期にレスポンスを書くこ
 class StockController &#123;<p class="paragraph"/>    def stock(<span class="java&#45;object">String</span> ticker) &#123;
        task &#123;
            ticker = ticker ?: 'GOOG'
-           def url = <span class="java&#45;keyword">new</span> URL(<span class="java&#45;quote">"http://download.finance.yahoo.com/d/quotes.csv?s=$&#123;ticker&#125;&#38;f=nsl1op&#38;e=.csv"</span>)
+           def url = <span class="java&#45;keyword">new</span> URL(<span class="java&#45;quote">"http://download.finance.yahoo.com/d/quotes.csv?s=&#36;&#123;ticker&#125;&#38;f=nsl1op&#38;e=.csv"</span>)
            <span class="java&#45;object">Double</span> price = url.text.split(',')&#91;&#45;1&#93; as <span class="java&#45;object">Double</span>
-           render <span class="java&#45;quote">"ticker: $ticker, price: $price"</span>
+           render <span class="java&#45;quote">"ticker: &#36;ticker, price: &#36;price"</span>
        &#125;
     &#125;
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">

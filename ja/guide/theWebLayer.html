@@ -1231,17 +1231,17 @@ class LoginCommand &#123;<p class="paragraph"/>    def loginService<p class="par
 &#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this example the command object interacts with the <code>loginService</code> bean which is injected by name from the Spring <code>ApplicationContext</code>.</div>
 この例では、<code>loginService</code>をSpringの<code>ApplicatinContext</code>から名前解決でコマンドオブジェクトに注入しています。<p class="paragraph"/><h4>Binding The Request Body To Command Objects</h4><p class="paragraph"/>When a request is made to a controller action which accepts a command object and the request contains a body, Grails will attempt to parse the body of the request based on the request content type and use the body to do data binding on the command object.  See the following example.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/bindingdemo/DemoController.groovy
 <span class="java&#45;keyword">package</span> bindingdemo<p class="paragraph"/>class DemoController &#123;<p class="paragraph"/>    def createWidget(Widget w) &#123; 
-        render <span class="java&#45;quote">"Name: $&#123;w?.name&#125;, Size: $&#123;w?.size&#125;"</span>
+        render <span class="java&#45;quote">"Name: &#36;&#123;w?.name&#125;, Size: &#36;&#123;w?.size&#125;"</span>
     &#125;
 &#125;<p class="paragraph"/>class Widget &#123;
     <span class="java&#45;object">String</span> name
     <span class="java&#45;object">Integer</span> size
-&#125;</pre></div><p class="paragraph"/><div class="code"><pre>$ curl &#45;H <span class="java&#45;quote">"Content&#45;Type: application/json"</span> &#45;d '&#123;<span class="java&#45;quote">"name"</span>:<span class="java&#45;quote">"Some Widget"</span>,<span class="java&#45;quote">"size"</span>:<span class="java&#45;quote">"42"</span>&#125;' localhost:8080/myapp/demo/createWidget
+&#125;</pre></div><p class="paragraph"/><div class="code"><pre>&#36; curl &#45;H <span class="java&#45;quote">"Content&#45;Type: application/json"</span> &#45;d '&#123;<span class="java&#45;quote">"name"</span>:<span class="java&#45;quote">"Some Widget"</span>,<span class="java&#45;quote">"size"</span>:<span class="java&#45;quote">"42"</span>&#125;' localhost:8080/myapp/demo/createWidget
  Name: Some Widget, Size: 42
-~ $ 
-$ curl &#45;H <span class="java&#45;quote">"Content&#45;Type: application/xml"</span> &#45;d '&#60;widget&#62;&#60;name&#62;Some Other Widget&#60;/name&#62;&#60;size&#62;2112&#60;/size&#62;&#60;/widget&#62;' localhost:8080/bodybind/demo/createWidget
+~ &#36; 
+&#36; curl &#45;H <span class="java&#45;quote">"Content&#45;Type: application/xml"</span> &#45;d '&#60;widget&#62;&#60;name&#62;Some Other Widget&#60;/name&#62;&#60;size&#62;2112&#60;/size&#62;&#60;/widget&#62;' localhost:8080/bodybind/demo/createWidget
  Name: Some Other Widget, Size: 2112
-~ $</pre></div><p class="paragraph"/>Note that the body of the request is being parsed to make that work.  Any attempt to read the body of the request after that will fail since the corresponding input stream will be empty.  The controller action can either use a command object or it can parse the body of the request on its own (either directly, or by referring to something like request.JSON), but cannot do both.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/bindingdemo/DemoController.groovy
+~ &#36;</pre></div><p class="paragraph"/>Note that the body of the request is being parsed to make that work.  Any attempt to read the body of the request after that will fail since the corresponding input stream will be empty.  The controller action can either use a command object or it can parse the body of the request on its own (either directly, or by referring to something like request.JSON), but cannot do both.<p class="paragraph"/><div class="code"><pre>// grails&#45;app/controllers/bindingdemo/DemoController.groovy
 <span class="java&#45;keyword">package</span> bindingdemo<p class="paragraph"/>class DemoController &#123;<p class="paragraph"/>    def createWidget(Widget w) &#123; 
         // <span class="java&#45;keyword">this</span> will fail because it requires reading the body,
         // which has already been read.
