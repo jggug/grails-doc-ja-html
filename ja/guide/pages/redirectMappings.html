@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>7.4.11 &#21517;&#21069;&#20184;&#12365;URL&#12510;&#12483;&#12500;&#12531;&#12464; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>7.4.3 URL&#12510;&#12483;&#12500;&#12531;&#12464;&#12391;&#12398;&#12522;&#12480;&#12452;&#12524;&#12463;&#12488; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -125,7 +125,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>7.4.11 &#21517;&#21069;&#20184;&#12365;URL&#12510;&#12483;&#12500;&#12531;&#12464; - Reference Documentation</h1>
+                    <h1>7.4.3 URL&#12510;&#12483;&#12500;&#12531;&#12464;&#12391;&#12398;&#12522;&#12480;&#12452;&#12524;&#12463;&#12488; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -139,39 +139,16 @@ function addJsClass() {
                 
 
                 
-<a name="7.4.11 Named URL Mappings"><!-- Legacy link --></a>
-<h2 id="namedMappings">7.4.11 名前付きURLマッピング</h2>
-<div class="hidden-block">URL Mappings also support named mappings, that is mappings which have a name associated with them. The name may be used to refer to a specific mapping when links are generated.</div>
-URLマッピングでは、名前で連携ができるように、名前付きマッピングに対応しています。<p class="paragraph"/><div class="hidden-block">The syntax for defining a named mapping is as follows:</div>
-名前付きマッピングの定義は以下のようになります:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
-   name &#60;mapping name&#62;: &#60;url pattern&#62; &#123;
-      // &#8230;
-   &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">For example:</div>
-例として:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
-    name personList: <span class="java&#45;quote">"/showPeople"</span> &#123;
-        controller = 'person'
-        action = 'list'
-    &#125;
-    name accountDetails: <span class="java&#45;quote">"/details/$acctNumber"</span> &#123;
-        controller = 'product'
-        action = 'accountDetails'
-    &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">The mapping may be referenced in a link tag in a GSP.</div>
-次のように、GSPでlinkタグからマッピングを参照します:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:link mapping=<span class="xml&#45;quote">"personList"</span>&#62;</span>List People<span class="xml&#45;tag">&#60;/g:link&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">That would result in:</div>
-この結果は以下のようになります:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;a href=<span class="xml&#45;quote">"/showPeople"</span>&#62;</span>List People<span class="xml&#45;tag">&#60;/a&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">Parameters may be specified using the params attribute.</div>
-params属性でパラメータを定義することができます.<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:link mapping=<span class="xml&#45;quote">"accountDetails"</span> params=<span class="xml&#45;quote">"&#91;acctNumber:'8675309'&#93;"</span>&#62;</span>
-    Show Account
-<span class="xml&#45;tag">&#60;/g:link&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">That would result in:</div>
-この例の結果は:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;a href=<span class="xml&#45;quote">"/details/8675309"</span>&#62;</span>Show Account<span class="xml&#45;tag">&#60;/a&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">Alternatively you may reference a named mapping using the link namespace.</div>
-名前付きマッピングでは、linkタグの代わりに、linkネームスペースのタグが使用できます。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;link:personList&#62;</span>List People<span class="xml&#45;tag">&#60;/link:personList&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">That would result in:</div>
-この例の結果は:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;a href=<span class="xml&#45;quote">"/showPeople"</span>&#62;</span>List People<span class="xml&#45;tag">&#60;/a&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">The link namespace approach allows parameters to be specified as attributes.</div>
-linkネームスペースタグでは、パラメータを属性で指定できます。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;link:accountDetails acctNumber=<span class="xml&#45;quote">"8675309"</span>&#62;</span>Show Account<span class="xml&#45;tag">&#60;/link:accountDetails&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">That would result in:</div>
-この例の結果は:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;a href=<span class="xml&#45;quote">"/details/8675309"</span>&#62;</span>Show Account<span class="xml&#45;tag">&#60;/a&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">To specify attributes that should be applied to the generated <code>href</code>, specify a <code>Map</code> value to the <code>attrs</code> attribute.  These attributes will be applied directly to the href, not passed through to be used as request parameters.</div>
-属性に指定した全ての内容は生成された<code>href</code>に適用されてしまうので、他の属性は、<code>attrs</code>属性に<code>Map</code>で指定します。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;link:accountDetails attrs=<span class="xml&#45;quote">"&#91;class: 'fancy'&#93;"</span> acctNumber=<span class="xml&#45;quote">"8675309"</span>&#62;</span>
-    Show Account
-<span class="xml&#45;tag">&#60;/link:accountDetails&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">That would result in:</div>
-この例の結果は:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;a href=<span class="xml&#45;quote">"/details/8675309"</span> class=<span class="xml&#45;quote">"fancy"</span>&#62;</span>Show Account<span class="xml&#45;tag">&#60;/a&#62;</span></pre></div>
+<a name="7.4.2 Redirects In URL Mappings"><!-- Legacy link --></a>
+<h2 id="redirectMappings">7.4.3 URLマッピングでのリダイレクト</h2>
+Since Grails 2.3, it is possible to define URL mappings which specify a redirect.
+When a URL mapping specifies a redirect, any time that mapping matches an incoming
+request, a redirect is initiated with information provided by the mapping.<p class="paragraph"/>When a URL mapping specifies a redirect the mapping must either supply a String
+representing a URI to redirect to or must provide a Map representing the target
+of the redirect.  That Map is structured just like the Map that may be passed
+as an argument to the <code>redirect</code> method in a controller.<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/viewBooks"</span>(redirect: '/books/list')
+<span class="java&#45;quote">"/viewAuthors"</span>(redirect: &#91;controller: 'author', action: 'list'&#93;)
+<span class="java&#45;quote">"/viewPublishers"</span>(redirect: &#91;controller: 'publisher', action: 'list', permanent: <span class="java&#45;keyword">true</span>&#93;)</pre></div><p class="paragraph"/>Request parameters that were part of the original request will be included in the redirect.
 
 
 
