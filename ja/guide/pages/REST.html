@@ -208,75 +208,7 @@ function addJsClass() {
 <h2 id="REST">8.1 REST</h2>
 <div class="hidden-block">REST is not really a technology in itself, but more an architectural pattern. REST is very simple and just involves using plain XML or JSON as a communication medium, combined with URL patterns that are "representational" of the underlying system, and HTTP methods such as GET, PUT, POST and DELETE.</div>
 RESTは本来SOAPのようなプロトコルではなく、アーキテクチャスタイルです。RESTは非常に単純です。簡素なXMLやJSONを通信媒体に用いて、基本的なシステムとGET、PUT、POSTおよびDELETEといったHTTPメソッドを「表現する」URLパターンを組み合わせています。<p class="paragraph"/><div class="hidden-block">Each HTTP method maps to an action type. For example GET for retrieving data, POST for creating data, PUT for updating and so on.</div>
-それぞれのHTTPメソッドは異なるアクションにマップします。例えば、GETはデータ検索、PUTはデータ作成、POSTは更新などとマップします。<p class="paragraph"/>Grails includes flexible features that make it easy to create RESTful APIs. Creating a RESTful resource can be as simple as one line of code, as demonstrated in the next section.<p class="paragraph"/>
-<blockquote class="warning">
-Grails 2.3で大幅な更新が行われるため、日本語版のみ旧仕様のドキュメントを一時的に残しておきます。
-以下、Grails 2.2.x 以前の仕様になります。
-</blockquote><p class="paragraph"/><h4>URLパターン <div class="hidden-block">URL patterns</div></h4><p class="paragraph"/><div class="hidden-block">The first step to implementing REST with Grails is to provide RESTful <a href="../guide/single.html#urlmappings" class="guide">URL mappings</a>:</div>
-GrailsでRESTを実装する１つ目のやり方として、以下のようにRESTfulな<a href="../guide/single.html#urlmappings" class="guide">URLマッピング</a>を提供する方法があります。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">static</span> mappings = &#123;
-   <span class="java&#45;quote">"/product/$id?"</span>(resource:<span class="java&#45;quote">"product"</span>)
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">This maps the URI <code>/product</code> onto a <code>ProductController</code>. Each HTTP method such as GET, PUT, POST and DELETE map to unique actions within the controller as outlined by the table below:</div>
-この例では、<code>/product</code>というURIを<code>ProductController</code>に紐付けます。GET、PUT、POSTおよびDELETEといった各HTTPメソッドは、下表に示したようにコントローラ内の一意のアクションに紐付きます。<p class="paragraph"/><div class="hidden-block">
-Method     | Action
-</div><p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th>メソッド</th><th>アクション</th></tr><tr class="table-odd"><td><code>GET</code></td><td><code>show</code></td></tr><tr class="table-even"><td><code>PUT</code></td><td><code>update</code></td></tr><tr class="table-odd"><td><code>POST</code></td><td><code>save</code></td></tr><tr class="table-even"><td><code>DELETE</code></td><td><code>delete</code></td></tr></table><p class="paragraph"/><div class="hidden-block">In addition, Grails provides automatic XML or JSON marshalling for you.</div>
-さらにGrailsではXMLまたJSONでの自動マーシャリングも提供しています。<p class="paragraph"/><div class="hidden-block">You can alter how HTTP methods are handled by using URL Mappings to <a href="../guide/single.html#mappingHTTP" class="guide">map to HTTP methods</a>:</div>
-<a href="../guide/single.html#mappingHTTP" class="guide">HTTPメソッドをマップ</a>する仕組みを使用して、URLマッピングをHTTPメソッドにハンドルすることが可能です:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/product/$id"</span>(controller: <span class="java&#45;quote">"product"</span>) &#123;
-    action = &#91;GET: <span class="java&#45;quote">"show"</span>, PUT: <span class="java&#45;quote">"update"</span>, DELETE: <span class="java&#45;quote">"delete"</span>, POST: <span class="java&#45;quote">"save"</span>&#93;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">However, unlike the <code>resource</code> argument used previously, in this case Grails will not provide automatic XML or JSON marshalling unless you specify the <code>parseRequest</code> argument:</div>
-ただし、この場合は、先の<code>resource</code>と違い、<code>parseRequest</code>変数をURLマッピングに指定しないと、XMLやJSONのマーシャリングを自動的には行いません:<p class="paragraph"/><div class="code"><pre><span class="java&#45;quote">"/product/$id"</span>(controller: <span class="java&#45;quote">"product"</span>, parseRequest: <span class="java&#45;keyword">true</span>) &#123;
-    action = &#91;GET: <span class="java&#45;quote">"show"</span>, PUT: <span class="java&#45;quote">"update"</span>, DELETE: <span class="java&#45;quote">"delete"</span>, POST: <span class="java&#45;quote">"save"</span>&#93;
-&#125;</pre></div><p class="paragraph"/><h4>HTTPメソッド <div class="hidden-block">HTTP Methods</div></h4><p class="paragraph"/><div class="hidden-block">In the previous section you saw how you can easily define URL mappings that map specific HTTP methods onto specific controller actions. Writing a REST client that then sends a specific HTTP method is then easy (example in Groovy's HTTPBuilder module):</div>
-前のセクションでは、特定のHTTPメソッドを特定のコントローラのアクションにマップするURLマッピングが、どれほど簡単に定義できるかを見ました。特定のHTTPメソッドを送信するRESTクライアントを作成するのも簡単です。（GroovyのHTTPBuilderモジュールの例）:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> groovyx.net.http.&#42;
-<span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> groovyx.net.http.ContentType.JSON<p class="paragraph"/>def http = <span class="java&#45;keyword">new</span> HTTPBuilder(<span class="java&#45;quote">"http://localhost:8080/amazon"</span>)<p class="paragraph"/> http.request(Method.GET, JSON) &#123;
-     url.path = '/book/list'
-     response.success = &#123; resp, json &#45;&#62;
-         <span class="java&#45;keyword">for</span> (book in json.books) &#123;
-             println book.title
-         &#125;
-     &#125;
- &#125;</pre></div><p class="paragraph"/><div class="hidden-block">Issuing a request with a method other than <code>GET</code> or <code>POST</code> from a regular browser is not possible without some help from Grails. When defining a <a href="../ref/Tags/form.html" class="tags">form</a> you can specify an alternative method such as <code>DELETE</code>:</div>
-通常のブラウザから<code>GET</code>または<code>POST</code>以外のメソッドの要求を発行するためには、Grailsの援助が必要となります。フォーム(<a href="../ref/Tags/form.html" class="tags">form</a>)を定義する時に、<code>DELETE</code>のような別のメソッドを指定できます。<p class="paragraph"/><div class="code"><pre>&#60;g:form controller=<span class="java&#45;quote">"book"</span> method=<span class="java&#45;quote">"DELETE"</span>&#62;
-    ..
-&#60;/g:form&#62;</pre></div><p class="paragraph"/><div class="hidden-block">Grails will send a hidden parameter called <code>_method</code>, which will be used as the request's HTTP method. Another alternative for changing the method for non-browser clients is to use the <code>X-HTTP-Method-Override</code> to specify the alternative method name.</div>
-Grailsは<code>_method</code>というhiddenパラメータを送信し、これをHTTPメソッドの要求として使用します。ブラウザ以外のクライアントでメソッドを変更するためには、<code>X-HTTP-Method-Override</code>を使用して代替メソッド名を指定します。<p class="paragraph"/><h4>XMLマーシャリング - 読み取り <div class="hidden-block">XML Marshalling - Reading</div></h4><p class="paragraph"/><div class="hidden-block">The controller can use Grails' <a href="../guide/single.html#xmlAndJSON" class="guide">XML marshalling</a> support to implement the GET method:</div>
-Grailsの<a href="../guide/single.html#xmlAndJSON" class="guide">XMLマーシャリングの機能</a>をコントローラで使用して、GETメソッドの実装できます。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.converters.XML<p class="paragraph"/>class ProductController &#123;
-    def show() &#123;
-        <span class="java&#45;keyword">if</span> (params.id &#38;&#38; Product.exists(params.id)) &#123;
-            def p = Product.findByName(params.id)
-            render p as XML
-        &#125;
-        <span class="java&#45;keyword">else</span> &#123;
-            def all = Product.list()
-            render all as XML
-        &#125;
-    &#125;
-    ..
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">If there is an <code>id</code> we search for the <code>Product</code> by name and return it, otherwise we return all Products. This way if we go to <code>/products</code> we get all products, otherwise if we go to <code>/product/MacBook</code> we only get a MacBook.</div>
-この例では、検索した内容が存在した場合はその<code>Product</code>を返し、無い場合は全てを返します。この方法で、<code>/product</code>にアクセスすると全リストが返り、<code>/product/MacBook</code>等指定して存在した場合は、その<code>Product</code>を返します。<p class="paragraph"/><h4>XMLマーシャリング - 更新 <div class="hidden-block">XML Marshalling - Updating</div></h4><p class="paragraph"/><div class="hidden-block">To support updates such as <code>PUT</code> and <code>POST</code> you can use the <a href="../ref/Controllers/params.html" class="controllers">params</a> object which Grails enhances with the ability to read an incoming XML packet. Given an incoming XML packet of:</div>
-<code>PUT</code>および<code>POSTの</code>ような更新をサポートするには、Grailsの<a href="../ref/Controllers/params.html" class="controllers">params</a>オブジェクトを利用してXMLを読み取ることができます。次のようなXMLを受信したとします。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;?xml version=<span class="xml&#45;quote">"1.0"</span> encoding=<span class="xml&#45;quote">"ISO&#45;8859&#45;1"</span>?&#62;</span>
-<span class="xml&#45;tag">&#60;product&#62;</span>
-    <span class="xml&#45;tag">&#60;name&#62;</span>MacBook<span class="xml&#45;tag">&#60;/name&#62;</span>
-    <span class="xml&#45;tag">&#60;vendor id=<span class="xml&#45;quote">"12"</span>&#62;</span>
-        <span class="xml&#45;tag">&#60;name&#62;</span>Apple<span class="xml&#45;tag">&#60;/name&#62;</span>
-     <span class="xml&#45;tag">&#60;/vender&#62;</span>
-<span class="xml&#45;tag">&#60;/product&#62;</span></pre></div><p class="paragraph"/><div class="hidden-block">you can read this XML packet using the same techniques described in the <a href="../guide/single.html#dataBinding" class="guide">Data Binding</a> section, using the <a href="../ref/Controllers/params.html" class="controllers">params</a> object:</div>
-このXMLを読み込むには、<a href="../guide/single.html#dataBinding" class="guide">データバインディング</a>の章に記述された内容と同じく、<a href="../ref/Controllers/params.html" class="controllers">params</a>オブジェクトから取得することができます:<p class="paragraph"/><div class="code"><pre>def save() &#123;
-    def p = <span class="java&#45;keyword">new</span> Product(params.product)<p class="paragraph"/>    <span class="java&#45;keyword">if</span> (p.save()) &#123;
-        render p as XML
-    &#125;
-    <span class="java&#45;keyword">else</span> &#123;
-        render p.errors
-    &#125;
-&#125;</pre></div><p class="paragraph"/><div class="hidden-block">In this example by indexing into the <code>params</code> object using the <code>product</code> key we can automatically create and bind the XML using the <code>Product</code> constructor. An interesting aspect of the line:</div>
-この例では、<code>params</code>オブジェクトから<code>product</code>キーを使用して取得し、<code>Product</code>クラスのコンストラクタに渡すことで自動的にバインドします:<p class="paragraph"/><div class="code"><pre>def p = <span class="java&#45;keyword">new</span> Product(params.product)</pre></div><p class="paragraph"/><div class="hidden-block">is that it requires no code changes to deal with a form submission that submits form data, or an XML request, or a JSON request.</div>
-興味深い点は、JSONリクエストまたはXMLリクエストの対応は、通常のフォーム送信の対応とそれほど変わりがないということです。<p class="paragraph"/><blockquote class="note">
-<div class="hidden-block">If you require different responses to different clients (REST, HTML etc.) you can use <a href="../guide/single.html#contentNegotiation" class="guide">content negotation</a></div>
-異なったクライアント（REST、HTMLなど）に対する異なった応答が必要な場合は、<a href="../guide/single.html#contentNegotiation" class="guide">コンテントネゴシエーション</a>を使用することができます。
-</blockquote><p class="paragraph"/><div class="hidden-block">The <code>Product</code> object is then saved and rendered as XML, otherwise an error message is produced using Grails' <a href="../guide/single.html#validation" class="guide">validation</a> capabilities in the form:</div>
-<code>Product</code>オブジェクトが保存され、XMLとして描写されます。問題が起きた場合は、Grailsの<a href="../guide/single.html#validation" class="guide">バリデーション</a>機能によってエラーメッセージが返信されます。<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;error&#62;</span>
-   <span class="xml&#45;tag">&#60;message&#62;</span>The property 'title' of class 'Person' must be specified<span class="xml&#45;tag">&#60;/message&#62;</span>
-<span class="xml&#45;tag">&#60;/error&#62;</span></pre></div><p class="paragraph"/><h4>JAX-RSでのREST <div class="hidden-block">REST with JAX-RS</div></h4><p class="paragraph"/><div class="hidden-block">There also is a <a href="http://grails.org/plugin/jaxrs" target="blank">JAX-RS Plugin</a> which can be used to build web services based on the Java API for RESTful Web Services (<a href="http://jcp.org/en/jsr/summary?id=311" target="blank">JSR 311: JAX-RS</a>).</div>
-RESTful Webサービス用のJava APIをベースとしたRESTを、<a href="http://grails.org/plugin/jaxrs" target="blank">JAX-RSプラグイン</a>構築することも可能です。  (<a href="http://jcp.org/en/jsr/summary?id=311" target="blank">JSR 311: JAX-RS</a>)
+それぞれのHTTPメソッドは異なるアクションにマップします。例えば、GETはデータ検索、PUTはデータ作成、POSTは更新などとマップします。<p class="paragraph"/>Grails includes flexible features that make it easy to create RESTful APIs. Creating a RESTful resource can be as simple as one line of code, as demonstrated in the next section.
 
 
 
@@ -504,7 +436,7 @@ The 'create' and 'edit' actions are already required if you plan to implement an
 これが必要ない場合は無効にできます。
 </blockquote><p class="paragraph"/><div class="hidden-block">The key to implementing REST actions is the <a href="../ref/Controllers/respond.html" class="controllers">respond</a> method introduced in Grails 2.3. The <code>respond</code> method tries to produce the most appropriate response for the requested content type (JSON, XML, HTML etc.)</div>
 RESTアクションの実装の鍵は、Grails 2.3で導入された<a href="../ref/Controllers/respond.html" class="controllers">respond</a>メソッドです。
-<code>respond</code>メソッドは、リクエストのCotent Type(JSON、XML、XMLなど)に対して、もっとも適切なレスポンスを生成しようとします。<p class="paragraph"/><div class="hidden-block">h4. Implementing the 'index' action</div>
+<code>respond</code>メソッドは、リクエストのContent Type(JSON、XML、HTMLなど)に対して、もっとも適切なレスポンスを生成しようとします。<p class="paragraph"/><div class="hidden-block">h4. Implementing the 'index' action</div>
 <h4>'index'アクションの実装</h4><p class="paragraph"/><div class="hidden-block">
 For example, to implement the <code>index</code> action, simply call the <code>respond</code> method passing the list of objects to respond with: 
 </div>
