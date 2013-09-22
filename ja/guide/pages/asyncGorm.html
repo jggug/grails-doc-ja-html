@@ -150,7 +150,7 @@ Grails 2.3から、GORMでサポートされているすべてのデータスト
 <h3>Asyncネームスペース</h3><p class="paragraph"/><div class="hidden-block">
 The Asynchronous GORM API is available on every domain class via the <code>async</code> namespace.
 </div>
-非同期GROM APIは、すべてのドメインクラスに対し<code>async</code>ネームスペースを通じて提供されます。<p class="paragraph"/><div class="hidden-block">
+非同期GORM APIは、すべてのドメインクラスに対し<code>async</code>ネームスペースを通じて提供されます。<p class="paragraph"/><div class="hidden-block">
 For example, the following code listing reads 3 objects from the database asynchronously:
 </div>
 例えば次のコードはデータベースから非同期に3つのオブジェクトを読み込みます。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> grails.async.Promises.&#42;<p class="paragraph"/>def p1 = Person.async.get(1L)
@@ -205,7 +205,7 @@ As discussed in the previous section you should avoid reading and writing object
 上記で説明したように、マージは問題を引き起こす可能性が高いため、異なるスレッド間でのオブジェクトの読み書きは避けるべきです。<p class="paragraph"/><div class="hidden-block">
 However, if you wish to do more complex GORM work asynchronously then the GORM async namespace provides a <code>task</code> method that makes this possible. For example:
 </div>
-しかし、GROMのasyncネームスペースが提供している<code>task</code>メソッドを使用することで、より複雑なGORMの非同期処理が可能になります。例えば以下のように使用します。<p class="paragraph"/><div class="code"><pre>def promise = Person.async.task &#123;
+しかし、GORMのasyncネームスペースが提供している<code>task</code>メソッドを使用することで、より複雑なGORMの非同期処理が可能になります。例えば以下のように使用します。<p class="paragraph"/><div class="code"><pre>def promise = Person.async.task &#123;
     withTransaction &#123;
        def person = findByFirstName(<span class="java&#45;quote">"Homer"</span>)
        person.firstName = <span class="java&#45;quote">"Bart"</span>
@@ -214,7 +214,7 @@ However, if you wish to do more complex GORM work asynchronously then the GORM a
 &#125;<p class="paragraph"/>Person updatedPerson = promise.get()</pre></div><p class="paragraph"/><div class="hidden-block">
 Note that the GORM <code>task</code> method differs from the static <code>Promises.task</code> method in that it deals with binding a new session to the asynchronous thread for you. If you do not use the GORM version and do asynchronous work with GORM then you need to do this manually. Example:
 </div>
-GORMの<code>task</code>メソッドは静的な<code>Promises.task</code>メソッドとは異なり、非同期処理のスレッドに対して自動的に新いセッションをバインドします。もしGROMの<code>task</code>メソッドを使用せず非同期にGORMの処理を行う場合は、これを手動で行う必要があります。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> grails.async.Promises.&#42;<p class="paragraph"/>def promise = task &#123;
+GORMの<code>task</code>メソッドは静的な<code>Promises.task</code>メソッドとは異なり、非同期処理のスレッドに対して自動的に新いセッションをバインドします。もしGORMの<code>task</code>メソッドを使用せず非同期にGORMの処理を行う場合は、これを手動で行う必要があります。<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> grails.async.Promises.&#42;<p class="paragraph"/>def promise = task &#123;
     Person.withNewSession &#123;
     	// your logic here
     &#125;
