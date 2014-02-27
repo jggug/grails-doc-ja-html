@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>1.4 Grails 2.0&#12398;&#26032;&#27231;&#33021; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>1.5 Grails 2.0&#12398;&#26032;&#27231;&#33021; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -123,7 +123,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>1.4 Grails 2.0&#12398;&#26032;&#27231;&#33021; - Reference Documentation</h1>
+                    <h1>1.5 Grails 2.0&#12398;&#26032;&#27231;&#33021; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -158,13 +158,13 @@ function addJsClass() {
 
                 
 <a name="1.1 What's new in Grails 2.0?"><!-- Legacy link --></a>
-<h2 id="whatsNew">1.4 Grails 2.0の新機能</h2>
+<h2 id="whatsNew">1.5 Grails 2.0の新機能</h2>
 <div class="hidden-block">This section covers the new features that are present in 2.0 and is broken down into sections covering the build system, core APIs, the web tier, persistence enhancements and improvements in testing. Note there are many more small enhancements and improvements, these sections just cover some of the highlights.</div>
 このセクションでは、現在2.0に存在する新機能、ビルドシステム、コアAPI、Web階層、永続化関連の強化等に分類し掘り下げて紹介します。他にも向上、強化した内容が多数ありますが、ここではハイライト的に紹介してます。
 
 
 <a name="1.1.1 Development Environment Features"><!-- Legacy link --></a>
-<h2 id="developmentEnvironmentFeatures">1.4.1 開発環境機能</h2>
+<h2 id="developmentEnvironmentFeatures">1.5.1 開発環境機能</h2>
 <h4>インタラクティブモードとコンソールの強化 <div class="hidden-block">Interactive Mode and Console Enhancements </div></h4><p class="paragraph"/><div class="hidden-block">Grails 2.0 features brand new console output that is more concise and user friendly to consume. An example of the new output when running tests can be seen below:</div>
 Grails 2.0では、より簡潔でユーザフレンドリな、新コンソール出力を実装しました。以下の例はテストを実行した内容です。<p class="paragraph"/><img border="0" class="center" src="../../img/test-output.png"></img><p class="paragraph"/><div class="hidden-block">In general Grails makes its best effort to display update information on a single line and only present the information that is crucial. This means that while in previous versions of Grails the <a href="../ref/Command Line/war.html" class="commandLine">war</a> command produced many lines of output, in Grails 2.0 only 1 line of output is produced:</div>
 コマンド実行の際に、重要な情報のみ１行を更新表示するようになりました。例えば、以前のバージョンまでは、warコマンドを実行すると大量のログが表示されていましたが、2.0からは1行だけで表示されます。<p class="paragraph"/><img border="0" class="center" src="../../img/war-output.png"></img><p class="paragraph"/><div class="hidden-block">In addition simply typing 'grails' at the command line activates the new interactive mode which features TAB completion, command history and keeps the JVM running to ensure commands execute much quicker than otherwise</div>
@@ -219,14 +219,14 @@ Ivyでハンドリングされている依存管理機能に多くの改善を�
 
 
 <a name="1.1.2 Core Features"><!-- Legacy link --></a>
-<h2 id="coreFeatures">1.4.2 コア機能</h2>
+<h2 id="coreFeatures">1.5.2 コア機能</h2>
 <h4>バイナリプラグイン <div class="hidden-block">Binary Plugins </div></h4><p class="paragraph"/><div class="hidden-block">Grails plugins can now be packaged as JAR files and published to standard maven repositories. This even works for GSP and static resources (with resources plugin 1.0.1). See the section on <a href="../guide/single.html#binaryPlugins" class="guide">Binary plugins</a> for more information.</div>
 Grailsプラグインは、JARファイルとしてパッケージして、Mavenリポジトリへ発行できるようになりました。GSPや静的リソースでも可能です。詳しくは、 <a href="../guide/single.html#binaryPlugins" class="guide">バイナリプラグイン</a>  のセクションを参考にしてください。<p class="paragraph"/><h4>Groovy 1.8 <div class="hidden-block">Groovy 1.8 </div></h4><p class="paragraph"/><div class="hidden-block">Grails 2.0 comes with Groovy 1.8 which includes many new <a href="http://docs.codehaus.org/display/GROOVY/Groovy+1.8+release+notes" target="blank">features and enhancements</a></div>
 Grails 2.0は、多くの新機能と向上をしたGroovy 1.8がバンドルされています。 <a href="http://docs.codehaus.org/display/GROOVY/Groovy+1.8+release+notes" target="blank">Groovy 1.8 リリースノート</a><p class="paragraph"/><h4>Spring 3.1 プロファイルサポート <div class="hidden-block">Spring 3.1 Profile Support </div></h4><p class="paragraph"/><div class="hidden-block">Grails' existing environment support has been bridged into the Spring 3.1 profile support. For example when running with a custom Grails environment called "production", a Spring profile of "production" is activated so that you can use Spring's bean configuration APIs to configure beans for a specific profile.</div>
 Grailsの環境サポートがSpring 3.1プロフィールサポートとブリッジできます。例えば、Grailsの環境で"production"で動作している場合、Springプロフィール"production"がアクティベートされます。これによって、Springビーン定義APIでのビーン定義でプロフィールを指定できます。
 
 <a name="1.1.3 Web Features"><!-- Legacy link --></a>
-<h2 id="webFeatures">1.4.3 Web機能</h2>
+<h2 id="webFeatures">1.5.3 Web機能</h2>
 <h4>コントローラのアクションにメソッドを利用 <div class="hidden-block">Controller Actions as Methods</div></h4><p class="paragraph"/><div class="hidden-block">It is now possible to define controller actions as methods instead of using closures as in previous versions of Grails. In fact this is now the preferred way of expressing an action. For example:</div>
 以前のクロージャで記述していたコントローラアクションをメソッドで記述可能になりました。これからはメソッド記述を推奨します。:<p class="paragraph"/><div class="hidden-block">
 // action as a method
@@ -295,7 +295,7 @@ def val = params.date('myDate')</pre></div><p class="paragraph"/><h4>URLフォ�
 subflowを呼ぶ際にinput引数の提供が可能になりました。またフローは、フローを呼び出す際に使用するoutput値を返す事ができます。<p class="paragraph"/>
 
 <a name="1.1.4 Persistence Features"><!-- Legacy link --></a>
-<h2 id="persistenceFeatures">1.4.4 永続化機能</h2>
+<h2 id="persistenceFeatures">1.5.4 永続化機能</h2>
 <h4>GORM API <div class="hidden-block">The GORM API</div></h4><p class="paragraph"/><div class="hidden-block">The GORM API has been formalized into a set of classes (<code>GormStaticApi</code>, <code>GormInstanceApi</code> and <code>GormValidationApi</code>) that get statically wired into every domain class at the byte code level. The result is better code completion for IDEs, better integration with Java and the potential for more GORM implementations for other types of data stores.</div>
 GORM APIは、 <code>GormStaticApi</code> 、 <code>GormInstanceApi</code> 、 <code>GormValidationApi</code> というクラスに置き換えられたことによって、全てのドメインのバイトコードレベルに注入されます。この実装でIDEでのコード補完、Javaとの統合、様々なデータストアへのGORM実装への可能性が向上しました。<p class="paragraph"/><h4>DetachedクライテリアとWhereクエリー <div class="hidden-block">Detached Criteria and Where Queries</div></h4><p class="paragraph"/>Grails 2.0 features support for <a href="../guide/single.html#detachedCriteria" class="guide">DetachedCriteria</a> which are criteria queries that are not associated with any session or connection and thus can be more easily reused and composed:<p class="paragraph"/><div class="code"><pre>def criteria = <span class="java&#45;keyword">new</span> DetachedCriteria(Person).build &#123;
     eq 'lastName', 'Simpson'
@@ -331,7 +331,7 @@ SetのユニークまたはListの順序必要としない場合でにおいて�
 詳しくは <a href="../guide/single.html#sets,ListsAndMaps" class="guide">セット、リスト、マップ</a> を参照してください。<p class="paragraph"/>
 
 <a name="1.1.5 Testing Features"><!-- Legacy link --></a>
-<h2 id="testingFeatures">1.4.5 テスト機能</h2>
+<h2 id="testingFeatures">1.5.5 テスト機能</h2>
 <h4>新ユニットテストのコンソール出力 <div class="hidden-block">New Unit Testing Console Output</div></h4><p class="paragraph"/><div class="hidden-block">Test output from the test-app command has been improved:</div>
 test-app実行時のテストコンソール出力が向上しました:<p class="paragraph"/><img border="0" class="center" src="../../img/test-output.png"></img><p class="paragraph"/><h4>新しいユニットテストAPI <div class="hidden-block">New Unit Testing API</div></h4><p class="paragraph"/><div class="hidden-block">There is a new unit testing API based on mixins that supports JUnit 3, 4 and Spock style tests (with Spock 0.6 and above). Example:</div>
 JUnit3,4,Spock(Spock 0.6以上)のテストに対応した、Mixinsベースの新しユニットテストAPIが追加されました:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> grails.test.mixin.TestFor<p class="paragraph"/>@TestFor(SimpleController)
@@ -377,6 +377,9 @@ class SimpleControllerTests  &#123;
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/bug-report.html">bug-report</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/clean-all.html">clean-all</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/clean.html">clean</a>
@@ -666,6 +669,9 @@ class SimpleControllerTests  &#123;
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Controllers/responseFormats.html">responseFormats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Controllers/scope.html">scope</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Controllers/servletContext.html">servletContext</a>

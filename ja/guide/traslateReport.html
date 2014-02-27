@@ -142,24 +142,755 @@ function addJsClass() {
 
 <h1>Document Translation Report.</h1>
 <ul class="star">
-<li><strong class="bold">File Count</strong> - 295</li>
+<li><strong class="bold">File Count</strong> - 296</li>
 <li><strong class="bold">Done</strong> - 281</li>
-<li><strong class="bold">TODO</strong> - 12</li>
+<li><strong class="bold">TODO</strong> - 13</li>
 <li><strong class="bold">Not found or new</strong> - 2</li>
-</ul><p class="paragraph"/><h2>Original document updated after translation.:</h2><p class="paragraph"/><h2>Not done.</h2>
+</ul><p class="paragraph"/><h2>Original document updated after translation.:</h2><p class="paragraph"/><strong class="bold">./guide/plugins/creatingAndInstallingPlugins.gdoc</strong><p class="paragraph"/><div class="code"><pre>83 : compile <span class="java&#45;quote">"&#58;quartz:0.1"</span></pre></div><p class="paragraph"/><strong class="bold">./guide/conf/dependencyResolution.gdoc</strong><p class="paragraph"/><div class="code"><pre>22 : grails.servlet.version = <span class="java&#45;quote">"3.0"</span> // Change depending on target container compliance (2.5 or 3.0)
+26 : grails.project.work.dir = <span class="java&#45;quote">"target/work"</span>
+27 : grails.project.target.level = 1.6
+28 : grails.project.source.level = 1.6
+31 : grails.project.fork = &#91;
+32 :     // configure settings <span class="java&#45;keyword">for</span> compilation JVM, note that <span class="java&#45;keyword">if</span> you alter the Groovy version forked compilation is required
+33 :     //  compile: &#91;maxMemory: 256, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, daemon:<span class="java&#45;keyword">true</span>&#93;,
+35 :     // configure settings <span class="java&#45;keyword">for</span> the test&#45;app JVM, uses the daemon by <span class="java&#45;keyword">default</span>
+36 :     test: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, daemon:<span class="java&#45;keyword">true</span>&#93;,
+37 :     // configure settings <span class="java&#45;keyword">for</span> the run&#45;app JVM
+38 :     run: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, forkReserve:<span class="java&#45;keyword">false</span>&#93;,
+39 :     // configure settings <span class="java&#45;keyword">for</span> the run&#45;war JVM
+40 :     war: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256, forkReserve:<span class="java&#45;keyword">false</span>&#93;,
+41 :     // configure settings <span class="java&#45;keyword">for</span> the Console UI JVM
+42 :     console: &#91;maxMemory: 768, minMemory: 64, debug: <span class="java&#45;keyword">false</span>, maxPerm: 256&#93;
+43 : &#93;
+49 :         // specify dependency exclusions here; <span class="java&#45;keyword">for</span> example, uncomment <span class="java&#45;keyword">this</span> to disable ehcache:
+52 :     log <span class="java&#45;quote">"error"</span> // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+53 :     checksums <span class="java&#45;keyword">true</span> // Whether to verify checksums on resolve
+54 :     legacyResolve <span class="java&#45;keyword">false</span> // whether to <span class="java&#45;keyword">do</span> a secondary resolve on plugin installation, not advised and here <span class="java&#45;keyword">for</span> backwards compatibility
+57 :         inherits <span class="java&#45;keyword">true</span> // Whether to inherit repository definitions from plugins
+64 :         // uncomment these (or add <span class="java&#45;keyword">new</span> ones) to enable remote dependency resolution from <span class="java&#45;keyword">public</span> Maven repositories
+70 :         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
+71 :         runtime 'mysql:mysql&#45;connector&#45;java:5.1.24'
+72 :         compile 'org.springframework.integration:spring&#45;integration&#45;core:2.2.5.RELEASE'
+76 :         // plugins <span class="java&#45;keyword">for</span> the build system only</pre></div><p class="paragraph"/><strong class="bold">./guide/gettingStarted/generatingAnApplication.gdoc</strong><p class="paragraph"/><div class="code"><pre>4  : grails generate&#45;all helloworld.Book</pre></div><p class="paragraph"/><strong class="bold">./guide/webServices/REST/hypermedia/vndError.gdoc</strong><p class="paragraph"/><div class="code"><pre>12 : &#123;<span class="java&#45;quote">"errors"</span>:&#91;&#123;<span class="java&#45;quote">"object"</span>:<span class="java&#45;quote">"<span class="java&#45;keyword">rest</span>.test.Book"</span>, <span class="java&#45;quote">"field"</span>:<span class="java&#45;quote">"title"</span>, <span class="java&#45;quote">"rejected&#45;value"</span>:<span class="java&#45;keyword">null</span>, <span class="java&#45;quote">"message"</span>:<span class="java&#45;quote">"Property &#91;title&#93; of class &#91;class <span class="java&#45;keyword">rest</span>.test.Book&#93; cannot be <span class="java&#45;keyword">null</span>"</span>&#125;&#93;&#125;</pre></div><p class="paragraph"/><strong class="bold">./guide/scaffolding.gdoc</strong><p class="paragraph"/><div class="code"><pre>11 :         compile <span class="java&#45;quote">"&#58;scaffolding:2.0.0"</span></pre></div><p class="paragraph"/><strong class="bold">./guide/webServices/REST/linkingToResources.gdoc</strong><p class="paragraph"/><div class="code"><pre>7  : However, currently you cannot use g:link to link to the DELETE action and most browsers <span class="java&#45;keyword">do</span> not support sending the DELETE method directly.
+9  : The best way to accomplish <span class="java&#45;keyword">this</span> is to use a form submit:
+12 :  &#60;form action=<span class="java&#45;quote">"/book/2"</span> method=<span class="java&#45;quote">"post"</span>&#62;
+13 :  	&#60;input type=<span class="java&#45;quote">"hidden"</span> name=<span class="java&#45;quote">"_method"</span> value=<span class="java&#45;quote">"DELETE"</span>/&#62;
+14 :  &#60;/form&#62;
+17 : Grails supports overriding the request method via the hidden _method parameter. This is <span class="java&#45;keyword">for</span> browser compatibility purposes. This is useful when using restful resource mappings to create powerful web interfaces.
+18 : To make a link fire <span class="java&#45;keyword">this</span> type of event, perhaps capture all click events <span class="java&#45;keyword">for</span> links with a `data&#45;method` attribute and issue a form submit via javascript.</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/gsp/resources.gdoc</strong><p class="paragraph"/><div class="code"><pre>1  : &#123;note&#125;
+2  : TBD&#8230; This section of material will be updated to cover the asset&#45;pipeline plugin before Grails 2.4 is released.
+3  : &#123;note&#125;</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/contentNegotiation.gdoc</strong><p class="paragraph"/><div class="code"><pre>8  : grails.mime.types = &#91; // the first one is the <span class="java&#45;keyword">default</span> format
+9  :     all:           '&#42;/&#42;', // 'all' maps to '&#42;' or the first available format in withFormat
+26 : The first one is the <span class="java&#45;keyword">default</span> format.
+53 :             &#42; &#123; render books as JSON &#125;
+61 : When no format matches explicitly, a <code>&#42;</code> (wildcard) block can be used to handle all other formats. 
+63 : There is a special format, <span class="java&#45;quote">"all"</span>, that is handled differently from the explicit formats. If <span class="java&#45;quote">"all"</span> is specified (normally <span class="java&#45;keyword">this</span> happens through the Accept header &#45; see below), then the first block of <code>withFormat()</code> is executed when there isn't a <code>&#42;</code> (wildcard) block available.  
+65 : You should not add an explicit <span class="java&#45;quote">"all"</span> block. In <span class="java&#45;keyword">this</span> example, a format of <span class="java&#45;quote">"all"</span> will trigger the <code>html</code> handler (<code>html</code> is the first block and there is no <code>&#42;</code> block).
+154: <span class="java&#45;quote">"/$controller/$action?/$id?(.$format)?"</span>&#123;</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/taglibs/iterativeTags.gdoc</strong><p class="paragraph"/><div class="code"><pre>25 : That value is then passed as the <span class="java&#45;keyword">default</span> variable <code>it</code> to the tag. However, <span class="java&#45;keyword">if</span> you have nested tags <span class="java&#45;keyword">this</span> can lead to conflicts, so you should instead name the variables that the body uses:</pre></div><p class="paragraph"/><strong class="bold">./guide/gettingStarted/creatingArtefacts.gdoc</strong><p class="paragraph"/><div class="code"><pre>8  : grails create&#45;app helloworld
+9  : cd helloworld
+13 : This will result in the creation of a domain class at <code>grails&#45;app/domain/helloworld/Book.groovy</code> such as:
+16 : <span class="java&#45;keyword">package</span> helloworld</pre></div><p class="paragraph"/><strong class="bold">./guide/introduction/whatsNew23.gdoc</strong><p class="paragraph"/><div class="code"><pre>57 : &#36; grails&#62; restart&#45;daemon
+200:         <span class="java&#45;quote">"/&#36;namespace/&#36;controller/&#36;action?"</span>()
+210: See the &#91;namespaced controllers|guide:namespacedControllers&#93; docs <span class="java&#45;keyword">for</span> more information.</pre></div><p class="paragraph"/><strong class="bold">./guide/async/promises.gdoc</strong><p class="paragraph"/><div class="code"><pre>129: def map = <span class="java&#45;keyword">new</span> PromiseMap()</pre></div><p class="paragraph"/><strong class="bold">./guide/conf/dependencyResolution/changingDependencies.gdoc</strong><p class="paragraph"/><div class="code"><pre>8  : Be sure to read the next section on <span class="java&#45;quote">"Dependency Resolution Caching"</span> in addition to <span class="java&#45;keyword">this</span> one as it affects changing dependencies.
+67 : &#42; maven network repository is searched, dependency is found to be the same <span class="java&#45;quote">"age"</span> as the version in the cache so will not be updated (i.e. downloaded)
+85 : &#42; maven local repository is searched, dependency is found to be the same <span class="java&#45;quote">"age"</span> as the version in the cache so will not be updated (i.e. downloaded)</pre></div><p class="paragraph"/><strong class="bold">./guide/upgradingFromPreviousVersionsOfGrails.gdoc</strong><p class="paragraph"/><div class="code"><pre>1  : A number of changes need to be considered when upgrading your application from Grails 2.2, some of them breaking. Here's a quick list with more detail on each item following after:
+3  : &#42; New improved data binding (no Spring property editors)
+4  : &#42; Much improved XSS prevention with <span class="java&#45;keyword">default</span> HTML encoding
+5  : &#42; A <span class="java&#45;keyword">new</span> dependency resolution engine
+6  : &#42; Must be online to fetch Grails dependencies
+7  : &#42; Grails core dependencies rearranged
+8  : &#42; Tomcat and Hibernate plugins independently versioned now (breaking&#33;)
+9  : &#42; Scaffolding is now a separate plugin
+10 : &#42; Spock included by <span class="java&#45;keyword">default</span>
+11 : &#42; Dependency injection does not work in integration tests by <span class="java&#45;keyword">default</span> 
+12 : &#42; Forked execution <span class="java&#45;keyword">for</span> tests
+13 : &#42; Reloading in <code>run&#45;app</code> won't work by <span class="java&#45;keyword">default</span> on upgraded apps
+14 : &#42; <code>grails&#45;debug</code> doesn't work <span class="java&#45;keyword">for</span> forked execution
+33 : If you need to authenticate to a maven repository, you will want to change the definition of that repository like so:
+36 : mavenRepo(<span class="java&#45;quote">"http://artifactory.mycompany.com/repo"</span>) &#123;
+37 :     authentication(username: <span class="java&#45;quote">"myusername"</span>, password: <span class="java&#45;quote">"secret"</span>)
+60 :     :: org.springframework&#35;spring&#45;test;3.2.2.RELEASE: configuration not found in org.springframework&#35;spring&#45;test;3.2.2.RELEASE: 'compile'. It was required from org.grails&#35;grails&#45;plugin&#45;testing;2.3.0.BUILD&#45;SNAPSHOT compile
+93 :         build ':tomcat:7.0.42'
+96 :         runtime ':hibernate:3.6.10.2' 
+116: You no longer need to add the Spock plugin to your projects. Simply create Spock specifications as before and they will be run as unit tests. In fact, don't install the Spock plugin, otherwise your specifications will run twice and potentially fail. This also means that the <code>spock</code> test type no longer exists. Specifications and JUnit tests run as the same type now.
+120: In order to support alternate JUnit4 test runners, Grails 2.3 no longer uses a special test runner to run tests and integration tests should no longer extend <code>GroovyTestCase</code>.
+122: This change requires that any JUnit integration tests that require dependency injection now need to be annotated with:
+125: &#64;TestMixin(IntegrationTestMixin)
+128: For Spock integration tests, extending <code>IntegrationSpec</code> also works.
+197: Some existing plugins (Cucumber plugin <span class="java&#45;keyword">for</span> example) <span class="java&#45;keyword">do</span> not work with 2.3.x forked execution because they expect the tests to be running in the same JVM as the application under tests. For example it is not possible to setup fixture / test data using GORM inside a functional test and have that data visible to the application under test since the application under test is in a separate JVM. The solution to <span class="java&#45;keyword">this</span> is to provide the necessary fixture data in the <code>BootStrap</code> of the application (only <span class="java&#45;keyword">for</span> the test environment of course).</pre></div><p class="paragraph"/><strong class="bold">./guide/testing/unitTesting/unitTestingFilters.gdoc</strong><p class="paragraph"/><div class="code"><pre>19 : <span class="java&#45;keyword">import</span> grails.test.mixin.TestFor
+20 : <span class="java&#45;keyword">import</span> spock.lang.Specification
+24 : class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+26 :     // &#8230;
+34 : <span class="java&#45;keyword">import</span> grails.test.mixin.TestFor
+35 : <span class="java&#45;keyword">import</span> spock.lang.Specification
+39 : class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+41 :     void <span class="java&#45;quote">"test list action is filtered"</span>() &#123;
+42 :         when:
+43 :         withFilters(action:<span class="java&#45;quote">"list"</span>) &#123;
+44 :             controller.list()
+47 :         then:
+48 :         response.redirectedUrl == '/book'</pre></div><p class="paragraph"/><strong class="bold">./guide/conf/dataSource/multipleDatasources.gdoc</strong><p class="paragraph"/><div class="code"><pre>221: Grails uses the Best Efforts 1PC pattern <span class="java&#45;keyword">for</span> handling transactions across multiple datasources.
+223: The &#91;Best Efforts 1PC pattern|http://www.javaworld.com/article/2077963/open&#45;source&#45;tools/distributed&#45;transactions&#45;in&#45;spring&#45;&#45;with&#45;and&#45;without&#45;xa.html?page=2&#93; is fairly general but can fail in some circumstances that the developer must be aware of. This is a non&#45;XA pattern that involves a <span class="java&#45;keyword">synchronized</span> single&#45;phase commit of a number of resources. Because the &#91;2PC|https://en.wikipedia.org/wiki/Two&#45;phase_commit&#93; is not used, it can never be as safe as an &#91;XA|https://en.wikipedia.org/wiki/X/Open_XA&#93; transaction, but is often good enough <span class="java&#45;keyword">if</span> the participants are aware of the compromises.
+225: The basic idea is to delay the commit of all resources as late as possible in a transaction so that the only thing that can go wrong is an infrastructure failure (not a business&#45;processing error). Systems that rely on Best Efforts 1PC reason that infrastructure failures are rare enough that they can afford to take the risk in <span class="java&#45;keyword">return</span> <span class="java&#45;keyword">for</span> higher throughput. If business&#45;processing services are also designed to be idempotent, then little can go wrong in practice.
+227: The BE1PC implementation was added in Grails 2.3.6. . Before <span class="java&#45;keyword">this</span> change additional datasources didn't take part in transactions initiated in Grails. The transactions in additional datasources were basically in auto commit mode. In some cases <span class="java&#45;keyword">this</span> might be the wanted behavior. One reason might be performance: on the start of each <span class="java&#45;keyword">new</span> transaction, the BE1PC transaction manager creates a <span class="java&#45;keyword">new</span> transaction to each datasource. It's possible to leave an additional datasource out of the BE1PC transaction manager by setting <code>transactional = <span class="java&#45;keyword">false</span></code> in the respective configuration block of the additional dataSource. Datasources with <code>readOnly = <span class="java&#45;keyword">true</span></code> will also be left out of the chained transaction manager (since 2.3.7).
+229: By <span class="java&#45;keyword">default</span>, the BE1PC implementation will add all beans implementing the Spring <code>&#91;PlatformTransactionManager|http://docs.spring.io/spring/docs/3.2.x/javadoc&#45;api/org/springframework/transaction/PlatformTransactionManager.html&#93;</code> <span class="java&#45;keyword">interface</span> to the chained BE1PC transaction manager. For example, a possible <code>&#91;JMSTransactionManager|http://docs.spring.io/spring/docs/3.2.x/javadoc&#45;api/org/springframework/jms/connection/JmsTransactionManager.html&#93;</code> bean in the Grails application context would be added to the Grails BE1PC transaction manager's chain of transaction managers. 
+231: You can exclude transaction manager beans from the BE1PC implementation with the <span class="java&#45;keyword">this</span> configuration option:
+233: grails.transaction.chainedTransactionManagerPostProcessor.blacklistPattern = '.&#42;'
+235: The exclude matching is done on the name of the transaction manager bean. The transaction managers of datasources with <code>transactional = <span class="java&#45;keyword">false</span></code> or <code>readOnly = <span class="java&#45;keyword">true</span></code> will be skipped and using <span class="java&#45;keyword">this</span> configuration option is not required in that <span class="java&#45;keyword">case</span>.
+239: When the Best Efforts 1PC pattern isn't suitable <span class="java&#45;keyword">for</span> handling transactions across multiple transactional resources (not only datasources), there are several options available <span class="java&#45;keyword">for</span> adding XA/2PC support to Grails applications.
+241: The &#91;Spring transactions documentation|http://docs.spring.io/spring/docs/3.2.x/spring&#45;framework&#45;reference/html/transaction.html&#35;transaction&#45;application&#45;server&#45;integration&#93; contains information about integrating the JTA/XA transaction manager of different application servers. In <span class="java&#45;keyword">this</span> <span class="java&#45;keyword">case</span>, you can configure a bean with the name <code>transactionManager</code> manually in <code>resources.groovy</code> or <code>resources.xml</code> file.
+243: There is also &#91;Atomikos plugin|http://grails.org/plugin/atomikos&#93; available <span class="java&#45;keyword">for</span> XA support in Grails applications.</pre></div><p class="paragraph"/><strong class="bold">./guide/webServices/REST/hypermedia/hal.gdoc</strong><p class="paragraph"/><div class="code"><pre>89 : To <span class="java&#45;keyword">return</span> HAL instead of regular JSON <span class="java&#45;keyword">for</span> a list of resources you can simply override the renderer in <code>grails&#45;app/conf/spring/resources.groovy</code> with an instance of <code>grails.<span class="java&#45;keyword">rest</span>.render.hal.HalJsonCollectionRenderer</code>:
+94 :     halBookCollectionRenderer(HalJsonCollectionRenderer, <span class="java&#45;keyword">rest</span>.test.Book)
+104: Content&#45;Type: application/hal+json;charset=UTF&#45;8
+105: Transfer&#45;Encoding: chunked
+106: Date: Thu, 17 Oct 2013 02:34:14 GMT
+111:       <span class="java&#45;quote">"href"</span>: <span class="java&#45;quote">"http://localhost:8080/myapp/books"</span>,
+117:     <span class="java&#45;quote">"book"</span>: &#91;
+118:       &#123;
+121:             <span class="java&#45;quote">"href"</span>: <span class="java&#45;quote">"http://localhost:8080/myapp/books/1"</span>,
+122:             <span class="java&#45;quote">"hreflang"</span>: <span class="java&#45;quote">"en"</span>,
+123:             <span class="java&#45;quote">"type"</span>: <span class="java&#45;quote">"application/hal+json"</span>
+126:         <span class="java&#45;quote">"title"</span>: <span class="java&#45;quote">"The Stand"</span>
+128:       &#123;
+131:             <span class="java&#45;quote">"href"</span>: <span class="java&#45;quote">"http://localhost:8080/myapp/books/2"</span>,
+132:             <span class="java&#45;quote">"hreflang"</span>: <span class="java&#45;quote">"en"</span>,
+133:             <span class="java&#45;quote">"type"</span>: <span class="java&#45;quote">"application/hal+json"</span>
+136:         <span class="java&#45;quote">"title"</span>: <span class="java&#45;quote">"Infinite Jest"</span>
+138:       &#123;
+141:             <span class="java&#45;quote">"href"</span>: <span class="java&#45;quote">"http://localhost:8080/myapp/books/3"</span>,
+142:             <span class="java&#45;quote">"hreflang"</span>: <span class="java&#45;quote">"en"</span>,
+143:             <span class="java&#45;quote">"type"</span>: <span class="java&#45;quote">"application/hal+json"</span>
+146:         <span class="java&#45;quote">"title"</span>: <span class="java&#45;quote">"Walden"</span>
+148:     &#93;
+153: Notice that the key associated with the list of <code>Book</code> objects in the rendered JSON is <code>book</code> which is derived from the type of objects in the collecion, namely <code>Book</code>.  In order to customize the value of <span class="java&#45;keyword">this</span> key assign a value to the <code>collectionName</code> property on the <code>HalJsonCollectionRenderer</code> bean as shown below:
+158:     halBookCollectionRenderer(HalCollectionJsonRenderer, <span class="java&#45;keyword">rest</span>.test.Book) &#123;
+159:         collectionName = 'publications'
+164: With that in place the rendered HAL will look like the following:
+170: Content&#45;Type: application/hal+json;charset=UTF&#45;8
+171: Transfer&#45;Encoding: chunked
+172: Date: Thu, 17 Oct 2013 02:34:14 GMT
+177:       <span class="java&#45;quote">"href"</span>: <span class="java&#45;quote">"http://localhost:8080/myapp/books"</span>,
+183:     <span class="java&#45;quote">"publications"</span>: &#91;
+184:       &#123;
+187:             <span class="java&#45;quote">"href"</span>: <span class="java&#45;quote">"http://localhost:8080/myapp/books/1"</span>,
+188:             <span class="java&#45;quote">"hreflang"</span>: <span class="java&#45;quote">"en"</span>,
+189:             <span class="java&#45;quote">"type"</span>: <span class="java&#45;quote">"application/hal+json"</span>
+192:         <span class="java&#45;quote">"title"</span>: <span class="java&#45;quote">"The Stand"</span>
+194:       &#123;
+197:             <span class="java&#45;quote">"href"</span>: <span class="java&#45;quote">"http://localhost:8080/myapp/books/2"</span>,
+198:             <span class="java&#45;quote">"hreflang"</span>: <span class="java&#45;quote">"en"</span>,
+199:             <span class="java&#45;quote">"type"</span>: <span class="java&#45;quote">"application/hal+json"</span>
+202:         <span class="java&#45;quote">"title"</span>: <span class="java&#45;quote">"Infinite Jest"</span>
+204:       &#123;
+207:             <span class="java&#45;quote">"href"</span>: <span class="java&#45;quote">"http://localhost:8080/myapp/books/3"</span>,
+208:             <span class="java&#45;quote">"hreflang"</span>: <span class="java&#45;quote">"en"</span>,
+209:             <span class="java&#45;quote">"type"</span>: <span class="java&#45;quote">"application/hal+json"</span>
+212:         <span class="java&#45;quote">"title"</span>: <span class="java&#45;quote">"Walden"</span>
+214:     &#93;</pre></div><p class="paragraph"/><strong class="bold">./guide/testing/unitTesting.gdoc</strong><p class="paragraph"/><div class="code"><pre>42 : <span class="java&#45;keyword">import</span> grails.test.mixin.TestFor
+43 : <span class="java&#45;keyword">import</span> spock.lang.Specification
+46 : @Mock(Book)
+47 : class BookControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+49 :     void <span class="java&#45;quote">"test search"</span>() &#123;
+50 :         given:
+51 :         def searchMock = mockFor(SearchService)
+52 :         searchMock.demand.searchWeb &#123; <span class="java&#45;object">String</span> q &#45;&#62; &#91;'first result', 'second result'&#93; &#125;
+53 :         searchMock.demand.<span class="java&#45;keyword">static</span>.logResults &#123; List results &#45;&#62;  &#125;
+54 :         controller.searchService = searchMock.createMock()
+56 :         when:
+57 :         controller.search()
+59 :         then:
+60 :         controller.response.text.contains <span class="java&#45;quote">"Found 2 results"</span>
+61 :     &#125;</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/controllers/commandObjects.gdoc</strong><p class="paragraph"/><div class="code"><pre>81 :     def createWidget(Widget w) &#123; 
+95 : ~ &#36; 
+98 : ~ &#36; 
+101: Note that the body of the request is being parsed to make that work.  Any attempt to read the body of the request after that will fail since the corresponding input stream will be empty.  The controller action can either use a command object or it can parse the body of the request on its own (either directly, or by referring to something like request.JSON), but cannot <span class="java&#45;keyword">do</span> both. 
+109:     def createWidget(Widget w) &#123;</pre></div><p class="paragraph"/><strong class="bold">./guide/testing/unitTesting/unitTestingDomains.gdoc</strong><p class="paragraph"/><div class="code"><pre>34 : class BookControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+35 :     // &#8230;
+48 :                     args: &#91;message(code: 'book.label', <span class="java&#45;keyword">default</span>: 'Book'), book.id&#93;)
+66 : class BookControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+67 :    void <span class="java&#45;quote">"test saving an invalid book"</span>() &#123;
+72 :         model.bookInstance &#33;= <span class="java&#45;keyword">null</span>
+73 :         view == '/book/create'
+76 :     void <span class="java&#45;quote">"test saving a valid book"</span>() &#123;
+84 :         response.redirectedUrl == '/book/show/1'
+85 :         flash.message &#33;= <span class="java&#45;keyword">null</span>
+86 :         Book.count() == 1
+99 : class BookControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+100:     // &#8230;
+104: Alternatively you can also use the <code>DomainClassUnitTestMixin</code> directly with the <code>TestMixin</code> annotation and then call the <code>mockDomain</code> method to mock domains during your test:
+114: class BookControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+116:     void setupSpec() &#123;
+117:          mockDomain(Book)
+120:     void <span class="java&#45;quote">"test saving an invalid book"</span>() &#123;
+125:         model.bookInstance &#33;= <span class="java&#45;keyword">null</span>
+126:         view == '/book/create'
+129:     void <span class="java&#45;quote">"test saving a valid book"</span>() &#123;
+137:         response.redirectedUrl == '/book/show/1'
+138:         flash.message &#33;= <span class="java&#45;keyword">null</span>
+139:         Book.count() == 1
+157: &#35; Domain classes
+158: &#35; Classes marked with the <code>Validateable</code> annotation
+159: &#35; Command Objects which have been made validateable automatically
+160: &#35; Classes configured to be validateable via the <code>grails.validateable.classes</code> property in <code>Config.groovy</code>
+162: The first 3 are easily testable in a unit test with no special configuration necessary as <span class="java&#45;object">long</span> as the test method is marked with <code>TestFor</code> or explicitly applies the <code>GrailsUnitTestMixin</code> using <code>TestMixin</code>.  See the examples below.</pre></div><p class="paragraph"/><strong class="bold">./guide/introduction/whatsNew/developmentEnvironmentFeatures.gdoc</strong><p class="paragraph"/><div class="code"><pre>90 : grails.dependency.cache.dir = <span class="java&#45;quote">"&#36;&#123;userHome&#125;/.ivy2/cache"</span></pre></div><p class="paragraph"/><strong class="bold">./guide/conf/versioning.gdoc</strong><p class="paragraph"/><div class="code"><pre>21 : You can retrieve the version of Grails that is running with:</pre></div><p class="paragraph"/><strong class="bold">./guide/spring/theBeanBuilderDSLExplained.gdoc</strong><p class="paragraph"/><div class="code"><pre>138:         children = &#91;ref('bart'), ref('lisa')&#93;
+169:         children = &#91;ref('bart'), ref('lisa')&#93;</pre></div><p class="paragraph"/><strong class="bold">./guide/i18n/scaffoldingAndI18n.gdoc</strong><p class="paragraph"/><div class="code"><pre>3  : The scaffolding includes locale specific labels <span class="java&#45;keyword">for</span> domain classes and domain fields. For example, <span class="java&#45;keyword">if</span> you have a <code>Book</code> domain class with a <code>title</code> field:
+5  : &#123;code:java&#125;
+6  : class Book &#123;
+7  :     <span class="java&#45;object">String</span> title
+9  : &#123;code&#125;
+11 : The scaffolding will use labels with the following keys:
+13 : &#123;code:java&#125;
+14 : book.label = Libro
+15 : book.title.label = Título del libro
+16 : &#123;code&#125;
+18 : You can use <span class="java&#45;keyword">this</span> property pattern <span class="java&#45;keyword">if</span> you'd like or come up with one of your own. There is nothing special about the use of the word <code>label</code> as part of the key other than it's the convention used by the scaffolding.</pre></div><p class="paragraph"/><strong class="bold">./guide/introduction/whatsNew22.gdoc</strong><p class="paragraph"/><div class="code"><pre>38 : Controller methods and GSP Tags which accept a controller name as a parameter now support an optional parameter indicating</pre></div><p class="paragraph"/><strong class="bold">./guide/testing/unitTesting/unitTestingControllers.gdoc</strong><p class="paragraph"/><div class="code"><pre>7  : <span class="java&#45;keyword">import</span> spock.lang.Specification
+10 : class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+12 :     void <span class="java&#45;quote">"test something"</span>() &#123;
+36 : <span class="java&#45;keyword">import</span> spock.lang.Specification
+39 : class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+41 :     void <span class="java&#45;quote">"test hello"</span>() &#123;
+42 :         when:
+43 :         controller.hello()
+45 :         then:
+46 :         response.text == 'hello'
+66 : <span class="java&#45;keyword">import</span> spock.lang.Specification
+69 : class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+71 :     void 'test index'() &#123;
+72 :         when:
+73 :         controller.index()
+75 :         then:
+76 :         response.redirectedUrl == '/simple/hello'
+85 : <span class="java&#45;keyword">import</span> spock.lang.Specification
+87 : @TestFor(PersonController)
+88 : class PersonControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+90 :     void 'test list'() &#123;
+91 :         when:
+92 :         params.sort = 'name'
+93 :         params.max = 20
+94 :         params.offset = 0
+95 :         controller.list()
+97 :         then:
+98 :         // &#8230;
+107: <span class="java&#45;keyword">import</span> spock.lang.Specification
+109: @TestFor(PersonController)
+110: class PersonControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+112:     void 'test save'() &#123;
+113:         when:
+114:         request.method = 'POST'
+115:         controller.save()
+117:         then:
+118:         // &#8230;
+127: <span class="java&#45;keyword">import</span> spock.lang.Specification
+129: @TestFor(PersonController)
+130: class PersonControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+132:     void 'test list'() &#123;
+133:         when:
+134:         request.method = 'POST'
+135:         request.makeAjaxRequest()
+136:         controller.getPage()
+138:         then:
+139:         // &#8230;
+161: <span class="java&#45;keyword">import</span> spock.lang.Specification
+164: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+166:     void 'test home'() &#123;
+167:         when:
+168:         controller.home()
+170:         then:
+171:         view == '/simple/homePage'
+172:         model.title == 'Hello World'
+197: <span class="java&#45;keyword">import</span> spock.lang.Specification
+200: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+202:     void 'test display'() &#123;
+203:         when:
+204:         controller.display()
+206:         then:
+207:         response.text == 'contents of the template'
+216: <span class="java&#45;keyword">import</span> spock.lang.Specification
+219: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+221:     void 'test display with mock template'() &#123;
+222:         when:
+223:         views&#91;'/simple/_snippet.gsp'&#93; = 'mock template contents'
+224:         controller.display()
+226:         then:
+227:         response.text == 'mock template contents'
+247: <span class="java&#45;keyword">import</span> spock.lang.Specification
+250: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+252:     void 'test show book details'() &#123;
+253:         when:
+256:         then:
+257:         model.author == 'Alvin Plantinga'
+279: <span class="java&#45;keyword">import</span> spock.lang.Specification
+282: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+284:     void 'test render xml'() &#123;
+285:         when:
+286:         controller.renderXml()
+288:         then:
+289:         response.text == <span class="java&#45;quote">"&#60;book title='Great'/&#62;"</span>
+290:         response.xml.@title.text() == 'Great'
+310: <span class="java&#45;keyword">import</span> spock.lang.Specification
+313: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+315:     void 'test render json'() &#123;
+316:         when:
+317:         controller.renderJson()
+319:         then:
+320:         response.text == '&#123;<span class="java&#45;quote">"book"</span>:<span class="java&#45;quote">"Great"</span>&#125;'
+321:         response.json.book == 'Great'
+333: def consumeBook(Book b) &#123;
+334:     render <span class="java&#45;quote">"The title is $&#123;b.title&#125;."</span>
+342: <span class="java&#45;keyword">import</span> spock.lang.Specification
+345: @Mock(&#91;Book&#93;)
+346: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+347:     void 'test consume book xml'() &#123;
+348:         when:
+349:         request.xml = '&#60;book&#62;&#60;title&#62;Wool&#60;/title&#62;&#60;/book&#62;'
+350:         controller.consumeBook()
+352:         then:
+353:         response.text == 'The title is Wool.'
+362: <span class="java&#45;keyword">import</span> spock.lang.Specification
+365: @Mock(&#91;Book&#93;)
+366: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+368:     void 'test consume book xml'() &#123;
+369:         when:
+370:         request.xml = <span class="java&#45;keyword">new</span> Book(title: 'Shift')
+371:         controller.consumeBook()
+373:         then:
+374:         response.text == 'The title is Shift.'
+384: <span class="java&#45;keyword">import</span> spock.lang.Specification
+387: @Mock(&#91;Book&#93;)
+388: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+390:     void 'test consume book json'() &#123;
+391:         when:
+392:         request.json = <span class="java&#45;keyword">new</span> Book(title: 'Shift')
+393:         controller.consumeBook()
+395:         then:
+396:         response.text == 'The title is Shift.'
+408:             render <span class="java&#45;quote">"The XML Title Is $&#123;request.XML.@title&#125;."</span>
+411:             render <span class="java&#45;quote">"The JSON Title Is $&#123;request.JSON.title&#125;."</span>
+421: <span class="java&#45;keyword">import</span> spock.lang.Specification
+424: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+426:     void 'test consume xml'() &#123;
+427:         when:
+428:         request.xml = '&#60;book title=<span class="java&#45;quote">"The Stand"</span>/&#62;'
+429:         controller.consume()
+431:         then:
+432:         response.text == 'The XML Title Is The Stand.'
+435:     void 'test consume json'() &#123;
+436:         when:
+437:         request.json = '&#123;title:<span class="java&#45;quote">"The Stand"</span>&#125;'
+438:         controller.consume()
+440:         then:
+441:         response.text == 'The JSON Title Is The Stand.'
+448: You can test mime type handling and the <code>withFormat</code> method quite simply by setting the request's <code>contentType</code> attribute:
+455:         xml &#123; render data as grails.converters.XML &#125;
+456:         json &#123; render data as grails.converters.JSON &#125;
+464: <span class="java&#45;keyword">import</span> spock.lang.Specification
+467: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+469:     void 'test say hello xml'() &#123;
+470:         when:
+471:         request.contentType = 'application/xml'
+472:         controller.sayHello()
+474:         then:
+475:         response.text == '&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;&#60;map&#62;&#60;entry key=<span class="java&#45;quote">"Hello"</span>&#62;World&#60;/entry&#62;&#60;/map&#62;'
+478:     void 'test say hello json'() &#123;
+479:         when:
+480:         request.contentType = 'application/json'
+481:         controller.sayHello()
+483:         then:
+484:         response.text == '&#123;<span class="java&#45;quote">"Hello"</span>:<span class="java&#45;quote">"World"</span>&#125;'
+489: There are constants provided by <code>ControllerUnitTestMixin</code> <span class="java&#45;keyword">for</span> all of the common common content types as shown below:
+493: <span class="java&#45;keyword">import</span> spock.lang.Specification
+496: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+498:     void 'test say hello xml'() &#123;
+499:         when:
+500:         request.contentType = XML_CONTENT_TYPE
+501:         controller.sayHello()
+503:         then:
+504:         response.text == '&#60;?xml version=<span class="java&#45;quote">"1.0"</span> encoding=<span class="java&#45;quote">"UTF&#45;8"</span>?&#62;&#60;map&#62;&#60;entry key=<span class="java&#45;quote">"Hello"</span>&#62;World&#60;/entry&#62;&#60;/map&#62;'
+507:     void 'test say hello json'() &#123;
+508:         when:
+509:         request.contentType = JSON_CONTENT_TYPE
+510:         controller.sayHello()
+512:         then:
+513:         response.text == '&#123;<span class="java&#45;quote">"Hello"</span>:<span class="java&#45;quote">"World"</span>&#125;'
+518: The defined constants are listed below:
+520: &#123;table&#125;
+521: &#42;Constant&#42; | &#42;Value&#42;
+522: ALL_CONTENT_TYPE | &#42;/&#42;
+523: FORM_CONTENT_TYPE | application/x&#45;www&#45;form&#45;urlencoded
+524: MULTIPART_FORM_CONTENT_TYPE | multipart/form&#45;data
+525: HTML_CONTENT_TYPE | text/html
+526: XHTML_CONTENT_TYPE | application/xhtml+xml
+527: XML_CONTENT_TYPE | application/xml
+528: JSON_CONTENT_TYPE | application/json
+529: TEXT_XML_CONTENT_TYPE | text/xml
+530: TEXT_JSON_CONTENT_TYPE | text/json
+531: HAL_JSON_CONTENT_TYPE | application/hal+json
+532: HAL_XML_CONTENT_TYPE | application/hal+xml
+533: ATOM_XML_CONTENT_TYPE | application/atom+xml
+534: &#123;table&#125;
+554: <span class="java&#45;keyword">import</span> spock.lang.Specification
+557: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+559:     void 'test duplicate form submission'() &#123;
+560:         when:
+561:         controller.handleForm()
+563:         then:
+564:         response.text == 'Bad'
+573: <span class="java&#45;keyword">import</span> spock.lang.Specification
+575: <span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.servlet.mvc.SynchronizerTokensHolder
+578: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+580:     void 'test valid form submission'() &#123;
+581:         when:
+582:         def tokenHolder = SynchronizerTokensHolder.store(session)
+584:         params&#91;SynchronizerTokensHolder.TOKEN_URI&#93; = '/controller/handleForm'
+585:         params&#91;SynchronizerTokensHolder.TOKEN_KEY&#93; = tokenHolder.generateToken(params&#91;SynchronizerTokensHolder.TOKEN_URI&#93;)
+586:         controller.handleForm()
+588:         then:
+589:         response.text == 'Good'
+598: <span class="java&#45;keyword">import</span> spock.lang.Specification
+600: <span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.web.servlet.mvc.SynchronizerTokensHolder
+603: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+605:     void 'test form submission'() &#123;
+606:         when:
+607:         controller.handleForm()
+609:         then:
+610:         response.text == 'Bad'
+612:         when:
+613:         response.reset()
+614:         def tokenHolder = SynchronizerTokensHolder.store(session)
+616:         params&#91;SynchronizerTokensHolder.TOKEN_URI&#93; = '/controller/handleForm'
+617:         params&#91;SynchronizerTokensHolder.TOKEN_KEY&#93; = tokenHolder.generateToken(params&#91;SynchronizerTokensHolder.TOKEN_URI&#93;)
+618:         controller.handleForm()
+620:         then:
+621:         response.text == 'Good'
+641: <span class="java&#45;keyword">import</span> spock.lang.Specification
+643: <span class="java&#45;keyword">import</span> org.codehaus.groovy.grails.plugins.testing.GrailsMockMultipartFile
+646: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+648:     void 'test file upload'() &#123;
+649:         when:
+650:         def file = <span class="java&#45;keyword">new</span> GrailsMockMultipartFile('myFile', 'some file contents'.bytes)
+651:         request.addFile file
+652:         controller.uploadFile()
+654:         then:
+655:         file.targetFileLocation.path == '/local/disk/myFile'
+668:     def handleCommand(SimpleCommand simple) &#123;
+669:         <span class="java&#45;keyword">if</span>(simple.hasErrors()) &#123;
+670:             render 'Bad'
+671:         &#125; <span class="java&#45;keyword">else</span> &#123;
+672:             render 'Good'
+677: class SimpleCommand &#123;
+678:     <span class="java&#45;object">String</span> name
+680:     <span class="java&#45;keyword">static</span> constraints = &#123;
+681:         name blank: <span class="java&#45;keyword">false</span>
+690: <span class="java&#45;keyword">import</span> spock.lang.Specification
+693: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+695:     void 'test valid command object'() &#123;
+696:         given:
+697:         def simpleCommand = <span class="java&#45;keyword">new</span> SimpleCommand(name: 'Hugh')
+698:         simpleCommand.validate()
+700:         when:
+701:         controller.handleCommand(simpleCommand)
+703:         then:
+704:         response.text == 'Good'
+707:     void 'test invalid command object'() &#123;
+708:         given:
+709:         def simpleCommand = <span class="java&#45;keyword">new</span> SimpleCommand(name: '')
+710:         simpleCommand.validate()
+712:         when:
+713:         controller.handleCommand(simpleCommand)
+715:         then:
+716:         response.text == 'Bad'
+721: The testing framework also supports allowing Grails to create the command object instance automatically.  To test <span class="java&#45;keyword">this</span> invoke the no&#45;arg version of the controller action method.  Grails will create an instance of the command object, perform data binding on it using the request parameters and validate the object just like it does in when the application is runnning.  See the test below.
+725: <span class="java&#45;keyword">import</span> spock.lang.Specification
+728: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+730:     void 'test valid command object'() &#123;
+731:         when:
+732:         params.name = 'Hugh'
+733:         controller.handleCommand()
+735:         then:
+736:         response.text == 'Good'
+739:     void 'test invalid command object'() &#123;
+740:         when:
+741:         params.name = ''
+742:         controller.handleCommand()
+744:         then:
+745:         response.text == 'Bad'
+764: <span class="java&#45;keyword">import</span> spock.lang.Specification
+767: class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+769:     void 'test render message tag'() &#123;
+770:         given:
+771:         messageSource.addMessage 'foo.bar', request.locale, 'Hello World'
+773:         when:
+774:         controller.showMessage()
+776:         then:
+777:         response.text == 'Hello World'</pre></div><p class="paragraph"/><strong class="bold">./guide/conf/dataSource/automaticDatabaseMigration.gdoc</strong><p class="paragraph"/><div class="code"><pre>24 : The plugin uses <span class="java&#45;quote">"Liquibase"</span>:http://www.liquibase.org/ and provides access to all of its functionality, and also has support <span class="java&#45;keyword">for</span> GORM (<span class="java&#45;keyword">for</span> example generating a change set by comparing your domain classes to a database).</pre></div><p class="paragraph"/><strong class="bold">./guide/testing/unitTesting/unitTestingTagLibraries.gdoc</strong><p class="paragraph"/><div class="code"><pre>7  : <span class="java&#45;keyword">import</span> grails.test.mixin.TestFor
+8  : <span class="java&#45;keyword">import</span> spock.lang.Specification
+11 : class SimpleTagLibSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+13 :     void <span class="java&#45;quote">"test something"</span>() &#123;
+22 : <span class="java&#45;keyword">import</span> spock.lang.Specification
+26 : class SimpleControllerSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+53 : <span class="java&#45;keyword">import</span> grails.test.mixin.TestFor
+54 : <span class="java&#45;keyword">import</span> spock.lang.Specification
+57 : class SimpleTagLibSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+59 :     void <span class="java&#45;quote">"test hello tag"</span>() &#123;
+60 :         expect:
+61 :         applyTemplate('&#60;s:hello /&#62;') == 'Hello World'
+62 :         applyTemplate('&#60;s:hello name=<span class="java&#45;quote">"Fred"</span> /&#62;') == 'Hello Fred'
+63 :         applyTemplate('&#60;s:bye author=<span class="java&#45;quote">"&#36;&#123;author&#125;"</span> /&#62;', &#91;author: <span class="java&#45;keyword">new</span> Author(name: 'Fred')&#93;) == 'Bye Fred'
+71 : <span class="java&#45;keyword">import</span> spock.lang.Specification
+72 : <span class="java&#45;keyword">import</span> grails.test.mixin.TestMixin
+73 : <span class="java&#45;keyword">import</span> grails.test.mixin.web.GroovyPageUnitTestMixin
+75 : @TestMixin(GroovyPageUnitTestMixin)
+76 : class MultipleTagLibSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+78 :     void <span class="java&#45;quote">"test multiple tags"</span>() &#123;
+79 :         given:
+80 :         mockTagLib(SomeTagLib)
+81 :         mockTagLib(SomeOtherTagLib)
+83 :         expect:
+84 :         // &#8230;
+92 : <span class="java&#45;keyword">import</span> grails.test.mixin.TestFor
+93 : <span class="java&#45;keyword">import</span> spock.lang.Specification
+96 : class SimpleTagLibSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+98 :     void <span class="java&#45;quote">"test hello tag"</span>() &#123;
+99 :         expect:
+111: <span class="java&#45;keyword">import</span> spock.lang.Specification
+112: <span class="java&#45;keyword">import</span> grails.test.mixin.TestMixin
+113: <span class="java&#45;keyword">import</span> grails.test.mixin.web.GroovyPageUnitTestMixin
+115: @TestMixin(GroovyPageUnitTestMixin)
+116: class RenderingSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+118:     void <span class="java&#45;quote">"test rendering template"</span>() &#123;
+119:         when:
+120:         def result = render(template: '/simple/hello')
+122:         then:
+123:         result == 'Hello World&#33;'</pre></div><p class="paragraph"/><strong class="bold">./guide/testing/unitTesting/unitTestingURLMappings.gdoc</strong><p class="paragraph"/><div class="code"><pre>6  : <span class="java&#45;keyword">import</span> com.demo.SimpleController
+7  : <span class="java&#45;keyword">import</span> grails.test.mixin.TestFor
+8  : <span class="java&#45;keyword">import</span> spock.lang.Specification
+11 : @Mock(SimpleController)
+12 : class UrlMappingsSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+13 :     // &#8230;
+36 :     <span class="java&#45;quote">"/actionOne"</span>(controller: <span class="java&#45;quote">"simple"</span>, action: <span class="java&#45;quote">"action1"</span>)
+37 :     <span class="java&#45;quote">"/actionTwo"</span>(controller: <span class="java&#45;quote">"simple"</span>, action: <span class="java&#45;quote">"action2"</span>)
+44 : <span class="java&#45;keyword">import</span> com.demo.SimpleController
+45 : <span class="java&#45;keyword">import</span> grails.test.mixin.TestFor
+46 : <span class="java&#45;keyword">import</span> spock.lang.Specification
+49 : @Mock(SimpleController)
+50 : class UrlMappingsSpec <span class="java&#45;keyword">extends</span> Specification &#123;
+52 :     void <span class="java&#45;quote">"test forward mappings"</span>() &#123;
+53 :         expect:
+54 :         assertForwardUrlMapping(<span class="java&#45;quote">"/actionOne"</span>, controller: 'simple', action: <span class="java&#45;quote">"action1"</span>)
+55 :         assertForwardUrlMapping(<span class="java&#45;quote">"/actionTwo"</span>, controller: 'simple', action: <span class="java&#45;quote">"action2"</span>)</pre></div><p class="paragraph"/><strong class="bold">./guide/conf/dataSource.gdoc</strong><p class="paragraph"/><div class="code"><pre>5  : Drivers typically come in the form of a JAR archive. It's best to use the dependency resolution to resolve the jar <span class="java&#45;keyword">if</span> it's available in a Maven repository, <span class="java&#45;keyword">for</span> example you could add a dependency <span class="java&#45;keyword">for</span> the MySQL driver like <span class="java&#45;keyword">this</span>:
+9  :         runtime 'mysql:mysql&#45;connector&#45;java:5.1.29'
+13 : If you can't use dependency resolution then just put the JAR in your project's <code>lib</code> directory.
+27 : &#42; <code>transactional</code> &#45; If <code><span class="java&#45;keyword">false</span></code> leaves the DataSource's transactionManager bean outside the chained BE1PC transaction manager implementation. This only applies to additional datasources.
+29 : &#42; <code>properties</code> &#45; Extra properties to set on the DataSource bean. See the &#91;Tomcat Pool|http://tomcat.apache.org/tomcat&#45;7.0&#45;doc/jdbc&#45;pool.html&#35;Common_Attributes&#93; documentation. There is also a Javadoc format &#91;documentation of the properties|https://tomcat.apache.org/tomcat&#45;7.0&#45;doc/api/org/apache/tomcat/jdbc/pool/PoolConfiguration.html&#93;.
+30 : &#42; <code>jmxExport</code> &#45; If <code><span class="java&#45;keyword">false</span></code>, will disable registration of JMX MBeans <span class="java&#45;keyword">for</span> all DataSources. By <span class="java&#45;keyword">default</span> JMX MBeans are added <span class="java&#45;keyword">for</span> DataSources with <code>jmxEnabled = <span class="java&#45;keyword">true</span></code> in properties.
+38 :     url = <span class="java&#45;quote">"jdbc:mysql://localhost:3306/my_database"</span>
+41 :     username = <span class="java&#45;quote">"username"</span>
+42 :     password = <span class="java&#45;quote">"password"</span>
+44 :        jmxEnabled = <span class="java&#45;keyword">true</span>
+50 :        maxAge = 10 &#42; 60000
+51 :        timeBetweenEvictionRunsMillis = 5000
+53 :        validationQuery = <span class="java&#45;quote">"SELECT 1"</span>
+54 :        validationQueryTimeout = 3
+55 :        validationInterval = 15000
+56 :        testOnBorrow = <span class="java&#45;keyword">true</span>
+57 :        testWhileIdle = <span class="java&#45;keyword">true</span>
+58 :        testOnReturn = <span class="java&#45;keyword">false</span>
+59 :        jdbcInterceptors = <span class="java&#45;quote">"ConnectionState;StatementCache(max=200)"</span>
+60 :        defaultTransactionIsolation = java.sql.Connection.TRANSACTION_READ_COMMITTED
+81 :     url = <span class="java&#45;quote">"jdbc:mysql://localhost:3306/my_database"</span>
+84 :     username = <span class="java&#45;quote">"username"</span>
+85 :     password = <span class="java&#45;quote">"password"</span>
+87 :        // Documentation <span class="java&#45;keyword">for</span> Tomcat JDBC Pool
+88 :        // http://tomcat.apache.org/tomcat&#45;7.0&#45;doc/jdbc&#45;pool.html&#35;Common_Attributes
+89 :        // https://tomcat.apache.org/tomcat&#45;7.0&#45;doc/api/org/apache/tomcat/jdbc/pool/PoolConfiguration.html
+90 :        jmxEnabled = <span class="java&#45;keyword">true</span>
+96 :        maxAge = 10 &#42; 60000
+97 :        timeBetweenEvictionRunsMillis = 5000
+99 :        validationQuery = <span class="java&#45;quote">"SELECT 1"</span>
+100:        validationQueryTimeout = 3
+101:        validationInterval = 15000
+102:        testOnBorrow = <span class="java&#45;keyword">true</span>
+103:        testWhileIdle = <span class="java&#45;keyword">true</span>
+104:        testOnReturn = <span class="java&#45;keyword">false</span>
+105:        ignoreExceptionOnPreLoad = <span class="java&#45;keyword">true</span>
+106:        // http://tomcat.apache.org/tomcat&#45;7.0&#45;doc/jdbc&#45;pool.html&#35;JDBC_interceptors
+107:        jdbcInterceptors = <span class="java&#45;quote">"ConnectionState;StatementCache(max=200)"</span>
+108:        defaultTransactionIsolation = java.sql.Connection.TRANSACTION_READ_COMMITTED // safe <span class="java&#45;keyword">default</span>
+109:        // controls <span class="java&#45;keyword">for</span> leaked connections 
+110:        abandonWhenPercentageFull = 100 // settings are active only when pool is full
+111:        removeAbandonedTimeout = 120
+112:        removeAbandoned = <span class="java&#45;keyword">true</span>
+113:        // use JMX console to change <span class="java&#45;keyword">this</span> setting at runtime
+114:        logAbandoned = <span class="java&#45;keyword">false</span> // causes stacktrace recording overhead, use only <span class="java&#45;keyword">for</span> debugging
+115:        // JDBC driver properties
+116:        // Mysql as example
+117:        dbProperties &#123;
+118:            // Mysql specific driver properties
+119:            // http://dev.mysql.com/doc/connector&#45;j/en/connector&#45;j&#45;reference&#45;configuration&#45;properties.html
+120:            // let Tomcat JDBC Pool handle reconnecting
+121:            autoReconnect=<span class="java&#45;keyword">false</span>
+122:            // truncation behaviour 
+123:            jdbcCompliantTruncation=<span class="java&#45;keyword">false</span>
+124:            // mysql 0&#45;date conversion
+125:            zeroDateTimeBehavior='convertToNull'
+126:            // Tomcat JDBC Pool's StatementCache is used instead, so disable mysql driver's cache
+127:            cachePrepStmts=<span class="java&#45;keyword">false</span>
+128:            cacheCallableStmts=<span class="java&#45;keyword">false</span>
+129:            // Tomcat JDBC Pool's StatementFinalizer keeps track
+130:            dontTrackOpenResources=<span class="java&#45;keyword">true</span>
+131:            // performance optimization: reduce number of SQLExceptions thrown in mysql driver code
+132:            holdResultsOpenOverStatementClose=<span class="java&#45;keyword">true</span>
+133:            // enable MySQL query cache &#45; using server prep stmts will disable query caching
+134:            useServerPrepStmts=<span class="java&#45;keyword">false</span>
+135:            // metadata caching
+136:            cacheServerConfiguration=<span class="java&#45;keyword">true</span>
+137:            cacheResultSetMetadata=<span class="java&#45;keyword">true</span>
+138:            metadataCacheSize=100
+139:            // timeouts <span class="java&#45;keyword">for</span> TCP/IP
+140:            connectTimeout=15000
+141:            socketTimeout=120000
+142:            // timer tuning (disable)
+143:            maintainTimeStats=<span class="java&#45;keyword">false</span>
+144:            enableQueryTimeouts=<span class="java&#45;keyword">false</span>
+145:            // misc tuning
+146:            noDatetimeStringSync=<span class="java&#45;keyword">true</span>
+147:        &#125;</pre></div><p class="paragraph"/><strong class="bold">./guide/services/declarativeTransactions.gdoc</strong><p class="paragraph"/><div class="code"><pre>27 : Grails also provides <code>&#64;Transactional</code> and <code>&#64;NotTransactional</code> annotations <span class="java&#45;keyword">for</span> cases where you need more fine&#45;grained control over transactions at a per&#45;method level or need to specify an alternative propagation level. For example, the <code>&#64;NotTransactional</code> annotation can be used to mark a particular method to be skipped when a class is annotated with <code>&#64;Transactional</code>.
+30 : The <code>grails.transaction.Transactional</code> annotation was first introduced in Grails 2.3. Prior to 2.3, Spring's @Transactional annotation was used.</pre></div><p class="paragraph"/><strong class="bold">./guide/webServices/REST/binding.gdoc</strong><p class="paragraph"/><div class="code"><pre>79 : The data binding depends on an instance of the &#91;DataBindingSource|api:org.grails.databinding.DataBindingSource&#93; <span class="java&#45;keyword">interface</span> created by an instance of the &#91;DataBindingSourceCreator|api:org.grails.databinding.bindingsource.DataBindingSourceCreator&#93; <span class="java&#45;keyword">interface</span>.  The specific implementation of @DataBindingSourceCreator<code> will be selected based on the </code>contentType<code> of the request.  Several implementations are provided to handle common content types.  The <span class="java&#45;keyword">default</span> implementations will be fine <span class="java&#45;keyword">for</span> most use cases.  The following table lists the content types which are supported by the core framework and which </code>DataBindingSourceCreator<code> implementations are used <span class="java&#45;keyword">for</span> each. All of the implementation classes are in the </code>org.codehaus.groovy.grails.web.binding.bindingsource@ <span class="java&#45;keyword">package</span>.
+83 :  application/xml, text/xml   | xmlDataBindingSourceCreator     | XmlDataBindingSourceCreator
+84 :  application/json, text/json | jsonDataBindingSourceCreator    | JsonDataBindingSourceCreator
+85 :  application/hal+json        | halJsonDataBindingSourceCreator | HalJsonDataBindingSourceCreator
+86 :  application/hal+xml         | halXmlDataBindingSourceCreator  | HalXmlDataBindingSourceCreator
+89 : In order to provide your own <code>DataBindingSourceCreator</code> <span class="java&#45;keyword">for</span> any of those content types, write a class which <span class="java&#45;keyword">implements</span>
+141: // MyCustomDataBindingSourceCreator.groovy in
+147: <span class="java&#45;keyword">import</span> org...databinding.SimpleMapDataBindingSource
+148: <span class="java&#45;keyword">import</span> org...databinding.bindingsource.AbstractRequestBodyDataBindingSourceCreator</pre></div><p class="paragraph"/><strong class="bold">./guide/contributing/build.gdoc</strong><p class="paragraph"/><div class="code"><pre>34 : These will take a <span class="java&#45;keyword">while</span> (15&#45;30 mins), so consider running individual tests using the command line. For example, to run the test spec <code>BinaryPluginSpec</code> simply execute the following command:
+36 : ./gradlew :grails&#45;core:test &#45;&#45;tests &#42;.BinaryPluginSpec
+61 : &#42; Add the springloaded&#45;core JAR file in $GRAILS_HOME/lib/org.springsource.springloaded/springloaded&#45;core/jars to grails&#45;core's classpath.</pre></div><p class="paragraph"/><strong class="bold">./guide/webServices/REST/versioningResources.gdoc</strong><p class="paragraph"/><div class="code"><pre>66 : <span class="java&#45;keyword">import</span> grails.<span class="java&#45;keyword">rest</span>.render.json.&#42;</pre></div><p class="paragraph"/><strong class="bold">./guide/introduction/whatsNew/webFeatures.gdoc</strong><p class="paragraph"/><div class="code"><pre>171:     <span class="java&#45;quote">"&#36;&#123;grails.web.UrlConverter.BEAN_NAME&#125;"</span>(com.myapplication.MyUrlConverterImpl)</pre></div><p class="paragraph"/><strong class="bold">./guide/theWebLayer/controllers/dataBinding.gdoc</strong><p class="paragraph"/><div class="code"><pre>22 : assert person.lastName == 'Gabriel'
+144:                   'players&#91;guitar&#93;': &#91;name: 'Steve Hackett'&#93;,
+145:                   'players&#91;vocals&#93;': &#91;name: 'Peter Gabriel'&#93;,
+152: assert album.players.guitar.name == 'Steve Hackett'
+153: assert album.players.vocals.name == 'Peter Gabriel'
+154: assert album.players.keyboards.name == 'Tony Banks'
+162:                   'players&#91;guitar&#93;': &#91;name: 'Steve Hackett'&#93;,
+170: assert album.players.guitar == 'Steve Hackett'
+181: assert album.players.guitar == 'Steve Hackett'
+652: A structured data binding editor is a helper class which can bind structured request parameters to a property.  The common use <span class="java&#45;keyword">case</span> <span class="java&#45;keyword">for</span> structured binding is binding to a <code>Date</code> object which might be constructed from several smaller pieces of information contained in several request parameters with names like <code>birthday_month</code>, <code>birthday_date</code> and <code>birthday_year</code>.  The structured editor would retrieve all of those individual pieces of information and use them to construct a <code>Date</code>.
+654: The framework provides a structured editor <span class="java&#45;keyword">for</span> binding to <code>Date</code> objects.  An application may register its own structured editors <span class="java&#45;keyword">for</span> whatever types are appropriate.  Consider the following classes:
+657: // src/groovy/databinding/Gadget.groovy
+658: <span class="java&#45;keyword">package</span> databinding
+660: class Gadget &#123;
+661:     Shape expandedShape
+662:     Shape compressedShape
+667: // src/groovy/databinding/Shape.groovy
+668: <span class="java&#45;keyword">package</span> databinding
+670: class Shape &#123;
+671:     <span class="java&#45;object">int</span> area
+675: A <code>Gadget</code> has 2 <code>Shape</code> fields.  A <code>Shape</code> has an <code>area</code> property.  It may be that the application wants to accept request parameters like <code>width</code> and <code>height</code> and use those to calculate the <code>area</code> of a <code>Shape</code> at binding time.  A structured binding editor is well suited <span class="java&#45;keyword">for</span> that.
+677: The way to register a structured editor with the data binding process is to add an instance of the &#91;org.grails.databinding.TypedStructuredBindingEditor|api:org.grails.databinding.TypedStructuredBindingEditor&#93; <span class="java&#45;keyword">interface</span> to the Spring application context.  The easiest way to implement the <code>TypedStructuredBindingEditor</code> <span class="java&#45;keyword">interface</span> is to extend the &#91;org.grails.databinding.converters.AbstractStructuredBindingEditor|api:org.grails.databinding.converters.AbstractStructuredBindingEditor&#93; <span class="java&#45;keyword">abstract</span> class and override the <code>getPropertyValue</code> method as shown below:
+680: // src/groovy/databinding/converters/StructuredShapeEditor.groovy
+681: <span class="java&#45;keyword">package</span> databinding.converters
+683: <span class="java&#45;keyword">import</span> databinding.Shape
+685: <span class="java&#45;keyword">import</span> org.grails.databinding.converters.AbstractStructuredBindingEditor
+687: class StructuredShapeEditor <span class="java&#45;keyword">extends</span> AbstractStructuredBindingEditor&#60;Shape&#62; &#123;
+689:     <span class="java&#45;keyword">public</span> Shape getPropertyValue(Map values) &#123;
+690:         // retrieve the individual values from the Map
+691:         def width = values.width as <span class="java&#45;object">int</span>
+692:         def height = values.height as <span class="java&#45;object">int</span>
+694:         // use the values to calculate the area of the Shape
+695:         def area = width &#42; height
+697:         // create and <span class="java&#45;keyword">return</span> a Shape with the appropriate area
+698:         <span class="java&#45;keyword">new</span> Shape(area: area)
+703: An instance of that class needs to be registered with the Spring application context:
+708:     shapeEditor databinding.converters.StructuredShapeEditor
+714: When the data binder binds to an instance of the <code>Gadget</code> class it will check to see <span class="java&#45;keyword">if</span> there are request parameters with names <code>compressedShape</code> and <code>expandedShape</code> which have a value of <span class="java&#45;quote">"struct"</span> and <span class="java&#45;keyword">if</span> they <span class="java&#45;keyword">do</span> exist, that will trigger the use of the <code>StructuredShapeEditor</code>.  The individual components of the structure need to have parameter names of the form propertyName_structuredElementName.  In the <span class="java&#45;keyword">case</span> of the <code>Gadget</code> class above that would mean that the <code>compressedShape</code> request parameter should have a value of <span class="java&#45;quote">"struct"</span> and the <code>compressedShape_width</code> and <code>compressedShape_height</code> parameters should have values which represent the width and the height of the compressed <code>Shape</code>.  Similarly, the <code>expandedShape</code> request parameter should have a value of <span class="java&#45;quote">"struct"</span> and the <code>expandedShape_width</code> and <code>expandedShape_height</code> parameters should have values which represent the width and the hight of the expanded <code>Shape</code>.
+717: // grails&#45;app/controllers/demo/DemoController.groovy
+718: class DemoController &#123;
+720:     def createGadget(Gadget gadget) &#123;
+721:         /&#42;
+723:         /demo/createGadget?expandedShape=struct&#38;expandedShape_width=80&#38;expandedShape_height=30
+724:                           &#38;compressedShape=struct&#38;compressedShape_width=10&#38;compressedShape_height=3
+726:         &#42;/
+728:         // with the request parameters shown above gadget.expandedShape.area would be 2400
+729:         // and gadget.compressedShape.area would be 30
+731:         // &#8230;
+737: Typically the request parameters with <span class="java&#45;quote">"struct"</span> as their value would be represented by hidden form fields.
+741: The &#91;DataBindingListener|api:org.grails.databinding.events.DataBindingListener&#93; <span class="java&#45;keyword">interface</span> provides a mechanism <span class="java&#45;keyword">for</span> listeners to be notified of data binding events.  The <span class="java&#45;keyword">interface</span> looks like <span class="java&#45;keyword">this</span>:
+744: <span class="java&#45;keyword">package</span> org.grails.databinding.events;
+746: <span class="java&#45;keyword">import</span> org.grails.databinding.errors.BindingError;
+748: <span class="java&#45;keyword">public</span> <span class="java&#45;keyword">interface</span> DataBindingListener &#123;
+750:     /&#42;&#42;
+751:      &#42; @<span class="java&#45;keyword">return</span> <span class="java&#45;keyword">true</span> <span class="java&#45;keyword">if</span> the listener is interested in events <span class="java&#45;keyword">for</span> the specified type.
+752:      &#42;/
+753:     <span class="java&#45;object">boolean</span> supports(<span class="java&#45;object">Class</span>&#60;?&#62; clazz);
+755:     /&#42;&#42;
+756:      &#42; Called when data binding is about to start.
+757:      &#42; 
+758:      &#42; @param target The object data binding is being imposed upon
+759:      &#42; @param errors the Spring Errors instance (a org.springframework.validation.BindingResult)
+760:      &#42; @<span class="java&#45;keyword">return</span> <span class="java&#45;keyword">true</span> <span class="java&#45;keyword">if</span> data binding should <span class="java&#45;keyword">continue</span>
+761:      &#42;/
+762:     <span class="java&#45;object">Boolean</span> beforeBinding(<span class="java&#45;object">Object</span> target, <span class="java&#45;object">Object</span> errors);
+764:     /&#42;&#42;
+765:      &#42; Called when data binding is about to imposed on a property
+766:      &#42;
+767:      &#42; @param target The object data binding is being imposed upon
+768:      &#42; @param propertyName The name of the property being bound to
+769:      &#42; @param value The value of the property being bound
+770:      &#42; @param errors the Spring Errors instance (a org.springframework.validation.BindingResult)
+771:      &#42; @<span class="java&#45;keyword">return</span> <span class="java&#45;keyword">true</span> <span class="java&#45;keyword">if</span> data binding should <span class="java&#45;keyword">continue</span>, otherwise <span class="java&#45;keyword">return</span> <span class="java&#45;keyword">false</span>
+772:      &#42;/
+773:     <span class="java&#45;object">Boolean</span> beforeBinding(<span class="java&#45;object">Object</span> target, <span class="java&#45;object">String</span> propertyName, <span class="java&#45;object">Object</span> value, <span class="java&#45;object">Object</span> errors);
+775:     /&#42;&#42;
+776:      &#42; Called after data binding has been imposed on a property
+777:      &#42;
+778:      &#42; @param target The object data binding is being imposed upon
+779:      &#42; @param propertyName The name of the property that was bound to
+780:      &#42; @param errors the Spring Errors instance (a org.springframework.validation.BindingResult)
+781:      &#42;/
+782:     void afterBinding(<span class="java&#45;object">Object</span> target, <span class="java&#45;object">String</span> propertyName, <span class="java&#45;object">Object</span> errors);
+784:     /&#42;&#42;
+785:      &#42; Called after data binding has finished.
+786:      &#42;  
+787:      &#42; @param target The object data binding is being imposed upon
+788:      &#42; @param errors the Spring Errors instance (a org.springframework.validation.BindingResult)
+789:      &#42;/
+790:     void afterBinding(<span class="java&#45;object">Object</span> target, <span class="java&#45;object">Object</span> errors);
+792:     /&#42;&#42;
+793:      &#42; Called when an error occurs binding to a property
+794:      &#42; @param error encapsulates information about the binding error
+795:      &#42; @param errors the Spring Errors instance (a org.springframework.validation.BindingResult)
+796:      &#42; @see BindingError
+797:      &#42;/
+798:     void bindingError(BindingError error, <span class="java&#45;object">Object</span> errors);
+802: Any bean in the Spring application context which <span class="java&#45;keyword">implements</span> that <span class="java&#45;keyword">interface</span> will automatically be registered with the data binder.  The &#91;DataBindingListenerAdapter|api:org.grails.databinding.events.DataBindingListenerAdapter&#93; class <span class="java&#45;keyword">implements</span> the <code>DataBindingListener</code> <span class="java&#45;keyword">interface</span> and provides <span class="java&#45;keyword">default</span> implementations <span class="java&#45;keyword">for</span> all of the methods in the <span class="java&#45;keyword">interface</span> so <span class="java&#45;keyword">this</span> class is well suited <span class="java&#45;keyword">for</span> subclassing so your listener class only needs to provide implementations <span class="java&#45;keyword">for</span> the methods your listener is interested in.
+804: The Grails data binder has limited support <span class="java&#45;keyword">for</span> the older &#91;BindEventListener|api:org.codehaus.groovy.grails.web.binding.BindEventListener&#93; style listeners.  <code>BindEventListener</code> looks like <span class="java&#45;keyword">this</span>:
+807: <span class="java&#45;keyword">package</span> org.codehaus.groovy.grails.web.binding;
+809: <span class="java&#45;keyword">import</span> org.springframework.beans.MutablePropertyValues;
+810: <span class="java&#45;keyword">import</span> org.springframework.beans.TypeConverter;
+812: <span class="java&#45;keyword">public</span> <span class="java&#45;keyword">interface</span> BindEventListener &#123;
+814:     /&#42;&#42;
+815:      &#42; @param target The target to bind to
+816:      &#42; @param source The source of the binding, typically a Map
+817:      &#42; @param typeConverter The type converter to be used
+818:      &#42;/
+819:     void doBind(<span class="java&#45;object">Object</span> target, MutablePropertyValues source, TypeConverter typeConverter);
+823: Support <span class="java&#45;keyword">for</span> <code>BindEventListener</code> is disabled by <span class="java&#45;keyword">default</span>.  To enable support assign a value of <code><span class="java&#45;keyword">true</span></code> to the <code>grails.databinding.enableSpringEventAdapter</code> property in <code>grails&#45;app/conf/Config.groovy</code>.
+827: grails.databinding.enableSpringEventAdapter=<span class="java&#45;keyword">true</span>
+832: With <code>enableSpringEventAdapter</code> set to <code><span class="java&#45;keyword">true</span></code> instances of <code>BindEventListener</code> which are in the Spring application context will automatically be registered with the data binder.  Notice that the <code>MutablePropertyValues</code> and <code>TypeConverter</code> arguments to the <code>doBind</code> method in <code>BindEventListener</code> are Spring specific classes and are not relevant to the current data binder.  The event adapter will pass <code><span class="java&#45;keyword">null</span></code> values <span class="java&#45;keyword">for</span> those arguments.  The only real value passed into the <code>doBind</code> method will be the object being bound to.  This limited support is provided <span class="java&#45;keyword">for</span> backward compatibility and will be useful <span class="java&#45;keyword">for</span> a subset of scenarios.  Developers are encouraged to migrate their <code>BindEventListener</code> beans to the newer <code>DataBindingListener</code> model.</pre></div><p class="paragraph"/><h2>Not done.</h2>
 <ul class="star">
 <li>../en/guide/commandLine/interactiveMode.gdoc</li>
 <li>../en/guide/commandLine/wrapper.gdoc</li>
+<li>../en/guide/introduction/whatsNew24.gdoc</li>
 <li>../en/guide/links.yml</li>
 <li>../en/guide/rewriteRules.txt</li>
-<li>../en/guide/security/xssPrevention.gdoc</li>
+<li> <strong class="bold">(original file updated)</strong> ../en/guide/security/xssPrevention.gdoc</li>
 <li>../en/guide/services/declarativeTransactions/transactionsRollbackAndTheSession.gdoc</li>
 <li>../en/guide/theWebLayer/controllers/controllerExceptionHandling.gdoc</li>
 <li>../en/guide/theWebLayer/urlmappings/namespacedControllers.gdoc</li>
 <li>../en/guide/theWebLayer/urlmappings/redirectMappings.gdoc</li>
-<li>../en/guide/theWebLayer/urlmappings/restfulMappings.gdoc</li>
+<li> <strong class="bold">(original file updated)</strong> ../en/guide/theWebLayer/urlmappings/restfulMappings.gdoc</li>
 <li> <strong class="bold">(original file updated)</strong> ../en/guide/toc.yml</li>
-<li>../en/guide/webServices/SOAP.gdoc</li>
+<li> <strong class="bold">(original file updated)</strong> ../en/guide/webServices/SOAP.gdoc</li>
 </ul><p class="paragraph"/><h2>File not found (new file added) or empty file</h2>
 <ul class="star">
 <li>../en/guide/gettingStarted.gdoc</li>
@@ -197,6 +928,9 @@ function addJsClass() {
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Command%20Line/bug-report.html">bug-report</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Command%20Line/clean-all.html">clean-all</a>
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Command%20Line/clean.html">clean</a>
@@ -486,6 +1220,9 @@ function addJsClass() {
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Controllers/responseFormats.html">responseFormats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Controllers/scope.html">scope</a>
                             </div>
                             
                             <div class="menu-item"><a href="../ref/Controllers/servletContext.html">servletContext</a>

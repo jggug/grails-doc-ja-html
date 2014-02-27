@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>1.4.4 &#27704;&#32154;&#21270;&#27231;&#33021; 2.3.0.BUILD-SNAPSHOT</title>
+    <title>1.5.4 &#27704;&#32154;&#21270;&#27231;&#33021; 2.3.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -123,7 +123,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>1.4.4 &#27704;&#32154;&#21270;&#27231;&#33021; - Reference Documentation</h1>
+                    <h1>1.5.4 &#27704;&#32154;&#21270;&#27231;&#33021; - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Graeme Rocher, Peter Ledbrook, Marc Palmer, Jeff Brown, Luke Daley, Burt Beckwith</p>
 
@@ -138,7 +138,7 @@ function addJsClass() {
 
                 
 <a name="1.1.4 Persistence Features"><!-- Legacy link --></a>
-<h2 id="persistenceFeatures">1.4.4 永続化機能</h2>
+<h2 id="persistenceFeatures">1.5.4 永続化機能</h2>
 <h4>GORM API <div class="hidden-block">The GORM API</div></h4><p class="paragraph"/><div class="hidden-block">The GORM API has been formalized into a set of classes (<code>GormStaticApi</code>, <code>GormInstanceApi</code> and <code>GormValidationApi</code>) that get statically wired into every domain class at the byte code level. The result is better code completion for IDEs, better integration with Java and the potential for more GORM implementations for other types of data stores.</div>
 GORM APIは、 <code>GormStaticApi</code> 、 <code>GormInstanceApi</code> 、 <code>GormValidationApi</code> というクラスに置き換えられたことによって、全てのドメインのバイトコードレベルに注入されます。この実装でIDEでのコード補完、Javaとの統合、様々なデータストアへのGORM実装への可能性が向上しました。<p class="paragraph"/><h4>DetachedクライテリアとWhereクエリー <div class="hidden-block">Detached Criteria and Where Queries</div></h4><p class="paragraph"/>Grails 2.0 features support for <a href="../guide/single.html#detachedCriteria" class="guide">DetachedCriteria</a> which are criteria queries that are not associated with any session or connection and thus can be more easily reused and composed:<p class="paragraph"/><div class="code"><pre>def criteria = <span class="java&#45;keyword">new</span> DetachedCriteria(Person).build &#123;
     eq 'lastName', 'Simpson'
@@ -204,6 +204,9 @@ SetのユニークまたはListの順序必要としない場合でにおいて�
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/bug-report.html">bug-report</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/clean-all.html">clean-all</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Command%20Line/clean.html">clean</a>
@@ -493,6 +496,9 @@ SetのユニークまたはListの順序必要としない場合でにおいて�
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Controllers/responseFormats.html">responseFormats</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Controllers/scope.html">scope</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Controllers/servletContext.html">servletContext</a>
